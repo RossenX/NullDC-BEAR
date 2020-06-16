@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configs>
+  <keymap>
+    <up></up>
+    <down></down>
+    <left></left>
+    <right></right>
+    <LP></LP>
+    <MP></MP>
+    <HP></HP>
+    <LK></LK>
+    <MK></MK>
+    <HK></HK>
+    <LPLK></LPLK>
+    <HPHK></HPHK>
+    <start></start>
+    <coin></coin>
+  </keymap>
+</configs>
