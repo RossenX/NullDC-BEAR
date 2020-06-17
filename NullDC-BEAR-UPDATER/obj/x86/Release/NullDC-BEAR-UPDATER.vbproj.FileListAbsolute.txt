@@ -1,0 +1,10 @@
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\bin\x86\Release\NullDC-BEAR-UPDATER.exe.config
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\bin\x86\Release\NullDC-BEAR-UPDATER.exe
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\bin\x86\Release\NullDC-BEAR-UPDATER.pdb
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\bin\x86\Release\NullDC-BEAR-UPDATER.xml
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\obj\x86\Release\NullDC_BEAR_UPDATER.frmUpdate.resources
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\obj\x86\Release\NullDC_BEAR_UPDATER.Resources.resources
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\obj\x86\Release\NullDC-BEAR-UPDATER.vbproj.GenerateResource.Cache
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\obj\x86\Release\NullDC-BEAR-UPDATER.exe
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\obj\x86\Release\NullDC-BEAR-UPDATER.xml
+D:\VS_Projects\NullDC-BEAR\NullDC-BEAR-UPDATER\obj\x86\Release\NullDC-BEAR-UPDATER.pdb

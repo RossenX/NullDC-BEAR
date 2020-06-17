@@ -75,7 +75,7 @@ Partial Class frmUpdate
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmUpdate"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmUpdate"
+        Me.Text = "NullDC BEAR Updater"
         Me.TransparencyKey = System.Drawing.Color.DimGray
         CType(Me.LoadingGif, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports System.IO
+Imports System.Net
 
 Public Class frmUpdate
 
@@ -39,7 +40,8 @@ Public Class frmUpdate
         GifEnd.Interval = 2400
         AddHandler GifEnd.Tick, AddressOf _GifEnd
         GifEnd.Start()
-        IO.File.Copy(My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC BEAR.exe", Application.StartupPath & "\NullDC BEAR.exe", True)
+        If File.Exists(Application.StartupPath & "\NullDC.BEAR.exe") Then File.Delete(Application.StartupPath & "\NullDC.BEAR.exe")
+        File.Copy(My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC BEAR.exe", Application.StartupPath & "\NullDC BEAR.exe", True)
     End Sub
 
     Private Sub _GifLoop()
