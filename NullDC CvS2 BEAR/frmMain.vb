@@ -1,9 +1,13 @@
 ﻿Imports System.IO
+Imports System.Net
 Imports System.Threading
 
 Public Class frmMain
 
-    Public Ver As String = "0.95d"
+    ' Update Stuff
+    Dim UpdateCheckClient As New WebClient
+
+    Public Ver As String = "0.96" ' 0.95d
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -27,6 +31,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
+
         lbVer.Text = Ver
         If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC CvS2\nulldc-1-0-4-en-win"
 
@@ -43,11 +48,15 @@ Public Class frmMain
             MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
             End
         End If
-
+        Console.WriteLine("Lol")
         CheckFilesAndShit()
         GetGamesList()
 
         ConfigFile = New Configs(NullDCPath)
+
+        ' Update Stuff
+        AddHandler UpdateCheckClient.DownloadStringCompleted, AddressOf UpdateCheckResult
+        CheckForUpdate()
 
         ' Create all the usual shit
         InputHandler = New InputHandling(Me)
@@ -57,6 +66,41 @@ Public Class frmMain
 
         If ConfigFile.FirstRun Then frmSetup.ShowDialog()
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
+
+    End Sub
+
+    Private Sub CheckForUpdate()
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+        Try
+            UpdateCheckClient.Credentials = New NetworkCredential()
+            UpdateCheckClient.Headers.Add("user-agent", "MyRSSReader/1.0")
+            UpdateCheckClient.DownloadStringTaskAsync("https://api.github.com/repos/RossenX/NullDC-BEAR/releases/latest")
+        Catch ex As Exception
+            ' some error when trying to update
+        End Try
+    End Sub
+
+    Private Sub UpdateCheckResult(ByVal sender As WebClient, e As DownloadStringCompletedEventArgs)
+        If Not e.Error Is Nothing Then Exit Sub ' Couldn't reach github for some reason so don't update
+
+        Dim LatestVersion As String = ""
+
+        For Each Line As String In e.Result.Split(",")
+            If Line.StartsWith("""tag_name""") Then
+                LatestVersion = Line.Split(":")(1).Replace("""", "")
+            End If
+        Next
+
+        If LatestVersion = Ver Then
+            ' Is up to date
+            Console.WriteLine("Up To Date, Delete updater if it exists")
+            If File.Exists(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe") Then File.Delete(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe")
+        Else
+            ' Is not up to date
+            If Not File.Exists(NullDCPath & "\NullDC-BEAR-UPDATER.exe") Then File.WriteAllBytes(NullDCPath & "\NullDC-BEAR-UPDATER.exe", My.Resources.NullDC_BEAR_UPDATER)
+            Process.Start(NullDCPath & "\NullDC-BEAR-UPDATER.exe")
+            End
+        End If
 
     End Sub
 
@@ -72,9 +116,7 @@ Public Class frmMain
     End Function
 
     Public Sub CopyResourceToDirectoryThread(ByVal _arg As Array)
-
         File.WriteAllBytes(My.Computer.FileSystem.SpecialDirectories.Temp & "\" & _arg(1), _arg(0))
-
     End Sub
 
     Private Sub UnzipResToDir(ByVal _res As Byte(), ByVal _name As String, ByVal _dir As String)
@@ -173,7 +215,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub GetGamesList() 
+    Private Sub GetGamesList()
         GameSelectForm.cbGameList.Items.Clear()
         HostingForm.cbGameList.Items.Clear()
         GameSelectForm.cbGameList.ValueMember = "Rom"

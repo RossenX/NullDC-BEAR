@@ -13,7 +13,6 @@ Public Class InputHandling
     Dim TurnedOn As Boolean = True
     Dim PollRate As Int16 = 16
 
-    Dim CoinButtonDown As Boolean = False
 
     Dim RxButtons As New BitArray(32, False)
     Dim LF_RxButtons As New BitArray(32, False)
@@ -28,11 +27,10 @@ Public Class InputHandling
     Dim KeyCache As New Dictionary(Of String, Array)
     ' Current, Idle, Min, Max, Last Frame
     Public RxAxis As New Dictionary(Of String, Array)
-    Dim CoinClicked As Boolean = False
+
 
     Dim kc As KeysConverter = New KeysConverter
 
-    Public qkoJAMMA_Keys As New Dictionary(Of String, String)
 
     Public PollThread As Thread
 

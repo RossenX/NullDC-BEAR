@@ -142,6 +142,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
+        Friend ReadOnly Property NullDC_BEAR_UPDATER() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("NullDC_BEAR_UPDATER", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
         Friend ReadOnly Property nulldcCLEAN() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("nulldcCLEAN", resourceCulture)

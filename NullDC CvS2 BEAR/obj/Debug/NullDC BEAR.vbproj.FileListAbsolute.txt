@@ -1,1 +1,30 @@
 D:\My Documents\Visual Studio 2015\Projects\NullDC CvS2 BEAR\NullDC CvS2 BEAR\bin\Debug\NullDC BEAR.exe.config
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\Debug\NullDC BEAR.exe.config
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\Debug\NullDC BEAR.exe
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\Debug\NullDC BEAR.pdb
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\Debug\NullDC BEAR.xml
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\Debug\OpenTK.dll
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\Debug\XInputDotNetPure.dll
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\Debug\OpenTK.pdb
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\Debug\OpenTK.xml
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC BEAR.vbprojResolveAssemblyReference.cache
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frm360ce.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmCalibration.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmChallenge.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmChallengeGameSelect.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmChallengeSent.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmDelayHelp.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmHostPanel.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmKeyMapping.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmLimiterHelp.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmLoLNerd.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmMain.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmNotification.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmSetup.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.frmWaitingForHost.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.Resources.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC_CvS2_BEAR.SimpleProgressBar.resources
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC BEAR.vbproj.GenerateResource.Cache
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC BEAR.exe
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC BEAR.xml
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\Debug\NullDC BEAR.pdb
