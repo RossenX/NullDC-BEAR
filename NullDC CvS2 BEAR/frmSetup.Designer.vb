@@ -25,6 +25,7 @@ Partial Class frmSetup
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.tcSetup = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnT1B1 = New System.Windows.Forms.Button()
         Me.btnT1B2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -43,7 +44,6 @@ Partial Class frmSetup
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tcSetup.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -87,6 +87,15 @@ Partial Class frmSetup
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(164, 191)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(164, 23)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "TELL ME ALL THE THINGS"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnT1B1
         '
@@ -210,9 +219,9 @@ Partial Class frmSetup
         '
         Me.btnT3B2.Location = New System.Drawing.Point(3, 200)
         Me.btnT3B2.Name = "btnT3B2"
-        Me.btnT3B2.Size = New System.Drawing.Size(243, 23)
+        Me.btnT3B2.Size = New System.Drawing.Size(72, 23)
         Me.btnT3B2.TabIndex = 4
-        Me.btnT3B2.Text = "Wait wait, i put in the wrong network settings"
+        Me.btnT3B2.Text = "Back"
         Me.btnT3B2.UseVisualStyleBackColor = True
         '
         'btnT3B3
@@ -226,12 +235,13 @@ Partial Class frmSetup
         '
         'btnT3B1
         '
-        Me.btnT3B1.Location = New System.Drawing.Point(6, 35)
+        Me.btnT3B1.BackColor = System.Drawing.Color.Red
+        Me.btnT3B1.Location = New System.Drawing.Point(115, 81)
         Me.btnT3B1.Name = "btnT3B1"
-        Me.btnT3B1.Size = New System.Drawing.Size(166, 23)
+        Me.btnT3B1.Size = New System.Drawing.Size(278, 40)
         Me.btnT3B1.TabIndex = 2
         Me.btnT3B1.Text = "Button Maping"
-        Me.btnT3B1.UseVisualStyleBackColor = True
+        Me.btnT3B1.UseVisualStyleBackColor = False
         '
         'Label5
         '
@@ -260,15 +270,6 @@ Partial Class frmSetup
         Me.Panel1.Size = New System.Drawing.Size(500, 227)
         Me.Panel1.TabIndex = 3
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(164, 191)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(164, 23)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "TELL ME ALL THE THINGS"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -278,7 +279,7 @@ Partial Class frmSetup
         Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmSetup"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "BEAR Setup"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tcSetup.ResumeLayout(False)

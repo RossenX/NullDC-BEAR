@@ -9,7 +9,12 @@ Imports System.IO
 
 Public Class InputHandling
 
+    Dim ProfileName
+
+
     Dim ControllerID As Int16 = 0
+    Dim InitialPoll = True
+    Dim PostInitialRoll = True
     Dim TurnedOn As Boolean = True
     Dim PollRate As Int16 = 16
 
@@ -24,7 +29,7 @@ Public Class InputHandling
     Public NeedConfigReload As Boolean = False
 
     ' Keeps data for the key presses last frame to avoid redoing the same thing over and over
-    Dim KeyCache As New Dictionary(Of String, Array)
+    Public KeyCache As New Dictionary(Of String, Array)
     ' Current, Idle, Min, Max, Last Frame
     Public RxAxis As New Dictionary(Of String, Array)
 
@@ -329,15 +334,14 @@ Public Class InputHandling
     Private Sub DoOpenTKInputRoll(ByRef State As JoystickState)
 
         'Console.WriteLine("OpenTK Input ROll")
-        State = Joystick.GetState(ControllerID)
-        Dim Capabilities = Joystick.GetCapabilities(ControllerID)
+        'State = Joystick.GetState(ControllerID)
 
+        Dim Capabilities = Joystick.GetCapabilities(ControllerID)
         Dim ButtonIndex = 0
         For i = 0 To Capabilities.ButtonCount - 1
             RxButtons(i) = State.IsButtonDown(i)
-            ButtonIndex = i
+            ButtonIndex += 1
         Next
-        ButtonIndex += 1 ' 16
 
         ' Get Hat Data
         For i = 0 To Capabilities.HatCount - 1
@@ -347,11 +351,13 @@ Public Class InputHandling
             RxButtons(i + ButtonIndex + 3) = State.GetHat(i).IsRight
             ButtonIndex += 4
         Next
+        Dim rawr = RxButtons
 
         ' Fill the rest of the array with false
         For i = ButtonIndex To RxButtons.Count - 1
             RxButtons(i) = False
         Next
+
 
         For i = 0 To 5 ' 0-5 | 6 Axis Support
             If Not State.GetAxis(i) = 0 Then
@@ -363,9 +369,12 @@ Public Class InputHandling
 
     Public Sub InputRoll()
         Console.WriteLine("Started Input Rolling")
+        ' Poll the Inptus once at start just to get their natural states
 
+        ' While loop is < 1ms
         While True
             Thread.Sleep(8)
+
             ' If the mapping is off then just pause it here, but lets not remove the thread because a bitch to deal with threads
             While Not TurnedOn
                 Thread.Sleep(1000)
@@ -383,6 +392,24 @@ Public Class InputHandling
                 DoWinMMRoll()
             End If
 
+            ' Ignore the first Two Polls, because they seem to sometimes return wrong keys, at least with my cheap-ass shitty controller.
+            If InitialPoll Then
+                For i = 0 To RxButtons.Count - 1
+                    LF_RxButtons(i) = RxButtons(i)
+                Next
+                InitialPoll = False
+                Continue While
+            End If
+
+            If PostInitialRoll Then
+                For i = 0 To RxButtons.Count - 1
+                    LF_RxButtons(i) = RxButtons(i)
+                Next
+                PostInitialRoll = False
+                Continue While
+            End If
+
+
             For i = 0 To RxButtons.Count - 1
                 If Not RxButtons(i) = LF_RxButtons(i) Then
                     If RxButtons(i) Then
@@ -391,18 +418,15 @@ Public Class InputHandling
                         RaiseEvent _KeyReleased(i)
                     End If
                 End If
-
             Next
 
             ' Done and Done Ez Pz now for the Axis
             For Each key As String In RxAxis.Keys
-                ' Moar that idle so it's +
                 If Not RxAxis(key)(4) = RxAxis(key)(0) Then
                     If RxAxis(key)(0) > (RxAxis(key)(1) + (RxAxis(key)(3) * (DeadZone / 100))) Then
                         RaiseEvent _KeyReleased(key & "-")
                         RaiseEvent _KeyPressed(key & "+")
 
-                        ' Less than idle so it's -
                     ElseIf RxAxis(key)(0) < (RxAxis(key)(1) + (RxAxis(key)(2) * (DeadZone / 100))) Then
                         RaiseEvent _KeyReleased(key & "+")
                         RaiseEvent _KeyPressed(key & "-")
@@ -419,6 +443,8 @@ Public Class InputHandling
                 ReloadConfigs()
                 RxButtons = New BitArray(32, False)
                 LF_RxButtons = New BitArray(32, False)
+                InitialPoll = True
+                PostInitialRoll = True
             End If
 
             ' Put current inputs in array of last roll
@@ -431,6 +457,7 @@ Public Class InputHandling
     End Sub
 
     Public Sub KeyPressed(Button As String) Handles Me._KeyPressed
+        Console.WriteLine("Button Pressed: {0}", Button)
         TranslateButtonToKey(Button, True)
     End Sub
 
@@ -439,6 +466,7 @@ Public Class InputHandling
     End Sub
 
     Private Sub TranslateButtonToKey(Button As String, Down As Boolean)
+        ' If We're rebinding then don't fire anything, let it handle it
         If MainFormRef.KeyMappingForm.Rebinding Then Exit Sub
         Dim upordown = 2
         If Down Then upordown = 0
@@ -449,7 +477,7 @@ Public Class InputHandling
                 keybd_event(Key, MapVirtualKey(Key, 0), upordown, 0)
             Next
             KeyCache(Button)(1) = Down
-            End If
+        End If
 
     End Sub
 

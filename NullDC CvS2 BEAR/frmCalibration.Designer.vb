@@ -94,9 +94,9 @@ Partial Class frmCalibration
         Me.TableLayoutPanel1.SetRowSpan(Me.Label2, 3)
         Me.Label2.Size = New System.Drawing.Size(281, 96)
         Me.Label2.TabIndex = 8
-        Me.Label2.Text = "Rotate your Sticks" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Bars should be around the center of the bars when idle." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If y" &
-    "our controller has some idle jitter, move the deadzone slider up untill the bars" &
-    " stop to jitter."
+        Me.Label2.Text = "Rotate your Sticks" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Pull your triggers" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Bars should be around the center of the" &
+    " bars when idle." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If your controller has some idle jitter, move the deadzone sli" &
+    "der up untill the bars stop to jitter."
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'trbDeadZone

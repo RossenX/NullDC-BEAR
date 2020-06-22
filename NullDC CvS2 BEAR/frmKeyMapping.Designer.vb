@@ -44,19 +44,22 @@ Partial Class frmKeyMapping
         Me.btnAK = New System.Windows.Forms.Button()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnQuickSetup = New System.Windows.Forms.Button()
+        Me.tlpProfile = New System.Windows.Forms.TableLayoutPanel()
+        Me.cbProfile = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnNewProfile = New System.Windows.Forms.Button()
+        Me.btnDeleteProfile = New System.Windows.Forms.Button()
         Me.btnUnbindAll = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbControllerID = New System.Windows.Forms.ComboBox()
         Me.btnOnOff = New System.Windows.Forms.Button()
         Me.btnDone = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.tlpProfile.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnup
@@ -120,9 +123,9 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel1.Controls.Add(Me.btnright, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.btndown, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.btnleft, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnup, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btnCalibrate, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.btnup, 1, 0)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(5, 7)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
@@ -137,7 +140,7 @@ Partial Class frmKeyMapping
         Me.btnCalibrate.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCalibrate.Location = New System.Drawing.Point(3, 3)
         Me.btnCalibrate.Name = "btnCalibrate"
-        Me.btnCalibrate.Size = New System.Drawing.Size(60, 23)
+        Me.btnCalibrate.Size = New System.Drawing.Size(60, 60)
         Me.btnCalibrate.TabIndex = 4
         Me.btnCalibrate.Text = "Calibrate"
         Me.btnCalibrate.UseVisualStyleBackColor = False
@@ -162,7 +165,7 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel2.Controls.Add(Me.btnMPMK, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnAP, 3, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.btnAK, 3, 2)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(206, 3)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(208, 7)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 4
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
@@ -352,33 +355,109 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 212.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(541, 298)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(544, 313)
         Me.TableLayoutPanel5.TabIndex = 7
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.btnQuickSetup)
+        Me.Panel1.Controls.Add(Me.tlpProfile)
         Me.Panel1.Controls.Add(Me.btnUnbindAll)
-        Me.Panel1.Controls.Add(Me.Button4)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.cbControllerID)
         Me.Panel1.Controls.Add(Me.btnOnOff)
         Me.Panel1.Controls.Add(Me.btnDone)
-        Me.Panel1.Controls.Add(Me.Button3)
-        Me.Panel1.Controls.Add(Me.Button2)
-        Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel1.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(535, 292)
+        Me.Panel1.Size = New System.Drawing.Size(538, 307)
         Me.Panel1.TabIndex = 0
+        '
+        'btnQuickSetup
+        '
+        Me.btnQuickSetup.BackColor = System.Drawing.Color.Cyan
+        Me.btnQuickSetup.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnQuickSetup.Location = New System.Drawing.Point(151, 225)
+        Me.btnQuickSetup.Name = "btnQuickSetup"
+        Me.btnQuickSetup.Size = New System.Drawing.Size(259, 75)
+        Me.btnQuickSetup.TabIndex = 18
+        Me.btnQuickSetup.Text = "Quick Setup"
+        Me.btnQuickSetup.UseVisualStyleBackColor = False
+        '
+        'tlpProfile
+        '
+        Me.tlpProfile.ColumnCount = 5
+        Me.tlpProfile.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tlpProfile.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.90909!))
+        Me.tlpProfile.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.090909!))
+        Me.tlpProfile.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tlpProfile.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tlpProfile.Controls.Add(Me.cbProfile, 1, 0)
+        Me.tlpProfile.Controls.Add(Me.Label2, 0, 0)
+        Me.tlpProfile.Controls.Add(Me.btnNewProfile, 3, 0)
+        Me.tlpProfile.Controls.Add(Me.btnDeleteProfile, 4, 0)
+        Me.tlpProfile.Location = New System.Drawing.Point(88, 279)
+        Me.tlpProfile.Name = "tlpProfile"
+        Me.tlpProfile.RowCount = 1
+        Me.tlpProfile.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlpProfile.Size = New System.Drawing.Size(364, 21)
+        Me.tlpProfile.TabIndex = 17
+        '
+        'cbProfile
+        '
+        Me.cbProfile.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbProfile.FormattingEnabled = True
+        Me.cbProfile.Location = New System.Drawing.Point(42, 0)
+        Me.cbProfile.Margin = New System.Windows.Forms.Padding(0)
+        Me.cbProfile.Name = "cbProfile"
+        Me.cbProfile.Size = New System.Drawing.Size(152, 21)
+        Me.cbProfile.TabIndex = 0
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Location = New System.Drawing.Point(3, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(36, 23)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Profile"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btnNewProfile
+        '
+        Me.btnNewProfile.BackColor = System.Drawing.Color.White
+        Me.btnNewProfile.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnNewProfile.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnNewProfile.Location = New System.Drawing.Point(209, 0)
+        Me.btnNewProfile.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnNewProfile.Name = "btnNewProfile"
+        Me.btnNewProfile.Size = New System.Drawing.Size(71, 23)
+        Me.btnNewProfile.TabIndex = 2
+        Me.btnNewProfile.Text = "New Profile"
+        Me.btnNewProfile.UseVisualStyleBackColor = False
+        '
+        'btnDeleteProfile
+        '
+        Me.btnDeleteProfile.BackColor = System.Drawing.Color.White
+        Me.btnDeleteProfile.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnDeleteProfile.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDeleteProfile.Location = New System.Drawing.Point(280, 0)
+        Me.btnDeleteProfile.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnDeleteProfile.Name = "btnDeleteProfile"
+        Me.btnDeleteProfile.Size = New System.Drawing.Size(84, 23)
+        Me.btnDeleteProfile.TabIndex = 3
+        Me.btnDeleteProfile.Text = "Delete"
+        Me.btnDeleteProfile.UseVisualStyleBackColor = False
         '
         'btnUnbindAll
         '
         Me.btnUnbindAll.BackColor = System.Drawing.Color.White
         Me.btnUnbindAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnUnbindAll.Location = New System.Drawing.Point(206, 191)
+        Me.btnUnbindAll.Location = New System.Drawing.Point(208, 188)
         Me.btnUnbindAll.Margin = New System.Windows.Forms.Padding(0)
         Me.btnUnbindAll.Name = "btnUnbindAll"
         Me.btnUnbindAll.Size = New System.Drawing.Size(80, 22)
@@ -386,21 +465,10 @@ Partial Class frmKeyMapping
         Me.btnUnbindAll.Text = "UNBIND ALL"
         Me.btnUnbindAll.UseVisualStyleBackColor = False
         '
-        'Button4
-        '
-        Me.Button4.BackColor = System.Drawing.Color.White
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button4.Location = New System.Drawing.Point(12, 263)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(110, 25)
-        Me.Button4.TabIndex = 16
-        Me.Button4.Text = "IT NO WORK!!"
-        Me.Button4.UseVisualStyleBackColor = False
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(383, 191)
+        Me.Label1.Location = New System.Drawing.Point(384, 198)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(65, 13)
         Me.Label1.TabIndex = 15
@@ -411,7 +479,7 @@ Partial Class frmKeyMapping
         Me.cbControllerID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbControllerID.FormattingEnabled = True
         Me.cbControllerID.Items.AddRange(New Object() {"0", "1", "2", "3"})
-        Me.cbControllerID.Location = New System.Drawing.Point(451, 187)
+        Me.cbControllerID.Location = New System.Drawing.Point(452, 194)
         Me.cbControllerID.Name = "cbControllerID"
         Me.cbControllerID.Size = New System.Drawing.Size(75, 21)
         Me.cbControllerID.TabIndex = 14
@@ -420,9 +488,9 @@ Partial Class frmKeyMapping
         '
         Me.btnOnOff.BackColor = System.Drawing.Color.Lime
         Me.btnOnOff.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnOnOff.Location = New System.Drawing.Point(451, 234)
+        Me.btnOnOff.Location = New System.Drawing.Point(3, 256)
         Me.btnOnOff.Name = "btnOnOff"
-        Me.btnOnOff.Size = New System.Drawing.Size(75, 23)
+        Me.btnOnOff.Size = New System.Drawing.Size(75, 48)
         Me.btnOnOff.TabIndex = 13
         Me.btnOnOff.Text = "ON"
         Me.btnOnOff.UseVisualStyleBackColor = False
@@ -431,52 +499,19 @@ Partial Class frmKeyMapping
         '
         Me.btnDone.BackColor = System.Drawing.Color.White
         Me.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDone.Location = New System.Drawing.Point(451, 260)
+        Me.btnDone.Location = New System.Drawing.Point(460, 249)
         Me.btnDone.Name = "btnDone"
-        Me.btnDone.Size = New System.Drawing.Size(75, 23)
+        Me.btnDone.Size = New System.Drawing.Size(75, 51)
         Me.btnDone.TabIndex = 12
         Me.btnDone.Text = "Done"
         Me.btnDone.UseVisualStyleBackColor = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.White
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button3.Location = New System.Drawing.Point(128, 263)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(112, 25)
-        Me.Button3.TabIndex = 11
-        Me.Button3.Text = "Way Moar Buttons?"
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.White
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Location = New System.Drawing.Point(93, 232)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 25)
-        Me.Button2.TabIndex = 10
-        Me.Button2.Text = "How work?"
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.White
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Location = New System.Drawing.Point(12, 234)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 9
-        Me.Button1.Text = "Wat do?"
-        Me.Button1.UseVisualStyleBackColor = False
         '
         'frmKeyMapping
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(541, 298)
+        Me.ClientSize = New System.Drawing.Size(544, 313)
         Me.Controls.Add(Me.TableLayoutPanel5)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.KeyPreview = True
@@ -490,6 +525,8 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.tlpProfile.ResumeLayout(False)
+        Me.tlpProfile.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -513,9 +550,6 @@ Partial Class frmKeyMapping
     Friend WithEvents btncoin As Button
     Friend WithEvents btnhk As Button
     Friend WithEvents btnCalibrate As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
     Friend WithEvents btnDone As Button
     Friend WithEvents btnOnOff As Button
     Friend WithEvents btnMPMK As Button
@@ -523,6 +557,11 @@ Partial Class frmKeyMapping
     Friend WithEvents btnAK As Button
     Friend WithEvents cbControllerID As ComboBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button4 As Button
     Friend WithEvents btnUnbindAll As Button
+    Friend WithEvents tlpProfile As TableLayoutPanel
+    Friend WithEvents cbProfile As ComboBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents btnNewProfile As Button
+    Friend WithEvents btnDeleteProfile As Button
+    Friend WithEvents btnQuickSetup As Button
 End Class

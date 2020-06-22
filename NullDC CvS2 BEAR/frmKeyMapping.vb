@@ -3,10 +3,11 @@ Imports System.Xml
 
 Public Class frmKeyMapping
 
-
-    Dim KeyToBind As String = ""
-    Dim WaitingForInput As Boolean = False
     Public Rebinding As Boolean = False
+    Dim WaitingForRelease As Boolean = False
+
+    Dim LastButtonBound As String = ""
+
     Dim KeyToRebind As String = ""
     Public KeybindConfigs As ArrayList = New ArrayList
     Dim CalibrationForm As frmCalibration
@@ -14,6 +15,8 @@ Public Class frmKeyMapping
     Dim ControllerID As Int32 = 0
 
     Dim InitSetupDone As Boolean = False
+
+    Dim RebindAllThread As Thread
 
     Public Sub New(ByRef MainForm)
         InitializeComponent()
@@ -24,6 +27,9 @@ Public Class frmKeyMapping
     Private Sub StartKeyBind(_KeyToBind As String)
         KeyToRebind = _KeyToBind
         Rebinding = True
+        WaitingForRelease = False
+        Me.Controls.Find("btn" & _KeyToBind, True)(0).BackColor = Color.Red
+
     End Sub
 
 #Region "Buttons"
@@ -101,15 +107,27 @@ Public Class frmKeyMapping
     Private Sub frmKeyMapping_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         AddHandler MainformRef.InputHandler._KeyPressed, AddressOf KeyPressed
+        AddHandler MainformRef.InputHandler._KeyReleased, AddressOf KeyReleased
+
         GetAllKeybinds()
         cbControllerID.SelectedIndex = ControllerID
         InitSetupDone = True
     End Sub
 
+    Public Sub KeyReleased(Button As String)
+        If LastButtonBound = Button And WaitingForRelease Then
+            Rebinding = False
+            WaitingForRelease = False
+            Me.Controls.Find("btn" & KeyToRebind, True)(0).BackColor = Color.White
+        End If
+    End Sub
+
+
     Public Sub KeyPressed(Button As String)
+
         'Check if rebinding
-        If Rebinding Then
-            Console.WriteLine("Rebind Key Pressed")
+        If Rebinding And Not WaitingForRelease Then
+            LastButtonBound = Button
             'Read configs
             GetAllKeybinds()
             Dim i As Int16
@@ -125,7 +143,8 @@ Public Class frmKeyMapping
                 i += 1
             Next
             WriteXMLConfigFile()
-            Rebinding = False
+            WaitingForRelease = True
+            Me.Controls.Find("btn" & KeyToRebind, True)(0).BackColor = Color.Green
             MainformRef.InputHandler.NeedConfigReload = True
         End If
 
@@ -209,8 +228,8 @@ Public Class frmKeyMapping
 
         writer.WriteEndElement()
 
-
     End Sub
+
     Private Sub frmKeyMapping_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If Rebinding Then Exit Sub
         Dim kc As New KeysConverter
@@ -221,8 +240,6 @@ Public Class frmKeyMapping
                 ButtonToChange = Me.Controls.Find("btn" & key.Name, True)(0)
             End If
         Next
-
-
 
         If Not ButtonToChange Is Nothing Then
             ButtonToChange.BackColor = Color.Green
@@ -248,18 +265,18 @@ Public Class frmKeyMapping
 
     Private Sub btnCalibrate_Click(sender As Object, e As EventArgs) Handles btnCalibrate.Click
         MsgBox("Make sure your stick is in neurtral before starting calibration")
-        CalibrationForm.Show()
+        CalibrationForm.ShowDialog()
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs)
         MsgBox("1. Click Calibrate." & vbCrLf & "2. Click a button in this window, click a button on your controller/stick." & vbCrLf & "3. Do that for all the controls." & vbCrLf & "4. Move/Click your controller, conresponding buttons will glow green, " & vbCrLf & "just make sure to bind them all first. Double inputs will not be recognized, like if you put X as both LK and HK, it won't click em both.")
     End Sub
 
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs)
         MsgBox("NullDC has terrible input plugins, so bassicly this will map your controller to a keyboard key. WASD for movement and uio(punches) jkl(kicks) 1(start) 3(coins). If you don't have a controller you can use those keys to play")
     End Sub
 
-    Private Sub Button3_Click_1(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click_1(sender As Object, e As EventArgs)
         MsgBox("Because Controllers")
     End Sub
 
@@ -308,19 +325,87 @@ Public Class frmKeyMapping
 
     End Sub
 
-    Private Sub Button4_Click_1(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click_1(sender As Object, e As EventArgs)
         frm360ce.Show()
     End Sub
 
     Private Sub btnUnbindAll_Click(sender As Object, e As EventArgs) Handles btnUnbindAll.Click
         Dim Result = MessageBox.Show("This will UNBIND all BEAR keys, so you can use an external program for mapping", "DECLAW", MessageBoxButtons.YesNo)
         If Result = DialogResult.Yes Then
-            For Each i As KeyBind In KeybindConfigs
-                i.Button = ""
-            Next
-            WriteXMLConfigFile()
-            MainformRef.InputHandler.NeedConfigReload = True
+            UnbindAll()
         End If
+    End Sub
+
+    Private Sub UnbindAll()
+        For Each i As KeyBind In KeybindConfigs
+            i.Button = ""
+        Next
+        WriteXMLConfigFile()
+        MainformRef.InputHandler.NeedConfigReload = True
+    End Sub
+
+    Private Sub frmKeyMapping_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        If Me.Visible Then
+            UpdateProfileList()
+            tlpProfile.Visible = False
+        End If
+
+    End Sub
+
+    Private Sub UpdateProfileList()
+        Dim files() As String = IO.Directory.GetFiles(MainformRef.NullDCPath)
+        Dim Profiles As New Arraylist
+
+        For Each file In files
+            Dim FileName As String = file.Split("\")(file.Split("\").Count - 1).Split(".")(0)
+            If FileName.StartsWith("KeyMapReBinds_") Then Profiles.Add(FileName.Split("_")(1))
+        Next
+
+        cbProfile.Items.Clear()
+        cbProfile.Items.Add("Default")
+        For Each profile As String In Profiles
+            cbProfile.Items.Add(profile)
+        Next
+
+    End Sub
+
+    Private Sub cbProfile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProfile.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub btnQuickSetup_Click(sender As Object, e As EventArgs) Handles btnQuickSetup.Click
+        If Not RebindAllThread Is Nothing Then
+            If RebindAllThread.IsAlive Then
+                RebindAllThread.Abort()
+                While RebindAllThread.IsAlive
+                    Thread.Sleep(50)
+                End While
+            End If
+        End If
+        RebindAllThread = New Thread(AddressOf StartQuickSetup)
+        RebindAllThread.IsBackground = True
+        RebindAllThread.Start()
+
+    End Sub
+
+    Private Sub ChangeProfile()
+
+    End Sub
+
+    Private Sub StartQuickSetup()
+        UnbindAll()
+        CalibrationForm.ShowDialog()
+        Dim ButtonsToRebind() As String = {"up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin", "start"}
+        For Each Key As String In ButtonsToRebind
+            StartKeyBind(Key)
+
+            Dim DoneBinding As Boolean = False
+            While Not DoneBinding
+                If Rebinding = False And WaitingForRelease = False Then DoneBinding = True
+                Thread.Sleep(10)
+            End While
+        Next
+
     End Sub
 
 End Class

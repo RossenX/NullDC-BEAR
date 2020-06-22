@@ -171,10 +171,6 @@ Public Class NullDCLauncher
 
         GameLaunched()
 
-        'SendMessage(d_b, BM_CLICK, IntPtr.Zero, IntPtr.Zero)
-
-
-
     End Sub
 
     Public Sub New(ByVal mf As frmMain)
@@ -204,6 +200,16 @@ Public Class NullDCLauncher
         End If
         DoNotSendNextExitEvent = False
 
+        While MainFormRef.IsNullDCRunning
+            Thread.Sleep(10)
+        End While
+
+        'Restore the nvmem to it's original state and delete if we made a new one
+        If File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup") Then
+            If File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin") Then File.Delete(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin")
+            My.Computer.FileSystem.RenameFile(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup", "naomi_nvmem.bin")
+        End If
+
     End Sub
 
     Private Function StartEmulator(ByVal RomName As String) As Boolean
@@ -215,9 +221,7 @@ Public Class NullDCLauncher
         NullDCproc = Process.Start(MainFormRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
-
         LoadRom(MainFormRef.NullDCPath & MainFormRef.GamesList(RomName)(1))
-
         Return True
 
     End Function
@@ -237,6 +241,15 @@ Public Class NullDCLauncher
     End Sub
 
     Private Sub ChangeSettings()
+
+        ' Rename nvmem file and back it up to restore when BEAR closes, because we don't want none of that shit making people desync
+        If File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup") Then ' Backup Already Exists probably closed nullDC after BEAR or something, delete the nvmem since that's one that was generated last time and not the backup
+            If File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin") Then File.Delete(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin")
+        Else
+            'Backup does not exists, make one.
+            My.Computer.FileSystem.RenameFile(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin", "naomi_nvmem.bin_backup")
+        End If
+
         ' Always create a new one of these, so people don't mess with it
         Dim thefile = MainFormRef.NullDCPath & "\antilag.cfg"
         Dim FPSLimit = "90"

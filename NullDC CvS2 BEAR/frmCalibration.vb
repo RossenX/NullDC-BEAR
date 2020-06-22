@@ -6,14 +6,14 @@ Imports System.Timers
 Public Class frmCalibration
 
     Dim CalibrationThread As Threading.Thread
-    Dim MainwindowRef As frmMain
+    Dim MainformRef As frmMain
     ' Current, Idle, Min, Max, Last Frame
     Dim AxixData As New Dictionary(Of String, Array)
     Dim PoVRestInit As Decimal = 0
 
     Public Sub New(ByRef _mainwindow As frmMain)
         InitializeComponent()
-        MainwindowRef = _mainwindow
+        MainformRef = _mainwindow
 
         AxixData.Add("x", {0, 0, 0, 0, 0})
         AxixData.Add("y", {0, 0, 0, 0, 0})
@@ -29,7 +29,7 @@ Public Class frmCalibration
 
     Public Sub CalibrationLoop()
         While Me.Visible
-            Dim tempAxis = MainwindowRef.InputHandler.RxAxis
+            Dim tempAxis = MainformRef.InputHandler.RxAxis
             For Each Key In tempAxis.Keys
                 If tempAxis(Key)(0) > AxixData(Key)(3) Then AxixData(Key)(3) = tempAxis(Key)(0) ' If it's more than 'max' then set it as new max
                 If tempAxis(Key)(0) < AxixData(Key)(2) Then AxixData(Key)(2) = tempAxis(Key)(0) ' If it's more than 'min' then set it as new max
@@ -48,12 +48,12 @@ Public Class frmCalibration
     Private Sub UpdateSliders()
         Try
             For Each key In AxixData.Keys
-                Dim tempAxis = MainwindowRef.InputHandler.RxAxis
+                Dim tempAxis = MainformRef.InputHandler.RxAxis
                 Dim tmpCTRL As SimpleProgressBar = Me.Controls.Find("Bar" & key.ToUpper, True)(0)
                 Dim INVOKATION As SimpleProgressBar.setValue_Delegate = AddressOf tmpCTRL.SetValue
                 Try
-                    If tempAxis(key)(0) > (AxixData(key)(1) + (AxixData(key)(3) * (MainwindowRef.InputHandler.DeadZone / 100))) Or
-                        tempAxis(key)(0) < (AxixData(key)(1) + (AxixData(key)(2) * (MainwindowRef.InputHandler.DeadZone / 100))) Then
+                    If tempAxis(key)(0) > (AxixData(key)(1) + (AxixData(key)(3) * (MainformRef.InputHandler.DeadZone / 100))) Or
+                        tempAxis(key)(0) < (AxixData(key)(1) + (AxixData(key)(2) * (MainformRef.InputHandler.DeadZone / 100))) Then
 
                         Dim BarValue = Normalize(tempAxis(key)(0), AxixData(key)(2), AxixData(key)(3))
                         tmpCTRL.Invoke(INVOKATION, BarValue)
@@ -76,10 +76,10 @@ Public Class frmCalibration
 
     Private Sub frmCalibration_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Me.Visible Then
-            Console.WriteLine("Calibrator Visible. Deadzone: {0}", MainwindowRef.InputHandler.DeadZone)
-            PoVRestInit = MainwindowRef.InputHandler.PoV
-            Dim tempAxis = MainwindowRef.InputHandler.RxAxis
-            trbDeadZone.Value = MainwindowRef.InputHandler.DeadZone
+            Console.WriteLine("Calibrator Visible. Deadzone: {0}", MainformRef.InputHandler.DeadZone)
+            PoVRestInit = MainformRef.InputHandler.PoV
+            Dim tempAxis = MainformRef.InputHandler.RxAxis
+            trbDeadZone.Value = MainformRef.InputHandler.DeadZone
             lbDeadZone.Text = trbDeadZone.Value
 
             AxixData("x") = {0, tempAxis("x")(0), 0, 0, 0}
@@ -93,10 +93,10 @@ Public Class frmCalibration
             CalibrationThread.IsBackground = True
             CalibrationThread.Start()
         Else
-            MainwindowRef.InputHandler.PoVRest = PoVRestInit
-            MainwindowRef.InputHandler.DeadZone = trbDeadZone.Value
-            MainwindowRef.InputHandler.UpdateAxisMap(AxixData)
-            MainwindowRef.InputHandler.NeedConfigReload = True
+            MainformRef.InputHandler.PoVRest = PoVRestInit
+            MainformRef.InputHandler.DeadZone = trbDeadZone.Value
+            MainformRef.InputHandler.UpdateAxisMap(AxixData)
+            MainformRef.InputHandler.NeedConfigReload = True
         End If
     End Sub
 
@@ -108,6 +108,6 @@ Public Class frmCalibration
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles trbDeadZone.Scroll
         Console.WriteLine("TrackBarChange: {0}", trbDeadZone.Value)
         lbDeadZone.Text = trbDeadZone.Value
-        MainwindowRef.InputHandler.DeadZone = trbDeadZone.Value
+        MainformRef.InputHandler.DeadZone = trbDeadZone.Value
     End Sub
 End Class

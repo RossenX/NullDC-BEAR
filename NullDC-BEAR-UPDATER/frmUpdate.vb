@@ -22,7 +22,7 @@ Public Class frmUpdate
 
         Try
             DownloadClient.Credentials = New NetworkCredential()
-            DownloadClient.DownloadFileTaskAsync(remoteUri, My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC BEAR.exe")
+            DownloadClient.DownloadFileTaskAsync(remoteUri, My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC.BEAR.exe")
         Catch ex As Exception
             MsgBox(ex.Message)
             End
@@ -40,8 +40,9 @@ Public Class frmUpdate
         GifEnd.Interval = 2400
         AddHandler GifEnd.Tick, AddressOf _GifEnd
         GifEnd.Start()
-        If File.Exists(Application.StartupPath & "\NullDC.BEAR.exe") Then File.Delete(Application.StartupPath & "\NullDC.BEAR.exe")
-        File.Copy(My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC BEAR.exe", Application.StartupPath & "\NullDC BEAR.exe", True)
+        ' Delete the BEAR with a space in it
+        If File.Exists(Application.StartupPath & "\NullDC BEAR.exe") Then File.Delete(Application.StartupPath & "\NullDC BEAR.exe")
+        File.Copy(My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC.BEAR.exe", Application.StartupPath & "\NullDC.BEAR.exe", True)
     End Sub
 
     Private Sub _GifLoop()
@@ -53,7 +54,7 @@ Public Class frmUpdate
     Private Sub _GifEnd()
         GifEnd.Stop()
         LoadingGif.Image = My.Resources.ken_terry04
-        Process.Start(Application.StartupPath & "\NullDC BEAR.exe")
+        Process.Start(Application.StartupPath & "\NullDC.BEAR.exe")
         End
 
     End Sub

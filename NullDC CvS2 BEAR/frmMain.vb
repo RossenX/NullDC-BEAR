@@ -7,7 +7,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "0.96a" ' 0.95d
+    Public Ver As String = "0.97" ' 0.95d
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -31,9 +31,8 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
-
         lbVer.Text = Ver
-        If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC CvS2\nulldc-1-0-4-en-win"
+        If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         If Not File.Exists(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe") Then
             Dim result As DialogResult = MessageBox.Show("NullDC was not found in this folder, INSTALL NULLDC INTO THIS FOLDER?", "NullDC Install", MessageBoxButtons.YesNo)
@@ -142,10 +141,32 @@ Public Class frmMain
 
     Private Sub CheckFilesAndShit()
 
+        ' Check the EXE name and all that shit from now on use the NullDC.BEAR.exe format since that's what github saves it as, since it hates spaces apperanly
+        ' Why do this you may ask? Well mostly so people who downloaded it from github have the same exe name after they update, for firewall reasons
+        If File.Exists(NullDCPath & "\NullDC BEAR.exe") Then
+            ' NullDC BEAR.exe exist Copy it, start it up close this one
+            If Application.ExecutablePath.Contains("NullDC BEAR.exe") Then
+                ' I am the exe with a space in it
+                File.Copy(NullDCPath & "\NullDC BEAR.exe", NullDCPath & "\NullDC.BEAR.exe")
+                While Not File.Exists(NullDCPath & "\NullDC.BEAR.exe")
+                    Thread.Sleep(10)
+                End While
+                ' Start the correct exe name
+                Process.Start(NullDCPath & "\NullDC.BEAR.exe")
+                ' Close this BEAR, next start it should be deleted by the NullDC.BEAR.exe
+                End
+            Else
+                ' I am not the exe with a space in it Delete the one with a space in it
+                Console.WriteLine("Deleting old NullDC Bear.exe")
+                File.Delete(NullDCPath & "\NullDC BEAR.exe")
+            End If
+
+        End If
 
         ' Check if Keybinds is there
         Dim CheckMatchingKeybinds As Boolean = True
         Dim cfg As XDocument = Nothing
+
         If Not File.Exists(NullDCPath & "\KeyMapReBinds.xml") Then CheckMatchingKeybinds = False
         If CheckMatchingKeybinds Then cfg = XDocument.Load(NullDCPath & "\KeyMapReBinds.xml")
 
@@ -201,6 +222,11 @@ Public Class frmMain
             cfg.<Configs>.<KeyMap>.<AK>.<rebind>.Value = KeyBoardConfigs("AK")
             cfg.Save(NullDCPath & "\KeyMapReBinds.xml")
         End If
+
+
+
+
+
 
         'Install Dependencies if needed
         If Not File.Exists(NullDCPath & "\XInputInterface.dll") Or
@@ -550,6 +576,7 @@ Public Class frmMain
         If c_status = "Hosting" And Not c_gamerom = "None" Then ' Person is hosting a game, so try to join them
             ' Check if you have the game
             If Not GamesList.ContainsKey(c_gamerom) Then
+                MsgBox(c_gamerom)
                 NotificationForm.ShowMessage("You don't have this game")
                 Exit Sub
             End If
@@ -584,6 +611,7 @@ Public Class frmMain
     Private Sub Matchlist_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Matchlist.MouseDoubleClick
         TryToChallenge()
     End Sub
+
 
 
 End Class
