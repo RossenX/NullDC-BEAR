@@ -1,29 +1,35 @@
-﻿Imports NullDC_CvS2_BEAR.frmMain
+﻿Imports System.Threading
+Imports NullDC_CvS2_BEAR.frmMain
 Imports NullDC_CvS2_BEAR.NetworkHandling
+Imports System.Windows
 
 Public Class frmChallenge
 
-    Dim Timeout As Timer = New Timer
+    Dim Timeout As Forms.Timer = New Forms.Timer
     Dim MainFormRef As frmMain
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
         MainFormRef = _mf
+
     End Sub
 
     Private Sub btnDeny_Click(sender As Object, e As EventArgs) Handles btnDeny.Click
         MainFormRef.NetworkHandler.SendMessage(">,D", MainFormRef.Challenger.ip)
         MainFormRef.EndSession("Denied")
+
     End Sub
 
     Public Sub StartChallenge(ByRef _challenger As NullDCPlayer)
         MainFormRef.Challenger = _challenger
         Me.Show()
+
     End Sub
 
     Private Sub frmChallenge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         AddHandler Timeout.Tick, AddressOf Timeout_tick
+
     End Sub
 
     Private Sub Timeout_tick(sender As Object, e As EventArgs)
@@ -35,6 +41,7 @@ Public Class frmChallenge
         Timeout.Stop()
         Dim INVOKATION As EndSession_delegate = AddressOf MainFormRef.EndSession
         MainFormRef.Invoke(INVOKATION, {"TO", Nothing})
+
     End Sub
 
 #Region "Moving Window"
@@ -61,6 +68,9 @@ Public Class frmChallenge
 
     Private Sub btnAccept_Click(sender As Object, e As EventArgs) Handles btnAccept.Click
         If MainFormRef.IsNullDCRunning Then MainFormRef.EndSession("New Challenger")
+        While MainFormRef.IsNullDCRunning
+            Thread.Sleep(10)
+        End While
 
         MainFormRef.ConfigFile.Port = MainFormRef.Challenger.port
         MainFormRef.ConfigFile.Status = "Client"
@@ -69,6 +79,7 @@ Public Class frmChallenge
         MainFormRef.NetworkHandler.SendMessage("^," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & MainFormRef.ConfigFile.Game, MainFormRef.Challenger.ip)
         MainFormRef.WaitingForm.Show()
         Me.Close()
+
     End Sub
 
     Private Sub frmChallenge_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
@@ -81,11 +92,13 @@ Public Class frmChallenge
         Else
             Timeout.Stop()
         End If
+
     End Sub
 
     Private Sub frmChallenge_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         e.Cancel = True
         Me.Visible = False
+
     End Sub
 
 

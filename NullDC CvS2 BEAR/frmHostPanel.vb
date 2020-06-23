@@ -14,7 +14,7 @@ Public Class frmHostPanel
 
     Public Sub BeginHost(Optional ByVal _challenger As NullDCPlayer = Nothing)
         MainformRef.Challenger = _challenger
-        MainformRef.EndSession("New Host")
+        'MainformRef.EndSession("New Host")
         Me.Show()
     End Sub
 

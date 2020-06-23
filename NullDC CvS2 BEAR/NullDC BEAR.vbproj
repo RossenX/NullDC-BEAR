@@ -320,6 +320,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Deps.zip" />
+    <None Include="Resources\naomi_nvmem_fresh.bin" />
     <None Include="Resources\nullDC.cfg" />
   </ItemGroup>
   <ItemGroup>

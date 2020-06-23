@@ -189,8 +189,13 @@ Public Class NullDCLauncher
 
     Private Sub EmulatorExited()
         Console.Write("Emulator Exited")
+        While MainFormRef.IsNullDCRunning
+            Thread.Sleep(10)
+        End While
+
         If Not DoNotSendNextExitEvent Then
             If Not MainFormRef.Challenger Is Nothing And (MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Client") Then
+                Console.WriteLine("Telling challenger i quit")
                 MainFormRef.NetworkHandler.SendMessage(">,E", MainFormRef.Challenger.ip)
             End If
 
@@ -199,16 +204,6 @@ Public Class NullDCLauncher
 
         End If
         DoNotSendNextExitEvent = False
-
-        While MainFormRef.IsNullDCRunning
-            Thread.Sleep(10)
-        End While
-
-        'Restore the nvmem to it's original state and delete if we made a new one
-        If File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup") Then
-            If File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin") Then File.Delete(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin")
-            My.Computer.FileSystem.RenameFile(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup", "naomi_nvmem.bin")
-        End If
 
     End Sub
 
@@ -242,15 +237,35 @@ Public Class NullDCLauncher
 
     Private Sub ChangeSettings()
 
-        ' Rename nvmem file and back it up to restore when BEAR closes, because we don't want none of that shit making people desync
-        If File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup") Then ' Backup Already Exists probably closed nullDC after BEAR or something, delete the nvmem since that's one that was generated last time and not the backup
-            If File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin") Then File.Delete(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin")
-        Else
-            'Backup does not exists, make one.
-            My.Computer.FileSystem.RenameFile(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin", "naomi_nvmem.bin_backup")
-        End If
 
-        ' Always create a new one of these, so people don't mess with it
+        ' Fuck nvMEM get rid of that shit
+        Dim nvmemPath = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin"
+
+        Try
+            'First try to simply delete it
+            File.Delete(nvmemPath)
+            Console.WriteLine("Deleted nvMem")
+        Catch
+            ' That failed, so try to override it with an empty one
+            Try
+                'remove the readonly tag
+                File.SetAttributes(nvmemPath, FileAttributes.Normal)
+                File.WriteAllBytes(nvmemPath, My.Resources.naomi_nvmem_fresh)
+                Console.WriteLine("Overwrote nvMem")
+            Catch
+                Try
+                    'Try to delete it again but remove it's read only
+                    File.SetAttributes(nvmemPath, FileAttributes.Normal)
+                    File.Delete(nvmemPath)
+                    Console.WriteLine("Deleted nvMEM after removing it's read only")
+                Catch
+                    MsgBox("Could not remove nvmem, this isn't usually a big problem, but it reduces the chance of desync. Please check if anything is blocking BEAR from overriding/deleting the naomi_nvmem.bin inside the data folder. kthx")
+                End Try
+            End Try
+        End Try
+
+
+
         Dim thefile = MainFormRef.NullDCPath & "\antilag.cfg"
         Dim FPSLimit = "90"
         Dim FPSLimiter = "0"

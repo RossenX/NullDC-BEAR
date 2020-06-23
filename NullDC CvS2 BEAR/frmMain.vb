@@ -7,7 +7,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "0.97" ' 0.95d
+    Public Ver As String = "0.97a" ' 0.95d
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -143,25 +143,31 @@ Public Class frmMain
 
         ' Check the EXE name and all that shit from now on use the NullDC.BEAR.exe format since that's what github saves it as, since it hates spaces apperanly
         ' Why do this you may ask? Well mostly so people who downloaded it from github have the same exe name after they update, for firewall reasons
-        If File.Exists(NullDCPath & "\NullDC BEAR.exe") Then
-            ' NullDC BEAR.exe exist Copy it, start it up close this one
-            If Application.ExecutablePath.Contains("NullDC BEAR.exe") Then
-                ' I am the exe with a space in it
-                File.Copy(NullDCPath & "\NullDC BEAR.exe", NullDCPath & "\NullDC.BEAR.exe")
-                While Not File.Exists(NullDCPath & "\NullDC.BEAR.exe")
-                    Thread.Sleep(10)
-                End While
-                ' Start the correct exe name
-                Process.Start(NullDCPath & "\NullDC.BEAR.exe")
-                ' Close this BEAR, next start it should be deleted by the NullDC.BEAR.exe
-                End
-            Else
-                ' I am not the exe with a space in it Delete the one with a space in it
-                Console.WriteLine("Deleting old NullDC Bear.exe")
-                File.Delete(NullDCPath & "\NullDC BEAR.exe")
+        Try
+
+            If File.Exists(NullDCPath & "\NullDC BEAR.exe") Then
+                ' NullDC BEAR.exe exist Copy it, start it up close this one
+                If Application.ExecutablePath.Contains("NullDC BEAR.exe") Then
+                    ' I am the exe with a space in it
+                    File.Copy(NullDCPath & "\NullDC BEAR.exe", NullDCPath & "\NullDC.BEAR.exe")
+                    While Not File.Exists(NullDCPath & "\NullDC.BEAR.exe")
+                        Thread.Sleep(10)
+                    End While
+                    ' Start the correct exe name
+                    Process.Start(NullDCPath & "\NullDC.BEAR.exe")
+                    ' Close this BEAR, next start it should be deleted by the NullDC.BEAR.exe
+                    End
+                Else
+                    ' I am not the exe with a space in it Delete the one with a space in it
+                    Console.WriteLine("Deleting old NullDC Bear.exe")
+                    File.Delete(NullDCPath & "\NullDC BEAR.exe")
+                End If
             End If
 
-        End If
+        Catch ex As Exception
+            MsgBox("Couldn't delete old NullDC BEAR.exe")
+        End Try
+
 
         ' Check if Keybinds is there
         Dim CheckMatchingKeybinds As Boolean = True
@@ -398,6 +404,7 @@ Public Class frmMain
                         NullDCLauncher.NullDCproc.CloseMainWindow()
                     End If
                     ConfigFile.Status = "Hosting"
+                    ConfigFile.Game = "None"
                     ConfigFile.SaveFile()
             End Select
         Else
@@ -591,7 +598,12 @@ Public Class frmMain
     End Sub
 
     Private Sub btnHost_Click(sender As Object, e As EventArgs) Handles btnHost.Click
-        If Challenger Is Nothing Or GameSelectForm.Visible Then
+        If IsNullDCRunning() Then
+            NotificationForm.ShowMessage("Can't Host and play at the same time!")
+            Exit Sub
+        End If
+
+        If Challenger Is Nothing Then
             OpenHostingPanel()
         Else
             NotificationForm.ShowMessage("I mean i admire your multitasking you can't fight two people at once")
@@ -773,6 +785,19 @@ Public Class Configs
 #End Region
 
     Public Sub SaveFile()
+        Console.WriteLine("[Saving config]")
+        Console.WriteLine("Version: {0}", Version)
+        Console.WriteLine("Name: {0}", Name)
+        Console.WriteLine("Network: {0}", Network)
+        Console.WriteLine("Port: {0}", Port)
+        Console.WriteLine("Reclaw: {0}", UseRemap)
+        Console.WriteLine("IP: {0}", IP)
+        Console.WriteLine("Host: {0}", Host)
+        Console.WriteLine("Status: {0}", Status)
+        Console.WriteLine("Delay: {0}", Delay)
+        Console.WriteLine("Game: {0}", Game)
+        Console.WriteLine("HostType: {0}", HostType)
+        Console.WriteLine("FPSLimit: {0}", FPSLimit)
         Dim NullDCPath = frmMain.NullDCPath
         Dim lines() As String =
             {
