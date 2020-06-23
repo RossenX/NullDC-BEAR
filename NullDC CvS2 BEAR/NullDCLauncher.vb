@@ -242,9 +242,14 @@ Public Class NullDCLauncher
         Dim nvmemPath = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin"
 
         Try
-            'First try to simply delete it
-            File.Delete(nvmemPath)
-            Console.WriteLine("Deleted nvMem")
+            If File.Exists(nvmemPath) Then
+                'First try to simply delete it
+                File.Delete(nvmemPath)
+                Console.WriteLine("Deleted nvMem")
+            Else
+                Console.WriteLine("No nvMem, we all good")
+            End If
+
         Catch
             ' That failed, so try to override it with an empty one
             Try
