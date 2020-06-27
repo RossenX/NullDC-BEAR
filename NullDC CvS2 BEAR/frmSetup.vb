@@ -77,6 +77,7 @@ Public Class frmSetup
     End Sub
 
     Private Sub btnT3B3_Click(sender As Object, e As EventArgs) Handles btnT3B3.Click
+        Application.OpenForms(0).Focus()
         Me.Close()
     End Sub
 
@@ -98,6 +99,24 @@ Public Class frmSetup
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         frmLoLNerd.Show()
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        AddEntryToFirewall()
+    End Sub
+
+    Private Sub AddEntryToFirewall()
+        Dim process As New Process
+        Dim processStartInfo As New ProcessStartInfo
+        processStartInfo.FileName = "cmd.exe"
+        processStartInfo.Verb = "runas"
+        processStartInfo.UseShellExecute = True
+        processStartInfo.CreateNoWindow = True
+        processStartInfo.Arguments = String.Format("/c netsh advfirewall firewall delete rule name=""NullDC BEAR"" program=""{0}"" & netsh advfirewall firewall delete rule name=""nulldc.bear.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""NullDC BEAR"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""NullDC BEAR"" dir=out action=allow program=""{0}"" enable=yes", Application.ExecutablePath)
+        processStartInfo.Arguments = processStartInfo.Arguments &
+                                     String.Format(" & netsh advfirewall firewall delete rule name=""NullDC"" program=""{0}"" & netsh advfirewall firewall delete rule name=""nulldc_win32_release-notrace.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""NullDC"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""NullDC"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\nullDC_Win32_Release-NoTrace.exe")
+        Dim Firewall = Process.Start(processStartInfo)
 
     End Sub
 #End Region

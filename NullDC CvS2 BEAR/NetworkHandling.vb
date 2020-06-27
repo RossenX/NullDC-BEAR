@@ -20,6 +20,7 @@ Public Class NetworkHandling
     Public Sub New(ByVal mf As frmMain)
         MainFormRef = mf
         Dim MyIPAddress As String = ""
+
         ' Get IP
         Dim nics As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
         For Each netadapter As NetworkInterface In nics
@@ -50,6 +51,9 @@ Public Class NetworkHandling
 
         InitializeReceiver()
     End Sub
+
+
+
 
     Public Sub SendMessage(ByRef message As String, Optional SendtoIP As String = "255.255.255.255")
         Console.WriteLine("<-SendMessage->" & message & "->" & SendtoIP)
@@ -86,8 +90,11 @@ Public Class NetworkHandling
 
     Delegate Sub MessageReceived_delegate(ByRef message As String, ByRef senderip As String, ByRef port As String)
     Private Sub MessageReceived(ByRef message As String, ByRef senderip As String, ByRef port As String)
-        If senderip = MainFormRef.ConfigFile.IP Then Exit Sub ' Ignore Own Messages
         Console.WriteLine("<-Recieved->" & message & " from " & senderip & ":" & port)
+        'If senderip = MainFormRef.ConfigFile.IP Then Exit Sub ' Ignore Own Messages
+
+
+
         Dim Split = message.Split(":")
         ' Ignore data from other version of the software
         If Not MainFormRef.Ver = Split(0) Then
@@ -127,12 +134,12 @@ Public Class NetworkHandling
             If Not MainFormRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainFormRef.GamesList(MainFormRef.ConfigFile.Game)(0) & "|" & MainFormRef.ConfigFile.Game
 
             SendMessage("<," & NameToSend & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & GameNameAndRomName & "," & Status, senderip)
-                Exit Sub
+            Exit Sub
 
-            End If
+        End If
 
-            ' I am <(0),<name>(1),<ip>(2),<port>(3),<gamename|gamerom>(4),<status>(5)
-            If message.StartsWith("<") Then
+        ' I am <(0),<name>(1),<ip>(2),<port>(3),<gamename|gamerom>(4),<status>(5)
+        If message.StartsWith("<") Then
             Dim tmpthread As New Thread(
                 Sub(senderip_)
                     Dim INVOKATION As AddPlayerToList_delegate = AddressOf MainFormRef.AddPlayerToList

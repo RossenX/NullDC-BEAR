@@ -1,22 +1,18 @@
-﻿Imports System.Threading
+﻿Imports System.IO
+Imports System.Threading
 Imports System.Xml
 
 Public Class frmKeyMapping
 
-    Public Rebinding As Boolean = False
-    Dim WaitingForRelease As Boolean = False
-
-    Dim LastButtonBound As String = ""
-
-    Dim KeyToRebind As String = ""
-    Public KeybindConfigs As ArrayList = New ArrayList
     Dim CalibrationForm As frmCalibration
     Dim MainformRef As frmMain
-    Dim ControllerID As Int32 = 0
-
-    Dim InitSetupDone As Boolean = False
-
     Dim RebindAllThread As Thread
+
+    Public Rebinding As Boolean = False
+    Dim WaitingForRelease As Boolean = False
+    Dim LastButtonBound As String = ""
+    Dim KeyToRebind As String = ""
+    Public LoadingSettings As Boolean = False
 
     Public Sub New(ByRef MainForm)
         InitializeComponent()
@@ -108,10 +104,6 @@ Public Class frmKeyMapping
         Me.Icon = My.Resources.NewNullDCBearIcon
         AddHandler MainformRef.InputHandler._KeyPressed, AddressOf KeyPressed
         AddHandler MainformRef.InputHandler._KeyReleased, AddressOf KeyReleased
-
-        GetAllKeybinds()
-        cbControllerID.SelectedIndex = ControllerID
-        InitSetupDone = True
     End Sub
 
     Public Sub KeyReleased(Button As String)
@@ -122,111 +114,29 @@ Public Class frmKeyMapping
         End If
     End Sub
 
-
     Public Sub KeyPressed(Button As String)
 
         'Check if rebinding
         If Rebinding And Not WaitingForRelease Then
             LastButtonBound = Button
-            'Read configs
-            GetAllKeybinds()
-            Dim i As Int16
-            For Each KB As KeyBind In KeybindConfigs
-                If KB.Name = KeyToRebind Then
-                    If Not KB.Button = Button Then
-                        KeybindConfigs(i).Button = Button
-                    End If
-                ElseIf KB.Button = Button Then
-                    KeybindConfigs(i).Button = ""
-                End If
 
-                i += 1
+            ' Edit the Config with new Key, ez pz
+            Dim cfg As XDocument = XDocument.Load(MainformRef.NullDCPath & "\" & MainformRef.InputHandler.GetXMLFile)
+            ' Check if button exists, if it does make it nothing
+            For Each a In cfg.Descendants("button")
+                If a.Value = Button Then a.Value = ""
             Next
-            WriteXMLConfigFile()
+
+            cfg.Descendants(KeyToRebind).<button>.Value = Button
+            cfg.Save(MainformRef.NullDCPath & "\" & MainformRef.InputHandler.GetXMLFile)
+
             WaitingForRelease = True
+
             Me.Controls.Find("btn" & KeyToRebind, True)(0).BackColor = Color.Green
+
             MainformRef.InputHandler.NeedConfigReload = True
+
         End If
-
-    End Sub
-
-    Private Sub GetAllKeybinds()
-
-        Dim cfg As XDocument = XDocument.Load(MainformRef.NullDCPath & "\KeyMapReBinds.xml")
-        KeybindConfigs.Clear()
-        For Each node As XElement In cfg.<Configs>.<KeyMap>.Nodes
-            KeybindConfigs.Add(New KeyBind(node.Name.ToString, node.<button>.Value, node.<rebind>.Value))
-        Next
-        ControllerID = cfg.<Configs>.<ControllerID>.Value
-
-    End Sub
-
-    Public Sub WriteXMLConfigFile()
-        Dim writer As New XmlTextWriter(MainformRef.NullDCPath & "\KeyMapReBinds.xml", System.Text.Encoding.UTF8)
-        writer.WriteStartDocument(True)
-        writer.Formatting = Formatting.Indented
-        writer.Indentation = 2
-        writer.WriteStartElement("Configs")                 ' Config Start
-        writer.WriteStartElement("ControllerID")                'ControllerID
-        writer.WriteString(ControllerID)                            ' Set
-        writer.WriteEndElement()                                'End
-
-        writer.WriteStartElement("KeyMap")                      ' Keymap
-        For Each Rebind As KeyBind In KeybindConfigs                ' Set
-            WriteKeyCodeXML(Rebind, writer)
-        Next
-        writer.WriteEndElement()                                'End
-
-        writer.WriteStartElement("AxisMap")                     ' Axis Map
-        For Each key As String In MainformRef.InputHandler.RxAxis.Keys
-            CreateAxisXMLEntry(key, MainformRef.InputHandler.RxAxis(key)(2), MainformRef.InputHandler.RxAxis(key)(3), MainformRef.InputHandler.RxAxis(key)(1), writer)
-        Next
-        writer.WriteEndElement()                                ' End
-
-        writer.WriteStartElement("PoV")
-        writer.WriteString(MainformRef.InputHandler.PoVRest)
-        writer.WriteEndElement()
-
-        writer.WriteStartElement("DeadZone")
-        writer.WriteString(MainformRef.InputHandler.DeadZone)
-        writer.WriteEndElement()
-
-        writer.WriteEndElement()                            ' Config End
-        writer.WriteEndDocument()
-        writer.Close()
-
-    End Sub
-
-    Private Sub WriteKeyCodeXML(key As KeyBind, ByRef writer As XmlTextWriter)
-        writer.WriteStartElement(key.Name)
-
-        writer.WriteStartElement("button")
-        writer.WriteString(key.Button)
-        writer.WriteEndElement()
-
-        writer.WriteStartElement("rebind")
-        writer.WriteString(key.Rebind)
-        writer.WriteEndElement()
-        writer.WriteEndElement()
-    End Sub
-
-    Private Sub CreateAxisXMLEntry(ByVal Axis As String, ByVal min As String, ByVal max As String, ByVal rest As String, ByRef writer As XmlTextWriter)
-
-        writer.WriteStartElement(Axis)
-
-        writer.WriteStartElement("min")
-        writer.WriteString(min)
-        writer.WriteEndElement()
-
-        writer.WriteStartElement("max")
-        writer.WriteString(max)
-        writer.WriteEndElement()
-
-        writer.WriteStartElement("rest")
-        writer.WriteString(rest)
-        writer.WriteEndElement()
-
-        writer.WriteEndElement()
 
     End Sub
 
@@ -268,19 +178,8 @@ Public Class frmKeyMapping
         CalibrationForm.ShowDialog()
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs)
-        MsgBox("1. Click Calibrate." & vbCrLf & "2. Click a button in this window, click a button on your controller/stick." & vbCrLf & "3. Do that for all the controls." & vbCrLf & "4. Move/Click your controller, conresponding buttons will glow green, " & vbCrLf & "just make sure to bind them all first. Double inputs will not be recognized, like if you put X as both LK and HK, it won't click em both.")
-    End Sub
-
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs)
-        MsgBox("NullDC has terrible input plugins, so bassicly this will map your controller to a keyboard key. WASD for movement and uio(punches) jkl(kicks) 1(start) 3(coins). If you don't have a controller you can use those keys to play")
-    End Sub
-
-    Private Sub Button3_Click_1(sender As Object, e As EventArgs)
-        MsgBox("Because Controllers")
-    End Sub
-
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
+        MainformRef.Focus()
         Me.Close()
     End Sub
 
@@ -299,22 +198,13 @@ Public Class frmKeyMapping
         MainformRef.ConfigFile.SaveFile()
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-        If MainformRef.ConfigFile.UseRemap Then
-            btnOnOff.BackColor = Color.Green
-            btnOnOff.Text = "On"
-        Else
-            btnOnOff.BackColor = Color.Red
-            btnOnOff.Text = "Off"
-        End If
-    End Sub
-
     Private Sub cbControllerID_SelectedIndexChanged(sender As ComboBox, e As EventArgs) Handles cbControllerID.SelectedIndexChanged
-        If InitSetupDone = True Then
-            GetAllKeybinds()
-            ControllerID = cbControllerID.Text
-            WriteXMLConfigFile()
+        If Not LoadingSettings Then
+            Dim cfg As XDocument = XDocument.Load(MainformRef.NullDCPath & "\" & MainformRef.InputHandler.GetXMLFile)
+            cfg.<Configs>.<ControllerID>.Value = cbControllerID.Text
+            cfg.Save(MainformRef.NullDCPath & "\" & MainformRef.InputHandler.GetXMLFile)
             MainformRef.InputHandler.NeedConfigReload = True
+
         End If
 
     End Sub
@@ -325,10 +215,6 @@ Public Class frmKeyMapping
 
     End Sub
 
-    Private Sub Button4_Click_1(sender As Object, e As EventArgs)
-        frm360ce.Show()
-    End Sub
-
     Private Sub btnUnbindAll_Click(sender As Object, e As EventArgs) Handles btnUnbindAll.Click
         Dim Result = MessageBox.Show("This will UNBIND all BEAR keys, so you can use an external program for mapping", "DECLAW", MessageBoxButtons.YesNo)
         If Result = DialogResult.Yes Then
@@ -337,24 +223,37 @@ Public Class frmKeyMapping
     End Sub
 
     Private Sub UnbindAll()
-        For Each i As KeyBind In KeybindConfigs
-            i.Button = ""
+
+        Dim cfg As XDocument = XDocument.Load(MainformRef.NullDCPath & "\" & MainformRef.InputHandler.GetXMLFile)
+        For Each a In cfg.Descendants("button")
+            a.Value = ""
         Next
-        WriteXMLConfigFile()
+        cfg.Save(MainformRef.InputHandler.GetXMLFile(True))
+
         MainformRef.InputHandler.NeedConfigReload = True
+
     End Sub
 
     Private Sub frmKeyMapping_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Me.Visible Then
             UpdateProfileList()
-            tlpProfile.Visible = False
-        End If
 
+            If MainformRef.ConfigFile.UseRemap Then
+                btnOnOff.BackColor = Color.Green
+                btnOnOff.Text = "On"
+            Else
+                btnOnOff.BackColor = Color.Red
+                btnOnOff.Text = "Off"
+            End If
+
+        End If
     End Sub
 
-    Private Sub UpdateProfileList()
+    Public Sub UpdateProfileList()
+        LoadingSettings = True
+
         Dim files() As String = IO.Directory.GetFiles(MainformRef.NullDCPath)
-        Dim Profiles As New Arraylist
+        Dim Profiles As New ArrayList
 
         For Each file In files
             Dim FileName As String = file.Split("\")(file.Split("\").Count - 1).Split(".")(0)
@@ -363,13 +262,17 @@ Public Class frmKeyMapping
 
         cbProfile.Items.Clear()
         cbProfile.Items.Add("Default")
+        Dim ProfileIndex = 1
+        Dim SelectedProfile = 0
         For Each profile As String In Profiles
             cbProfile.Items.Add(profile)
+            If profile = MainformRef.InputHandler.ProfileName Then SelectedProfile = ProfileIndex
+            ProfileIndex += 1
         Next
+        cbProfile.SelectedIndex = SelectedProfile
+        cbControllerID.SelectedIndex = MainformRef.InputHandler.ControllerID
 
-    End Sub
-
-    Private Sub cbProfile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProfile.SelectedIndexChanged
+        LoadingSettings = False
 
     End Sub
 
@@ -388,10 +291,6 @@ Public Class frmKeyMapping
 
     End Sub
 
-    Private Sub ChangeProfile()
-
-    End Sub
-
     Private Sub StartQuickSetup()
         UnbindAll()
         CalibrationForm.ShowDialog()
@@ -406,6 +305,39 @@ Public Class frmKeyMapping
             End While
         Next
 
+    End Sub
+
+    Private Sub cbProfile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProfile.SelectedIndexChanged
+        If Not LoadingSettings Then ChangeProfile()
+        Panel1.Focus()
+
+    End Sub
+
+    Private Sub ChangeProfile()
+        MainformRef.ConfigFile.KeyMapProfile = cbProfile.Text
+        MainformRef.ConfigFile.SaveFile()
+        MainformRef.InputHandler.NeedConfigReload = True
+
+    End Sub
+
+    Private Sub btnNewProfile_Click(sender As Object, e As EventArgs) Handles btnNewProfile.Click
+        Dim NewProfileFrame = New frmNewProfile(MainformRef)
+        NewProfileFrame.Show(Me)
+    End Sub
+
+    Private Sub btnDeleteProfile_Click(sender As Object, e As EventArgs) Handles btnDeleteProfile.Click
+        If cbProfile.Text = "Default" Then
+            MainformRef.NotificationForm.ShowMessage("Cannot Delete Default")
+            Exit Sub
+        End If
+
+        File.SetAttributes(MainformRef.InputHandler.GetXMLFile(True), FileAttributes.Normal)
+        File.Delete(MainformRef.InputHandler.GetXMLFile(True))
+        Dim CurrentIndex = cbProfile.SelectedIndex
+        cbProfile.Items.Remove(cbProfile.SelectedItem)
+
+        If cbProfile.Items.Count > CurrentIndex - 1 Then CurrentIndex = cbProfile.Items.Count - 1
+        cbProfile.SelectedIndex = CurrentIndex
     End Sub
 
 End Class

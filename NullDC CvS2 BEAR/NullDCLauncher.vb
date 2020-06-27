@@ -193,6 +193,8 @@ Public Class NullDCLauncher
             Thread.Sleep(10)
         End While
 
+        RestoreNvmem()
+
         If Not DoNotSendNextExitEvent Then
             If Not MainFormRef.Challenger Is Nothing And (MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Client") Then
                 Console.WriteLine("Telling challenger i quit")
@@ -235,40 +237,73 @@ Public Class NullDCLauncher
 
     End Sub
 
-    Private Sub ChangeSettings()
 
-
-        ' Fuck nvMEM get rid of that shit
+    Private Sub RestoreNvmem() ' Mostly so it doesn't fuck up blue's launcher
         Dim nvmemPath = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin"
+        Dim nvmemPathBackup = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
 
         Try
-            If File.Exists(nvmemPath) Then
-                'First try to simply delete it
+            If File.Exists(nvmemPath) Then ' nvmem exists
+                File.SetAttributes(nvmemPath, FileAttributes.Normal)
                 File.Delete(nvmemPath)
-                Console.WriteLine("Deleted nvMem")
-            Else
-                Console.WriteLine("No nvMem, we all good")
+
+                If File.Exists(nvmemPathBackup) Then ' Backup Exists
+                    File.SetAttributes(nvmemPathBackup, FileAttributes.Normal)
+                    My.Computer.FileSystem.RenameFile(nvmemPathBackup, "naomi_nvmem.bin")
+                    File.SetAttributes(nvmemPath, FileAttributes.ReadOnly)
+                End If
             End If
 
-        Catch
-            ' That failed, so try to override it with an empty one
-            Try
-                'remove the readonly tag
-                File.SetAttributes(nvmemPath, FileAttributes.Normal)
-                File.WriteAllBytes(nvmemPath, My.Resources.naomi_nvmem_fresh)
-                Console.WriteLine("Overwrote nvMem")
-            Catch
-                Try
-                    'Try to delete it again but remove it's read only
-                    File.SetAttributes(nvmemPath, FileAttributes.Normal)
-                    File.Delete(nvmemPath)
-                    Console.WriteLine("Deleted nvMEM after removing it's read only")
-                Catch
-                    MsgBox("Could not remove nvmem, this isn't usually a big problem, but it reduces the chance of desync. Please check if anything is blocking BEAR from overriding/deleting the naomi_nvmem.bin inside the data folder. kthx")
-                End Try
-            End Try
+        Catch ex As Exception
+            MsgBox("Couldn't restore nvmem: " & ex.Message)
         End Try
 
+    End Sub
+
+    Private Sub BackupNvmem()
+        ' Fuck nvMEM get rid of that shit
+        Dim nvmemPath = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin"
+        Dim nvmemPathBackup = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
+
+
+        Try
+            If File.Exists(nvmemPath) Then ' nvmem exists... shocker.
+
+                If File.Exists(nvmemPathBackup) Then ' Backup Exists nullDC probably crashed or something
+                    ' Delete w.e nvmem is currenly in there, leave backup
+                    File.SetAttributes(nvmemPath, FileAttributes.Normal)
+                    File.Delete(nvmemPath)
+
+                Else
+                    ' No backup, so backup the nvmem
+                    File.SetAttributes(nvmemPath, FileAttributes.Normal)
+                    My.Computer.FileSystem.RenameFile(nvmemPath, "naomi_nvmem.bin_backup")
+                    File.SetAttributes(nvmemPathBackup, FileAttributes.ReadOnly)
+
+                End If
+
+            Else
+                Console.WriteLine("No nvMem, we all good")
+
+            End If
+        Catch ex As Exception
+            MsgBox("Couldn't backup nvmem: " & ex.Message)
+
+        End Try
+
+    End Sub
+
+    Private Sub ChangeSettings()
+
+        BackupNvmem()
+
+        ' Wait for nvmem to be dealt with
+        Dim SleepTime = 0
+        While File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin")
+            Thread.Sleep(100)
+            SleepTime += 100
+            If SleepTime > 1000 Then Exit While ' Fuck it just continue
+        End While
 
 
         Dim thefile = MainFormRef.NullDCPath & "\antilag.cfg"

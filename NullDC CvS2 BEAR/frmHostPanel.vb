@@ -14,7 +14,7 @@ Public Class frmHostPanel
 
     Public Sub BeginHost(Optional ByVal _challenger As NullDCPlayer = Nothing)
         MainformRef.Challenger = _challenger
-        'MainformRef.EndSession("New Host")
+        MainformRef.EndSession("New Host")
         Me.Show()
     End Sub
 
@@ -52,13 +52,14 @@ Public Class frmHostPanel
                 Dim Game = MainformRef.Challenger.game
                 Console.WriteLine("Game Is:  " & Game)
                 If MainformRef.Challenger.game = "None" Then cbGameList.Visible = True
-
+                SuggestDelay()
             Else
                 lbInfo.Text = "Hosting Solo"
                 cbDelay.Text = "1"
                 lbPing.Text = ""
                 cbGameList.Visible = True
             End If
+
         Else
         End If
 
@@ -68,21 +69,25 @@ Public Class frmHostPanel
         If MainformRef.Challenger Is Nothing Then
             MainformRef.NotificationForm.ShowMessage("I can't predict the future, unless you're hosting someone i can't suggest a delay for you")
         Else
-            Dim ping = New Ping().Send(MainformRef.Challenger.ip).RoundtripTime
-            If ping = 0 Then
-                MainformRef.NotificationForm.ShowMessage("Coulnd't ping the player. Make sure you and your challanger are not behind a firewall or something.")
-                Exit Sub
-            End If
-            Dim DelayFrameRate = 32.66
-            Dim delay = Math.Ceiling(ping / DelayFrameRate)
-            If delay = 0 Then delay = 1
-            cbDelay.Text = delay
-            lbPing.Text = "Ping: " & ping & " | Delay rating: " & (ping / DelayFrameRate).ToString("0.##")
-            If delay > 7 Then
-                MainformRef.NotificationForm.ShowMessage("Delay > 7 has a VERY HIGH chance of desync!")
-            End If
+            SuggestDelay()
         End If
 
+    End Sub
+
+    Private Sub SuggestDelay()
+        Dim ping = New Ping().Send(MainformRef.Challenger.ip).RoundtripTime
+        If ping = 0 Then
+            MainformRef.NotificationForm.ShowMessage("Coulnd't ping the player. Make sure you and your challanger are not behind a firewall or something.")
+            Exit Sub
+        End If
+        Dim DelayFrameRate = 32.66
+        Dim delay = Math.Ceiling(ping / DelayFrameRate)
+        If delay = 0 Then delay = 1
+        cbDelay.Text = delay
+        lbPing.Text = "Ping: " & ping & " | Delay rating: " & (ping / DelayFrameRate).ToString("0.##")
+        If delay > 7 Then
+            MainformRef.NotificationForm.ShowMessage("Delay > 7 has a VERY HIGH chance of desync!")
+        End If
     End Sub
 
     Private Sub btnStartHosting_Click(sender As Object, e As EventArgs) Handles btnStartHosting.Click

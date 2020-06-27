@@ -9,42 +9,31 @@ Imports System.IO
 
 Public Class InputHandling
 
-    Dim ProfileName
-
-
-    Dim ControllerID As Int16 = 0
+    Public ProfileName As String = "Default"
+    Public KeyBoardConfigs As New Dictionary(Of String, String)
+    Public PoV As Decimal = 0 ' PoV / Dpad
+    Public PoVRest As Decimal = 0 ' PoV / Dpad
+    Public DeadZone As Int16 = 10
+    Public NeedConfigReload As Boolean = False
+    Public KeyCache As New Dictionary(Of String, Array) ' Keeps data for the key presses last frame to avoid redoing the same thing over and over
+    Public RxAxis As New Dictionary(Of String, Array) ' Current, Idle, Min, Max, Last Frame
+    Public PollThread As Thread
+    Public myjoyEX As JOYINFOEX
+    Public Event _KeyPressed(ByVal Key As String)
+    Public Event _KeyReleased(ByVal Key As String)
+    Public KeybindConfigs As ArrayList = New ArrayList 'Key Configs from XML
+    Dim kc As KeysConverter = New KeysConverter
+    Public ControllerID As Int16 = 0
     Dim InitialPoll = True
     Dim PostInitialRoll = True
     Dim TurnedOn As Boolean = True
     Dim PollRate As Int16 = 16
-
-
     Dim RxButtons As New BitArray(32, False)
     Dim LF_RxButtons As New BitArray(32, False)
-
-    Public PoV As Decimal = 0 ' PoV / Dpad
-    Public PoVRest As Decimal = 0 ' PoV / Dpad
-    Public DeadZone As Int16 = 10
-
-    Public NeedConfigReload As Boolean = False
-
-    ' Keeps data for the key presses last frame to avoid redoing the same thing over and over
-    Public KeyCache As New Dictionary(Of String, Array)
-    ' Current, Idle, Min, Max, Last Frame
-    Public RxAxis As New Dictionary(Of String, Array)
-
-
-    Dim kc As KeysConverter = New KeysConverter
-
-
-    Public PollThread As Thread
-
-    ' JoyStick Mapping
-    Declare Function joyGetPosEx Lib "winmm.dll" (ByVal uJoyID As Integer, ByRef pji As JOYINFOEX) As Integer
-    Public myjoyEX As JOYINFOEX
-    'Public xinputstate As GamePadState
+    Dim MainFormRef As frmMain 'Rebind Vars
 
     ' Virtual Keyboard Mapping
+    Private Declare Function joyGetPosEx Lib "winmm.dll" (ByVal uJoyID As Integer, ByRef pji As JOYINFOEX) As Integer ' JoyStick Mapping
     Private Declare Sub keybd_event Lib "user32.dll" (ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As Integer, ByVal dwExtraInfo As Integer)
     <DllImport("User32.dll", SetLastError:=False, CallingConvention:=CallingConvention.StdCall,
            CharSet:=CharSet.Auto)>
@@ -55,7 +44,6 @@ Public Class InputHandling
     Public Shared Function VkKeyScanExW(ByVal ch As Char, ByVal dwhkl As IntPtr) As Short
     End Function
 
-    ' Joystick Variable Struct
     <StructLayout(LayoutKind.Sequential)>
     Public Structure JOYINFOEX
         Public dwSize As Integer
@@ -73,28 +61,19 @@ Public Class InputHandling
         Public dwReserved2 As Integer
     End Structure
 
-    ' Key Pressing Events
-    Public Event _KeyPressed(ByVal Key As String)
-    Public Event _KeyReleased(ByVal Key As String)
-
-    'Key Configs from XML
-    Public KeybindConfigs As ArrayList = New ArrayList
-    'Cache all the Keys for easier/faster looping
-
-    'Rebind Vars
-    Dim MainFormRef As frmMain
-
     Public Sub New(ByRef mf As frmMain)
         MainFormRef = mf
         myjoyEX.dwSize = 64
         myjoyEX.dwFlags = &HFF
+
+        GetKeyboardConfigs()
         ReloadConfigs()
+
+        TurnedOn = MainFormRef.ConfigFile.UseRemap
 
         PollThread = New Thread(AddressOf InputRoll)
         PollThread.IsBackground = True
         PollThread.Start()
-
-        TurnedOn = MainFormRef.ConfigFile.UseRemap
     End Sub
 
     Public Sub TurnOnOff(ByVal OnOff As Boolean)
@@ -105,20 +84,86 @@ Public Class InputHandling
         End If
     End Sub
 
-    Public Sub ReloadConfigs()
+    Public Function GetXMLFile(Optional ByVal FullPath As Boolean = False) As String
+        Dim _path = ""
+        If FullPath Then _path = MainFormRef.NullDCPath & "\"
 
-        ' Check if XML exists, if not make it
-        If Not File.Exists(MainFormRef.NullDCPath & "\KeyMapReBinds.xml") Then
-            CreateKeyMapConfigs()
+        If ProfileName = "Default" Then
+            _path += "KeyMapReBinds.xml"
+        Else
+            _path += "KeyMapReBinds_" & ProfileName & ".xml"
         End If
 
+        Return _path
+    End Function
+
+    Public Sub GetKeyboardConfigs()
+
+        KeyBoardConfigs.Clear()
+        Dim KeyboardLines() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc")
+        Dim KeyList() As String = {"Start", "Test", "Up", "Down", "Left", "Right", "Button_1", "Button_2", "Button_3", "Button_4", "Button_5", "Button_6", "Coin"}
+        Dim KeyListx() As String = {"start", "Test", "up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin"}
+
+        'Check if any of them are blank
+        Dim ReCreateKeyboardqkc As Boolean = False
+        Dim FoundKeys() As Boolean = {False, False, False, False, False, False, False, False, False, False, False, False, False}
+        Dim FoundAllKeys As Boolean = False
+        For Each line In KeyboardLines
+            If line.Split("=").Count = 0 Then Continue For
+            Dim CurrentKeyChecking = line.Split("=")(1)
+            If Array.IndexOf(KeyList, CurrentKeyChecking) = -1 Then ' If we don't find the keyboard button somehow then create it
+                File.WriteAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc", {"5=Start", "3=Test", "w=Up", "s=Down", "a=Left", "d=Right", "8=Button_1", "9=Button_2", "0=Button_3", "u=Button_4", "i=Button_5", "o=Button_6", "1=Coin"})
+                KeyboardLines = File.ReadAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc")
+                FoundAllKeys = True
+                Exit For
+            Else
+                FoundKeys(Array.IndexOf(KeyList, CurrentKeyChecking)) = True
+            End If
+
+        Next
+
+        If Not FoundAllKeys Then
+            For Each foundkey In FoundKeys ' Second Check if we dind't find ALL the keys
+                If Not foundkey Then
+                    File.WriteAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc", {"5=Start", "3=Test", "w=Up", "s=Down", "a=Left", "d=Right", "8=Button_1", "9=Button_2", "0=Button_3", "u=Button_4", "i=Button_5", "o=Button_6", "1=Coin"})
+                    KeyboardLines = File.ReadAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc")
+                    Exit For
+                End If
+            Next
+
+        End If
+
+        For Each line As String In KeyboardLines
+            If line.Contains("Test") Then Continue For
+            Dim SplitKeyEntry = line.Split("=")
+            Dim KeyIndex = Array.IndexOf(KeyList, SplitKeyEntry(1))
+            KeyBoardConfigs.Add(KeyListx(KeyIndex), SplitKeyEntry(0))
+
+        Next
+
+        KeyBoardConfigs.Add("LPLK", KeyBoardConfigs("LP") & KeyBoardConfigs("LK"))
+        KeyBoardConfigs.Add("MPMK", KeyBoardConfigs("MP") & KeyBoardConfigs("MK"))
+        KeyBoardConfigs.Add("HPHK", KeyBoardConfigs("HP") & KeyBoardConfigs("HK"))
+        KeyBoardConfigs.Add("AP", KeyBoardConfigs("LP") & KeyBoardConfigs("MP") & KeyBoardConfigs("HP"))
+        KeyBoardConfigs.Add("AK", KeyBoardConfigs("LK") & KeyBoardConfigs("MK") & KeyBoardConfigs("HK"))
+
+    End Sub
+
+    Public Sub ReloadConfigs()
+
+        ' Get Profile Name
+        ProfileName = MainFormRef.ConfigFile.KeyMapProfile
+
+        ' Check if XML exists, if not make it
+        If Not File.Exists(GetXMLFile(True)) Then CreateKeyMapConfigs()
+
         'Read configs
-        Dim cfg As XDocument = XDocument.Load(MainFormRef.NullDCPath & "\KeyMapReBinds.xml")
+        Dim cfg As XDocument = XDocument.Load(GetXMLFile(True))
 
         'load configs to an easier to access variable
         KeybindConfigs.Clear()
         For Each node As XElement In cfg.<Configs>.<KeyMap>.Nodes
-            KeybindConfigs.Add(New KeyBind(node.Name.ToString, node.<button>.Value, node.<rebind>.Value))
+            KeybindConfigs.Add(New KeyBind(node.Name.ToString, node.<button>.Value, KeyBoardConfigs(node.Name.ToString)))
         Next
 
         ' Axis Cache
@@ -139,34 +184,44 @@ Public Class InputHandling
         ControllerID = cfg.<Configs>.<ControllerID>.Value
         PoVRest = cfg.<Configs>.<PoV>.Value
 
+
+        If Not MainFormRef.KeyMappingForm Is Nothing Then
+            MainFormRef.KeyMappingForm.LoadingSettings = True
+            MainFormRef.KeyMappingForm.cbControllerID.Invoke(Sub() MainFormRef.KeyMappingForm.cbControllerID.SelectedIndex = ControllerID)
+            MainFormRef.KeyMappingForm.LoadingSettings = False
+
+        End If
+
         NeedConfigReload = False
 
     End Sub
 
     Public Sub CreateKeyMapConfigs()
         ' Push the Defaults into the Array Setup so it's default XInput
-        KeybindConfigs.Add(New KeyBind("up", "y+", MainFormRef.KeyBoardConfigs("Up")))
-        KeybindConfigs.Add(New KeyBind("down", "y-", MainFormRef.KeyBoardConfigs("Down")))
-        KeybindConfigs.Add(New KeyBind("left", "x-", MainFormRef.KeyBoardConfigs("Left")))
-        KeybindConfigs.Add(New KeyBind("right", "x+", MainFormRef.KeyBoardConfigs("Right")))
+        KeybindConfigs.Clear()
+        KeybindConfigs.Add(New KeyBind("up", "y+", KeyBoardConfigs("up")))
+        KeybindConfigs.Add(New KeyBind("down", "y-", KeyBoardConfigs("down")))
+        KeybindConfigs.Add(New KeyBind("left", "x-", KeyBoardConfigs("left")))
+        KeybindConfigs.Add(New KeyBind("right", "x+", KeyBoardConfigs("right")))
 
-        KeybindConfigs.Add(New KeyBind("LP", "2", MainFormRef.KeyBoardConfigs("Button_1")))
-        KeybindConfigs.Add(New KeyBind("MP", "3", MainFormRef.KeyBoardConfigs("Button_2")))
-        KeybindConfigs.Add(New KeyBind("HP", "5", MainFormRef.KeyBoardConfigs("Button_3")))
+        KeybindConfigs.Add(New KeyBind("LP", "2", KeyBoardConfigs("LP")))
+        KeybindConfigs.Add(New KeyBind("MP", "3", KeyBoardConfigs("MP")))
+        KeybindConfigs.Add(New KeyBind("HP", "5", KeyBoardConfigs("HP")))
 
-        KeybindConfigs.Add(New KeyBind("LK", "0", MainFormRef.KeyBoardConfigs("Button_4")))
-        KeybindConfigs.Add(New KeyBind("MK", "1", MainFormRef.KeyBoardConfigs("Button_5")))
-        KeybindConfigs.Add(New KeyBind("HK", "4", MainFormRef.KeyBoardConfigs("Button_6")))
+        KeybindConfigs.Add(New KeyBind("LK", "0", KeyBoardConfigs("LK")))
+        KeybindConfigs.Add(New KeyBind("MK", "1", KeyBoardConfigs("MK")))
+        KeybindConfigs.Add(New KeyBind("HK", "4", KeyBoardConfigs("HK")))
 
-        KeybindConfigs.Add(New KeyBind("LPLK", "", MainFormRef.KeyBoardConfigs("LPLK")))
-        KeybindConfigs.Add(New KeyBind("MPMK", "", MainFormRef.KeyBoardConfigs("MPMK")))
-        KeybindConfigs.Add(New KeyBind("HPHK", "", MainFormRef.KeyBoardConfigs("HPHK")))
-        KeybindConfigs.Add(New KeyBind("AP", "", MainFormRef.KeyBoardConfigs("AP")))
-        KeybindConfigs.Add(New KeyBind("AK", "", MainFormRef.KeyBoardConfigs("AK")))
+        KeybindConfigs.Add(New KeyBind("LPLK", "", KeyBoardConfigs("LPLK")))
+        KeybindConfigs.Add(New KeyBind("MPMK", "", KeyBoardConfigs("MPMK")))
+        KeybindConfigs.Add(New KeyBind("HPHK", "", KeyBoardConfigs("HPHK")))
+        KeybindConfigs.Add(New KeyBind("AP", "", KeyBoardConfigs("AP")))
+        KeybindConfigs.Add(New KeyBind("AK", "", KeyBoardConfigs("AK")))
 
-        KeybindConfigs.Add(New KeyBind("start", "8", MainFormRef.KeyBoardConfigs("Start")))
-        KeybindConfigs.Add(New KeyBind("coin", "9", MainFormRef.KeyBoardConfigs("Coin")))
+        KeybindConfigs.Add(New KeyBind("start", "8", KeyBoardConfigs("start")))
+        KeybindConfigs.Add(New KeyBind("coin", "9", KeyBoardConfigs("coin")))
 
+        RxAxis.Clear()
         ' Axis ' {Current, Rest, Min, Max, Lastframe}
         RxAxis.Add("x", {0, 0, -1, 1, 0})
         RxAxis.Add("y", {0, 0, -1, 1, 0})
@@ -176,10 +231,13 @@ Public Class InputHandling
         RxAxis.Add("v", {0, 0, 0, 1, 0})
 
         WriteXMLConfigFile()
+        MainFormRef.KeyMappingForm.cbProfile.Invoke(Sub() MainFormRef.KeyMappingForm.UpdateProfileList())
+
+
     End Sub
 
     Public Sub WriteXMLConfigFile()
-        Dim writer As New XmlTextWriter(MainFormRef.NullDCPath & "\KeyMapReBinds.xml", System.Text.Encoding.UTF8)
+        Dim writer As New XmlTextWriter(GetXMLFile(True), Text.Encoding.UTF8)
         writer.WriteStartDocument(True)
         writer.Formatting = Formatting.Indented
         writer.Indentation = 2
@@ -242,13 +300,8 @@ Public Class InputHandling
         writer.WriteString(key.Button)
         writer.WriteEndElement()
 
-        writer.WriteStartElement("rebind")
-        writer.WriteString(key.Rebind)
-        writer.WriteEndElement()
         writer.WriteEndElement()
     End Sub
-
-
 
     Private Sub DoXInputRoll(ByRef xinputstate As XInputDotNetPure.GamePadState)
 
@@ -329,7 +382,6 @@ Public Class InputHandling
 
         End With
     End Sub
-
 
     Private Sub DoOpenTKInputRoll(ByRef State As JoystickState)
 
@@ -484,14 +536,6 @@ Public Class InputHandling
     Private Function GetKeyFromChar(c As Char) As Keys
         Dim vkKeyCode As Short = VkKeyScanExW(c, InputLanguage.CurrentInputLanguage.Handle)
         Return CType((((vkKeyCode And &HFF00) << 8) Or (vkKeyCode And &HFF)), Keys)
-    End Function
-
-    Public Function GetJoyStickInfo() As JOYINFOEX
-
-        Dim JoystickInfo As JOYINFOEX
-        Call joyGetPosEx(0, JoystickInfo)
-        Return JoystickInfo
-
     End Function
 
     Public Sub UpdateAxisMap(NewMap As Dictionary(Of String, Array))

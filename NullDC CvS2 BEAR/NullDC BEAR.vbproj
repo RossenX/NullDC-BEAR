@@ -126,12 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="frm360ce.Designer.vb">
-      <DependentUpon>frm360ce.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frm360ce.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmCalibration.Designer.vb">
       <DependentUpon>frmCalibration.vb</DependentUpon>
     </Compile>
@@ -193,6 +187,12 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNewProfile.Designer.vb">
+      <DependentUpon>frmNewProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNotification.Designer.vb">
       <DependentUpon>frmNotification.vb</DependentUpon>
     </Compile>
@@ -235,11 +235,9 @@
     <Compile Include="SimpleProgressBar.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="NetPlayHandler.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frm360ce.resx">
-      <DependentUpon>frm360ce.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmCalibration.resx">
       <DependentUpon>frmCalibration.vb</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewProfile.resx">
+      <DependentUpon>frmNewProfile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNotification.resx">
       <DependentUpon>frmNotification.vb</DependentUpon>
@@ -350,6 +351,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NullDC-BEAR-UPDATER.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Beta.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

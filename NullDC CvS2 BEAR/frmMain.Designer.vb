@@ -44,9 +44,11 @@ Partial Class frmMain
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lbVer = New System.Windows.Forms.Label()
+        Me.imgBeta = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -61,7 +63,7 @@ Partial Class frmMain
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(106, 26)
         Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Button Mapping"
+        Me.Button1.Text = "Controls"
         Me.Button1.UseVisualStyleBackColor = False
         '
         'Matchlist
@@ -322,9 +324,20 @@ Partial Class frmMain
         Me.lbVer.BackColor = System.Drawing.Color.Transparent
         Me.lbVer.Location = New System.Drawing.Point(525, 56)
         Me.lbVer.Name = "lbVer"
-        Me.lbVer.Size = New System.Drawing.Size(39, 13)
+        Me.lbVer.Size = New System.Drawing.Size(34, 13)
         Me.lbVer.TabIndex = 10
-        Me.lbVer.Text = "Label6"
+        Me.lbVer.Text = "0.00a"
+        '
+        'imgBeta
+        '
+        Me.imgBeta.BackColor = System.Drawing.Color.Transparent
+        Me.imgBeta.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Beta
+        Me.imgBeta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.imgBeta.Location = New System.Drawing.Point(331, -31)
+        Me.imgBeta.Name = "imgBeta"
+        Me.imgBeta.Size = New System.Drawing.Size(182, 155)
+        Me.imgBeta.TabIndex = 11
+        Me.imgBeta.TabStop = False
         '
         'frmMain
         '
@@ -339,6 +352,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.btnMinimize)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.TableLayoutPanel4)
+        Me.Controls.Add(Me.imgBeta)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmMain"
@@ -349,6 +363,7 @@ Partial Class frmMain
         Me.Panel1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
+        CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -375,4 +390,5 @@ Partial Class frmMain
     Friend WithEvents Label1 As Label
     Friend WithEvents lbVer As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents imgBeta As PictureBox
 End Class

@@ -3,11 +3,12 @@ Imports System.Net
 Imports System.Threading
 
 Public Class frmMain
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "0.97b"
+    Public Ver As String = "0.98"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -16,8 +17,6 @@ Public Class frmMain
     Public ConfigFile As Configs
     Public FirstRun As Boolean = True
 
-    Public KeyBoardConfigs As New Dictionary(Of String, String)
-
     Public ChallengeForm As frmChallenge = New frmChallenge(Me)
     Public ChallengeSentForm As frmChallengeSent = New frmChallengeSent(Me)
     Public HostingForm As frmHostPanel = New frmHostPanel(Me)
@@ -25,6 +24,14 @@ Public Class frmMain
     Public WaitingForm As frmWaitingForHost = New frmWaitingForHost
     Public NotificationForm As frmNotification = New frmNotification
     Public KeyMappingForm As frmKeyMapping
+
+#Region "Beta"
+    ' Fuck the replay shit for now
+    ' Public NetplayHandler As NetPlayHandler
+
+#End Region
+
+
 
     Public Challenger As NullDCPlayer
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
@@ -47,10 +54,8 @@ Public Class frmMain
             MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
             End
         End If
-        Console.WriteLine("Lol")
-        CheckFilesAndShit()
-        GetGamesList()
 
+        CheckFilesAndShit()
         ConfigFile = New Configs(NullDCPath)
 
         ' Update Stuff
@@ -66,9 +71,20 @@ Public Class frmMain
         If ConfigFile.FirstRun Then frmSetup.ShowDialog()
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
 
+
+        ' Beta Features Only
+        If IsBeta Then
+            ' NetPlayHandler = New NetPlayHandler(Me)
+
+        End If
+
+
     End Sub
 
     Private Sub CheckForUpdate()
+        imgBeta.Visible = IsBeta
+        If IsBeta Then Exit Sub
+
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
         Try
             UpdateCheckClient.Credentials = New NetworkCredential()
@@ -168,71 +184,10 @@ Public Class frmMain
             MsgBox("Couldn't delete old NullDC BEAR.exe")
         End Try
 
-
-        ' Check if Keybinds is there
-        Dim CheckMatchingKeybinds As Boolean = True
-        Dim cfg As XDocument = Nothing
-
-        If Not File.Exists(NullDCPath & "\KeyMapReBinds.xml") Then CheckMatchingKeybinds = False
-        If CheckMatchingKeybinds Then cfg = XDocument.Load(NullDCPath & "\KeyMapReBinds.xml")
-
         ' Make the Keyboard File if it doens't exist, it should but i mean you never know
         If Not File.Exists(NullDCPath & "\qkoJAMMA\Keyboard.qkc") Then
             File.WriteAllLines(NullDCPath & "\qkoJAMMA\Keyboard.qkc", {"5=Start", "3=Test", "w=Up", "s=Down", "a=Left", "d=Right", "8=Button_1", "9=Button_2", "0=Button_3", "u=Button_4", "i=Button_5", "o=Button_6", "1=Coin"})
         End If
-
-        Dim KeyboardLines() As String = File.ReadAllLines(NullDCPath & "\qkoJAMMA\Keyboard.qkc")
-        Dim KeyList = {"Start", "Test", "Up", "Down", "Left", "Right", "Button_1", "Button_2", "Button_3", "Button_4", "Button_5", "Button_6", "Coin"}
-        Dim KeyListx = {"start", "Test", "up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin"} ' My names for the buttons in RECLAW
-
-        For Each line As String In KeyboardLines ' Go line by line and find of the keyboard config file
-            If line.Contains("Test") Then Continue For
-
-            Dim keyIndex = 0
-            For Each KeyName As String In KeyList ' Check the entry against all the entries in Keylist to find out which one it is.
-
-                ' If Not Line {Start} = KeyList {Start} Then Continue
-                If Not line.Split("=")(1).Trim.ToLower = KeyName.Trim.ToLower Then
-                    keyIndex += 1
-                    Continue For
-                End If
-
-                ' Check if Entry Exists if not Create it
-                If Not KeyBoardConfigs.ContainsKey(KeyName) Then KeyBoardConfigs.Add(KeyName, "")
-                ' Update it with the Correct Value
-                KeyBoardConfigs(KeyName) = line.Split("=")(0).ToLower
-
-                ' A Config File Exists
-                If CheckMatchingKeybinds Then
-                    cfg.Descendants(KeyListx(keyIndex)).<rebind>.Value = line.Split("=")(0)
-                End If
-
-                keyIndex += 1
-            Next
-
-        Next
-
-        ' Micros
-        KeyBoardConfigs.Add("LPLK", KeyBoardConfigs("Button_1") & KeyBoardConfigs("Button_4"))
-        KeyBoardConfigs.Add("MPMK", KeyBoardConfigs("Button_2") & KeyBoardConfigs("Button_5"))
-        KeyBoardConfigs.Add("HPHK", KeyBoardConfigs("Button_3") & KeyBoardConfigs("Button_6"))
-        KeyBoardConfigs.Add("AP", KeyBoardConfigs("Button_1") & KeyBoardConfigs("Button_2") & KeyBoardConfigs("Button_3"))
-        KeyBoardConfigs.Add("AK", KeyBoardConfigs("Button_4") & KeyBoardConfigs("Button_5") & KeyBoardConfigs("Button_6"))
-
-        ' Save the XML
-        If CheckMatchingKeybinds Then
-            cfg.<Configs>.<KeyMap>.<LPLK>.<rebind>.Value = KeyBoardConfigs("LPLK")
-            cfg.<Configs>.<KeyMap>.<MPMK>.<rebind>.Value = KeyBoardConfigs("MPMK")
-            cfg.<Configs>.<KeyMap>.<HPHK>.<rebind>.Value = KeyBoardConfigs("HPHK")
-            cfg.<Configs>.<KeyMap>.<AP>.<rebind>.Value = KeyBoardConfigs("AP")
-            cfg.<Configs>.<KeyMap>.<AK>.<rebind>.Value = KeyBoardConfigs("AK")
-            cfg.Save(NullDCPath & "\KeyMapReBinds.xml")
-        End If
-
-
-
-
-
 
         'Install Dependencies if needed
         If Not File.Exists(NullDCPath & "\XInputInterface.dll") Or
@@ -245,6 +200,7 @@ Public Class frmMain
         If Not File.Exists(NullDCPath & "\d3d9.dll") Then File.WriteAllBytes(NullDCPath & "\d3d9.dll", My.Resources.d3d9)
         File.WriteAllLines(NullDCPath & "\antilag.cfg", {"[config]", "RenderAheadLimit=0", "FPSlimit=60"})
 
+        GetGamesList()
     End Sub
 
     Private Sub GetGamesList()
@@ -569,6 +525,11 @@ Public Class frmMain
             Exit Sub
         End If
 
+        If Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(0) = ConfigFile.IP Then
+            NotificationForm.ShowMessage("I can't really help you with your inner demons if you want to fight yourself.")
+            Exit Sub
+        End If
+
         ' Check if player is already hosting, if they are then just join and skip all the checks
         Dim c_name As String = Matchlist.SelectedItems(0).SubItems(0).Text
         Dim c_ip As String = Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(0)
@@ -576,8 +537,6 @@ Public Class frmMain
         Dim c_gamerom As String = Matchlist.SelectedItems(0).SubItems(3).Text
         If Not c_gamerom = "None" Then c_gamerom = c_gamerom.Split("|")(1) ' Game is not None, so get what rom it is.
         Dim c_status As String = Matchlist.SelectedItems(0).SubItems(4).Text
-
-
 
         ' Skip game Selection
         If c_status = "Hosting" And Not c_gamerom = "None" Then ' Person is hosting a game, so try to join them
@@ -661,6 +620,7 @@ Public Class Configs
     Private _ver As String = frmMain.Ver
     Private _hosttype As String = "1"
     Private _fpslimit As String = "60"
+    Private _keyprofile As String = "Default"
 
 #Region "Properties"
 
@@ -782,22 +742,18 @@ Public Class Configs
         End Set
     End Property
 
+    Public Property KeyMapProfile() As String
+        Get
+            Return _keyprofile
+        End Get
+        Set(ByVal value As String)
+            _keyprofile = value
+        End Set
+    End Property
+
 #End Region
 
     Public Sub SaveFile()
-        Console.WriteLine("[Saving config]")
-        Console.WriteLine("Version: {0}", Version)
-        Console.WriteLine("Name: {0}", Name)
-        Console.WriteLine("Network: {0}", Network)
-        Console.WriteLine("Port: {0}", Port)
-        Console.WriteLine("Reclaw: {0}", UseRemap)
-        Console.WriteLine("IP: {0}", IP)
-        Console.WriteLine("Host: {0}", Host)
-        Console.WriteLine("Status: {0}", Status)
-        Console.WriteLine("Delay: {0}", Delay)
-        Console.WriteLine("Game: {0}", Game)
-        Console.WriteLine("HostType: {0}", HostType)
-        Console.WriteLine("FPSLimit: {0}", FPSLimit)
         Dim NullDCPath = frmMain.NullDCPath
         Dim lines() As String =
             {
@@ -813,7 +769,8 @@ Public Class Configs
                 "Delay=" & Delay,
                 "Game=" & Game,
                 "HostType=" & HostType,
-                "FPSLimit=" & FPSLimit
+                "FPSLimit=" & FPSLimit,
+                "KeyProfile=" & KeyMapProfile
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
     End Sub
@@ -843,6 +800,7 @@ Public Class Configs
                     If line.Contains("Delay") Then Delay = line.Split("=")(1).Trim
                     If line.Contains("HostType") Then HostType = line.Split("=")(1).Trim
                     If line.Contains("FPSLimit") Then FPSLimit = line.Split("=")(1).Trim
+                    If line.Contains("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
 
                 Next
                 Status = "Idle"
@@ -863,6 +821,7 @@ Public Class Configs
                 Game = "None"
                 HostType = lines(11).Split("=")(1).Trim
                 FPSLimit = lines(12).Split("=")(1).Trim
+                KeyMapProfile = lines(13).Split("=")(1).Trim
 
             End If
 
