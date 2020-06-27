@@ -252,6 +252,7 @@ Public Class NullDCLauncher
                     My.Computer.FileSystem.RenameFile(nvmemPathBackup, "naomi_nvmem.bin")
                     File.SetAttributes(nvmemPath, FileAttributes.ReadOnly)
                 End If
+
             End If
 
         Catch ex As Exception
@@ -283,7 +284,7 @@ Public Class NullDCLauncher
                 End If
 
             Else
-                Console.WriteLine("No nvMem, we all good")
+                Console.WriteLine("No nvmem, we all good")
 
             End If
         Catch ex As Exception

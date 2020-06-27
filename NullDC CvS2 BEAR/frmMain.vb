@@ -22,7 +22,7 @@ Public Class frmMain
     Public HostingForm As frmHostPanel = New frmHostPanel(Me)
     Public GameSelectForm As frmChallengeGameSelect = New frmChallengeGameSelect(Me)
     Public WaitingForm As frmWaitingForHost = New frmWaitingForHost
-    Public NotificationForm As frmNotification = New frmNotification
+    Public NotificationForm As frmNotification = New frmNotification(Me)
     Public KeyMappingForm As frmKeyMapping
 
 #Region "Beta"
@@ -68,9 +68,8 @@ Public Class frmMain
         NetworkHandler = New NetworkHandling(Me)
         NullDCLauncher = New NullDCLauncher(Me)
 
-        If ConfigFile.FirstRun Then frmSetup.ShowDialog()
+        If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
-
 
         ' Beta Features Only
         If IsBeta Then
@@ -78,6 +77,7 @@ Public Class frmMain
 
         End If
 
+        RefreshPlayerList()
 
     End Sub
 
@@ -263,7 +263,8 @@ Public Class frmMain
         If Not Challenger Is Nothing Then
             NetworkHandler.SendMessage(">, Q", Challenger.ip)
         End If
-        Application.Exit()
+
+        End
 
     End Sub
 
@@ -472,7 +473,7 @@ Public Class frmMain
 
 #Region "Button Clicks"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        KeyMappingForm.Show()
+        KeyMappingForm.Show(Me)
 
     End Sub
 
@@ -482,7 +483,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        RefreshPlayerList()
 
+    End Sub
+
+    Private Sub RefreshPlayerList()
         If Not RefreshTimer.Enabled Then
             Matchlist.Items.Clear()
             NetworkHandler.SendMessage("?," & ConfigFile.IP)
@@ -505,7 +510,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSetup_Click(sender As Object, e As EventArgs) Handles btnSetup.Click
-        frmSetup.Show()
+        frmSetup.Show(Me)
 
     End Sub
 

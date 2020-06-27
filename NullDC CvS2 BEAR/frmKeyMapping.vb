@@ -245,6 +245,7 @@ Public Class frmKeyMapping
                 btnOnOff.BackColor = Color.Red
                 btnOnOff.Text = "Off"
             End If
+            Me.CenterToParent()
 
         End If
     End Sub

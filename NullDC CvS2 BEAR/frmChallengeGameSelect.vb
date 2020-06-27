@@ -10,7 +10,7 @@
 
     Public Sub StartChallenge(Optional ByVal _challenger As NullDCPlayer = Nothing)
         Me._Challenger = _challenger
-        Visible = True
+        Me.Show(MainFormRef)
 
     End Sub
 
@@ -104,6 +104,7 @@
                 cbHostType.SelectedIndex = 1
             End If
             tbFPS.Text = MainFormRef.ConfigFile.FPSLimit
+            Me.CenterToParent()
         Else
             _Challenger = Nothing
         End If

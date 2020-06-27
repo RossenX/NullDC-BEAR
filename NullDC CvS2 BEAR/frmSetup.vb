@@ -11,6 +11,7 @@ Public Class frmSetup
             btnT1B1.Visible = False
             btnT1B2.Text = "Yus"
         End If
+        Me.CenterToParent()
     End Sub
 
     Private Sub btnT1B2_Click(sender As Object, e As EventArgs) Handles btnT1B2.Click
@@ -82,7 +83,7 @@ Public Class frmSetup
     End Sub
 
     Private Sub btnT3B1_Click(sender As Object, e As EventArgs) Handles btnT3B1.Click
-        frmMain.KeyMappingForm.Show()
+        frmMain.KeyMappingForm.Show(Me)
     End Sub
 
 

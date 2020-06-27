@@ -15,7 +15,7 @@ Public Class frmHostPanel
     Public Sub BeginHost(Optional ByVal _challenger As NullDCPlayer = Nothing)
         MainformRef.Challenger = _challenger
         MainformRef.EndSession("New Host")
-        Me.Show()
+        Me.Show(MainformRef)
     End Sub
 
     Private Sub frmHostPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -60,6 +60,7 @@ Public Class frmHostPanel
                 cbGameList.Visible = True
             End If
 
+            Me.CenterToParent()
         Else
         End If
 

@@ -1,8 +1,10 @@
 ﻿Public Class frmNotification
 
     Dim HideTimer As Timer = New Timer
-    Public Sub New()
+    Dim MainformRef As frmMain
+    Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
+        MainformRef = _mf
         HideTimer.Interval = 5000
         AddHandler HideTimer.Tick, AddressOf HideTimer_tick
     End Sub
@@ -12,9 +14,9 @@
         HideTimer.Stop()
     End Sub
 
-
     Public Sub ShowMessage(ByVal msg As String)
-        Me.Show()
+        Me.Hide()
+        Me.Show(MainformRef)
         Label1.Text = msg
     End Sub
 
@@ -31,6 +33,7 @@
     Private Sub frmNotification_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Visible Then
             HideTimer.Start()
+            Me.CenterToParent()
         Else
             HideTimer.Stop()
         End If
