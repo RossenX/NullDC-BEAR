@@ -24,13 +24,12 @@ Public Class InputHandling
     Public KeybindConfigs As ArrayList = New ArrayList 'Key Configs from XML
     Dim kc As KeysConverter = New KeysConverter
     Public ControllerID As Int16 = 0
-    Dim InitialPoll = True
-    Dim PostInitialRoll = True
     Dim TurnedOn As Boolean = True
     Dim PollRate As Int16 = 16
     Dim RxButtons As New BitArray(32, False)
     Dim LF_RxButtons As New BitArray(32, False)
     Dim MainFormRef As frmMain 'Rebind Vars
+    Dim CoinKeyDown As Boolean = False
 
     ' Virtual Keyboard Mapping
     Private Declare Function joyGetPosEx Lib "winmm.dll" (ByVal uJoyID As Integer, ByRef pji As JOYINFOEX) As Integer ' JoyStick Mapping
@@ -444,24 +443,6 @@ Public Class InputHandling
                 DoWinMMRoll()
             End If
 
-            ' Ignore the first Two Polls, because they seem to sometimes return wrong keys, at least with my cheap-ass shitty controller.
-            If InitialPoll Then
-                For i = 0 To RxButtons.Count - 1
-                    LF_RxButtons(i) = RxButtons(i)
-                Next
-                InitialPoll = False
-                Continue While
-            End If
-
-            If PostInitialRoll Then
-                For i = 0 To RxButtons.Count - 1
-                    LF_RxButtons(i) = RxButtons(i)
-                Next
-                PostInitialRoll = False
-                Continue While
-            End If
-
-
             For i = 0 To RxButtons.Count - 1
                 If Not RxButtons(i) = LF_RxButtons(i) Then
                     If RxButtons(i) Then
@@ -495,8 +476,6 @@ Public Class InputHandling
                 ReloadConfigs()
                 RxButtons = New BitArray(32, False)
                 LF_RxButtons = New BitArray(32, False)
-                InitialPoll = True
-                PostInitialRoll = True
             End If
 
             ' Put current inputs in array of last roll
@@ -526,7 +505,23 @@ Public Class InputHandling
             If KeyCache(Button)(1) = Down Then Exit Sub
             For Each Key As Keys In KeyCache(Button)(0)
                 'Console.WriteLine("Button: " & Button & " " & Down)
-                keybd_event(Key, MapVirtualKey(Key, 0), upordown, 0)
+                If KeyBoardConfigs("coin") = kc.ConvertToString(Key) And MainFormRef.IsNullDCRunning Then
+
+                    If Down Then
+                        If Not CoinKeyDown Then
+                            keybd_event(Key, MapVirtualKey(Key, 0), 0, 0)
+                            Thread.Sleep(16)
+                            keybd_event(Key, MapVirtualKey(Key, 0), 2, 0)
+                            CoinKeyDown = True
+                        End If
+                    Else
+                        CoinKeyDown = False
+                    End If
+
+                Else
+                    keybd_event(Key, MapVirtualKey(Key, 0), upordown, 0)
+                End If
+
             Next
             KeyCache(Button)(1) = Down
         End If

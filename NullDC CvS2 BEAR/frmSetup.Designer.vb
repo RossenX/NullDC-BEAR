@@ -30,6 +30,8 @@ Partial Class frmSetup
         Me.btnT1B2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.tbPort = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnT2B1 = New System.Windows.Forms.Button()
@@ -44,8 +46,6 @@ Partial Class frmSetup
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tcSetup.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -69,7 +69,7 @@ Partial Class frmSetup
         Me.tcSetup.Controls.Add(Me.TabPage1)
         Me.tcSetup.Controls.Add(Me.TabPage2)
         Me.tcSetup.Controls.Add(Me.TabPage3)
-        Me.tcSetup.Location = New System.Drawing.Point(-1, -22)
+        Me.tcSetup.Location = New System.Drawing.Point(-4, -23)
         Me.tcSetup.Margin = New System.Windows.Forms.Padding(0)
         Me.tcSetup.Name = "tcSetup"
         Me.tcSetup.SelectedIndex = 0
@@ -146,6 +146,26 @@ Partial Class frmSetup
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(6, 152)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(390, 13)
+        Me.Label7.TabIndex = 8
+        Me.Label7.Text = "If you're having trouble connecting or hosting, CLICK THE BIG GREEN BUTTON"
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.Lime
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button2.Location = New System.Drawing.Point(9, 168)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(380, 54)
+        Me.Button2.TabIndex = 7
+        Me.Button2.Text = "Add Firewall Entry for BEAR and NullDC to Windows Firewall"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'tbPort
         '
         Me.tbPort.Location = New System.Drawing.Point(9, 98)
@@ -164,7 +184,7 @@ Partial Class frmSetup
         '
         'btnT2B1
         '
-        Me.btnT2B1.Location = New System.Drawing.Point(419, 194)
+        Me.btnT2B1.Location = New System.Drawing.Point(419, 199)
         Me.btnT2B1.Name = "btnT2B1"
         Me.btnT2B1.Size = New System.Drawing.Size(75, 23)
         Me.btnT2B1.TabIndex = 4
@@ -240,11 +260,12 @@ Partial Class frmSetup
         'btnT3B1
         '
         Me.btnT3B1.BackColor = System.Drawing.Color.Red
+        Me.btnT3B1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnT3B1.Location = New System.Drawing.Point(115, 81)
         Me.btnT3B1.Name = "btnT3B1"
         Me.btnT3B1.Size = New System.Drawing.Size(278, 40)
         Me.btnT3B1.TabIndex = 2
-        Me.btnT3B1.Text = "Button Maping"
+        Me.btnT3B1.Text = "Controls"
         Me.btnT3B1.UseVisualStyleBackColor = False
         '
         'Label5
@@ -273,26 +294,6 @@ Partial Class frmSetup
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(500, 227)
         Me.Panel1.TabIndex = 3
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.Lime
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Location = New System.Drawing.Point(9, 160)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(380, 54)
-        Me.Button2.TabIndex = 7
-        Me.Button2.Text = "Add Firewall Entry for BEAR and NullDC to Windows Firewall"
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 144)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(390, 13)
-        Me.Label7.TabIndex = 8
-        Me.Label7.Text = "If you're having trouble connecting or hosting, CLICK THE BIG GREEN BUTTON"
         '
         'frmSetup
         '
