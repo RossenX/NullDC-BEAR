@@ -269,7 +269,10 @@ Public Class InputHandling
         RxAxis.Add("v", {0, 0, 0, 1, 0})
 
         WriteXMLConfigFile()
-        MainFormRef.KeyMappingForm.cbProfile.Invoke(Sub() MainFormRef.KeyMappingForm.UpdateProfileList())
+
+        If Not MainFormRef.KeyMappingForm Is Nothing Then
+            MainFormRef.KeyMappingForm.cbProfile.Invoke(Sub() MainFormRef.KeyMappingForm.UpdateProfileList())
+        End If
 
     End Sub
 
