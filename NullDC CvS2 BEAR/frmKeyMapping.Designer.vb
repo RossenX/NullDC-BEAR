@@ -29,20 +29,26 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnCalibrate = New System.Windows.Forms.Button()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnstart = New System.Windows.Forms.Button()
-        Me.btncoin = New System.Windows.Forms.Button()
-        Me.btnHPHK = New System.Windows.Forms.Button()
-        Me.btnhk = New System.Windows.Forms.Button()
-        Me.btnmk = New System.Windows.Forms.Button()
-        Me.btnlk = New System.Windows.Forms.Button()
-        Me.btnLPLK = New System.Windows.Forms.Button()
-        Me.btnhp = New System.Windows.Forms.Button()
-        Me.btnmp = New System.Windows.Forms.Button()
         Me.btnlp = New System.Windows.Forms.Button()
+        Me.btnmp = New System.Windows.Forms.Button()
+        Me.btnlk = New System.Windows.Forms.Button()
+        Me.btnmk = New System.Windows.Forms.Button()
+        Me.btnhp = New System.Windows.Forms.Button()
+        Me.btnhk = New System.Windows.Forms.Button()
+        Me.btncoin = New System.Windows.Forms.Button()
+        Me.btnstart = New System.Windows.Forms.Button()
+        Me.btnHPHK = New System.Windows.Forms.Button()
+        Me.btnLPLK = New System.Windows.Forms.Button()
         Me.btnMPMK = New System.Windows.Forms.Button()
         Me.btnAP = New System.Windows.Forms.Button()
         Me.btnAK = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnMKHK = New System.Windows.Forms.Button()
+        Me.btnLPMP = New System.Windows.Forms.Button()
+        Me.btnMPHP = New System.Windows.Forms.Button()
+        Me.btnLKMK = New System.Windows.Forms.Button()
         Me.tlpProfile = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbProfile = New System.Windows.Forms.ComboBox()
@@ -54,9 +60,12 @@ Partial Class frmKeyMapping
         Me.btnUnbindAll = New System.Windows.Forms.Button()
         Me.btnOnOff = New System.Windows.Forms.Button()
         Me.btnDone = New System.Windows.Forms.Button()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
         Me.tlpProfile.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -134,7 +143,7 @@ Partial Class frmKeyMapping
         '
         'btnCalibrate
         '
-        Me.btnCalibrate.BackColor = System.Drawing.Color.White
+        Me.btnCalibrate.BackColor = System.Drawing.Color.Cyan
         Me.btnCalibrate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnCalibrate.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCalibrate.Location = New System.Drawing.Point(80, 80)
@@ -147,113 +156,143 @@ Partial Class frmKeyMapping
         '
         'TableLayoutPanel2
         '
-        Me.TableLayoutPanel2.ColumnCount = 5
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.btnstart, 2, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.btncoin, 1, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnHPHK, 2, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnhk, 2, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnmk, 1, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnlk, 0, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnLPLK, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnhp, 2, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnmp, 1, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnlp, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnMPMK, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnAP, 4, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnAK, 4, 3)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(246, 84)
+        Me.TableLayoutPanel2.ColumnCount = 3
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.Controls.Add(Me.btnlp, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnmp, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnlk, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnmk, 1, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnhp, 2, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnhk, 2, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.btncoin, 1, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnstart, 2, 2)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(246, 60)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 5
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(371, 150)
+        Me.TableLayoutPanel2.RowCount = 3
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(371, 126)
         Me.TableLayoutPanel2.TabIndex = 5
         '
-        'btnstart
+        'btnlp
         '
-        Me.btnstart.BackColor = System.Drawing.Color.White
-        Me.btnstart.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnstart.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnstart.Location = New System.Drawing.Point(182, 128)
-        Me.btnstart.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnstart.Name = "btnstart"
-        Me.btnstart.Size = New System.Drawing.Size(91, 22)
-        Me.btnstart.TabIndex = 9
-        Me.btnstart.Text = "Start"
-        Me.btnstart.UseVisualStyleBackColor = False
+        Me.btnlp.BackColor = System.Drawing.Color.White
+        Me.btnlp.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnlp.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnlp.Location = New System.Drawing.Point(0, 0)
+        Me.btnlp.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnlp.Name = "btnlp"
+        Me.btnlp.Size = New System.Drawing.Size(123, 50)
+        Me.btnlp.TabIndex = 0
+        Me.btnlp.Text = "Button 1"
+        Me.btnlp.UseVisualStyleBackColor = False
         '
-        'btncoin
+        'btnmp
         '
-        Me.btncoin.BackColor = System.Drawing.Color.White
-        Me.btncoin.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btncoin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btncoin.Location = New System.Drawing.Point(91, 128)
-        Me.btncoin.Margin = New System.Windows.Forms.Padding(0)
-        Me.btncoin.Name = "btncoin"
-        Me.btncoin.Size = New System.Drawing.Size(91, 22)
-        Me.btncoin.TabIndex = 8
-        Me.btncoin.Text = "Coin"
-        Me.btncoin.UseVisualStyleBackColor = False
-        '
-        'btnHPHK
-        '
-        Me.btnHPHK.BackColor = System.Drawing.Color.White
-        Me.btnHPHK.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnHPHK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnHPHK.Location = New System.Drawing.Point(182, 0)
-        Me.btnHPHK.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnHPHK.Name = "btnHPHK"
-        Me.btnHPHK.Size = New System.Drawing.Size(91, 41)
-        Me.btnHPHK.TabIndex = 7
-        Me.btnHPHK.Text = "3+6"
-        Me.btnHPHK.UseVisualStyleBackColor = False
-        '
-        'btnhk
-        '
-        Me.btnhk.BackColor = System.Drawing.Color.White
-        Me.btnhk.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnhk.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnhk.Location = New System.Drawing.Point(182, 87)
-        Me.btnhk.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnhk.Name = "btnhk"
-        Me.btnhk.Size = New System.Drawing.Size(91, 41)
-        Me.btnhk.TabIndex = 6
-        Me.btnhk.Text = "Button 6"
-        Me.btnhk.UseVisualStyleBackColor = False
-        '
-        'btnmk
-        '
-        Me.btnmk.BackColor = System.Drawing.Color.White
-        Me.btnmk.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnmk.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnmk.Location = New System.Drawing.Point(91, 87)
-        Me.btnmk.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnmk.Name = "btnmk"
-        Me.btnmk.Size = New System.Drawing.Size(91, 41)
-        Me.btnmk.TabIndex = 5
-        Me.btnmk.Text = "Button 5"
-        Me.btnmk.UseVisualStyleBackColor = False
+        Me.btnmp.BackColor = System.Drawing.Color.White
+        Me.btnmp.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnmp.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnmp.Location = New System.Drawing.Point(123, 0)
+        Me.btnmp.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnmp.Name = "btnmp"
+        Me.btnmp.Size = New System.Drawing.Size(123, 50)
+        Me.btnmp.TabIndex = 1
+        Me.btnmp.Text = "Button 2"
+        Me.btnmp.UseVisualStyleBackColor = False
         '
         'btnlk
         '
         Me.btnlk.BackColor = System.Drawing.Color.White
         Me.btnlk.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnlk.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnlk.Location = New System.Drawing.Point(0, 87)
+        Me.btnlk.Location = New System.Drawing.Point(0, 50)
         Me.btnlk.Margin = New System.Windows.Forms.Padding(0)
         Me.btnlk.Name = "btnlk"
-        Me.btnlk.Size = New System.Drawing.Size(91, 41)
+        Me.btnlk.Size = New System.Drawing.Size(123, 50)
         Me.btnlk.TabIndex = 4
         Me.btnlk.Text = "Button 4"
         Me.btnlk.UseVisualStyleBackColor = False
+        '
+        'btnmk
+        '
+        Me.btnmk.BackColor = System.Drawing.Color.White
+        Me.btnmk.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnmk.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnmk.Location = New System.Drawing.Point(123, 50)
+        Me.btnmk.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnmk.Name = "btnmk"
+        Me.btnmk.Size = New System.Drawing.Size(123, 50)
+        Me.btnmk.TabIndex = 5
+        Me.btnmk.Text = "Button 5"
+        Me.btnmk.UseVisualStyleBackColor = False
+        '
+        'btnhp
+        '
+        Me.btnhp.BackColor = System.Drawing.Color.White
+        Me.btnhp.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnhp.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnhp.Location = New System.Drawing.Point(246, 0)
+        Me.btnhp.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnhp.Name = "btnhp"
+        Me.btnhp.Size = New System.Drawing.Size(125, 50)
+        Me.btnhp.TabIndex = 2
+        Me.btnhp.Text = "Button 3"
+        Me.btnhp.UseVisualStyleBackColor = False
+        '
+        'btnhk
+        '
+        Me.btnhk.BackColor = System.Drawing.Color.White
+        Me.btnhk.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnhk.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnhk.Location = New System.Drawing.Point(246, 50)
+        Me.btnhk.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnhk.Name = "btnhk"
+        Me.btnhk.Size = New System.Drawing.Size(125, 50)
+        Me.btnhk.TabIndex = 6
+        Me.btnhk.Text = "Button 6"
+        Me.btnhk.UseVisualStyleBackColor = False
+        '
+        'btncoin
+        '
+        Me.btncoin.BackColor = System.Drawing.Color.White
+        Me.btncoin.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btncoin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btncoin.Location = New System.Drawing.Point(123, 100)
+        Me.btncoin.Margin = New System.Windows.Forms.Padding(0)
+        Me.btncoin.Name = "btncoin"
+        Me.btncoin.Size = New System.Drawing.Size(123, 26)
+        Me.btncoin.TabIndex = 8
+        Me.btncoin.Text = "Coin"
+        Me.btncoin.UseVisualStyleBackColor = False
+        '
+        'btnstart
+        '
+        Me.btnstart.BackColor = System.Drawing.Color.White
+        Me.btnstart.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnstart.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnstart.Location = New System.Drawing.Point(246, 100)
+        Me.btnstart.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnstart.Name = "btnstart"
+        Me.btnstart.Size = New System.Drawing.Size(125, 26)
+        Me.btnstart.TabIndex = 9
+        Me.btnstart.Text = "Start"
+        Me.btnstart.UseVisualStyleBackColor = False
+        '
+        'btnHPHK
+        '
+        Me.btnHPHK.BackColor = System.Drawing.Color.White
+        Me.btnHPHK.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnHPHK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnHPHK.Location = New System.Drawing.Point(164, 0)
+        Me.btnHPHK.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnHPHK.Name = "btnHPHK"
+        Me.btnHPHK.Size = New System.Drawing.Size(84, 27)
+        Me.btnHPHK.TabIndex = 7
+        Me.btnHPHK.Text = "3+6"
+        Me.btnHPHK.UseVisualStyleBackColor = False
         '
         'btnLPLK
         '
@@ -263,59 +302,20 @@ Partial Class frmKeyMapping
         Me.btnLPLK.Location = New System.Drawing.Point(0, 0)
         Me.btnLPLK.Margin = New System.Windows.Forms.Padding(0)
         Me.btnLPLK.Name = "btnLPLK"
-        Me.btnLPLK.Size = New System.Drawing.Size(91, 41)
+        Me.btnLPLK.Size = New System.Drawing.Size(82, 27)
         Me.btnLPLK.TabIndex = 3
         Me.btnLPLK.Text = "1+4"
         Me.btnLPLK.UseVisualStyleBackColor = False
-        '
-        'btnhp
-        '
-        Me.btnhp.BackColor = System.Drawing.Color.White
-        Me.btnhp.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnhp.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnhp.Location = New System.Drawing.Point(182, 46)
-        Me.btnhp.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnhp.Name = "btnhp"
-        Me.btnhp.Size = New System.Drawing.Size(91, 41)
-        Me.btnhp.TabIndex = 2
-        Me.btnhp.Text = "Button 3"
-        Me.btnhp.UseVisualStyleBackColor = False
-        '
-        'btnmp
-        '
-        Me.btnmp.BackColor = System.Drawing.Color.White
-        Me.btnmp.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnmp.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnmp.Location = New System.Drawing.Point(91, 46)
-        Me.btnmp.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnmp.Name = "btnmp"
-        Me.btnmp.Size = New System.Drawing.Size(91, 41)
-        Me.btnmp.TabIndex = 1
-        Me.btnmp.Text = "Button 2"
-        Me.btnmp.UseVisualStyleBackColor = False
-        '
-        'btnlp
-        '
-        Me.btnlp.BackColor = System.Drawing.Color.White
-        Me.btnlp.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnlp.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnlp.Location = New System.Drawing.Point(0, 46)
-        Me.btnlp.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnlp.Name = "btnlp"
-        Me.btnlp.Size = New System.Drawing.Size(91, 41)
-        Me.btnlp.TabIndex = 0
-        Me.btnlp.Text = "Button 1"
-        Me.btnlp.UseVisualStyleBackColor = False
         '
         'btnMPMK
         '
         Me.btnMPMK.BackColor = System.Drawing.Color.White
         Me.btnMPMK.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnMPMK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnMPMK.Location = New System.Drawing.Point(91, 0)
+        Me.btnMPMK.Location = New System.Drawing.Point(82, 0)
         Me.btnMPMK.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMPMK.Name = "btnMPMK"
-        Me.btnMPMK.Size = New System.Drawing.Size(91, 41)
+        Me.btnMPMK.Size = New System.Drawing.Size(82, 27)
         Me.btnMPMK.TabIndex = 10
         Me.btnMPMK.Text = "2+5"
         Me.btnMPMK.UseVisualStyleBackColor = False
@@ -325,10 +325,10 @@ Partial Class frmKeyMapping
         Me.btnAP.BackColor = System.Drawing.Color.White
         Me.btnAP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnAP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAP.Location = New System.Drawing.Point(278, 46)
+        Me.btnAP.Location = New System.Drawing.Point(164, 27)
         Me.btnAP.Margin = New System.Windows.Forms.Padding(0)
         Me.btnAP.Name = "btnAP"
-        Me.btnAP.Size = New System.Drawing.Size(93, 41)
+        Me.btnAP.Size = New System.Drawing.Size(84, 27)
         Me.btnAP.TabIndex = 11
         Me.btnAP.Text = "1+2+3"
         Me.btnAP.UseVisualStyleBackColor = False
@@ -338,16 +338,17 @@ Partial Class frmKeyMapping
         Me.btnAK.BackColor = System.Drawing.Color.White
         Me.btnAK.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnAK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAK.Location = New System.Drawing.Point(278, 87)
+        Me.btnAK.Location = New System.Drawing.Point(164, 54)
         Me.btnAK.Margin = New System.Windows.Forms.Padding(0)
         Me.btnAK.Name = "btnAK"
-        Me.btnAK.Size = New System.Drawing.Size(93, 41)
+        Me.btnAK.Size = New System.Drawing.Size(84, 21)
         Me.btnAK.TabIndex = 12
         Me.btnAK.Text = "4+5+6"
         Me.btnAK.UseVisualStyleBackColor = False
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel1.Controls.Add(Me.tlpProfile)
         Me.Panel1.Controls.Add(Me.TableLayoutPanel2)
@@ -358,8 +359,94 @@ Partial Class frmKeyMapping
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(623, 347)
+        Me.Panel1.Size = New System.Drawing.Size(624, 353)
         Me.Panel1.TabIndex = 0
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.TableLayoutPanel3)
+        Me.GroupBox1.Location = New System.Drawing.Point(357, 192)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(260, 103)
+        Me.GroupBox1.TabIndex = 20
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Micros"
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 3
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.btnMKHK, 0, 2)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnLPLK, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnMPMK, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnHPHK, 2, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnLPMP, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnMPHP, 1, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnLKMK, 0, 2)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnAP, 2, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.btnAK, 2, 2)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(6, 19)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 3
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(248, 75)
+        Me.TableLayoutPanel3.TabIndex = 19
+        '
+        'btnMKHK
+        '
+        Me.btnMKHK.BackColor = System.Drawing.Color.White
+        Me.btnMKHK.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnMKHK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnMKHK.Location = New System.Drawing.Point(82, 54)
+        Me.btnMKHK.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMKHK.Name = "btnMKHK"
+        Me.btnMKHK.Size = New System.Drawing.Size(82, 21)
+        Me.btnMKHK.TabIndex = 16
+        Me.btnMKHK.Text = "5+6"
+        Me.btnMKHK.UseVisualStyleBackColor = False
+        '
+        'btnLPMP
+        '
+        Me.btnLPMP.BackColor = System.Drawing.Color.White
+        Me.btnLPMP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnLPMP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnLPMP.Location = New System.Drawing.Point(0, 27)
+        Me.btnLPMP.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnLPMP.Name = "btnLPMP"
+        Me.btnLPMP.Size = New System.Drawing.Size(82, 27)
+        Me.btnLPMP.TabIndex = 13
+        Me.btnLPMP.Text = "1+2"
+        Me.btnLPMP.UseVisualStyleBackColor = False
+        '
+        'btnMPHP
+        '
+        Me.btnMPHP.BackColor = System.Drawing.Color.White
+        Me.btnMPHP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnMPHP.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnMPHP.Location = New System.Drawing.Point(82, 27)
+        Me.btnMPHP.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMPHP.Name = "btnMPHP"
+        Me.btnMPHP.Size = New System.Drawing.Size(82, 27)
+        Me.btnMPHP.TabIndex = 14
+        Me.btnMPHP.Text = "2+3"
+        Me.btnMPHP.UseVisualStyleBackColor = False
+        '
+        'btnLKMK
+        '
+        Me.btnLKMK.BackColor = System.Drawing.Color.White
+        Me.btnLKMK.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnLKMK.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnLKMK.Location = New System.Drawing.Point(0, 54)
+        Me.btnLKMK.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnLKMK.Name = "btnLKMK"
+        Me.btnLKMK.Size = New System.Drawing.Size(82, 21)
+        Me.btnLKMK.TabIndex = 15
+        Me.btnLKMK.Text = "4+5"
+        Me.btnLKMK.UseVisualStyleBackColor = False
         '
         'tlpProfile
         '
@@ -459,7 +546,7 @@ Partial Class frmKeyMapping
         '
         Me.btnQuickSetup.BackColor = System.Drawing.Color.Cyan
         Me.btnQuickSetup.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnQuickSetup.Location = New System.Drawing.Point(9, 291)
+        Me.btnQuickSetup.Location = New System.Drawing.Point(9, 298)
         Me.btnQuickSetup.Name = "btnQuickSetup"
         Me.btnQuickSetup.Size = New System.Drawing.Size(225, 46)
         Me.btnQuickSetup.TabIndex = 18
@@ -470,7 +557,7 @@ Partial Class frmKeyMapping
         '
         Me.btnUnbindAll.BackColor = System.Drawing.Color.White
         Me.btnUnbindAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnUnbindAll.Location = New System.Drawing.Point(246, 263)
+        Me.btnUnbindAll.Location = New System.Drawing.Point(246, 270)
         Me.btnUnbindAll.Margin = New System.Windows.Forms.Padding(0)
         Me.btnUnbindAll.Name = "btnUnbindAll"
         Me.btnUnbindAll.Size = New System.Drawing.Size(92, 22)
@@ -482,7 +569,7 @@ Partial Class frmKeyMapping
         '
         Me.btnOnOff.BackColor = System.Drawing.Color.Lime
         Me.btnOnOff.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnOnOff.Location = New System.Drawing.Point(246, 291)
+        Me.btnOnOff.Location = New System.Drawing.Point(246, 298)
         Me.btnOnOff.Name = "btnOnOff"
         Me.btnOnOff.Size = New System.Drawing.Size(92, 46)
         Me.btnOnOff.TabIndex = 13
@@ -493,7 +580,7 @@ Partial Class frmKeyMapping
         '
         Me.btnDone.BackColor = System.Drawing.Color.White
         Me.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDone.Location = New System.Drawing.Point(524, 291)
+        Me.btnDone.Location = New System.Drawing.Point(524, 297)
         Me.btnDone.Name = "btnDone"
         Me.btnDone.Size = New System.Drawing.Size(93, 46)
         Me.btnDone.TabIndex = 12
@@ -505,7 +592,7 @@ Partial Class frmKeyMapping
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(623, 347)
+        Me.ClientSize = New System.Drawing.Size(624, 353)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.KeyPreview = True
@@ -517,6 +604,8 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.TableLayoutPanel3.ResumeLayout(False)
         Me.tlpProfile.ResumeLayout(False)
         Me.tlpProfile.PerformLayout()
         Me.ResumeLayout(False)
@@ -555,4 +644,11 @@ Partial Class frmKeyMapping
     Friend WithEvents btnNewProfile As Button
     Friend WithEvents btnDeleteProfile As Button
     Friend WithEvents btnQuickSetup As Button
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents btnLPMP As Button
+    Friend WithEvents btnMPHP As Button
+    Friend WithEvents btnMKHK As Button
+    Friend WithEvents btnLKMK As Button
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

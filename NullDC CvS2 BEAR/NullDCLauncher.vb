@@ -40,6 +40,8 @@ Public Class NullDCLauncher
     Public Shared Function FindWindowW(<MarshalAs(UnmanagedType.LPTStr)> ByVal lpClassName As String, <MarshalAs(UnmanagedType.LPTStr)> ByVal lpWindowName As String) As IntPtr
     End Function
 
+
+
     <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
     Private Shared Function GetDlgItem(ByVal hDlg As IntPtr, id As Integer) As IntPtr
     End Function
@@ -61,6 +63,7 @@ Public Class NullDCLauncher
     Public Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
     Public Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As IntPtr, ByVal lpString As System.Text.StringBuilder, ByVal cch As Integer) As Integer
     Public Declare Function SetForegroundWindow Lib "user32.dll" (ByVal hwnd As Integer) As Integer
+    Public Declare Function MoveWindow Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal X As Int32, ByVal Y As Int32, ByVal nWidth As Int32, ByVal nHeight As Int32, ByVal bRepaint As Boolean) As Boolean
 
     <DllImport("user32.dll", SetLastError:=True)>
     Private Shared Function GetForegroundWindow() As IntPtr
@@ -251,6 +254,7 @@ Public Class NullDCLauncher
                     File.SetAttributes(nvmemPathBackup, FileAttributes.Normal)
                     My.Computer.FileSystem.RenameFile(nvmemPathBackup, "naomi_nvmem.bin")
                     File.SetAttributes(nvmemPath, FileAttributes.ReadOnly)
+
                 End If
 
             End If
@@ -265,7 +269,6 @@ Public Class NullDCLauncher
         ' Fuck nvMEM get rid of that shit
         Dim nvmemPath = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin"
         Dim nvmemPathBackup = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
-
 
         Try
             If File.Exists(nvmemPath) Then ' nvmem exists... shocker.
@@ -294,8 +297,33 @@ Public Class NullDCLauncher
 
     End Sub
 
+    Private Sub DealWithBios()
+        Dim naomi_boot_Path As String = MainFormRef.NullDCPath & "\data\naomi_boot.bin"
+        Dim naomi_boot_Path_Inactive As String = MainFormRef.NullDCPath & "\data\naomi_boot.bin.inactive"
+
+        If File.Exists(naomi_boot_Path) Then
+            If File.Exists(naomi_boot_Path_Inactive) Then
+
+                File.SetAttributes(naomi_boot_Path_Inactive, FileAttributes.Normal)
+                File.Delete(naomi_boot_Path_Inactive)
+
+                File.SetAttributes(naomi_boot_Path, FileAttributes.Normal)
+                My.Computer.FileSystem.RenameFile(naomi_boot_Path, "naomi_boot.bin.inactive")
+
+            Else
+                File.SetAttributes(naomi_boot_Path, FileAttributes.Normal)
+                My.Computer.FileSystem.RenameFile(naomi_boot_Path, "naomi_boot.bin.inactive")
+
+            End If
+
+        End If
+
+    End Sub
+
     Private Sub ChangeSettings()
 
+        ' naomi_boot.bin.inactive
+        DealWithBios()
         BackupNvmem()
 
         ' Wait for nvmem to be dealt with

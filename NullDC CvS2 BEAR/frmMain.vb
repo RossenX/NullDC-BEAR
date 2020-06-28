@@ -3,7 +3,7 @@ Imports System.Net
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = True
+    Dim IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -31,13 +31,13 @@ Public Class frmMain
 
 #End Region
 
-
-
     Public Challenger As NullDCPlayer
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
+        niBEAR.Icon = My.Resources.NewNullDCBearIcon
+
         lbVer.Text = Ver
         If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
@@ -77,7 +77,7 @@ Public Class frmMain
 
         End If
 
-        RefreshPlayerList()
+        RefreshPlayerList(False)
 
     End Sub
 
@@ -256,6 +256,10 @@ Public Class frmMain
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         ConfigFile.SaveFile()
+
+        niBEAR.Visible = False
+        niBEAR.Icon = Nothing
+
         If IsNullDCRunning() Then
             NullDCLauncher.NullDCproc.CloseMainWindow()
         End If
@@ -265,6 +269,7 @@ Public Class frmMain
         End If
 
         End
+
 
     End Sub
 
@@ -436,6 +441,8 @@ Public Class frmMain
                     Message = "Player is challenging someone else"
                 Case "BC"
                     Message = "Player is being challenged by someone else"
+                Case "SP"
+                    Message = "Player is setting up BEAR"
             End Select
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
@@ -487,14 +494,17 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub RefreshPlayerList()
+    Private Sub RefreshPlayerList(Optional ByVal StartTimer As Boolean = True)
+
         If Not RefreshTimer.Enabled Then
-            Matchlist.Items.Clear()
+            If StartTimer Then
+                Matchlist.Items.Clear()
+                RefreshTimer.Interval = 5000
+                RefreshTimer.Start()
+            End If
             NetworkHandler.SendMessage("?," & ConfigFile.IP)
-            RefreshTimer.Interval = 5000
-            RefreshTimer.Start()
         Else
-            NotificationForm.ShowMessage("Slow down cowboy, wait at least 5 seconds between refreshing")
+                NotificationForm.ShowMessage("Slow down cowboy, wait at least 5 seconds between refreshing")
         End If
 
     End Sub
@@ -588,7 +598,24 @@ Public Class frmMain
         TryToChallenge()
     End Sub
 
+    Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If Me.WindowState = FormWindowState.Minimized Then
+            niBEAR.Visible = True
+            niBEAR.BalloonTipIcon = ToolTipIcon.None
+            niBEAR.BalloonTipTitle = "NulDC BEAR"
+            niBEAR.BalloonTipText = "Aight, I'll be here if you need me."
+            niBEAR.ShowBalloonTip(50000)
+            ShowInTaskbar = False
+        End If
 
+    End Sub
+
+    Private Sub niBEAR_DoubleClick(sender As Object, e As EventArgs) Handles niBEAR.DoubleClick
+        ShowInTaskbar = True
+        Me.WindowState = FormWindowState.Normal
+        niBEAR.Visible = False
+
+    End Sub
 
 End Class
 

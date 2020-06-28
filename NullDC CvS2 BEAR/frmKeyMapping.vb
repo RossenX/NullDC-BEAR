@@ -21,6 +21,10 @@ Public Class frmKeyMapping
     End Sub
 
     Private Sub StartKeyBind(_KeyToBind As String)
+        If Rebinding Then
+            Me.Controls.Find("btn" & KeyToRebind, True)(0).BackColor = Color.White
+        End If
+
         KeyToRebind = _KeyToBind
         Rebinding = True
         WaitingForRelease = False
@@ -96,6 +100,22 @@ Public Class frmKeyMapping
 
     Private Sub btnAK_Click(sender As Object, e As EventArgs) Handles btnAK.Click
         StartKeyBind("AK")
+    End Sub
+
+    Private Sub btnLPMP_Click(sender As Object, e As EventArgs) Handles btnLPMP.Click
+        StartKeyBind("LPMP")
+    End Sub
+
+    Private Sub btnMPHP_Click(sender As Object, e As EventArgs) Handles btnMPHP.Click
+        StartKeyBind("MPHP")
+    End Sub
+
+    Private Sub btnLKMK_Click(sender As Object, e As EventArgs) Handles btnLKMK.Click
+        StartKeyBind("LKMK")
+    End Sub
+
+    Private Sub btnMKHK_Click(sender As Object, e As EventArgs) Handles btnMKHK.Click
+        StartKeyBind("MKHK")
     End Sub
 
 #End Region
@@ -253,7 +273,7 @@ Public Class frmKeyMapping
     Public Sub UpdateProfileList()
         LoadingSettings = True
 
-        Dim files() As String = IO.Directory.GetFiles(MainformRef.NullDCPath)
+        Dim files() As String = Directory.GetFiles(MainformRef.NullDCPath)
         Dim Profiles As New ArrayList
 
         For Each file In files
@@ -334,11 +354,19 @@ Public Class frmKeyMapping
 
         File.SetAttributes(MainformRef.InputHandler.GetXMLFile(True), FileAttributes.Normal)
         File.Delete(MainformRef.InputHandler.GetXMLFile(True))
-        Dim CurrentIndex = cbProfile.SelectedIndex
         cbProfile.Items.Remove(cbProfile.SelectedItem)
-
-        If cbProfile.Items.Count > CurrentIndex - 1 Then CurrentIndex = cbProfile.Items.Count - 1
-        cbProfile.SelectedIndex = CurrentIndex
+        cbProfile.SelectedIndex = 0
     End Sub
 
+    Public Sub ClearAllButtons()
+
+        For Each KeyBoardThing In MainformRef.InputHandler.KeyBoardConfigs
+            Me.Controls.Find("btn" & KeyBoardThing.Key, True)(0).BackColor = Color.White
+        Next
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
 End Class

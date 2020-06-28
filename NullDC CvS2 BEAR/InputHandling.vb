@@ -25,9 +25,10 @@ Public Class InputHandling
     Dim kc As KeysConverter = New KeysConverter
     Public ControllerID As Int16 = 0
     Dim TurnedOn As Boolean = True
-    Dim PollRate As Int16 = 16
+
     Dim RxButtons As New BitArray(32, False)
     Dim LF_RxButtons As New BitArray(32, False)
+
     Dim MainFormRef As frmMain 'Rebind Vars
     Dim CoinKeyDown As Boolean = False
 
@@ -143,6 +144,12 @@ Public Class InputHandling
         KeyBoardConfigs.Add("LPLK", KeyBoardConfigs("LP") & KeyBoardConfigs("LK"))
         KeyBoardConfigs.Add("MPMK", KeyBoardConfigs("MP") & KeyBoardConfigs("MK"))
         KeyBoardConfigs.Add("HPHK", KeyBoardConfigs("HP") & KeyBoardConfigs("HK"))
+        ' New Micros
+        KeyBoardConfigs.Add("LPMP", KeyBoardConfigs("LP") & KeyBoardConfigs("MP"))
+        KeyBoardConfigs.Add("MPHP", KeyBoardConfigs("MP") & KeyBoardConfigs("HP"))
+        KeyBoardConfigs.Add("LKMK", KeyBoardConfigs("LK") & KeyBoardConfigs("MK"))
+        KeyBoardConfigs.Add("MKHK", KeyBoardConfigs("MK") & KeyBoardConfigs("HK"))
+
         KeyBoardConfigs.Add("AP", KeyBoardConfigs("LP") & KeyBoardConfigs("MP") & KeyBoardConfigs("HP"))
         KeyBoardConfigs.Add("AK", KeyBoardConfigs("LK") & KeyBoardConfigs("MK") & KeyBoardConfigs("HK"))
 
@@ -183,15 +190,41 @@ Public Class InputHandling
         ControllerID = cfg.<Configs>.<ControllerID>.Value
         PoVRest = cfg.<Configs>.<PoV>.Value
 
+        ' Check Need to Resave the file to a newer version type
+        If Not cfg.<Configs>.<BEARver>.Value = MainFormRef.Ver Then
+            UpdateKeyMapConfigs()
+        End If
+
 
         If Not MainFormRef.KeyMappingForm Is Nothing Then
             MainFormRef.KeyMappingForm.LoadingSettings = True
             MainFormRef.KeyMappingForm.cbControllerID.Invoke(Sub() MainFormRef.KeyMappingForm.cbControllerID.SelectedIndex = ControllerID)
             MainFormRef.KeyMappingForm.LoadingSettings = False
-
         End If
 
         NeedConfigReload = False
+
+    End Sub
+
+    Public Sub UpdateKeyMapConfigs()
+
+        Dim ListOfAllBinds As String() = {"up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "LPLK", "MPMK", "HPHK", "LPMP", "MPHP", "LKMK", "MKHK", "AP", "AK", "start", "coin"}
+        For Each KeyBind As KeyBind In KeybindConfigs
+            For i = 0 To ListOfAllBinds.Count - 1
+                If KeyBind.Name = ListOfAllBinds(i) Then
+                    ListOfAllBinds(i) = Nothing
+                End If
+            Next
+        Next
+
+        For Each MissingKey As String In ListOfAllBinds
+            If Not MissingKey Is Nothing Then
+                KeybindConfigs.Add(New KeyBind(MissingKey, "", KeyBoardConfigs(MissingKey)))
+                Console.WriteLine("Missing Key: {0}", MissingKey)
+            End If
+        Next
+
+        WriteXMLConfigFile()
 
     End Sub
 
@@ -214,6 +247,12 @@ Public Class InputHandling
         KeybindConfigs.Add(New KeyBind("LPLK", "", KeyBoardConfigs("LPLK")))
         KeybindConfigs.Add(New KeyBind("MPMK", "", KeyBoardConfigs("MPMK")))
         KeybindConfigs.Add(New KeyBind("HPHK", "", KeyBoardConfigs("HPHK")))
+        ' New Micros
+        KeybindConfigs.Add(New KeyBind("LPMP", "", KeyBoardConfigs("LPMP")))
+        KeybindConfigs.Add(New KeyBind("MPHP", "", KeyBoardConfigs("MPHP")))
+        KeybindConfigs.Add(New KeyBind("LKMK", "", KeyBoardConfigs("LKMK")))
+        KeybindConfigs.Add(New KeyBind("MKHK", "", KeyBoardConfigs("MKHK")))
+
         KeybindConfigs.Add(New KeyBind("AP", "", KeyBoardConfigs("AP")))
         KeybindConfigs.Add(New KeyBind("AK", "", KeyBoardConfigs("AK")))
 
@@ -232,7 +271,6 @@ Public Class InputHandling
         WriteXMLConfigFile()
         MainFormRef.KeyMappingForm.cbProfile.Invoke(Sub() MainFormRef.KeyMappingForm.UpdateProfileList())
 
-
     End Sub
 
     Public Sub WriteXMLConfigFile()
@@ -243,7 +281,7 @@ Public Class InputHandling
         writer.WriteStartElement("Configs")
 
         writer.WriteStartElement("ControllerID")
-        writer.WriteString("0")
+        writer.WriteString(ControllerID)
         writer.WriteEndElement()
 
         writer.WriteStartElement("KeyMap")
@@ -264,6 +302,10 @@ Public Class InputHandling
 
         writer.WriteStartElement("DeadZone")
         writer.WriteString(DeadZone)
+        writer.WriteEndElement()
+
+        writer.WriteStartElement("BEARver")
+        writer.WriteString(MainFormRef.Ver)
         writer.WriteEndElement()
 
         writer.WriteEndElement()
@@ -384,10 +426,8 @@ Public Class InputHandling
 
     Private Sub DoOpenTKInputRoll(ByRef State As JoystickState)
 
-        'Console.WriteLine("OpenTK Input ROll")
-        'State = Joystick.GetState(ControllerID)
-
         Dim Capabilities = Joystick.GetCapabilities(ControllerID)
+
         Dim ButtonIndex = 0
         For i = 0 To Capabilities.ButtonCount - 1
             RxButtons(i) = State.IsButtonDown(i)
@@ -402,7 +442,6 @@ Public Class InputHandling
             RxButtons(i + ButtonIndex + 3) = State.GetHat(i).IsRight
             ButtonIndex += 4
         Next
-        Dim rawr = RxButtons
 
         ' Fill the rest of the array with false
         For i = ButtonIndex To RxButtons.Count - 1
@@ -451,6 +490,7 @@ Public Class InputHandling
                         RaiseEvent _KeyReleased(i)
                     End If
                 End If
+
             Next
 
             ' Done and Done Ez Pz now for the Axis
@@ -470,17 +510,17 @@ Public Class InputHandling
                     End If
                 End If
                 RxAxis(key)(4) = RxAxis(key)(0)
+
             Next
 
             If NeedConfigReload Then
                 ReloadConfigs()
-                RxButtons = New BitArray(32, False)
-                LF_RxButtons = New BitArray(32, False)
+
             End If
 
-            ' Put current inputs in array of last roll
             For i = 0 To RxButtons.Count - 1
                 LF_RxButtons(i) = RxButtons(i)
+
             Next
 
         End While
@@ -510,7 +550,7 @@ Public Class InputHandling
                     If Down Then
                         If Not CoinKeyDown Then
                             keybd_event(Key, MapVirtualKey(Key, 0), 0, 0)
-                            Thread.Sleep(16)
+                            Thread.Sleep(12)
                             keybd_event(Key, MapVirtualKey(Key, 0), 2, 0)
                             CoinKeyDown = True
                         End If

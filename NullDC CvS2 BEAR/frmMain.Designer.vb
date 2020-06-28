@@ -22,6 +22,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Matchlist = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -45,6 +46,7 @@ Partial Class frmMain
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lbVer = New System.Windows.Forms.Label()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
+        Me.niBEAR = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -339,6 +341,10 @@ Partial Class frmMain
         Me.imgBeta.TabIndex = 11
         Me.imgBeta.TabStop = False
         '
+        'niBEAR
+        '
+        Me.niBEAR.Text = "BEAR"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -391,4 +397,5 @@ Partial Class frmMain
     Friend WithEvents lbVer As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents imgBeta As PictureBox
+    Friend WithEvents niBEAR As NotifyIcon
 End Class

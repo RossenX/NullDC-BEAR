@@ -175,6 +175,8 @@ Public Class NetworkHandling
                 SendMessage(">,BH", senderip) ' Starting a host
             ElseIf MainFormRef.WaitingForm.Visible Then
                 SendMessage(">,BW", senderip) ' Waiting for a 
+            ElseIf frmSetup.visible Then
+                SendMessage(">,SP", senderip) ' In Setup
             ElseIf Split(5) = "0" Then ' Challanger isn't hosting, send them my host info if i have any
 
                 If MainFormRef.ConfigFile.Status = "Hosting" Then ' Check if i'm still hosting
