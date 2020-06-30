@@ -330,7 +330,6 @@ Public Class frmKeyMapping
 
     Private Sub cbProfile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProfile.SelectedIndexChanged
         If Not LoadingSettings Then ChangeProfile()
-        Panel1.Focus()
 
     End Sub
 
@@ -369,4 +368,9 @@ Public Class frmKeyMapping
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
+
+    Private Sub cbProfile_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbProfile.KeyPress
+        e.Handled = True
+    End Sub
+
 End Class
