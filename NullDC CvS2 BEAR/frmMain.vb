@@ -39,19 +39,19 @@ Public Class frmMain
         niBEAR.Icon = My.Resources.NewNullDCBearIcon
 
         lbVer.Text = Ver
-        If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
+        If Debugger.IsAttached Then NullDCPath = "C:\Users\JC NET TELECOM PC 1\Downloads\nullDCTeste"
 
         If Not File.Exists(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe") Then
-            Dim result As DialogResult = MessageBox.Show("NullDC was not found in this folder, INSTALL NULLDC INTO THIS FOLDER?", "NullDC Install", MessageBoxButtons.YesNo)
+            Dim result As DialogResult = MessageBox.Show("O NullDC não foi encontrado nesta pasta, GOSTARIA DE INSTALAR NA PASTA ATUAL?", "Instalador NullDC", MessageBoxButtons.YesNo)
             If result = DialogResult.Yes Then
-                Dim result2 As DialogResult = MessageBox.Show("This will create a bunch of files in the same folder as NullDC BEAR.exe, OK?", "NullDC Extraction", MessageBoxButtons.YesNo)
+                Dim result2 As DialogResult = MessageBox.Show("Serão criados alguns arquivos na mesma pasta onde se encontra o NullDC BEAR.exe, OK?", "Extrair NullDC", MessageBoxButtons.YesNo)
                 If result2 = DialogResult.Yes Then
                     UnzipResToDir(My.Resources.nulldcCLEAN, "bear_tmp_nulldc.zip", NullDCPath)
-                    MsgBox("NullDC Has been Extracted here, put some games in the ROMS folder then start BEAR up again")
+                    MsgBox("O NullDC Foi extraído aqui, coloque alguns jogos na dentro da pasta ROMS E reinicie o BEAR")
                     End
                 End If
             End If
-            MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
+            MsgBox("Preciso estar na mesma pasta em que o nullDC_Win32_Release-NoTrace.exe")
             End
         End If
 
@@ -108,7 +108,7 @@ Public Class frmMain
 
         If LatestVersion = Ver Then
             ' Is up to date
-            Console.WriteLine("Up To Date, Delete updater if it exists")
+            Console.WriteLine("Atualização concluída!, Excluir updater se existir")
             If File.Exists(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe") Then File.Delete(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe")
         Else
             ' Is not up to date
@@ -175,13 +175,13 @@ Public Class frmMain
                     End
                 Else
                     ' I am not the exe with a space in it Delete the one with a space in it
-                    Console.WriteLine("Deleting old NullDC Bear.exe")
+                    Console.WriteLine("Excluindo versão anterior NullDC Bear.exe")
                     File.Delete(NullDCPath & "\NullDC BEAR.exe")
                 End If
             End If
 
         Catch ex As Exception
-            MsgBox("Couldn't delete old NullDC BEAR.exe")
+            MsgBox("Não foi possível excluir a versão anterior do NullDC BEAR.exe")
         End Try
 
         ' Make the Keyboard File if it doens't exist, it should but i mean you never know
@@ -237,7 +237,7 @@ Public Class frmMain
         Next
 
         If GamesList.Count = 0 Then
-            MsgBox("No Games Found in the /roms folder. Please put some games in there then start BEAR")
+            MsgBox("Não há jogos na pasta /roms. Coloque alguns jogos dentro dela e inicie o BEAR")
             End
         End If
 
@@ -378,11 +378,11 @@ Public Class frmMain
             Select Case Reason
                 Case "HO"
                     Challenger = Nothing
-                    Message = "Played isn't hosting anymore"
+                    Message = "O Jogador não está mais hospedando a partida"
                     NotificationForm.ShowMessage(Message)
                 Case "HA"
                     Challenger = Nothing
-                    Message = "Player is already hosting a game, refresh and join their game"
+                    Message = "O jogador já está hospedando um jogo, atualize e entre em outra partida"
                     NotificationForm.ShowMessage(Message)
             End Select
 
@@ -410,39 +410,39 @@ Public Class frmMain
 
             Select Case Reason
                 Case "D"
-                    Message = "Player was too scared of you to accept."
+                    Message = "O jogador está com medo de enfrentar você."
                 Case "T"
-                    Message = "Player might be asleep, request timed out."
+                    Message = "O jogador deve estar dormindo, tempo de resposta excedido."
                 Case "C"
-                    Message = "Player changed their mind."
+                    Message = "O jogador mudou de idéia."
                 Case "H"
-                    Message = "The host quit"
+                    Message = "O anfitirão saiu."
                 Case "E"
-                    Message = "Other Player Left"
+                    Message = "O outro jogador saiu."
                 Case "BB"
-                    Message = "Player is currently challenging someone"
+                    Message = "O jogador está desafiando outro."
                 Case "Q"
-                    Message = "Player quit"
+                    Message = "O jogador saiu."
                 Case "VM"
-                    Message = "PLAYER IS USING OTHER BEAR VERSION"
+                    Message = "O JOGADOR ESTÁ USANDO OUTRA VERSÃO DO BEAR"
                 Case "BI"
-                    Message = "Player is already in a game"
+                    Message = "O jogador já está em uma partida."
                 Case "NG"
-                    Message = "Player does not have this game"
+                    Message = "O jogador não possui esse jogo"
                 Case "BO"
-                    Message = "Challanger got bored of waiting"
+                    Message = "O desafiante cansou de esperar."
                 Case "HO"
-                    Message = "Player Stopped Hosting, refresh the list plox"
+                    Message = "O jogador parou de hospedar, atualize e lista."
                 Case "BH"
-                    Message = "Host hasn't started a game yet"
+                    Message = "O anfitrião ainda não iniciou o jogo."
                 Case "BW"
-                    Message = "Player is connecting to someone else"
+                    Message = "O jogador está conectando com outro."
                 Case "BB"
-                    Message = "Player is challenging someone else"
+                    Message = "O jogador está desafiando outro"
                 Case "BC"
-                    Message = "Player is being challenged by someone else"
+                    Message = "O jogador está sendo desafiado por outro"
                 Case "SP"
-                    Message = "Player is setting up BEAR"
+                    Message = "O jogador está atualizando o BEAR"
             End Select
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
@@ -504,7 +504,7 @@ Public Class frmMain
             End If
             NetworkHandler.SendMessage("?," & ConfigFile.IP)
         Else
-                NotificationForm.ShowMessage("Slow down cowboy, wait at least 5 seconds between refreshing")
+            NotificationForm.ShowMessage("Calma pequeno gafanhoto, espera pelo menos 5 segundinhos antes de atualizar")
         End If
 
     End Sub
@@ -531,17 +531,17 @@ Public Class frmMain
     Private Sub TryToChallenge()
 
         If Not Challenger Is Nothing Or GameSelectForm.Visible Then
-            NotificationForm.ShowMessage("Already Challenging someone")
+            NotificationForm.ShowMessage("Já está desafiando outro")
             Exit Sub
         End If
 
         If Matchlist.SelectedItems().Count = 0 Then
-            NotificationForm.ShowMessage("You can't the fight wall, choose a player from the list")
+            NotificationForm.ShowMessage("Você não pode desafiar a parede, escolha um jogador da lista")
             Exit Sub
         End If
 
         If Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(0) = ConfigFile.IP Then
-            NotificationForm.ShowMessage("I can't really help you with your inner demons if you want to fight yourself.")
+            NotificationForm.ShowMessage("Eu realmente não posso ajudá-lo com seus demônios interiores, se você quiser lutar contra si mesmo.")
             Exit Sub
         End If
 
@@ -558,7 +558,7 @@ Public Class frmMain
             ' Check if you have the game
             If Not GamesList.ContainsKey(c_gamerom) Then
                 MsgBox(c_gamerom)
-                NotificationForm.ShowMessage("You don't have this game")
+                NotificationForm.ShowMessage("Você não possui este jogo.")
                 Exit Sub
             End If
 
@@ -573,14 +573,14 @@ Public Class frmMain
 
     Private Sub btnHost_Click(sender As Object, e As EventArgs) Handles btnHost.Click
         If IsNullDCRunning() Then
-            NotificationForm.ShowMessage("Can't Host and play at the same time!")
+            NotificationForm.ShowMessage("Não é possível hospedar e jogar ao mesmo tempo!")
             Exit Sub
         End If
 
         If Challenger Is Nothing Then
             OpenHostingPanel()
         Else
-            NotificationForm.ShowMessage("I mean i admire your multitasking you can't fight two people at once")
+            NotificationForm.ShowMessage("Eu admiro sua habilidade, mas não é possível lutar contra 2 jogadores ao mesmo tempo.")
         End If
 
     End Sub
@@ -603,7 +603,7 @@ Public Class frmMain
             niBEAR.Visible = True
             niBEAR.BalloonTipIcon = ToolTipIcon.None
             niBEAR.BalloonTipTitle = "NulDC BEAR"
-            niBEAR.BalloonTipText = "Aight, I'll be here if you need me."
+            niBEAR.BalloonTipText = "Beleza, estarei aqui caso precise de mim!"
             niBEAR.ShowBalloonTip(50000)
             ShowInTaskbar = False
         End If

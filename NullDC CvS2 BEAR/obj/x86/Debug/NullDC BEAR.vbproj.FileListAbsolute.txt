@@ -1,0 +1,30 @@
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\bin\x86\Debug\NullDC.BEAR.exe.config
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\bin\x86\Debug\NullDC.BEAR.exe
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\bin\x86\Debug\NullDC.BEAR.pdb
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\bin\x86\Debug\NullDC.BEAR.xml
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\bin\x86\Debug\OpenTK.dll
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\bin\x86\Debug\XInputDotNetPure.dll
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC BEAR.vbprojAssemblyReference.cache
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmCalibration.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmChallenge.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmChallengeGameSelect.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmChallengeSent.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmDelayHelp.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmHostPanel.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmKeyMapping.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmLimiterHelp.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmLoLNerd.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmMain.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmNewProfile.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmNotification.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmSetup.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmSpecialThanks.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmWaitingForHost.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.Resources.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.SimpleProgressBar.resources
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC BEAR.vbproj.GenerateResource.cache
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC BEAR.vbproj.CoreCompileInputs.cache
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC BEAR.vbproj.CopyComplete
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC.BEAR.exe
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC.BEAR.xml
+C:\Users\JC NET TELECOM PC 1\Downloads\repo\NullDC CvS2 BEAR\obj\x86\Debug\NullDC.BEAR.pdb
