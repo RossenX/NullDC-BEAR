@@ -65,7 +65,7 @@ Partial Class frmMain
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(106, 26)
         Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Controls"
+        Me.Button1.Text = "Controles"
         Me.Button1.UseVisualStyleBackColor = False
         '
         'Matchlist
@@ -151,7 +151,7 @@ Partial Class frmMain
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(106, 26)
         Me.btnSearch.TabIndex = 4
-        Me.btnSearch.Text = "Refresh"
+        Me.btnSearch.Text = "Atualizar"
         Me.btnSearch.UseVisualStyleBackColor = False
         '
         'BtnJoin
@@ -166,7 +166,7 @@ Partial Class frmMain
         Me.BtnJoin.Name = "BtnJoin"
         Me.BtnJoin.Size = New System.Drawing.Size(106, 26)
         Me.BtnJoin.TabIndex = 5
-        Me.BtnJoin.Text = "Challenge"
+        Me.BtnJoin.Text = "Desafiar"
         Me.BtnJoin.UseVisualStyleBackColor = False
         '
         'btnOffline
@@ -210,7 +210,7 @@ Partial Class frmMain
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 23)
         Me.btnExit.TabIndex = 6
-        Me.btnExit.Text = "Exit"
+        Me.btnExit.Text = "Sair"
         Me.btnExit.UseVisualStyleBackColor = False
         '
         'btnMinimize
@@ -223,7 +223,7 @@ Partial Class frmMain
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(75, 23)
         Me.btnMinimize.TabIndex = 7
-        Me.btnMinimize.Text = "Minimize"
+        Me.btnMinimize.Text = "Minimizar"
         Me.btnMinimize.UseVisualStyleBackColor = False
         '
         'btnSetup
@@ -236,7 +236,7 @@ Partial Class frmMain
         Me.btnSetup.Name = "btnSetup"
         Me.btnSetup.Size = New System.Drawing.Size(75, 23)
         Me.btnSetup.TabIndex = 8
-        Me.btnSetup.Text = "Setup"
+        Me.btnSetup.Text = "Opções"
         Me.btnSetup.UseVisualStyleBackColor = False
         '
         'Panel1
@@ -304,7 +304,7 @@ Partial Class frmMain
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(198, 24)
         Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Game"
+        Me.Label4.Text = "Jogo"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label1
@@ -317,7 +317,7 @@ Partial Class frmMain
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(163, 24)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Name"
+        Me.Label1.Text = "Nome"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lbVer

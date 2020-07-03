@@ -32,9 +32,9 @@ Partial Class frmNewProfile
         'tbProfileName
         '
         Me.tbProfileName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbProfileName.Location = New System.Drawing.Point(76, 3)
+        Me.tbProfileName.Location = New System.Drawing.Point(70, 3)
         Me.tbProfileName.Name = "tbProfileName"
-        Me.tbProfileName.Size = New System.Drawing.Size(377, 20)
+        Me.tbProfileName.Size = New System.Drawing.Size(381, 20)
         Me.tbProfileName.TabIndex = 0
         '
         'btnNew
@@ -42,11 +42,11 @@ Partial Class frmNewProfile
         Me.btnNew.BackColor = System.Drawing.Color.White
         Me.btnNew.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnNew.Location = New System.Drawing.Point(459, 3)
+        Me.btnNew.Location = New System.Drawing.Point(457, 3)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(167, 22)
+        Me.btnNew.Size = New System.Drawing.Size(169, 22)
         Me.btnNew.TabIndex = 1
-        Me.btnNew.Text = "Create New Profile"
+        Me.btnNew.Text = "Criar novo Perfil"
         Me.btnNew.UseVisualStyleBackColor = False
         '
         'TableLayoutPanel1
@@ -73,9 +73,9 @@ Partial Class frmNewProfile
         Me.Label1.Location = New System.Drawing.Point(3, 3)
         Me.Label1.Margin = New System.Windows.Forms.Padding(3)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(67, 22)
+        Me.Label1.Size = New System.Drawing.Size(61, 22)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Profile Name"
+        Me.Label1.Text = "Perfil Nome"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'frmNewProfile
@@ -88,7 +88,7 @@ Partial Class frmNewProfile
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewProfile"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Create New Profile"
+        Me.Text = "Criar Novo perfil"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
