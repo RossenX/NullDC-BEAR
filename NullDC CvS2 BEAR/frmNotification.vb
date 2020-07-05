@@ -1,12 +1,11 @@
 ﻿Public Class frmNotification
 
     Dim HideTimer As Timer = New Timer
-    Dim MainformRef As frmMain
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
-        MainformRef = _mf
         HideTimer.Interval = 5000
         AddHandler HideTimer.Tick, AddressOf HideTimer_tick
+
     End Sub
 
     Private Sub HideTimer_tick(sender As Object, e As EventArgs)

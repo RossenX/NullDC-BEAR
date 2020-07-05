@@ -64,8 +64,8 @@ Partial Class frmWaitingForHost
         '
         'frmWaitingForHost
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Squares
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None

@@ -25,17 +25,17 @@ Partial Class frmCalibration
         Me.components = New System.ComponentModel.Container()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnDone = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.trbDeadZone = New System.Windows.Forms.TrackBar()
-        Me.lbDeadZone = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BarX = New NullDC_CvS2_BEAR.SimpleProgressBar()
         Me.BarY = New NullDC_CvS2_BEAR.SimpleProgressBar()
         Me.BarZ = New NullDC_CvS2_BEAR.SimpleProgressBar()
         Me.BarT = New NullDC_CvS2_BEAR.SimpleProgressBar()
         Me.BarU = New NullDC_CvS2_BEAR.SimpleProgressBar()
         Me.BarV = New NullDC_CvS2_BEAR.SimpleProgressBar()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.trbDeadZone = New System.Windows.Forms.TrackBar()
+        Me.lbDeadZone = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.trbDeadZone, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -83,6 +83,54 @@ Partial Class frmCalibration
         Me.btnDone.TabIndex = 6
         Me.btnDone.Text = "Done"
         Me.btnDone.UseVisualStyleBackColor = False
+        '
+        'BarX
+        '
+        Me.BarX.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BarX.Location = New System.Drawing.Point(3, 3)
+        Me.BarX.Name = "BarX"
+        Me.BarX.Size = New System.Drawing.Size(327, 26)
+        Me.BarX.TabIndex = 9
+        '
+        'BarY
+        '
+        Me.BarY.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BarY.Location = New System.Drawing.Point(3, 35)
+        Me.BarY.Name = "BarY"
+        Me.BarY.Size = New System.Drawing.Size(327, 26)
+        Me.BarY.TabIndex = 10
+        '
+        'BarZ
+        '
+        Me.BarZ.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BarZ.Location = New System.Drawing.Point(3, 67)
+        Me.BarZ.Name = "BarZ"
+        Me.BarZ.Size = New System.Drawing.Size(327, 26)
+        Me.BarZ.TabIndex = 11
+        '
+        'BarT
+        '
+        Me.BarT.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BarT.Location = New System.Drawing.Point(3, 99)
+        Me.BarT.Name = "BarT"
+        Me.BarT.Size = New System.Drawing.Size(327, 26)
+        Me.BarT.TabIndex = 12
+        '
+        'BarU
+        '
+        Me.BarU.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BarU.Location = New System.Drawing.Point(3, 131)
+        Me.BarU.Name = "BarU"
+        Me.BarU.Size = New System.Drawing.Size(327, 26)
+        Me.BarU.TabIndex = 13
+        '
+        'BarV
+        '
+        Me.BarV.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BarV.Location = New System.Drawing.Point(3, 163)
+        Me.BarV.Name = "BarV"
+        Me.BarV.Size = New System.Drawing.Size(327, 26)
+        Me.BarV.TabIndex = 14
         '
         'Label2
         '
@@ -135,58 +183,10 @@ Partial Class frmCalibration
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 8
         '
-        'BarX
-        '
-        Me.BarX.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BarX.Location = New System.Drawing.Point(3, 3)
-        Me.BarX.Name = "BarX"
-        Me.BarX.Size = New System.Drawing.Size(327, 26)
-        Me.BarX.TabIndex = 9
-        '
-        'BarY
-        '
-        Me.BarY.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BarY.Location = New System.Drawing.Point(3, 35)
-        Me.BarY.Name = "BarY"
-        Me.BarY.Size = New System.Drawing.Size(327, 26)
-        Me.BarY.TabIndex = 10
-        '
-        'BarZ
-        '
-        Me.BarZ.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BarZ.Location = New System.Drawing.Point(3, 67)
-        Me.BarZ.Name = "BarZ"
-        Me.BarZ.Size = New System.Drawing.Size(327, 26)
-        Me.BarZ.TabIndex = 11
-        '
-        'BarT
-        '
-        Me.BarT.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BarT.Location = New System.Drawing.Point(3, 99)
-        Me.BarT.Name = "BarT"
-        Me.BarT.Size = New System.Drawing.Size(327, 26)
-        Me.BarT.TabIndex = 12
-        '
-        'BarU
-        '
-        Me.BarU.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BarU.Location = New System.Drawing.Point(3, 131)
-        Me.BarU.Name = "BarU"
-        Me.BarU.Size = New System.Drawing.Size(327, 26)
-        Me.BarU.TabIndex = 13
-        '
-        'BarV
-        '
-        Me.BarV.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BarV.Location = New System.Drawing.Point(3, 163)
-        Me.BarV.Name = "BarV"
-        Me.BarV.Size = New System.Drawing.Size(327, 26)
-        Me.BarV.TabIndex = 14
-        '
         'frmCalibration
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(620, 228)
         Me.Controls.Add(Me.TableLayoutPanel1)

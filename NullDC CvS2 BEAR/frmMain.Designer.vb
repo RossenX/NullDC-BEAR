@@ -47,6 +47,8 @@ Partial Class frmMain
         Me.lbVer = New System.Windows.Forms.Label()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
         Me.niBEAR = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.btnReplay = New System.Windows.Forms.Button()
+        Me.btnDLC = New System.Windows.Forms.Button()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -219,7 +221,7 @@ Partial Class frmMain
         Me.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnMinimize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMinimize.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnMinimize.Location = New System.Drawing.Point(28, 420)
+        Me.btnMinimize.Location = New System.Drawing.Point(23, 420)
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(75, 23)
         Me.btnMinimize.TabIndex = 7
@@ -345,13 +347,41 @@ Partial Class frmMain
         '
         Me.niBEAR.Text = "BEAR"
         '
+        'btnReplay
+        '
+        Me.btnReplay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnReplay.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnReplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReplay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
+        Me.btnReplay.Location = New System.Drawing.Point(148, 420)
+        Me.btnReplay.Name = "btnReplay"
+        Me.btnReplay.Size = New System.Drawing.Size(75, 23)
+        Me.btnReplay.TabIndex = 12
+        Me.btnReplay.Text = "Replays"
+        Me.btnReplay.UseVisualStyleBackColor = False
+        '
+        'btnDLC
+        '
+        Me.btnDLC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnDLC.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDLC.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDLC.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
+        Me.btnDLC.Location = New System.Drawing.Point(266, 420)
+        Me.btnDLC.Name = "btnDLC"
+        Me.btnDLC.Size = New System.Drawing.Size(75, 23)
+        Me.btnDLC.TabIndex = 13
+        Me.btnDLC.Text = "Free DLC"
+        Me.btnDLC.UseVisualStyleBackColor = False
+        '
         'frmMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.MainMenuBackground
         Me.ClientSize = New System.Drawing.Size(602, 491)
+        Me.Controls.Add(Me.btnDLC)
+        Me.Controls.Add(Me.btnReplay)
         Me.Controls.Add(Me.lbVer)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnSetup)
@@ -398,4 +428,6 @@ Partial Class frmMain
     Friend WithEvents Label2 As Label
     Friend WithEvents imgBeta As PictureBox
     Friend WithEvents niBEAR As NotifyIcon
+    Friend WithEvents btnReplay As Button
+    Friend WithEvents btnDLC As Button
 End Class

@@ -156,6 +156,12 @@
     <Compile Include="frmDelayHelp.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDLC.Designer.vb">
+      <DependentUpon>frmDLC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDLC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmHostPanel.Designer.vb">
       <DependentUpon>frmHostPanel.vb</DependentUpon>
     </Compile>
@@ -199,6 +205,12 @@
     <Compile Include="frmNotification.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmReplays.Designer.vb">
+      <DependentUpon>frmReplays.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmReplays.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSetup.Designer.vb">
       <DependentUpon>frmSetup.vb</DependentUpon>
     </Compile>
@@ -235,13 +247,14 @@
     </Compile>
     <Compile Include="NetworkHandling.vb" />
     <Compile Include="NullDCLauncher.vb" />
+    <Compile Include="Rx.vb" />
     <Compile Include="SimpleProgressBar.Designer.vb">
       <DependentUpon>SimpleProgressBar.vb</DependentUpon>
     </Compile>
     <Compile Include="SimpleProgressBar.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NetPlayHandler.vb" />
+    <Compile Include="BearPlay.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmCalibration.resx">
@@ -258,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDelayHelp.resx">
       <DependentUpon>frmDelayHelp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDLC.resx">
+      <DependentUpon>frmDLC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHostPanel.resx">
       <DependentUpon>frmHostPanel.vb</DependentUpon>
@@ -280,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNotification.resx">
       <DependentUpon>frmNotification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReplays.resx">
+      <DependentUpon>frmReplays.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetup.resx">
       <DependentUpon>frmSetup.vb</DependentUpon>
@@ -326,11 +345,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\be.zip" />
+    <None Include="Resources\bj.zip" />
+    <None Include="Resources\bu.zip" />
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Deps.zip" />
-    <None Include="Resources\naomi_nvmem_fresh.bin" />
     <None Include="Resources\nullDC.cfg" />
   </ItemGroup>
   <ItemGroup>

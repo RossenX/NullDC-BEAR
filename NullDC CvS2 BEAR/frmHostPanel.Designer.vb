@@ -38,6 +38,7 @@ Partial Class frmHostPanel
         Me.Button2 = New System.Windows.Forms.Button()
         Me.tbFPS = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbRegion = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -160,9 +161,9 @@ Partial Class frmHostPanel
         Me.cbGameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGameList.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.cbGameList.FormattingEnabled = True
-        Me.cbGameList.Location = New System.Drawing.Point(107, 230)
+        Me.cbGameList.Location = New System.Drawing.Point(65, 230)
         Me.cbGameList.Name = "cbGameList"
-        Me.cbGameList.Size = New System.Drawing.Size(236, 21)
+        Me.cbGameList.Size = New System.Drawing.Size(258, 21)
         Me.cbGameList.TabIndex = 10
         '
         'Button1
@@ -234,13 +235,24 @@ Partial Class frmHostPanel
         Me.Label3.TabIndex = 16
         Me.Label3.Text = "Limit"
         '
+        'cbRegion
+        '
+        Me.cbRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbRegion.FormattingEnabled = True
+        Me.cbRegion.Items.AddRange(New Object() {"JPN", "USA", "EUR"})
+        Me.cbRegion.Location = New System.Drawing.Point(329, 230)
+        Me.cbRegion.Name = "cbRegion"
+        Me.cbRegion.Size = New System.Drawing.Size(52, 21)
+        Me.cbRegion.TabIndex = 25
+        '
         'frmHostPanel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.SingleSquare
         Me.ClientSize = New System.Drawing.Size(450, 450)
+        Me.Controls.Add(Me.cbRegion)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.tbFPS)
         Me.Controls.Add(Me.Button2)
@@ -285,4 +297,5 @@ Partial Class frmHostPanel
     Friend WithEvents Button2 As Button
     Friend WithEvents tbFPS As TextBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents cbRegion As ComboBox
 End Class

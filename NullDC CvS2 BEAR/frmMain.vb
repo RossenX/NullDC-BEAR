@@ -3,12 +3,12 @@ Imports System.Net
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = False
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "0.98c"
+    Public Ver As String = "0.99"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -26,8 +26,7 @@ Public Class frmMain
     Public KeyMappingForm As frmKeyMapping
 
 #Region "Beta"
-    ' Fuck the replay shit for now
-    ' Public NetplayHandler As NetPlayHandler
+    Public Bearplay As BearPlay
 
 #End Region
 
@@ -37,6 +36,9 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         niBEAR.Icon = My.Resources.NewNullDCBearIcon
+        Me.CenterToScreen()
+
+        Rx.MainformRef = Me
 
         lbVer.Text = Ver
         If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
@@ -73,11 +75,17 @@ Public Class frmMain
 
         ' Beta Features Only
         If IsBeta Then
-            ' NetPlayHandler = New NetPlayHandler(Me)
+            'Bearplay = New BearPlay(Me)
+            'ZipFile.ExtractToDirectory("C:\Users\RossenX\Downloads\Capcom_vs_SNK_2_Mark_of_the_Millennium_2001.zip", "C:\Users\RossenX\Downloads")
 
         End If
 
         RefreshPlayerList(False)
+
+        If GamesList.Count = 0 Then
+            NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
+            'End
+        End If
 
     End Sub
 
@@ -134,7 +142,7 @@ Public Class frmMain
         File.WriteAllBytes(My.Computer.FileSystem.SpecialDirectories.Temp & "\" & _arg(1), _arg(0))
     End Sub
 
-    Private Sub UnzipResToDir(ByVal _res As Byte(), ByVal _name As String, ByVal _dir As String)
+    Public Sub UnzipResToDir(ByVal _res As Byte(), ByVal _name As String, ByVal _dir As String)
         Dim FileWriteThread As Thread
         FileWriteThread = New Thread(AddressOf CopyResourceToDirectoryThread)
         FileWriteThread.IsBackground = True
@@ -200,12 +208,23 @@ Public Class frmMain
         If Not File.Exists(NullDCPath & "\d3d9.dll") Then File.WriteAllBytes(NullDCPath & "\d3d9.dll", My.Resources.d3d9)
         File.WriteAllLines(NullDCPath & "\antilag.cfg", {"[config]", "RenderAheadLimit=0", "FPSlimit=60"})
 
+        ' Remove any honey files that may have been left over if someone quit or it crashed or w.e reason, but if it fails then fuck it let em stay
+        Try
+            Dim _honey As String() = Directory.GetFiles(NullDCPath & "\roms", "*.honey")
+            For Each _file In _honey
+                File.SetAttributes(_file, FileAttributes.Normal)
+                File.Delete(_file)
+            Next
+        Catch ex As Exception
+
+        End Try
+
+
         GetGamesList()
     End Sub
 
-    Private Sub GetGamesList()
-        GameSelectForm.cbGameList.Items.Clear()
-        HostingForm.cbGameList.Items.Clear()
+    Public Sub GetGamesList()
+        GamesList.Clear()
         GameSelectForm.cbGameList.ValueMember = "Rom"
         GameSelectForm.cbGameList.DisplayMember = "Game"
         HostingForm.cbGameList.ValueMember = "Rom"
@@ -236,16 +255,11 @@ Public Class frmMain
             Next
         Next
 
-        If GamesList.Count = 0 Then
-            MsgBox("No Games Found in the /roms folder. Please put some games in there then start BEAR")
-            End
-        End If
-
         GameSelectForm.cbGameList.DataSource = table
         HostingForm.cbGameList.DataSource = table
 
-        GameSelectForm.cbGameList.SelectedIndex = 0
-        HostingForm.cbGameList.SelectedIndex = 0
+        'GameSelectForm.cbGameList.SelectedIndex = 0
+        'HostingForm.cbGameList.SelectedIndex = 0
 
     End Sub
 
@@ -267,6 +281,10 @@ Public Class frmMain
         If Not Challenger Is Nothing Then
             NetworkHandler.SendMessage(">, Q", Challenger.ip)
         End If
+
+        While Not Bearplay Is Nothing
+            Thread.Sleep(100)
+        End While
 
         End
 
@@ -290,8 +308,8 @@ Public Class frmMain
 
     End Sub
 
-    Public Delegate Sub JoinHost_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16)
-    Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16)
+    Public Delegate Sub JoinHost_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String)
+    Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String)
         If WaitingForm.Visible Then WaitingForm.Visible = False
         Challenger = New NullDCPlayer(_name, _ip, _port, _game)
         ConfigFile.Host = _ip
@@ -299,8 +317,9 @@ Public Class frmMain
         ConfigFile.Status = "Client"
         ConfigFile.Game = _game
         ConfigFile.Delay = _delay
+        ConfigFile.ReplayFile = ""
         ConfigFile.SaveFile()
-        NullDCLauncher.LaunchDC(ConfigFile.Game)
+        NullDCLauncher.LaunchDC(ConfigFile.Game, _region)
 
     End Sub
 
@@ -337,7 +356,7 @@ Public Class frmMain
 
             Select Case Reason
                 Case "Window Closed" ' This is only fired automatically by the emulator when it closes, sometimes we need to ignore this
-                    Console.Write("Window Closed")
+                    Console.WriteLine("Window Closed")
                     RemoveChallenger() ' Remove Challenger Data in case we have any
                     ' Set game to none and back to idle
                     ConfigFile.Game = "None"
@@ -347,7 +366,11 @@ Public Class frmMain
                     Console.Write("New Challanger")
                     If IsNullDCRunning() Then
                         NullDCLauncher.DoNotSendNextExitEvent = True
-                        NullDCLauncher.NullDCproc.CloseMainWindow()
+                        NullDCLauncher.NullDCproc.Kill()
+                        While IsNullDCRunning() ' Just to make sure it's dead before we accept
+                            NullDCLauncher.NullDCproc.Kill()
+                            Thread.Sleep(100)
+                        End While
                     End If
                     ' Set out game to w.e our challenger wants to play and set outself to client
                     ConfigFile.Game = Challenger.game
@@ -355,6 +378,9 @@ Public Class frmMain
                     ConfigFile.SaveFile()
                 Case "Denied", "TO" ' T/O or Denied
                     RemoveChallenger()
+                    ConfigFile.Game = "None"
+                    ConfigFile.Status = "Idle"
+                    ConfigFile.SaveFile()
                 Case "Host Canceled" ' You were hosting but then you stopped Clear the game info
                     RemoveChallenger()
                     ConfigFile.Game = "None"
@@ -363,7 +389,11 @@ Public Class frmMain
                 Case "New Host" ' You started a new host Just close the nullDC if it's open, disable raising it's event
                     If IsNullDCRunning() Then
                         NullDCLauncher.NullDCproc.EnableRaisingEvents = False ' Disable Event Raising so this doesn't automaticlly clear challenger data
-                        NullDCLauncher.NullDCproc.CloseMainWindow()
+                        NullDCLauncher.NullDCproc.Kill()
+                        While IsNullDCRunning() ' Just to make sure it's dead before we accept
+                            NullDCLauncher.NullDCproc.Kill()
+                            Thread.Sleep(100)
+                        End While
                     End If
                     ConfigFile.Status = "Hosting"
                     ConfigFile.Game = "None"
@@ -402,11 +432,13 @@ Public Class frmMain
             ChallengeSentForm.Visible = False
             WaitingForm.Visible = False
             HostingForm.Visible = False
-            ConfigFile.Game = "None"
-            ConfigFile.Status = "Idle"
-            ConfigFile.SaveFile()
 
-            If IsNullDCRunning() Then NullDCLauncher.NullDCproc.CloseMainWindow() ' Close the NullDC Window
+            'If IsNullDCRunning() Then NullDCLauncher.NullDCproc.CloseMainWindow() ' Close the NullDC Window
+
+            While IsNullDCRunning()
+                NullDCLauncher.NullDCproc.Kill()
+                Thread.Sleep(100)
+            End While
 
             Select Case Reason
                 Case "D"
@@ -428,7 +460,7 @@ Public Class frmMain
                 Case "BI"
                     Message = "Player is already in a game"
                 Case "NG"
-                    Message = "Player does not have this game"
+                    Message = "Player doesn't have this game or rom (lst file) do not match"
                 Case "BO"
                     Message = "Challanger got bored of waiting"
                 Case "HO"
@@ -447,6 +479,9 @@ Public Class frmMain
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
 
+            ConfigFile.Game = "None"
+            ConfigFile.Status = "Idle"
+            ConfigFile.SaveFile()
         End If
 
     End Sub
@@ -480,7 +515,12 @@ Public Class frmMain
 
 #Region "Button Clicks"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        KeyMappingForm.Show(Me)
+        If KeyMappingForm.Visible Then
+            KeyMappingForm.Focus()
+        Else
+            KeyMappingForm.Show(Me)
+        End If
+
 
     End Sub
 
@@ -504,12 +544,18 @@ Public Class frmMain
             End If
             NetworkHandler.SendMessage("?," & ConfigFile.IP)
         Else
-                NotificationForm.ShowMessage("Slow down cowboy, wait at least 5 seconds between refreshing")
+            NotificationForm.ShowMessage("Slow down cowboy, wait at least 5 seconds between refreshing")
         End If
 
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        For i = 0 To Application.OpenForms.Count - 1
+            If i = 0 Then Continue For
+
+            Application.OpenForms(i).Close()
+        Next
+
         Me.Close()
 
     End Sub
@@ -520,7 +566,9 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSetup_Click(sender As Object, e As EventArgs) Handles btnSetup.Click
-        frmSetup.Show(Me)
+        If Not Application.OpenForms().OfType(Of frmSetup).Any Then
+            frmSetup.Show(Me)
+        End If
 
     End Sub
 
@@ -558,7 +606,7 @@ Public Class frmMain
             ' Check if you have the game
             If Not GamesList.ContainsKey(c_gamerom) Then
                 MsgBox(c_gamerom)
-                NotificationForm.ShowMessage("You don't have this game")
+                NotificationForm.ShowMessage("You don't have this game or rom (lst file) do not match")
                 Exit Sub
             End If
 
@@ -605,7 +653,7 @@ Public Class frmMain
             niBEAR.BalloonTipTitle = "NulDC BEAR"
             niBEAR.BalloonTipText = "Aight, I'll be here if you need me."
             niBEAR.ShowBalloonTip(50000)
-            ShowInTaskbar = False
+            ShowInTaskbar = False ' this removes the form from the openforms... so gona disable it for now
         End If
 
     End Sub
@@ -617,6 +665,27 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub btnReplay_Click(sender As Object, e As EventArgs) Handles btnReplay.Click
+        If Not Application.OpenForms().OfType(Of frmReplays).Any Then
+            frmReplays.Show(Me)
+        Else
+            frmReplays.Focus()
+        End If
+
+    End Sub
+
+    Private Sub btnDLC_Click(sender As Object, e As EventArgs) Handles btnDLC.Click
+        If Not Application.OpenForms().OfType(Of frmDLC).Any Then
+            frmDLC.Show(Me)
+        Else
+            frmDLC.Focus()
+        End If
+
+    End Sub
+
+    Private Sub niBEAR_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles niBEAR.MouseDoubleClick
+
+    End Sub
 End Class
 
 Public Class NullDCPlayer
@@ -653,6 +722,8 @@ Public Class Configs
     Private _hosttype As String = "1"
     Private _fpslimit As String = "60"
     Private _keyprofile As String = "Default"
+    Private _recordreplay As Int16 = 0
+    Private _ReplayFile As String = ""
 
 #Region "Properties"
 
@@ -783,6 +854,24 @@ Public Class Configs
         End Set
     End Property
 
+    Public Property RecordReplay() As Int16
+        Get
+            Return _recordreplay
+        End Get
+        Set(ByVal value As Int16)
+            _recordreplay = value
+        End Set
+    End Property
+
+    Public Property ReplayFile() As String
+        Get
+            Return _ReplayFile
+        End Get
+        Set(ByVal value As String)
+            _ReplayFile = value
+        End Set
+    End Property
+
 #End Region
 
     Public Sub SaveFile()
@@ -802,7 +891,9 @@ Public Class Configs
                 "Game=" & Game,
                 "HostType=" & HostType,
                 "FPSLimit=" & FPSLimit,
-                "KeyProfile=" & KeyMapProfile
+                "KeyProfile=" & KeyMapProfile,
+                "RecordReplay=" & RecordReplay,
+                "ReplayFile=" & ReplayFile
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
     End Sub
@@ -833,6 +924,8 @@ Public Class Configs
                     If line.Contains("HostType") Then HostType = line.Split("=")(1).Trim
                     If line.Contains("FPSLimit") Then FPSLimit = line.Split("=")(1).Trim
                     If line.Contains("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
+                    If line.Contains("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim
+                    If line.Contains("ReplayFile") Then ReplayFile = line.Split("=")(1).Trim
 
                 Next
                 Status = "Idle"
@@ -854,6 +947,8 @@ Public Class Configs
                 HostType = lines(11).Split("=")(1).Trim
                 FPSLimit = lines(12).Split("=")(1).Trim
                 KeyMapProfile = lines(13).Split("=")(1).Trim
+                RecordReplay = lines(14).Split("=")(1).Trim
+                ReplayFile = lines(15).Split("=")(1).Trim
 
             End If
 

@@ -1,14 +1,14 @@
 ﻿Imports System.Net.NetworkInformation
+Imports System.Threading
 Imports NullDC_CvS2_BEAR.frmMain
 
 Public Class frmHostPanel
 
-    Dim MainformRef As frmMain
     Private Ping As Int16 = 0
+    Dim SuggestThread As Thread
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
-        MainformRef = _mf
 
     End Sub
 
@@ -21,7 +21,7 @@ Public Class frmHostPanel
     Private Sub frmHostPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Icon = My.Resources.NewNullDCBearIcon
         cbDelay.Text = "1"
-        cbGameList.SelectedText = 0
+        If cbGameList.Items.Count > 0 Then cbGameList.SelectedIndex = 0
 
     End Sub
 
@@ -33,6 +33,7 @@ Public Class frmHostPanel
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         If Not MainformRef.Challenger Is Nothing Then MainformRef.NetworkHandler.SendMessage(">,H", MainformRef.Challenger.ip)
         MainformRef.EndSession("Host Canceled")
+        MainformRef.Focus()
     End Sub
 
     Private Sub HostPanel_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
@@ -44,6 +45,7 @@ Public Class frmHostPanel
                 cbHostType.SelectedIndex = 1
             End If
             tbFPS.Text = MainformRef.ConfigFile.FPSLimit
+            If cbRegion.Text = "" Then cbRegion.Text = "JPN"
             If Not MainformRef.Challenger Is Nothing Then
                 lbInfo.Text = "Hosting " & MainformRef.Challenger.name
                 cbDelay.Text = "1"
@@ -52,7 +54,10 @@ Public Class frmHostPanel
                 Dim Game = MainformRef.Challenger.game
                 Console.WriteLine("Game Is:  " & Game)
                 If MainformRef.Challenger.game = "None" Then cbGameList.Visible = True
-                SuggestDelay()
+
+                SuggestThread = New Thread(AddressOf SuggestDelay)
+                SuggestThread.IsBackground = True
+                SuggestThread.Start(True)
             Else
                 lbInfo.Text = "Hosting Solo"
                 cbDelay.Text = "1"
@@ -70,28 +75,37 @@ Public Class frmHostPanel
         If MainformRef.Challenger Is Nothing Then
             MainformRef.NotificationForm.ShowMessage("I can't predict the future, unless you're hosting someone i can't suggest a delay for you")
         Else
-            SuggestDelay()
+            SuggestThread = New Thread(AddressOf SuggestDelay)
+            SuggestThread.IsBackground = True
+            SuggestThread.Start(False)
         End If
 
     End Sub
 
-    Private Sub SuggestDelay()
+    Private Sub SuggestDelay(ByVal AutoSuggest As Boolean)
+
         Dim ping = New Ping().Send(MainformRef.Challenger.ip).RoundtripTime
         If ping = 0 Then
-            MainformRef.NotificationForm.ShowMessage("Coulnd't ping the player. Make sure you and your challanger are not behind a firewall or something.")
+            If Not AutoSuggest Then MainformRef.NotificationForm.ShowMessage("Coulnd't ping the player. Make sure you and your challanger are not behind a firewall or something.")
             Exit Sub
         End If
         Dim DelayFrameRate = 32.66
         Dim delay = Math.Ceiling(ping / DelayFrameRate)
         If delay = 0 Then delay = 1
-        cbDelay.Text = delay
-        lbPing.Text = "Ping: " & ping & " | Delay rating: " & (ping / DelayFrameRate).ToString("0.##")
+        cbDelay.Invoke(Sub() cbDelay.Text = delay)
+        lbPing.Invoke(Sub() lbPing.Text = "Ping: " & ping & " | Delay rating: " & (ping / DelayFrameRate).ToString("0.##"))
+
         If delay > 7 Then
             MainformRef.NotificationForm.ShowMessage("Delay > 7 has a VERY HIGH chance of desync!")
         End If
     End Sub
 
     Private Sub btnStartHosting_Click(sender As Object, e As EventArgs) Handles btnStartHosting.Click
+        If cbGameList.Text = "" Then
+            MainformRef.NotificationForm.ShowMessage("No Game Selected")
+            Exit Sub
+        End If
+
         Dim HostType As String = "0"
         Dim RomName As String = cbGameList.SelectedValue
         If Not MainformRef.Challenger Is Nothing Then RomName = MainformRef.Challenger.game
@@ -101,19 +115,23 @@ Public Class frmHostPanel
         MainformRef.ConfigFile.Delay = cbDelay.Text
         MainformRef.ConfigFile.FPSLimit = tbFPS.Text
         MainformRef.ConfigFile.Game = RomName
-
+        MainformRef.ConfigFile.ReplayFile = ""
         If cbHostType.Text = "Audio Sync" Then HostType = "1"
 
         MainformRef.ConfigFile.HostType = HostType
         MainformRef.ConfigFile.SaveFile()
 
-        MainformRef.NullDCLauncher.LaunchDC(MainformRef.ConfigFile.Game)
+        MainformRef.NullDCLauncher.LaunchDC(MainformRef.ConfigFile.Game, cbRegion.Text)
         Me.Close()
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        frmDelayHelp.Show()
+        If Not Application.OpenForms().OfType(Of frmDelayHelp).Any Then
+            frmDelayHelp.Show(Me)
+        Else
+            frmDelayHelp.Focus()
+        End If
     End Sub
 
     Private Sub tbFPS_KeyPress(sender As TextBox, e As KeyPressEventArgs) Handles tbFPS.KeyPress
@@ -137,6 +155,11 @@ Public Class frmHostPanel
     End Sub
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
-        frmLimiterHelp.Show()
+        If Not Application.OpenForms().OfType(Of frmLimiterHelp).Any Then
+            frmLimiterHelp.Show(Me)
+        Else
+            frmLimiterHelp.Focus()
+        End If
+
     End Sub
 End Class

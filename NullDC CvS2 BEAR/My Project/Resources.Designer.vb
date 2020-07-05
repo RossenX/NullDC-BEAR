@@ -61,12 +61,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property be() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("be", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property Beta() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Beta", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property bj() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("bj", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property bu() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("bu", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
         
@@ -117,16 +147,6 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("MainMenuBackground", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property naomi_nvmem_fresh() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("naomi_nvmem_fresh", resourceCulture)
-                Return CType(obj,Byte())
             End Get
         End Property
         

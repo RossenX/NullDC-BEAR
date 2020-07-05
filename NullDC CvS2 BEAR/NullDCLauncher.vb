@@ -7,14 +7,14 @@ Imports System.Text
 
 Public Class NullDCLauncher
 
-
+    Public Region As String
     Public NullDCproc As Process
+    Public DoNotSendNextExitEvent As Boolean
     Dim AutoHotkey As Process
     Dim SingleInstance As Boolean = True
-    Public DoNotSendNextExitEvent As Boolean
-
     Dim MainFormRef As frmMain
     Dim LoadRomThread As Thread
+
     ' ------------------------------------
 
 #Region "API"
@@ -40,8 +40,6 @@ Public Class NullDCLauncher
     Public Shared Function FindWindowW(<MarshalAs(UnmanagedType.LPTStr)> ByVal lpClassName As String, <MarshalAs(UnmanagedType.LPTStr)> ByVal lpWindowName As String) As IntPtr
     End Function
 
-
-
     <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
     Private Shared Function GetDlgItem(ByVal hDlg As IntPtr, id As Integer) As IntPtr
     End Function
@@ -64,6 +62,7 @@ Public Class NullDCLauncher
     Public Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As IntPtr, ByVal lpString As System.Text.StringBuilder, ByVal cch As Integer) As Integer
     Public Declare Function SetForegroundWindow Lib "user32.dll" (ByVal hwnd As Integer) As Integer
     Public Declare Function MoveWindow Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal X As Int32, ByVal Y As Int32, ByVal nWidth As Int32, ByVal nHeight As Int32, ByVal bRepaint As Boolean) As Boolean
+    Declare Function BlockInput Lib "user32" (ByVal fBlockIt As Boolean) As Boolean
 
     <DllImport("user32.dll", SetLastError:=True)>
     Private Shared Function GetForegroundWindow() As IntPtr
@@ -135,7 +134,7 @@ Public Class NullDCLauncher
 
             If DialogLoopSleepTimer > 2000 Then
                 MsgBox("Rom Loader Failed")
-                NullDCproc.CloseMainWindow()
+                NullDCproc.Kill()
                 Exit Sub
             End If
 
@@ -180,7 +179,8 @@ Public Class NullDCLauncher
         MainFormRef = mf
     End Sub
 
-    Public Sub LaunchDC(ByVal RomName As String)
+    Public Sub LaunchDC(ByVal RomName As String, ByRef _region As String)
+        Region = _region
         If MainFormRef.IsNullDCRunning And SingleInstance Then
             frmMain.NotificationForm.ShowMessage("An Instance of NullDC online is already running.")
             Exit Sub
@@ -192,6 +192,12 @@ Public Class NullDCLauncher
 
     Private Sub EmulatorExited()
         Console.Write("Emulator Exited")
+        If Not MainFormRef.Bearplay Is Nothing Then
+            MainFormRef.Bearplay.CleanUp(MainFormRef.ConfigFile.Game)
+            MainFormRef.Bearplay = Nothing
+        End If
+
+
         While MainFormRef.IsNullDCRunning
             Thread.Sleep(10)
         End While
@@ -210,21 +216,31 @@ Public Class NullDCLauncher
         End If
         DoNotSendNextExitEvent = False
 
+        ' Set State Back to None and Idle since Emulator Closed
+        MainFormRef.ConfigFile.Game = "None"
+        MainFormRef.ConfigFile.Status = "Idle"
+        MainFormRef.ConfigFile.SaveFile()
+        MainFormRef.RemoveChallenger()
+
     End Sub
 
-    Private Function StartEmulator(ByVal RomName As String) As Boolean
+    Private Sub StartEmulator(ByVal RomName As String)
         ' Override settings to new ones to make sure everyone matches
         File.WriteAllBytes(MainFormRef.NullDCPath & "\nullDC.cfg", My.Resources.nullDC)
         ' Change what settings need changing inthe cfg
         ChangeSettings()
 
+        ' Just a sanity check so bearplay only runs on an online game.
+        If MainFormRef.ConfigFile.RecordReplay = 1 And (MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Client") Then
+            MainFormRef.Bearplay = New BearPlay(Region)
+        End If
+
         NullDCproc = Process.Start(MainFormRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
         LoadRom(MainFormRef.NullDCPath & MainFormRef.GamesList(RomName)(1))
-        Return True
 
-    End Function
+    End Sub
 
     Private Shared Sub OutputHandler(sendingProcess As Object, outLine As DataReceivedEventArgs)
         If Not String.IsNullOrEmpty(outLine.Data) Then
@@ -235,11 +251,16 @@ Public Class NullDCLauncher
     Private Sub GameLaunched()
         ' If we're a host then send out call to my partner to join
         If MainFormRef.ConfigFile.Status = "Hosting" And Not MainFormRef.Challenger Is Nothing Then
-            MainFormRef.NetworkHandler.SendMessage("$," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & MainFormRef.ConfigFile.Game & "," & MainFormRef.ConfigFile.Delay, MainFormRef.Challenger.ip)
+            MainFormRef.NetworkHandler.SendMessage("$," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & MainFormRef.ConfigFile.Game & "," & MainFormRef.ConfigFile.Delay & "," & Region, MainFormRef.Challenger.ip)
         End If
 
-    End Sub
+        ' Game is loaded, might as well delete the boot don't need it anymore
+        If File.Exists(MainFormRef.NullDCPath & "\data\naomi_boot.bin") Then
+            File.SetAttributes(MainFormRef.NullDCPath & "\data\naomi_boot.bin", FileAttributes.Normal)
+            File.Delete(MainFormRef.NullDCPath & "\data\naomi_boot.bin")
 
+        End If
+    End Sub
 
     Private Sub RestoreNvmem() ' Mostly so it doesn't fuck up blue's launcher
         Dim nvmemPath = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin"
@@ -291,6 +312,7 @@ Public Class NullDCLauncher
 
             End If
         Catch ex As Exception
+            'In case nvmrm couldn't be deleted for w.e reason just give em a message about it and continue
             MsgBox("Couldn't backup nvmem: " & ex.Message)
 
         End Try
@@ -298,6 +320,7 @@ Public Class NullDCLauncher
     End Sub
 
     Private Sub DealWithBios()
+        ' Boot Dealing
         Dim naomi_boot_Path As String = MainFormRef.NullDCPath & "\data\naomi_boot.bin"
         Dim naomi_boot_Path_Inactive As String = MainFormRef.NullDCPath & "\data\naomi_boot.bin.inactive"
 
@@ -318,6 +341,18 @@ Public Class NullDCLauncher
 
         End If
 
+        ' Make sure there's SOME kinda bios in there
+        Dim naomi_bios_path As String = MainFormRef.NullDCPath & "\data\naomi_bios.bin"
+        If Not File.Exists(naomi_bios_path) Then MainFormRef.UnzipResToDir(My.Resources.bj, "naomi_bios.bin", MainFormRef.NullDCPath & "\data")
+
+        ' Now that we've taken care of BM's launcher bios stuff, lets check our own bios and what we need to do
+        If Not Region = "JPN" Then ' Only check if it's NOT the JPN bios because those are the ones that use naomi_boot
+            Dim BiosToUse = My.Resources.bu
+            If Region = "EUR" Then BiosToUse = My.Resources.be
+            MainFormRef.UnzipResToDir(BiosToUse, "naomi_boot.bin", MainFormRef.NullDCPath & "\data")
+
+        End If
+
     End Sub
 
     Private Sub ChangeSettings()
@@ -325,6 +360,10 @@ Public Class NullDCLauncher
         ' naomi_boot.bin.inactive
         DealWithBios()
         BackupNvmem()
+
+        ' Check if this is a Replay
+        Dim IsReplay As Boolean = False
+        If Not MainFormRef.ConfigFile.ReplayFile = "" Then IsReplay = True
 
         ' Wait for nvmem to be dealt with
         Dim SleepTime = 0
@@ -338,14 +377,21 @@ Public Class NullDCLauncher
         Dim thefile = MainFormRef.NullDCPath & "\antilag.cfg"
         Dim FPSLimit = "90"
         Dim FPSLimiter = "0"
-        If MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Offline" Then
-            If MainFormRef.ConfigFile.HostType = "0" Then
-                FPSLimiter = "0"
-                FPSLimit = MainFormRef.ConfigFile.FPSLimit
-            Else
-                FPSLimiter = "2"
+
+        If IsReplay Then ' Replays are always in Audio Sync mode for best clarity
+            FPSLimiter = "2"
+            FPSLimit = "90" ' Apperanltly replays can't go faster than 90fps
+        Else
+            If MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Offline" Then
+                If MainFormRef.ConfigFile.HostType = "0" Then
+                    FPSLimiter = "0"
+                    FPSLimit = MainFormRef.ConfigFile.FPSLimit
+                Else
+                    FPSLimiter = "2"
+                End If
             End If
         End If
+
         File.WriteAllLines(thefile, {"[config]", "RenderAheadLimit=0", "FPSlimit=" & FPSLimit})
 
         thefile = MainFormRef.NullDCPath & "\nullDC.cfg"
@@ -362,9 +408,32 @@ Public Class NullDCLauncher
                 If Not MainFormRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
                 lines(linenumber + 1) = "Enabled=" & EnableOnline
                 lines(linenumber + 2) = "Hosting=" & IsHosting
-                lines(linenumber + 3) = "Host=" & MainFormRef.ConfigFile.Host
-                lines(linenumber + 4) = "Port=" & MainFormRef.ConfigFile.Port
+
+                Dim HostToUse = MainFormRef.ConfigFile.Host
+                Dim PortToUse = MainFormRef.ConfigFile.Port
+
+                If MainFormRef.ConfigFile.RecordReplay = 1 Then
+                    HostToUse = MainFormRef.ConfigFile.IP
+                End If
+
+                lines(linenumber + 3) = "Host=" & HostToUse
+
+                If MainFormRef.ConfigFile.RecordReplay = 1 And MainFormRef.ConfigFile.Status = "Hosting" Then
+                    PortToUse = CInt(PortToUse) + 1
+                End If
+
+                lines(linenumber + 4) = "Port=" & PortToUse
+
                 lines(linenumber + 5) = "Delay=" & MainFormRef.ConfigFile.Delay
+
+            End If
+
+            If IsReplay Then
+                If line.StartsWith("[Replay]") Then
+                    lines(linenumber + 1) = "Enabled=1"
+                    lines(linenumber + 2) = "Playback=1"
+                    lines(linenumber + 3) = "File=" & MainFormRef.ConfigFile.ReplayFile
+                End If
             End If
 
             ' Audio Sync on host only
@@ -378,6 +447,7 @@ Public Class NullDCLauncher
                 If frmMain.ConfigFile.UseRemap = "0" Then KeyboardOrJoystick = "joy1"
                 lines(linenumber) = "player1=" & KeyboardOrJoystick
             End If
+
             If line.StartsWith("Emulator.NoConsole=") Then
                 Dim con As String = "1"
                 If MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Offline" Then con = "0"
@@ -388,6 +458,14 @@ Public Class NullDCLauncher
         Next
         'Emulator.NoConsole
         File.WriteAllLines(thefile, lines)
+
+        ' Stuff to help Casters
+        'Dim Lines As String()
+        If IsReplay Then
+            Dim ReplayFile = File.ReadAllText(MainFormRef.ConfigFile.ReplayFile)
+            File.WriteAllLines(MainFormRef.NullDCPath & "\replays\Player1Name.txt", {ReplayFile.Split("|")(1)})
+            File.WriteAllLines(MainFormRef.NullDCPath & "\replays\Player2Name.txt", {ReplayFile.Split("|")(2)})
+        End If
 
     End Sub
 

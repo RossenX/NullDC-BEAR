@@ -31,6 +31,9 @@ Partial Class frmChallengeGameSelect
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbHostType = New System.Windows.Forms.ComboBox()
+        Me.btnDLC = New System.Windows.Forms.Button()
+        Me.cbRegion = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cbGameList
@@ -134,13 +137,51 @@ Partial Class frmChallengeGameSelect
         Me.cbHostType.Size = New System.Drawing.Size(77, 21)
         Me.cbHostType.TabIndex = 17
         '
+        'btnDLC
+        '
+        Me.btnDLC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnDLC.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDLC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDLC.Location = New System.Drawing.Point(70, 235)
+        Me.btnDLC.Name = "btnDLC"
+        Me.btnDLC.Size = New System.Drawing.Size(142, 28)
+        Me.btnDLC.TabIndex = 22
+        Me.btnDLC.Text = "Get More Games"
+        Me.btnDLC.UseVisualStyleBackColor = False
+        '
+        'cbRegion
+        '
+        Me.cbRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbRegion.FormattingEnabled = True
+        Me.cbRegion.Items.AddRange(New Object() {"JPN", "USA", "EUR"})
+        Me.cbRegion.Location = New System.Drawing.Point(334, 235)
+        Me.cbRegion.Name = "cbRegion"
+        Me.cbRegion.Size = New System.Drawing.Size(52, 21)
+        Me.cbRegion.TabIndex = 23
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.Label4.Location = New System.Drawing.Point(274, 238)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(58, 16)
+        Me.Label4.TabIndex = 24
+        Me.Label4.Text = "Region"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'frmChallengeGameSelect
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.SingleSquare
         Me.ClientSize = New System.Drawing.Size(450, 450)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.cbRegion)
+        Me.Controls.Add(Me.btnDLC)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.tbFPS)
         Me.Controls.Add(Me.Button2)
@@ -169,4 +210,7 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents Button2 As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents cbHostType As ComboBox
+    Friend WithEvents btnDLC As Button
+    Friend WithEvents cbRegion As ComboBox
+    Friend WithEvents Label4 As Label
 End Class

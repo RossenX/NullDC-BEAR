@@ -6,14 +6,12 @@ Imports System.Timers
 Public Class frmCalibration
 
     Dim CalibrationThread As Threading.Thread
-    Dim MainformRef As frmMain
     ' Current, Idle, Min, Max, Last Frame
     Dim AxixData As New Dictionary(Of String, Array)
     Dim PoVRestInit As Decimal = 0
 
     Public Sub New(ByRef _mainwindow As frmMain)
         InitializeComponent()
-        MainformRef = _mainwindow
 
         AxixData.Add("x", {0, 0, 0, 0, 0})
         AxixData.Add("y", {0, 0, 0, 0, 0})

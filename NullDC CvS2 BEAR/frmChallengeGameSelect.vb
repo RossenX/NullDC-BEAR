@@ -1,20 +1,28 @@
 ﻿Public Class frmChallengeGameSelect
 
     Public _Challenger As NullDCPlayer
-    Dim MainFormRef As frmMain
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
-        MainFormRef = _mf
     End Sub
 
     Public Sub StartChallenge(Optional ByVal _challenger As NullDCPlayer = Nothing)
         Me._Challenger = _challenger
-        Me.Show(MainFormRef)
+
+        If Me.Visible Then
+            Me.Focus()
+        Else
+            Me.Show(MainFormRef)
+        End If
 
     End Sub
 
     Private Sub btnLetsGo_Click(sender As Object, e As EventArgs) Handles btnLetsGo.Click
+        If cbGameList.Text = "" Then
+            MainFormRef.NotificationForm.ShowMessage("No Game Selected")
+            Exit Sub
+        End If
+
         If _Challenger Is Nothing Then
             StartOffline()
         Else
@@ -32,20 +40,20 @@
         MainFormRef.ConfigFile.HostType = HostType
         MainFormRef.ConfigFile.Status = "Offline"
         MainFormRef.ConfigFile.Game = cbGameList.SelectedValue
+        MainFormRef.ConfigFile.ReplayFile = ""
         MainFormRef.ConfigFile.SaveFile()
 
-        MainFormRef.NullDCLauncher.LaunchDC(cbGameList.SelectedValue)
+        MainformRef.NullDCLauncher.LaunchDC(cbGameList.SelectedValue, cbRegion.Text)
         Me.Close()
 
     End Sub
 
     Public Sub StartOnline()
         Dim GameRom As String = cbGameList.SelectedValue
-        MainFormRef.Challenger = New NullDCPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, GameRom)
-        'MainFormRef.NetworkHandler.SendMessage("!," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & GameRom & ",1", _Challenger.ip)
-        MainFormRef.ChallengeSentForm.StartChallenge(MainFormRef.Challenger)
-
+        MainformRef.Challenger = New NullDCPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, GameRom)
+        MainformRef.ChallengeSentForm.StartChallenge(MainformRef.Challenger)
         Me.Close()
+
     End Sub
 
     Private Sub frmChallengeGameSelect_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -56,7 +64,7 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
-
+        MainformRef.Focus()
     End Sub
 
     Private Sub frmChallengeGameSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -87,22 +95,31 @@
                 cbHostType.Visible = False
                 Button2.Visible = False
                 Label2.Visible = False
+                cbRegion.Visible = False
+                Label4.Visible = False
 
             Else
                 cbHostType.Visible = True
                 cbHostType.Visible = True
                 Button2.Visible = True
                 Label2.Visible = True
+                cbRegion.Visible = True
+                Label4.Visible = True
 
             End If
 
-            cbGameList.SelectedIndex = 0
+            If cbRegion.Text = "" Then
+                cbRegion.SelectedIndex = 0
+            End If
+
+            If cbGameList.Items.Count > 0 Then cbGameList.SelectedIndex = 0
             cbHostType.SelectedIndex = 0
             If MainFormRef.ConfigFile.HostType = "1" Then
                 cbHostType.SelectedIndex = 0
             Else
                 cbHostType.SelectedIndex = 1
             End If
+
             tbFPS.Text = MainFormRef.ConfigFile.FPSLimit
             Me.CenterToParent()
         Else
@@ -112,8 +129,21 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        frmLimiterHelp.Show()
+        If Not Application.OpenForms().OfType(Of frmLimiterHelp).Any Then
+            frmLimiterHelp.Show(Me)
+        Else
+            frmLimiterHelp.Focus()
+        End If
+    End Sub
 
+    Private Sub btnDLC_Click(sender As Object, e As EventArgs) Handles btnDLC.Click
+        If Not Application.OpenForms().OfType(Of frmDLC).Any Then
+            frmDLC.Show(Me)
+            Me.Close()
+        Else
+            frmDLC.Focus()
+            Me.Close()
+        End If
     End Sub
 
 End Class

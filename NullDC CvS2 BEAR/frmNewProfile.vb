@@ -1,9 +1,7 @@
 ﻿Public Class frmNewProfile
-    Dim MainformRef As frmMain
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
-        MainformRef = _mf
     End Sub
 
     Private Sub frmNewProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -6,18 +6,16 @@ Imports System.Windows
 Public Class frmChallenge
 
     Dim Timeout As Forms.Timer = New Forms.Timer
-    Dim MainFormRef As frmMain
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
-        MainFormRef = _mf
 
     End Sub
 
     Private Sub btnDeny_Click(sender As Object, e As EventArgs) Handles btnDeny.Click
         MainFormRef.NetworkHandler.SendMessage(">,D", MainFormRef.Challenger.ip)
         MainFormRef.EndSession("Denied")
-
+        MainformRef.Focus()
     End Sub
 
     Public Sub StartChallenge(ByRef _challenger As NullDCPlayer)
@@ -42,6 +40,9 @@ Public Class frmChallenge
         Dim INVOKATION As EndSession_delegate = AddressOf MainFormRef.EndSession
         MainFormRef.Invoke(INVOKATION, {"TO", Nothing})
 
+        frmMain.ConfigFile.Game = "None"
+        frmMain.ConfigFile.Status = "Idle"
+        frmMain.ConfigFile.SaveFile()
     End Sub
 
 #Region "Moving Window"
@@ -91,6 +92,7 @@ Public Class frmChallenge
             lbChallengeText.Text = MainFormRef.Challenger.name & " Has challenged you to " & vbCrLf & GameName
         Else
             Timeout.Stop()
+
         End If
 
     End Sub

@@ -5,7 +5,6 @@ Imports System.Xml
 Public Class frmKeyMapping
 
     Dim CalibrationForm As frmCalibration
-    Dim MainformRef As frmMain
     Dim RebindAllThread As Thread
 
     Public Rebinding As Boolean = False
@@ -16,7 +15,6 @@ Public Class frmKeyMapping
 
     Public Sub New(ByRef MainForm)
         InitializeComponent()
-        MainformRef = MainForm
         CalibrationForm = New frmCalibration(MainForm)
     End Sub
 
@@ -199,8 +197,8 @@ Public Class frmKeyMapping
     End Sub
 
     Private Sub btnDone_Click(sender As Object, e As EventArgs) Handles btnDone.Click
-        MainformRef.Focus()
         Me.Close()
+        MainformRef.Focus()
     End Sub
 
     Private Sub btnOnOff_Click(sender As Object, e As EventArgs) Handles btnOnOff.Click

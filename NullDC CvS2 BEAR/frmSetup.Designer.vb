@@ -69,7 +69,7 @@ Partial Class frmSetup
         Me.tcSetup.Controls.Add(Me.TabPage1)
         Me.tcSetup.Controls.Add(Me.TabPage2)
         Me.tcSetup.Controls.Add(Me.TabPage3)
-        Me.tcSetup.Location = New System.Drawing.Point(-4, -23)
+        Me.tcSetup.Location = New System.Drawing.Point(-4, -22)
         Me.tcSetup.Margin = New System.Windows.Forms.Padding(0)
         Me.tcSetup.Name = "tcSetup"
         Me.tcSetup.SelectedIndex = 0
@@ -92,7 +92,7 @@ Partial Class frmSetup
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(164, 191)
+        Me.Button1.Location = New System.Drawing.Point(164, 199)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(164, 23)
         Me.Button1.TabIndex = 3
@@ -101,7 +101,7 @@ Partial Class frmSetup
         '
         'btnT1B1
         '
-        Me.btnT1B1.Location = New System.Drawing.Point(9, 191)
+        Me.btnT1B1.Location = New System.Drawing.Point(9, 201)
         Me.btnT1B1.Name = "btnT1B1"
         Me.btnT1B1.Size = New System.Drawing.Size(149, 23)
         Me.btnT1B1.TabIndex = 2
@@ -110,7 +110,7 @@ Partial Class frmSetup
         '
         'btnT1B2
         '
-        Me.btnT1B2.Location = New System.Drawing.Point(416, 191)
+        Me.btnT1B2.Location = New System.Drawing.Point(419, 199)
         Me.btnT1B2.Name = "btnT1B2"
         Me.btnT1B2.Size = New System.Drawing.Size(75, 23)
         Me.btnT1B2.TabIndex = 1
@@ -297,8 +297,8 @@ Partial Class frmSetup
         '
         'frmSetup
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(787, 248)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PictureBox1)

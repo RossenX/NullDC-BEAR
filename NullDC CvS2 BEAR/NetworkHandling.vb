@@ -52,9 +52,6 @@ Public Class NetworkHandling
         InitializeReceiver()
     End Sub
 
-
-
-
     Public Sub SendMessage(ByRef message As String, Optional SendtoIP As String = "255.255.255.255")
         Console.WriteLine("<-SendMessage->" & message & "->" & SendtoIP)
         Dim toSend As String = MainFormRef.ConfigFile.Version & ":" & message
@@ -106,7 +103,7 @@ Public Class NetworkHandling
 
         If Not MainFormRef.Challenger Is Nothing And Not message.StartsWith("?") Then ' Only accept who is messages from anyone that is not your challenger
             ' Message is not from challanger
-            If Not MainFormRef.Challenger.ip = senderip Then
+            If Not MainFormRef.Challenger.ip = senderip And Not MainFormRef.ConfigFile.IP = senderip Then
                 Console.WriteLine("<-DENIED->")
                 SendMessage(">,BB", senderip)
                 Exit Sub
@@ -183,7 +180,7 @@ Public Class NetworkHandling
                     MainFormRef.Challenger = New NullDCPlayer(Split(1), Split(2), Split(3), Split(4), Split(5))
                     'Dim INVOKATION As SetChallenger_delegate = AddressOf MainFormRef.SetChallenger
                     'MainFormRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), Split(5)})
-                    SendMessage("$," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & MainFormRef.ConfigFile.Game & "," & MainFormRef.ConfigFile.Delay, senderip)
+                    SendMessage("$," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & MainFormRef.ConfigFile.Game & "," & MainFormRef.ConfigFile.Delay & "," & MainFormRef.NullDCLauncher.Region, senderip)
 
                 Else
                     SendMessage(">,HO", senderip) ' No Longer Hosting
@@ -228,12 +225,12 @@ Public Class NetworkHandling
             Exit Sub
         End If
 
-        ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5)
+        ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5),<region>(6)
         If message.StartsWith("$") Then
             Console.WriteLine("<-Host Started->" & message)
             Dim INVOKATION As JoinHost_delegate = AddressOf MainFormRef.JoinHost
             Dim delay As Int16 = CInt(Split(5))
-            MainFormRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), delay})
+            MainFormRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), delay, Split(6)})
             Exit Sub
         End If
 

@@ -2,14 +2,11 @@
 
 Public Class frmChallengeSent
 
-    Dim MainFormRef As frmMain
-
 #Region "Properties"
 #End Region
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
-        MainFormRef = _mf
     End Sub
 
     Public Sub StartChallenge(ByVal _challanger As NullDCPlayer)
@@ -28,6 +25,7 @@ Public Class frmChallengeSent
     Private Sub btnNope_Click(sender As Object, e As EventArgs) Handles btnNope.Click
         MainFormRef.NetworkHandler.SendMessage(">,C", MainFormRef.Challenger.ip)
         MainFormRef.EndSession("Denied")
+        MainformRef.Focus()
     End Sub
 
 #Region "Moving Window"
