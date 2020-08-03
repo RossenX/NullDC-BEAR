@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="DreamcastLauncher.vb" />
     <Compile Include="frmCalibration.Designer.vb">
       <DependentUpon>frmCalibration.vb</DependentUpon>
     </Compile>
@@ -246,7 +247,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="NetworkHandling.vb" />
-    <Compile Include="NullDCLauncher.vb" />
+    <Compile Include="NaomiLauncher.vb" />
     <Compile Include="Rx.vb" />
     <Compile Include="SimpleProgressBar.Designer.vb">
       <DependentUpon>SimpleProgressBar.vb</DependentUpon>
@@ -384,6 +385,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Beta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BEARJamma_Win32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BEARPLAYlines.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

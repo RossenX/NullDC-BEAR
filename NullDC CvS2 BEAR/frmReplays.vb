@@ -9,7 +9,7 @@ Public Class frmReplays
 
         If Not Directory.Exists(MainformRef.NullDCPath & "\replays") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\replays")
 
-        OpenFileDialog.Filter = "Bear Replay (*.bearplay)|*.bearplay"
+        OpenFileDialog.Filter = "Bear Replay (*.bearplay2)|*.bearplay2"
 
         If MainformRef.ConfigFile.RecordReplay = 1 Then
             btnOn.BackColor = Color.Green
@@ -24,7 +24,7 @@ Public Class frmReplays
     End Sub
 
     Private Sub GetReplayList()
-        Dim files As String() = Directory.GetFiles(MainformRef.NullDCPath & "\replays", "*.bearplay")
+        Dim files As String() = Directory.GetFiles(MainformRef.NullDCPath & "\replays", "*.bearplay2")
         lvReplays.Items.Clear()
 
         For Each _bearplay In files
@@ -36,7 +36,7 @@ Public Class frmReplays
                 listviewItem.SubItems.Add(FileStringSplitUp(1))
                 listviewItem.SubItems.Add(FileStringSplitUp(2))
                 listviewItem.SubItems.Add(FileStringSplitUp(3) & "|" & FileStringSplitUp(4))
-                listviewItem.SubItems.Add(FileStringSplitUp(5))
+                listviewItem.SubItems.Add(FileStringSplitUp(6))
                 lvReplays.Items.Add(listviewItem)
             Catch ex As Exception
 
@@ -67,7 +67,7 @@ Public Class frmReplays
     End Sub
 
     Private Sub btnOn_Click(sender As Object, e As EventArgs) Handles btnOn.Click
-        OpenFileDialog.Filter = "Bear Replay (*.bearplay)|*.bearplay"
+        OpenFileDialog.Filter = "Bear Replay (*.bearplay2)|*.bearplay2"
 
         If MainformRef.ConfigFile.RecordReplay = 1 Then
             btnOn.BackColor = Color.Red
@@ -101,13 +101,15 @@ Public Class frmReplays
                 Exit Sub
             End If
 
-            MainformRef.ConfigFile.Status = "Offline"
+            MainformRef.ConfigFile.Status = "Spectator"
             MainformRef.ConfigFile.Game = FileStringSplitUp(4)
             MainformRef.ConfigFile.ReplayFile = ReplayPath
             MainformRef.ConfigFile.SaveFile()
-            MainformRef.NullDCLauncher.LaunchDC(FileStringSplitUp(4), FileStringSplitUp(7))
+            MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(1)
+            MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(2)
+            MainformRef.NullDCLauncher.LaunchDC(FileStringSplitUp(4), FileStringSplitUp(5))
         Catch ex As Exception
-            MainformRef.ConfigFile.Status = "Idle"
+            MainformRef.ConfigFile.Status = MainformRef.cbStatus.Text
             MainformRef.ConfigFile.Game = "None"
             MainformRef.ConfigFile.ReplayFile = ""
             MainformRef.ConfigFile.SaveFile()

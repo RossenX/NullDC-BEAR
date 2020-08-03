@@ -24,7 +24,7 @@ Public Class frmUpdate
             DownloadClient.Credentials = New NetworkCredential()
             DownloadClient.DownloadFileTaskAsync(remoteUri, My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC.BEAR.exe")
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox("Update Error:" & ex.Message)
             End
         End Try
     End Sub

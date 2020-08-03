@@ -16,6 +16,7 @@ Public Class frmKeyMapping
     Public Sub New(ByRef MainForm)
         InitializeComponent()
         CalibrationForm = New frmCalibration(MainForm)
+        Me.Show()
     End Sub
 
     Private Sub StartKeyBind(_KeyToBind As String)
@@ -164,7 +165,8 @@ Public Class frmKeyMapping
 
         Dim ButtonToChange As Button = Nothing
         For Each key As KeyBind In MainformRef.InputHandler.KeybindConfigs
-            If key.Rebind.ToLower = kc.ConvertToString(e.KeyCode).ToLower Then
+            If key.Rebind.Length > 1 Then Continue For
+            If key.Rebind(0) = e.KeyCode Then
                 ButtonToChange = Me.Controls.Find("btn" & key.Name, True)(0)
             End If
         Next
@@ -180,7 +182,8 @@ Public Class frmKeyMapping
 
         Dim ButtonToChange As Button = Nothing
         For Each key As KeyBind In MainformRef.InputHandler.KeybindConfigs
-            If key.Rebind.ToLower = kc.ConvertToString(e.KeyCode).ToLower Then
+            If key.Rebind.Length > 1 Then Continue For
+            If key.Rebind(0) = e.KeyCode Then
                 ButtonToChange = Me.Controls.Find("btn" & key.Name, True)(0)
             End If
         Next
@@ -360,10 +363,6 @@ Public Class frmKeyMapping
         For Each KeyBoardThing In MainformRef.InputHandler.KeyBoardConfigs
             Me.Controls.Find("btn" & KeyBoardThing.Key, True)(0).BackColor = Color.White
         Next
-
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
 

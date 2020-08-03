@@ -112,9 +112,13 @@
                 cbRegion.SelectedIndex = 0
             End If
 
-            If cbGameList.Items.Count > 0 Then cbGameList.SelectedIndex = 0
+            If cbGameList.Items.Count > 0 Then
+                'cbGameList.SelectedIndex = 0
+            End If
+
             cbHostType.SelectedIndex = 0
-            If MainFormRef.ConfigFile.HostType = "1" Then
+
+            If MainformRef.ConfigFile.HostType = "1" Then
                 cbHostType.SelectedIndex = 0
             Else
                 cbHostType.SelectedIndex = 1

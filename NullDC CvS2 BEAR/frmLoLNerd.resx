@@ -132,23 +132,13 @@ So here's what this program does and what files it'll create and what they do an
     
 2. File Here's a list of all the files it'll create/alter in case you ever want to remove all traces of my beautiful creation.
     All these are in the nullDC folder.
-
-2.1. nullDC.cfg -&gt; Will be overriden every time you play a game with optimized settings to minimize desync and lag.
-    ALL the settings in nullDC have been tested and tried and every single one of those should stay as they are.
-    Odd settings you might wonder wtf about:
-        Rendering at half resolution
-            The way nullDC works is as you maximize the game the resolution WILL INCREASE unlike most emulators. 
-            So i half the resolution for better performance and unless you play on a 640 x 480 monitor you'll be getting a good upscale when you maximize the window.
-        Sometimes audio sync is on, why?
-            After trying a ton of stuff i found that keeping audio sync on the host so they keep track of all the frames being rendered and the clients follow the host results in
-            much fewer desync issues. You can choose frame limit in the host options though, so you got both options.
             
-2.2. antilag.cfg -&gt; this is the config file for the fps limiter
-2.3. d3d9.dll -&gt; FPS Limiter only used by the clients and in FPS limit host mode.
-2.4. KeyMapReBinds.xml -&gt; Keeps the keybind settings
-2.5. NullDC_BEAR.cfg -&gt; Holds BEAR settings
-2.6. That's all the files this program will create/alter
-2.7 XInputInterface.dll\XInputDotNetPure.dll\OpenTK.dll -&gt; Input Libraries for controller support
+2.1. antilag.cfg -&gt; this is the config file for the fps limiter
+2.2. d3d9.dll -&gt; FPS Limiter only used by the clients and in FPS limit host mode.
+2.3. KeyMapReBinds.xml -&gt; Keeps the keybind settings
+2.4. NullDC_BEAR.cfg -&gt; Holds BEAR settings
+2.5. That's all the files this program will create/alter
+2.6 XInputInterface.dll\XInputDotNetPure.dll\OpenTK.dll\SDL2.dll\SDL2_net.dll -&gt; Input and network Libraries
 
 Aight well that's about the jist of it.
 TLDR: IT MAKE GEM EZER TO PLAY SO U CAN BEAT MOAR PEOPLE AND DO LESS NERD STUFF</value>

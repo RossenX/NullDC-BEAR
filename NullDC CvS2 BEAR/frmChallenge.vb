@@ -41,7 +41,7 @@ Public Class frmChallenge
         MainFormRef.Invoke(INVOKATION, {"TO", Nothing})
 
         frmMain.ConfigFile.Game = "None"
-        frmMain.ConfigFile.Status = "Idle"
+        frmMain.ConfigFile.Status = MainformRef.cbStatus.Text
         frmMain.ConfigFile.SaveFile()
     End Sub
 
@@ -87,7 +87,7 @@ Public Class frmChallenge
         If Visible Then
             My.Computer.Audio.Play(My.Resources.NewChallanger, AudioPlayMode.Background)
             Timeout.Interval = 10000
-            Timeout.Start()
+            'Timeout.Start()
             Dim GameName As String = MainFormRef.GamesList(MainFormRef.Challenger.game)(0)
             lbChallengeText.Text = MainFormRef.Challenger.name & " Has challenged you to " & vbCrLf & GameName
         Else

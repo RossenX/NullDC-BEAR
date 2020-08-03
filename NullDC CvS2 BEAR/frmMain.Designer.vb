@@ -49,6 +49,9 @@ Partial Class frmMain
         Me.niBEAR = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.btnReplay = New System.Windows.Forms.Button()
         Me.btnDLC = New System.Windows.Forms.Button()
+        Me.btnPatreon = New System.Windows.Forms.Button()
+        Me.cbStatus = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -58,14 +61,13 @@ Partial Class frmMain
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.Button1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(318, 297)
+        Me.Button1.Location = New System.Drawing.Point(388, 442)
         Me.Button1.Margin = New System.Windows.Forms.Padding(0)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(106, 26)
+        Me.Button1.Size = New System.Drawing.Size(75, 26)
         Me.Button1.TabIndex = 2
         Me.Button1.Text = "Controls"
         Me.Button1.UseVisualStyleBackColor = False
@@ -130,8 +132,7 @@ Partial Class frmMain
         Me.TableLayoutPanel4.Controls.Add(Me.btnSearch, 0, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.BtnJoin, 1, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.btnOffline, 4, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.btnHost, 2, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.Button1, 3, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.btnHost, 3, 1)
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(38, 93)
         Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
@@ -153,7 +154,7 @@ Partial Class frmMain
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(106, 26)
         Me.btnSearch.TabIndex = 4
-        Me.btnSearch.Text = "Refresh"
+        Me.btnSearch.Text = "Refresh ↺"
         Me.btnSearch.UseVisualStyleBackColor = False
         '
         'BtnJoin
@@ -183,7 +184,7 @@ Partial Class frmMain
         Me.btnOffline.Name = "btnOffline"
         Me.btnOffline.Size = New System.Drawing.Size(109, 26)
         Me.btnOffline.TabIndex = 7
-        Me.btnOffline.Text = "Offline"
+        Me.btnOffline.Text = "Play Offline"
         Me.btnOffline.UseVisualStyleBackColor = False
         '
         'btnHost
@@ -193,7 +194,7 @@ Partial Class frmMain
         Me.btnHost.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnHost.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHost.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnHost.Location = New System.Drawing.Point(212, 297)
+        Me.btnHost.Location = New System.Drawing.Point(318, 297)
         Me.btnHost.Margin = New System.Windows.Forms.Padding(0)
         Me.btnHost.Name = "btnHost"
         Me.btnHost.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -208,11 +209,11 @@ Partial Class frmMain
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnExit.Location = New System.Drawing.Point(505, 420)
+        Me.btnExit.Location = New System.Drawing.Point(548, 30)
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(75, 23)
+        Me.btnExit.Size = New System.Drawing.Size(23, 23)
         Me.btnExit.TabIndex = 6
-        Me.btnExit.Text = "Exit"
+        Me.btnExit.Text = "X"
         Me.btnExit.UseVisualStyleBackColor = False
         '
         'btnMinimize
@@ -221,11 +222,11 @@ Partial Class frmMain
         Me.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnMinimize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMinimize.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnMinimize.Location = New System.Drawing.Point(23, 420)
+        Me.btnMinimize.Location = New System.Drawing.Point(519, 30)
         Me.btnMinimize.Name = "btnMinimize"
-        Me.btnMinimize.Size = New System.Drawing.Size(75, 23)
+        Me.btnMinimize.Size = New System.Drawing.Size(23, 23)
         Me.btnMinimize.TabIndex = 7
-        Me.btnMinimize.Text = "Minimize"
+        Me.btnMinimize.Text = "_"
         Me.btnMinimize.UseVisualStyleBackColor = False
         '
         'btnSetup
@@ -234,7 +235,7 @@ Partial Class frmMain
         Me.btnSetup.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSetup.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSetup.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnSetup.Location = New System.Drawing.Point(385, 420)
+        Me.btnSetup.Location = New System.Drawing.Point(388, 420)
         Me.btnSetup.Name = "btnSetup"
         Me.btnSetup.Size = New System.Drawing.Size(75, 23)
         Me.btnSetup.TabIndex = 8
@@ -337,7 +338,7 @@ Partial Class frmMain
         Me.imgBeta.BackColor = System.Drawing.Color.Transparent
         Me.imgBeta.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Beta
         Me.imgBeta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.imgBeta.Location = New System.Drawing.Point(331, -31)
+        Me.imgBeta.Location = New System.Drawing.Point(332, -28)
         Me.imgBeta.Name = "imgBeta"
         Me.imgBeta.Size = New System.Drawing.Size(182, 155)
         Me.imgBeta.TabIndex = 11
@@ -373,16 +374,54 @@ Partial Class frmMain
         Me.btnDLC.Text = "Free DLC"
         Me.btnDLC.UseVisualStyleBackColor = False
         '
+        'btnPatreon
+        '
+        Me.btnPatreon.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnPatreon.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnPatreon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPatreon.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
+        Me.btnPatreon.Location = New System.Drawing.Point(245, 442)
+        Me.btnPatreon.Name = "btnPatreon"
+        Me.btnPatreon.Size = New System.Drawing.Size(120, 23)
+        Me.btnPatreon.TabIndex = 14
+        Me.btnPatreon.Text = "Patreon o3o"
+        Me.btnPatreon.UseVisualStyleBackColor = False
+        '
+        'cbStatus
+        '
+        Me.cbStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbStatus.FormattingEnabled = True
+        Me.cbStatus.Items.AddRange(New Object() {"Idle", "DND", "Hidden"})
+        Me.cbStatus.Location = New System.Drawing.Point(37, 430)
+        Me.cbStatus.Name = "cbStatus"
+        Me.cbStatus.Size = New System.Drawing.Size(59, 21)
+        Me.cbStatus.TabIndex = 15
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Location = New System.Drawing.Point(37, 419)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(62, 13)
+        Me.Label3.TabIndex = 16
+        Me.Label3.Text = "Your Status"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.MainMenuBackground
-        Me.ClientSize = New System.Drawing.Size(602, 491)
+        Me.ClientSize = New System.Drawing.Size(610, 495)
         Me.Controls.Add(Me.btnDLC)
+        Me.Controls.Add(Me.cbStatus)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.btnPatreon)
         Me.Controls.Add(Me.btnReplay)
         Me.Controls.Add(Me.lbVer)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnSetup)
         Me.Controls.Add(Me.btnMinimize)
@@ -421,7 +460,6 @@ Partial Class frmMain
     Friend WithEvents btnSetup As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents lbVer As Label
@@ -430,4 +468,8 @@ Partial Class frmMain
     Friend WithEvents niBEAR As NotifyIcon
     Friend WithEvents btnReplay As Button
     Friend WithEvents btnDLC As Button
+    Friend WithEvents btnPatreon As Button
+    Friend WithEvents cbStatus As ComboBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label3 As Label
 End Class

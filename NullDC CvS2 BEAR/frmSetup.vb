@@ -10,18 +10,33 @@ Public Class frmSetup
             Label1.Refresh()
             btnT1B1.Visible = False
             btnT1B2.Text = "Yus"
+            tcSetup.SelectedIndex = 1
+
+            FillSettings()
+
         End If
         Me.CenterToParent()
     End Sub
 
-    Private Sub btnT1B2_Click(sender As Object, e As EventArgs) Handles btnT1B2.Click
-        tcSetup.SelectedIndex += 1
+    Private Sub FillSettings()
         tbPlayerName.Text = Rx.MainformRef.ConfigFile.Name
         For Each NetworkName As String In GetNetworkNames()
             cbNetworks.Items.Add(NetworkName)
         Next
         cbNetworks.Text = Rx.MainformRef.ConfigFile.Network
         tbPort.Text = Rx.MainformRef.ConfigFile.Port
+        If MainformRef.ConfigFile.AllowSpectators = 1 Then
+            cbAllowSpectators.Text = "Yes"
+        Else
+            cbAllowSpectators.Text = "No"
+        End If
+    End Sub
+
+
+    Private Sub btnT1B2_Click(sender As Object, e As EventArgs) Handles btnT1B2.Click
+        tcSetup.SelectedIndex += 1
+        FillSettings()
+
     End Sub
 
     Private Function GetNetworkNames() As ArrayList
@@ -70,7 +85,8 @@ Public Class frmSetup
         Next
 
         Rx.MainformRef.ConfigFile.SaveFile()
-        tcSetup.SelectedIndex += 1
+        Me.Close()
+        'tcSetup.SelectedIndex += 1
     End Sub
 
     Private Sub btnT3B2_Click(sender As Object, e As EventArgs) Handles btnT3B2.Click
@@ -125,6 +141,25 @@ Public Class frmSetup
         processStartInfo.Arguments = processStartInfo.Arguments &
                                      String.Format(" & netsh advfirewall firewall delete rule name=""NullDC"" program=""{0}"" & netsh advfirewall firewall delete rule name=""nulldc_win32_release-notrace.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""NullDC"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""NullDC"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\nullDC_Win32_Release-NoTrace.exe")
         Dim Firewall = Process.Start(processStartInfo)
+
+    End Sub
+
+    Private Sub cbAllowSpectators_SelectedIndexChanged(sender As ComboBox, e As EventArgs) Handles cbAllowSpectators.SelectedIndexChanged
+        If sender.Text = "Yes" Then
+            MainformRef.ConfigFile.AllowSpectators = 1
+        Else
+            MainformRef.ConfigFile.AllowSpectators = 0
+        End If
+        MainformRef.ConfigFile.SaveFile()
+
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        If Rx.MainformRef.KeyMappingForm.Visible Then
+            Rx.MainformRef.KeyMappingForm.Focus()
+        Else
+            Rx.MainformRef.KeyMappingForm.Show()
+        End If
 
     End Sub
 #End Region

@@ -10,7 +10,7 @@ Imports System.IO
 Public Class InputHandling
 
     Public ProfileName As String = "Default"
-    Public KeyBoardConfigs As New Dictionary(Of String, String)
+    Public KeyBoardConfigs As New Dictionary(Of String, Array)
     Public PoV As Decimal = 0 ' PoV / Dpad
     Public PoVRest As Decimal = 0 ' PoV / Dpad
     Public DeadZone As Int16 = 10
@@ -62,6 +62,11 @@ Public Class InputHandling
     End Structure
 
     Public Sub New(ByRef mf As frmMain)
+        ' Disable SDL2 Backend for OpenTK because i do not want to use it
+        Dim OpenTKOptions = New ToolkitOptions
+        OpenTKOptions.Backend = PlatformBackend.PreferNative
+        Toolkit.Init(OpenTKOptions)
+
         MainFormRef = mf
         myjoyEX.dwSize = 64
         myjoyEX.dwFlags = &HFF
@@ -100,58 +105,36 @@ Public Class InputHandling
     Public Sub GetKeyboardConfigs()
 
         KeyBoardConfigs.Clear()
-        Dim KeyboardLines() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc")
+        Dim KeyboardLines() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\nullDC.cfg")
         Dim KeyList() As String = {"Start", "Test", "Up", "Down", "Left", "Right", "Button_1", "Button_2", "Button_3", "Button_4", "Button_5", "Button_6", "Coin"}
         Dim KeyListx() As String = {"start", "Test", "up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin"}
 
-        'Check if any of them are blank
-        Dim ReCreateKeyboardqkc As Boolean = False
-        Dim FoundKeys() As Boolean = {False, False, False, False, False, False, False, False, False, False, False, False, False}
-        Dim FoundAllKeys As Boolean = False
-        For Each line In KeyboardLines
-            If line.Split("=").Count = 0 Then Continue For
-            Dim CurrentKeyChecking = line.Split("=")(1)
-            If Array.IndexOf(KeyList, CurrentKeyChecking) = -1 Then ' If we don't find the keyboard button somehow then create it
-                File.WriteAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc", {"5=Start", "3=Test", "w=Up", "s=Down", "a=Left", "d=Right", "8=Button_1", "9=Button_2", "0=Button_3", "u=Button_4", "i=Button_5", "o=Button_6", "1=Coin"})
-                KeyboardLines = File.ReadAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc")
-                FoundAllKeys = True
-                Exit For
-            Else
-                FoundKeys(Array.IndexOf(KeyList, CurrentKeyChecking)) = True
-            End If
-
-        Next
-
-        If Not FoundAllKeys Then
-            For Each foundkey In FoundKeys ' Second Check if we dind't find ALL the keys
-                If Not foundkey Then
-                    File.WriteAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc", {"5=Start", "3=Test", "w=Up", "s=Down", "a=Left", "d=Right", "8=Button_1", "9=Button_2", "0=Button_3", "u=Button_4", "i=Button_5", "o=Button_6", "1=Coin"})
-                    KeyboardLines = File.ReadAllLines(MainFormRef.NullDCPath & "\qkoJAMMA\Keyboard.qkc")
-                    Exit For
-                End If
-            Next
-
-        End If
-
         For Each line As String In KeyboardLines
-            If line.Contains("Test") Then Continue For
-            Dim SplitKeyEntry = line.Split("=")
-            Dim KeyIndex = Array.IndexOf(KeyList, SplitKeyEntry(1))
-            KeyBoardConfigs.Add(KeyListx(KeyIndex), SplitKeyEntry(0))
-
+            If line.StartsWith("BPortA_I_START_KEY") Then KeyBoardConfigs.Add("start", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_COIN_KEY") Then KeyBoardConfigs.Add("coin", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_UP_KEY") Then KeyBoardConfigs.Add("up", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_DOWN_KEY") Then KeyBoardConfigs.Add("down", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_LEFT_KEY") Then KeyBoardConfigs.Add("left", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_RIGHT_KEY") Then KeyBoardConfigs.Add("right", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_BTN0_KEY") Then KeyBoardConfigs.Add("LP", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_BTN1_KEY") Then KeyBoardConfigs.Add("MP", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_BTN2_KEY") Then KeyBoardConfigs.Add("HP", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_BTN3_KEY") Then KeyBoardConfigs.Add("LK", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_BTN4_KEY") Then KeyBoardConfigs.Add("MK", {CInt(line.Split("=")(1))})
+            If line.StartsWith("BPortA_I_BTN5_KEY") Then KeyBoardConfigs.Add("HK", {CInt(line.Split("=")(1))})
         Next
 
-        KeyBoardConfigs.Add("LPLK", KeyBoardConfigs("LP") & KeyBoardConfigs("LK"))
-        KeyBoardConfigs.Add("MPMK", KeyBoardConfigs("MP") & KeyBoardConfigs("MK"))
-        KeyBoardConfigs.Add("HPHK", KeyBoardConfigs("HP") & KeyBoardConfigs("HK"))
+        KeyBoardConfigs.Add("LPLK", {KeyBoardConfigs("LP")(0), KeyBoardConfigs("LK")(0)})
+        KeyBoardConfigs.Add("MPMK", {KeyBoardConfigs("MP")(0), KeyBoardConfigs("MK")(0)})
+        KeyBoardConfigs.Add("HPHK", {KeyBoardConfigs("HP")(0), KeyBoardConfigs("HK")(0)})
         ' New Micros
-        KeyBoardConfigs.Add("LPMP", KeyBoardConfigs("LP") & KeyBoardConfigs("MP"))
-        KeyBoardConfigs.Add("MPHP", KeyBoardConfigs("MP") & KeyBoardConfigs("HP"))
-        KeyBoardConfigs.Add("LKMK", KeyBoardConfigs("LK") & KeyBoardConfigs("MK"))
-        KeyBoardConfigs.Add("MKHK", KeyBoardConfigs("MK") & KeyBoardConfigs("HK"))
+        KeyBoardConfigs.Add("LPMP", {KeyBoardConfigs("LP")(0), KeyBoardConfigs("MP")(0)})
+        KeyBoardConfigs.Add("MPHP", {KeyBoardConfigs("MP")(0), KeyBoardConfigs("HP")(0)})
+        KeyBoardConfigs.Add("LKMK", {KeyBoardConfigs("LK")(0), KeyBoardConfigs("MK")(0)})
+        KeyBoardConfigs.Add("MKHK", {KeyBoardConfigs("MK")(0), KeyBoardConfigs("HK")(0)})
 
-        KeyBoardConfigs.Add("AP", KeyBoardConfigs("LP") & KeyBoardConfigs("MP") & KeyBoardConfigs("HP"))
-        KeyBoardConfigs.Add("AK", KeyBoardConfigs("LK") & KeyBoardConfigs("MK") & KeyBoardConfigs("HK"))
+        KeyBoardConfigs.Add("AP", {KeyBoardConfigs("LP")(0), KeyBoardConfigs("MP")(0), KeyBoardConfigs("HP")(0)})
+        KeyBoardConfigs.Add("AK", {KeyBoardConfigs("LK")(0), KeyBoardConfigs("MK")(0), KeyBoardConfigs("HK")(0)})
 
     End Sub
 
@@ -182,7 +165,7 @@ Public Class InputHandling
         KeyCache.Clear()
         For Each keybind As KeyBind In KeybindConfigs
             If Not KeyCache.ContainsKey(keybind.Button) Then
-                KeyCache.Add(keybind.Button, {keybind.tKeychar, False})
+                KeyCache.Add(keybind.Button, {keybind.Rebind, False})
             End If
         Next
 
@@ -195,10 +178,11 @@ Public Class InputHandling
             UpdateKeyMapConfigs()
         End If
 
-
         If Not MainFormRef.KeyMappingForm Is Nothing Then
             MainFormRef.KeyMappingForm.LoadingSettings = True
-            MainFormRef.KeyMappingForm.cbControllerID.Invoke(Sub() MainFormRef.KeyMappingForm.cbControllerID.SelectedIndex = ControllerID)
+            MainFormRef.KeyMappingForm.cbControllerID.Invoke(Sub()
+                                                                 MainFormRef.KeyMappingForm.cbControllerID.SelectedIndex = ControllerID
+                                                             End Sub)
             MainFormRef.KeyMappingForm.LoadingSettings = False
         End If
 
@@ -482,6 +466,7 @@ Public Class InputHandling
             ElseIf RawrInputState.IsConnected Then
                 DoOpenTKInputRoll(RawrInputState)
             Else
+                ' Pretty sure this will never get called unless it's some ancient arcade stick, like ANCIENT
                 DoWinMMRoll()
             End If
 
@@ -531,7 +516,7 @@ Public Class InputHandling
     End Sub
 
     Public Sub KeyPressed(Button As String) Handles Me._KeyPressed
-        Console.WriteLine("Button Pressed: {0}", Button)
+        'Console.WriteLine("Button Pressed: {0}", Button)
         TranslateButtonToKey(Button, True)
     End Sub
 
@@ -546,25 +531,9 @@ Public Class InputHandling
         If Down Then upordown = 0
         If KeyCache.ContainsKey(Button) Then
             If KeyCache(Button)(1) = Down Then Exit Sub
-            For Each Key As Keys In KeyCache(Button)(0)
-                'Console.WriteLine("Button: " & Button & " " & Down)
-                If KeyBoardConfigs("coin") = kc.ConvertToString(Key) And MainFormRef.IsNullDCRunning Then
-
-                    If Down Then
-                        If Not CoinKeyDown Then
-                            keybd_event(Key, MapVirtualKey(Key, 0), 0, 0)
-                            Thread.Sleep(12)
-                            keybd_event(Key, MapVirtualKey(Key, 0), 2, 0)
-                            CoinKeyDown = True
-                        End If
-                    Else
-                        CoinKeyDown = False
-                    End If
-
-                Else
-                    keybd_event(Key, MapVirtualKey(Key, 0), upordown, 0)
-                End If
-
+            For Each Key As Int16 In KeyCache(Button)(0)
+                'Console.WriteLine("Button: " & Button & " " & Down & " " & Key)
+                keybd_event(Key, MapVirtualKey(Key, 0), upordown, 0)
             Next
             KeyCache(Button)(1) = Down
         End If
@@ -592,33 +561,13 @@ Public Class KeyBind
 
     Public Name As String = ""
     Public Button As String
-    Public Rebind As String
-    Public tKeychar As ArrayList = New ArrayList
+    Public Rebind As Array
     Public Pressed As Boolean
 
-    Public Sub New(_Name As String)
-        Name = _Name
-        Button = ""
-        Rebind = "a"
-        For Each Key As Char In Rebind.ToCharArray
-            tKeychar.Add(GetKeyFromChar(Key))
-        Next
-
-    End Sub
-
-    Public Sub New(_Name As String, _Button As String, _Rebind As String)
+    Public Sub New(_Name As String, _Button As String, _Rebind As Array)
         Name = _Name
         Button = _Button
         Rebind = _Rebind
-        For Each Key As Char In Rebind.ToCharArray
-            tKeychar.Add(GetKeyFromChar(Key))
-        Next
     End Sub
-
-    Private Function GetKeyFromChar(c As Char) As Keys
-        Dim vkKeyCode As Short = VkKeyScanExW(c, InputLanguage.CurrentInputLanguage.Handle) 'get the vertial key code value for the Char according to the keyboard layout for this thread
-        'Get the vkKey value from the low order byte and the Shift state from the high order byte from the vkKeyCode value and add them together using the Bitwise OR operator.
-        Return CType((((vkKeyCode And &HFF00) << 8) Or (vkKeyCode And &HFF)), Keys) ''Then cast that value to a Keys type.
-    End Function
 
 End Class

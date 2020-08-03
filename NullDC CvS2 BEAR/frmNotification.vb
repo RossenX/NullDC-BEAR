@@ -14,9 +14,19 @@
     End Sub
 
     Public Sub ShowMessage(ByVal msg As String)
-        Me.Hide()
-        Me.Show(MainformRef)
-        Label1.Text = msg
+        If MainformRef.InvokeRequired Then
+            Me.Invoke(Sub()
+                          Me.Hide()
+                          Me.Show(MainformRef)
+                          Label1.Text = msg
+                      End Sub)
+        Else
+            Me.Hide()
+            Me.Show(MainformRef)
+            Label1.Text = msg
+        End If
+
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

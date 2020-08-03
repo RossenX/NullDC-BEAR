@@ -1,7 +1,7 @@
 ﻿Public Class frmWaitingForHost
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        frmMain.NetworkHandler.SendMessage(">,BO", frmMain.Challenger.ip)
+        If Not MainformRef.Challenger Is Nothing Then frmMain.NetworkHandler.SendMessage(">,BO", frmMain.Challenger.ip)
         frmMain.EndSession("Denied")
     End Sub
 

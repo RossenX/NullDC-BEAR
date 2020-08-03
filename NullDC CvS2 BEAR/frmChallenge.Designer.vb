@@ -60,7 +60,7 @@ Partial Class frmChallenge
         Me.lbChallengeText.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lbChallengeText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbChallengeText.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbChallengeText.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbChallengeText.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbChallengeText.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.lbChallengeText.Location = New System.Drawing.Point(0, 0)
         Me.lbChallengeText.Margin = New System.Windows.Forms.Padding(0)

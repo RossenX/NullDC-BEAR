@@ -71,6 +71,47 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property BEARJamma_Win32() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Win32", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to 
+        '''[BEARJamma]
+        '''BPortA_I_SERVICE_KEY_1=115
+        '''BPortA_I_TEST_KEY_1=116
+        '''BPortA_I_SERVICE_KEY_2=117
+        '''BPortA_I_TEST_KEY_2=118
+        '''BPortA_I_START_KEY=49
+        '''BPortA_I_COIN_KEY=53
+        '''BPortA_I_UP_KEY=87
+        '''BPortA_I_DOWN_KEY=83
+        '''BPortA_I_LEFT_KEY=65
+        '''BPortA_I_RIGHT_KEY=68
+        '''BPortA_I_BTN0_KEY=56
+        '''BPortA_I_BTN1_KEY=57
+        '''BPortA_I_BTN2_KEY=48
+        '''BPortA_I_BTN3_KEY=85
+        '''BPortA_I_BTN4_KEY=73
+        '''BPortA_I_BTN5_KEY=79
+        '''BPortB_I_SERVICE_KEY_1=115
+        '''BPortB_I_TEST_KEY_1=116
+        '''BPortB_I_SERVICE_KEY_2=117
+        '''BPortB_I_TEST_KEY_2=118
+        '''BPortB_I_START_KEY=13 [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property BEARPLAYlines() As String
+            Get
+                Return ResourceManager.GetString("BEARPLAYlines", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property Beta() As System.Drawing.Bitmap

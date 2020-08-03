@@ -259,7 +259,7 @@ Partial Class frmReplays
         Me.Controls.Add(Me.btnOpen)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmReplays"
-        Me.Text = "Replays (Experimental)"
+        Me.Text = "BEARPlay Replays 2.0"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)

@@ -1,13 +1,14 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Threading
 
 Public Class frmDLC
 
-    Dim GamesListClient As New WebClient
     Dim DownloadClient As New WebClient
     Dim DownloadingGameName = ""
     Dim DownloadingZipName = ""
     Dim DownloadCanceled As Boolean = False
+    Dim SelectedGameURL As DownloadableGame = Nothing
 
     Private Sub frmDLC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
@@ -17,26 +18,37 @@ Public Class frmDLC
 
         AddHandler DownloadClient.DownloadFileCompleted, AddressOf DownloadComplete
         AddHandler DownloadClient.DownloadProgressChanged, AddressOf DownloadProgress
-        AddHandler GamesListClient.DownloadStringCompleted, AddressOf GotDownloadableGamesList
+
     End Sub
 
-    Private Sub GotDownloadableGamesList(ByVal sender As WebClient, e As DownloadStringCompletedEventArgs)
-        If Not e.Error Is Nothing Then
-            MsgBox("Error Getting Downloadable Games List")
-            Exit Sub
-        End If
+    Private Sub ArchiveDotOrgParse(ByVal URL As String, ListView As ListView)
+        Dim StrippedURL = URL.Replace("&output=json", "/")
+        StrippedURL = StrippedURL.Replace("/details/", "/download/")
 
-        lvGamesList.Items.Clear()
+        Dim GamesListClient As New WebClient
+        GamesListClient.Credentials = New NetworkCredential()
+        GamesListClient.Headers.Add("user-agent", "MyRSSReader/1.0")
 
-        For Each _sp As String In e.Result.Split("""")
-            If _sp.Contains(".zip") Then
-                Dim _tmp = _sp.Replace("\/", "").Replace(".zip", "").Replace("_", " ").Trim
-                Dim _it As New ListViewItem(_tmp)
-                _it.SubItems.Add("https://archive.org/download/NaomiRomsReuploadByGhostware/" & _sp.Replace("\/", ""))
-                lvGamesList.Items.Add(_it)
+        GamesListClient.DownloadStringTaskAsync(URL)
 
-            End If
-        Next
+        AddHandler GamesListClient.DownloadStringCompleted,
+            Sub(ByVal sender As WebClient, e As DownloadStringCompletedEventArgs)
+
+                If Not e.Error Is Nothing Then
+                    MsgBox("Error Getting Downloadable Games List")
+                    Exit Sub
+                End If
+
+                For Each _sp As String In e.Result.Split("""")
+                    If _sp.Contains(".zip") Then
+                        Dim _tmp = _sp.Replace("\/", "").Replace(".zip", "").Replace("_", " ").Trim
+                        Dim _it As New ListViewItem(_tmp)
+                        _it.SubItems.Add(StrippedURL & _sp.Replace("\/", ""))
+                        ListView.Items.Add(_it)
+                    End If
+                Next
+
+            End Sub
 
     End Sub
 
@@ -44,17 +56,19 @@ Public Class frmDLC
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
         Try
-            GamesListClient.Credentials = New NetworkCredential()
-            GamesListClient.Headers.Add("user-agent", "MyRSSReader/1.0")
-            GamesListClient.DownloadStringTaskAsync("https://archive.org/details/NaomiRomsReuploadByGhostware&output=json")
+            ArchiveDotOrgParse("https://archive.org/details/NaomiRomsReuploadByGhostware&output=json", lvGamesList_naomi)
+            ArchiveDotOrgParse("https://archive.org/details/AtomiswaveReuploadByGhostware&output=json", lvGamelist_Atomiswave)
         Catch ex As Exception
-
+            MsgBox(ex.InnerException)
         End Try
+
 
     End Sub
 
     Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
-        If Not lvGamesList.SelectedItems.Count > 0 Then Exit Sub
+        If SelectedGameURL Is Nothing Then
+            Exit Sub
+        End If
 
         If DownloadClient.IsBusy Then
             DownloadCanceled = True
@@ -62,19 +76,19 @@ Public Class frmDLC
             Exit Sub
         End If
 
-        DownloadingGameName = lvGamesList.SelectedItems(0).SubItems(0).Text
-        Dim _tmp = lvGamesList.SelectedItems(0).SubItems(1).Text.Split("/")
+        DownloadingGameName = SelectedGameURL.Name
+        Dim _tmp As String() = SelectedGameURL.URL.Split("/")
         DownloadingZipName = _tmp(_tmp.Count - 1).Replace(".zip", ".honey")
 
         Try
             DownloadClient.Credentials = New NetworkCredential()
-            DownloadClient.DownloadFileTaskAsync(lvGamesList.SelectedItems(0).SubItems(1).Text, MainformRef.NullDCPath & "\roms\" & DownloadingZipName)
+            DownloadClient.DownloadFileTaskAsync(SelectedGameURL.URL, MainformRef.NullDCPath & "\roms\" & DownloadingZipName)
 
             ProgressBar1.Visible = True
             btnDownload.Text = "Downloading... " & DownloadingGameName
             DownloadCanceled = False
 
-            Console.WriteLine("Downloading: {0}", lvGamesList.SelectedItems(0).SubItems(1).Text)
+            Console.WriteLine("Downloading: {0}", SelectedGameURL.Name)
             ProgressBar1.Value = 0
         Catch ex As Exception
             MsgBox("Downlaod Error: " & ex.Message)
@@ -93,39 +107,50 @@ Public Class frmDLC
     End Sub
 
     Private Sub DownloadComplete()
+        Console.WriteLine("Download Done")
         Dim zipPath = MainformRef.NullDCPath & "\roms\" & DownloadingZipName
         Dim RomDirectory = MainformRef.NullDCPath & "\roms\" & DownloadingGameName
-        btnDownload.Invoke(Sub() btnDownload.Text = "Installing...")
+        'btnDownload.Text = "Installing..."
 
-        If Not DownloadCanceled Then
-            Try
-                If Not Directory.Exists(RomDirectory) Then Directory.CreateDirectory(RomDirectory)
-                Using archive As ZipArchive = ZipFile.OpenRead(zipPath)
-                    For Each entry As ZipArchiveEntry In archive.Entries
-                        If entry.FullName.Split("\").Length > 1 Then
-                            Directory.CreateDirectory(RomDirectory & "\" & entry.FullName.Split("\")(0))
-                        End If
-                        entry.ExtractToFile(RomDirectory & "\" & entry.FullName, True)
-                    Next
-                End Using
-                MainformRef.NotificationForm.ShowMessage("Enjoy " & DownloadingGameName)
+        Dim InstallThread As Thread =
+            New Thread(Sub()
+                           If Not DownloadCanceled Then
+                               Try
+                                   MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
+                                   If Not Directory.Exists(RomDirectory) Then Directory.CreateDirectory(RomDirectory)
+                                   Using archive As ZipArchive = ZipFile.OpenRead(zipPath)
+                                       For Each entry As ZipArchiveEntry In archive.Entries
+                                           If entry.FullName.Split("\").Length > 1 Then
+                                               Directory.CreateDirectory(RomDirectory & "\" & entry.FullName.Split("\")(0))
+                                           End If
+                                           entry.ExtractToFile(RomDirectory & "\" & entry.FullName, True)
+                                       Next
+                                   End Using
+                                   MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & DownloadingGameName))
+                               Catch ex As Exception
+                                   MsgBox("Rom install Error: " & ex.Message)
+                               End Try
 
-            Catch ex As Exception
-                MsgBox("Rom install Error: " & ex.Message)
-            End Try
+                           End If
 
-        End If
+                           If File.Exists(zipPath) Then
+                               File.SetAttributes(zipPath, FileAttributes.Normal)
+                               File.Delete(zipPath)
+                           End If
 
+                           MainformRef.Invoke(
+                           Sub()
+                               If Me.Visible Then
+                                   'MainformRef.GetGamesList()
+                                   ProgressBar1.Visible = False
+                                   btnDownload.Text = "Download"
+                                   DownloadCanceled = False
+                               End If
+                           End Sub)
 
-        If File.Exists(zipPath) Then
-            File.SetAttributes(zipPath, FileAttributes.Normal)
-            File.Delete(zipPath)
-        End If
+                       End Sub)
 
-        MainformRef.GetGamesList()
-        ProgressBar1.Visible = False
-        btnDownload.Text = "Download"
-        DownloadCanceled = False
+        InstallThread.Start()
 
     End Sub
 
@@ -145,4 +170,35 @@ Public Class frmDLC
         If Not Directory.Exists(MainformRef.NullDCPath & "\roms") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\roms")
         Process.Start(MainformRef.NullDCPath & "\roms")
     End Sub
+
+    Private Sub lvGamelist_Atomiswave_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvGamelist_Atomiswave.SelectedIndexChanged
+        If lvGamelist_Atomiswave.SelectedItems.Count = 0 Then
+            SelectedGameURL = Nothing
+        Else
+            SelectedGameURL = New DownloadableGame(lvGamelist_Atomiswave.SelectedItems(0).SubItems(1).Text, lvGamelist_Atomiswave.SelectedItems(0).SubItems(0).Text)
+        End If
+
+    End Sub
+
+    Private Sub lvGamesList_naomi_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvGamesList_naomi.SelectedIndexChanged
+        If lvGamesList_naomi.SelectedItems.Count = 0 Then
+            SelectedGameURL = Nothing
+        Else
+            SelectedGameURL = New DownloadableGame(lvGamesList_naomi.SelectedItems(0).SubItems(1).Text, lvGamesList_naomi.SelectedItems(0).SubItems(0).Text)
+        End If
+
+    End Sub
+
+End Class
+
+Class DownloadableGame
+
+    Public URL = ""
+    Public Name = ""
+
+    Public Sub New(ByVal _url As String, ByVal _name As String)
+        URL = _url
+        Name = _name
+    End Sub
+
 End Class

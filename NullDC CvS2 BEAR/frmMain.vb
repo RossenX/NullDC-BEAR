@@ -1,6 +1,9 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Net.NetworkInformation
 Imports System.Threading
+Imports Open.Nat
+Imports OpenTK
 
 Public Class frmMain
     Dim IsBeta As Boolean = True
@@ -8,10 +11,10 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "0.99"
+    Public Ver As String = "1.0h"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
-    Public NullDCLauncher As NullDCLauncher
+    Public NullDCLauncher As NaomiLauncher
     Public NullDCPath As String = Application.StartupPath
     Public GamesList As New Dictionary(Of String, Array)
     Public ConfigFile As Configs
@@ -25,23 +28,19 @@ Public Class frmMain
     Public NotificationForm As frmNotification = New frmNotification(Me)
     Public KeyMappingForm As frmKeyMapping
 
-#Region "Beta"
-    Public Bearplay As BearPlay
-
-#End Region
-
     Public Challenger As NullDCPlayer
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\deps", "deps.zip")
+        'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
+
         Me.Icon = My.Resources.NewNullDCBearIcon
         niBEAR.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToScreen()
 
         Rx.MainformRef = Me
-
         lbVer.Text = Ver
-        If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         If Not File.Exists(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe") Then
             Dim result As DialogResult = MessageBox.Show("NullDC was not found in this folder, INSTALL NULLDC INTO THIS FOLDER?", "NullDC Install", MessageBoxButtons.YesNo)
@@ -49,16 +48,17 @@ Public Class frmMain
                 Dim result2 As DialogResult = MessageBox.Show("This will create a bunch of files in the same folder as NullDC BEAR.exe, OK?", "NullDC Extraction", MessageBoxButtons.YesNo)
                 If result2 = DialogResult.Yes Then
                     UnzipResToDir(My.Resources.nulldcCLEAN, "bear_tmp_nulldc.zip", NullDCPath)
-                    MsgBox("NullDC Has been Extracted here, put some games in the ROMS folder then start BEAR up again")
-                    End
                 End If
+            Else
+                MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
+                End
             End If
-            MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
-            End
         End If
 
         CheckFilesAndShit()
         ConfigFile = New Configs(NullDCPath)
+        cbStatus.Text = ConfigFile.Status
+        Rx.PreferedStatus = cbStatus.Text
 
         ' Update Stuff
         AddHandler UpdateCheckClient.DownloadStringCompleted, AddressOf UpdateCheckResult
@@ -68,17 +68,10 @@ Public Class frmMain
         InputHandler = New InputHandling(Me)
         KeyMappingForm = New frmKeyMapping(Me)
         NetworkHandler = New NetworkHandling(Me)
-        NullDCLauncher = New NullDCLauncher(Me)
+        NullDCLauncher = New NaomiLauncher(Me)
 
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
-
-        ' Beta Features Only
-        If IsBeta Then
-            'Bearplay = New BearPlay(Me)
-            'ZipFile.ExtractToDirectory("C:\Users\RossenX\Downloads\Capcom_vs_SNK_2_Mark_of_the_Millennium_2001.zip", "C:\Users\RossenX\Downloads")
-
-        End If
 
         RefreshPlayerList(False)
 
@@ -87,7 +80,106 @@ Public Class frmMain
             'End
         End If
 
+        ' turn on cfg watcher so we can redo the keybinds if they change
+        CreateCFGWatcher()
+        CreateRomFolderWatcher()
+        ' This is to create a window handle for on-the-fly keybind changing in emulator
+        'KeyMappingForm.Show(Me)
+        KeyMappingForm.Hide()
+        Joined_Bear()
     End Sub
+
+    Private Sub Joined_Bear()
+
+        If Not MainformRef.NetworkHandler Is Nothing Then
+            MainformRef.NetworkHandler.SendMessage("<," & ConfigFile.Name & "," & ConfigFile.IP & "," & ConfigFile.Port & ",None," & ConfigFile.Status)
+        End If
+
+    End Sub
+
+    Dim RomFolderWatcher As FileSystemWatcher
+    Private Sub CreateRomFolderWatcher()
+        RomFolderWatcher = New FileSystemWatcher()
+        RomFolderWatcher.IncludeSubdirectories = True
+        RomFolderWatcher.Path = NullDCPath & "\roms"
+
+        RomFolderWatcher.NotifyFilter = NotifyFilters.Attributes Or
+            NotifyFilters.CreationTime Or
+            NotifyFilters.DirectoryName Or
+            NotifyFilters.FileName Or
+            NotifyFilters.LastAccess Or
+            NotifyFilters.LastWrite Or
+            NotifyFilters.Security Or
+            NotifyFilters.Size
+
+        AddHandler RomFolderWatcher.Changed, AddressOf RomFolderChange
+        AddHandler RomFolderWatcher.Created, AddressOf RomFolderChange
+        AddHandler RomFolderWatcher.Renamed, AddressOf RomFolderChange
+        AddHandler RomFolderWatcher.Deleted, AddressOf RomFolderChange
+
+        RomFolderWatcher.EnableRaisingEvents = True
+    End Sub
+
+    Private Sub RomFolderChange(ByVal source As Object, ByVal e As FileSystemEventArgs)
+        If Not e.Name.Contains("eeprom") Then ' As long as it has nothing to do with eeproms, then reload the games.
+            Console.WriteLine("Roms folder changed, check if we have new games")
+            RomFolderWatcher.EnableRaisingEvents = False
+            Thread.Sleep(500)
+            Me.Invoke(Sub() GetGamesList())
+            RomFolderWatcher.EnableRaisingEvents = True
+        End If
+    End Sub
+
+    Dim CFGWatcher As FileSystemWatcher
+    Private Sub CreateCFGWatcher()
+        CFGWatcher = New FileSystemWatcher()
+        CFGWatcher.IncludeSubdirectories = False
+        CFGWatcher.Path = NullDCPath
+        CFGWatcher.NotifyFilter = NotifyFilters.LastWrite
+        AddHandler CFGWatcher.Changed, AddressOf CFGChanged
+        CFGWatcher.EnableRaisingEvents = True
+    End Sub
+
+    Private Sub CFGChanged(ByVal source As Object, ByVal e As FileSystemEventArgs)
+        If e.Name = "nullDC.cfg" Then
+            CFGWatcher.EnableRaisingEvents = False
+
+            Thread.Sleep(1000)
+            While IsFileInUse(NullDCPath & "/nulldc.cfg")
+                Thread.Sleep(50)
+                Continue While
+            End While
+
+            ' Check if something overrode the BEAR configs
+            Dim ConfigLines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
+            Dim BEARJAMMAConfigsFound = False
+            For Each line In ConfigLines
+                If line.StartsWith("[BEARJamma]") Then
+                    BEARJAMMAConfigsFound = True
+                    Exit For
+                End If
+            Next
+
+            If Not BEARJAMMAConfigsFound Then ' no BEARPLAY configs so lets add them to the end and keep all the other settings
+                Dim BearPlayLines = My.Resources.BEARPLAYlines
+                File.AppendAllText(MainformRef.NullDCPath & "\nullDC.cfg", BearPlayLines)
+            End If
+
+            InputHandler.GetKeyboardConfigs()
+            InputHandler.NeedConfigReload = True
+            CFGWatcher.EnableRaisingEvents = True
+        End If
+    End Sub
+
+    Public Function IsFileInUse(sFile As String) As Boolean
+        Try
+            Using f As New IO.FileStream(sFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None)
+            End Using
+        Catch Ex As Exception
+            Return True
+        End Try
+        Return False
+    End Function
 
     Private Sub CheckForUpdate()
         imgBeta.Visible = IsBeta
@@ -111,13 +203,30 @@ Public Class frmMain
         For Each Line As String In e.Result.Split(",")
             If Line.StartsWith("""tag_name""") Then
                 LatestVersion = Line.Split(":")(1).Replace("""", "")
+                Exit For
             End If
         Next
 
         If LatestVersion = Ver Then
             ' Is up to date
             Console.WriteLine("Up To Date, Delete updater if it exists")
-            If File.Exists(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe") Then File.Delete(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe")
+            If File.Exists(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe") Then
+                Dim UpdaterDeleted = False
+                Dim TryingToDeleteFor = 0
+                While Not UpdaterDeleted
+                    ' Try for 2 seconds to delete the updater, if u can't then just leave it
+                    If TryingToDeleteFor > 2000 Then Exit While
+
+                    Try
+                        File.SetAttributes(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe", FileAttributes.Normal)
+                        File.Delete(Application.StartupPath & "\NullDC-BEAR-UPDATER.exe")
+                        UpdaterDeleted = True
+                    Catch ex As Exception
+                        TryingToDeleteFor += 50
+                        Thread.Sleep(50)
+                    End Try
+                End While
+            End If
         Else
             ' Is not up to date
             If Not File.Exists(NullDCPath & "\NullDC-BEAR-UPDATER.exe") Then File.WriteAllBytes(NullDCPath & "\NullDC-BEAR-UPDATER.exe", My.Resources.NullDC_BEAR_UPDATER)
@@ -165,10 +274,27 @@ Public Class frmMain
 
     Private Sub CheckFilesAndShit()
 
+        ' Check BEARJamma Configs in FIle, WE NEED HIS FOR THE KEYBINDS TO WORK EVEN IF NULLDC IS NOT ON
+        Dim ConfigLines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
+        Dim BEARJAMMAConfigsFound = False
+        For Each line In ConfigLines
+            If line.StartsWith("[BEARJamma]") Then
+                BEARJAMMAConfigsFound = True
+                Exit For
+            End If
+        Next
+
+        If Not BEARJAMMAConfigsFound Then ' no BEARPLAY configs so lets add them to the end and keep all the other settings
+            Dim BearPlayLines = My.Resources.BEARPLAYlines
+            File.AppendAllText(MainformRef.NullDCPath & "\nullDC.cfg", BearPlayLines)
+        End If
+
+        ' Check Configs if there's BEARPlay entry, if not then add them just to make sure old configs work fine with BEARPLAY out of the box
+        If Not File.Exists(NullDCPath & "\nullDC.cfg") Then My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC.cfg", My.Resources.nullDC, False)
+
         ' Check the EXE name and all that shit from now on use the NullDC.BEAR.exe format since that's what github saves it as, since it hates spaces apperanly
         ' Why do this you may ask? Well mostly so people who downloaded it from github have the same exe name after they update, for firewall reasons
         Try
-
             If File.Exists(NullDCPath & "\NullDC BEAR.exe") Then
                 ' NullDC BEAR.exe exist Copy it, start it up close this one
                 If Application.ExecutablePath.Contains("NullDC BEAR.exe") Then
@@ -192,17 +318,26 @@ Public Class frmMain
             MsgBox("Couldn't delete old NullDC BEAR.exe")
         End Try
 
-        ' Make the Keyboard File if it doens't exist, it should but i mean you never know
-        If Not File.Exists(NullDCPath & "\qkoJAMMA\Keyboard.qkc") Then
-            File.WriteAllLines(NullDCPath & "\qkoJAMMA\Keyboard.qkc", {"5=Start", "3=Test", "w=Up", "s=Down", "a=Left", "d=Right", "8=Button_1", "9=Button_2", "0=Button_3", "u=Button_4", "i=Button_5", "o=Button_6", "1=Coin"})
+        If Not My.Computer.FileSystem.DirectoryExists(NullDCPath & "\replays") Then
+            My.Computer.FileSystem.CreateDirectory(NullDCPath & "\replays")
         End If
 
         'Install Dependencies if needed
         If Not File.Exists(NullDCPath & "\XInputInterface.dll") Or
             Not File.Exists(NullDCPath & "\XInputDotNetPure.dll") Or
-            Not File.Exists(NullDCPath & "\OpenTK.dll") Then
+            Not File.Exists(NullDCPath & "\OpenTK.dll") Or
+            Not File.Exists(NullDCPath & "\SDL2.dll") Or
+            Not File.Exists(NullDCPath & "\SDL2_net.dll") Then
             UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
         End If
+
+        ' Just copy the beargamma plugin everytime the launcher starts, to make sure w.e version is in the launcher is the one that's in the plugins folder
+        Try
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32, False)
+        Catch ex As Exception
+            'MsgBox("Could not update BEARJamma, please turn off NullDC.")
+            'End
+        End Try
 
         ' FPS Limited Doesn't Exist lets Create it
         If Not File.Exists(NullDCPath & "\d3d9.dll") Then File.WriteAllBytes(NullDCPath & "\d3d9.dll", My.Resources.d3d9)
@@ -218,7 +353,6 @@ Public Class frmMain
         Catch ex As Exception
 
         End Try
-
 
         GetGamesList()
     End Sub
@@ -269,25 +403,19 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        ConfigFile.Status = cbStatus.Text
         ConfigFile.SaveFile()
+
+        NetworkHandler.SendMessage("&")
 
         niBEAR.Visible = False
         niBEAR.Icon = Nothing
 
-        If IsNullDCRunning() Then
-            NullDCLauncher.NullDCproc.CloseMainWindow()
-        End If
+        If IsNullDCRunning() Then NullDCLauncher.NullDCproc.CloseMainWindow()
+        If Not Challenger Is Nothing Then NetworkHandler.SendMessage(">, Q", Challenger.ip)
 
-        If Not Challenger Is Nothing Then
-            NetworkHandler.SendMessage(">, Q", Challenger.ip)
-        End If
-
-        While Not Bearplay Is Nothing
-            Thread.Sleep(100)
-        End While
 
         End
-
 
     End Sub
 
@@ -323,16 +451,91 @@ Public Class frmMain
 
     End Sub
 
-    Public Delegate Sub AddPlayerToList_delegate(ByVal Player As NullDCPlayer, ByVal ping As String)
-    Public Sub AddPlayerToList(ByVal Player As NullDCPlayer, ByVal ping As String)
-        Dim PlayerInfo As ListViewItem = New ListViewItem(Player.name, Player.name)
-        PlayerInfo.SubItems.Add(Player.ip & ":" & Player.port)
-        PlayerInfo.SubItems.Add(ping)
-        PlayerInfo.SubItems.Add(Player.game)
-        PlayerInfo.SubItems.Add(Player.status)
-        PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
-        PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
-        Matchlist.Items.Add(PlayerInfo)
+    Public Delegate Sub JoinAsSpectator_delegate(ByVal _p1name As String, ByVal _p2name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _region As String)
+    Public Sub JoinAsSpectator(ByVal _p1name As String, ByVal _p2name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _region As String)
+        Challenger = Nothing
+        ConfigFile.Host = _ip
+        ConfigFile.Port = _port
+        ConfigFile.Status = "Spectator"
+        ConfigFile.Game = _game
+        ConfigFile.ReplayFile = ""
+        ConfigFile.SaveFile()
+
+        NullDCLauncher.P1Name = _p1name
+        NullDCLauncher.P2Name = _p2name
+        WaitingForm.Visible = False
+        ChallengeSentForm.Visible = False
+        NullDCLauncher.LaunchDC(ConfigFile.Game, _region)
+    End Sub
+
+    Public Delegate Sub RemovePlayerFromList_delegate(ByVal IP As String)
+    Public Sub RemovePlayerFromList(ByVal IP As String)
+        Console.WriteLine("Removing Player: " & IP)
+        For Each playerentry As ListViewItem In Matchlist.Items
+            If playerentry.SubItems(1).Text.Split(":")(0) = IP Then
+                Matchlist.Items.Remove(playerentry)
+                Exit For
+            End If
+        Next
+
+    End Sub
+
+    Public Delegate Sub AddPlayerToList_delegate(ByVal Player As NullDCPlayer)
+    Public Sub AddPlayerToList(ByVal Player As NullDCPlayer)
+        'Check if this IP:Port combo exists
+        Dim FoundEntry As ListViewItem = Nothing
+        Dim FoundEntryID = 0
+        For Each playerentry As ListViewItem In Matchlist.Items
+            If playerentry.SubItems(1).Text = Player.ip & ":" & Player.port Then
+                FoundEntry = playerentry
+                Exit For
+            End If
+
+            FoundEntryID += 1
+        Next
+
+        If FoundEntry Is Nothing Then
+
+            Dim ItemNumber As Int16 = Matchlist.Items.Count
+            Dim PlayerInfo As ListViewItem = New ListViewItem(Player.name, Player.name)
+            PlayerInfo.SubItems.Add(Player.ip & ":" & Player.port)
+
+            Dim pingthread As Thread = New Thread(Sub()
+                                                      If My.Computer.Network.Ping(Player.ip) Then
+                                                          Dim Pinger As Ping = New Ping()
+                                                          Dim rep As PingReply = Pinger.Send(Player.ip, 1000)
+                                                          Dim Ping = rep.RoundtripTime.ToString
+                                                          MainformRef.Matchlist.Invoke(Sub() MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = Ping)
+                                                      End If
+                                                  End Sub)
+            pingthread.Start()
+
+            PlayerInfo.SubItems.Add("T/O")
+            PlayerInfo.SubItems.Add(Player.game)
+            PlayerInfo.SubItems.Add(Player.status)
+            PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
+            PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
+            Matchlist.Items.Add(PlayerInfo)
+        Else
+            Matchlist.Items(FoundEntryID).SubItems(0).Text = Player.name
+            Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
+
+            Dim pingthread As Thread = New Thread(Sub()
+                                                      If My.Computer.Network.Ping(Player.ip) Then
+                                                          Dim Pinger As Ping = New Ping()
+                                                          Dim rep As PingReply = Pinger.Send(Player.ip, 1000)
+                                                          Dim Ping = rep.RoundtripTime.ToString
+                                                          MainformRef.Matchlist.Invoke(Sub() MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = Ping)
+                                                      End If
+                                                  End Sub)
+            pingthread.Start()
+
+            Matchlist.Items(FoundEntryID).SubItems(3).Text = Player.game
+            Matchlist.Items(FoundEntryID).SubItems(4).Text = Player.status
+
+        End If
+
+
 
     End Sub
 
@@ -360,15 +563,15 @@ Public Class frmMain
                     RemoveChallenger() ' Remove Challenger Data in case we have any
                     ' Set game to none and back to idle
                     ConfigFile.Game = "None"
-                    ConfigFile.Status = "Idle"
+                    ConfigFile.Status = MainformRef.cbStatus.Text
                     ConfigFile.SaveFile()
                 Case "New Challenger" ' This is fired when you accept to fight a new challanger
                     Console.Write("New Challanger")
                     If IsNullDCRunning() Then
                         NullDCLauncher.DoNotSendNextExitEvent = True
-                        NullDCLauncher.NullDCproc.Kill()
+                        NullDCLauncher.NullDCproc.CloseMainWindow()
                         While IsNullDCRunning() ' Just to make sure it's dead before we accept
-                            NullDCLauncher.NullDCproc.Kill()
+                            NullDCLauncher.NullDCproc.CloseMainWindow()
                             Thread.Sleep(100)
                         End While
                     End If
@@ -379,19 +582,19 @@ Public Class frmMain
                 Case "Denied", "TO" ' T/O or Denied
                     RemoveChallenger()
                     ConfigFile.Game = "None"
-                    ConfigFile.Status = "Idle"
+                    ConfigFile.Status = MainformRef.cbStatus.Text
                     ConfigFile.SaveFile()
                 Case "Host Canceled" ' You were hosting but then you stopped Clear the game info
                     RemoveChallenger()
                     ConfigFile.Game = "None"
-                    ConfigFile.Status = "Idle"
+                    ConfigFile.Status = MainformRef.cbStatus.Text
                     ConfigFile.SaveFile()
                 Case "New Host" ' You started a new host Just close the nullDC if it's open, disable raising it's event
                     If IsNullDCRunning() Then
                         NullDCLauncher.NullDCproc.EnableRaisingEvents = False ' Disable Event Raising so this doesn't automaticlly clear challenger data
-                        NullDCLauncher.NullDCproc.Kill()
+                        NullDCLauncher.NullDCproc.CloseMainWindow()
                         While IsNullDCRunning() ' Just to make sure it's dead before we accept
-                            NullDCLauncher.NullDCproc.Kill()
+                            NullDCLauncher.NullDCproc.CloseMainWindow()
                             Thread.Sleep(100)
                         End While
                     End If
@@ -436,7 +639,7 @@ Public Class frmMain
             'If IsNullDCRunning() Then NullDCLauncher.NullDCproc.CloseMainWindow() ' Close the NullDC Window
 
             While IsNullDCRunning()
-                NullDCLauncher.NullDCproc.Kill()
+                NullDCLauncher.NullDCproc.CloseMainWindow()
                 Thread.Sleep(100)
             End While
 
@@ -475,12 +678,18 @@ Public Class frmMain
                     Message = "Player is being challenged by someone else"
                 Case "SP"
                     Message = "Player is setting up BEAR"
+                Case "NS"
+                    Message = "Player does not allow spectators"
+                Case "NSS"
+                    Message = "Player is spectating or watching a replay, can't spectate them."
+                Case "DND"
+                    Message = "Player is in DND mode."
             End Select
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
 
             ConfigFile.Game = "None"
-            ConfigFile.Status = "Idle"
+            ConfigFile.Status = MainformRef.cbStatus.Text
             ConfigFile.SaveFile()
         End If
 
@@ -526,12 +735,10 @@ Public Class frmMain
 
     Private Sub btnOffline_Click(sender As Object, e As EventArgs) Handles btnOffline.Click
         GameSelectForm.StartChallenge()
-
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         RefreshPlayerList()
-
     End Sub
 
     Private Sub RefreshPlayerList(Optional ByVal StartTimer As Boolean = True)
@@ -601,12 +808,17 @@ Public Class frmMain
         If Not c_gamerom = "None" Then c_gamerom = c_gamerom.Split("|")(1) ' Game is not None, so get what rom it is.
         Dim c_status As String = Matchlist.SelectedItems(0).SubItems(4).Text
 
-        ' Skip game Selection
-        If c_status = "Hosting" And Not c_gamerom = "None" Then ' Person is hosting a game, so try to join them
+        Console.WriteLine("Challange: " & c_ip)
+        ' Skip game Selection if person is already in a game, try to spectate instead.
+        If Not c_status = "Idle" Then ' this person is playing SOMETHING so lets try to challange them and see what they reply
+            If c_status = "DND" Then
+                NotificationForm.ShowMessage("Player is in DND")
+                Exit Sub
+            End If
             ' Check if you have the game
             If Not GamesList.ContainsKey(c_gamerom) Then
-                MsgBox(c_gamerom)
-                NotificationForm.ShowMessage("You don't have this game or rom (lst file) do not match")
+                'MsgBox(c_gamerom)
+                NotificationForm.ShowMessage("You don't have this game (" & c_gamerom & ") not found.")
                 Exit Sub
             End If
 
@@ -683,9 +895,22 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub niBEAR_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles niBEAR.MouseDoubleClick
-
+    Private Sub btnPatreon_Click(sender As Object, e As EventArgs) Handles btnPatreon.Click
+        Process.Start("https://www.patreon.com/RossenX")
     End Sub
+
+    Private Sub cbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStatus.SelectedIndexChanged
+        If Not NetworkHandler Is Nothing Then
+            ConfigFile.Status = cbStatus.Text
+            ConfigFile.SaveFile()
+
+            If ConfigFile.Status = "Hidden" Then
+                NetworkHandler.SendMessage("&")
+            End If
+        End If
+        ActiveControl = Nothing
+    End Sub
+
 End Class
 
 Public Class NullDCPlayer
@@ -724,6 +949,8 @@ Public Class Configs
     Private _keyprofile As String = "Default"
     Private _recordreplay As Int16 = 0
     Private _ReplayFile As String = ""
+    Private _allowSpectators As Int16 = 1
+    Private _beta As Int16 = 0
 
 #Region "Properties"
 
@@ -872,6 +1099,24 @@ Public Class Configs
         End Set
     End Property
 
+    Public Property AllowSpectators() As Int16
+        Get
+            Return _allowSpectators
+        End Get
+        Set(ByVal value As Int16)
+            _allowSpectators = value
+        End Set
+    End Property
+
+    Public Property Beta() As Int16
+        Get
+            Return _beta
+        End Get
+        Set(ByVal value As Int16)
+            _beta = value
+        End Set
+    End Property
+
 #End Region
 
     Public Sub SaveFile()
@@ -893,9 +1138,33 @@ Public Class Configs
                 "FPSLimit=" & FPSLimit,
                 "KeyProfile=" & KeyMapProfile,
                 "RecordReplay=" & RecordReplay,
-                "ReplayFile=" & ReplayFile
+                "ReplayFile=" & ReplayFile,
+                "AllowSpectators=" & AllowSpectators,
+                "Beta=" & Beta
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
+        ' Send Updated List To Other People
+        Dim GameNameAndRomName = "None"
+        If Not Game = "None" Then
+            GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
+        End If
+
+        If MainformRef.cbStatus.InvokeRequired Then
+            MainformRef.cbStatus.Invoke(Sub() Rx.PreferedStatus = MainformRef.cbStatus.Text)
+        Else
+            Rx.PreferedStatus = MainformRef.cbStatus.Text
+        End If
+
+
+        If Not MainformRef.NetworkHandler Is Nothing Then
+            If Rx.PreferedStatus = "Hidden" Then
+                MainformRef.NetworkHandler.SendMessage("&")
+            Else
+                MainformRef.NetworkHandler.SendMessage("<," & Name & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
+            End If
+
+        End If
+
     End Sub
 
     Public Sub New(ByRef NullDCPath As String)
@@ -926,9 +1195,11 @@ Public Class Configs
                     If line.Contains("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
                     If line.Contains("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim
                     If line.Contains("ReplayFile") Then ReplayFile = line.Split("=")(1).Trim
+                    If line.Contains("AllowSpectators") Then AllowSpectators = line.Split("=")(1).Trim
+                    If line.Contains("Beta") Then Beta = line.Split("=")(1).Trim
+                    If line.Contains("Status") Then Status = line.Split("=")(1).Trim
 
                 Next
-                Status = "Idle"
                 Game = "None"
                 SaveFile()
                 Exit Sub
@@ -941,7 +1212,7 @@ Public Class Configs
                 UseRemap = lines(5).Split("=")(1).Trim
                 IP = lines(6).Split("=")(1).Trim
                 Host = lines(7).Split("=")(1).Trim
-                Status = "Idle"
+                Status = lines(8).Split("=")(1).Trim
                 Delay = lines(9).Split("=")(1).Trim
                 Game = "None"
                 HostType = lines(11).Split("=")(1).Trim
@@ -949,6 +1220,8 @@ Public Class Configs
                 KeyMapProfile = lines(13).Split("=")(1).Trim
                 RecordReplay = lines(14).Split("=")(1).Trim
                 ReplayFile = lines(15).Split("=")(1).Trim
+                AllowSpectators = lines(16).Split("=")(1).Trim
+                Beta = lines(17).Split("=")(1).Trim
 
             End If
 

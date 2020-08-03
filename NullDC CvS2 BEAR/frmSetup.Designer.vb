@@ -30,13 +30,14 @@ Partial Class frmSetup
         Me.btnT1B2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.cbAllowSpectators = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.tbPort = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnT2B1 = New System.Windows.Forms.Button()
         Me.cbNetworks = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbPlayerName = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
@@ -46,12 +47,16 @@ Partial Class frmSetup
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
+        Me.Label3 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tcSetup.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -69,7 +74,7 @@ Partial Class frmSetup
         Me.tcSetup.Controls.Add(Me.TabPage1)
         Me.tcSetup.Controls.Add(Me.TabPage2)
         Me.tcSetup.Controls.Add(Me.TabPage3)
-        Me.tcSetup.Location = New System.Drawing.Point(-4, -22)
+        Me.tcSetup.Location = New System.Drawing.Point(-4, -21)
         Me.tcSetup.Margin = New System.Windows.Forms.Padding(0)
         Me.tcSetup.Name = "tcSetup"
         Me.tcSetup.SelectedIndex = 0
@@ -114,7 +119,7 @@ Partial Class frmSetup
         Me.btnT1B2.Name = "btnT1B2"
         Me.btnT1B2.Size = New System.Drawing.Size(75, 23)
         Me.btnT1B2.TabIndex = 1
-        Me.btnT1B2.Text = "Lets go"
+        Me.btnT1B2.Text = ">"
         Me.btnT1B2.UseVisualStyleBackColor = True
         '
         'Label1
@@ -129,13 +134,17 @@ Partial Class frmSetup
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Label3)
+        Me.TabPage2.Controls.Add(Me.TrackBar1)
+        Me.TabPage2.Controls.Add(Me.Button3)
+        Me.TabPage2.Controls.Add(Me.Label8)
+        Me.TabPage2.Controls.Add(Me.cbAllowSpectators)
         Me.TabPage2.Controls.Add(Me.Label7)
         Me.TabPage2.Controls.Add(Me.Button2)
         Me.TabPage2.Controls.Add(Me.tbPort)
         Me.TabPage2.Controls.Add(Me.Label6)
         Me.TabPage2.Controls.Add(Me.btnT2B1)
         Me.TabPage2.Controls.Add(Me.cbNetworks)
-        Me.TabPage2.Controls.Add(Me.Label3)
         Me.TabPage2.Controls.Add(Me.Label2)
         Me.TabPage2.Controls.Add(Me.tbPlayerName)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
@@ -145,6 +154,24 @@ Partial Class frmSetup
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(112, 3)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(86, 13)
+        Me.Label8.TabIndex = 10
+        Me.Label8.Text = "Allow Spectators"
+        '
+        'cbAllowSpectators
+        '
+        Me.cbAllowSpectators.FormattingEnabled = True
+        Me.cbAllowSpectators.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cbAllowSpectators.Location = New System.Drawing.Point(115, 19)
+        Me.cbAllowSpectators.Name = "cbAllowSpectators"
+        Me.cbAllowSpectators.Size = New System.Drawing.Size(83, 21)
+        Me.cbAllowSpectators.TabIndex = 9
         '
         'Label7
         '
@@ -161,14 +188,14 @@ Partial Class frmSetup
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button2.Location = New System.Drawing.Point(9, 168)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(380, 54)
+        Me.Button2.Size = New System.Drawing.Size(387, 54)
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Add Firewall Entry for BEAR and NullDC to Windows Firewall"
         Me.Button2.UseVisualStyleBackColor = False
         '
         'tbPort
         '
-        Me.tbPort.Location = New System.Drawing.Point(9, 98)
+        Me.tbPort.Location = New System.Drawing.Point(204, 20)
         Me.tbPort.Name = "tbPort"
         Me.tbPort.Size = New System.Drawing.Size(100, 20)
         Me.tbPort.TabIndex = 6
@@ -176,11 +203,11 @@ Partial Class frmSetup
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 82)
+        Me.Label6.Location = New System.Drawing.Point(204, 4)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(323, 13)
+        Me.Label6.Size = New System.Drawing.Size(62, 13)
         Me.Label6.TabIndex = 5
-        Me.Label6.Text = "Which port do you want to use? (Usually don't want to change this)"
+        Me.Label6.Text = "NullDC Port"
         '
         'btnT2B1
         '
@@ -188,25 +215,17 @@ Partial Class frmSetup
         Me.btnT2B1.Name = "btnT2B1"
         Me.btnT2B1.Size = New System.Drawing.Size(75, 23)
         Me.btnT2B1.TabIndex = 4
-        Me.btnT2B1.Text = "Next"
+        Me.btnT2B1.Text = "Save"
         Me.btnT2B1.UseVisualStyleBackColor = True
         '
         'cbNetworks
         '
         Me.cbNetworks.FormattingEnabled = True
-        Me.cbNetworks.Location = New System.Drawing.Point(9, 58)
+        Me.cbNetworks.Location = New System.Drawing.Point(455, 168)
         Me.cbNetworks.Name = "cbNetworks"
-        Me.cbNetworks.Size = New System.Drawing.Size(212, 21)
+        Me.cbNetworks.Size = New System.Drawing.Size(39, 21)
         Me.cbNetworks.TabIndex = 3
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 42)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(215, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Which network do you want to kick ass on?"
+        Me.cbNetworks.Visible = False
         '
         'Label2
         '
@@ -245,7 +264,7 @@ Partial Class frmSetup
         Me.btnT3B2.Name = "btnT3B2"
         Me.btnT3B2.Size = New System.Drawing.Size(72, 23)
         Me.btnT3B2.TabIndex = 4
-        Me.btnT3B2.Text = "Back"
+        Me.btnT3B2.Text = "<"
         Me.btnT3B2.UseVisualStyleBackColor = True
         '
         'btnT3B3
@@ -254,7 +273,7 @@ Partial Class frmSetup
         Me.btnT3B3.Name = "btnT3B3"
         Me.btnT3B3.Size = New System.Drawing.Size(109, 23)
         Me.btnT3B3.TabIndex = 3
-        Me.btnT3B3.Text = "Done and Done"
+        Me.btnT3B3.Text = "Lets Go!"
         Me.btnT3B3.UseVisualStyleBackColor = True
         '
         'btnT3B1
@@ -295,6 +314,35 @@ Partial Class frmSetup
         Me.Panel1.Size = New System.Drawing.Size(500, 227)
         Me.Panel1.TabIndex = 3
         '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.Red
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button3.Location = New System.Drawing.Point(9, 46)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(295, 40)
+        Me.Button3.TabIndex = 11
+        Me.Button3.Text = "Controls"
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'TrackBar1
+        '
+        Me.TrackBar1.Location = New System.Drawing.Point(449, 20)
+        Me.TrackBar1.Name = "TrackBar1"
+        Me.TrackBar1.Orientation = System.Windows.Forms.Orientation.Vertical
+        Me.TrackBar1.Size = New System.Drawing.Size(45, 142)
+        Me.TrackBar1.TabIndex = 12
+        Me.TrackBar1.TickStyle = System.Windows.Forms.TickStyle.Both
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(450, 8)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(42, 13)
+        Me.Label3.TabIndex = 13
+        Me.Label3.Text = "Volume"
+        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -315,6 +363,7 @@ Partial Class frmSetup
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
         Me.Panel1.ResumeLayout(False)
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -331,7 +380,6 @@ Partial Class frmSetup
     Friend WithEvents Label2 As Label
     Friend WithEvents tbPlayerName As TextBox
     Friend WithEvents cbNetworks As ComboBox
-    Friend WithEvents Label3 As Label
     Friend WithEvents btnT2B1 As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
@@ -343,4 +391,9 @@ Partial Class frmSetup
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents cbAllowSpectators As ComboBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents TrackBar1 As TrackBar
+    Friend WithEvents Label3 As Label
 End Class
