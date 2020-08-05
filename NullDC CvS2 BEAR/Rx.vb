@@ -26,11 +26,11 @@ Module Rx
         If File.Exists(EEPROMPath) Then
             File.SetAttributes(EEPROMPath, FileAttributes.Normal)
             If File.Exists(EEPROMPath_backup) Then
-                File.SetAttributes(EEPROMPath_backup, FileAttributes.Normal)
-                File.Delete(EEPROMPath_backup)
+                File.SetAttributes(EEPROMPath, FileAttributes.Normal)
+                File.Delete(EEPROMPath)
+            Else
+                My.Computer.FileSystem.RenameFile(EEPROMPath, Path.GetFileName(EEPROMPath_backup))
             End If
-            My.Computer.FileSystem.RenameFile(EEPROMPath, Path.GetFileName(EEPROMPath_backup))
-
         End If
 
         If Not EEPROMString = "" Then
@@ -40,8 +40,12 @@ Module Rx
                 EEPROMasByte(i) = Convert.ToByte(EEPROMString.Substring(i * 2, 2), 16)
             Next
             File.WriteAllBytes(EEPROMPath, EEPROMasByte)
+        Else
+            If File.Exists(EEPROMPath) Then
+                File.SetAttributes(EEPROMPath, FileAttributes.Normal)
+                File.Delete(EEPROMPath)
+            End If
         End If
-
 
     End Sub
 

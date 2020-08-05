@@ -108,6 +108,10 @@ Public Class frmReplays
             MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(1)
             MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(2)
 
+            ' Write the EEPROM OF THE THING
+            Dim eeprom As String() = FileAsStrings.Split(New String() {"|eeprom|"}, StringSplitOptions.RemoveEmptyEntries)
+            Rx.WriteEEPROM(eeprom(1), MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1))
+
             MainformRef.NullDCLauncher.LaunchDC(FileStringSplitUp(4), FileStringSplitUp(5))
         Catch ex As Exception
             MainformRef.ConfigFile.Status = MainformRef.Configfile.awaystatus

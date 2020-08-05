@@ -64,7 +64,7 @@ Partial Class frmMain
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(388, 442)
+        Me.Button1.Location = New System.Drawing.Point(386, 420)
         Me.Button1.Margin = New System.Windows.Forms.Padding(0)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 26)
@@ -235,11 +235,11 @@ Partial Class frmMain
         Me.btnSetup.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSetup.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSetup.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnSetup.Location = New System.Drawing.Point(388, 420)
+        Me.btnSetup.Location = New System.Drawing.Point(505, 422)
         Me.btnSetup.Name = "btnSetup"
         Me.btnSetup.Size = New System.Drawing.Size(75, 23)
         Me.btnSetup.TabIndex = 8
-        Me.btnSetup.Text = "Setup"
+        Me.btnSetup.Text = "Options"
         Me.btnSetup.UseVisualStyleBackColor = False
         '
         'Panel1

@@ -52,7 +52,7 @@ Partial Class frmSetup
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(275, 126)
+        Me.Button1.Location = New System.Drawing.Point(275, 157)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(164, 23)
         Me.Button1.TabIndex = 3
@@ -148,7 +148,7 @@ Partial Class frmSetup
         'cbNetworks
         '
         Me.cbNetworks.FormattingEnabled = True
-        Me.cbNetworks.Location = New System.Drawing.Point(445, 126)
+        Me.cbNetworks.Location = New System.Drawing.Point(531, 112)
         Me.cbNetworks.Name = "cbNetworks"
         Me.cbNetworks.Size = New System.Drawing.Size(39, 21)
         Me.cbNetworks.TabIndex = 3

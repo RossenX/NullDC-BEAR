@@ -295,27 +295,19 @@ Public Class NaomiLauncher
         Dim nvmemPathBackup = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
 
         Try
-            If File.Exists(nvmemPath) Then ' nvmem exists... shocker.
-
-                If File.Exists(nvmemPathBackup) Then ' Backup Exists nullDC probably crashed or something
-                    ' Delete w.e nvmem is currenly in there, leave backup
+            If File.Exists(nvmemPath) Then
+                If File.Exists(nvmemPathBackup) Then
                     File.SetAttributes(nvmemPath, FileAttributes.Normal)
                     File.Delete(nvmemPath)
-
                 Else
-                    ' No backup, so backup the nvmem
                     File.SetAttributes(nvmemPath, FileAttributes.Normal)
                     My.Computer.FileSystem.RenameFile(nvmemPath, "naomi_nvmem.bin_backup")
                     File.SetAttributes(nvmemPathBackup, FileAttributes.ReadOnly)
-
                 End If
-
             Else
                 Console.WriteLine("No nvmem, we all good")
-
             End If
         Catch ex As Exception
-            'In case nvmrm couldn't be deleted for w.e reason just give em a message about it and continue
             MsgBox("Couldn't backup nvmem: " & ex.Message)
         End Try
 
