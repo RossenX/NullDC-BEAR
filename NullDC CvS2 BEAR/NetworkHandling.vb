@@ -52,7 +52,7 @@ Public Class NetworkHandling
         Console.WriteLine("<-SendMessage->" & message & "->" & SendtoIP)
 
         ' Don't send any I AM messages if you are hidden, but send everything else.
-        If message.StartsWith("<") And Rx.PreferedStatus = "Hidden" Then
+        If message.StartsWith("<") And MainformRef.ConfigFile.AwayStatus = "Hidden" Then
             Exit Sub
         End If
 
@@ -99,7 +99,7 @@ Public Class NetworkHandling
         ' Get the message string
         message = Split(1)
 
-        If message.StartsWith("!") And Rx.PreferedStatus = "DND" Then
+        If message.StartsWith("!") And MainformRef.ConfigFile.AwayStatus = "DND" Then
             SendMessage(">,DND", senderip)
             Exit Sub
         End If
@@ -261,10 +261,10 @@ Public Class NetworkHandling
         ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5),<region>(6),<EEPROM>(7) EEPROM HANDLING NOT YET IMPLEMENTED
         If message.StartsWith("$") Then
             Console.WriteLine("<-Host Started->" & message)
-            Dim INVOKATION As JoinHost_delegate = AddressOf MainFormRef.JoinHost
+            Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
+            Dim eeprom As String() = message.Split(New String() {",eeprom,"}, StringSplitOptions.RemoveEmptyEntries)
             Dim delay As Int16 = CInt(Split(5))
-            'Dim EEPROM As Byte() = Encoding.ASCII.GetBytes(message.Split("|EEPROM|")(1))
-            MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6)})
+            MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), eeprom(1)})
             Exit Sub
         End If
 

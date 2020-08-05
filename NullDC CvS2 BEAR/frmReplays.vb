@@ -107,9 +107,10 @@ Public Class frmReplays
             MainformRef.ConfigFile.SaveFile()
             MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(1)
             MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(2)
+
             MainformRef.NullDCLauncher.LaunchDC(FileStringSplitUp(4), FileStringSplitUp(5))
         Catch ex As Exception
-            MainformRef.ConfigFile.Status = MainformRef.cbStatus.Text
+            MainformRef.ConfigFile.Status = MainformRef.Configfile.awaystatus
             MainformRef.ConfigFile.Game = "None"
             MainformRef.ConfigFile.ReplayFile = ""
             MainformRef.ConfigFile.SaveFile()

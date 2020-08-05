@@ -89,6 +89,12 @@
     End Sub
 
     Private Sub frmChallengeGameSelect_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        Dim wavePlayer As New NAudio.Wave.WaveOut
+        Dim ChallangeSound As New NAudio.Wave.WaveFileReader(My.Resources.NewChallanger)
+        wavePlayer.Init(ChallangeSound)
+        wavePlayer.Volume = MainformRef.ConfigFile.Volume / 100
+        wavePlayer.Play()
+
         If Visible Then
             If Not _Challenger Is Nothing Then
                 cbHostType.Visible = False
@@ -124,7 +130,7 @@
                 cbHostType.SelectedIndex = 1
             End If
 
-            tbFPS.Text = MainFormRef.ConfigFile.FPSLimit
+            tbFPS.Text = MainformRef.ConfigFile.FPSLimit
             Me.CenterToParent()
         Else
             _Challenger = Nothing

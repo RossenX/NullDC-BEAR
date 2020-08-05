@@ -3,19 +3,12 @@ Imports System.Net.NetworkInformation
 
 Public Class frmSetup
 
+    Dim wavePlayer As New NAudio.Wave.WaveOut
+
     Private Sub frmSetup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
-        If Not Rx.MainformRef.ConfigFile.FirstRun Then
-            Label1.Text = "Oh hey again, what's up? Missed a setting or something?"
-            Label1.Refresh()
-            btnT1B1.Visible = False
-            btnT1B2.Text = "Yus"
-            tcSetup.SelectedIndex = 1
-
-            FillSettings()
-
-        End If
         Me.CenterToParent()
+        FillSettings()
     End Sub
 
     Private Sub FillSettings()
@@ -23,6 +16,7 @@ Public Class frmSetup
         For Each NetworkName As String In GetNetworkNames()
             cbNetworks.Items.Add(NetworkName)
         Next
+        tb_Volume.Value = MainformRef.ConfigFile.Volume
         cbNetworks.Text = Rx.MainformRef.ConfigFile.Network
         tbPort.Text = Rx.MainformRef.ConfigFile.Port
         If MainformRef.ConfigFile.AllowSpectators = 1 Then
@@ -30,13 +24,6 @@ Public Class frmSetup
         Else
             cbAllowSpectators.Text = "No"
         End If
-    End Sub
-
-
-    Private Sub btnT1B2_Click(sender As Object, e As EventArgs) Handles btnT1B2.Click
-        tcSetup.SelectedIndex += 1
-        FillSettings()
-
     End Sub
 
     Private Function GetNetworkNames() As ArrayList
@@ -55,15 +42,11 @@ Public Class frmSetup
         Return networkNames
     End Function
 
-    Private Sub btnT1B1_Click(sender As Object, e As EventArgs) Handles btnT1B1.Click
-        End
-    End Sub
-
-    Private Sub btnT2B1_Click(sender As Object, e As EventArgs) Handles btnT2B1.Click
-        Rx.MainformRef.ConfigFile.Name = tbPlayerName.Text
-        Rx.MainformRef.ConfigFile.Network = cbNetworks.Text
-        Rx.MainformRef.ConfigFile.Port = tbPort.Text
-
+    Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
+        MainformRef.ConfigFile.Name = tbPlayerName.Text
+        MainformRef.ConfigFile.Network = cbNetworks.Text
+        MainformRef.ConfigFile.Port = tbPort.Text
+        MainformRef.ConfigFile.Volume = tb_Volume.Value
 
         ' Get IP
         Dim nics As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
@@ -86,29 +69,7 @@ Public Class frmSetup
 
         Rx.MainformRef.ConfigFile.SaveFile()
         Me.Close()
-        'tcSetup.SelectedIndex += 1
     End Sub
-
-    Private Sub btnT3B2_Click(sender As Object, e As EventArgs) Handles btnT3B2.Click
-        tcSetup.SelectedIndex -= 1
-
-    End Sub
-
-    Private Sub btnT3B3_Click(sender As Object, e As EventArgs) Handles btnT3B3.Click
-        Me.Close()
-        Application.OpenForms(0).Activate()
-
-    End Sub
-
-    Private Sub btnT3B1_Click(sender As Object, e As EventArgs) Handles btnT3B1.Click
-        If Rx.MainformRef.KeyMappingForm.Visible Then
-            Rx.MainformRef.KeyMappingForm.Focus()
-        Else
-            Rx.MainformRef.KeyMappingForm.Show()
-        End If
-
-    End Sub
-
 
 #Region "Text Field Limitation"
     Private Sub tbPlayerName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tbPlayerName.KeyPress
@@ -162,6 +123,21 @@ Public Class frmSetup
         End If
 
     End Sub
+
+    Private Sub tb_Volume_MouseCaptureChanged(sender As Object, e As EventArgs) Handles tb_Volume.MouseCaptureChanged
+        wavePlayer.Dispose()
+        wavePlayer = New NAudio.Wave.WaveOut
+        Dim ChallangeSound As New NAudio.Wave.WaveFileReader(My.Resources.NewChallanger)
+        wavePlayer.Init(ChallangeSound)
+        wavePlayer.Volume = tb_Volume.Value / 100
+        wavePlayer.Play()
+
+    End Sub
+
+    Private Sub frmSetup_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        wavePlayer.Dispose()
+    End Sub
+
 #End Region
 
 End Class

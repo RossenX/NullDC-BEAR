@@ -1,35 +1,62 @@
 ﻿Imports System.IO
+Imports System.Text
 
 Module Rx
-    Public MainformRef As frmMain
-    Public PreferedStatus As String
-    ' yes this is all that there is in this module. It's litterally so i can keep a reference to the main form after i minimize to tray, 
-    ' because APPERANLY minimizing something To tray And removing it from the taskbar makes it lose it's reference in the openforms param.
+    Public MainformRef As frmMain ' Mainly here to have a constatn reference to the main form even after minimzing to tray
 
-    Public Function GetEEPROM(ByVal _romfullpath As String) As Byte()
-        Dim EEPROM As Byte() = {}
+    Public Function GetEEPROM(ByVal _romfullpath As String) As String
         Dim EEPROMPath As String = _romfullpath & ".eeprom"
-        Dim FileBytes As Byte()
+        Dim FileBytes As String
 
         If File.Exists(EEPROMPath) Then
-            FileBytes = File.ReadAllBytes(_romfullpath & ".eeprom")
+            FileBytes = BitConverter.ToString(File.ReadAllBytes(EEPROMPath)).Replace("-", String.Empty)
             Console.WriteLine("Read EEPROM:" & FileBytes.ToString)
         Else
-            Return {}
+            Return ""
         End If
 
         Return FileBytes
     End Function
 
-    Public Sub WriteEEPROM(ByVal _romfullpath As String, ByVal _eeprom As Byte())
-        Dim EEPROMPath As String = MainformRef.NullDCPath & _romfullpath & ".eeprom"
-        Console.WriteLine("Write EEPROM:" & _eeprom.ToString)
+    ' Write the client EEPROM, only used to sync, has no actual use outside of sync
+    Public Sub WriteEEPROM(ByVal EEPROMString As String, ByVal _romfullpath As String)
+        Dim EEPROMPath As String = _romfullpath & ".eeprom"
+        Dim EEPROMPath_backup As String = EEPROMPath & "_backup"
+
         If File.Exists(EEPROMPath) Then
             File.SetAttributes(EEPROMPath, FileAttributes.Normal)
-            File.Delete(EEPROMPath)
+            If File.Exists(EEPROMPath_backup) Then
+                File.SetAttributes(EEPROMPath_backup, FileAttributes.Normal)
+                File.Delete(EEPROMPath_backup)
+            End If
+            My.Computer.FileSystem.RenameFile(EEPROMPath, Path.GetFileName(EEPROMPath_backup))
+
         End If
 
-        File.WriteAllBytes(EEPROMPath, _eeprom)
+        If Not EEPROMString = "" Then
+            Dim nBytes = EEPROMString.Length \ 2
+            Dim EEPROMasByte(nBytes - 1) As Byte
+            For i = 0 To nBytes - 1
+                EEPROMasByte(i) = Convert.ToByte(EEPROMString.Substring(i * 2, 2), 16)
+            Next
+            File.WriteAllBytes(EEPROMPath, EEPROMasByte)
+        End If
+
+
+    End Sub
+
+    Public Sub RestoreEEPROM(ByVal _romfullpath As String)
+        Dim EEPROMPath As String = _romfullpath & ".eeprom"
+        Dim EEPROMPath_backup As String = EEPROMPath & "_backup"
+
+        If File.Exists(EEPROMPath_backup) Then
+            File.SetAttributes(EEPROMPath_backup, FileAttributes.Normal)
+            If File.Exists(EEPROMPath) Then
+                File.SetAttributes(EEPROMPath, FileAttributes.Normal)
+                File.Delete(EEPROMPath)
+            End If
+            My.Computer.FileSystem.RenameFile(EEPROMPath_backup, Path.GetFileName(EEPROMPath))
+        End If
     End Sub
 
 End Module

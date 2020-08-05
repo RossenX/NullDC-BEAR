@@ -180,7 +180,7 @@ Public Class NaomiLauncher
 
             End While
 
-            GameLaunched()
+            GameLaunched(RomPath)
 
         Catch ex As Exception
             MsgBox("Rom Loader Failed, woops.")
@@ -205,7 +205,7 @@ Public Class NaomiLauncher
 
     Private Sub EmulatorExited()
         Console.Write("Emulator Exited")
-        While MainFormRef.IsNullDCRunning
+        While MainformRef.IsNullDCRunning
             Thread.Sleep(10)
         End While
 
@@ -225,7 +225,7 @@ Public Class NaomiLauncher
 
         ' Set State Back to None and Idle since Emulator Closed
         MainFormRef.ConfigFile.Game = "None"
-        MainformRef.ConfigFile.Status = Rx.PreferedStatus
+        MainformRef.ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
         MainformRef.ConfigFile.SaveFile()
         MainFormRef.RemoveChallenger()
         P1Name = ""
@@ -251,17 +251,16 @@ Public Class NaomiLauncher
         End If
     End Sub
 
-    Private Sub GameLaunched()
+    Private Sub GameLaunched(ByVal FullRomPath)
         ' If we're a host then send out call to my partner to join
-        If MainFormRef.ConfigFile.Status = "Hosting" And Not MainFormRef.Challenger Is Nothing Then
-            'Dim EEPROMString As String = GetEEPROM(MainFormRef.GamesList(MainFormRef.ConfigFile.Game)(1)).ToString
-            MainFormRef.NetworkHandler.SendMessage("$," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & MainFormRef.ConfigFile.Game & "," & MainFormRef.ConfigFile.Delay & "," & Region, MainFormRef.Challenger.ip)
+        If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
+            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.GetEEPROM(FullRomPath), MainformRef.Challenger.ip)
         End If
 
         ' Game is loaded, might as well delete the boot don't need it anymore
-        If File.Exists(MainFormRef.NullDCPath & "\data\naomi_boot.bin") Then
-            File.SetAttributes(MainFormRef.NullDCPath & "\data\naomi_boot.bin", FileAttributes.Normal)
-            File.Delete(MainFormRef.NullDCPath & "\data\naomi_boot.bin")
+        If File.Exists(MainformRef.NullDCPath & "\data\naomi_boot.bin") Then
+            File.SetAttributes(MainformRef.NullDCPath & "\data\naomi_boot.bin", FileAttributes.Normal)
+            File.Delete(MainformRef.NullDCPath & "\data\naomi_boot.bin")
 
         End If
 
@@ -288,6 +287,8 @@ Public Class NaomiLauncher
         Catch ex As Exception
             MsgBox("Couldn't restore nvmem: " & ex.Message)
         End Try
+
+        Rx.RestoreEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1))
 
     End Sub
 
@@ -319,20 +320,6 @@ Public Class NaomiLauncher
         Catch ex As Exception
             'In case nvmrm couldn't be deleted for w.e reason just give em a message about it and continue
             MsgBox("Couldn't backup nvmem: " & ex.Message)
-
-        End Try
-
-        '' EEPROM
-        Try
-            Dim EEPROMPATH = MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1) & ".eeprom"
-            Console.WriteLine(EEPROMPATH)
-            If File.Exists(EEPROMPATH) Then
-                File.SetAttributes(EEPROMPATH, FileAttributes.Normal)
-                'File.Delete(EEPROMPATH)
-            End If
-            Dim a = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1))
-        Catch ex As Exception
-            MsgBox("Couldn't remove eeprom, possible desync: " & ex.Message)
         End Try
 
     End Sub
@@ -471,7 +458,7 @@ Public Class NaomiLauncher
             If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
-            If line.StartsWith("Enhancements.AspectRatioMode=") Then lines(linenumber) = "Enhancements.AspectRatioMode=1"
+            'If line.StartsWith("Enhancements.AspectRatioMode=") Then lines(linenumber) = "Enhancements.AspectRatioMode=1"
 
             ' [nullAica]
             If line.StartsWith("BufferSize=") Then lines(linenumber) = "BufferSize=2048"

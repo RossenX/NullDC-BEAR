@@ -58,7 +58,6 @@ Public Class frmMain
         CheckFilesAndShit()
         ConfigFile = New Configs(NullDCPath)
         cbStatus.Text = ConfigFile.Status
-        Rx.PreferedStatus = cbStatus.Text
 
         ' Update Stuff
         AddHandler UpdateCheckClient.DownloadStringCompleted, AddressOf UpdateCheckResult
@@ -66,8 +65,8 @@ Public Class frmMain
 
         ' Create all the usual shit
         InputHandler = New InputHandling(Me)
-        KeyMappingForm = New frmKeyMapping(Me)
         NetworkHandler = New NetworkHandling(Me)
+        KeyMappingForm = New frmKeyMapping(Me)
         NullDCLauncher = New NaomiLauncher(Me)
 
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
@@ -77,24 +76,12 @@ Public Class frmMain
 
         If GamesList.Count = 0 Then
             NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
-            'End
         End If
 
-        ' turn on cfg watcher so we can redo the keybinds if they change
         CreateCFGWatcher()
         CreateRomFolderWatcher()
-        ' This is to create a window handle for on-the-fly keybind changing in emulator
         'KeyMappingForm.Show(Me)
         KeyMappingForm.Hide()
-        Joined_Bear()
-    End Sub
-
-    Private Sub Joined_Bear()
-
-        If Not MainformRef.NetworkHandler Is Nothing Then
-            MainformRef.NetworkHandler.SendMessage("<," & ConfigFile.Name & "," & ConfigFile.IP & "," & ConfigFile.Port & ",None," & ConfigFile.Status)
-        End If
-
     End Sub
 
     Dim RomFolderWatcher As FileSystemWatcher
@@ -327,7 +314,8 @@ Public Class frmMain
             Not File.Exists(NullDCPath & "\XInputDotNetPure.dll") Or
             Not File.Exists(NullDCPath & "\OpenTK.dll") Or
             Not File.Exists(NullDCPath & "\SDL2.dll") Or
-            Not File.Exists(NullDCPath & "\SDL2_net.dll") Then
+            Not File.Exists(NullDCPath & "\SDL2_net.dll") Or
+            Not File.Exists(NullDCPath & "\NAudio.dll") Then
             UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
         End If
 
@@ -403,7 +391,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        ConfigFile.Status = cbStatus.Text
+        ConfigFile.Status = ConfigFile.AwayStatus
         ConfigFile.SaveFile()
 
         NetworkHandler.SendMessage("&")
@@ -436,9 +424,10 @@ Public Class frmMain
 
     End Sub
 
-    Public Delegate Sub JoinHost_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String)
-    Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String)
+    Public Delegate Sub JoinHost_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _eeprom As String)
+    Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _eeprom As String)
         If WaitingForm.Visible Then WaitingForm.Visible = False
+        Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
         Challenger = New NullDCPlayer(_name, _ip, _port, _game)
         ConfigFile.Host = _ip
         ConfigFile.Port = _port
@@ -563,7 +552,7 @@ Public Class frmMain
                     RemoveChallenger() ' Remove Challenger Data in case we have any
                     ' Set game to none and back to idle
                     ConfigFile.Game = "None"
-                    ConfigFile.Status = MainformRef.cbStatus.Text
+                    ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
                     ConfigFile.SaveFile()
                 Case "New Challenger" ' This is fired when you accept to fight a new challanger
                     Console.Write("New Challanger")
@@ -582,12 +571,12 @@ Public Class frmMain
                 Case "Denied", "TO" ' T/O or Denied
                     RemoveChallenger()
                     ConfigFile.Game = "None"
-                    ConfigFile.Status = MainformRef.cbStatus.Text
+                    ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
                     ConfigFile.SaveFile()
                 Case "Host Canceled" ' You were hosting but then you stopped Clear the game info
                     RemoveChallenger()
                     ConfigFile.Game = "None"
-                    ConfigFile.Status = MainformRef.cbStatus.Text
+                    ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
                     ConfigFile.SaveFile()
                 Case "New Host" ' You started a new host Just close the nullDC if it's open, disable raising it's event
                     If IsNullDCRunning() Then
@@ -689,7 +678,7 @@ Public Class frmMain
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
 
             ConfigFile.Game = "None"
-            ConfigFile.Status = MainformRef.cbStatus.Text
+            ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
             ConfigFile.SaveFile()
         End If
 
@@ -859,6 +848,13 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+
+        Matchlist.Columns(0).Width = Matchlist.Width * 0.32
+        Matchlist.Columns(1).Width = 0
+        Matchlist.Columns(2).Width = Matchlist.Width * 0.11
+        Matchlist.Columns(3).Width = Matchlist.Width * 0.39
+        Matchlist.Columns(4).Width = Matchlist.Width * 0.18 - 25
+
         If Me.WindowState = FormWindowState.Minimized Then
             niBEAR.Visible = True
             niBEAR.BalloonTipIcon = ToolTipIcon.None
@@ -901,12 +897,22 @@ Public Class frmMain
 
     Private Sub cbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStatus.SelectedIndexChanged
         If Not NetworkHandler Is Nothing Then
-            ConfigFile.Status = cbStatus.Text
-            ConfigFile.SaveFile()
+            Dim ShouldSave = False
+            Dim ShouldSendIamAgain = False
+            If ConfigFile.AwayStatus = "Hidden" And Not cbStatus.Text = "Hidden" Then ShouldSendIamAgain = True
+            If ConfigFile.Status = ConfigFile.AwayStatus Then ShouldSave = True
 
-            If ConfigFile.Status = "Hidden" Then
+            ConfigFile.AwayStatus = cbStatus.Text
+
+            If ShouldSave Then
+                ConfigFile.Status = cbStatus.Text
+                ConfigFile.SaveFile()
+            End If
+
+            If ConfigFile.AwayStatus = "Hidden" Then
                 NetworkHandler.SendMessage("&")
             End If
+
         End If
         ActiveControl = Nothing
     End Sub
@@ -950,7 +956,8 @@ Public Class Configs
     Private _recordreplay As Int16 = 0
     Private _ReplayFile As String = ""
     Private _allowSpectators As Int16 = 1
-    Private _beta As Int16 = 0
+    Private _awaystatus As String = "Idle"
+    Private _volume As Int16 = 100
 
 #Region "Properties"
 
@@ -1108,12 +1115,21 @@ Public Class Configs
         End Set
     End Property
 
-    Public Property Beta() As Int16
+    Public Property AwayStatus() As String
         Get
-            Return _beta
+            Return _awaystatus
+        End Get
+        Set(ByVal value As String)
+            _awaystatus = value
+        End Set
+    End Property
+
+    Public Property Volume() As Int16
+        Get
+            Return _volume
         End Get
         Set(ByVal value As Int16)
-            _beta = value
+            _volume = value
         End Set
     End Property
 
@@ -1140,94 +1156,57 @@ Public Class Configs
                 "RecordReplay=" & RecordReplay,
                 "ReplayFile=" & ReplayFile,
                 "AllowSpectators=" & AllowSpectators,
-                "Beta=" & Beta
+                "AwayStatus=" & AwayStatus,
+                "Volume=" & Volume
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
-        ' Send Updated List To Other People
         Dim GameNameAndRomName = "None"
         If Not Game = "None" Then
             GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
         End If
 
-        If MainformRef.cbStatus.InvokeRequired Then
-            MainformRef.cbStatus.Invoke(Sub() Rx.PreferedStatus = MainformRef.cbStatus.Text)
-        Else
-            Rx.PreferedStatus = MainformRef.cbStatus.Text
-        End If
-
-
         If Not MainformRef.NetworkHandler Is Nothing Then
-            If Rx.PreferedStatus = "Hidden" Then
+            If AwayStatus = "Hidden" Then
                 MainformRef.NetworkHandler.SendMessage("&")
             Else
                 MainformRef.NetworkHandler.SendMessage("<," & Name & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
             End If
-
         End If
-
     End Sub
 
     Public Sub New(ByRef NullDCPath As String)
 
-        'Check Config FIle
         If Not File.Exists(NullDCPath & "\NullDC_BEAR.cfg") Then
             FirstRun = True
-            ' Save That Shit
             SaveFile()
         Else
             FirstRun = False
-            ' Not first Run but has different version Configs
             Dim thefile = NullDCPath & "\NullDC_BEAR.cfg"
             Dim lines() As String = File.ReadAllLines(thefile)
-
-            If Not lines(1).Split("=")(1).Trim = frmMain.Ver Then
-                ' This is when they already have a version of the Config file so lets try to get as much info from it as we can before we create a proper one
-                For Each line As String In lines
-                    If line.Contains("Name") Then Name = line.Split("=")(1).Trim
-                    If line.Contains("Network") Then Network = line.Split("=")(1).Trim
-                    If line.Contains("Port") Then Port = line.Split("=")(1).Trim
-                    If line.Contains("Reclaw") Then UseRemap = line.Split("=")(1).Trim
-                    If line.Contains("IP") Then IP = line.Split("=")(1).Trim
-                    If line.Contains("Host") Then Host = line.Split("=")(1).Trim
-                    If line.Contains("Delay") Then Delay = line.Split("=")(1).Trim
-                    If line.Contains("HostType") Then HostType = line.Split("=")(1).Trim
-                    If line.Contains("FPSLimit") Then FPSLimit = line.Split("=")(1).Trim
-                    If line.Contains("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
-                    If line.Contains("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim
-                    If line.Contains("ReplayFile") Then ReplayFile = line.Split("=")(1).Trim
-                    If line.Contains("AllowSpectators") Then AllowSpectators = line.Split("=")(1).Trim
-                    If line.Contains("Beta") Then Beta = line.Split("=")(1).Trim
-                    If line.Contains("Status") Then Status = line.Split("=")(1).Trim
-
-                Next
-                Game = "None"
-                SaveFile()
-                Exit Sub
-
-            Else
-                Version = lines(1).Split("=")(1).Trim
-                Name = lines(2).Split("=")(1).Trim
-                Network = lines(3).Split("=")(1).Trim
-                Port = lines(4).Split("=")(1).Trim
-                UseRemap = lines(5).Split("=")(1).Trim
-                IP = lines(6).Split("=")(1).Trim
-                Host = lines(7).Split("=")(1).Trim
-                Status = lines(8).Split("=")(1).Trim
-                Delay = lines(9).Split("=")(1).Trim
-                Game = "None"
-                HostType = lines(11).Split("=")(1).Trim
-                FPSLimit = lines(12).Split("=")(1).Trim
-                KeyMapProfile = lines(13).Split("=")(1).Trim
-                RecordReplay = lines(14).Split("=")(1).Trim
-                ReplayFile = lines(15).Split("=")(1).Trim
-                AllowSpectators = lines(16).Split("=")(1).Trim
-                Beta = lines(17).Split("=")(1).Trim
-
-            End If
-
-
+            For Each line As String In lines
+                If line.Contains("Name") Then Name = line.Split("=")(1).Trim
+                If line.Contains("Network") Then Network = line.Split("=")(1).Trim
+                If line.Contains("Port") Then Port = line.Split("=")(1).Trim
+                If line.Contains("Reclaw") Then UseRemap = line.Split("=")(1).Trim
+                If line.Contains("IP") Then IP = line.Split("=")(1).Trim
+                If line.Contains("Host") Then Host = line.Split("=")(1).Trim
+                If line.Contains("Delay") Then Delay = line.Split("=")(1).Trim
+                If line.Contains("HostType") Then HostType = line.Split("=")(1).Trim
+                If line.Contains("FPSLimit") Then FPSLimit = line.Split("=")(1).Trim
+                If line.Contains("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
+                If line.Contains("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim
+                If line.Contains("ReplayFile") Then ReplayFile = line.Split("=")(1).Trim
+                If line.Contains("AllowSpectators") Then AllowSpectators = line.Split("=")(1).Trim
+                If line.Contains("AwayStatus") Then
+                    AwayStatus = line.Split("=")(1).Trim
+                    Status = line.Split("=")(1).Trim
+                End If
+                If line.Contains("Volume") Then Volume = line.Split("=")(1).Trim
+            Next
+            Game = "None"
+            SaveFile()
+            Exit Sub
         End If
-
     End Sub
 
 End Class
