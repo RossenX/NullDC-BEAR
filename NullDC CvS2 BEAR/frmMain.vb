@@ -67,6 +67,7 @@ Public Class frmMain
         InputHandler = New InputHandling(Me)
         NetworkHandler = New NetworkHandling(Me)
         KeyMappingForm = New frmKeyMapping(Me)
+        'KeyMappingForm.Hide()
         NullDCLauncher = New NaomiLauncher(Me)
 
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
@@ -80,8 +81,6 @@ Public Class frmMain
 
         CreateCFGWatcher()
         CreateRomFolderWatcher()
-        'KeyMappingForm.Show(Me)
-        KeyMappingForm.Hide()
     End Sub
 
     Dim RomFolderWatcher As FileSystemWatcher
@@ -1160,16 +1159,19 @@ Public Class Configs
                 "Volume=" & Volume
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
-        Dim GameNameAndRomName = "None"
-        If Not Game = "None" Then
-            GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
-        End If
 
         If Not MainformRef.NetworkHandler Is Nothing Then
             If AwayStatus = "Hidden" Then
                 MainformRef.NetworkHandler.SendMessage("&")
             Else
-                MainformRef.NetworkHandler.SendMessage("<," & Name & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
+
+                Dim GameNameAndRomName = "None"
+                If Not Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
+
+                Dim NameToSend As String = Name
+                If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " Vs " & MainformRef.Challenger.name
+
+                MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
             End If
         End If
     End Sub

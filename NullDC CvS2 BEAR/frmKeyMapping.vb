@@ -17,6 +17,7 @@ Public Class frmKeyMapping
         InitializeComponent()
         CalibrationForm = New frmCalibration(MainForm)
         Me.Show()
+        Me.Hide()
     End Sub
 
     Private Sub StartKeyBind(_KeyToBind As String)

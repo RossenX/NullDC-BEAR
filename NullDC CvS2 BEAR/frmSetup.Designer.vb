@@ -29,7 +29,6 @@ Partial Class frmSetup
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.cbAllowSpectators = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.tbPort = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -53,7 +52,7 @@ Partial Class frmSetup
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(275, 112)
+        Me.Button1.Location = New System.Drawing.Point(275, 126)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(164, 23)
         Me.Button1.TabIndex = 3
@@ -63,7 +62,7 @@ Partial Class frmSetup
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(693, 19)
+        Me.Label3.Location = New System.Drawing.Point(614, 19)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(42, 13)
         Me.Label3.TabIndex = 13
@@ -71,11 +70,11 @@ Partial Class frmSetup
         '
         'tb_Volume
         '
-        Me.tb_Volume.Location = New System.Drawing.Point(696, 35)
+        Me.tb_Volume.Location = New System.Drawing.Point(617, 34)
         Me.tb_Volume.Maximum = 100
         Me.tb_Volume.Name = "tb_Volume"
         Me.tb_Volume.Orientation = System.Windows.Forms.Orientation.Vertical
-        Me.tb_Volume.Size = New System.Drawing.Size(45, 142)
+        Me.tb_Volume.Size = New System.Drawing.Size(45, 146)
         Me.tb_Volume.TabIndex = 12
         Me.tb_Volume.TickFrequency = 10
         Me.tb_Volume.TickStyle = System.Windows.Forms.TickStyle.Both
@@ -102,6 +101,7 @@ Partial Class frmSetup
         '
         'cbAllowSpectators
         '
+        Me.cbAllowSpectators.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbAllowSpectators.FormattingEnabled = True
         Me.cbAllowSpectators.Items.AddRange(New Object() {"Yes", "No"})
         Me.cbAllowSpectators.Location = New System.Drawing.Point(487, 34)
@@ -109,22 +109,13 @@ Partial Class frmSetup
         Me.cbAllowSpectators.Size = New System.Drawing.Size(83, 21)
         Me.cbAllowSpectators.TabIndex = 9
         '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(275, 170)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(390, 13)
-        Me.Label7.TabIndex = 8
-        Me.Label7.Text = "If you're having trouble connecting or hosting, CLICK THE BIG GREEN BUTTON"
-        '
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.Color.Lime
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button2.Location = New System.Drawing.Point(275, 186)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(387, 54)
+        Me.Button2.Size = New System.Drawing.Size(306, 54)
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Add Firewall Entry for BEAR and NullDC to Windows Firewall"
         Me.Button2.UseVisualStyleBackColor = False
@@ -147,9 +138,9 @@ Partial Class frmSetup
         '
         'btnSaveExit
         '
-        Me.btnSaveExit.Location = New System.Drawing.Point(668, 217)
+        Me.btnSaveExit.Location = New System.Drawing.Point(587, 186)
         Me.btnSaveExit.Name = "btnSaveExit"
-        Me.btnSaveExit.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveExit.Size = New System.Drawing.Size(75, 54)
         Me.btnSaveExit.TabIndex = 4
         Me.btnSaveExit.Text = "Save"
         Me.btnSaveExit.UseVisualStyleBackColor = True
@@ -157,7 +148,7 @@ Partial Class frmSetup
         'cbNetworks
         '
         Me.cbNetworks.FormattingEnabled = True
-        Me.cbNetworks.Location = New System.Drawing.Point(696, 177)
+        Me.cbNetworks.Location = New System.Drawing.Point(445, 126)
         Me.cbNetworks.Name = "cbNetworks"
         Me.cbNetworks.Size = New System.Drawing.Size(39, 21)
         Me.cbNetworks.TabIndex = 3
@@ -183,7 +174,7 @@ Partial Class frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(752, 250)
+        Me.ClientSize = New System.Drawing.Size(670, 250)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.cbNetworks)
@@ -192,7 +183,6 @@ Partial Class frmSetup
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.tbPort)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button3)
@@ -219,7 +209,6 @@ Partial Class frmSetup
     Friend WithEvents Label6 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
-    Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents cbAllowSpectators As ComboBox
     Friend WithEvents Button3 As Button

@@ -224,24 +224,21 @@ Public Class NaomiLauncher
         DoNotSendNextExitEvent = False
 
         ' Set State Back to None and Idle since Emulator Closed
-        MainFormRef.ConfigFile.Game = "None"
+        MainformRef.RemoveChallenger()
+        MainformRef.ConfigFile.Game = "None"
         MainformRef.ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
         MainformRef.ConfigFile.SaveFile()
-        MainFormRef.RemoveChallenger()
         P1Name = ""
         P2Name = ""
     End Sub
 
     Private Sub StartEmulator(ByVal RomName As String)
-        ' Override settings to new ones to make sure everyone matches
-        ' File.WriteAllBytes(MainFormRef.NullDCPath & "\nullDC.cfg", My.Resources.nullDC)
-        ' Change what settings need changing inthe cfg
         ChangeSettings()
 
-        NullDCproc = Process.Start(MainFormRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
+        NullDCproc = Process.Start(MainformRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
-        LoadRom(MainFormRef.NullDCPath & MainFormRef.GamesList(RomName)(1))
+        LoadRom(MainformRef.NullDCPath & MainformRef.GamesList(RomName)(1))
 
     End Sub
 
