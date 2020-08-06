@@ -262,7 +262,7 @@ Public Class NetworkHandling
         If message.StartsWith("$") Then
             Console.WriteLine("<-Host Started->" & message)
             Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
-            Dim eeprom As String() = message.Split(New String() {",eeprom,"}, StringSplitOptions.RemoveEmptyEntries)
+            Dim eeprom As String() = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)
             Dim delay As Int16 = CInt(Split(5))
             MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), eeprom(1)})
             Exit Sub

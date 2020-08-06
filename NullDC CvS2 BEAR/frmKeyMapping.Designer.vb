@@ -79,6 +79,7 @@ Partial Class frmKeyMapping
         Me.btnup.Name = "btnup"
         Me.btnup.Size = New System.Drawing.Size(75, 75)
         Me.btnup.TabIndex = 0
+        Me.btnup.TabStop = False
         Me.btnup.Text = "UP"
         Me.btnup.UseVisualStyleBackColor = False
         '
@@ -92,6 +93,7 @@ Partial Class frmKeyMapping
         Me.btnright.Name = "btnright"
         Me.btnright.Size = New System.Drawing.Size(75, 75)
         Me.btnright.TabIndex = 1
+        Me.btnright.TabStop = False
         Me.btnright.Text = "Right"
         Me.btnright.UseVisualStyleBackColor = False
         '
@@ -105,6 +107,7 @@ Partial Class frmKeyMapping
         Me.btndown.Name = "btndown"
         Me.btndown.Size = New System.Drawing.Size(75, 75)
         Me.btndown.TabIndex = 2
+        Me.btndown.TabStop = False
         Me.btndown.Text = "Down"
         Me.btndown.UseVisualStyleBackColor = False
         '
@@ -118,6 +121,7 @@ Partial Class frmKeyMapping
         Me.btnleft.Name = "btnleft"
         Me.btnleft.Size = New System.Drawing.Size(75, 75)
         Me.btnleft.TabIndex = 3
+        Me.btnleft.TabStop = False
         Me.btnleft.Text = "Left"
         Me.btnleft.UseVisualStyleBackColor = False
         '
@@ -151,6 +155,7 @@ Partial Class frmKeyMapping
         Me.btnCalibrate.Name = "btnCalibrate"
         Me.btnCalibrate.Size = New System.Drawing.Size(65, 65)
         Me.btnCalibrate.TabIndex = 4
+        Me.btnCalibrate.TabStop = False
         Me.btnCalibrate.Text = "Calibrate Axis Triggers"
         Me.btnCalibrate.UseVisualStyleBackColor = False
         '
@@ -187,6 +192,7 @@ Partial Class frmKeyMapping
         Me.btnlp.Name = "btnlp"
         Me.btnlp.Size = New System.Drawing.Size(123, 50)
         Me.btnlp.TabIndex = 0
+        Me.btnlp.TabStop = False
         Me.btnlp.Text = "Button 1"
         Me.btnlp.UseVisualStyleBackColor = False
         '
@@ -200,6 +206,7 @@ Partial Class frmKeyMapping
         Me.btnmp.Name = "btnmp"
         Me.btnmp.Size = New System.Drawing.Size(123, 50)
         Me.btnmp.TabIndex = 1
+        Me.btnmp.TabStop = False
         Me.btnmp.Text = "Button 2"
         Me.btnmp.UseVisualStyleBackColor = False
         '
@@ -213,6 +220,7 @@ Partial Class frmKeyMapping
         Me.btnlk.Name = "btnlk"
         Me.btnlk.Size = New System.Drawing.Size(123, 50)
         Me.btnlk.TabIndex = 4
+        Me.btnlk.TabStop = False
         Me.btnlk.Text = "Button 4"
         Me.btnlk.UseVisualStyleBackColor = False
         '
@@ -226,6 +234,7 @@ Partial Class frmKeyMapping
         Me.btnmk.Name = "btnmk"
         Me.btnmk.Size = New System.Drawing.Size(123, 50)
         Me.btnmk.TabIndex = 5
+        Me.btnmk.TabStop = False
         Me.btnmk.Text = "Button 5"
         Me.btnmk.UseVisualStyleBackColor = False
         '
@@ -239,6 +248,7 @@ Partial Class frmKeyMapping
         Me.btnhp.Name = "btnhp"
         Me.btnhp.Size = New System.Drawing.Size(125, 50)
         Me.btnhp.TabIndex = 2
+        Me.btnhp.TabStop = False
         Me.btnhp.Text = "Button 3"
         Me.btnhp.UseVisualStyleBackColor = False
         '
@@ -252,6 +262,7 @@ Partial Class frmKeyMapping
         Me.btnhk.Name = "btnhk"
         Me.btnhk.Size = New System.Drawing.Size(125, 50)
         Me.btnhk.TabIndex = 6
+        Me.btnhk.TabStop = False
         Me.btnhk.Text = "Button 6"
         Me.btnhk.UseVisualStyleBackColor = False
         '
@@ -265,6 +276,7 @@ Partial Class frmKeyMapping
         Me.btncoin.Name = "btncoin"
         Me.btncoin.Size = New System.Drawing.Size(123, 26)
         Me.btncoin.TabIndex = 8
+        Me.btncoin.TabStop = False
         Me.btncoin.Text = "Coin"
         Me.btncoin.UseVisualStyleBackColor = False
         '
@@ -278,6 +290,7 @@ Partial Class frmKeyMapping
         Me.btnstart.Name = "btnstart"
         Me.btnstart.Size = New System.Drawing.Size(125, 26)
         Me.btnstart.TabIndex = 9
+        Me.btnstart.TabStop = False
         Me.btnstart.Text = "Start"
         Me.btnstart.UseVisualStyleBackColor = False
         '
@@ -291,6 +304,7 @@ Partial Class frmKeyMapping
         Me.btnHPHK.Name = "btnHPHK"
         Me.btnHPHK.Size = New System.Drawing.Size(84, 27)
         Me.btnHPHK.TabIndex = 7
+        Me.btnHPHK.TabStop = False
         Me.btnHPHK.Text = "3+6"
         Me.btnHPHK.UseVisualStyleBackColor = False
         '
@@ -304,6 +318,7 @@ Partial Class frmKeyMapping
         Me.btnLPLK.Name = "btnLPLK"
         Me.btnLPLK.Size = New System.Drawing.Size(82, 27)
         Me.btnLPLK.TabIndex = 3
+        Me.btnLPLK.TabStop = False
         Me.btnLPLK.Text = "1+4"
         Me.btnLPLK.UseVisualStyleBackColor = False
         '
@@ -317,6 +332,7 @@ Partial Class frmKeyMapping
         Me.btnMPMK.Name = "btnMPMK"
         Me.btnMPMK.Size = New System.Drawing.Size(82, 27)
         Me.btnMPMK.TabIndex = 10
+        Me.btnMPMK.TabStop = False
         Me.btnMPMK.Text = "2+5"
         Me.btnMPMK.UseVisualStyleBackColor = False
         '
@@ -330,6 +346,7 @@ Partial Class frmKeyMapping
         Me.btnAP.Name = "btnAP"
         Me.btnAP.Size = New System.Drawing.Size(84, 27)
         Me.btnAP.TabIndex = 11
+        Me.btnAP.TabStop = False
         Me.btnAP.Text = "1+2+3"
         Me.btnAP.UseVisualStyleBackColor = False
         '
@@ -343,6 +360,7 @@ Partial Class frmKeyMapping
         Me.btnAK.Name = "btnAK"
         Me.btnAK.Size = New System.Drawing.Size(84, 21)
         Me.btnAK.TabIndex = 12
+        Me.btnAK.TabStop = False
         Me.btnAK.Text = "4+5+6"
         Me.btnAK.UseVisualStyleBackColor = False
         '
@@ -406,6 +424,7 @@ Partial Class frmKeyMapping
         Me.btnMKHK.Name = "btnMKHK"
         Me.btnMKHK.Size = New System.Drawing.Size(82, 21)
         Me.btnMKHK.TabIndex = 16
+        Me.btnMKHK.TabStop = False
         Me.btnMKHK.Text = "5+6"
         Me.btnMKHK.UseVisualStyleBackColor = False
         '
@@ -419,6 +438,7 @@ Partial Class frmKeyMapping
         Me.btnLPMP.Name = "btnLPMP"
         Me.btnLPMP.Size = New System.Drawing.Size(82, 27)
         Me.btnLPMP.TabIndex = 13
+        Me.btnLPMP.TabStop = False
         Me.btnLPMP.Text = "1+2"
         Me.btnLPMP.UseVisualStyleBackColor = False
         '
@@ -432,6 +452,7 @@ Partial Class frmKeyMapping
         Me.btnMPHP.Name = "btnMPHP"
         Me.btnMPHP.Size = New System.Drawing.Size(82, 27)
         Me.btnMPHP.TabIndex = 14
+        Me.btnMPHP.TabStop = False
         Me.btnMPHP.Text = "2+3"
         Me.btnMPHP.UseVisualStyleBackColor = False
         '
@@ -445,6 +466,7 @@ Partial Class frmKeyMapping
         Me.btnLKMK.Name = "btnLKMK"
         Me.btnLKMK.Size = New System.Drawing.Size(82, 21)
         Me.btnLKMK.TabIndex = 15
+        Me.btnLKMK.TabStop = False
         Me.btnLKMK.Text = "4+5"
         Me.btnLKMK.UseVisualStyleBackColor = False
         '
@@ -492,6 +514,7 @@ Partial Class frmKeyMapping
         Me.cbProfile.Name = "cbProfile"
         Me.cbProfile.Size = New System.Drawing.Size(285, 21)
         Me.cbProfile.TabIndex = 0
+        Me.cbProfile.TabStop = False
         '
         'cbControllerID
         '
@@ -504,6 +527,7 @@ Partial Class frmKeyMapping
         Me.cbControllerID.Name = "cbControllerID"
         Me.cbControllerID.Size = New System.Drawing.Size(40, 21)
         Me.cbControllerID.TabIndex = 14
+        Me.cbControllerID.TabStop = False
         '
         'Label2
         '
@@ -526,6 +550,7 @@ Partial Class frmKeyMapping
         Me.btnNewProfile.Name = "btnNewProfile"
         Me.btnNewProfile.Size = New System.Drawing.Size(95, 23)
         Me.btnNewProfile.TabIndex = 2
+        Me.btnNewProfile.TabStop = False
         Me.btnNewProfile.Text = "New Profile"
         Me.btnNewProfile.UseVisualStyleBackColor = False
         '
@@ -539,6 +564,7 @@ Partial Class frmKeyMapping
         Me.btnDeleteProfile.Name = "btnDeleteProfile"
         Me.btnDeleteProfile.Size = New System.Drawing.Size(70, 23)
         Me.btnDeleteProfile.TabIndex = 3
+        Me.btnDeleteProfile.TabStop = False
         Me.btnDeleteProfile.Text = "Delete"
         Me.btnDeleteProfile.UseVisualStyleBackColor = False
         '
@@ -550,6 +576,7 @@ Partial Class frmKeyMapping
         Me.btnQuickSetup.Name = "btnQuickSetup"
         Me.btnQuickSetup.Size = New System.Drawing.Size(225, 46)
         Me.btnQuickSetup.TabIndex = 18
+        Me.btnQuickSetup.TabStop = False
         Me.btnQuickSetup.Text = "Quick Setup"
         Me.btnQuickSetup.UseVisualStyleBackColor = False
         '
@@ -557,11 +584,12 @@ Partial Class frmKeyMapping
         '
         Me.btnUnbindAll.BackColor = System.Drawing.Color.White
         Me.btnUnbindAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnUnbindAll.Location = New System.Drawing.Point(246, 270)
+        Me.btnUnbindAll.Location = New System.Drawing.Point(246, 263)
         Me.btnUnbindAll.Margin = New System.Windows.Forms.Padding(0)
         Me.btnUnbindAll.Name = "btnUnbindAll"
         Me.btnUnbindAll.Size = New System.Drawing.Size(92, 22)
         Me.btnUnbindAll.TabIndex = 13
+        Me.btnUnbindAll.TabStop = False
         Me.btnUnbindAll.Text = "UNBIND ALL"
         Me.btnUnbindAll.UseVisualStyleBackColor = False
         '
@@ -573,6 +601,7 @@ Partial Class frmKeyMapping
         Me.btnOnOff.Name = "btnOnOff"
         Me.btnOnOff.Size = New System.Drawing.Size(92, 46)
         Me.btnOnOff.TabIndex = 13
+        Me.btnOnOff.TabStop = False
         Me.btnOnOff.Text = "ON"
         Me.btnOnOff.UseVisualStyleBackColor = False
         '
@@ -584,6 +613,7 @@ Partial Class frmKeyMapping
         Me.btnDone.Name = "btnDone"
         Me.btnDone.Size = New System.Drawing.Size(93, 46)
         Me.btnDone.TabIndex = 12
+        Me.btnDone.TabStop = False
         Me.btnDone.Text = "Done"
         Me.btnDone.UseVisualStyleBackColor = False
         '

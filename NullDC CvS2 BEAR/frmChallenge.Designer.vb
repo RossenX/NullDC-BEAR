@@ -39,7 +39,7 @@ Partial Class frmChallenge
         Me.btnAccept.Name = "btnAccept"
         Me.btnAccept.Size = New System.Drawing.Size(230, 63)
         Me.btnAccept.TabIndex = 0
-        Me.btnAccept.Text = "BRING IT!"
+        Me.btnAccept.Text = "LET'S GO!"
         Me.btnAccept.UseVisualStyleBackColor = False
         '
         'btnDeny

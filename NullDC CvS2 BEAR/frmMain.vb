@@ -896,26 +896,15 @@ Public Class frmMain
 
     Private Sub cbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStatus.SelectedIndexChanged
         If Not NetworkHandler Is Nothing Then
-            Dim ShouldSave = False
-            Dim ShouldSendIamAgain = False
-            If ConfigFile.AwayStatus = "Hidden" And Not cbStatus.Text = "Hidden" Then ShouldSendIamAgain = True
-            If ConfigFile.Status = ConfigFile.AwayStatus Then ShouldSave = True
-
             ConfigFile.AwayStatus = cbStatus.Text
 
-            If ShouldSave Then
+            If Not IsNullDCRunning() Then
                 ConfigFile.Status = cbStatus.Text
                 ConfigFile.SaveFile()
             End If
-
-            If ConfigFile.AwayStatus = "Hidden" Then
-                NetworkHandler.SendMessage("&")
-            End If
-
         End If
         ActiveControl = Nothing
     End Sub
-
 End Class
 
 Public Class NullDCPlayer
@@ -1172,6 +1161,7 @@ Public Class Configs
                 If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " Vs " & MainformRef.Challenger.name
 
                 MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
+
             End If
         End If
     End Sub

@@ -124,6 +124,7 @@ Public Class frmKeyMapping
         Me.Icon = My.Resources.NewNullDCBearIcon
         AddHandler MainformRef.InputHandler._KeyPressed, AddressOf KeyPressed
         AddHandler MainformRef.InputHandler._KeyReleased, AddressOf KeyReleased
+        ActiveControl = Nothing
     End Sub
 
     Public Sub KeyReleased(Button As String)
