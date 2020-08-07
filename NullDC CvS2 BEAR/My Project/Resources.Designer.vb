@@ -87,8 +87,8 @@ Namespace My.Resources
         '''BPortA_I_TEST_KEY_1=116
         '''BPortA_I_SERVICE_KEY_2=117
         '''BPortA_I_TEST_KEY_2=118
-        '''BPortA_I_START_KEY=49
-        '''BPortA_I_COIN_KEY=53
+        '''BPortA_I_START_KEY=53
+        '''BPortA_I_COIN_KEY=49
         '''BPortA_I_UP_KEY=87
         '''BPortA_I_DOWN_KEY=83
         '''BPortA_I_LEFT_KEY=65
@@ -227,6 +227,16 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("NullDC_BEAR_UPDATER", resourceCulture)
                 Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property NullDCBEAR_Title() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("NullDCBEAR_Title", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         

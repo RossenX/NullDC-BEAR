@@ -20,7 +20,7 @@ Public Class frmMain
     Public ConfigFile As Configs
     Public FirstRun As Boolean = True
 
-    Public ChallengeForm As frmChallenge = New frmChallenge(Me)
+    Public ChallengeForm As frmChallenge
     Public ChallengeSentForm As frmChallengeSent = New frmChallengeSent(Me)
     Public HostingForm As frmHostPanel = New frmHostPanel(Me)
     Public GameSelectForm As frmChallengeGameSelect = New frmChallengeGameSelect(Me)
@@ -64,10 +64,10 @@ Public Class frmMain
         CheckForUpdate()
 
         ' Create all the usual shit
+        ChallengeForm = New frmChallenge(Me)
         InputHandler = New InputHandling(Me)
         NetworkHandler = New NetworkHandling(Me)
         KeyMappingForm = New frmKeyMapping(Me)
-        'KeyMappingForm.Hide()
         NullDCLauncher = New NaomiLauncher(Me)
 
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
@@ -391,7 +391,7 @@ Public Class frmMain
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         ConfigFile.Status = ConfigFile.AwayStatus
-        ConfigFile.SaveFile()
+        ConfigFile.SaveFile(False)
 
         NetworkHandler.SendMessage("&")
 
@@ -671,7 +671,7 @@ Public Class frmMain
                 Case "NSS"
                     Message = "Player is spectating or watching a replay, can't spectate them."
                 Case "DND"
-                    Message = "Player is in DND mode."
+                    Message = "Player is not accepting challenges right now."
             End Select
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
@@ -694,12 +694,12 @@ Public Class frmMain
     Private xpos1 As Integer
     Private ypos1 As Integer
 
-    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown
+    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown, BEARTitle.MouseDown, imgBeta.MouseDown, lbVer.MouseDown
         xpos1 = Control.MousePosition.X - Me.Location.X
         ypos1 = Control.MousePosition.Y - Me.Location.Y
     End Sub
 
-    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove
+    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove, BEARTitle.MouseMove, imgBeta.MouseMove, lbVer.MouseMove
         If e.Button = MouseButtons.Left Then
             newpoint = Control.MousePosition
             newpoint.X -= (xpos1)
@@ -738,6 +738,14 @@ Public Class frmMain
                 RefreshTimer.Start()
             End If
             NetworkHandler.SendMessage("?," & ConfigFile.IP)
+            ' Send info on myself also
+
+            Dim NameToSend As String = MainformRef.ConfigFile.Name
+            If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " vs " & MainformRef.Challenger.name
+
+            Dim GameNameAndRomName = "None"
+            If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
+            NetworkHandler.SendMessage("<," & NameToSend & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & MainformRef.ConfigFile.Status)
         Else
             NotificationForm.ShowMessage("Slow down cowboy, wait at least 5 seconds between refreshing")
         End If
@@ -800,7 +808,7 @@ Public Class frmMain
         ' Skip game Selection if person is already in a game, try to spectate instead.
         If Not c_status = "Idle" Then ' this person is playing SOMETHING so lets try to challange them and see what they reply
             If c_status = "DND" Then
-                NotificationForm.ShowMessage("Player is in DND")
+                NotificationForm.ShowMessage("Player is not accepting challenges right now.")
                 Exit Sub
             End If
             ' Check if you have the game
@@ -902,6 +910,7 @@ Public Class frmMain
                 ConfigFile.Status = cbStatus.Text
                 ConfigFile.SaveFile()
             End If
+
         End If
         ActiveControl = Nothing
     End Sub
@@ -1123,7 +1132,7 @@ Public Class Configs
 
 #End Region
 
-    Public Sub SaveFile()
+    Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
         Dim NullDCPath = frmMain.NullDCPath
         Dim lines() As String =
             {
@@ -1153,15 +1162,15 @@ Public Class Configs
             If AwayStatus = "Hidden" Then
                 MainformRef.NetworkHandler.SendMessage("&")
             Else
+                If SendIam Then
+                    Dim GameNameAndRomName = "None"
+                    If Not Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
 
-                Dim GameNameAndRomName = "None"
-                If Not Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
+                    Dim NameToSend As String = Name
+                    If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " Vs " & MainformRef.Challenger.name
 
-                Dim NameToSend As String = Name
-                If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " Vs " & MainformRef.Challenger.name
-
-                MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
-
+                    MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
+                End If
             End If
         End If
     End Sub

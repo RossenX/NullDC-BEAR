@@ -52,10 +52,12 @@ Partial Class frmMain
         Me.btnPatreon = New System.Windows.Forms.Button()
         Me.cbStatus = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.BEARTitle = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BEARTitle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -337,10 +339,10 @@ Partial Class frmMain
         '
         Me.imgBeta.BackColor = System.Drawing.Color.Transparent
         Me.imgBeta.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Beta
-        Me.imgBeta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.imgBeta.Location = New System.Drawing.Point(332, -28)
+        Me.imgBeta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.imgBeta.Location = New System.Drawing.Point(410, 41)
         Me.imgBeta.Name = "imgBeta"
-        Me.imgBeta.Size = New System.Drawing.Size(182, 155)
+        Me.imgBeta.Size = New System.Drawing.Size(110, 36)
         Me.imgBeta.TabIndex = 11
         Me.imgBeta.TabStop = False
         '
@@ -408,6 +410,17 @@ Partial Class frmMain
         Me.Label3.TabIndex = 16
         Me.Label3.Text = "Your Status"
         '
+        'BEARTitle
+        '
+        Me.BEARTitle.BackColor = System.Drawing.Color.Transparent
+        Me.BEARTitle.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.NullDCBEAR_Title
+        Me.BEARTitle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BEARTitle.Location = New System.Drawing.Point(42, 29)
+        Me.BEARTitle.Name = "BEARTitle"
+        Me.BEARTitle.Size = New System.Drawing.Size(353, 49)
+        Me.BEARTitle.TabIndex = 17
+        Me.BEARTitle.TabStop = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -428,6 +441,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.TableLayoutPanel4)
         Me.Controls.Add(Me.imgBeta)
+        Me.Controls.Add(Me.BEARTitle)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmMain"
@@ -439,6 +453,7 @@ Partial Class frmMain
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BEARTitle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -472,4 +487,5 @@ Partial Class frmMain
     Friend WithEvents cbStatus As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents BEARTitle As PictureBox
 End Class

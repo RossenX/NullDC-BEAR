@@ -109,8 +109,6 @@ Public Class frmChallenge
     Private Sub frmChallenge_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         e.Cancel = True
         Me.Visible = False
-        wavePlayer.Dispose()
     End Sub
-
 
 End Class

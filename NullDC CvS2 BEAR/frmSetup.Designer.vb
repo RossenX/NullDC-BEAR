@@ -56,6 +56,7 @@ Partial Class frmSetup
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(164, 23)
         Me.Button1.TabIndex = 3
+        Me.Button1.TabStop = False
         Me.Button1.Text = "TELL ME ALL THE THINGS"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -76,6 +77,7 @@ Partial Class frmSetup
         Me.tb_Volume.Orientation = System.Windows.Forms.Orientation.Vertical
         Me.tb_Volume.Size = New System.Drawing.Size(45, 146)
         Me.tb_Volume.TabIndex = 12
+        Me.tb_Volume.TabStop = False
         Me.tb_Volume.TickFrequency = 10
         Me.tb_Volume.TickStyle = System.Windows.Forms.TickStyle.Both
         '
@@ -87,6 +89,7 @@ Partial Class frmSetup
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(295, 40)
         Me.Button3.TabIndex = 11
+        Me.Button3.TabStop = False
         Me.Button3.Text = "Controls"
         Me.Button3.UseVisualStyleBackColor = False
         '
@@ -108,6 +111,7 @@ Partial Class frmSetup
         Me.cbAllowSpectators.Name = "cbAllowSpectators"
         Me.cbAllowSpectators.Size = New System.Drawing.Size(83, 21)
         Me.cbAllowSpectators.TabIndex = 9
+        Me.cbAllowSpectators.TabStop = False
         '
         'Button2
         '
@@ -117,6 +121,7 @@ Partial Class frmSetup
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(306, 54)
         Me.Button2.TabIndex = 7
+        Me.Button2.TabStop = False
         Me.Button2.Text = "Add Firewall Entry for BEAR and NullDC to Windows Firewall"
         Me.Button2.UseVisualStyleBackColor = False
         '
@@ -126,6 +131,7 @@ Partial Class frmSetup
         Me.tbPort.Name = "tbPort"
         Me.tbPort.Size = New System.Drawing.Size(100, 20)
         Me.tbPort.TabIndex = 6
+        Me.tbPort.TabStop = False
         '
         'Label6
         '
@@ -142,6 +148,7 @@ Partial Class frmSetup
         Me.btnSaveExit.Name = "btnSaveExit"
         Me.btnSaveExit.Size = New System.Drawing.Size(75, 54)
         Me.btnSaveExit.TabIndex = 4
+        Me.btnSaveExit.TabStop = False
         Me.btnSaveExit.Text = "Save"
         Me.btnSaveExit.UseVisualStyleBackColor = True
         '
@@ -152,6 +159,7 @@ Partial Class frmSetup
         Me.cbNetworks.Name = "cbNetworks"
         Me.cbNetworks.Size = New System.Drawing.Size(39, 21)
         Me.cbNetworks.TabIndex = 3
+        Me.cbNetworks.TabStop = False
         Me.cbNetworks.Visible = False
         '
         'Label2
@@ -169,6 +177,7 @@ Partial Class frmSetup
         Me.tbPlayerName.Name = "tbPlayerName"
         Me.tbPlayerName.Size = New System.Drawing.Size(100, 20)
         Me.tbPlayerName.TabIndex = 0
+        Me.tbPlayerName.TabStop = False
         '
         'frmSetup
         '

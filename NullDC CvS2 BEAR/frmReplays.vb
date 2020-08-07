@@ -108,7 +108,6 @@ Public Class frmReplays
             MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(1)
             MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(2)
 
-            ' Write the EEPROM OF THE THING
             If FileAsStrings.Contains("|eeprom|") Then
                 Dim eeprom As String() = FileAsStrings.Split(New String() {"|eeprom|"}, StringSplitOptions.None)
                 Rx.WriteEEPROM(eeprom(1), MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1))

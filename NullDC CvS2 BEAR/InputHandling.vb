@@ -127,7 +127,7 @@ Public Class InputHandling
         KeyBoardConfigs.Add("LPLK", {KeyBoardConfigs("LP")(0), KeyBoardConfigs("LK")(0)})
         KeyBoardConfigs.Add("MPMK", {KeyBoardConfigs("MP")(0), KeyBoardConfigs("MK")(0)})
         KeyBoardConfigs.Add("HPHK", {KeyBoardConfigs("HP")(0), KeyBoardConfigs("HK")(0)})
-        ' New Micros
+
         KeyBoardConfigs.Add("LPMP", {KeyBoardConfigs("LP")(0), KeyBoardConfigs("MP")(0)})
         KeyBoardConfigs.Add("MPHP", {KeyBoardConfigs("MP")(0), KeyBoardConfigs("HP")(0)})
         KeyBoardConfigs.Add("LKMK", {KeyBoardConfigs("LK")(0), KeyBoardConfigs("MK")(0)})
@@ -140,13 +140,8 @@ Public Class InputHandling
 
     Public Sub ReloadConfigs()
 
-        ' Get Profile Name
         ProfileName = MainFormRef.ConfigFile.KeyMapProfile
-
-        ' Check if XML exists, if not make it
         If Not File.Exists(GetXMLFile(True)) Then CreateKeyMapConfigs()
-
-        'Read configs
         Dim cfg As XDocument = XDocument.Load(GetXMLFile(True))
 
         'load configs to an easier to access variable
@@ -549,6 +544,10 @@ Public Class InputHandling
         RxAxis = NewMap
         WriteXMLConfigFile()
         NeedConfigReload = True
+    End Sub
+
+    Private Sub FastForwardToggle()
+
     End Sub
 
 End Class

@@ -91,15 +91,14 @@ Public Class NetworkHandling
         'If senderip = MainFormRef.ConfigFile.IP Then Exit Sub ' Ignore Own Messages
 
         Dim Split = message.Split(":")
-        ' Ignore data from other version of BEAR
-        If Not MainFormRef.Ver = Split(0) Then
-            'SendMessage(">,VM", senderip)
+        If Not MainformRef.Ver = Split(0) Then
             Exit Sub
         End If
+
         ' Get the message string
         message = Split(1)
 
-        If message.StartsWith("!") And MainformRef.ConfigFile.AwayStatus = "DND" Then
+        If message.StartsWith("!") And (MainformRef.ConfigFile.AwayStatus = "DND" Or MainformRef.ConfigFile.AwayStatus = "Hidden") Then
             SendMessage(">,DND", senderip)
             Exit Sub
         End If
