@@ -439,8 +439,9 @@ Public Class frmMain
 
     End Sub
 
-    Public Delegate Sub JoinAsSpectator_delegate(ByVal _p1name As String, ByVal _p2name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _region As String)
-    Public Sub JoinAsSpectator(ByVal _p1name As String, ByVal _p2name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _region As String)
+    Public Delegate Sub JoinAsSpectator_delegate(ByVal _p1name As String, ByVal _p2name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _region As String, ByVal _eeprom As String)
+    Public Sub JoinAsSpectator(ByVal _p1name As String, ByVal _p2name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _region As String, ByVal _eeprom As String)
+        Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
         Challenger = Nothing
         ConfigFile.Host = _ip
         ConfigFile.Port = _port
@@ -899,7 +900,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnPatreon_Click(sender As Object, e As EventArgs) Handles btnPatreon.Click
-        Process.Start("https://www.patreon.com/RossenX")
+        Process.Start("https://www.patreon.com/NullDCBEAR")
     End Sub
 
     Private Sub cbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStatus.SelectedIndexChanged

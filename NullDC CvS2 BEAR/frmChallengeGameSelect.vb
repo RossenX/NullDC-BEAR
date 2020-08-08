@@ -40,8 +40,9 @@
         MainFormRef.ConfigFile.HostType = HostType
         MainFormRef.ConfigFile.Status = "Offline"
         MainFormRef.ConfigFile.Game = cbGameList.SelectedValue
-        MainFormRef.ConfigFile.ReplayFile = ""
-        MainFormRef.ConfigFile.SaveFile()
+        MainformRef.ConfigFile.ReplayFile = ""
+        MainformRef.ConfigFile.Host = "127.0.0.1"
+        MainformRef.ConfigFile.SaveFile()
 
         MainformRef.NullDCLauncher.LaunchDC(cbGameList.SelectedValue, cbRegion.Text)
         Me.Close()

@@ -503,7 +503,6 @@ Public Class InputHandling
 
             For i = 0 To RxButtons.Count - 1
                 LF_RxButtons(i) = RxButtons(i)
-
             Next
 
         End While

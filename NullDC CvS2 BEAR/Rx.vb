@@ -3,6 +3,7 @@ Imports System.Text
 
 Module Rx
     Public MainformRef As frmMain ' Mainly here to have a constatn reference to the main form even after minimzing to tray
+    Public EEPROM As String
 
     Public Function GetEEPROM(ByVal _romfullpath As String) As String
         Dim EEPROMPath As String = _romfullpath & ".eeprom"

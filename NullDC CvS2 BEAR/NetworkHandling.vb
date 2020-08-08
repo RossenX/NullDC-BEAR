@@ -14,6 +14,7 @@ Public Class NetworkHandling
     Public BEAR_UDPReceiver As UdpClient
     Public BEAR_UDPSender As UdpClient
     Private receivingThread As Thread
+    Private EEPROM_ As String
 
     Public Sub New(ByVal mf As frmMain)
         Dim MyIPAddress As String = ""
@@ -49,13 +50,13 @@ Public Class NetworkHandling
     End Sub
 
     Public Sub SendMessage(ByRef message As String, Optional SendtoIP As String = "255.255.255.255")
-        Console.WriteLine("<-SendMessage->" & message & "->" & SendtoIP)
-
         ' Don't send any I AM messages if you are hidden, but send everything else.
         If message.StartsWith("<") And MainformRef.ConfigFile.AwayStatus = "Hidden" Then
+            Console.WriteLine("<-SendMessage->" & "  <ignored an IAM request>")
             Exit Sub
         End If
 
+        Console.WriteLine("<-SendMessage->" & message & "->" & SendtoIP)
         Dim toSend As String = MainformRef.ConfigFile.Version & ":" & message
         Dim data() As Byte = Encoding.ASCII.GetBytes(toSend)
         BEAR_UDPSender = New UdpClient(SendtoIP, port)
@@ -178,8 +179,7 @@ Public Class NetworkHandling
                         tmp_p2name = "Local Player 2"
                     End If
 
-                    ' Send 'join as spectator' message
-                    SendMessage("@," & tmp_p1name & "," & tmp_p2name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region, senderip)
+                    SendMessage("@," & tmp_p1name & "," & tmp_p2name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, senderip)
                     Exit Sub
                 Else
                     SendMessage(">,NS", senderip)
@@ -261,9 +261,9 @@ Public Class NetworkHandling
         If message.StartsWith("$") Then
             Console.WriteLine("<-Host Started->" & message)
             Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
-            Dim eeprom As String() = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)
+            Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
             Dim delay As Int16 = CInt(Split(5))
-            MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), eeprom(1)})
+            MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Rx.EEPROM})
             Exit Sub
         End If
 
@@ -271,9 +271,9 @@ Public Class NetworkHandling
         ' Delay not required, spectating will always add delay based on how smooth it is.
         If message.StartsWith("@") Then
             Console.WriteLine("<-Join As Spectator->" & message)
-            Dim INVOKATION As JoinAsSpectator_delegate = AddressOf MainFormRef.JoinAsSpectator
-            'Dim EEPROM As Byte() = Encoding.ASCII.GetBytes(message.Split("|EEPROM|")(1))
-            MainformRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), Split(5), Split(6)})
+            Dim INVOKATION As JoinAsSpectator_delegate = AddressOf MainformRef.JoinAsSpectator
+            Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
+            MainformRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), Split(5), Split(6), Rx.EEPROM})
         End If
 
     End Sub

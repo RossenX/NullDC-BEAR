@@ -251,7 +251,8 @@ Public Class NaomiLauncher
     Private Sub GameLaunched(ByVal FullRomPath)
         ' If we're a host then send out call to my partner to join
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
-            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.GetEEPROM(FullRomPath), MainformRef.Challenger.ip)
+            Rx.EEPROM = Rx.GetEEPROM(FullRomPath)
+            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
         End If
 
         ' Game is loaded, might as well delete the boot don't need it anymore
