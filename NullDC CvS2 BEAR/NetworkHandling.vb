@@ -14,7 +14,6 @@ Public Class NetworkHandling
     Public BEAR_UDPReceiver As UdpClient
     Public BEAR_UDPSender As UdpClient
     Private receivingThread As Thread
-    Private EEPROM_ As String
 
     Public Sub New(ByVal mf As frmMain)
         Dim MyIPAddress As String = ""
@@ -188,7 +187,6 @@ Public Class NetworkHandling
             End If
         End If
 
-
         ' Wanna Fight !(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<host>(5)
         If message.StartsWith("!") Then
             Console.WriteLine("<-Being Challenged->")
@@ -212,13 +210,13 @@ Public Class NetworkHandling
 
                 If MainFormRef.ConfigFile.Status = "Hosting" Then ' Check if i'm still hosting
                     MainFormRef.Challenger = New NullDCPlayer(Split(1), Split(2), Split(3), Split(4), Split(5))
-                    SendMessage("$," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & MainFormRef.ConfigFile.Game & "," & MainFormRef.ConfigFile.Delay & "," & MainFormRef.NullDCLauncher.Region, senderip)
+                    SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, senderip)
                 Else
                     SendMessage(">,HO", senderip)
                     Exit Sub
                 End If
 
-            ElseIf Split(5) = "1" Then ' ok they are going to host it, let me check if i'm already hosting something
+            ElseIf Split(5) = "1" Then ' ok they are going to host it, just show the challange accept window
 
                 If Not MainFormRef.IsNullDCRunning Then
                     Dim INVOKATION As BeingChallenged_delegate = AddressOf MainFormRef.BeingChallenged

@@ -251,7 +251,7 @@ Public Class NaomiLauncher
     Private Sub GameLaunched(ByVal FullRomPath)
         ' If we're a host then send out call to my partner to join
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
-            Rx.EEPROM = Rx.GetEEPROM(FullRomPath)
+            Rx.EEPROM = Rx.GetEEPROM(FullRomPath) ' Save EEPROM for sending to spectators or if we're just hosting solo and waiting.
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
         End If
 
