@@ -6,7 +6,6 @@ D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\NAudio.dll
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\OpenTK.dll
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\XInputDotNetPure.dll
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\NAudio.xml
-D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC BEAR.vbprojResolveAssemblyReference.cache
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmCalibration.resources
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmChallenge.resources
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC_CvS2_BEAR.frmChallengeGameSelect.resources
@@ -30,3 +29,4 @@ D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC BEAR.vbproj.Gen
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC.BEAR.exe
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC.BEAR.xml
 D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC.BEAR.pdb
+D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\obj\x86\Debug\NullDC BEAR.vbprojResolveAssemblyReference.cache

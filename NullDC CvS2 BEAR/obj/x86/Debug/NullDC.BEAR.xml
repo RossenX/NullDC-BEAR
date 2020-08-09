@@ -119,12 +119,22 @@ BPortB_I_START_KEY=13 [rest of string was truncated]&quot;;.
   Looks up a localized resource of type System.Byte[].
 </summary>
 </member>
+<member name="P:NullDC_CvS2_BEAR.My.Resources.Resources.nullDC_GUI_Win32">
+<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member>
+<member name="P:NullDC_CvS2_BEAR.My.Resources.Resources.nullDC_Win32_Release_NoTrace">
+<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member>
 <member name="P:NullDC_CvS2_BEAR.My.Resources.Resources.NullDCBEAR_Title">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
-<member name="P:NullDC_CvS2_BEAR.My.Resources.Resources.nulldcCLEAN">
+<member name="P:NullDC_CvS2_BEAR.My.Resources.Resources.NullNaomiClean">
 <summary>
   Looks up a localized resource of type System.Byte[].
 </summary>

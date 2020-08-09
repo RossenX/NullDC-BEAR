@@ -231,6 +231,26 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property nullDC_GUI_Win32() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("nullDC_GUI_Win32", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property nullDC_Win32_Release_NoTrace() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("nullDC_Win32_Release_NoTrace", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property NullDCBEAR_Title() As System.Drawing.Bitmap
@@ -243,9 +263,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
-        Friend ReadOnly Property nulldcCLEAN() As Byte()
+        Friend ReadOnly Property NullNaomiClean() As Byte()
             Get
-                Dim obj As Object = ResourceManager.GetObject("nulldcCLEAN", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("NullNaomiClean", resourceCulture)
                 Return CType(obj,Byte())
             End Get
         End Property

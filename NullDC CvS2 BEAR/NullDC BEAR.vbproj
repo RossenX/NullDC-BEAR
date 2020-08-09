@@ -367,7 +367,7 @@
     <None Include="Resources\d3d9.dll" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\nulldcCLEAN.zip" />
+    <None Include="Resources\NullNaomiClean.zip" />
     <None Include="Resources\Squares.png" />
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +399,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NullDCBEAR-Title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nullDC_GUI_Win32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\x86\Debug\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nullDC_Win32_Release-NoTrace.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -125,8 +125,10 @@ Public Class NetworkHandling
         ' < - I AM
         ' ! - Wanna Fite
         ' ^ - Lets FITE
-        ' > - I am a Coward
+        ' > - Session Ending or decline or w.e, just end the session for w.e reason.
         ' $ - Server Started Notification
+        ' & - Exited BEAR, remove from loby.
+        ' @ - Join as spectator
 
         ' Who is ' ?(0) ' Sending IP is Reduntant now it always uses w.e IP you could connect to but kept it in there for now untill later cleanup
         If message.StartsWith("?") Then

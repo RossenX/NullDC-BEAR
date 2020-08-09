@@ -89,97 +89,12 @@ Public Class NaomiLauncher
 
     Private Sub LoadRom_Thread(ByVal RomPath As String)
         Try
-
-            Dim DialogLoopSleepTimer = 0 ' Little buffer that will go higher and higher to compensate for slower PCs
-            Dim FoundTheRightWindow = False
-            Dim MainHwnd = &H0
-            Dim d = &H0
-            Dim d_c = &H0
-            Dim D_c_c = &H0
-            Dim d_c_c_e = &H0
-            Dim d_b = &H0
-
             While Not MainformRef.IsNullDCRunning
                 Thread.Sleep(5)
             End While
 
             NullDCproc.WaitForInputIdle() ' Wait for NullDC to be open and idle
-            MainHwnd = NullDCproc.MainWindowHandle ' Get the Main nullDC Window Handle
-            PostMessage(MainHwnd, WM_COMMAND, &H17, 0) ' Send the open normal boot message
-
-            While Not FoundTheRightWindow ' Wait untill the dialog opens and you found it's handle
-                DialogLoopSleepTimer += 1
-                Console.WriteLine("A: {0}", DialogLoopSleepTimer)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                d = GetForegroundWindow() 'FindWindowW("#32770", Nothing)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                Dim length = GetWindowTextLength(d)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                Dim sb As New StringBuilder("", length)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                GetWindowText(d, sb, sb.Capacity + 1).ToString()
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                d_c = FindWindowEx(d, 0, "ComboBoxEx32", vbNullString)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                D_c_c = FindWindowEx(d_c, 0, "ComboBox", vbNullString)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                d_c_c_e = FindWindowEx(D_c_c, 0, "Edit", vbNullString)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                d_b = GetDlgItem(d, 1)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                If Not d_c = 0 And Not D_c_c = 0 And Not d_c_c_e = 0 And Not d_b = 0 Then
-                    Thread.Sleep(50)
-                    FoundTheRightWindow = True
-                End If
-
-                If DialogLoopSleepTimer > 2000 Then
-                    MsgBox("Rom Loader Failed")
-                    NullDCproc.CloseMainWindow()
-                    Exit Sub
-                End If
-
-            End While
-
-            'DialogLoopSleepTimer = 0
-
-            Dim BoxWritenIn = False
-            While Not BoxWritenIn
-                DialogLoopSleepTimer += 1
-                Console.WriteLine("B: {0}", DialogLoopSleepTimer)
-                Thread.Sleep(DialogLoopSleepTimer)
-                SendMessage(d_c_c_e, WM_SETTEXT, Len(RomPath) + 1, RomPath)
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                Dim TextLen As Integer = SendMessage(d_c_c_e, WM_GETTEXTLENGTH, 0, 0) + 1
-                Thread.Sleep(DialogLoopSleepTimer)
-                Dim Buffer As String = New String(" "c, TextLen)
-                Thread.Sleep(DialogLoopSleepTimer)
-                SendMessageByString(d_c_c_e, WM_GETTEXT, TextLen, Buffer)
-                Thread.Sleep(DialogLoopSleepTimer)
-                If Buffer.Contains(RomPath) Then
-                    Thread.Sleep(50)
-                    SendMessage(d_b, BM_CLICK, IntPtr.Zero, IntPtr.Zero)
-                    BoxWritenIn = True
-                End If
-                Thread.Sleep(DialogLoopSleepTimer)
-
-                If DialogLoopSleepTimer > 2000 Then
-                    MsgBox("Rom Loader Failed")
-                    NullDCproc.CloseMainWindow()
-                    Exit Sub
-                End If
-
-            End While
-
+            'PostMessage(NullDCproc.MainWindowHandle, WM_COMMAND, &H17, 0) ' Send the open normal boot message
             GameLaunched(RomPath)
 
         Catch ex As Exception
@@ -250,6 +165,7 @@ Public Class NaomiLauncher
 
     Private Sub GameLaunched(ByVal FullRomPath)
         ' If we're a host then send out call to my partner to join
+        Console.WriteLine("Game Launched")
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
             Rx.EEPROM = Rx.GetEEPROM(FullRomPath) ' Save EEPROM for sending to spectators or if we're just hosting solo and waiting.
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
@@ -357,6 +273,7 @@ Public Class NaomiLauncher
         ' naomi_boot.bin.inactive
         DealWithBios()
         BackupNvmem()
+        lstCheck()
 
         ' Check if this is a Replay
         Dim IsReplay As Int16 = 0
@@ -483,6 +400,10 @@ Public Class NaomiLauncher
             If line.StartsWith("Current_ARM=") Then lines(linenumber) = "Current_ARM=vbaARM_Win32.dll"
             If line.StartsWith("Current_ExtDevice=") Then lines(linenumber) = "Current_ExtDevice=nullExtDev_Win32.dll"
 
+            ' [Naomi]
+            If line.StartsWith("LoadDefaultRom=") Then lines(linenumber) = "LoadDefaultRom=1"
+            If line.StartsWith("DefaultRom=") Then lines(linenumber) = "DefaultRom=" & MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1)
+
             If line.StartsWith("Current_maple0_5=") Then
                 lines(linenumber) = "Current_maple0_5=BEARJamma_Win32.dll:0" ' Make sure that BEAR  is only plugin
                 lines(linenumber + 1) = "Current_maple1_5=NULL"
@@ -524,12 +445,49 @@ Public Class NaomiLauncher
         Next
 
         'Emulator.NoConsole
+        File.SetAttributes(thefile, FileAttributes.Normal)
         File.WriteAllLines(thefile, lines)
 
         ' Stuff to help Casters
-        File.WriteAllLines(MainFormRef.NullDCPath & "\replays\Player1Name.txt", {P1Name})
-        File.WriteAllLines(MainFormRef.NullDCPath & "\replays\Player2Name.txt", {P2Name})
+        If File.Exists(MainformRef.NullDCPath & "\replays\Player1Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\replays\Player1Name.txt", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\replays\Player1Name.txt", {P1Name})
 
+        If File.Exists(MainformRef.NullDCPath & "\replays\Player2Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\replays\Player2Name.txt", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\replays\Player2Name.txt", {P2Name})
+
+    End Sub
+
+    ' some LST files don't follow the spacing as others, so need to check them to prevent a crash
+    Private Sub lstCheck()
+        Dim lstFile = MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1)
+        If File.Exists(lstFile) Then
+            Dim lines = File.ReadAllLines(lstFile)
+            Dim NameLine As String = "Game Name"
+            Dim BinLine As String = "The Bin Stuff"
+            Dim NameLineNumber = -1
+            Dim BinLineNumber = -1
+
+            Dim LineCount = 1
+            For Each line As String In lines
+                If line.Replace(" ", vbEmpty).Length > 0 Then
+                    If line.StartsWith("""") Then
+                        BinLine = line
+                        BinLineNumber = LineCount
+                    Else
+                        NameLine = line
+                        NameLineNumber = LineCount
+                    End If
+                End If
+                LineCount += 1
+            Next
+
+            If Not NameLineNumber = 1 Or Not BinLineNumber = 2 Then
+                File.SetAttributes(lstFile, FileAttributes.Normal)
+                File.WriteAllLines(lstFile, {NameLine, BinLine})
+                Console.WriteLine("Fixed lst file")
+            End If
+
+        End If
     End Sub
 
 End Class

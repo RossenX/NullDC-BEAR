@@ -32,7 +32,7 @@ Public Class frmMain
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\deps", "deps.zip")
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\nulldcClean", "NullNaomiClean.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         Me.Icon = My.Resources.NewNullDCBearIcon
@@ -47,7 +47,12 @@ Public Class frmMain
             If result = DialogResult.Yes Then
                 Dim result2 As DialogResult = MessageBox.Show("This will create a bunch of files in the same folder as NullDC BEAR.exe, OK?", "NullDC Extraction", MessageBoxButtons.YesNo)
                 If result2 = DialogResult.Yes Then
-                    UnzipResToDir(My.Resources.nulldcCLEAN, "bear_tmp_nulldc.zip", NullDCPath)
+                    Try
+                        UnzipResToDir(My.Resources.NullNaomiClean, "bear_tmp_nulldc.zip", NullDCPath)
+                    Catch ex As Exception
+                        MsgBox(ex.StackTrace)
+                    End Try
+
                 End If
             Else
                 MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
@@ -139,10 +144,14 @@ Public Class frmMain
             ' Check if something overrode the BEAR configs
             Dim ConfigLines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
             Dim BEARJAMMAConfigsFound = False
+            Dim NaomiConfigsFound = False
+
             For Each line In ConfigLines
                 If line.StartsWith("[BEARJamma]") Then
                     BEARJAMMAConfigsFound = True
-                    Exit For
+                End If
+                If line.StartsWith("[Naomi]") Then
+                    NaomiConfigsFound = True
                 End If
             Next
 
@@ -150,6 +159,12 @@ Public Class frmMain
                 Dim BearPlayLines = My.Resources.BEARPLAYlines
                 File.AppendAllText(MainformRef.NullDCPath & "\nullDC.cfg", BearPlayLines)
             End If
+
+            If Not NaomiConfigsFound Then
+                File.AppendAllText(MainformRef.NullDCPath & "\nullDC.cfg", "[Naomi]" & vbNewLine & "LoadDefaultRom=1" & vbNewLine & "DefaultRom=0")
+            End If
+
+
 
             InputHandler.GetKeyboardConfigs()
             InputHandler.NeedConfigReload = True
@@ -249,10 +264,13 @@ Public Class frmMain
 
         Using archive As ZipArchive = ZipFile.OpenRead(My.Computer.FileSystem.SpecialDirectories.Temp & "\" & _name)
             For Each entry As ZipArchiveEntry In archive.Entries
+                Console.WriteLine("Extracting: " & entry.FullName)
                 If entry.FullName.Split("\").Length > 1 Then
                     Directory.CreateDirectory(_dir & "\" & entry.FullName.Split("\")(0))
                 End If
-                entry.ExtractToFile(_dir & "\" & entry.FullName, True)
+                If Not entry.FullName.EndsWith("\") Then
+                    entry.ExtractToFile(_dir & "\" & entry.FullName, True)
+                End If
             Next
         End Using
 
@@ -263,16 +281,24 @@ Public Class frmMain
         ' Check BEARJamma Configs in FIle, WE NEED HIS FOR THE KEYBINDS TO WORK EVEN IF NULLDC IS NOT ON
         Dim ConfigLines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
         Dim BEARJAMMAConfigsFound = False
+        Dim NaomiConfigsFound = False
+
         For Each line In ConfigLines
             If line.StartsWith("[BEARJamma]") Then
                 BEARJAMMAConfigsFound = True
-                Exit For
+            End If
+            If line.StartsWith("[Naomi]") Then
+                NaomiConfigsFound = True
             End If
         Next
 
         If Not BEARJAMMAConfigsFound Then ' no BEARPLAY configs so lets add them to the end and keep all the other settings
             Dim BearPlayLines = My.Resources.BEARPLAYlines
             File.AppendAllText(MainformRef.NullDCPath & "\nullDC.cfg", BearPlayLines)
+        End If
+
+        If Not NaomiConfigsFound Then
+            File.AppendAllText(MainformRef.NullDCPath & "\nullDC.cfg", "[Naomi]" & vbNewLine & "LoadDefaultRom=1" & vbNewLine & "DefaultRom=0")
         End If
 
         ' Check Configs if there's BEARPlay entry, if not then add them just to make sure old configs work fine with BEARPLAY out of the box
@@ -321,9 +347,11 @@ Public Class frmMain
         ' Just copy the beargamma plugin everytime the launcher starts, to make sure w.e version is in the launcher is the one that's in the plugins folder
         Try
             My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32, False)
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_GUI_Win32.dll", My.Resources.nullDC_GUI_Win32, False)
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe", My.Resources.nullDC_Win32_Release_NoTrace, False)
         Catch ex As Exception
-            'MsgBox("Could not update BEARJamma, please turn off NullDC.")
-            'End
+            MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
+            End
         End Try
 
         ' FPS Limited Doesn't Exist lets Create it
