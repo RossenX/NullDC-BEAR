@@ -1,5 +1,7 @@
 ﻿Imports System.IO
+Imports System.Net.NetworkInformation
 Imports System.Text
+Imports System.Threading
 
 Module Rx
     Public MainformRef As frmMain ' Mainly here to have a constatn reference to the main form even after minimzing to tray
@@ -63,5 +65,23 @@ Module Rx
             My.Computer.FileSystem.RenameFile(EEPROMPath_backup, Path.GetFileName(EEPROMPath))
         End If
     End Sub
+
+    Public Function PingIP(ByVal _ip As String) As String
+        Dim Ping = "T/O"
+        Try
+            If My.Computer.Network.Ping(_ip) Then
+                Dim Pinger As Ping = New Ping()
+                Dim rep As PingReply = Pinger.Send(_ip, 1000)
+                Ping = rep.RoundtripTime.ToString
+                Console.WriteLine("Ping: " & _ip & " | " & rep.RoundtripTime)
+            End If
+
+
+        Catch ex As Exception
+
+        End Try
+
+        Return Ping
+    End Function
 
 End Module

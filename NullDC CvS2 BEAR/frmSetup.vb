@@ -27,6 +27,11 @@ Public Class frmSetup
         MainformRef.ConfigFile.Network = ""
         MainformRef.ConfigFile.Port = tbPort.Text
         MainformRef.ConfigFile.Volume = tb_Volume.Value
+        If cbAllowSpectators.Text = "Yes" Then
+            MainformRef.ConfigFile.AllowSpectators = 1
+        Else
+            MainformRef.ConfigFile.AllowSpectators = 0
+        End If
 
         ' Get IP
         Dim nics As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
@@ -82,16 +87,6 @@ Public Class frmSetup
         processStartInfo.Arguments = processStartInfo.Arguments &
                                      String.Format(" & netsh advfirewall firewall delete rule name=""NullDC"" program=""{0}"" & netsh advfirewall firewall delete rule name=""nulldc_win32_release-notrace.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""NullDC"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""NullDC"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\nullDC_Win32_Release-NoTrace.exe")
         Dim Firewall = Process.Start(processStartInfo)
-
-    End Sub
-
-    Private Sub cbAllowSpectators_SelectedIndexChanged(sender As ComboBox, e As EventArgs) Handles cbAllowSpectators.SelectedIndexChanged
-        If sender.Text = "Yes" Then
-            MainformRef.ConfigFile.AllowSpectators = 1
-        Else
-            MainformRef.ConfigFile.AllowSpectators = 0
-        End If
-        MainformRef.ConfigFile.SaveFile()
 
     End Sub
 

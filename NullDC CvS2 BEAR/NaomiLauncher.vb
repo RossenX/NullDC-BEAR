@@ -70,7 +70,6 @@ Public Class NaomiLauncher
     Private Shared Function GetForegroundWindow() As IntPtr
     End Function
 
-
     Private Const BM_CLICK As Integer = &HF5
     Private Const WM_ACTIVATE As Integer = &H6
     Private Const WA_ACTIVE As Integer = &H1
@@ -150,7 +149,6 @@ Public Class NaomiLauncher
 
     Private Sub StartEmulator(ByVal RomName As String)
         ChangeSettings()
-
         NullDCproc = Process.Start(MainformRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited

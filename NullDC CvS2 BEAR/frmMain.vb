@@ -77,14 +77,14 @@ Public Class frmMain
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
 
-        RefreshPlayerList(False)
-
         If GamesList.Count = 0 Then
             NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
         End If
 
         CreateCFGWatcher()
         CreateRomFolderWatcher()
+
+        RefreshPlayerList(False)
     End Sub
 
     Dim RomFolderWatcher As FileSystemWatcher
@@ -447,7 +447,6 @@ Public Class frmMain
             ConfigFile.Game = _game
         End If
         ConfigFile.SaveFile()
-
     End Sub
 
     Public Delegate Sub JoinHost_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _eeprom As String)
@@ -515,35 +514,33 @@ Public Class frmMain
             Dim ItemNumber As Int16 = Matchlist.Items.Count
             Dim PlayerInfo As ListViewItem = New ListViewItem(Player.name, Player.name)
             PlayerInfo.SubItems.Add(Player.ip & ":" & Player.port)
-
-            Dim pingthread As Thread = New Thread(Sub()
-                                                      If My.Computer.Network.Ping(Player.ip) Then
-                                                          Dim Pinger As Ping = New Ping()
-                                                          Dim rep As PingReply = Pinger.Send(Player.ip, 1000)
-                                                          Dim Ping = rep.RoundtripTime.ToString
-                                                          MainformRef.Matchlist.Invoke(Sub() MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = Ping)
-                                                      End If
-                                                  End Sub)
-            pingthread.Start()
-
             PlayerInfo.SubItems.Add("T/O")
             PlayerInfo.SubItems.Add(Player.game)
             PlayerInfo.SubItems.Add(Player.status)
             PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
             PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
             Matchlist.Items.Add(PlayerInfo)
+            Dim pingthread As Thread = New Thread(Sub()
+                                                      If My.Computer.Network.Ping(Player.ip) Then
+                                                          Thread.Sleep(100 + (100 * ItemNumber))
+                                                          Dim ping As PingReply = New Ping().Send(Player.ip)
+                                                          MainformRef.Matchlist.Invoke(Sub() MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = ping.RoundtripTime)
+                                                      End If
+                                                  End Sub)
+            pingthread.IsBackground = True
+            pingthread.Start()
         Else
             Matchlist.Items(FoundEntryID).SubItems(0).Text = Player.name
             Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
 
             Dim pingthread As Thread = New Thread(Sub()
                                                       If My.Computer.Network.Ping(Player.ip) Then
-                                                          Dim Pinger As Ping = New Ping()
-                                                          Dim rep As PingReply = Pinger.Send(Player.ip, 1000)
-                                                          Dim Ping = rep.RoundtripTime.ToString
-                                                          MainformRef.Matchlist.Invoke(Sub() MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = Ping)
+                                                          Thread.Sleep(100 + (100 * FoundEntryID))
+                                                          Dim ping As PingReply = New Ping().Send(Player.ip)
+                                                          MainformRef.Matchlist.Invoke(Sub() MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = ping.RoundtripTime)
                                                       End If
                                                   End Sub)
+            pingthread.IsBackground = True
             pingthread.Start()
 
             Matchlist.Items(FoundEntryID).SubItems(3).Text = Player.game

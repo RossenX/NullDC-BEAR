@@ -83,17 +83,21 @@ Public Class frmHostPanel
     End Sub
 
     Private Sub SuggestDelay(ByVal AutoSuggest As Boolean)
+        Try
+            Dim ping As PingReply = New Ping().Send(MainformRef.Challenger.ip)
+            If ping.RoundtripTime = 0 Then
+                If Not AutoSuggest Then MainformRef.NotificationForm.ShowMessage("Coulnd't ping the player. Make sure you and your challanger are not behind a firewall or something.")
+                Exit Sub
+            End If
+            Dim DelayFrameRate = 32.66 '32.66
+            Dim delay = Math.Ceiling(ping.RoundtripTime / DelayFrameRate)
+            If delay = 0 Then delay = 1
+            cbDelay.Invoke(Sub() cbDelay.Text = delay)
+            lbPing.Invoke(Sub() lbPing.Text = "Ping: " & ping.RoundtripTime & " | Delay rating: " & (ping.RoundtripTime / DelayFrameRate).ToString("0.##"))
+        Catch ex As Exception
 
-        Dim ping = New Ping().Send(MainformRef.Challenger.ip).RoundtripTime
-        If ping = 0 Then
-            If Not AutoSuggest Then MainformRef.NotificationForm.ShowMessage("Coulnd't ping the player. Make sure you and your challanger are not behind a firewall or something.")
-            Exit Sub
-        End If
-        Dim DelayFrameRate = 32.66 '32.66
-        Dim delay = Math.Ceiling(ping / DelayFrameRate)
-        If delay = 0 Then delay = 1
-        cbDelay.Invoke(Sub() cbDelay.Text = delay)
-        lbPing.Invoke(Sub() lbPing.Text = "Ping: " & ping & " | Delay rating: " & (ping / DelayFrameRate).ToString("0.##"))
+        End Try
+
 
     End Sub
 
