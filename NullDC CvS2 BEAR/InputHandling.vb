@@ -105,6 +105,10 @@ Public Class InputHandling
     Public Sub GetKeyboardConfigs()
 
         KeyBoardConfigs.Clear()
+        While MainFormRef.IsFileInUse(MainFormRef.NullDCPath & "\nullDC.cfg")
+            Thread.Sleep(50)
+        End While
+
         Dim KeyboardLines() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\nullDC.cfg")
         Dim KeyList() As String = {"Start", "Test", "Up", "Down", "Left", "Right", "Button_1", "Button_2", "Button_3", "Button_4", "Button_5", "Button_6", "Coin"}
         Dim KeyListx() As String = {"start", "Test", "up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin"}

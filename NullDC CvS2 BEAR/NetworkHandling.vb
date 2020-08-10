@@ -273,7 +273,7 @@ Public Class NetworkHandling
             Console.WriteLine("<-Join As Spectator->" & message)
             Dim INVOKATION As JoinAsSpectator_delegate = AddressOf MainformRef.JoinAsSpectator
             Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
-            MainformRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), Split(5), Split(6), Rx.EEPROM})
+            MainformRef.Invoke(INVOKATION, {Split(1), Split(2), senderip, Split(4), Split(5), Split(6), Rx.EEPROM})
         End If
 
     End Sub

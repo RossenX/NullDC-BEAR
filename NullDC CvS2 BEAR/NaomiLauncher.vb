@@ -70,6 +70,7 @@ Public Class NaomiLauncher
     Private Shared Function GetForegroundWindow() As IntPtr
     End Function
 
+
     Private Const BM_CLICK As Integer = &HF5
     Private Const WM_ACTIVATE As Integer = &H6
     Private Const WA_ACTIVE As Integer = &H1
@@ -166,8 +167,8 @@ Public Class NaomiLauncher
     Private Sub GameLaunched(ByVal FullRomPath)
         ' If we're a host then send out call to my partner to join
         Console.WriteLine("Game Launched")
+        Rx.EEPROM = Rx.GetEEPROM(FullRomPath) ' Save EEPROM for sending to spectators or if we're just hosting solo and waiting.
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
-            Rx.EEPROM = Rx.GetEEPROM(FullRomPath) ' Save EEPROM for sending to spectators or if we're just hosting solo and waiting.
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
         End If
 
@@ -376,6 +377,7 @@ Public Class NaomiLauncher
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
             If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
+            If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & MainformRef.ConfigFile.Volume / 5
 
             ' [nullExtDev]
             If line.StartsWith("mode=") Then lines(linenumber) = "mode=0"

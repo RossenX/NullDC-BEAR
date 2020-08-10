@@ -2,7 +2,6 @@
 Imports System.Net
 Imports System.Net.NetworkInformation
 Imports System.Threading
-Imports Open.Nat
 Imports OpenTK
 
 Public Class frmMain
@@ -138,7 +137,6 @@ Public Class frmMain
             Thread.Sleep(1000)
             While IsFileInUse(NullDCPath & "/nulldc.cfg")
                 Thread.Sleep(50)
-                Continue While
             End While
 
             ' Check if something overrode the BEAR configs
@@ -156,12 +154,13 @@ Public Class frmMain
             Next
 
             If Not BEARJAMMAConfigsFound Then ' no BEARPLAY configs so lets add them to the end and keep all the other settings
-                Dim BearPlayLines = My.Resources.BEARPLAYlines
-                File.AppendAllText(MainformRef.NullDCPath & "\nullDC.cfg", BearPlayLines)
+                'Dim a As String() = My.Resources.BEARPLAYlines.Split(vbNewLine)
+                'Dim BearPlayLines = My.Resources.BEARPLAYlines
+                File.AppendAllLines(MainformRef.NullDCPath & "\nullDC.cfg", My.Resources.BEARPLAYlines.Split(vbNewLine))
             End If
 
             If Not NaomiConfigsFound Then
-                File.AppendAllText(MainformRef.NullDCPath & "\nullDC.cfg", "[Naomi]" & vbNewLine & "LoadDefaultRom=1" & vbNewLine & "DefaultRom=0")
+                File.AppendAllLines(MainformRef.NullDCPath & "\nullDC.cfg", {"[Naomi]", "LoadDefaultRom=1", "DefaultRom=0"})
             End If
 
 
@@ -820,7 +819,7 @@ Public Class frmMain
             Exit Sub
         End If
 
-        If Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(0) = ConfigFile.IP Then
+        If Matchlist.SelectedItems(0).SubItems(0).Text.Trim = ConfigFile.Name.Trim Then
             NotificationForm.ShowMessage("I can't really help you with your inner demons if you want to fight yourself.")
             Exit Sub
         End If

@@ -13,11 +13,7 @@ Public Class frmSetup
 
     Private Sub FillSettings()
         tbPlayerName.Text = Rx.MainformRef.ConfigFile.Name
-        For Each NetworkName As String In GetNetworkNames()
-            cbNetworks.Items.Add(NetworkName)
-        Next
         tb_Volume.Value = MainformRef.ConfigFile.Volume
-        cbNetworks.Text = Rx.MainformRef.ConfigFile.Network
         tbPort.Text = Rx.MainformRef.ConfigFile.Port
         If MainformRef.ConfigFile.AllowSpectators = 1 Then
             cbAllowSpectators.Text = "Yes"
@@ -26,25 +22,9 @@ Public Class frmSetup
         End If
     End Sub
 
-    Private Function GetNetworkNames() As ArrayList
-        Dim networkNames As ArrayList = New ArrayList
-        Dim nics As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
-        For Each netadapter As NetworkInterface In nics
-            For Each Address In netadapter.GetIPProperties.UnicastAddresses
-                Dim OutAddress As IPAddress = New IPAddress(2130706433)
-                If IPAddress.TryParse(Address.Address.ToString, OutAddress) Then
-                    If OutAddress.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork Then
-                        networkNames.Add(netadapter.Name)
-                    End If
-                End If
-            Next
-        Next
-        Return networkNames
-    End Function
-
     Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
         MainformRef.ConfigFile.Name = tbPlayerName.Text
-        MainformRef.ConfigFile.Network = cbNetworks.Text
+        MainformRef.ConfigFile.Network = ""
         MainformRef.ConfigFile.Port = tbPort.Text
         MainformRef.ConfigFile.Volume = tb_Volume.Value
 
@@ -136,6 +116,16 @@ Public Class frmSetup
 
     Private Sub frmSetup_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         wavePlayer.Dispose()
+    End Sub
+
+    Private Sub tbPort_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tbPort.KeyPress
+        If Not (Asc(e.KeyChar) = 8) Then
+            Dim allowedChars As String = "0123456789"
+            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Or (Asc(e.KeyChar) = 8) Then
+                e.KeyChar = ChrW(0)
+                e.Handled = True
+            End If
+        End If
     End Sub
 
 #End Region

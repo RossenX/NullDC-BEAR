@@ -33,7 +33,6 @@ Partial Class frmSetup
         Me.tbPort = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnSaveExit = New System.Windows.Forms.Button()
-        Me.cbNetworks = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbPlayerName = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -152,16 +151,6 @@ Partial Class frmSetup
         Me.btnSaveExit.Text = "Save"
         Me.btnSaveExit.UseVisualStyleBackColor = True
         '
-        'cbNetworks
-        '
-        Me.cbNetworks.FormattingEnabled = True
-        Me.cbNetworks.Location = New System.Drawing.Point(531, 112)
-        Me.cbNetworks.Name = "cbNetworks"
-        Me.cbNetworks.Size = New System.Drawing.Size(39, 21)
-        Me.cbNetworks.TabIndex = 3
-        Me.cbNetworks.TabStop = False
-        Me.cbNetworks.Visible = False
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -186,7 +175,6 @@ Partial Class frmSetup
         Me.ClientSize = New System.Drawing.Size(670, 250)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.cbNetworks)
         Me.Controls.Add(Me.tb_Volume)
         Me.Controls.Add(Me.btnSaveExit)
         Me.Controls.Add(Me.Label6)
@@ -212,7 +200,6 @@ Partial Class frmSetup
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents tbPlayerName As TextBox
-    Friend WithEvents cbNetworks As ComboBox
     Friend WithEvents btnSaveExit As Button
     Friend WithEvents tbPort As TextBox
     Friend WithEvents Label6 As Label
