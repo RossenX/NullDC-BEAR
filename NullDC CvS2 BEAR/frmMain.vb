@@ -31,7 +31,7 @@ Public Class frmMain
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\nulldcClean", "NullNaomiClean.zip")
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\tozip", "NullNaomiClean.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         Me.Icon = My.Resources.NewNullDCBearIcon
@@ -267,6 +267,7 @@ Public Class frmMain
                 If entry.FullName.Split("\").Length > 1 Then
                     Directory.CreateDirectory(_dir & "\" & entry.FullName.Split("\")(0))
                 End If
+
                 If Not entry.FullName.EndsWith("\") Then
                     entry.ExtractToFile(_dir & "\" & entry.FullName, True)
                 End If
@@ -520,28 +521,52 @@ Public Class frmMain
             PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
             PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
             Matchlist.Items.Add(PlayerInfo)
-            Dim pingthread As Thread = New Thread(Sub()
-                                                      If My.Computer.Network.Ping(Player.ip) Then
-                                                          Thread.Sleep(100 + (100 * ItemNumber))
-                                                          Dim ping As PingReply = New Ping().Send(Player.ip)
-                                                          MainformRef.Matchlist.Invoke(Sub() MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = ping.RoundtripTime)
-                                                      End If
-                                                  End Sub)
-            pingthread.IsBackground = True
-            pingthread.Start()
+            Try
+                Dim pingthread As Thread = New Thread(Sub()
+                                                          If My.Computer.Network.Ping(Player.ip) Then
+                                                              Thread.Sleep(100 + (100 * ItemNumber))
+                                                              Dim ping As PingReply = New Ping().Send(Player.ip)
+                                                              MainformRef.Matchlist.Invoke(Sub()
+                                                                                               Try
+                                                                                                   MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = ping.RoundtripTime
+                                                                                               Catch ex As Exception
+
+                                                                                               End Try
+
+                                                                                           End Sub)
+                                                          End If
+                                                      End Sub)
+                pingthread.IsBackground = True
+                pingthread.Start()
+            Catch ex As Exception
+
+            End Try
+
         Else
             Matchlist.Items(FoundEntryID).SubItems(0).Text = Player.name
             Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
 
-            Dim pingthread As Thread = New Thread(Sub()
-                                                      If My.Computer.Network.Ping(Player.ip) Then
-                                                          Thread.Sleep(100 + (100 * FoundEntryID))
-                                                          Dim ping As PingReply = New Ping().Send(Player.ip)
-                                                          MainformRef.Matchlist.Invoke(Sub() MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = ping.RoundtripTime)
-                                                      End If
-                                                  End Sub)
-            pingthread.IsBackground = True
-            pingthread.Start()
+            Try
+                Dim pingthread As Thread = New Thread(Sub()
+                                                          If My.Computer.Network.Ping(Player.ip) Then
+                                                              Thread.Sleep(100 + (100 * FoundEntryID))
+                                                              Dim ping As PingReply = New Ping().Send(Player.ip)
+                                                              MainformRef.Matchlist.Invoke(Sub()
+                                                                                               Try
+                                                                                                   MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = ping.RoundtripTime
+                                                                                               Catch ex As Exception
+
+                                                                                               End Try
+
+                                                                                           End Sub)
+                                                          End If
+                                                      End Sub)
+                pingthread.IsBackground = True
+                pingthread.Start()
+            Catch ex As Exception
+
+            End Try
+
 
             Matchlist.Items(FoundEntryID).SubItems(3).Text = Player.game
             Matchlist.Items(FoundEntryID).SubItems(4).Text = Player.status
@@ -568,8 +593,6 @@ Public Class frmMain
         HostingForm.Visible = False
 
         If _canceledby Is Nothing Then
-            ' Hide all the Panels
-
             Select Case Reason
                 Case "Window Closed" ' This is only fired automatically by the emulator when it closes, sometimes we need to ignore this
                     Console.WriteLine("Window Closed")
@@ -980,6 +1003,7 @@ Public Class Configs
     Private _allowSpectators As Int16 = 1
     Private _awaystatus As String = "Idle"
     Private _volume As Int16 = 100
+    Private _showconsole As Int16 = 1
 
 #Region "Properties"
 
@@ -1155,6 +1179,16 @@ Public Class Configs
         End Set
     End Property
 
+    Public Property ShowConsole() As Int16
+        Get
+            Return _showconsole
+        End Get
+        Set(ByVal value As Int16)
+            _showconsole = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -1179,7 +1213,8 @@ Public Class Configs
                 "ReplayFile=" & ReplayFile,
                 "AllowSpectators=" & AllowSpectators,
                 "AwayStatus=" & AwayStatus,
-                "Volume=" & Volume
+                "Volume=" & Volume,
+                "ShowConsole=" & ShowConsole
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -1228,6 +1263,7 @@ Public Class Configs
                     Status = line.Split("=")(1).Trim
                 End If
                 If line.Contains("Volume") Then Volume = line.Split("=")(1).Trim
+                If line.Contains("ShowConsole") Then ShowConsole = line.Split("=")(1).Trim
             Next
             Game = "None"
             SaveFile()

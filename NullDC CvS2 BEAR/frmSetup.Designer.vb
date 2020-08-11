@@ -35,6 +35,7 @@ Partial Class frmSetup
         Me.btnSaveExit = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbPlayerName = New System.Windows.Forms.TextBox()
+        Me.cbShowConsole = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_Volume, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -51,7 +52,7 @@ Partial Class frmSetup
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(275, 157)
+        Me.Button1.Location = New System.Drawing.Point(275, 111)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(164, 23)
         Me.Button1.TabIndex = 3
@@ -84,9 +85,9 @@ Partial Class frmSetup
         '
         Me.Button3.BackColor = System.Drawing.Color.Red
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button3.Location = New System.Drawing.Point(275, 66)
+        Me.Button3.Location = New System.Drawing.Point(275, 140)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(295, 40)
+        Me.Button3.Size = New System.Drawing.Size(306, 40)
         Me.Button3.TabIndex = 11
         Me.Button3.TabStop = False
         Me.Button3.Text = "Controls"
@@ -168,11 +169,22 @@ Partial Class frmSetup
         Me.tbPlayerName.TabIndex = 0
         Me.tbPlayerName.TabStop = False
         '
+        'cbShowConsole
+        '
+        Me.cbShowConsole.AutoSize = True
+        Me.cbShowConsole.Location = New System.Drawing.Point(275, 61)
+        Me.cbShowConsole.Name = "cbShowConsole"
+        Me.cbShowConsole.Size = New System.Drawing.Size(130, 17)
+        Me.cbShowConsole.TabIndex = 14
+        Me.cbShowConsole.Text = "Show NullDC Console"
+        Me.cbShowConsole.UseVisualStyleBackColor = True
+        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(670, 250)
+        Me.Controls.Add(Me.cbShowConsole)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.tb_Volume)
@@ -210,4 +222,5 @@ Partial Class frmSetup
     Friend WithEvents Button3 As Button
     Friend WithEvents tb_Volume As TrackBar
     Friend WithEvents Label3 As Label
+    Friend WithEvents cbShowConsole As CheckBox
 End Class

@@ -12,9 +12,11 @@ Public Class frmSetup
     End Sub
 
     Private Sub FillSettings()
-        tbPlayerName.Text = Rx.MainformRef.ConfigFile.Name
+        tbPlayerName.Text = MainformRef.ConfigFile.Name
         tb_Volume.Value = MainformRef.ConfigFile.Volume
-        tbPort.Text = Rx.MainformRef.ConfigFile.Port
+        tbPort.Text = MainformRef.ConfigFile.Port
+        cbShowConsole.Checked = MainformRef.ConfigFile.ShowConsole
+
         If MainformRef.ConfigFile.AllowSpectators = 1 Then
             cbAllowSpectators.Text = "Yes"
         Else
@@ -27,6 +29,7 @@ Public Class frmSetup
         MainformRef.ConfigFile.Network = ""
         MainformRef.ConfigFile.Port = tbPort.Text
         MainformRef.ConfigFile.Volume = tb_Volume.Value
+        MainformRef.ConfigFile.ShowConsole = Convert.ToInt32(cbShowConsole.Checked)
         If cbAllowSpectators.Text = "Yes" Then
             MainformRef.ConfigFile.AllowSpectators = 1
         Else

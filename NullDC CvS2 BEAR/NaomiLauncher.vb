@@ -135,14 +135,15 @@ Public Class NaomiLauncher
             Dim INVOKATION As EndSession_delegate = AddressOf MainFormRef.EndSession
             MainFormRef.Invoke(INVOKATION, {"Window Closed", Nothing})
 
+        Else
+            ' Set State Back to None and Idle since Emulator Closed
+            MainformRef.RemoveChallenger()
+            MainformRef.ConfigFile.Game = "None"
+            MainformRef.ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
+            MainformRef.ConfigFile.SaveFile()
         End If
-        DoNotSendNextExitEvent = False
 
-        ' Set State Back to None and Idle since Emulator Closed
-        MainformRef.RemoveChallenger()
-        MainformRef.ConfigFile.Game = "None"
-        MainformRef.ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
-        MainformRef.ConfigFile.SaveFile()
+        DoNotSendNextExitEvent = False
         P1Name = ""
         P2Name = ""
     End Sub
@@ -192,11 +193,8 @@ Public Class NaomiLauncher
                     File.SetAttributes(nvmemPathBackup, FileAttributes.Normal)
                     My.Computer.FileSystem.RenameFile(nvmemPathBackup, "naomi_nvmem.bin")
                     File.SetAttributes(nvmemPath, FileAttributes.ReadOnly)
-
                 End If
-
             End If
-
         Catch ex As Exception
             MsgBox("Couldn't restore nvmem: " & ex.Message)
         End Try
@@ -364,6 +362,7 @@ Public Class NaomiLauncher
             If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
+
             'If line.StartsWith("Enhancements.AspectRatioMode=") Then lines(linenumber) = "Enhancements.AspectRatioMode=1"
 
             ' [nullAica]
@@ -375,7 +374,7 @@ Public Class NaomiLauncher
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
             If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
-            If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & MainformRef.ConfigFile.Volume / 5
+            If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.Volume / 10) + ((MainformRef.ConfigFile.Volume - (MainformRef.ConfigFile.Volume / 10)) * (MainformRef.ConfigFile.Volume / 100)))
 
             ' [nullExtDev]
             If line.StartsWith("mode=") Then lines(linenumber) = "mode=0"
@@ -436,9 +435,11 @@ Public Class NaomiLauncher
 
             ' Audio Sync on host only
             If line.StartsWith("Emulator.NoConsole=") Then
-                Dim con As String = "1"
-                If MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Offline" Then con = "0"
-                lines(linenumber) = "Emulator.NoConsole=0" '& con
+                If MainformRef.ConfigFile.ShowConsole = 1 Then
+                    lines(linenumber) = "Emulator.NoConsole=0" '& con
+                Else
+                    lines(linenumber) = "Emulator.NoConsole=1" '& con
+                End If
             End If
 
             linenumber += 1

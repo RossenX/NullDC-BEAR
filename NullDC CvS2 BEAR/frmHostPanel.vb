@@ -75,9 +75,14 @@ Public Class frmHostPanel
         If MainformRef.Challenger Is Nothing Then
             MainformRef.NotificationForm.ShowMessage("I can't predict the future, unless you're hosting someone i can't suggest a delay for you")
         Else
-            SuggestThread = New Thread(AddressOf SuggestDelay)
-            SuggestThread.IsBackground = True
-            SuggestThread.Start(False)
+            Try
+                SuggestThread = New Thread(AddressOf SuggestDelay)
+                SuggestThread.IsBackground = True
+                SuggestThread.Start(False)
+            Catch ex As Exception
+
+            End Try
+
         End If
 
     End Sub

@@ -58,9 +58,16 @@ Public Class NetworkHandling
         Console.WriteLine("<-SendMessage->" & message & "->" & SendtoIP)
         Dim toSend As String = MainformRef.ConfigFile.Version & ":" & message
         Dim data() As Byte = Encoding.ASCII.GetBytes(toSend)
-        BEAR_UDPSender = New UdpClient(SendtoIP, port)
-        BEAR_UDPSender.EnableBroadcast = True
-        BEAR_UDPSender.Send(data, data.Length)
+
+        Try
+            BEAR_UDPSender = New UdpClient(SendtoIP, port)
+            BEAR_UDPSender.EnableBroadcast = True
+            BEAR_UDPSender.SendAsync(data, data.Length)
+
+        Catch ex As Exception
+            Console.WriteLine("Failed to send")
+        End Try
+
     End Sub
 
     Public Sub InitializeReceiver()
@@ -109,9 +116,9 @@ Public Class NetworkHandling
         End If
 
         If Not MainFormRef.Challenger Is Nothing Then ' Only accept who is and challenge messages from none-challangers
-            If Not message.StartsWith("<") And Not message.StartsWith("?") And Not message.StartsWith("!") Then
+            If Not message.StartsWith("<") And Not message.StartsWith("?") And Not message.StartsWith("!") And Not message.StartsWith("&") Then
                 ' Message is not from challanger
-                If Not MainFormRef.Challenger.ip = senderip And Not MainFormRef.ConfigFile.IP = senderip Then
+                If Not MainformRef.Challenger.ip = senderip And Not MainformRef.ConfigFile.IP = senderip Then
                     Console.WriteLine("<-DENIED->")
                     SendMessage(">,BB", senderip)
                     Exit Sub

@@ -71,6 +71,7 @@ Partial Class frmMain
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 26)
         Me.Button1.TabIndex = 2
+        Me.Button1.TabStop = False
         Me.Button1.Text = "Controls"
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -156,6 +157,7 @@ Partial Class frmMain
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(106, 26)
         Me.btnSearch.TabIndex = 4
+        Me.btnSearch.TabStop = False
         Me.btnSearch.Text = "Refresh ↺"
         Me.btnSearch.UseVisualStyleBackColor = False
         '
@@ -171,6 +173,7 @@ Partial Class frmMain
         Me.BtnJoin.Name = "BtnJoin"
         Me.BtnJoin.Size = New System.Drawing.Size(106, 26)
         Me.BtnJoin.TabIndex = 5
+        Me.BtnJoin.TabStop = False
         Me.BtnJoin.Text = "Challenge"
         Me.BtnJoin.UseVisualStyleBackColor = False
         '
@@ -186,6 +189,7 @@ Partial Class frmMain
         Me.btnOffline.Name = "btnOffline"
         Me.btnOffline.Size = New System.Drawing.Size(109, 26)
         Me.btnOffline.TabIndex = 7
+        Me.btnOffline.TabStop = False
         Me.btnOffline.Text = "Play Offline"
         Me.btnOffline.UseVisualStyleBackColor = False
         '
@@ -202,6 +206,7 @@ Partial Class frmMain
         Me.btnHost.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.btnHost.Size = New System.Drawing.Size(106, 26)
         Me.btnHost.TabIndex = 6
+        Me.btnHost.TabStop = False
         Me.btnHost.Text = "Host"
         Me.btnHost.UseVisualStyleBackColor = False
         '
@@ -215,6 +220,7 @@ Partial Class frmMain
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(23, 23)
         Me.btnExit.TabIndex = 6
+        Me.btnExit.TabStop = False
         Me.btnExit.Text = "X"
         Me.btnExit.UseVisualStyleBackColor = False
         '
@@ -228,6 +234,7 @@ Partial Class frmMain
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(23, 23)
         Me.btnMinimize.TabIndex = 7
+        Me.btnMinimize.TabStop = False
         Me.btnMinimize.Text = "_"
         Me.btnMinimize.UseVisualStyleBackColor = False
         '
@@ -241,6 +248,7 @@ Partial Class frmMain
         Me.btnSetup.Name = "btnSetup"
         Me.btnSetup.Size = New System.Drawing.Size(75, 23)
         Me.btnSetup.TabIndex = 8
+        Me.btnSetup.TabStop = False
         Me.btnSetup.Text = "Options"
         Me.btnSetup.UseVisualStyleBackColor = False
         '
@@ -360,6 +368,7 @@ Partial Class frmMain
         Me.btnReplay.Name = "btnReplay"
         Me.btnReplay.Size = New System.Drawing.Size(75, 23)
         Me.btnReplay.TabIndex = 12
+        Me.btnReplay.TabStop = False
         Me.btnReplay.Text = "Replays"
         Me.btnReplay.UseVisualStyleBackColor = False
         '
@@ -373,6 +382,7 @@ Partial Class frmMain
         Me.btnDLC.Name = "btnDLC"
         Me.btnDLC.Size = New System.Drawing.Size(75, 23)
         Me.btnDLC.TabIndex = 13
+        Me.btnDLC.TabStop = False
         Me.btnDLC.Text = "Free DLC"
         Me.btnDLC.UseVisualStyleBackColor = False
         '
@@ -386,6 +396,7 @@ Partial Class frmMain
         Me.btnPatreon.Name = "btnPatreon"
         Me.btnPatreon.Size = New System.Drawing.Size(120, 23)
         Me.btnPatreon.TabIndex = 14
+        Me.btnPatreon.TabStop = False
         Me.btnPatreon.Text = "Patreon o3o"
         Me.btnPatreon.UseVisualStyleBackColor = False
         '
@@ -399,6 +410,7 @@ Partial Class frmMain
         Me.cbStatus.Name = "cbStatus"
         Me.cbStatus.Size = New System.Drawing.Size(59, 21)
         Me.cbStatus.TabIndex = 15
+        Me.cbStatus.TabStop = False
         '
         'Label3
         '
