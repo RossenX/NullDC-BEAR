@@ -32,6 +32,8 @@ Public Class frmMain
 
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
+    Private FormLoaded As Boolean = False
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\tozip", "NullNaomiClean.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
@@ -518,13 +520,17 @@ Public Class frmMain
         'Check if this IP:Port combo exists
         Dim FoundEntry As ListViewItem = Nothing
         Dim FoundEntryID = 0
-        For Each playerentry As ListViewItem In Matchlist.Items
-            If playerentry.SubItems(1).Text = Player.ip & ":" & Player.port Then
-                FoundEntry = playerentry
-                Exit For
-            End If
-            FoundEntryID += 1
-        Next
+
+        Matchlist.Invoke(Sub()
+                             For Each playerentry As ListViewItem In Matchlist.Items
+                                 If playerentry.SubItems(1).Text = Player.ip & ":" & Player.port Then
+                                     FoundEntry = playerentry
+                                     Exit For
+                                 End If
+                                 FoundEntryID += 1
+                             Next
+                         End Sub)
+
 
         If FoundEntry Is Nothing Then
 
@@ -536,7 +542,9 @@ Public Class frmMain
             PlayerInfo.SubItems.Add(Player.status)
             PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
             PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
-            Matchlist.Items.Add(PlayerInfo)
+            Matchlist.Invoke(Sub() Matchlist.Items.Add(PlayerInfo))
+
+
             Try
                 Dim pingthread As Thread = New Thread(Sub()
                                                           If My.Computer.Network.Ping(Player.ip) Then
@@ -559,8 +567,11 @@ Public Class frmMain
             End Try
 
         Else
-            Matchlist.Items(FoundEntryID).SubItems(0).Text = Player.name
-            Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
+            Matchlist.Invoke(Sub()
+                                 Matchlist.Items(FoundEntryID).SubItems(0).Text = Player.name
+                                 Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
+                             End Sub)
+
 
             Try
                 Dim pingthread As Thread = New Thread(Sub()
@@ -583,13 +594,11 @@ Public Class frmMain
 
             End Try
 
-
-            Matchlist.Items(FoundEntryID).SubItems(3).Text = Player.game
-            Matchlist.Items(FoundEntryID).SubItems(4).Text = Player.status
-
+            Matchlist.Invoke(Sub()
+                                 Matchlist.Items(FoundEntryID).SubItems(3).Text = Player.game
+                                 Matchlist.Items(FoundEntryID).SubItems(4).Text = Player.status
+                             End Sub)
         End If
-
-
 
     End Sub
 
@@ -978,6 +987,7 @@ Public Class frmMain
         End If
         ActiveControl = Nothing
     End Sub
+
 End Class
 
 Public Class NullDCPlayer

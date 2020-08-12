@@ -151,8 +151,9 @@ Public Class NetworkHandling
 
         ' I am <(0),<name>(1),<ip>(2),<port>(3),<gamename|gamerom>(4),<status>(5)
         If message.StartsWith("<") Then
-            Dim INVOKATION As AddPlayerToList_delegate = AddressOf MainFormRef.AddPlayerToList
-            MainformRef.Matchlist.Invoke(INVOKATION, {New NullDCPlayer(Split(1), senderip, Split(3), Split(4), Split(5))})
+            'Dim INVOKATION As AddPlayerToList_delegate = AddressOf MainFormRef.AddPlayerToList
+            'MainformRef.Matchlist.Invoke(INVOKATION, {New NullDCPlayer(Split(1), senderip, Split(3), Split(4), Split(5))})
+            MainformRef.AddPlayerToList(New NullDCPlayer(Split(1), senderip, Split(3), Split(4), Split(5)))
             Exit Sub
         End If
 
