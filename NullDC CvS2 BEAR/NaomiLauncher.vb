@@ -330,6 +330,12 @@ Public Class NaomiLauncher
             End If
         End If
 
+        If IsReplay = 1 Or IsSpectator = 1 Or MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then
+            FPSLimiter = "1"
+        Else
+            FPSLimiter = "0"
+        End If
+
         ' No Longer Need to rewrite the entire file
         File.WriteAllLines(thefile, {"[config]", "RenderAheadLimit=0", "FPSlimit=" & FPSLimit})
 

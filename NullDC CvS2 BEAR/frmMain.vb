@@ -20,14 +20,16 @@ Public Class frmMain
     Public FirstRun As Boolean = True
 
     Public ChallengeForm As frmChallenge
-    Public ChallengeSentForm As frmChallengeSent = New frmChallengeSent(Me)
-    Public HostingForm As frmHostPanel = New frmHostPanel(Me)
-    Public GameSelectForm As frmChallengeGameSelect = New frmChallengeGameSelect(Me)
-    Public WaitingForm As frmWaitingForHost = New frmWaitingForHost
-    Public NotificationForm As frmNotification = New frmNotification(Me)
+    Public ChallengeSentForm As frmChallengeSent
+    Public HostingForm As frmHostPanel
+    Public GameSelectForm As frmChallengeGameSelect
+    Public WaitingForm As frmWaitingForHost
+    Public NotificationForm As frmNotification
+
     Public KeyMappingForm As frmKeyMapping
 
     Public Challenger As NullDCPlayer
+
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -59,6 +61,12 @@ Public Class frmMain
             End If
         End If
 
+        ChallengeSentForm = New frmChallengeSent(Me)
+        HostingForm = New frmHostPanel(Me)
+        GameSelectForm = New frmChallengeGameSelect(Me)
+        WaitingForm = New frmWaitingForHost
+        NotificationForm = New frmNotification(Me)
+
         CheckFilesAndShit()
         ConfigFile = New Configs(NullDCPath)
         cbStatus.Text = ConfigFile.Status
@@ -73,6 +81,7 @@ Public Class frmMain
         NetworkHandler = New NetworkHandling(Me)
         KeyMappingForm = New frmKeyMapping(Me)
         NullDCLauncher = New NaomiLauncher(Me)
+        ' 
 
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
@@ -83,8 +92,8 @@ Public Class frmMain
 
         CreateCFGWatcher()
         CreateRomFolderWatcher()
-
         RefreshPlayerList(False)
+
     End Sub
 
     Dim RomFolderWatcher As FileSystemWatcher
@@ -134,9 +143,9 @@ Public Class frmMain
         If e.Name = "nullDC.cfg" Then
             CFGWatcher.EnableRaisingEvents = False
 
-            Thread.Sleep(1000)
+            Thread.Sleep(2000)
             While IsFileInUse(NullDCPath & "/nulldc.cfg")
-                Thread.Sleep(50)
+                Thread.Sleep(500)
             End While
 
             ' Check if something overrode the BEAR configs
@@ -148,6 +157,7 @@ Public Class frmMain
                 If line.StartsWith("[BEARJamma]") Then
                     BEARJAMMAConfigsFound = True
                 End If
+
                 If line.StartsWith("[Naomi]") Then
                     NaomiConfigsFound = True
                 End If
@@ -162,8 +172,6 @@ Public Class frmMain
             If Not NaomiConfigsFound Then
                 File.AppendAllLines(MainformRef.NullDCPath & "\nullDC.cfg", {"[Naomi]", "LoadDefaultRom=1", "DefaultRom=0"})
             End If
-
-
 
             InputHandler.GetKeyboardConfigs()
             InputHandler.NeedConfigReload = True
@@ -186,6 +194,7 @@ Public Class frmMain
         If IsBeta Then Exit Sub
 
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
         Try
             UpdateCheckClient.Credentials = New NetworkCredential()
             UpdateCheckClient.Headers.Add("user-agent", "MyRSSReader/1.0")
@@ -193,6 +202,7 @@ Public Class frmMain
         Catch ex As Exception
             ' some error when trying to update
         End Try
+
     End Sub
 
     Private Sub UpdateCheckResult(ByVal sender As WebClient, e As DownloadStringCompletedEventArgs)
@@ -355,7 +365,14 @@ Public Class frmMain
         End Try
 
         ' FPS Limited Doesn't Exist lets Create it
-        If Not File.Exists(NullDCPath & "\d3d9.dll") Then File.WriteAllBytes(NullDCPath & "\d3d9.dll", My.Resources.d3d9)
+        If File.Exists(NullDCPath & "\d3d9.dll") Then
+
+            File.SetAttributes(NullDCPath & "\d3d9.dll", FileAttributes.Normal)
+            File.Delete(NullDCPath & "\d3d9.dll")
+
+            'File.WriteAllBytes(NullDCPath & "\d3d9.dll", My.Resources.d3d9)
+
+        End If
         File.WriteAllLines(NullDCPath & "\antilag.cfg", {"[config]", "RenderAheadLimit=0", "FPSlimit=60"})
 
         ' Remove any honey files that may have been left over if someone quit or it crashed or w.e reason, but if it fails then fuck it let em stay
@@ -506,7 +523,6 @@ Public Class frmMain
                 FoundEntry = playerentry
                 Exit For
             End If
-
             FoundEntryID += 1
         Next
 
@@ -524,7 +540,7 @@ Public Class frmMain
             Try
                 Dim pingthread As Thread = New Thread(Sub()
                                                           If My.Computer.Network.Ping(Player.ip) Then
-                                                              Thread.Sleep(100 + (100 * ItemNumber))
+                                                              Thread.Sleep(250 + (250 * ItemNumber))
                                                               Dim ping As PingReply = New Ping().Send(Player.ip)
                                                               MainformRef.Matchlist.Invoke(Sub()
                                                                                                Try
@@ -549,7 +565,7 @@ Public Class frmMain
             Try
                 Dim pingthread As Thread = New Thread(Sub()
                                                           If My.Computer.Network.Ping(Player.ip) Then
-                                                              Thread.Sleep(100 + (100 * FoundEntryID))
+                                                              Thread.Sleep(250 + (250 * FoundEntryID))
                                                               Dim ping As PingReply = New Ping().Send(Player.ip)
                                                               MainformRef.Matchlist.Invoke(Sub()
                                                                                                Try
@@ -1252,7 +1268,7 @@ Public Class Configs
                 If line.Contains("IP") Then IP = line.Split("=")(1).Trim
                 If line.Contains("Host") Then Host = line.Split("=")(1).Trim
                 If line.Contains("Delay") Then Delay = line.Split("=")(1).Trim
-                If line.Contains("HostType") Then HostType = line.Split("=")(1).Trim
+                If line.Contains("HostType") Then HostType = 1 'line.Split("=")(1).Trim
                 If line.Contains("FPSLimit") Then FPSLimit = line.Split("=")(1).Trim
                 If line.Contains("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
                 If line.Contains("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim

@@ -93,17 +93,15 @@
         If Visible Then
             If Not _Challenger Is Nothing Then
                 cbHostType.Visible = False
-                cbHostType.Visible = False
                 Button2.Visible = False
                 Label2.Visible = False
                 cbRegion.Visible = False
                 Label4.Visible = False
 
             Else
-                cbHostType.Visible = True
-                cbHostType.Visible = True
-                Button2.Visible = True
-                Label2.Visible = True
+                cbHostType.Visible = False
+                Button2.Visible = False
+                Label2.Visible = False
                 cbRegion.Visible = True
                 Label4.Visible = True
 

@@ -185,11 +185,12 @@ Partial Class frmHostPanel
         Me.cbHostType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbHostType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbHostType.FormattingEnabled = True
-        Me.cbHostType.Items.AddRange(New Object() {"Audio Sync", "FPS Limit"})
+        Me.cbHostType.Items.AddRange(New Object() {"Audio Sync"})
         Me.cbHostType.Location = New System.Drawing.Point(136, 278)
         Me.cbHostType.Name = "cbHostType"
         Me.cbHostType.Size = New System.Drawing.Size(77, 21)
         Me.cbHostType.TabIndex = 12
+        Me.cbHostType.Visible = False
         '
         'Label2
         '
@@ -202,6 +203,7 @@ Partial Class frmHostPanel
         Me.Label2.Size = New System.Drawing.Size(54, 16)
         Me.Label2.TabIndex = 13
         Me.Label2.Text = "Limiter"
+        Me.Label2.Visible = False
         '
         'Button2
         '
@@ -215,6 +217,7 @@ Partial Class frmHostPanel
         Me.Button2.TabIndex = 14
         Me.Button2.Text = "?"
         Me.Button2.UseVisualStyleBackColor = False
+        Me.Button2.Visible = False
         '
         'tbFPS
         '
@@ -222,6 +225,7 @@ Partial Class frmHostPanel
         Me.tbFPS.Name = "tbFPS"
         Me.tbFPS.Size = New System.Drawing.Size(35, 20)
         Me.tbFPS.TabIndex = 15
+        Me.tbFPS.Visible = False
         '
         'Label3
         '
@@ -234,6 +238,7 @@ Partial Class frmHostPanel
         Me.Label3.Size = New System.Drawing.Size(40, 16)
         Me.Label3.TabIndex = 16
         Me.Label3.Text = "Limit"
+        Me.Label3.Visible = False
         '
         'cbRegion
         '

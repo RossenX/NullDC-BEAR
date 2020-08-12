@@ -92,6 +92,7 @@ Partial Class frmChallengeGameSelect
         Me.Label3.Size = New System.Drawing.Size(40, 16)
         Me.Label3.TabIndex = 21
         Me.Label3.Text = "Limit"
+        Me.Label3.Visible = False
         '
         'tbFPS
         '
@@ -99,6 +100,7 @@ Partial Class frmChallengeGameSelect
         Me.tbFPS.Name = "tbFPS"
         Me.tbFPS.Size = New System.Drawing.Size(35, 20)
         Me.tbFPS.TabIndex = 20
+        Me.tbFPS.Visible = False
         '
         'Button2
         '
@@ -112,6 +114,7 @@ Partial Class frmChallengeGameSelect
         Me.Button2.TabIndex = 19
         Me.Button2.Text = "?"
         Me.Button2.UseVisualStyleBackColor = False
+        Me.Button2.Visible = False
         '
         'Label2
         '
@@ -124,6 +127,7 @@ Partial Class frmChallengeGameSelect
         Me.Label2.Size = New System.Drawing.Size(54, 16)
         Me.Label2.TabIndex = 18
         Me.Label2.Text = "Limiter"
+        Me.Label2.Visible = False
         '
         'cbHostType
         '
@@ -131,11 +135,12 @@ Partial Class frmChallengeGameSelect
         Me.cbHostType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbHostType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cbHostType.FormattingEnabled = True
-        Me.cbHostType.Items.AddRange(New Object() {"Audio Sync", "FPS Limit"})
+        Me.cbHostType.Items.AddRange(New Object() {"Audio Sync"})
         Me.cbHostType.Location = New System.Drawing.Point(188, 138)
         Me.cbHostType.Name = "cbHostType"
         Me.cbHostType.Size = New System.Drawing.Size(77, 21)
         Me.cbHostType.TabIndex = 17
+        Me.cbHostType.Visible = False
         '
         'btnDLC
         '

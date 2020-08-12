@@ -106,7 +106,7 @@ Public Class InputHandling
 
         KeyBoardConfigs.Clear()
         While MainFormRef.IsFileInUse(MainFormRef.NullDCPath & "\nullDC.cfg")
-            Thread.Sleep(50)
+            Thread.Sleep(500)
         End While
 
         Dim KeyboardLines() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\nullDC.cfg")

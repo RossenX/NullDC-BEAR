@@ -124,7 +124,8 @@ So here's what this program does and what files it'll create and what they do an
 
 1. BEAR is a lobby system for nullDC it should work with every naomi game that nullDC can run.
     It includes:
-        FPS limited -&gt; using a d3d9.dll (Look below for more info)
+        FPS limited -&gt; using a 
+        (Look below for more info)
         Key Rebinding -&gt; built in keybinder using xinput/dinput/raw controller data from windows, should work on any controller that windows recognizes.
         Rom Loader -&gt; Now coded into the launcher itself!
         Automatic IP and Port settings -&gt; No more setting up numbers and typign stuff like some kinda nerd.
