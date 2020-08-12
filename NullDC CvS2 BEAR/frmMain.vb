@@ -10,7 +10,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.0h"
+    Public Ver As String = "1.0j"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NaomiLauncher
@@ -70,6 +70,7 @@ Public Class frmMain
         NotificationForm = New frmNotification(Me)
 
         CheckFilesAndShit()
+
         ConfigFile = New Configs(NullDCPath)
         cbStatus.Text = ConfigFile.Status
 
@@ -89,7 +90,7 @@ Public Class frmMain
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
 
         If GamesList.Count = 0 Then
-            NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
+            'NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
         End If
 
         CreateCFGWatcher()
@@ -318,29 +319,6 @@ Public Class frmMain
 
         ' Check the EXE name and all that shit from now on use the NullDC.BEAR.exe format since that's what github saves it as, since it hates spaces apperanly
         ' Why do this you may ask? Well mostly so people who downloaded it from github have the same exe name after they update, for firewall reasons
-        Try
-            If File.Exists(NullDCPath & "\NullDC BEAR.exe") Then
-                ' NullDC BEAR.exe exist Copy it, start it up close this one
-                If Application.ExecutablePath.Contains("NullDC BEAR.exe") Then
-                    ' I am the exe with a space in it
-                    File.Copy(NullDCPath & "\NullDC BEAR.exe", NullDCPath & "\NullDC.BEAR.exe")
-                    While Not File.Exists(NullDCPath & "\NullDC.BEAR.exe")
-                        Thread.Sleep(10)
-                    End While
-                    ' Start the correct exe name
-                    Process.Start(NullDCPath & "\NullDC.BEAR.exe")
-                    ' Close this BEAR, next start it should be deleted by the NullDC.BEAR.exe
-                    End
-                Else
-                    ' I am not the exe with a space in it Delete the one with a space in it
-                    Console.WriteLine("Deleting old NullDC Bear.exe")
-                    File.Delete(NullDCPath & "\NullDC BEAR.exe")
-                End If
-            End If
-
-        Catch ex As Exception
-            MsgBox("Couldn't delete old NullDC BEAR.exe")
-        End Try
 
         If Not My.Computer.FileSystem.DirectoryExists(NullDCPath & "\replays") Then
             My.Computer.FileSystem.CreateDirectory(NullDCPath & "\replays")
@@ -811,7 +789,6 @@ Public Class frmMain
                 RefreshTimer.Start()
             End If
             NetworkHandler.SendMessage("?," & ConfigFile.IP)
-            ' Send info on myself also
 
             Dim NameToSend As String = MainformRef.ConfigFile.Name
             If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " vs " & MainformRef.Challenger.name

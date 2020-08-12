@@ -79,6 +79,7 @@ Public Class InputHandling
         PollThread = New Thread(AddressOf InputRoll)
         PollThread.IsBackground = True
         PollThread.Start()
+
     End Sub
 
     Public Sub TurnOnOff(ByVal OnOff As Boolean)
@@ -105,11 +106,14 @@ Public Class InputHandling
     Public Sub GetKeyboardConfigs()
 
         KeyBoardConfigs.Clear()
+
         While MainFormRef.IsFileInUse(MainFormRef.NullDCPath & "\nullDC.cfg")
             Thread.Sleep(500)
         End While
 
+        Dim LinesLoaded As Boolean = False
         Dim KeyboardLines() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\nullDC.cfg")
+
         Dim KeyList() As String = {"Start", "Test", "Up", "Down", "Left", "Right", "Button_1", "Button_2", "Button_3", "Button_4", "Button_5", "Button_6", "Coin"}
         Dim KeyListx() As String = {"start", "Test", "up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin"}
 
@@ -446,7 +450,7 @@ Public Class InputHandling
     Public Sub InputRoll()
         Console.WriteLine("Started Input Rolling")
         ' Poll the Inptus once at start just to get their natural states
-
+        Thread.Sleep(2000)
         ' While loop is < 1ms
         While True
             Thread.Sleep(8)

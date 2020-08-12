@@ -41,7 +41,11 @@ Public Class frmUpdate
         AddHandler GifEnd.Tick, AddressOf _GifEnd
         GifEnd.Start()
         ' Delete the BEAR with a space in it
-        If File.Exists(Application.StartupPath & "\NullDC BEAR.exe") Then File.Delete(Application.StartupPath & "\NullDC BEAR.exe")
+        If File.Exists(Application.StartupPath & "\NullDC BEAR.exe") Then
+            File.SetAttributes(Application.StartupPath & "\NullDC BEAR.exe", FileAttributes.Normal)
+            File.Delete(Application.StartupPath & "\NullDC BEAR.exe")
+        End If
+
         File.Copy(My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC.BEAR.exe", Application.StartupPath & "\NullDC.BEAR.exe", True)
     End Sub
 
