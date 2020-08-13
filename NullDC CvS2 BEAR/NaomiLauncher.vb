@@ -170,14 +170,6 @@ Public Class NaomiLauncher
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
         End If
-
-        ' Game is loaded, might as well delete the boot don't need it anymore
-        If File.Exists(MainformRef.NullDCPath & "\data\naomi_boot.bin") Then
-            File.SetAttributes(MainformRef.NullDCPath & "\data\naomi_boot.bin", FileAttributes.Normal)
-            File.Delete(MainformRef.NullDCPath & "\data\naomi_boot.bin")
-
-        End If
-
     End Sub
 
     Private Sub RestoreNvmem() ' Mostly so it doesn't fuck up blue's launcher
@@ -228,26 +220,6 @@ Public Class NaomiLauncher
     End Sub
 
     Private Sub DealWithBios()
-        ' Boot Dealing
-        Dim naomi_boot_Path As String = MainFormRef.NullDCPath & "\data\naomi_boot.bin"
-        Dim naomi_boot_Path_Inactive As String = MainFormRef.NullDCPath & "\data\naomi_boot.bin.inactive"
-
-        If File.Exists(naomi_boot_Path) Then
-            If File.Exists(naomi_boot_Path_Inactive) Then
-
-                File.SetAttributes(naomi_boot_Path_Inactive, FileAttributes.Normal)
-                File.Delete(naomi_boot_Path_Inactive)
-
-                File.SetAttributes(naomi_boot_Path, FileAttributes.Normal)
-                My.Computer.FileSystem.RenameFile(naomi_boot_Path, "naomi_boot.bin.inactive")
-
-            Else
-                File.SetAttributes(naomi_boot_Path, FileAttributes.Normal)
-                My.Computer.FileSystem.RenameFile(naomi_boot_Path, "naomi_boot.bin.inactive")
-
-            End If
-
-        End If
 
         ' Make sure there's SOME kinda bios in there
         Dim naomi_bios_path As String = MainFormRef.NullDCPath & "\data\naomi_bios.bin"
@@ -259,6 +231,11 @@ Public Class NaomiLauncher
             If Region = "EUR" Then BiosToUse = My.Resources.be
             MainFormRef.UnzipResToDir(BiosToUse, "naomi_boot.bin", MainFormRef.NullDCPath & "\data")
 
+        Else
+            If File.Exists(MainformRef.NullDCPath & "\data\naomi_boot.bin") Then
+                File.SetAttributes(MainformRef.NullDCPath & "\data\naomi_boot.bin", FileAttributes.Normal)
+                File.Delete(MainformRef.NullDCPath & "\data\naomi_boot.bin")
+            End If
         End If
 
     End Sub
