@@ -34,6 +34,8 @@ Public Class frmMain
 
     Private FormLoaded As Boolean = False
 
+    Public FinishedLoading As Boolean = False
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\tozip", "NullNaomiClean.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
@@ -97,6 +99,7 @@ Public Class frmMain
         CreateRomFolderWatcher()
         RefreshPlayerList(False)
 
+        FinishedLoading = True
     End Sub
 
     Dim RomFolderWatcher As FileSystemWatcher

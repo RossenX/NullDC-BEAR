@@ -80,6 +80,11 @@ Public Class NaomiLauncher
     Private Const WM_GETTEXTLENGTH As Integer = &HE
 #End Region
 
+    Public Sub FastForward(ByVal _on As Boolean)
+        PostMessage(NullDCproc.MainWindowHandle, WM_COMMAND, 118, 0)
+    End Sub
+
+
     Public Sub LoadRom(ByRef RomPath As String)
         If Not LoadRomThread Is Nothing Then If LoadRomThread.IsAlive Then LoadRomThread.Abort() ' Abort the old thread if it exists
         LoadRomThread = New Thread(AddressOf LoadRom_Thread)

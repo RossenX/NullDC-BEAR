@@ -168,7 +168,7 @@ Public Class InputHandling
         KeyCache.Clear()
         For Each keybind As KeyBind In KeybindConfigs
             If Not KeyCache.ContainsKey(keybind.Button) Then
-                KeyCache.Add(keybind.Button, {keybind.Rebind, False})
+                KeyCache.Add(keybind.Button, {keybind.Rebind, False, keybind.Name})
             End If
         Next
 
@@ -448,9 +448,18 @@ Public Class InputHandling
     End Sub
 
     Public Sub InputRoll()
-        Console.WriteLine("Started Input Rolling")
+
         ' Poll the Inptus once at start just to get their natural states
         Thread.Sleep(2000)
+
+        While MainFormRef Is Nothing
+            While Not MainFormRef.FinishedLoading
+                Thread.Sleep(500)
+            End While
+            Thread.Sleep(500)
+        End While
+
+        Console.WriteLine("Started Input Rolling")
         ' While loop is < 1ms
         While True
             Thread.Sleep(8)
@@ -472,6 +481,8 @@ Public Class InputHandling
                 ' Pretty sure this will never get called unless it's some ancient arcade stick, like ANCIENT
                 DoWinMMRoll()
             End If
+
+
 
             For i = 0 To RxButtons.Count - 1
                 If Not RxButtons(i) = LF_RxButtons(i) Then
@@ -526,6 +537,12 @@ Public Class InputHandling
         TranslateButtonToKey(Button, False)
     End Sub
 
+    Private Sub FastforwardReplay(ByVal _ff As Boolean)
+
+        MainFormRef.NullDCLauncher.FastForward(_ff)
+
+    End Sub
+
     Private Sub TranslateButtonToKey(Button As String, Down As Boolean)
         ' If We're rebinding then don't fire anything, let it handle it
         If MainFormRef.KeyMappingForm.Rebinding Then Exit Sub
@@ -533,12 +550,24 @@ Public Class InputHandling
         If Down Then upordown = 0
         If KeyCache.ContainsKey(Button) Then
             If KeyCache(Button)(1) = Down Then Exit Sub
+
             For Each Key As Int16 In KeyCache(Button)(0)
-                'Console.WriteLine("Button: " & Button & " " & Down & " " & Key)
                 keybd_event(Key, MapVirtualKey(Key, 0), upordown, 0)
             Next
+
+            ' Spectator Controls
+            If Down Then
+                If MainFormRef.ConfigFile.Status = "Spectator" Then
+                    If KeyCache(Button)(2).ToString = "right" Then
+                        FastforwardReplay(True)
+                    End If
+                End If
+            End If
+
+
             KeyCache(Button)(1) = Down
         End If
+
 
     End Sub
 
