@@ -32,6 +32,8 @@ Public Class InputHandling
     Dim MainFormRef As frmMain 'Rebind Vars
     Dim CoinKeyDown As Boolean = False
 
+    Dim Spectatorcontrol_Fastforward As Boolean() = {False, False}
+
     ' Virtual Keyboard Mapping
     Private Declare Function joyGetPosEx Lib "winmm.dll" (ByVal uJoyID As Integer, ByRef pji As JOYINFOEX) As Integer ' JoyStick Mapping
     Private Declare Sub keybd_event Lib "user32.dll" (ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As Integer, ByVal dwExtraInfo As Integer)
@@ -42,6 +44,10 @@ Public Class InputHandling
 
     <DllImport("user32.dll", EntryPoint:="VkKeyScanExW")>
     Public Shared Function VkKeyScanExW(ByVal ch As Char, ByVal dwhkl As IntPtr) As Short
+    End Function
+
+    <DllImport("user32.dll")>
+    Public Shared Function GetAsyncKeyState(ByVal vKey As System.Windows.Forms.Keys) As Short
     End Function
 
     <StructLayout(LayoutKind.Sequential)>
@@ -147,7 +153,7 @@ Public Class InputHandling
     End Sub
 
     Public Sub ReloadConfigs()
-
+        Console.WriteLine("InputHandling:ReloadConfigs")
         ProfileName = MainFormRef.ConfigFile.KeyMapProfile
         If Not File.Exists(GetXMLFile(True)) Then CreateKeyMapConfigs()
         Dim cfg As XDocument = XDocument.Load(GetXMLFile(True))
@@ -515,6 +521,21 @@ Public Class InputHandling
 
             Next
 
+            ' Spectator Controls
+            If MainFormRef.ConfigFile.Status = "Spectator" Then
+                If GetAsyncKeyState(KeyBoardConfigs("right")(0)) <> 0 Then
+                    Spectatorcontrol_Fastforward(0) = True
+                Else
+                    Spectatorcontrol_Fastforward(0) = False
+                End If
+
+                If Not Spectatorcontrol_Fastforward(1) = Spectatorcontrol_Fastforward(0) And Spectatorcontrol_Fastforward(0) = True Then
+                    FastforwardReplayToggle()
+                End If
+
+                Spectatorcontrol_Fastforward(1) = Spectatorcontrol_Fastforward(0)
+            End If
+
             If NeedConfigReload Then
                 ReloadConfigs()
 
@@ -523,6 +544,8 @@ Public Class InputHandling
             For i = 0 To RxButtons.Count - 1
                 LF_RxButtons(i) = RxButtons(i)
             Next
+
+
 
         End While
 
@@ -537,9 +560,9 @@ Public Class InputHandling
         TranslateButtonToKey(Button, False)
     End Sub
 
-    Private Sub FastforwardReplay(ByVal _ff As Boolean)
+    Private Sub FastforwardReplayToggle()
 
-        MainFormRef.NullDCLauncher.FastForward(_ff)
+        MainFormRef.NullDCLauncher.FastForward()
 
     End Sub
 
@@ -554,16 +577,6 @@ Public Class InputHandling
             For Each Key As Int16 In KeyCache(Button)(0)
                 keybd_event(Key, MapVirtualKey(Key, 0), upordown, 0)
             Next
-
-            ' Spectator Controls
-            If Down Then
-                If MainFormRef.ConfigFile.Status = "Spectator" Then
-                    If KeyCache(Button)(2).ToString = "right" Then
-                        FastforwardReplay(True)
-                    End If
-                End If
-            End If
-
 
             KeyCache(Button)(1) = Down
         End If
@@ -580,10 +593,7 @@ Public Class InputHandling
         RxAxis = NewMap
         WriteXMLConfigFile()
         NeedConfigReload = True
-    End Sub
-
-    Private Sub FastForwardToggle()
-
+        Console.WriteLine("InputHandling:UpdateAxisMap")
     End Sub
 
 End Class

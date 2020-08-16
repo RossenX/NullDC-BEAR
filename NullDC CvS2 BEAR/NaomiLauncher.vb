@@ -80,8 +80,11 @@ Public Class NaomiLauncher
     Private Const WM_GETTEXTLENGTH As Integer = &HE
 #End Region
 
-    Public Sub FastForward(ByVal _on As Boolean)
-        PostMessage(NullDCproc.MainWindowHandle, WM_COMMAND, 118, 0)
+    Public Sub FastForward()
+        If Not NullDCproc Is Nothing Then
+            PostMessage(NullDCproc.MainWindowHandle, WM_COMMAND, 118, 0)
+        End If
+
     End Sub
 
 

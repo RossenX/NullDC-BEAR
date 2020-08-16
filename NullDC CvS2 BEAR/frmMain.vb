@@ -139,16 +139,18 @@ Public Class frmMain
     Private Sub CreateCFGWatcher()
         CFGWatcher = New FileSystemWatcher()
         CFGWatcher.IncludeSubdirectories = False
+
         CFGWatcher.Path = NullDCPath
         CFGWatcher.NotifyFilter = NotifyFilters.LastWrite
         AddHandler CFGWatcher.Changed, AddressOf CFGChanged
+
         CFGWatcher.EnableRaisingEvents = True
     End Sub
 
     Private Sub CFGChanged(ByVal source As Object, ByVal e As FileSystemEventArgs)
         If e.Name = "nullDC.cfg" Then
             CFGWatcher.EnableRaisingEvents = False
-
+            Console.WriteLine("cfg Changed")
             Thread.Sleep(2000)
             While IsFileInUse(NullDCPath & "/nulldc.cfg")
                 Thread.Sleep(500)
