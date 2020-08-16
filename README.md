@@ -5,6 +5,7 @@ A nullDC ALL-IN-ONE Launcher and optimizer to ensure easy setup for nullDC(Naomi
 Easy setup easy connection, minimal effort maximum performance.
 
 Prerequired:
+
 VC++ 2015 (If nullDC is giving errors/crashing)
 https://www.microsoft.com/en-us/download/details.aspx?id=48145
 
