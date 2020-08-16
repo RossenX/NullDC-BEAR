@@ -326,7 +326,6 @@ Public Class NaomiLauncher
 
         thefile = MainFormRef.NullDCPath & "\nullDC.cfg"
         Dim lines() As String = File.ReadAllLines(thefile)
-
         Dim linenumber = 0
         For Each line As String In lines
 
@@ -392,7 +391,8 @@ Public Class NaomiLauncher
 
             ' [Naomi]
             If line.StartsWith("LoadDefaultRom=") Then lines(linenumber) = "LoadDefaultRom=1"
-            If line.StartsWith("DefaultRom=") Then lines(linenumber) = "DefaultRom=" & MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1)
+            If line.StartsWith("DefaultRom=") Then lines(linenumber) = "DefaultRom=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1).ToString.Replace("\roms\", "roms\")
+
 
             If line.StartsWith("Current_maple0_5=") Then
                 lines(linenumber) = "Current_maple0_5=BEARJamma_Win32.dll:0" ' Make sure that BEAR  is only plugin
