@@ -32,7 +32,7 @@ Public Class InputHandling
     Dim MainFormRef As frmMain 'Rebind Vars
     Dim CoinKeyDown As Boolean = False
 
-    Dim Spectatorcontrol_Fastforward As Boolean() = {False, False}
+    Dim SpectatorControls_FastForward_Pressed As Boolean = False
 
     ' Virtual Keyboard Mapping
     Private Declare Function joyGetPosEx Lib "winmm.dll" (ByVal uJoyID As Integer, ByRef pji As JOYINFOEX) As Integer ' JoyStick Mapping
@@ -468,8 +468,27 @@ Public Class InputHandling
         Console.WriteLine("Started Input Rolling")
         ' While loop is < 1ms
         While True
-            Thread.Sleep(8)
+            Thread.Sleep(7)
+            If MainFormRef.ConfigFile.Status = "Spectator" Then
+                Try
+                    If MainFormRef.IsNullDCRunning Then
+                        If MainFormRef.NullDCLauncher.IsNullDCWindowSelected Then
+                            If GetAsyncKeyState(KeyBoardConfigs("right")(0)) <> 0 Then
+                                If SpectatorControls_FastForward_Pressed = False Then
+                                    SpectatorControls_FastForward_Pressed = True
+                                    FastforwardReplayToggle()
+                                End If
+                            Else
+                                SpectatorControls_FastForward_Pressed = False
+                            End If
 
+                        End If
+                    End If
+                Catch ex As Exception
+
+                End Try
+
+            End If
             ' If the mapping is off then just pause it here, but lets not remove the thread because a bitch to deal with threads
             While Not TurnedOn
                 Thread.Sleep(1000)
@@ -521,20 +540,9 @@ Public Class InputHandling
 
             Next
 
-            ' Spectator Controls
-            If MainFormRef.ConfigFile.Status = "Spectator" Then
-                If GetAsyncKeyState(KeyBoardConfigs("right")(0)) <> 0 Then
-                    Spectatorcontrol_Fastforward(0) = True
-                Else
-                    Spectatorcontrol_Fastforward(0) = False
-                End If
 
-                If Not Spectatorcontrol_Fastforward(1) = Spectatorcontrol_Fastforward(0) And Spectatorcontrol_Fastforward(0) = True Then
-                    FastforwardReplayToggle()
-                End If
 
-                Spectatorcontrol_Fastforward(1) = Spectatorcontrol_Fastforward(0)
-            End If
+
 
             If NeedConfigReload Then
                 ReloadConfigs()
@@ -544,6 +552,7 @@ Public Class InputHandling
             For i = 0 To RxButtons.Count - 1
                 LF_RxButtons(i) = RxButtons(i)
             Next
+
 
 
 

@@ -62,12 +62,15 @@ Public Class NaomiLauncher
 
     Public Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
     Public Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As IntPtr, ByVal lpString As System.Text.StringBuilder, ByVal cch As Integer) As Integer
-    Public Declare Function SetForegroundWindow Lib "user32.dll" (ByVal hwnd As Integer) As Integer
     Public Declare Function MoveWindow Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal X As Int32, ByVal Y As Int32, ByVal nWidth As Int32, ByVal nHeight As Int32, ByVal bRepaint As Boolean) As Boolean
     Declare Function BlockInput Lib "user32" (ByVal fBlockIt As Boolean) As Boolean
 
-    <DllImport("user32.dll", SetLastError:=True)>
+    <DllImport("user32.dll")>
     Private Shared Function GetForegroundWindow() As IntPtr
+    End Function
+
+    <DllImport("user32.dll")>
+    Public Shared Function GetWindowThreadProcessId(ByVal hWnd As IntPtr, <Out()> ByRef lpdwProcessId As UInteger) As UInteger
     End Function
 
     Private Const BM_CLICK As Integer = &HF5
@@ -79,6 +82,19 @@ Public Class NaomiLauncher
     Private Const WM_GETTEXT As Integer = &HD
     Private Const WM_GETTEXTLENGTH As Integer = &HE
 #End Region
+
+    Public Function IsNullDCWindowSelected() As Boolean
+        If MainformRef.IsNullDCRunning Then
+            Dim hWnd As IntPtr = GetForegroundWindow()
+            Dim ProcessID As UInteger = 0
+
+            GetWindowThreadProcessId(hWnd, ProcessID)
+
+            If ProcessID = NullDCproc.Id Then Return True
+        End If
+
+        Return False
+    End Function
 
     Public Sub FastForward()
         If Not NullDCproc Is Nothing Then
