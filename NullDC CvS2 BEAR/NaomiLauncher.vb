@@ -87,9 +87,7 @@ Public Class NaomiLauncher
         If MainformRef.IsNullDCRunning Then
             Dim hWnd As IntPtr = GetForegroundWindow()
             Dim ProcessID As UInteger = 0
-
             GetWindowThreadProcessId(hWnd, ProcessID)
-
             If ProcessID = NullDCproc.Id Then Return True
         End If
 
