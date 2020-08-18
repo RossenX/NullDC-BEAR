@@ -386,24 +386,21 @@ Public Class frmMain
         table.Columns.Add("Rom", GetType(String))
         table.Columns.Add("Game", GetType(String))
 
-        For Each Dir As String In Directory.GetDirectories(NullDCPath & "\roms")
-            Dim Files = Directory.GetFiles(Dir)
-            For Each file In Files
-                Dim FileType = file.Split(".")
-                If FileType(FileType.Count - 1) = "lst" Then
-                    Dim GameName_Split = file.Split("\")
 
-                    Dim GameName As String = GameName_Split(GameName_Split.Count - 2)
-                    Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
-                    Dim RomPath As String = file.Replace(NullDCPath, "")
+        ' New Get ALl Roms code that includes subfolders
 
-                    If Not GamesList.ContainsKey(RomName) Then
-                        GamesList.Add(RomName, {GameName, RomPath})
-                        table.Rows.Add({RomName, GameName})
-                    End If
+        Dim Files = Directory.GetFiles(NullDCPath & "\roms", "*.lst", SearchOption.AllDirectories)
+        For Each file In Files
+            Dim GameName_Split = file.Split("\")
 
-                End If
-            Next
+            Dim GameName As String = GameName_Split(GameName_Split.Count - 2)
+            Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
+            Dim RomPath As String = file.Replace(NullDCPath, "")
+
+            If Not GamesList.ContainsKey(RomName) Then
+                GamesList.Add(RomName, {GameName, RomPath})
+                table.Rows.Add({RomName, GameName})
+            End If
         Next
 
         GameSelectForm.cbGameList.DataSource = table

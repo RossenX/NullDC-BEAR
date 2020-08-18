@@ -21,6 +21,12 @@ Public Class frmDLC
 
     End Sub
 
+    Private Sub AddDirectLink(ByVal _url As String, ByVal _name As String, ByRef _listtoadd As ListView)
+        Dim _it As New ListViewItem(_name)
+        _it.SubItems.Add(_url)
+        _listtoadd.Items.Add(_it)
+    End Sub
+
     Private Sub ArchiveDotOrgParse(ByVal URL As String, ListView As ListView)
         Dim StrippedURL = URL.Replace("&output=json", "/")
         StrippedURL = StrippedURL.Replace("/details/", "/download/")
@@ -48,6 +54,8 @@ Public Class frmDLC
                     End If
                 Next
 
+                ListView.Sorting = SortOrder.Ascending
+                ListView.Sort()
             End Sub
 
     End Sub
@@ -58,6 +66,7 @@ Public Class frmDLC
         Try
             ArchiveDotOrgParse("https://archive.org/details/NaomiRomsReuploadByGhostware&output=json", lvGamesList_naomi)
             ArchiveDotOrgParse("https://archive.org/details/AtomiswaveReuploadByGhostware&output=json", lvGamelist_Atomiswave)
+            AddDirectLink("https://archive.org/download/neo-geo-battle-coliseum-unlocked/NeoGeo%20Battle%20Coliseum%20-%20Unlocked.zip", "Neo Geo Battle Coliseum Unlocked", lvGamelist_Atomiswave)
         Catch ex As Exception
             MsgBox(ex.InnerException)
         End Try
@@ -118,14 +127,9 @@ Public Class frmDLC
                                Try
                                    MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
                                    If Not Directory.Exists(RomDirectory) Then Directory.CreateDirectory(RomDirectory)
-                                   Using archive As ZipArchive = ZipFile.OpenRead(zipPath)
-                                       For Each entry As ZipArchiveEntry In archive.Entries
-                                           If entry.FullName.Split("\").Length > 1 Then
-                                               Directory.CreateDirectory(RomDirectory & "\" & entry.FullName.Split("\")(0))
-                                           End If
-                                           entry.ExtractToFile(RomDirectory & "\" & entry.FullName, True)
-                                       Next
-                                   End Using
+                                   If File.Exists(zipPath) Then
+                                       ZipFile.ExtractToDirectory(zipPath, RomDirectory)
+                                   End If
                                    MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & DownloadingGameName))
                                Catch ex As Exception
                                    MsgBox("Rom install Error: " & ex.Message)
