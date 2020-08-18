@@ -126,6 +126,7 @@ Public Class frmDLC
                            If Not DownloadCanceled Then
                                Try
                                    MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
+
                                    If Not Directory.Exists(RomDirectory) Then
                                        Directory.CreateDirectory(RomDirectory)
                                    Else
@@ -149,15 +150,14 @@ Public Class frmDLC
                                File.Delete(zipPath)
                            End If
 
-                           MainformRef.Invoke(
-                           Sub()
-                               If Me.Visible Then
-                                   'MainformRef.GetGamesList()
-                                   ProgressBar1.Visible = False
-                                   btnDownload.Text = "Download"
-                                   DownloadCanceled = False
-                               End If
-                           End Sub)
+                           MainformRef.Invoke(Sub()
+                                                  If Me.Visible Then
+                                                      'MainformRef.GetGamesList()
+                                                      ProgressBar1.Visible = False
+                                                      btnDownload.Text = "Download"
+                                                      DownloadCanceled = False
+                                                  End If
+                                              End Sub)
 
                        End Sub)
 
