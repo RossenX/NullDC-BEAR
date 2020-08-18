@@ -5,12 +5,12 @@ Imports System.Threading
 Imports OpenTK
 
 Public Class frmMain
-    Dim IsBeta As Boolean = False
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.0k"
+    Public Ver As String = "1.1"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NaomiLauncher
@@ -1264,26 +1264,26 @@ Public Class Configs
             Dim lines() As String = File.ReadAllLines(thefile)
             Dim tmpVersion = ""
             For Each line As String In lines
-                If line.Contains("Version") Then tmpVersion = line.Split("=")(1).Trim
-                If line.Contains("Name") Then Name = line.Split("=")(1).Trim
-                If line.Contains("Network") Then Network = line.Split("=")(1).Trim
-                If line.Contains("Port") Then Port = line.Split("=")(1).Trim
-                If line.Contains("Reclaw") Then UseRemap = line.Split("=")(1).Trim
-                If line.Contains("IP") Then IP = line.Split("=")(1).Trim
-                If line.Contains("Host") Then Host = line.Split("=")(1).Trim
-                If line.Contains("Delay") Then Delay = line.Split("=")(1).Trim
-                If line.Contains("HostType") Then HostType = 1 'line.Split("=")(1).Trim
-                If line.Contains("FPSLimit") Then FPSLimit = line.Split("=")(1).Trim
-                If line.Contains("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
-                If line.Contains("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim
-                If line.Contains("ReplayFile") Then ReplayFile = line.Split("=")(1).Trim
-                If line.Contains("AllowSpectators") Then AllowSpectators = line.Split("=")(1).Trim
-                If line.Contains("AwayStatus") Then
+                If line.StartsWith("Version") Then tmpVersion = line.Split("=")(1).Trim
+                If line.StartsWith("Name") Then Name = line.Split("=")(1).Trim
+                If line.StartsWith("Network") Then Network = line.Split("=")(1).Trim
+                If line.StartsWith("Port") Then Port = line.Split("=")(1).Trim
+                If line.StartsWith("Reclaw") Then UseRemap = line.Split("=")(1).Trim
+                If line.StartsWith("IP") Then IP = line.Split("=")(1).Trim
+                If line.StartsWith("Host") Then Host = line.Split("=")(1).Trim
+                If line.StartsWith("Delay") Then Delay = line.Split("=")(1).Trim
+                If line.StartsWith("HostType") Then HostType = 1 'line.Split("=")(1).Trim
+                If line.StartsWith("FPSLimit") Then FPSLimit = line.Split("=")(1).Trim
+                If line.StartsWith("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
+                If line.StartsWith("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim
+                If line.StartsWith("ReplayFile") Then ReplayFile = line.Split("=")(1).Trim
+                If line.StartsWith("AllowSpectators") Then AllowSpectators = line.Split("=")(1).Trim
+                If line.StartsWith("AwayStatus") Then
                     AwayStatus = line.Split("=")(1).Trim
                     Status = line.Split("=")(1).Trim
                 End If
-                If line.Contains("Volume") Then Volume = line.Split("=")(1).Trim
-                If line.Contains("eVolume") Then
+                If line.StartsWith("Volume") Then Volume = line.Split("=")(1).Trim
+                If line.StartsWith("eVolume") Then
                     If Not tmpVersion = MainformRef.Ver Then
                         EmulatorVolume = Volume
                     Else
@@ -1291,7 +1291,7 @@ Public Class Configs
                     End If
 
                 End If
-                If line.Contains("ShowConsole") Then ShowConsole = line.Split("=")(1).Trim
+                If line.StartsWith("ShowConsole") Then ShowConsole = line.Split("=")(1).Trim
             Next
 
             Game = "None"
