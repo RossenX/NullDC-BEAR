@@ -126,10 +126,17 @@ Public Class frmDLC
                            If Not DownloadCanceled Then
                                Try
                                    MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
-                                   If Not Directory.Exists(RomDirectory) Then Directory.CreateDirectory(RomDirectory)
+                                   If Not Directory.Exists(RomDirectory) Then
+                                       Directory.CreateDirectory(RomDirectory)
+                                   Else
+                                       Directory.Delete(RomDirectory, True)
+                                       Directory.CreateDirectory(RomDirectory)
+                                   End If
+
                                    If File.Exists(zipPath) Then
                                        ZipFile.ExtractToDirectory(zipPath, RomDirectory)
                                    End If
+
                                    MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & DownloadingGameName))
                                Catch ex As Exception
                                    MsgBox("Rom install Error: " & ex.Message)
