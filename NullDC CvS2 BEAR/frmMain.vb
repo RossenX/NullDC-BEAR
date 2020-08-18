@@ -1009,6 +1009,8 @@ Public Class Configs
     Private _awaystatus As String = "Idle"
     Private _volume As Int16 = 100
     Private _showconsole As Int16 = 1
+    Private _evolume As Int16 = 100
+
 
 #Region "Properties"
 
@@ -1194,6 +1196,15 @@ Public Class Configs
 
     End Property
 
+    Public Property EmulatorVolume() As Int16
+        Get
+            Return _evolume
+        End Get
+        Set(ByVal value As Int16)
+            _evolume = value
+        End Set
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -1219,6 +1230,7 @@ Public Class Configs
                 "AllowSpectators=" & AllowSpectators,
                 "AwayStatus=" & AwayStatus,
                 "Volume=" & Volume,
+                "eVolume=" & EmulatorVolume,
                 "ShowConsole=" & ShowConsole
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
@@ -1238,6 +1250,7 @@ Public Class Configs
                 End If
             End If
         End If
+
     End Sub
 
     Public Sub New(ByRef NullDCPath As String)
@@ -1249,7 +1262,9 @@ Public Class Configs
             FirstRun = False
             Dim thefile = NullDCPath & "\NullDC_BEAR.cfg"
             Dim lines() As String = File.ReadAllLines(thefile)
+            Dim tmpVersion = ""
             For Each line As String In lines
+                If line.Contains("Version") Then tmpVersion = line.Split("=")(1).Trim
                 If line.Contains("Name") Then Name = line.Split("=")(1).Trim
                 If line.Contains("Network") Then Network = line.Split("=")(1).Trim
                 If line.Contains("Port") Then Port = line.Split("=")(1).Trim
@@ -1268,8 +1283,17 @@ Public Class Configs
                     Status = line.Split("=")(1).Trim
                 End If
                 If line.Contains("Volume") Then Volume = line.Split("=")(1).Trim
+                If line.Contains("eVolume") Then
+                    If Not tmpVersion = MainformRef.Ver Then
+                        EmulatorVolume = Volume
+                    Else
+                        EmulatorVolume = line.Split("=")(1).Trim
+                    End If
+
+                End If
                 If line.Contains("ShowConsole") Then ShowConsole = line.Split("=")(1).Trim
             Next
+
             Game = "None"
             SaveFile()
             Exit Sub

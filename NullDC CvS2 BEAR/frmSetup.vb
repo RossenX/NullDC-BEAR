@@ -14,6 +14,8 @@ Public Class frmSetup
     Private Sub FillSettings()
         tbPlayerName.Text = MainformRef.ConfigFile.Name
         tb_Volume.Value = MainformRef.ConfigFile.Volume
+        tb_eVolume.Value = MainformRef.ConfigFile.EmulatorVolume
+
         tbPort.Text = MainformRef.ConfigFile.Port
         cbShowConsole.Checked = MainformRef.ConfigFile.ShowConsole
 
@@ -29,6 +31,7 @@ Public Class frmSetup
         MainformRef.ConfigFile.Network = ""
         MainformRef.ConfigFile.Port = tbPort.Text
         MainformRef.ConfigFile.Volume = tb_Volume.Value
+        MainformRef.ConfigFile.EmulatorVolume = tb_eVolume.Value
         MainformRef.ConfigFile.ShowConsole = Convert.ToInt32(cbShowConsole.Checked)
         If cbAllowSpectators.Text = "Yes" Then
             MainformRef.ConfigFile.AllowSpectators = 1
@@ -102,12 +105,12 @@ Public Class frmSetup
 
     End Sub
 
-    Private Sub tb_Volume_MouseCaptureChanged(sender As Object, e As EventArgs) Handles tb_Volume.MouseCaptureChanged
+    Private Sub tb_Volume_MouseCaptureChanged(sender As TrackBar, e As EventArgs) Handles tb_Volume.MouseCaptureChanged, tb_eVolume.MouseCaptureChanged
         wavePlayer.Dispose()
         wavePlayer = New NAudio.Wave.WaveOut
         Dim ChallangeSound As New NAudio.Wave.WaveFileReader(My.Resources.NewChallanger)
         wavePlayer.Init(ChallangeSound)
-        wavePlayer.Volume = tb_Volume.Value / 100
+        wavePlayer.Volume = sender.Value / 100
         wavePlayer.Play()
 
     End Sub

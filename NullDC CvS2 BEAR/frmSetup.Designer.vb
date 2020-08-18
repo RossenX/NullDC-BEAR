@@ -36,8 +36,15 @@ Partial Class frmSetup
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbPlayerName = New System.Windows.Forms.TextBox()
         Me.cbShowConsole = New System.Windows.Forms.CheckBox()
+        Me.tb_eVolume = New System.Windows.Forms.TrackBar()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_Volume, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tb_eVolume, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
@@ -63,15 +70,18 @@ Partial Class frmSetup
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(614, 19)
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label3.Location = New System.Drawing.Point(57, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(42, 13)
+        Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 13
-        Me.Label3.Text = "Volume"
+        Me.Label3.Text = "BEAR"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tb_Volume
         '
-        Me.tb_Volume.Location = New System.Drawing.Point(617, 34)
+        Me.tb_Volume.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tb_Volume.Location = New System.Drawing.Point(57, 16)
         Me.tb_Volume.Maximum = 100
         Me.tb_Volume.Name = "tb_Volume"
         Me.tb_Volume.Orientation = System.Windows.Forms.Orientation.Vertical
@@ -146,7 +156,7 @@ Partial Class frmSetup
         '
         Me.btnSaveExit.Location = New System.Drawing.Point(587, 186)
         Me.btnSaveExit.Name = "btnSaveExit"
-        Me.btnSaveExit.Size = New System.Drawing.Size(75, 54)
+        Me.btnSaveExit.Size = New System.Drawing.Size(111, 54)
         Me.btnSaveExit.TabIndex = 4
         Me.btnSaveExit.TabStop = False
         Me.btnSaveExit.Text = "Save"
@@ -179,15 +189,70 @@ Partial Class frmSetup
         Me.cbShowConsole.Text = "Show NullDC Console"
         Me.cbShowConsole.UseVisualStyleBackColor = True
         '
+        'tb_eVolume
+        '
+        Me.tb_eVolume.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tb_eVolume.Location = New System.Drawing.Point(3, 16)
+        Me.tb_eVolume.Maximum = 100
+        Me.tb_eVolume.Name = "tb_eVolume"
+        Me.tb_eVolume.Orientation = System.Windows.Forms.Orientation.Vertical
+        Me.tb_eVolume.Size = New System.Drawing.Size(48, 146)
+        Me.tb_eVolume.TabIndex = 15
+        Me.tb_eVolume.TabStop = False
+        Me.tb_eVolume.TickFrequency = 10
+        Me.tb_eVolume.TickStyle = System.Windows.Forms.TickStyle.Both
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Location = New System.Drawing.Point(3, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(48, 13)
+        Me.Label1.TabIndex = 16
+        Me.Label1.Text = "Emulator"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.AutoSize = True
+        Me.GroupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.GroupBox1.Controls.Add(Me.TableLayoutPanel1)
+        Me.GroupBox1.Location = New System.Drawing.Point(587, 1)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(111, 184)
+        Me.GroupBox1.TabIndex = 17
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Volume"
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.AutoSize = True
+        Me.TableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.TableLayoutPanel1.ColumnCount = 2
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.tb_Volume, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label3, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.tb_eVolume, 0, 1)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(105, 165)
+        Me.TableLayoutPanel1.TabIndex = 0
+        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(670, 250)
+        Me.ClientSize = New System.Drawing.Size(706, 250)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.cbShowConsole)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.tb_Volume)
         Me.Controls.Add(Me.btnSaveExit)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.tbPort)
@@ -204,6 +269,11 @@ Partial Class frmSetup
         Me.Text = "BEAR Setup"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tb_Volume, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tb_eVolume, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -223,4 +293,8 @@ Partial Class frmSetup
     Friend WithEvents tb_Volume As TrackBar
     Friend WithEvents Label3 As Label
     Friend WithEvents cbShowConsole As CheckBox
+    Friend WithEvents tb_eVolume As TrackBar
+    Friend WithEvents Label1 As Label
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 End Class

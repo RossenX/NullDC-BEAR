@@ -378,7 +378,7 @@ Public Class NaomiLauncher
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
             If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
-            If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.Volume / 10) + ((MainformRef.ConfigFile.Volume - (MainformRef.ConfigFile.Volume / 10)) * (MainformRef.ConfigFile.Volume / 100)))
+            If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
 
             ' [nullExtDev]
             If line.StartsWith("mode=") Then lines(linenumber) = "mode=0"
