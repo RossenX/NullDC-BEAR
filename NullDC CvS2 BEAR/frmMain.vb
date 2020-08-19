@@ -747,12 +747,12 @@ Public Class frmMain
     Private xpos1 As Integer
     Private ypos1 As Integer
 
-    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown, BEARTitle.MouseDown, imgBeta.MouseDown, lbVer.MouseDown
+    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown, BEARTitle.MouseDown, imgBeta.MouseDown, lbVer.MouseDown, TableLayoutPanel4.MouseDown
         xpos1 = Control.MousePosition.X - Me.Location.X
         ypos1 = Control.MousePosition.Y - Me.Location.Y
     End Sub
 
-    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove, BEARTitle.MouseMove, imgBeta.MouseMove, lbVer.MouseMove
+    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove, BEARTitle.MouseMove, imgBeta.MouseMove, lbVer.MouseMove, TableLayoutPanel4.MouseMove
         If e.Button = MouseButtons.Left Then
             newpoint = Control.MousePosition
             newpoint.X -= (xpos1)
