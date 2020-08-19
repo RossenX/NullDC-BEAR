@@ -5,7 +5,7 @@ Imports System.Threading
 Imports OpenTK
 
 Public Class frmMain
-    Dim IsBeta As Boolean = True
+    Dim IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -1282,15 +1282,13 @@ Public Class Configs
                     AwayStatus = line.Split("=")(1).Trim
                     Status = line.Split("=")(1).Trim
                 End If
-                If line.StartsWith("Volume") Then Volume = line.Split("=")(1).Trim
-                If line.StartsWith("eVolume") Then
-                    If Not tmpVersion = MainformRef.Ver Then
-                        EmulatorVolume = Volume
-                    Else
-                        EmulatorVolume = line.Split("=")(1).Trim
-                    End If
 
+                If line.StartsWith("Volume") Then
+                    Volume = line.Split("=")(1).Trim
+                    EmulatorVolume = line.Split("=")(1).Trim
                 End If
+
+                If line.StartsWith("eVolume") Then EmulatorVolume = line.Split("=")(1).Trim
                 If line.StartsWith("ShowConsole") Then ShowConsole = line.Split("=")(1).Trim
             Next
 
