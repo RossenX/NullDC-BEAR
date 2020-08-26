@@ -1,19 +1,21 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Net.NetworkInformation
+Imports System.Security.Cryptography
+Imports System.Text
 Imports System.Threading
 Imports OpenTK
 
 Public Class frmMain
-    Dim IsBeta As Boolean = False
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.0m"
+    Public Ver As String = "1.1"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
-    Public NullDCLauncher As NaomiLauncher
+    Public NullDCLauncher As NullDCLauncher
     Public NullDCPath As String = Application.StartupPath
     Public GamesList As New Dictionary(Of String, Array)
     Public ConfigFile As Configs
@@ -37,7 +39,7 @@ Public Class frmMain
     Public FinishedLoading As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\tozip", "NullNaomiClean.zip")
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "DcClean.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         Me.Icon = My.Resources.NewNullDCBearIcon
@@ -85,7 +87,7 @@ Public Class frmMain
         InputHandler = New InputHandling(Me)
         NetworkHandler = New NetworkHandling(Me)
         KeyMappingForm = New frmKeyMapping(Me)
-        NullDCLauncher = New NaomiLauncher(Me)
+        NullDCLauncher = New NullDCLauncher
         ' 
 
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
@@ -95,7 +97,7 @@ Public Class frmMain
             'NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
         End If
 
-        CreateCFGWatcher()
+        'CreateCFGWatcher()
         CreateRomFolderWatcher()
         RefreshPlayerList(False)
 
@@ -181,7 +183,7 @@ Public Class frmMain
                 File.AppendAllLines(MainformRef.NullDCPath & "\nullDC.cfg", {"[Naomi]", "LoadDefaultRom=1", "DefaultRom=0"})
             End If
 
-            InputHandler.GetKeyboardConfigs()
+            'InputHandler.GetKeyboardConfigs()
             InputHandler.NeedConfigReload = True
             CFGWatcher.EnableRaisingEvents = True
         End If
@@ -371,6 +373,20 @@ Public Class frmMain
 
         End Try
 
+        ' DREAMCAST STUFF
+
+        ' Extract Dreamcast Emulator if it does not exist
+        If Not Directory.Exists(NullDCPath & "\dc") Then
+            Directory.CreateDirectory(NullDCPath & "\dc")
+            UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
+        End If
+
+
+
+
+
+
+
         GetGamesList()
     End Sub
 
@@ -390,15 +406,47 @@ Public Class frmMain
         ' New Get ALl Roms code that includes subfolders
 
         Dim Files = Directory.GetFiles(NullDCPath & "\roms", "*.lst", SearchOption.AllDirectories)
-        For Each file In Files
-            Dim GameName_Split = file.Split("\")
+        For Each _file In Files
+            Dim GameName_Split = _file.Split("\")
 
             Dim GameName As String = GameName_Split(GameName_Split.Count - 2)
             Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
-            Dim RomPath As String = file.Replace(NullDCPath, "")
+            Dim RomPath As String = _file.Replace(NullDCPath, "")
 
             If Not GamesList.ContainsKey(RomName) Then
-                GamesList.Add(RomName, {GameName, RomPath})
+                GamesList.Add(RomName, {GameName, RomPath, "naomi"})
+                table.Rows.Add({RomName, GameName})
+            End If
+        Next
+
+        ' GET DREAMCAST ROMS
+        Dim hasher As MD5 = MD5.Create()
+
+        Files = Directory.GetFiles(NullDCPath & "\dc\roms", "*.cdi", SearchOption.AllDirectories)
+        For Each _file In Files
+            Dim GameName_Split = _file.Split("\")
+
+            ' hash Generation
+            Dim fs As New FileStream(_file, FileMode.Open)
+            Dim binary_reader As New BinaryReader(fs)
+            fs.Position = 0
+            Dim bytes() As Byte = hasher.ComputeHash(binary_reader.ReadBytes(1000000))
+            Dim sBuilder As New StringBuilder()
+            For n As Integer = 0 To bytes.Length - 1
+                sBuilder.Append(bytes(n).ToString("X2"))
+            Next n
+            fs.Close()
+
+            'My.Computer.Clipboard.SetText(sBuilder.ToString)
+            'MsgBox(GameName_Split(GameName_Split.Count - 1) & " | " & sBuilder.ToString)
+            ' hash generator end
+
+            Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Replace(".cdi", "")
+            Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
+            Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+            If Not GamesList.ContainsKey(RomName) Then
+                GamesList.Add(RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
                 table.Rows.Add({RomName, GameName})
             End If
         Next
@@ -413,6 +461,19 @@ Public Class frmMain
 
     Private Sub RefreshTimer_tick(sender As Object, e As EventArgs)
         RefreshTimer.Stop()
+
+    End Sub
+
+    Public Sub GameLauncher(ByVal _romname, ByVal _region)
+        Dim Emulator As String = GamesList(_romname)(2)
+
+        Select Case Emulator
+            Case "dc"
+                NullDCLauncher.LaunchDreamcast(_romname, _region)
+            Case "naomi"
+                NullDCLauncher.LaunchNaomi(_romname, _region)
+
+        End Select
 
     End Sub
 
@@ -461,7 +522,7 @@ Public Class frmMain
         ConfigFile.Delay = _delay
         ConfigFile.ReplayFile = ""
         ConfigFile.SaveFile()
-        NullDCLauncher.LaunchDC(ConfigFile.Game, _region)
+        NullDCLauncher.LaunchNaomi(ConfigFile.Game, _region)
 
     End Sub
 
@@ -480,7 +541,7 @@ Public Class frmMain
         NullDCLauncher.P2Name = _p2name
         WaitingForm.Visible = False
         ChallengeSentForm.Visible = False
-        NullDCLauncher.LaunchDC(ConfigFile.Game, _region)
+        NullDCLauncher.LaunchNaomi(ConfigFile.Game, _region)
     End Sub
 
     Public Delegate Sub RemovePlayerFromList_delegate(ByVal IP As String)

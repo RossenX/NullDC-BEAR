@@ -242,6 +242,7 @@ Partial Class frmHostPanel
         '
         'cbRegion
         '
+        Me.cbRegion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cbRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRegion.FormattingEnabled = True
         Me.cbRegion.Items.AddRange(New Object() {"JPN", "USA", "EUR"})

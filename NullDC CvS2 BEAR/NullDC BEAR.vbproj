@@ -153,7 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="DreamcastLauncher.vb" />
     <Compile Include="frmCalibration.Designer.vb">
       <DependentUpon>frmCalibration.vb</DependentUpon>
     </Compile>
@@ -274,7 +273,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="NetworkHandling.vb" />
-    <Compile Include="NaomiLauncher.vb" />
+    <Compile Include="NullDCLauncher.vb" />
     <Compile Include="Rx.vb" />
     <Compile Include="SimpleProgressBar.Designer.vb">
       <DependentUpon>SimpleProgressBar.vb</DependentUpon>
@@ -359,6 +358,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="Resources\vmu_data_port01.bin" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -380,7 +380,9 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DcClean.zip" />
     <None Include="Resources\Deps.zip" />
+    <Content Include="Resources\DreamcastGameOptimizations.txt" />
     <None Include="Resources\nullDC.cfg" />
   </ItemGroup>
   <ItemGroup>

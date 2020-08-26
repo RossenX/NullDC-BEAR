@@ -44,7 +44,9 @@
         MainformRef.ConfigFile.Host = "127.0.0.1"
         MainformRef.ConfigFile.SaveFile()
 
-        MainformRef.NullDCLauncher.LaunchDC(cbGameList.SelectedValue, cbRegion.Text)
+        MainformRef.GameLauncher(cbGameList.SelectedValue, cbRegion.Text)
+        'MainformRef.NullDCLauncher.LaunchDC(cbGameList.SelectedValue, cbRegion.Text)
+
         Me.Close()
 
     End Sub

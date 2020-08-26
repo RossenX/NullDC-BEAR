@@ -43,6 +43,13 @@ Partial Class frmKeyMapping
         Me.btnAP = New System.Windows.Forms.Button()
         Me.btnAK = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btndpadright = New System.Windows.Forms.Button()
+        Me.btndpaddown = New System.Windows.Forms.Button()
+        Me.btndpadleft = New System.Windows.Forms.Button()
+        Me.btndpadup = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnMKHK = New System.Windows.Forms.Button()
@@ -64,6 +71,9 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.tlpProfile.SuspendLayout()
@@ -74,10 +84,10 @@ Partial Class frmKeyMapping
         Me.btnup.BackColor = System.Drawing.Color.White
         Me.btnup.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnup.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnup.Location = New System.Drawing.Point(75, 0)
+        Me.btnup.Location = New System.Drawing.Point(73, 0)
         Me.btnup.Margin = New System.Windows.Forms.Padding(0)
         Me.btnup.Name = "btnup"
-        Me.btnup.Size = New System.Drawing.Size(75, 75)
+        Me.btnup.Size = New System.Drawing.Size(73, 72)
         Me.btnup.TabIndex = 0
         Me.btnup.TabStop = False
         Me.btnup.Text = "UP"
@@ -88,10 +98,10 @@ Partial Class frmKeyMapping
         Me.btnright.BackColor = System.Drawing.Color.White
         Me.btnright.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnright.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnright.Location = New System.Drawing.Point(150, 75)
+        Me.btnright.Location = New System.Drawing.Point(146, 72)
         Me.btnright.Margin = New System.Windows.Forms.Padding(0)
         Me.btnright.Name = "btnright"
-        Me.btnright.Size = New System.Drawing.Size(75, 75)
+        Me.btnright.Size = New System.Drawing.Size(73, 72)
         Me.btnright.TabIndex = 1
         Me.btnright.TabStop = False
         Me.btnright.Text = "Right"
@@ -102,10 +112,10 @@ Partial Class frmKeyMapping
         Me.btndown.BackColor = System.Drawing.Color.White
         Me.btndown.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btndown.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btndown.Location = New System.Drawing.Point(75, 150)
+        Me.btndown.Location = New System.Drawing.Point(73, 144)
         Me.btndown.Margin = New System.Windows.Forms.Padding(0)
         Me.btndown.Name = "btndown"
-        Me.btndown.Size = New System.Drawing.Size(75, 75)
+        Me.btndown.Size = New System.Drawing.Size(73, 72)
         Me.btndown.TabIndex = 2
         Me.btndown.TabStop = False
         Me.btndown.Text = "Down"
@@ -116,10 +126,10 @@ Partial Class frmKeyMapping
         Me.btnleft.BackColor = System.Drawing.Color.White
         Me.btnleft.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnleft.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnleft.Location = New System.Drawing.Point(0, 75)
+        Me.btnleft.Location = New System.Drawing.Point(0, 72)
         Me.btnleft.Margin = New System.Windows.Forms.Padding(0)
         Me.btnleft.Name = "btnleft"
-        Me.btnleft.Size = New System.Drawing.Size(75, 75)
+        Me.btnleft.Size = New System.Drawing.Size(73, 72)
         Me.btnleft.TabIndex = 3
         Me.btnleft.TabStop = False
         Me.btnleft.Text = "Left"
@@ -136,13 +146,14 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel1.Controls.Add(Me.btnleft, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.btnup, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btnCalibrate, 1, 1)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(9, 60)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(225, 225)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(219, 216)
         Me.TableLayoutPanel1.TabIndex = 4
         '
         'btnCalibrate
@@ -150,10 +161,10 @@ Partial Class frmKeyMapping
         Me.btnCalibrate.BackColor = System.Drawing.Color.Cyan
         Me.btnCalibrate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnCalibrate.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnCalibrate.Location = New System.Drawing.Point(80, 80)
+        Me.btnCalibrate.Location = New System.Drawing.Point(78, 77)
         Me.btnCalibrate.Margin = New System.Windows.Forms.Padding(5)
         Me.btnCalibrate.Name = "btnCalibrate"
-        Me.btnCalibrate.Size = New System.Drawing.Size(65, 65)
+        Me.btnCalibrate.Size = New System.Drawing.Size(63, 62)
         Me.btnCalibrate.TabIndex = 4
         Me.btnCalibrate.TabStop = False
         Me.btnCalibrate.Text = "Calibrate Axis Triggers"
@@ -173,13 +184,13 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel2.Controls.Add(Me.btnhk, 2, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.btncoin, 1, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.btnstart, 2, 2)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(246, 60)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(393, 76)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(371, 126)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(326, 126)
         Me.TableLayoutPanel2.TabIndex = 5
         '
         'btnlp
@@ -190,10 +201,10 @@ Partial Class frmKeyMapping
         Me.btnlp.Location = New System.Drawing.Point(0, 0)
         Me.btnlp.Margin = New System.Windows.Forms.Padding(0)
         Me.btnlp.Name = "btnlp"
-        Me.btnlp.Size = New System.Drawing.Size(123, 50)
+        Me.btnlp.Size = New System.Drawing.Size(108, 50)
         Me.btnlp.TabIndex = 0
         Me.btnlp.TabStop = False
-        Me.btnlp.Text = "Button 1"
+        Me.btnlp.Text = "1 / X"
         Me.btnlp.UseVisualStyleBackColor = False
         '
         'btnmp
@@ -201,13 +212,13 @@ Partial Class frmKeyMapping
         Me.btnmp.BackColor = System.Drawing.Color.White
         Me.btnmp.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnmp.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnmp.Location = New System.Drawing.Point(123, 0)
+        Me.btnmp.Location = New System.Drawing.Point(108, 0)
         Me.btnmp.Margin = New System.Windows.Forms.Padding(0)
         Me.btnmp.Name = "btnmp"
-        Me.btnmp.Size = New System.Drawing.Size(123, 50)
+        Me.btnmp.Size = New System.Drawing.Size(108, 50)
         Me.btnmp.TabIndex = 1
         Me.btnmp.TabStop = False
-        Me.btnmp.Text = "Button 2"
+        Me.btnmp.Text = "2 / Y"
         Me.btnmp.UseVisualStyleBackColor = False
         '
         'btnlk
@@ -218,10 +229,10 @@ Partial Class frmKeyMapping
         Me.btnlk.Location = New System.Drawing.Point(0, 50)
         Me.btnlk.Margin = New System.Windows.Forms.Padding(0)
         Me.btnlk.Name = "btnlk"
-        Me.btnlk.Size = New System.Drawing.Size(123, 50)
+        Me.btnlk.Size = New System.Drawing.Size(108, 50)
         Me.btnlk.TabIndex = 4
         Me.btnlk.TabStop = False
-        Me.btnlk.Text = "Button 4"
+        Me.btnlk.Text = "4 / A"
         Me.btnlk.UseVisualStyleBackColor = False
         '
         'btnmk
@@ -229,13 +240,13 @@ Partial Class frmKeyMapping
         Me.btnmk.BackColor = System.Drawing.Color.White
         Me.btnmk.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnmk.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnmk.Location = New System.Drawing.Point(123, 50)
+        Me.btnmk.Location = New System.Drawing.Point(108, 50)
         Me.btnmk.Margin = New System.Windows.Forms.Padding(0)
         Me.btnmk.Name = "btnmk"
-        Me.btnmk.Size = New System.Drawing.Size(123, 50)
+        Me.btnmk.Size = New System.Drawing.Size(108, 50)
         Me.btnmk.TabIndex = 5
         Me.btnmk.TabStop = False
-        Me.btnmk.Text = "Button 5"
+        Me.btnmk.Text = "5 / B"
         Me.btnmk.UseVisualStyleBackColor = False
         '
         'btnhp
@@ -243,13 +254,13 @@ Partial Class frmKeyMapping
         Me.btnhp.BackColor = System.Drawing.Color.White
         Me.btnhp.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnhp.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnhp.Location = New System.Drawing.Point(246, 0)
+        Me.btnhp.Location = New System.Drawing.Point(216, 0)
         Me.btnhp.Margin = New System.Windows.Forms.Padding(0)
         Me.btnhp.Name = "btnhp"
-        Me.btnhp.Size = New System.Drawing.Size(125, 50)
+        Me.btnhp.Size = New System.Drawing.Size(110, 50)
         Me.btnhp.TabIndex = 2
         Me.btnhp.TabStop = False
-        Me.btnhp.Text = "Button 3"
+        Me.btnhp.Text = "3 / L"
         Me.btnhp.UseVisualStyleBackColor = False
         '
         'btnhk
@@ -257,13 +268,13 @@ Partial Class frmKeyMapping
         Me.btnhk.BackColor = System.Drawing.Color.White
         Me.btnhk.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnhk.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnhk.Location = New System.Drawing.Point(246, 50)
+        Me.btnhk.Location = New System.Drawing.Point(216, 50)
         Me.btnhk.Margin = New System.Windows.Forms.Padding(0)
         Me.btnhk.Name = "btnhk"
-        Me.btnhk.Size = New System.Drawing.Size(125, 50)
+        Me.btnhk.Size = New System.Drawing.Size(110, 50)
         Me.btnhk.TabIndex = 6
         Me.btnhk.TabStop = False
-        Me.btnhk.Text = "Button 6"
+        Me.btnhk.Text = "6 / R"
         Me.btnhk.UseVisualStyleBackColor = False
         '
         'btncoin
@@ -271,10 +282,10 @@ Partial Class frmKeyMapping
         Me.btncoin.BackColor = System.Drawing.Color.White
         Me.btncoin.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btncoin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btncoin.Location = New System.Drawing.Point(123, 100)
+        Me.btncoin.Location = New System.Drawing.Point(108, 100)
         Me.btncoin.Margin = New System.Windows.Forms.Padding(0)
         Me.btncoin.Name = "btncoin"
-        Me.btncoin.Size = New System.Drawing.Size(123, 26)
+        Me.btncoin.Size = New System.Drawing.Size(108, 26)
         Me.btncoin.TabIndex = 8
         Me.btncoin.TabStop = False
         Me.btncoin.Text = "Coin"
@@ -285,10 +296,10 @@ Partial Class frmKeyMapping
         Me.btnstart.BackColor = System.Drawing.Color.White
         Me.btnstart.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnstart.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnstart.Location = New System.Drawing.Point(246, 100)
+        Me.btnstart.Location = New System.Drawing.Point(216, 100)
         Me.btnstart.Margin = New System.Windows.Forms.Padding(0)
         Me.btnstart.Name = "btnstart"
-        Me.btnstart.Size = New System.Drawing.Size(125, 26)
+        Me.btnstart.Size = New System.Drawing.Size(110, 26)
         Me.btnstart.TabIndex = 9
         Me.btnstart.TabStop = False
         Me.btnstart.Text = "Start"
@@ -366,8 +377,9 @@ Partial Class frmKeyMapping
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.GroupBox3)
+        Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel1.Controls.Add(Me.tlpProfile)
         Me.Panel1.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel1.Controls.Add(Me.btnQuickSetup)
@@ -377,13 +389,109 @@ Partial Class frmKeyMapping
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(624, 353)
+        Me.Panel1.Size = New System.Drawing.Size(731, 376)
         Me.Panel1.TabIndex = 0
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.TableLayoutPanel4)
+        Me.GroupBox3.Location = New System.Drawing.Point(246, 208)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(150, 160)
+        Me.GroupBox3.TabIndex = 22
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "D-Pad (Dreamcast Only)"
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.ColumnCount = 3
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.Controls.Add(Me.btndpadright, 2, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.btndpaddown, 1, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.btndpadleft, 0, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.btndpadup, 1, 0)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 3
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(144, 141)
+        Me.TableLayoutPanel4.TabIndex = 5
+        '
+        'btndpadright
+        '
+        Me.btndpadright.BackColor = System.Drawing.Color.White
+        Me.btndpadright.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btndpadright.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btndpadright.Location = New System.Drawing.Point(96, 47)
+        Me.btndpadright.Margin = New System.Windows.Forms.Padding(0)
+        Me.btndpadright.Name = "btndpadright"
+        Me.btndpadright.Size = New System.Drawing.Size(48, 47)
+        Me.btndpadright.TabIndex = 1
+        Me.btndpadright.TabStop = False
+        Me.btndpadright.Text = "Right"
+        Me.btndpadright.UseVisualStyleBackColor = False
+        '
+        'btndpaddown
+        '
+        Me.btndpaddown.BackColor = System.Drawing.Color.White
+        Me.btndpaddown.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btndpaddown.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btndpaddown.Location = New System.Drawing.Point(48, 94)
+        Me.btndpaddown.Margin = New System.Windows.Forms.Padding(0)
+        Me.btndpaddown.Name = "btndpaddown"
+        Me.btndpaddown.Size = New System.Drawing.Size(48, 47)
+        Me.btndpaddown.TabIndex = 2
+        Me.btndpaddown.TabStop = False
+        Me.btndpaddown.Text = "Down"
+        Me.btndpaddown.UseVisualStyleBackColor = False
+        '
+        'btndpadleft
+        '
+        Me.btndpadleft.BackColor = System.Drawing.Color.White
+        Me.btndpadleft.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btndpadleft.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btndpadleft.Location = New System.Drawing.Point(0, 47)
+        Me.btndpadleft.Margin = New System.Windows.Forms.Padding(0)
+        Me.btndpadleft.Name = "btndpadleft"
+        Me.btndpadleft.Size = New System.Drawing.Size(48, 47)
+        Me.btndpadleft.TabIndex = 3
+        Me.btndpadleft.TabStop = False
+        Me.btndpadleft.Text = "Left"
+        Me.btndpadleft.UseVisualStyleBackColor = False
+        '
+        'btndpadup
+        '
+        Me.btndpadup.BackColor = System.Drawing.Color.White
+        Me.btndpadup.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btndpadup.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btndpadup.Location = New System.Drawing.Point(48, 0)
+        Me.btndpadup.Margin = New System.Windows.Forms.Padding(0)
+        Me.btndpadup.Name = "btndpadup"
+        Me.btndpadup.Size = New System.Drawing.Size(48, 47)
+        Me.btndpadup.TabIndex = 0
+        Me.btndpadup.TabStop = False
+        Me.btndpadup.Text = "UP"
+        Me.btndpadup.UseVisualStyleBackColor = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.TableLayoutPanel1)
+        Me.GroupBox2.Location = New System.Drawing.Point(15, 60)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(225, 235)
+        Me.GroupBox2.TabIndex = 21
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Analog Stick"
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel3)
-        Me.GroupBox1.Location = New System.Drawing.Point(357, 192)
+        Me.GroupBox1.Location = New System.Drawing.Point(459, 208)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(260, 103)
         Me.GroupBox1.TabIndex = 20
@@ -506,6 +614,7 @@ Partial Class frmKeyMapping
         '
         'cbProfile
         '
+        Me.cbProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cbProfile.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbProfile.FormattingEnabled = True
@@ -518,6 +627,7 @@ Partial Class frmKeyMapping
         '
         'cbControllerID
         '
+        Me.cbControllerID.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cbControllerID.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbControllerID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbControllerID.FormattingEnabled = True
@@ -572,7 +682,7 @@ Partial Class frmKeyMapping
         '
         Me.btnQuickSetup.BackColor = System.Drawing.Color.Cyan
         Me.btnQuickSetup.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnQuickSetup.Location = New System.Drawing.Point(9, 298)
+        Me.btnQuickSetup.Location = New System.Drawing.Point(15, 318)
         Me.btnQuickSetup.Name = "btnQuickSetup"
         Me.btnQuickSetup.Size = New System.Drawing.Size(225, 46)
         Me.btnQuickSetup.TabIndex = 18
@@ -584,7 +694,7 @@ Partial Class frmKeyMapping
         '
         Me.btnUnbindAll.BackColor = System.Drawing.Color.White
         Me.btnUnbindAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnUnbindAll.Location = New System.Drawing.Point(246, 263)
+        Me.btnUnbindAll.Location = New System.Drawing.Point(433, 344)
         Me.btnUnbindAll.Margin = New System.Windows.Forms.Padding(0)
         Me.btnUnbindAll.Name = "btnUnbindAll"
         Me.btnUnbindAll.Size = New System.Drawing.Size(92, 22)
@@ -597,7 +707,7 @@ Partial Class frmKeyMapping
         '
         Me.btnOnOff.BackColor = System.Drawing.Color.Lime
         Me.btnOnOff.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnOnOff.Location = New System.Drawing.Point(246, 298)
+        Me.btnOnOff.Location = New System.Drawing.Point(528, 322)
         Me.btnOnOff.Name = "btnOnOff"
         Me.btnOnOff.Size = New System.Drawing.Size(92, 46)
         Me.btnOnOff.TabIndex = 13
@@ -609,7 +719,7 @@ Partial Class frmKeyMapping
         '
         Me.btnDone.BackColor = System.Drawing.Color.White
         Me.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDone.Location = New System.Drawing.Point(524, 297)
+        Me.btnDone.Location = New System.Drawing.Point(626, 322)
         Me.btnDone.Name = "btnDone"
         Me.btnDone.Size = New System.Drawing.Size(93, 46)
         Me.btnDone.TabIndex = 12
@@ -622,7 +732,7 @@ Partial Class frmKeyMapping
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(624, 353)
+        Me.ClientSize = New System.Drawing.Size(731, 376)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.KeyPreview = True
@@ -634,6 +744,9 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.TableLayoutPanel4.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.tlpProfile.ResumeLayout(False)
@@ -681,4 +794,11 @@ Partial Class frmKeyMapping
     Friend WithEvents btnMKHK As Button
     Friend WithEvents btnLKMK As Button
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
+    Friend WithEvents btndpadright As Button
+    Friend WithEvents btndpaddown As Button
+    Friend WithEvents btndpadleft As Button
+    Friend WithEvents btndpadup As Button
+    Friend WithEvents GroupBox2 As GroupBox
 End Class

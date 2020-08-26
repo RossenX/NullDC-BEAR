@@ -318,7 +318,7 @@ Public Class frmKeyMapping
     Private Sub StartQuickSetup()
         UnbindAll()
         CalibrationForm.ShowDialog()
-        Dim ButtonsToRebind() As String = {"up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin", "start"}
+        Dim ButtonsToRebind() As String = {"up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin", "start", "dpadup", "dpaddown", "dpadleft", "dpadright"}
         For Each Key As String In ButtonsToRebind
             StartKeyBind(Key)
 
@@ -370,6 +370,22 @@ Public Class frmKeyMapping
 
     Private Sub cbProfile_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbProfile.KeyPress
         e.Handled = True
+    End Sub
+
+    Private Sub btndup_Click(sender As Object, e As EventArgs) Handles btndpadup.Click
+        StartKeyBind("dpadup")
+    End Sub
+
+    Private Sub btndpadright_Click(sender As Object, e As EventArgs) Handles btndpadright.Click
+        StartKeyBind("dpadright")
+    End Sub
+
+    Private Sub btndpadleft_Click(sender As Object, e As EventArgs) Handles btndpadleft.Click
+        StartKeyBind("dpadleft")
+    End Sub
+
+    Private Sub btndpaddown_Click(sender As Object, e As EventArgs) Handles btndpaddown.Click
+        StartKeyBind("dpaddown")
     End Sub
 
 End Class

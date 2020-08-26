@@ -184,4 +184,13 @@
   <data name="nullDC_Win32_Release_NoTrace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nullDC_Win32_Release-NoTrace.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="DcClean" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DcClean.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DreamcastGameOptimizations" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DreamcastGameOptimizations.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="vmu_data_port01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vmu_data_port01.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

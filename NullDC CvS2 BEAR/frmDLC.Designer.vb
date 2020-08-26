@@ -38,6 +38,7 @@ Partial Class frmDLC
         Me.lvGamelist_Atomiswave = New System.Windows.Forms.ListView()
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tc_games.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -173,6 +174,7 @@ Partial Class frmDLC
         Me.TableLayoutPanel1.SetColumnSpan(Me.tc_games, 2)
         Me.tc_games.Controls.Add(Me.TabPage1)
         Me.tc_games.Controls.Add(Me.TabPage2)
+        Me.tc_games.Controls.Add(Me.TabPage3)
         Me.tc_games.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tc_games.Location = New System.Drawing.Point(0, 25)
         Me.tc_games.Margin = New System.Windows.Forms.Padding(0)
@@ -228,6 +230,16 @@ Partial Class frmDLC
         '
         Me.ColumnHeader4.Width = 0
         '
+        'TabPage3
+        '
+        Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(420, 327)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Dreamcast"
+        '
         'frmDLC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -263,4 +275,5 @@ Partial Class frmDLC
     Friend WithEvents lvGamelist_Atomiswave As ListView
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ColumnHeader4 As ColumnHeader
+    Friend WithEvents TabPage3 As TabPage
 End Class

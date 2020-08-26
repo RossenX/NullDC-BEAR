@@ -174,10 +174,36 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
+        Friend ReadOnly Property DcClean() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DcClean", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
         Friend ReadOnly Property Deps() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("Deps", resourceCulture)
                 Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to CVS2::E35A6720CB1DAFF46A9BDFD76C31D598
+        '''Dynarec.UnderclockFpu=1
+        '''MVC2::1728B4188302B24E25F4E05C13A6451F
+        '''Dynarec.UnderclockFpu=1
+        '''Emulation.ModVolMode=2
+        '''Emulation.AlphaSortMode=1
+        '''SFA3::D87F4E83C47870135A81DEC63826238B
+        '''Dreamcast.Cable=0.
+        '''</summary>
+        Friend ReadOnly Property DreamcastGameOptimizations() As String
+            Get
+                Return ResourceManager.GetString("DreamcastGameOptimizations", resourceCulture)
             End Get
         End Property
         
@@ -297,6 +323,16 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("ThreeSquare", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property vmu_data_port01() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("vmu_data_port01", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
     End Module

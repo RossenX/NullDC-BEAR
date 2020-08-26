@@ -116,7 +116,7 @@ Public Class frmReplays
                 Rx.WriteEEPROM("", MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1))
             End If
 
-            MainformRef.NullDCLauncher.LaunchDC(FileStringSplitUp(4), FileStringSplitUp(5))
+            MainformRef.NullDCLauncher.LaunchNaomi(FileStringSplitUp(4), FileStringSplitUp(5))
         Catch ex As Exception
             MainformRef.ConfigFile.Status = MainformRef.Configfile.awaystatus
             MainformRef.ConfigFile.Game = "None"

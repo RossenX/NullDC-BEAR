@@ -77,7 +77,7 @@ Public Class InputHandling
         myjoyEX.dwSize = 64
         myjoyEX.dwFlags = &HFF
 
-        GetKeyboardConfigs()
+        GetKeyboardConfigs("naomi")
         ReloadConfigs()
 
         TurnedOn = MainFormRef.ConfigFile.UseRemap
@@ -109,34 +109,69 @@ Public Class InputHandling
         Return _path
     End Function
 
-    Public Sub GetKeyboardConfigs()
+    Public Sub GetKeyboardConfigs(ByVal _platform As String)
+        Console.WriteLine("Got Keyboard Configs for: " & _platform)
 
         KeyBoardConfigs.Clear()
 
-        While MainFormRef.IsFileInUse(MainFormRef.NullDCPath & "\nullDC.cfg")
+        While MainFormRef.IsFileInUse(MainFormRef.NullDCPath & "\nullDC.cfg") Or MainFormRef.IsFileInUse(MainFormRef.NullDCPath & "\dc\nullDC.cfg")
             Thread.Sleep(500)
         End While
 
-        Dim LinesLoaded As Boolean = False
-        Dim KeyboardLines() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\nullDC.cfg")
+        Dim KeyboardLines_Naomi() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\nullDC.cfg")
+        Dim KeyboardLines_Dreamcast() As String = File.ReadAllLines(MainFormRef.NullDCPath & "\dc\nullDC.cfg")
 
-        Dim KeyList() As String = {"Start", "Test", "Up", "Down", "Left", "Right", "Button_1", "Button_2", "Button_3", "Button_4", "Button_5", "Button_6", "Coin"}
-        Dim KeyListx() As String = {"start", "Test", "up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin"}
+        Select Case _platform
 
-        For Each line As String In KeyboardLines
-            If line.StartsWith("BPortA_I_START_KEY") Then KeyBoardConfigs.Add("start", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_COIN_KEY") Then KeyBoardConfigs.Add("coin", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_UP_KEY") Then KeyBoardConfigs.Add("up", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_DOWN_KEY") Then KeyBoardConfigs.Add("down", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_LEFT_KEY") Then KeyBoardConfigs.Add("left", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_RIGHT_KEY") Then KeyBoardConfigs.Add("right", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_BTN0_KEY") Then KeyBoardConfigs.Add("LP", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_BTN1_KEY") Then KeyBoardConfigs.Add("MP", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_BTN2_KEY") Then KeyBoardConfigs.Add("HP", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_BTN3_KEY") Then KeyBoardConfigs.Add("LK", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_BTN4_KEY") Then KeyBoardConfigs.Add("MK", {CInt(line.Split("=")(1))})
-            If line.StartsWith("BPortA_I_BTN5_KEY") Then KeyBoardConfigs.Add("HK", {CInt(line.Split("=")(1))})
-        Next
+            Case "dc"
+
+                For Each line As String In KeyboardLines_Dreamcast
+                    If line.StartsWith("BPortA_CONT_START=") Then KeyBoardConfigs.Add("start", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_ANALOG_UP=") Then KeyBoardConfigs.Add("up", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_ANALOG_DOWN=") Then KeyBoardConfigs.Add("down", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_ANALOG_LEFT=") Then KeyBoardConfigs.Add("left", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_ANALOG_RIGHT=") Then KeyBoardConfigs.Add("right", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_X=") Then KeyBoardConfigs.Add("LP", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_Y=") Then KeyBoardConfigs.Add("MP", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_LSLIDER=") Then KeyBoardConfigs.Add("HP", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_A=") Then KeyBoardConfigs.Add("LK", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_B=") Then KeyBoardConfigs.Add("MK", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_RSLIDER=") Then KeyBoardConfigs.Add("HK", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_DPAD_UP=") Then KeyBoardConfigs.Add("dpadup", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_DPAD_DOWN=") Then KeyBoardConfigs.Add("dpaddown", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_DPAD_LEFT=") Then KeyBoardConfigs.Add("dpadleft", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_DPAD_RIGHT=") Then KeyBoardConfigs.Add("dpadright", {CInt(line.Split("=")(1))})
+                Next
+
+                For Each line As String In KeyboardLines_Naomi
+                    If line.StartsWith("BPortA_I_COIN_KEY") Then KeyBoardConfigs.Add("coin", {CInt(line.Split("=")(1))})
+                Next
+
+            Case "naomi"
+
+                For Each line As String In KeyboardLines_Naomi
+                    If line.StartsWith("BPortA_I_START_KEY=") Then KeyBoardConfigs.Add("start", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_COIN_KEY=") Then KeyBoardConfigs.Add("coin", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_UP_KEY=") Then KeyBoardConfigs.Add("up", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_DOWN_KEY=") Then KeyBoardConfigs.Add("down", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_LEFT_KEY=") Then KeyBoardConfigs.Add("left", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_RIGHT_KEY=") Then KeyBoardConfigs.Add("right", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_BTN0_KEY=") Then KeyBoardConfigs.Add("LP", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_BTN1_KEY=") Then KeyBoardConfigs.Add("MP", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_BTN2_KEY=") Then KeyBoardConfigs.Add("HP", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_BTN3_KEY=") Then KeyBoardConfigs.Add("LK", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_BTN4_KEY=") Then KeyBoardConfigs.Add("MK", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_I_BTN5_KEY=") Then KeyBoardConfigs.Add("HK", {CInt(line.Split("=")(1))})
+                Next
+
+                For Each line As String In KeyboardLines_Dreamcast
+                    If line.StartsWith("BPortA_CONT_DPAD_UP=") Then KeyBoardConfigs.Add("dpadup", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_DPAD_DOWN=") Then KeyBoardConfigs.Add("dpaddown", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_DPAD_LEFT=") Then KeyBoardConfigs.Add("dpadleft", {CInt(line.Split("=")(1))})
+                    If line.StartsWith("BPortA_CONT_DPAD_RIGHT=") Then KeyBoardConfigs.Add("dpadright", {CInt(line.Split("=")(1))})
+                Next
+
+        End Select
 
         KeyBoardConfigs.Add("LPLK", {KeyBoardConfigs("LP")(0), KeyBoardConfigs("LK")(0)})
         KeyBoardConfigs.Add("MPMK", {KeyBoardConfigs("MP")(0), KeyBoardConfigs("MK")(0)})
@@ -201,7 +236,7 @@ Public Class InputHandling
 
     Public Sub UpdateKeyMapConfigs()
 
-        Dim ListOfAllBinds As String() = {"up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "LPLK", "MPMK", "HPHK", "LPMP", "MPHP", "LKMK", "MKHK", "AP", "AK", "start", "coin"}
+        Dim ListOfAllBinds As String() = {"up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "LPLK", "MPMK", "HPHK", "LPMP", "MPHP", "LKMK", "MKHK", "AP", "AK", "start", "coin", "dpadup", "dpaddown", "dpadleft", "dpadright"}
         For Each KeyBind As KeyBind In KeybindConfigs
             For i = 0 To ListOfAllBinds.Count - 1
                 If KeyBind.Name = ListOfAllBinds(i) Then
@@ -231,11 +266,11 @@ Public Class InputHandling
 
         KeybindConfigs.Add(New KeyBind("LP", "2", KeyBoardConfigs("LP")))
         KeybindConfigs.Add(New KeyBind("MP", "3", KeyBoardConfigs("MP")))
-        KeybindConfigs.Add(New KeyBind("HP", "5", KeyBoardConfigs("HP")))
+        KeybindConfigs.Add(New KeyBind("HP", "4", KeyBoardConfigs("HP")))
 
         KeybindConfigs.Add(New KeyBind("LK", "0", KeyBoardConfigs("LK")))
         KeybindConfigs.Add(New KeyBind("MK", "1", KeyBoardConfigs("MK")))
-        KeybindConfigs.Add(New KeyBind("HK", "4", KeyBoardConfigs("HK")))
+        KeybindConfigs.Add(New KeyBind("HK", "5", KeyBoardConfigs("HK")))
 
         KeybindConfigs.Add(New KeyBind("LPLK", "", KeyBoardConfigs("LPLK")))
         KeybindConfigs.Add(New KeyBind("MPMK", "", KeyBoardConfigs("MPMK")))
@@ -251,6 +286,11 @@ Public Class InputHandling
 
         KeybindConfigs.Add(New KeyBind("start", "8", KeyBoardConfigs("start")))
         KeybindConfigs.Add(New KeyBind("coin", "9", KeyBoardConfigs("coin")))
+
+        KeybindConfigs.Add(New KeyBind("dpadup", "", KeyBoardConfigs("dpadup")))
+        KeybindConfigs.Add(New KeyBind("dpaddown", "", KeyBoardConfigs("dpaddown")))
+        KeybindConfigs.Add(New KeyBind("dpadleft", "", KeyBoardConfigs("dpadleft")))
+        KeybindConfigs.Add(New KeyBind("dpadright", "", KeyBoardConfigs("dpadright")))
 
         RxAxis.Clear()
         ' Axis ' {Current, Rest, Min, Max, Lastframe}
@@ -366,8 +406,8 @@ Public Class InputHandling
         RxAxis("y")(0) = xinputstate.ThumbSticks.Left.Y
         RxAxis("z")(0) = xinputstate.ThumbSticks.Right.X
         RxAxis("t")(0) = xinputstate.ThumbSticks.Right.Y
-        RxAxis("u")(0) = xinputstate.Triggers.Left - 1
-        RxAxis("v")(0) = xinputstate.Triggers.Right - 1
+        RxAxis("u")(0) = xinputstate.Triggers.Left
+        RxAxis("v")(0) = xinputstate.Triggers.Right
 
     End Sub
 

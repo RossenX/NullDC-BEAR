@@ -38,6 +38,7 @@ Partial Class frmChallengeGameSelect
         '
         'cbGameList
         '
+        Me.cbGameList.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cbGameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGameList.FormattingEnabled = True
         Me.cbGameList.Location = New System.Drawing.Point(70, 208)
@@ -156,6 +157,7 @@ Partial Class frmChallengeGameSelect
         '
         'cbRegion
         '
+        Me.cbRegion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cbRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRegion.FormattingEnabled = True
         Me.cbRegion.Items.AddRange(New Object() {"JPN", "USA", "EUR"})

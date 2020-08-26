@@ -127,7 +127,7 @@ Public Class frmHostPanel
         MainformRef.ConfigFile.HostType = HostType
         MainformRef.ConfigFile.SaveFile()
 
-        MainformRef.NullDCLauncher.LaunchDC(MainformRef.ConfigFile.Game, cbRegion.Text)
+        MainformRef.NullDCLauncher.LaunchNaomi(MainformRef.ConfigFile.Game, cbRegion.Text)
         Me.Close()
 
     End Sub

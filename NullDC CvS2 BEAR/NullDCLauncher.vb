@@ -5,7 +5,7 @@ Imports System.Threading
 Imports System.Globalization
 Imports System.Text
 
-Public Class NaomiLauncher
+Public Class NullDCLauncher
 
     Public Region As String
     Public NullDCproc As Process
@@ -14,10 +14,7 @@ Public Class NaomiLauncher
     Public P2Name As String = ""
     Dim AutoHotkey As Process
     Dim SingleInstance As Boolean = True
-    'Dim MainFormRef As frmMain
     Dim LoadRomThread As Thread
-
-    ' ------------------------------------
 
 #Region "API"
     Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As IntPtr
@@ -101,23 +98,21 @@ Public Class NaomiLauncher
 
     End Sub
 
-
-    Public Sub LoadRom(ByRef RomPath As String)
+    Public Sub LoadGame()
         If Not LoadRomThread Is Nothing Then If LoadRomThread.IsAlive Then LoadRomThread.Abort() ' Abort the old thread if it exists
-        LoadRomThread = New Thread(AddressOf LoadRom_Thread)
+        LoadRomThread = New Thread(AddressOf LoadGame_Thread)
         LoadRomThread.IsBackground = True
-        LoadRomThread.Start(RomPath)
+        LoadRomThread.Start()
     End Sub
 
-    Private Sub LoadRom_Thread(ByVal RomPath As String)
+    Private Sub LoadGame_Thread()
         Try
             While Not MainformRef.IsNullDCRunning
                 Thread.Sleep(5)
             End While
 
-            NullDCproc.WaitForInputIdle() ' Wait for NullDC to be open and idle
-            'PostMessage(NullDCproc.MainWindowHandle, WM_COMMAND, &H17, 0) ' Send the open normal boot message
-            GameLaunched(RomPath)
+            NullDCproc.WaitForInputIdle()
+            GameLoaded()
 
         Catch ex As Exception
             MsgBox("Rom Loader Failed, woops.")
@@ -125,17 +120,30 @@ Public Class NaomiLauncher
 
     End Sub
 
-    Public Sub New(ByVal mf As frmMain)
-        MainFormRef = mf
-    End Sub
-
-    Public Sub LaunchDC(ByVal RomName As String, ByRef _region As String)
+    Public Sub LaunchDreamcast(ByVal _romname As String, ByRef _region As String)
+        MainformRef.InputHandler.GetKeyboardConfigs("dc")
+        MainformRef.InputHandler.NeedConfigReload = True
         Region = _region
-        If MainFormRef.IsNullDCRunning And SingleInstance Then
+
+        If MainformRef.IsNullDCRunning And SingleInstance Then
             frmMain.NotificationForm.ShowMessage("An Instance of NullDC online is already running.")
             Exit Sub
         Else
-            StartEmulator(RomName)
+            StartDreamcastEmulator(_romname)
+        End If
+
+    End Sub
+
+    Public Sub LaunchNaomi(ByVal _romname As String, ByRef _region As String)
+        MainformRef.InputHandler.GetKeyboardConfigs("naomi")
+        MainformRef.InputHandler.NeedConfigReload = True
+        Region = _region
+
+        If MainformRef.IsNullDCRunning And SingleInstance Then
+            frmMain.NotificationForm.ShowMessage("An Instance of NullDC online is already running.")
+            Exit Sub
+        Else
+            StartNaomiEmulator(_romname)
         End If
 
     End Sub
@@ -149,13 +157,13 @@ Public Class NaomiLauncher
         RestoreNvmem()
 
         If Not DoNotSendNextExitEvent Then
-            If Not MainFormRef.Challenger Is Nothing And (MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Client") Then
+            If Not MainformRef.Challenger Is Nothing And (MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Client") Then
                 Console.WriteLine("Telling challenger i quit")
-                MainFormRef.NetworkHandler.SendMessage(">,E", MainFormRef.Challenger.ip)
+                MainformRef.NetworkHandler.SendMessage(">,E", MainformRef.Challenger.ip)
             End If
 
-            Dim INVOKATION As EndSession_delegate = AddressOf MainFormRef.EndSession
-            MainFormRef.Invoke(INVOKATION, {"Window Closed", Nothing})
+            Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
+            MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
 
         Else
             ' Set State Back to None and Idle since Emulator Closed
@@ -170,12 +178,24 @@ Public Class NaomiLauncher
         P2Name = ""
     End Sub
 
-    Private Sub StartEmulator(ByVal RomName As String)
-        ChangeSettings()
+    Private Sub StartDreamcastEmulator(ByVal _romname As String)
+        ChangeSettings_Dreamcast()
+        NullDCproc = Process.Start(MainformRef.NullDCPath & "\dc\nullDC_Win32_Release-NoTrace.exe")
+        NullDCproc.EnableRaisingEvents = True
+        AddHandler NullDCproc.Exited, AddressOf EmulatorExited
+        LoadGame()
+
+    End Sub
+
+    Private Sub StartNaomiEmulator(ByVal _romname As String)
+        ChangeSettings_Naomi()
+
+        Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
+
         NullDCproc = Process.Start(MainformRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
-        LoadRom(MainformRef.NullDCPath & MainformRef.GamesList(RomName)(1))
+        LoadGame()
 
     End Sub
 
@@ -185,18 +205,17 @@ Public Class NaomiLauncher
         End If
     End Sub
 
-    Private Sub GameLaunched(ByVal FullRomPath)
+    Private Sub GameLoaded()
         ' If we're a host then send out call to my partner to join
         Console.WriteLine("Game Launched")
-        Rx.EEPROM = Rx.GetEEPROM(FullRomPath) ' Save EEPROM for sending to spectators or if we're just hosting solo and waiting.
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
         End If
     End Sub
 
     Private Sub RestoreNvmem() ' Mostly so it doesn't fuck up blue's launcher
-        Dim nvmemPath = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin"
-        Dim nvmemPathBackup = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
+        Dim nvmemPath = MainformRef.NullDCPath & "\data\naomi_nvmem.bin"
+        Dim nvmemPathBackup = MainformRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
 
         Try
             If File.Exists(nvmemPath) Then ' nvmem exists
@@ -219,8 +238,8 @@ Public Class NaomiLauncher
 
     Private Sub BackupNvmem()
         ' Fuck nvMEM get rid of that shit
-        Dim nvmemPath = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin"
-        Dim nvmemPathBackup = MainFormRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
+        Dim nvmemPath = MainformRef.NullDCPath & "\data\naomi_nvmem.bin"
+        Dim nvmemPathBackup = MainformRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
 
         Try
             If File.Exists(nvmemPath) Then
@@ -244,14 +263,14 @@ Public Class NaomiLauncher
     Private Sub DealWithBios()
 
         ' Make sure there's SOME kinda bios in there
-        Dim naomi_bios_path As String = MainFormRef.NullDCPath & "\data\naomi_bios.bin"
-        If Not File.Exists(naomi_bios_path) Then MainFormRef.UnzipResToDir(My.Resources.bj, "naomi_bios.bin", MainFormRef.NullDCPath & "\data")
+        Dim naomi_bios_path As String = MainformRef.NullDCPath & "\data\naomi_bios.bin"
+        If Not File.Exists(naomi_bios_path) Then MainformRef.UnzipResToDir(My.Resources.bj, "naomi_bios.bin", MainformRef.NullDCPath & "\data")
 
         ' Now that we've taken care of BM's launcher bios stuff, lets check our own bios and what we need to do
         If Not Region = "JPN" Then ' Only check if it's NOT the JPN bios because those are the ones that use naomi_boot
             Dim BiosToUse = My.Resources.bu
             If Region = "EUR" Then BiosToUse = My.Resources.be
-            MainFormRef.UnzipResToDir(BiosToUse, "naomi_boot.bin", MainFormRef.NullDCPath & "\data")
+            MainformRef.UnzipResToDir(BiosToUse, "naomi_boot.bin", MainformRef.NullDCPath & "\data")
 
         Else
             If File.Exists(MainformRef.NullDCPath & "\data\naomi_boot.bin") Then
@@ -262,41 +281,187 @@ Public Class NaomiLauncher
 
     End Sub
 
-    Private Sub ChangeSettings()
-        ' Check Configs for BEARJamma data
+    Private Sub ChangeSettings_Dreamcast()
 
-        ' Set the Playernames
-        ' naomi_boot.bin.inactive
-        DealWithBios()
-        BackupNvmem()
-        lstCheck()
+        ' Put in the VMU to keep it in sync for now
+        My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin", My.Resources.vmu_data_port01, False)
 
-        ' Check if this is a Replay
         Dim IsReplay As Int16 = 0
         Dim IsSpectator As Int16 = 0
         Dim IsHosting = "0"
 
-        If Not MainFormRef.ConfigFile.ReplayFile = "" Then IsReplay = 1
-        If MainFormRef.ConfigFile.Status = "Spectator" Then IsSpectator = 1
-        If MainFormRef.ConfigFile.Status = "Hosting" Then IsHosting = "1"
+        If Not MainformRef.ConfigFile.ReplayFile = "" Then IsReplay = 1
+        If MainformRef.ConfigFile.Status = "Spectator" Then IsSpectator = 1
+        If MainformRef.ConfigFile.Status = "Hosting" Then IsHosting = "1"
+
+        Dim FPSLimiter = "0"
+        If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then FPSLimiter = "1"
+
+        ' Get Game Specific Configs Here
+        Dim SpecialSettings As New ArrayList
+        Dim StartGettingSettings As Boolean = False
+
+        For Each line As String In My.Resources.DreamcastGameOptimizations.Split(vbNewLine)
+            line = line.Trim
+            If line.Contains(MainformRef.GamesList(MainformRef.ConfigFile.Game)(3)) Then
+                StartGettingSettings = True
+                Continue For
+            End If
+
+            If line.Contains("::") And StartGettingSettings Then Exit For
+            If StartGettingSettings Then SpecialSettings.Add(line)
+        Next
+
+        Dim _regionID = 0
+        Dim _broadcast = 0
+
+        Select Case Region
+            Case "JPN"
+                _regionID = 0
+                _broadcast = 0
+            Case "USA"
+                _regionID = 1
+                _broadcast = 0
+            Case "EUR"
+                _regionID = 2
+                _broadcast = 1
+        End Select
+
+        ' General Settings
+        Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
+        Dim linenumber = 0
+        For Each line As String In lines
+            ' [nullDC]
+            If line.StartsWith("Dynarec.Enabled=") Then lines(linenumber) = "Dynarec.Enabled=1"
+            If line.StartsWith("Dynarec.DoConstantPropagation=") Then lines(linenumber) = "Dynarec.DoConstantPropagation=1"
+            If line.StartsWith("Dynarec.UnderclockFpu=") Then lines(linenumber) = "Dynarec.UnderclockFpu=0"
+            If line.StartsWith("Dreamcast.Cable=") Then lines(linenumber) = "Dreamcast.Cable=2"
+            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1543276807" ' 1543276807
+            If line.StartsWith("Dreamcast.Region=") Then lines(linenumber) = "Dreamcast.Region=" & _regionID
+            If line.StartsWith("Dreamcast.Broadcast=") Then lines(linenumber) = "Dreamcast.Broadcast=" & _broadcast
+            If line.StartsWith("Emulator.AutoStart=") Then lines(linenumber) = "Emulator.AutoStart=1"
+            If line.StartsWith("Dynarec.SafeMode=") Then lines(linenumber) = "Dynarec.SafeMode=1"
+
+            ' [nullDC_plugins]
+            If line.StartsWith("GUI=") Then lines(linenumber) = "GUI=nullDC_GUI_Win32.dll"
+            If line.StartsWith("Current_PVR=") Then lines(linenumber) = "Current_PVR=drkPvr_Win32.dll"
+            If line.StartsWith("Current_GDR=") Then lines(linenumber) = "Current_GDR=ImgReader_Win32.dll"
+            If line.StartsWith("Current_AICA=") Then lines(linenumber) = "Current_AICA=nullAica_Win32.dll"
+            If line.StartsWith("Current_ARM=") Then lines(linenumber) = "Current_ARM=vbaARM_Win32.dll"
+            If line.StartsWith("Current_ExtDevice=") Then lines(linenumber) = "Current_ExtDevice=nullExtDev_Win32.dll"
+
+            If line.StartsWith("Current_maple") Then
+                lines(linenumber) = line.Split("=")(0) & "=NULL"
+                If line.StartsWith("Current_maple0_5") Then lines(linenumber) = "Current_maple0_5=BEARJamma_Win32.dll:0"
+                If line.StartsWith("Current_maple0_0") Then lines(linenumber) = "Current_maple0_0=BEARJamma_Win32.dll:1"
+                If line.StartsWith("Current_maple1_5") Then lines(linenumber) = "Current_maple1_5=BEARJamma_Win32.dll:0"
+
+            End If
+
+            ' [nullDC_GUI]
+            If line.StartsWith("AutoHideMenu=") Then lines(linenumber) = "AutoHideMenu=0"
+
+            ' [drkpvr]
+            If line.StartsWith("Emulation.AlphaSortMode=") Then lines(linenumber) = "Emulation.AlphaSortMode=2"
+            If line.StartsWith("Emulation.PaletteMode=") Then lines(linenumber) = "Emulation.PaletteMode=1"
+            If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=0"
+            If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
+            If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"
+            If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
+            If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
+            If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
+
+            ' [ImageReader]
+            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=0"
+            If line.StartsWith("LoadDefaultImage=") Then lines(linenumber) = "LoadDefaultImage=1"
+            If line.StartsWith("DefaultImage=") Then lines(linenumber) = "DefaultImage=roms\" & MainformRef.ConfigFile.Game
+            If line.StartsWith("LastImage=") Then lines(linenumber) = "LastImage=roms\" & MainformRef.ConfigFile.Game
+
+            ' [nullAica]
+            If line.StartsWith("BufferSize=") Then lines(linenumber) = "BufferSize=2048"
+            If line.StartsWith("HW_mixing=") Then lines(linenumber) = "HW_mixing=0"
+            If line.StartsWith("SoundRenderer=") Then lines(linenumber) = "SoundRenderer=1"
+            If line.StartsWith("BufferCount=") Then lines(linenumber) = "BufferCount=1"
+            If line.StartsWith("CDDAMute=") Then lines(linenumber) = "CDDAMute=0"
+            If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
+            If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
+            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
+            If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
+
+            ' [nullExtDev]
+            If line.StartsWith("mode=") Then lines(linenumber) = "mode=0"
+            If line.StartsWith("adapter=") Then lines(linenumber) = "adapter=0"
+
+            ' [drkMaple]
+            If line.StartsWith("Mouse.Sensitivity=") Then lines(linenumber) = "Mouse.Sensitivity=100"
+            If line.StartsWith("ShowVMU=") Then lines(linenumber) = "ShowVMU=0"
+
+            ' Change Netplay Shit
+            If line.StartsWith("[BEARPlay]") Then
+                Dim EnableOnline = "0"
+                If Not MainformRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
+
+                lines(linenumber + 1) = "Online=" & EnableOnline
+                lines(linenumber + 2) = "Host=" & MainformRef.ConfigFile.Host
+                lines(linenumber + 3) = "Hosting=" & IsHosting
+                lines(linenumber + 4) = "Port=" & MainformRef.ConfigFile.Port
+                lines(linenumber + 5) = "Delay=" & MainformRef.ConfigFile.Delay
+                lines(linenumber + 6) = "Record=0" ' & MainformRef.ConfigFile.RecordReplay
+                lines(linenumber + 7) = "Playback=0" ' & IsReplay
+                lines(linenumber + 8) = "AllowSpectators=0" ' & MainformRef.ConfigFile.AllowSpectators
+                lines(linenumber + 9) = "Spectator=0" ' & IsSpectator
+                lines(linenumber + 10) = "P1Name=" & P1Name
+                lines(linenumber + 11) = "P2Name=" & P2Name
+                lines(linenumber + 12) = "File=" & MainformRef.ConfigFile.ReplayFile
+                lines(linenumber + 13) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
+                lines(linenumber + 14) = "GameRom=" & MainformRef.ConfigFile.Game
+                lines(linenumber + 15) = "Region=" & Region
+            End If
+
+            For Each SpecialSettingLine As String In SpecialSettings
+                If line.Split("=")(0) = SpecialSettingLine.Split("=")(0) Then
+                    lines(linenumber) = SpecialSettingLine
+                End If
+            Next
+
+            linenumber += 1
+        Next
+
+        File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", lines)
+
+    End Sub
+
+    Private Sub ChangeSettings_Naomi()
+        DealWithBios()
+        BackupNvmem()
+        lstCheck()
+
+        Dim IsReplay As Int16 = 0
+        Dim IsSpectator As Int16 = 0
+        Dim IsHosting = "0"
+
+        If Not MainformRef.ConfigFile.ReplayFile = "" Then IsReplay = 1
+        If MainformRef.ConfigFile.Status = "Spectator" Then IsSpectator = 1
+        If MainformRef.ConfigFile.Status = "Hosting" Then IsHosting = "1"
 
         ' Get P1/P2 Names
         If P1Name = "" Or P2Name = "" Then ' Player names were not set beforehand 
-            If MainFormRef.ConfigFile.Status = "Offline" Or MainFormRef.ConfigFile.Status = "Spectator" Then
-                P1Name = MainFormRef.ConfigFile.Name
+            If MainformRef.ConfigFile.Status = "Offline" Or MainformRef.ConfigFile.Status = "Spectator" Then
+                P1Name = MainformRef.ConfigFile.Name
                 P2Name = "Local Player 2"
             Else
                 If IsHosting Then
-                    P1Name = MainFormRef.ConfigFile.Name
-                    If MainFormRef.Challenger Is Nothing Then
+                    P1Name = MainformRef.ConfigFile.Name
+                    If MainformRef.Challenger Is Nothing Then
                         P2Name = "Solo Host"
                     Else
-                        P2Name = MainFormRef.Challenger.name
+                        P2Name = MainformRef.Challenger.name
                     End If
 
                 Else
-                    P1Name = MainFormRef.Challenger.name
-                    P2Name = MainFormRef.ConfigFile.Name
+                    P1Name = MainformRef.Challenger.name
+                    P2Name = MainformRef.ConfigFile.Name
                 End If
             End If
 
@@ -304,14 +469,14 @@ Public Class NaomiLauncher
 
         ' Wait for nvmem to be dealt with
         Dim SleepTime = 0
-        While File.Exists(MainFormRef.NullDCPath & "\data\naomi_nvmem.bin")
+        While File.Exists(MainformRef.NullDCPath & "\data\naomi_nvmem.bin")
             Thread.Sleep(100)
             SleepTime += 100
             If SleepTime > 1000 Then Exit While ' Fuck it just continue
         End While
 
 
-        Dim thefile = MainFormRef.NullDCPath & "\antilag.cfg"
+        Dim thefile = MainformRef.NullDCPath & "\antilag.cfg"
         Dim FPSLimit = "90"
         Dim FPSLimiter = "0"
 
@@ -319,10 +484,10 @@ Public Class NaomiLauncher
             FPSLimiter = "1"
             FPSLimit = "120" ' Apperanltly replays can't go faster than 90fps
         Else
-            If MainFormRef.ConfigFile.Status = "Hosting" Or MainFormRef.ConfigFile.Status = "Offline" Then
-                If MainFormRef.ConfigFile.HostType = "0" Then
+            If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then
+                If MainformRef.ConfigFile.HostType = "0" Then
                     FPSLimiter = "0"
-                    FPSLimit = MainFormRef.ConfigFile.FPSLimit
+                    FPSLimit = MainformRef.ConfigFile.FPSLimit
                 Else
                     FPSLimiter = "1"
                 End If
@@ -338,7 +503,7 @@ Public Class NaomiLauncher
         ' No Longer Need to rewrite the entire file
         File.WriteAllLines(thefile, {"[config]", "RenderAheadLimit=0", "FPSlimit=" & FPSLimit})
 
-        thefile = MainFormRef.NullDCPath & "\nullDC.cfg"
+        thefile = MainformRef.NullDCPath & "\nullDC.cfg"
         Dim lines() As String = File.ReadAllLines(thefile)
         Dim linenumber = 0
         For Each line As String In lines
@@ -348,7 +513,7 @@ Public Class NaomiLauncher
             If line.StartsWith("Dynarec.DoConstantPropagation=") Then lines(linenumber) = "Dynarec.DoConstantPropagation=1"
             If line.StartsWith("Dynarec.UnderclockFpu=") Then lines(linenumber) = "Dynarec.UnderclockFpu=0"
             If line.StartsWith("Dreamcast.Cable=") Then lines(linenumber) = "Dreamcast.Cable=1"
-            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1917526710" ' 1917526710
+            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1543298463" ' 1917526710
             If line.StartsWith("Dreamcast.Region=") Then lines(linenumber) = "Dreamcast.Region=0"
             If line.StartsWith("Dreamcast.Broadcast=") Then lines(linenumber) = "Dreamcast.Broadcast=0"
             If line.StartsWith("Emulator.AutoStart=") Then lines(linenumber) = "Emulator.AutoStart=0"
@@ -419,22 +584,22 @@ Public Class NaomiLauncher
             ' Change Netplay Shit
             If line.StartsWith("[BEARPlay]") Then
                 Dim EnableOnline = "0"
-                If Not MainFormRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
+                If Not MainformRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
 
                 lines(linenumber + 1) = "Online=" & EnableOnline
-                lines(linenumber + 2) = "Host=" & MainFormRef.ConfigFile.Host
+                lines(linenumber + 2) = "Host=" & MainformRef.ConfigFile.Host
                 lines(linenumber + 3) = "Hosting=" & IsHosting
-                lines(linenumber + 4) = "Port=" & MainFormRef.ConfigFile.Port
-                lines(linenumber + 5) = "Delay=" & MainFormRef.ConfigFile.Delay
-                lines(linenumber + 6) = "Record=" & MainFormRef.ConfigFile.RecordReplay
+                lines(linenumber + 4) = "Port=" & MainformRef.ConfigFile.Port
+                lines(linenumber + 5) = "Delay=" & MainformRef.ConfigFile.Delay
+                lines(linenumber + 6) = "Record=" & MainformRef.ConfigFile.RecordReplay
                 lines(linenumber + 7) = "Playback=" & IsReplay
-                lines(linenumber + 8) = "AllowSpectators=" & MainFormRef.ConfigFile.AllowSpectators
+                lines(linenumber + 8) = "AllowSpectators=" & MainformRef.ConfigFile.AllowSpectators
                 lines(linenumber + 9) = "Spectator=" & IsSpectator
                 lines(linenumber + 10) = "P1Name=" & P1Name
                 lines(linenumber + 11) = "P2Name=" & P2Name
-                lines(linenumber + 12) = "File=" & MainFormRef.ConfigFile.ReplayFile
-                lines(linenumber + 13) = "GameName=" & MainFormRef.GamesList(MainFormRef.ConfigFile.Game)(0)
-                lines(linenumber + 14) = "GameRom=" & MainFormRef.ConfigFile.Game
+                lines(linenumber + 12) = "File=" & MainformRef.ConfigFile.ReplayFile
+                lines(linenumber + 13) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
+                lines(linenumber + 14) = "GameRom=" & MainformRef.ConfigFile.Game
                 lines(linenumber + 15) = "Region=" & Region
             End If
 
@@ -463,7 +628,6 @@ Public Class NaomiLauncher
 
     End Sub
 
-    ' some LST files don't follow the spacing as others, so need to check them to prevent a crash
     Private Sub lstCheck()
         Dim lstFile = MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1)
         If File.Exists(lstFile) Then
