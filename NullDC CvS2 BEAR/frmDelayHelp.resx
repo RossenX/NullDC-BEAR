@@ -127,13 +127,6 @@ Delay 1 = Lan Tournament Quality
 Delay 2 = Online Tournament Quality
 Delay 3-7 = Great for Online Play, still better than SF5
 Delay 7-12 = Bassicly playing SF5 online, Pretty ok for online play but high chance of desync. Check below for how to identify desync as a host
-Delay 12+ = You'll slowly start to notice the delay more and more as this goes higher there's also a higher chance of desync
-
-Changing the suggested delay may cause higher chance of desync. I've tested it a LOT to try and find the sweet spot for minimal desync while keeping it playable
-
-HOST TIP: As you can see i always have the console showing for the host, this is because it tells you a lot to help with desync. At the start of the game you'll see
-Unexpeted frame, expected 1 recieved 0
-THAT IS A GOOD THING if you see this pop up 1-7 times that's good it means that your game SHOULD be well sycned and the client is the right frame behind the host.
-If you see it say it recieved a number that is not 0 (usually with 8+ delay) then your game might not be well synced and desyncs are to be expected.</value>
+Delay 12+ = You'll slowly start to notice the delay more and more as this goes higher there's also a higher chance of desync</value>
   </data>
 </root>

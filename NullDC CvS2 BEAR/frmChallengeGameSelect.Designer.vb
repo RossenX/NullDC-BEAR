@@ -26,11 +26,6 @@ Partial Class frmChallengeGameSelect
         Me.btnLetsGo = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.tbFPS = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.cbHostType = New System.Windows.Forms.ComboBox()
         Me.btnDLC = New System.Windows.Forms.Button()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -82,67 +77,6 @@ Partial Class frmChallengeGameSelect
         Me.Button1.Text = "Cancel"
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(191, 162)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(40, 16)
-        Me.Label3.TabIndex = 21
-        Me.Label3.Text = "Limit"
-        Me.Label3.Visible = False
-        '
-        'tbFPS
-        '
-        Me.tbFPS.Location = New System.Drawing.Point(230, 159)
-        Me.tbFPS.Name = "tbFPS"
-        Me.tbFPS.Size = New System.Drawing.Size(35, 20)
-        Me.tbFPS.TabIndex = 20
-        Me.tbFPS.Visible = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Button2.Location = New System.Drawing.Point(161, 136)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(25, 25)
-        Me.Button2.TabIndex = 19
-        Me.Button2.Text = "?"
-        Me.Button2.UseVisualStyleBackColor = False
-        Me.Button2.Visible = False
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(199, 120)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(54, 16)
-        Me.Label2.TabIndex = 18
-        Me.Label2.Text = "Limiter"
-        Me.Label2.Visible = False
-        '
-        'cbHostType
-        '
-        Me.cbHostType.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.cbHostType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbHostType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cbHostType.FormattingEnabled = True
-        Me.cbHostType.Items.AddRange(New Object() {"Audio Sync"})
-        Me.cbHostType.Location = New System.Drawing.Point(188, 138)
-        Me.cbHostType.Name = "cbHostType"
-        Me.cbHostType.Size = New System.Drawing.Size(77, 21)
-        Me.cbHostType.TabIndex = 17
-        Me.cbHostType.Visible = False
-        '
         'btnDLC
         '
         Me.btnDLC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
@@ -189,11 +123,6 @@ Partial Class frmChallengeGameSelect
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.cbRegion)
         Me.Controls.Add(Me.btnDLC)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.tbFPS)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.cbHostType)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnLetsGo)
@@ -212,11 +141,6 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents btnLetsGo As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Button1 As Button
-    Friend WithEvents Label3 As Label
-    Friend WithEvents tbFPS As TextBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Label2 As Label
-    Friend WithEvents cbHostType As ComboBox
     Friend WithEvents btnDLC As Button
     Friend WithEvents cbRegion As ComboBox
     Friend WithEvents Label4 As Label

@@ -125,6 +125,7 @@ Public Class frmKeyMapping
         AddHandler MainformRef.InputHandler._KeyPressed, AddressOf KeyPressed
         AddHandler MainformRef.InputHandler._KeyReleased, AddressOf KeyReleased
         ActiveControl = Nothing
+
     End Sub
 
     Public Sub KeyReleased(Button As String)

@@ -34,11 +34,15 @@ Public Class InputHandling
 
     Dim SpectatorControls_FastForward_Pressed As Boolean = False
 
-    ' Virtual Keyboard Mapping
-    Private Declare Function joyGetPosEx Lib "winmm.dll" (ByVal uJoyID As Integer, ByRef pji As JOYINFOEX) As Integer ' JoyStick Mapping
-    Private Declare Sub keybd_event Lib "user32.dll" (ByVal bVk As Byte, ByVal bScan As Byte, ByVal dwFlags As Integer, ByVal dwExtraInfo As Integer)
-    <DllImport("User32.dll", SetLastError:=False, CallingConvention:=CallingConvention.StdCall,
-           CharSet:=CharSet.Auto)>
+    <DllImport("winmm.dll", EntryPoint:="joyGetPosEx")>
+    Private Shared Function joyGetPosEx(ByVal uJoyID As Integer, ByRef pji As JOYINFOEX) As Integer
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Sub keybd_event(bVk As Byte, bScan As Byte, dwFlags As UInteger, dwExtraInfo As UIntPtr)
+    End Sub
+
+    <DllImport("User32.dll", SetLastError:=False, CallingConvention:=CallingConvention.StdCall, CharSet:=CharSet.Auto)>
     Public Shared Function MapVirtualKey(ByVal uCode As UInt32, ByVal uMapType As UInt32) As UInt32
     End Function
 
@@ -287,10 +291,10 @@ Public Class InputHandling
         KeybindConfigs.Add(New KeyBind("start", "8", KeyBoardConfigs("start")))
         KeybindConfigs.Add(New KeyBind("coin", "9", KeyBoardConfigs("coin")))
 
-        KeybindConfigs.Add(New KeyBind("dpadup", "", KeyBoardConfigs("dpadup")))
-        KeybindConfigs.Add(New KeyBind("dpaddown", "", KeyBoardConfigs("dpaddown")))
-        KeybindConfigs.Add(New KeyBind("dpadleft", "", KeyBoardConfigs("dpadleft")))
-        KeybindConfigs.Add(New KeyBind("dpadright", "", KeyBoardConfigs("dpadright")))
+        KeybindConfigs.Add(New KeyBind("dpadup", "10", KeyBoardConfigs("dpadup")))
+        KeybindConfigs.Add(New KeyBind("dpaddown", "11", KeyBoardConfigs("dpaddown")))
+        KeybindConfigs.Add(New KeyBind("dpadleft", "12", KeyBoardConfigs("dpadleft")))
+        KeybindConfigs.Add(New KeyBind("dpadright", "13", KeyBoardConfigs("dpadright")))
 
         RxAxis.Clear()
         ' Axis ' {Current, Rest, Min, Max, Lastframe}
@@ -402,12 +406,12 @@ Public Class InputHandling
         RxButtons(13) = Not Convert.ToBoolean(xinputstate.DPad.Right) ' 13
 
         ' Axis Handling
-        RxAxis("x")(0) = xinputstate.ThumbSticks.Left.X
-        RxAxis("y")(0) = xinputstate.ThumbSticks.Left.Y
-        RxAxis("z")(0) = xinputstate.ThumbSticks.Right.X
-        RxAxis("t")(0) = xinputstate.ThumbSticks.Right.Y
-        RxAxis("u")(0) = xinputstate.Triggers.Left
-        RxAxis("v")(0) = xinputstate.Triggers.Right
+        RxAxis("x")(0) = Math.Round(xinputstate.ThumbSticks.Left.X, 2)
+        RxAxis("y")(0) = Math.Round(xinputstate.ThumbSticks.Left.Y, 2)
+        RxAxis("z")(0) = Math.Round(xinputstate.ThumbSticks.Right.X, 2)
+        RxAxis("t")(0) = Math.Round(xinputstate.ThumbSticks.Right.Y, 2)
+        RxAxis("u")(0) = Math.Round(xinputstate.Triggers.Left, 2)
+        RxAxis("v")(0) = Math.Round(xinputstate.Triggers.Right, 2)
 
     End Sub
 
@@ -450,12 +454,12 @@ Public Class InputHandling
                 RxButtons(i) = keymap(i).ToString
             Next
 
-            RxAxis("x")(0) = .dwXpos
-            RxAxis("y")(0) = .dwYpos
-            RxAxis("z")(0) = .dwZpos
-            RxAxis("t")(0) = .dwTpos
-            RxAxis("u")(0) = .dwUpos
-            RxAxis("v")(0) = .dwVpos
+            RxAxis("x")(0) = Math.Round((.dwXpos / 256) / 256, 2)
+            RxAxis("y")(0) = Math.Round((.dwYpos / 256) / 256, 2)
+            RxAxis("z")(0) = Math.Round((.dwZpos / 256) / 256, 2)
+            RxAxis("t")(0) = Math.Round((.dwTpos / 256) / 256, 2)
+            RxAxis("u")(0) = Math.Round((.dwUpos / 256) / 256, 2)
+            RxAxis("v")(0) = Math.Round((.dwVpos / 256) / 256, 2)
 
         End With
     End Sub
@@ -495,9 +499,7 @@ Public Class InputHandling
 
     Public Sub InputRoll()
 
-        ' Poll the Inptus once at start just to get their natural states
-        Thread.Sleep(2000)
-
+        Thread.Sleep(1000)
         While MainFormRef Is Nothing
             While Not MainFormRef.FinishedLoading
                 Thread.Sleep(500)
@@ -508,7 +510,7 @@ Public Class InputHandling
         Console.WriteLine("Started Input Rolling")
         ' While loop is < 1ms
         While True
-            Thread.Sleep(7)
+            Thread.Sleep(1)
             If MainFormRef.ConfigFile.Status = "Spectator" Then
                 Try
                     If MainFormRef.IsNullDCRunning Then
@@ -525,25 +527,22 @@ Public Class InputHandling
                         End If
                     End If
                 Catch ex As Exception
-
                 End Try
-
             End If
-            ' If the mapping is off then just pause it here, but lets not remove the thread because a bitch to deal with threads
             While Not TurnedOn
                 Thread.Sleep(1000)
             End While
 
-            Dim xinputstate As XInputDotNetPure.GamePadState = XInputDotNetPure.GamePad.GetState(ControllerID) ' Check XInput
-            Dim RawrInputState As JoystickState = Joystick.GetState(ControllerID) ' Check RawInput
 
-            ' Go with Xinput over RawInput
+
+            Dim xinputstate As XInputDotNetPure.GamePadState = XInputDotNetPure.GamePad.GetState(ControllerID)
+            Dim RawrInputState As JoystickState = Joystick.GetState(ControllerID)
+
             If xinputstate.IsConnected Then
                 DoXInputRoll(xinputstate)
             ElseIf RawrInputState.IsConnected Then
                 DoOpenTKInputRoll(RawrInputState)
             Else
-                ' Pretty sure this will never get called unless it's some ancient arcade stick, like ANCIENT
                 DoWinMMRoll()
             End If
 
@@ -560,7 +559,7 @@ Public Class InputHandling
 
             Next
 
-            ' Done and Done Ez Pz now for the Axis
+
             For Each key As String In RxAxis.Keys
                 If Not RxAxis(key)(4) = RxAxis(key)(0) Then
                     If RxAxis(key)(0) > (RxAxis(key)(1) + (RxAxis(key)(3) * (DeadZone / 100))) Then
@@ -577,31 +576,22 @@ Public Class InputHandling
                     End If
                 End If
                 RxAxis(key)(4) = RxAxis(key)(0)
-
             Next
-
-
-
 
 
             If NeedConfigReload Then
                 ReloadConfigs()
-
             End If
 
             For i = 0 To RxButtons.Count - 1
                 LF_RxButtons(i) = RxButtons(i)
             Next
 
-
-
-
         End While
 
     End Sub
 
     Public Sub KeyPressed(Button As String) Handles Me._KeyPressed
-        'Console.WriteLine("Button Pressed: {0}", Button)
         TranslateButtonToKey(Button, True)
     End Sub
 
@@ -610,9 +600,7 @@ Public Class InputHandling
     End Sub
 
     Private Sub FastforwardReplayToggle()
-
         MainFormRef.NullDCLauncher.FastForward()
-
     End Sub
 
     Private Sub TranslateButtonToKey(Button As String, Down As Boolean)
@@ -648,10 +636,6 @@ Public Class InputHandling
 End Class
 
 Public Class KeyBind
-
-    <DllImport("user32.dll", EntryPoint:="VkKeyScanExW")>
-    Public Shared Function VkKeyScanExW(ByVal ch As Char, ByVal dwhkl As IntPtr) As Short
-    End Function
 
     Public Name As String = ""
     Public Button As String

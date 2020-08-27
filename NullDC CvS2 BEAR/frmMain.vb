@@ -353,14 +353,10 @@ Public Class frmMain
 
         ' FPS Limited Doesn't Exist lets Create it
         If File.Exists(NullDCPath & "\d3d9.dll") Then
-
             File.SetAttributes(NullDCPath & "\d3d9.dll", FileAttributes.Normal)
             File.Delete(NullDCPath & "\d3d9.dll")
 
-            'File.WriteAllBytes(NullDCPath & "\d3d9.dll", My.Resources.d3d9)
-
         End If
-        File.WriteAllLines(NullDCPath & "\antilag.cfg", {"[config]", "RenderAheadLimit=0", "FPSlimit=60"})
 
         ' Remove any honey files that may have been left over if someone quit or it crashed or w.e reason, but if it fails then fuck it let em stay
         Try
@@ -385,12 +381,22 @@ Public Class frmMain
 
 
 
+        If Not File.Exists(NullDCPath & "\dc\GameSpecificSettings.optibear") Then
+            File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations.ToString)
+        Else
+            Dim _file() As String = File.ReadAllLines(NullDCPath & "\dc\GameSpecificSettings.optibear")
+            If Not _file(0) = Ver Then
+                File.SetAttributes(NullDCPath & "\dc\GameSpecificSettings.optibear", FileAttributes.Normal)
+                File.WriteAllLines(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations.Split(vbNewLine))
+            End If
+        End If
+
 
 
         GetGamesList()
     End Sub
 
-    Public Sub GetGamesList()
+    Public Sub GetGamesList(Optional ByVal _system As String = "all")
         GamesList.Clear()
         GameSelectForm.cbGameList.ValueMember = "Rom"
         GameSelectForm.cbGameList.DisplayMember = "Game"
@@ -402,60 +408,68 @@ Public Class frmMain
         table.Columns.Add("Rom", GetType(String))
         table.Columns.Add("Game", GetType(String))
 
+        ' New Get All Roms code that includes subfolders
+        Dim Files
+        If _system = "all" Or _system = "naomi" Then
+            Files = Directory.GetFiles(NullDCPath & "\roms", "*.lst", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
 
-        ' New Get ALl Roms code that includes subfolders
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 2)
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-        Dim Files = Directory.GetFiles(NullDCPath & "\roms", "*.lst", SearchOption.AllDirectories)
-        For Each _file In Files
-            Dim GameName_Split = _file.Split("\")
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "naomi", ""})
+                    table.Rows.Add({RomName, GameName})
+                End If
+            Next
+        End If
 
-            Dim GameName As String = GameName_Split(GameName_Split.Count - 2)
-            Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
-            Dim RomPath As String = _file.Replace(NullDCPath, "")
+        If _system = "all" Or _system = "dc" Then
+            Dim hasher As MD5 = MD5.Create()
+            Files = Directory.GetFiles(NullDCPath & "\dc\roms", "*.cdi", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
 
-            If Not GamesList.ContainsKey(RomName) Then
-                GamesList.Add(RomName, {GameName, RomPath, "naomi"})
-                table.Rows.Add({RomName, GameName})
+                ' hash Generation
+                Dim fs As New FileStream(_file, FileMode.Open)
+                Dim binary_reader As New BinaryReader(fs)
+                fs.Position = 0
+                Dim bytes() As Byte = hasher.ComputeHash(binary_reader.ReadBytes(1000000))
+                Dim sBuilder As New StringBuilder()
+                For n As Integer = 0 To bytes.Length - 1
+                    sBuilder.Append(bytes(n).ToString("X2"))
+                Next n
+                fs.Close()
+
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Replace(".cdi", "")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
+                    table.Rows.Add({RomName, GameName})
+                End If
+            Next
+        End If
+
+        ' Generate the hash file in the dc roms
+        Dim _hashes As String = ""
+        For Each _key In GamesList.Keys
+            If Not GamesList(_key)(3) = "" Then
+                If _hashes = "" Then
+                    _hashes = GamesList(_key)(0) & "::" & GamesList(_key)(3)
+                Else
+                    _hashes = _hashes & vbNewLine & GamesList(_key)(0) & "::" & GamesList(_key)(3)
+                End If
             End If
         Next
 
-        ' GET DREAMCAST ROMS
-        Dim hasher As MD5 = MD5.Create()
-
-        Files = Directory.GetFiles(NullDCPath & "\dc\roms", "*.cdi", SearchOption.AllDirectories)
-        For Each _file In Files
-            Dim GameName_Split = _file.Split("\")
-
-            ' hash Generation
-            Dim fs As New FileStream(_file, FileMode.Open)
-            Dim binary_reader As New BinaryReader(fs)
-            fs.Position = 0
-            Dim bytes() As Byte = hasher.ComputeHash(binary_reader.ReadBytes(1000000))
-            Dim sBuilder As New StringBuilder()
-            For n As Integer = 0 To bytes.Length - 1
-                sBuilder.Append(bytes(n).ToString("X2"))
-            Next n
-            fs.Close()
-
-            'My.Computer.Clipboard.SetText(sBuilder.ToString)
-            'MsgBox(GameName_Split(GameName_Split.Count - 1) & " | " & sBuilder.ToString)
-            ' hash generator end
-
-            Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Replace(".cdi", "")
-            Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
-            Dim RomPath As String = _file.Replace(NullDCPath, "")
-
-            If Not GamesList.ContainsKey(RomName) Then
-                GamesList.Add(RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
-                table.Rows.Add({RomName, GameName})
-            End If
-        Next
+        File.WriteAllLines(NullDCPath & "\dc\roms\romhashes.txt", _hashes.Split(vbNewLine))
 
         GameSelectForm.cbGameList.DataSource = table
         HostingForm.cbGameList.DataSource = table
-
-        'GameSelectForm.cbGameList.SelectedIndex = 0
-        'HostingForm.cbGameList.SelectedIndex = 0
 
     End Sub
 
@@ -1061,8 +1075,6 @@ Public Class Configs
     Private _delay As Int16 = 1
     Private _game As String = "None"
     Private _ver As String = frmMain.Ver
-    Private _hosttype As String = "1"
-    Private _fpslimit As String = "60"
     Private _keyprofile As String = "Default"
     Private _recordreplay As Int16 = 0
     Private _ReplayFile As String = ""
@@ -1175,24 +1187,6 @@ Public Class Configs
         End Set
     End Property
 
-    Public Property HostType() As String
-        Get
-            Return _hosttype
-        End Get
-        Set(ByVal value As String)
-            _hosttype = value
-        End Set
-    End Property
-
-    Public Property FPSLimit() As String
-        Get
-            Return _fpslimit
-        End Get
-        Set(ByVal value As String)
-            _fpslimit = value
-        End Set
-    End Property
-
     Public Property KeyMapProfile() As String
         Get
             Return _keyprofile
@@ -1283,8 +1277,6 @@ Public Class Configs
                 "Status=" & Status,
                 "Delay=" & Delay,
                 "Game=" & Game,
-                "HostType=" & HostType,
-                "FPSLimit=" & FPSLimit,
                 "KeyProfile=" & KeyMapProfile,
                 "RecordReplay=" & RecordReplay,
                 "ReplayFile=" & ReplayFile,
@@ -1333,8 +1325,6 @@ Public Class Configs
                 If line.StartsWith("IP") Then IP = line.Split("=")(1).Trim
                 If line.StartsWith("Host") Then Host = line.Split("=")(1).Trim
                 If line.StartsWith("Delay") Then Delay = line.Split("=")(1).Trim
-                If line.StartsWith("HostType") Then HostType = 1 'line.Split("=")(1).Trim
-                If line.StartsWith("FPSLimit") Then FPSLimit = line.Split("=")(1).Trim
                 If line.StartsWith("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
                 If line.StartsWith("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim
                 If line.StartsWith("ReplayFile") Then ReplayFile = line.Split("=")(1).Trim

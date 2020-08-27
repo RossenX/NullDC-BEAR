@@ -17,50 +17,9 @@ Public Class NullDCLauncher
     Dim LoadRomThread As Thread
 
 #Region "API"
-    Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As IntPtr
-
-    Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Int32, ByVal wMsg As Int32, ByVal _wParam As Int32, lParam As String) As Int32
-
     <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
     Private Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Boolean
     End Function
-
-    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
-    Private Shared Function FindWindowEx(ByVal parentHandle As IntPtr, ByVal childAfter As IntPtr, ByVal lclassName As String, ByVal windowTitle As String) As IntPtr
-    End Function
-
-    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
-    Public Shared Function SetWindowText(hWnd As IntPtr, lpString As String) As Boolean
-    End Function
-    <DllImport("user32.dll", SetLastError:=True)>
-    Private Shared Function IsWindowVisible(ByVal hWnd As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
-    End Function
-    <DllImport("user32.dll", EntryPoint:="FindWindowW")>
-    Public Shared Function FindWindowW(<MarshalAs(UnmanagedType.LPTStr)> ByVal lpClassName As String, <MarshalAs(UnmanagedType.LPTStr)> ByVal lpWindowName As String) As IntPtr
-    End Function
-
-    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
-    Private Shared Function GetDlgItem(ByVal hDlg As IntPtr, id As Integer) As IntPtr
-    End Function
-    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
-    Private Shared Function GetClassName(ByVal hWnd As System.IntPtr, ByVal lpClassName As System.Text.StringBuilder, ByVal nMaxCount As Integer) As Integer
-    End Function
-    <DllImport("user32.dll", SetLastError:=True)>
-    Private Shared Function SetActiveWindow(ByVal hWnd As IntPtr) As IntPtr
-    End Function
-    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
-    Private Shared Function EnumChildWindows(ByVal hWndParent As System.IntPtr, ByVal lpEnumFunc As EnumWindowsProc, ByVal lParam As Integer) As Boolean
-    End Function
-    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
-    Private Shared Function GetWindowTextLength(ByVal hwnd As IntPtr) As Integer
-    End Function
-    Private Declare Function SendMessageByString Lib "user32.dll" Alias "SendMessageA" (ByVal hwnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As String) As Integer
-    Private Delegate Function EnumWindowsProc(ByVal hWnd As IntPtr, ByVal lParam As IntPtr) As Boolean
-
-    Public Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
-    Public Declare Function GetWindowText Lib "user32" Alias "GetWindowTextA" (ByVal hwnd As IntPtr, ByVal lpString As System.Text.StringBuilder, ByVal cch As Integer) As Integer
-    Public Declare Function MoveWindow Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal X As Int32, ByVal Y As Int32, ByVal nWidth As Int32, ByVal nHeight As Int32, ByVal bRepaint As Boolean) As Boolean
-    Declare Function BlockInput Lib "user32" (ByVal fBlockIt As Boolean) As Boolean
 
     <DllImport("user32.dll")>
     Private Shared Function GetForegroundWindow() As IntPtr
@@ -70,14 +29,8 @@ Public Class NullDCLauncher
     Public Shared Function GetWindowThreadProcessId(ByVal hWnd As IntPtr, <Out()> ByRef lpdwProcessId As UInteger) As UInteger
     End Function
 
-    Private Const BM_CLICK As Integer = &HF5
-    Private Const WM_ACTIVATE As Integer = &H6
-    Private Const WA_ACTIVE As Integer = &H1
     Private Const WM_COMMAND As Integer = &H111
-    Private Const WM_SETTEXT As Integer = &HC
-    Private Const WM_CLOSE As Integer = &H10
-    Private Const WM_GETTEXT As Integer = &HD
-    Private Const WM_GETTEXTLENGTH As Integer = &HE
+
 #End Region
 
     Public Function IsNullDCWindowSelected() As Boolean
@@ -86,6 +39,7 @@ Public Class NullDCLauncher
             Dim ProcessID As UInteger = 0
             GetWindowThreadProcessId(hWnd, ProcessID)
             If ProcessID = NullDCproc.Id Then Return True
+
         End If
 
         Return False
@@ -103,6 +57,7 @@ Public Class NullDCLauncher
         LoadRomThread = New Thread(AddressOf LoadGame_Thread)
         LoadRomThread.IsBackground = True
         LoadRomThread.Start()
+
     End Sub
 
     Private Sub LoadGame_Thread()
@@ -286,12 +241,7 @@ Public Class NullDCLauncher
         ' Put in the VMU to keep it in sync for now
         My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin", My.Resources.vmu_data_port01, False)
 
-        Dim IsReplay As Int16 = 0
-        Dim IsSpectator As Int16 = 0
         Dim IsHosting = "0"
-
-        If Not MainformRef.ConfigFile.ReplayFile = "" Then IsReplay = 1
-        If MainformRef.ConfigFile.Status = "Spectator" Then IsSpectator = 1
         If MainformRef.ConfigFile.Status = "Hosting" Then IsHosting = "1"
 
         Dim FPSLimiter = "0"
@@ -301,7 +251,7 @@ Public Class NullDCLauncher
         Dim SpecialSettings As New ArrayList
         Dim StartGettingSettings As Boolean = False
 
-        For Each line As String In My.Resources.DreamcastGameOptimizations.Split(vbNewLine)
+        For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\dc\GameSpecificSettings.optibear")
             line = line.Trim
             If line.Contains(MainformRef.GamesList(MainformRef.ConfigFile.Game)(3)) Then
                 StartGettingSettings = True
@@ -335,7 +285,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Dynarec.Enabled=") Then lines(linenumber) = "Dynarec.Enabled=1"
             If line.StartsWith("Dynarec.DoConstantPropagation=") Then lines(linenumber) = "Dynarec.DoConstantPropagation=1"
             If line.StartsWith("Dynarec.UnderclockFpu=") Then lines(linenumber) = "Dynarec.UnderclockFpu=0"
-            If line.StartsWith("Dreamcast.Cable=") Then lines(linenumber) = "Dreamcast.Cable=2"
+            If line.StartsWith("Dreamcast.Cable=") Then lines(linenumber) = "Dreamcast.Cable=0"
             If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1543276807" ' 1543276807
             If line.StartsWith("Dreamcast.Region=") Then lines(linenumber) = "Dreamcast.Region=" & _regionID
             If line.StartsWith("Dreamcast.Broadcast=") Then lines(linenumber) = "Dreamcast.Broadcast=" & _broadcast
@@ -355,7 +305,6 @@ Public Class NullDCLauncher
                 If line.StartsWith("Current_maple0_5") Then lines(linenumber) = "Current_maple0_5=BEARJamma_Win32.dll:0"
                 If line.StartsWith("Current_maple0_0") Then lines(linenumber) = "Current_maple0_0=BEARJamma_Win32.dll:1"
                 If line.StartsWith("Current_maple1_5") Then lines(linenumber) = "Current_maple1_5=BEARJamma_Win32.dll:0"
-
             End If
 
             ' [nullDC_GUI]
@@ -400,7 +349,6 @@ Public Class NullDCLauncher
             If line.StartsWith("[BEARPlay]") Then
                 Dim EnableOnline = "0"
                 If Not MainformRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
-
                 lines(linenumber + 1) = "Online=" & EnableOnline
                 lines(linenumber + 2) = "Host=" & MainformRef.ConfigFile.Host
                 lines(linenumber + 3) = "Hosting=" & IsHosting
@@ -421,9 +369,9 @@ Public Class NullDCLauncher
             For Each SpecialSettingLine As String In SpecialSettings
                 If line.Split("=")(0) = SpecialSettingLine.Split("=")(0) Then
                     lines(linenumber) = SpecialSettingLine
+                    Console.WriteLine("Special Setting Applies: " & SpecialSettingLine)
                 End If
             Next
-
             linenumber += 1
         Next
 
@@ -433,6 +381,7 @@ Public Class NullDCLauncher
     End Sub
 
     Private Sub ChangeSettings_Naomi()
+
         DealWithBios()
         BackupNvmem()
         lstCheck()
@@ -475,35 +424,10 @@ Public Class NullDCLauncher
             If SleepTime > 1000 Then Exit While ' Fuck it just continue
         End While
 
-
-        Dim thefile = MainformRef.NullDCPath & "\antilag.cfg"
-        Dim FPSLimit = "90"
         Dim FPSLimiter = "0"
+        If IsReplay = 1 Or IsSpectator = 1 Or MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then FPSLimiter = "1"
 
-        If IsReplay = 1 Or IsSpectator = 1 Then ' Replays and Spectating are always in Audio Sync mode for best clarity plus it allows fast forward at x2 speed
-            FPSLimiter = "1"
-            FPSLimit = "120" ' Apperanltly replays can't go faster than 90fps
-        Else
-            If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then
-                If MainformRef.ConfigFile.HostType = "0" Then
-                    FPSLimiter = "0"
-                    FPSLimit = MainformRef.ConfigFile.FPSLimit
-                Else
-                    FPSLimiter = "1"
-                End If
-            End If
-        End If
-
-        If IsReplay = 1 Or IsSpectator = 1 Or MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then
-            FPSLimiter = "1"
-        Else
-            FPSLimiter = "0"
-        End If
-
-        ' No Longer Need to rewrite the entire file
-        File.WriteAllLines(thefile, {"[config]", "RenderAheadLimit=0", "FPSlimit=" & FPSLimit})
-
-        thefile = MainformRef.NullDCPath & "\nullDC.cfg"
+        Dim thefile = MainformRef.NullDCPath & "\nullDC.cfg"
         Dim lines() As String = File.ReadAllLines(thefile)
         Dim linenumber = 0
         For Each line As String In lines

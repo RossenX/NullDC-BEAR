@@ -34,7 +34,7 @@ Partial Class frmDelayHelp
         Me.RichTextBox1.Location = New System.Drawing.Point(0, 0)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
-        Me.RichTextBox1.Size = New System.Drawing.Size(721, 562)
+        Me.RichTextBox1.Size = New System.Drawing.Size(721, 204)
         Me.RichTextBox1.TabIndex = 0
         Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
         '
@@ -42,7 +42,7 @@ Partial Class frmDelayHelp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(721, 562)
+        Me.ClientSize = New System.Drawing.Size(721, 204)
         Me.Controls.Add(Me.RichTextBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmDelayHelp"

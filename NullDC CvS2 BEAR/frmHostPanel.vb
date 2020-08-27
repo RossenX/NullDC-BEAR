@@ -1,6 +1,5 @@
 ﻿Imports System.Net.NetworkInformation
 Imports System.Threading
-Imports NullDC_CvS2_BEAR.frmMain
 
 Public Class frmHostPanel
 
@@ -16,6 +15,7 @@ Public Class frmHostPanel
         MainformRef.Challenger = _challenger
         MainformRef.EndSession("New Host")
         Me.Show(MainformRef)
+
     End Sub
 
     Private Sub frmHostPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -28,23 +28,18 @@ Public Class frmHostPanel
     Private Sub frmHostPanel_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         e.Cancel = True
         Visible = False
+
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         If Not MainformRef.Challenger Is Nothing Then MainformRef.NetworkHandler.SendMessage(">,H", MainformRef.Challenger.ip)
         MainformRef.EndSession("Host Canceled")
         MainformRef.Focus()
+
     End Sub
 
     Private Sub HostPanel_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If Visible = True Then
-            cbHostType.SelectedIndex = 0
-            If MainformRef.ConfigFile.HostType = "1" Then
-                cbHostType.SelectedIndex = 0
-            Else
-                cbHostType.SelectedIndex = 1
-            End If
-            tbFPS.Text = MainformRef.ConfigFile.FPSLimit
             If cbRegion.Text = "" Then cbRegion.Text = "JPN"
             If Not MainformRef.Challenger Is Nothing Then
                 lbInfo.Text = "Hosting " & MainformRef.Challenger.name
@@ -103,7 +98,6 @@ Public Class frmHostPanel
 
         End Try
 
-
     End Sub
 
     Private Sub btnStartHosting_Click(sender As Object, e As EventArgs) Handles btnStartHosting.Click
@@ -119,12 +113,8 @@ Public Class frmHostPanel
         MainformRef.ConfigFile.Host = MainformRef.ConfigFile.IP
         MainformRef.ConfigFile.Status = "Hosting"
         MainformRef.ConfigFile.Delay = cbDelay.Text
-        MainformRef.ConfigFile.FPSLimit = tbFPS.Text
         MainformRef.ConfigFile.Game = RomName
         MainformRef.ConfigFile.ReplayFile = ""
-        If cbHostType.Text = "Audio Sync" Then HostType = "1"
-
-        MainformRef.ConfigFile.HostType = HostType
         MainformRef.ConfigFile.SaveFile()
 
         MainformRef.NullDCLauncher.LaunchNaomi(MainformRef.ConfigFile.Game, cbRegion.Text)
@@ -140,32 +130,4 @@ Public Class frmHostPanel
         End If
     End Sub
 
-    Private Sub tbFPS_KeyPress(sender As TextBox, e As KeyPressEventArgs) Handles tbFPS.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "0123456789"
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Or (Asc(e.KeyChar) = 8) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
-    Private Sub cbHostType_SelectedIndexChanged(sender As ComboBox, e As EventArgs) Handles cbHostType.SelectedIndexChanged
-        If sender.Text = "Audio Sync" Then
-            tbFPS.Visible = False
-            Label3.Visible = False
-        Else
-            tbFPS.Visible = True
-            Label3.Visible = True
-        End If
-    End Sub
-
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
-        If Not Application.OpenForms().OfType(Of frmLimiterHelp).Any Then
-            frmLimiterHelp.Show(Me)
-        Else
-            frmLimiterHelp.Focus()
-        End If
-
-    End Sub
 End Class

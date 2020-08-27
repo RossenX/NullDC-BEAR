@@ -184,7 +184,7 @@ Partial Class frmKeyMapping
         Me.TableLayoutPanel2.Controls.Add(Me.btnhk, 2, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.btncoin, 1, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.btnstart, 2, 2)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(393, 76)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(402, 76)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
@@ -389,13 +389,13 @@ Partial Class frmKeyMapping
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(731, 376)
+        Me.Panel1.Size = New System.Drawing.Size(745, 376)
         Me.Panel1.TabIndex = 0
         '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.TableLayoutPanel4)
-        Me.GroupBox3.Location = New System.Drawing.Point(246, 208)
+        Me.GroupBox3.Location = New System.Drawing.Point(246, 60)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(150, 160)
         Me.GroupBox3.TabIndex = 22
@@ -491,7 +491,7 @@ Partial Class frmKeyMapping
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel3)
-        Me.GroupBox1.Location = New System.Drawing.Point(459, 208)
+        Me.GroupBox1.Location = New System.Drawing.Point(468, 208)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(260, 103)
         Me.GroupBox1.TabIndex = 20
@@ -594,11 +594,11 @@ Partial Class frmKeyMapping
         Me.tlpProfile.Controls.Add(Me.Label2, 2, 0)
         Me.tlpProfile.Controls.Add(Me.btnNewProfile, 5, 0)
         Me.tlpProfile.Controls.Add(Me.btnDeleteProfile, 6, 0)
-        Me.tlpProfile.Location = New System.Drawing.Point(9, 9)
+        Me.tlpProfile.Location = New System.Drawing.Point(15, 9)
         Me.tlpProfile.Name = "tlpProfile"
         Me.tlpProfile.RowCount = 1
         Me.tlpProfile.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlpProfile.Size = New System.Drawing.Size(608, 23)
+        Me.tlpProfile.Size = New System.Drawing.Size(713, 23)
         Me.tlpProfile.TabIndex = 17
         '
         'Label1
@@ -607,9 +607,9 @@ Partial Class frmKeyMapping
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label1.Location = New System.Drawing.Point(3, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(65, 23)
+        Me.Label1.Size = New System.Drawing.Size(51, 23)
         Me.Label1.TabIndex = 15
-        Me.Label1.Text = "Controller ID"
+        Me.Label1.Text = "Controller"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'cbProfile
@@ -618,10 +618,10 @@ Partial Class frmKeyMapping
         Me.cbProfile.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbProfile.FormattingEnabled = True
-        Me.cbProfile.Location = New System.Drawing.Point(153, 0)
+        Me.cbProfile.Location = New System.Drawing.Point(139, 0)
         Me.cbProfile.Margin = New System.Windows.Forms.Padding(0)
         Me.cbProfile.Name = "cbProfile"
-        Me.cbProfile.Size = New System.Drawing.Size(285, 21)
+        Me.cbProfile.Size = New System.Drawing.Size(404, 21)
         Me.cbProfile.TabIndex = 0
         Me.cbProfile.TabStop = False
         '
@@ -632,7 +632,7 @@ Partial Class frmKeyMapping
         Me.cbControllerID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbControllerID.FormattingEnabled = True
         Me.cbControllerID.Items.AddRange(New Object() {"0", "1", "2", "3"})
-        Me.cbControllerID.Location = New System.Drawing.Point(71, 0)
+        Me.cbControllerID.Location = New System.Drawing.Point(57, 0)
         Me.cbControllerID.Margin = New System.Windows.Forms.Padding(0)
         Me.cbControllerID.Name = "cbControllerID"
         Me.cbControllerID.Size = New System.Drawing.Size(40, 21)
@@ -643,7 +643,7 @@ Partial Class frmKeyMapping
         '
         Me.Label2.AutoSize = True
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label2.Location = New System.Drawing.Point(114, 0)
+        Me.Label2.Location = New System.Drawing.Point(100, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(36, 23)
         Me.Label2.TabIndex = 1
@@ -655,7 +655,7 @@ Partial Class frmKeyMapping
         Me.btnNewProfile.BackColor = System.Drawing.Color.White
         Me.btnNewProfile.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnNewProfile.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnNewProfile.Location = New System.Drawing.Point(443, 0)
+        Me.btnNewProfile.Location = New System.Drawing.Point(548, 0)
         Me.btnNewProfile.Margin = New System.Windows.Forms.Padding(0)
         Me.btnNewProfile.Name = "btnNewProfile"
         Me.btnNewProfile.Size = New System.Drawing.Size(95, 23)
@@ -669,7 +669,7 @@ Partial Class frmKeyMapping
         Me.btnDeleteProfile.BackColor = System.Drawing.Color.White
         Me.btnDeleteProfile.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnDeleteProfile.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDeleteProfile.Location = New System.Drawing.Point(538, 0)
+        Me.btnDeleteProfile.Location = New System.Drawing.Point(643, 0)
         Me.btnDeleteProfile.Margin = New System.Windows.Forms.Padding(0)
         Me.btnDeleteProfile.Name = "btnDeleteProfile"
         Me.btnDeleteProfile.Size = New System.Drawing.Size(70, 23)
@@ -694,7 +694,7 @@ Partial Class frmKeyMapping
         '
         Me.btnUnbindAll.BackColor = System.Drawing.Color.White
         Me.btnUnbindAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnUnbindAll.Location = New System.Drawing.Point(433, 344)
+        Me.btnUnbindAll.Location = New System.Drawing.Point(338, 297)
         Me.btnUnbindAll.Margin = New System.Windows.Forms.Padding(0)
         Me.btnUnbindAll.Name = "btnUnbindAll"
         Me.btnUnbindAll.Size = New System.Drawing.Size(92, 22)
@@ -707,7 +707,7 @@ Partial Class frmKeyMapping
         '
         Me.btnOnOff.BackColor = System.Drawing.Color.Lime
         Me.btnOnOff.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnOnOff.Location = New System.Drawing.Point(528, 322)
+        Me.btnOnOff.Location = New System.Drawing.Point(338, 322)
         Me.btnOnOff.Name = "btnOnOff"
         Me.btnOnOff.Size = New System.Drawing.Size(92, 46)
         Me.btnOnOff.TabIndex = 13
@@ -719,7 +719,7 @@ Partial Class frmKeyMapping
         '
         Me.btnDone.BackColor = System.Drawing.Color.White
         Me.btnDone.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDone.Location = New System.Drawing.Point(626, 322)
+        Me.btnDone.Location = New System.Drawing.Point(635, 318)
         Me.btnDone.Name = "btnDone"
         Me.btnDone.Size = New System.Drawing.Size(93, 46)
         Me.btnDone.TabIndex = 12
@@ -732,7 +732,7 @@ Partial Class frmKeyMapping
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(731, 376)
+        Me.ClientSize = New System.Drawing.Size(745, 376)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.KeyPreview = True

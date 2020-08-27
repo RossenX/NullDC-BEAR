@@ -201,12 +201,6 @@
     <Compile Include="frmKeyMapping.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLimiterHelp.Designer.vb">
-      <DependentUpon>frmLimiterHelp.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmLimiterHelp.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmLoLNerd.Designer.vb">
       <DependentUpon>frmLoLNerd.vb</DependentUpon>
     </Compile>
@@ -308,9 +302,6 @@
     <EmbeddedResource Include="frmKeyMapping.resx">
       <DependentUpon>frmKeyMapping.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLimiterHelp.resx">
-      <DependentUpon>frmLimiterHelp.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmLoLNerd.resx">
       <DependentUpon>frmLoLNerd.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -387,9 +378,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NewChallanger.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\d3d9.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NullNaomiClean.zip" />

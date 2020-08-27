@@ -33,12 +33,7 @@
 
     Public Sub StartOffline()
 
-        Dim HostType As String = "0"
-        If cbHostType.Text = "Audio Sync" Then HostType = "1"
-
-        MainFormRef.ConfigFile.FPSLimit = tbFPS.Text
-        MainFormRef.ConfigFile.HostType = HostType
-        MainFormRef.ConfigFile.Status = "Offline"
+        MainformRef.ConfigFile.Status = "Offline"
         MainFormRef.ConfigFile.Game = cbGameList.SelectedValue
         MainformRef.ConfigFile.ReplayFile = ""
         MainformRef.ConfigFile.Host = "127.0.0.1"
@@ -75,70 +70,25 @@
 
     End Sub
 
-    Private Sub cbHostType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbHostType.SelectedIndexChanged
-        If _Challenger Is Nothing Then
-            If sender.Text = "Audio Sync" Then
-                tbFPS.Visible = False
-                Label3.Visible = False
-            Else
-                tbFPS.Visible = True
-                Label3.Visible = True
-            End If
-        Else
-            tbFPS.Visible = False
-            Label3.Visible = False
-        End If
-
-    End Sub
-
     Private Sub frmChallengeGameSelect_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Visible Then
             If Not _Challenger Is Nothing Then
-                cbHostType.Visible = False
-                Button2.Visible = False
-                Label2.Visible = False
                 cbRegion.Visible = False
                 Label4.Visible = False
-
             Else
-                cbHostType.Visible = False
-                Button2.Visible = False
-                Label2.Visible = False
                 cbRegion.Visible = True
                 Label4.Visible = True
-
             End If
 
             If cbRegion.Text = "" Then
                 cbRegion.SelectedIndex = 0
             End If
 
-            If cbGameList.Items.Count > 0 Then
-                'cbGameList.SelectedIndex = 0
-            End If
-
-            cbHostType.SelectedIndex = 0
-
-            If MainformRef.ConfigFile.HostType = "1" Then
-                cbHostType.SelectedIndex = 0
-            Else
-                cbHostType.SelectedIndex = 1
-            End If
-
-            tbFPS.Text = MainformRef.ConfigFile.FPSLimit
             Me.CenterToParent()
         Else
             _Challenger = Nothing
         End If
 
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If Not Application.OpenForms().OfType(Of frmLimiterHelp).Any Then
-            frmLimiterHelp.Show(Me)
-        Else
-            frmLimiterHelp.Focus()
-        End If
     End Sub
 
     Private Sub btnDLC_Click(sender As Object, e As EventArgs) Handles btnDLC.Click

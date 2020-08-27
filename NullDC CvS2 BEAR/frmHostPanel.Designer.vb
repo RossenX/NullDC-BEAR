@@ -33,12 +33,9 @@ Partial Class frmHostPanel
         Me.btnSuggestDelay = New System.Windows.Forms.Button()
         Me.cbGameList = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.cbHostType = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.tbFPS = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
+        Me.cbPlatform = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -49,7 +46,7 @@ Partial Class frmHostPanel
         Me.btnStartHosting.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnStartHosting.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnStartHosting.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.btnStartHosting.Location = New System.Drawing.Point(187, 342)
+        Me.btnStartHosting.Location = New System.Drawing.Point(187, 353)
         Me.btnStartHosting.Name = "btnStartHosting"
         Me.btnStartHosting.Size = New System.Drawing.Size(75, 31)
         Me.btnStartHosting.TabIndex = 3
@@ -63,9 +60,9 @@ Partial Class frmHostPanel
         Me.cbDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.cbDelay.FormattingEnabled = True
         Me.cbDelay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
-        Me.cbDelay.Location = New System.Drawing.Point(244, 278)
+        Me.cbDelay.Location = New System.Drawing.Point(187, 283)
         Me.cbDelay.Name = "cbDelay"
-        Me.cbDelay.Size = New System.Drawing.Size(61, 21)
+        Me.cbDelay.Size = New System.Drawing.Size(75, 21)
         Me.cbDelay.TabIndex = 4
         '
         'Label1
@@ -74,7 +71,7 @@ Partial Class frmHostPanel
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(249, 260)
+        Me.Label1.Location = New System.Drawing.Point(184, 264)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(49, 16)
         Me.Label1.TabIndex = 5
@@ -83,7 +80,7 @@ Partial Class frmHostPanel
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.NullDC_CvS2_BEAR.My.Resources.Resources.ConnectingNetplay
-        Me.PictureBox1.Location = New System.Drawing.Point(75, 32)
+        Me.PictureBox1.Location = New System.Drawing.Point(75, 1)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(300, 149)
         Me.PictureBox1.TabIndex = 6
@@ -96,7 +93,7 @@ Partial Class frmHostPanel
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.lbInfo, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lbPing, 0, 1)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(107, 187)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(107, 155)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -135,7 +132,7 @@ Partial Class frmHostPanel
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.btnExit.Location = New System.Drawing.Point(187, 1)
+        Me.btnExit.Location = New System.Drawing.Point(190, 1)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 31)
         Me.btnExit.TabIndex = 8
@@ -148,9 +145,9 @@ Partial Class frmHostPanel
         Me.btnSuggestDelay.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSuggestDelay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSuggestDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.btnSuggestDelay.Location = New System.Drawing.Point(244, 301)
+        Me.btnSuggestDelay.Location = New System.Drawing.Point(187, 310)
         Me.btnSuggestDelay.Name = "btnSuggestDelay"
-        Me.btnSuggestDelay.Size = New System.Drawing.Size(61, 22)
+        Me.btnSuggestDelay.Size = New System.Drawing.Size(75, 22)
         Me.btnSuggestDelay.TabIndex = 9
         Me.btnSuggestDelay.Text = "Suggest"
         Me.btnSuggestDelay.UseVisualStyleBackColor = False
@@ -161,9 +158,9 @@ Partial Class frmHostPanel
         Me.cbGameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGameList.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.cbGameList.FormattingEnabled = True
-        Me.cbGameList.Location = New System.Drawing.Point(65, 230)
+        Me.cbGameList.Location = New System.Drawing.Point(58, 225)
         Me.cbGameList.Name = "cbGameList"
-        Me.cbGameList.Size = New System.Drawing.Size(258, 21)
+        Me.cbGameList.Size = New System.Drawing.Size(282, 21)
         Me.cbGameList.TabIndex = 10
         '
         'Button1
@@ -172,73 +169,12 @@ Partial Class frmHostPanel
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(308, 277)
+        Me.Button1.Location = New System.Drawing.Point(268, 296)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(25, 25)
         Me.Button1.TabIndex = 11
         Me.Button1.Text = "?"
         Me.Button1.UseVisualStyleBackColor = False
-        '
-        'cbHostType
-        '
-        Me.cbHostType.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.cbHostType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbHostType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cbHostType.FormattingEnabled = True
-        Me.cbHostType.Items.AddRange(New Object() {"Audio Sync"})
-        Me.cbHostType.Location = New System.Drawing.Point(136, 278)
-        Me.cbHostType.Name = "cbHostType"
-        Me.cbHostType.Size = New System.Drawing.Size(77, 21)
-        Me.cbHostType.TabIndex = 12
-        Me.cbHostType.Visible = False
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(147, 260)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(54, 16)
-        Me.Label2.TabIndex = 13
-        Me.Label2.Text = "Limiter"
-        Me.Label2.Visible = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Button2.Location = New System.Drawing.Point(109, 276)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(25, 25)
-        Me.Button2.TabIndex = 14
-        Me.Button2.Text = "?"
-        Me.Button2.UseVisualStyleBackColor = False
-        Me.Button2.Visible = False
-        '
-        'tbFPS
-        '
-        Me.tbFPS.Location = New System.Drawing.Point(178, 299)
-        Me.tbFPS.Name = "tbFPS"
-        Me.tbFPS.Size = New System.Drawing.Size(35, 20)
-        Me.tbFPS.TabIndex = 15
-        Me.tbFPS.Visible = False
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(139, 302)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(40, 16)
-        Me.Label3.TabIndex = 16
-        Me.Label3.Text = "Limit"
-        Me.Label3.Visible = False
         '
         'cbRegion
         '
@@ -246,10 +182,34 @@ Partial Class frmHostPanel
         Me.cbRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRegion.FormattingEnabled = True
         Me.cbRegion.Items.AddRange(New Object() {"JPN", "USA", "EUR"})
-        Me.cbRegion.Location = New System.Drawing.Point(329, 230)
+        Me.cbRegion.Location = New System.Drawing.Point(346, 225)
         Me.cbRegion.Name = "cbRegion"
         Me.cbRegion.Size = New System.Drawing.Size(52, 21)
         Me.cbRegion.TabIndex = 25
+        '
+        'cbPlatform
+        '
+        Me.cbPlatform.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cbPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPlatform.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.cbPlatform.FormattingEnabled = True
+        Me.cbPlatform.Items.AddRange(New Object() {"All", "Dreamcast", "Naomi"})
+        Me.cbPlatform.Location = New System.Drawing.Point(187, 198)
+        Me.cbPlatform.Name = "cbPlatform"
+        Me.cbPlatform.Size = New System.Drawing.Size(75, 21)
+        Me.cbPlatform.TabIndex = 26
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.Label2.Location = New System.Drawing.Point(123, 200)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(65, 16)
+        Me.Label2.TabIndex = 27
+        Me.Label2.Text = "Platform"
         '
         'frmHostPanel
         '
@@ -258,17 +218,14 @@ Partial Class frmHostPanel
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.SingleSquare
         Me.ClientSize = New System.Drawing.Size(450, 450)
-        Me.Controls.Add(Me.cbRegion)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.tbFPS)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.cbPlatform)
+        Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.cbHostType)
+        Me.Controls.Add(Me.cbRegion)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.cbGameList)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.btnSuggestDelay)
-        Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cbDelay)
@@ -298,10 +255,7 @@ Partial Class frmHostPanel
     Friend WithEvents btnSuggestDelay As Button
     Friend WithEvents cbGameList As ComboBox
     Friend WithEvents Button1 As Button
-    Friend WithEvents cbHostType As ComboBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents tbFPS As TextBox
-    Friend WithEvents Label3 As Label
     Friend WithEvents cbRegion As ComboBox
+    Friend WithEvents cbPlatform As ComboBox
+    Friend WithEvents Label2 As Label
 End Class
