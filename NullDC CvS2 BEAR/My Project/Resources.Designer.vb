@@ -81,6 +81,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property BEARJamma_Win32_dc() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Win32_dc", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to 
         '''[BEARJamma]
         '''BPortA_I_SERVICE_KEY_1=115
@@ -182,13 +192,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to CVS2::E35A6720CB1DAFF46A9BDFD76C31D598
+        '''  Looks up a localized string similar to 1.1
+        '''CVS2::E35A6720CB1DAFF46A9BDFD76C31D598
         '''Dynarec.UnderclockFpu=1
         '''MVC2::1728B4188302B24E25F4E05C13A6451F
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
         '''Emulation.AlphaSortMode=1
         '''SFA3::D87F4E83C47870135A81DEC63826238B
+        '''Dreamcast.Cable=0
+        '''Vampire Chronicle for Matching Service::AAD52ABB2A03E225C5745015549C6900
         '''Dreamcast.Cable=0.
         '''</summary>
         Friend ReadOnly Property DreamcastGameOptimizations() As String

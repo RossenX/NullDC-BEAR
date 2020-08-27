@@ -14,7 +14,7 @@ Namespace My
         ApplicationServices.UnhandledExceptionEventArgs) _
         Handles Me.UnhandledException
             e.ExitApplication =
-                MessageBox.Show("Yo Something went wrong send this to RossenX" & vbCrLf & e.Exception.Message, "Crashy McCrashface")
+                MessageBox.Show("Yo Something went wrong send this to RossenX" & vbCrLf & e.Exception.Message & vbNewLine & vbNewLine & e.Exception.StackTrace, "Crashy McCrashface")
         End Sub
 
     End Class

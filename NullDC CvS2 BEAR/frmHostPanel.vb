@@ -117,7 +117,7 @@ Public Class frmHostPanel
         MainformRef.ConfigFile.ReplayFile = ""
         MainformRef.ConfigFile.SaveFile()
 
-        MainformRef.NullDCLauncher.LaunchNaomi(MainformRef.ConfigFile.Game, cbRegion.Text)
+        MainformRef.GameLauncher(MainformRef.ConfigFile.Game, cbRegion.Text)
         Me.Close()
 
     End Sub

@@ -119,7 +119,7 @@ Partial Class frmDLC
         Me.btnRomsFolder.Name = "btnRomsFolder"
         Me.btnRomsFolder.Size = New System.Drawing.Size(313, 41)
         Me.btnRomsFolder.TabIndex = 6
-        Me.btnRomsFolder.Text = "Open Roms Folder"
+        Me.btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
         Me.btnRomsFolder.UseVisualStyleBackColor = False
         '
         'Label1

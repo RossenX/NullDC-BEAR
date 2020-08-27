@@ -88,29 +88,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>NullDC.BEAR.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>NullDC.BEAR.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
@@ -238,12 +215,6 @@
     <Compile Include="frmSetup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSpecialThanks.Designer.vb">
-      <DependentUpon>frmSpecialThanks.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmSpecialThanks.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmWaitingForHost.Designer.vb">
       <DependentUpon>frmWaitingForHost.vb</DependentUpon>
     </Compile>
@@ -321,9 +292,6 @@
     <EmbeddedResource Include="frmSetup.resx">
       <DependentUpon>frmSetup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSpecialThanks.resx">
-      <DependentUpon>frmSpecialThanks.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmWaitingForHost.resx">
       <DependentUpon>frmWaitingForHost.vb</DependentUpon>
     </EmbeddedResource>
@@ -373,6 +341,7 @@
   <ItemGroup>
     <None Include="Resources\DcClean.zip" />
     <None Include="Resources\Deps.zip" />
+    <None Include="Resources\BEARJamma_Win32_dc.dll" />
     <Content Include="Resources\DreamcastGameOptimizations.txt" />
     <None Include="Resources\nullDC.cfg" />
   </ItemGroup>

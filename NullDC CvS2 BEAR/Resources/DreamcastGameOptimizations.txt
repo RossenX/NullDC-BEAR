@@ -1,6 +1,8 @@
 1.1
 CVS2::E35A6720CB1DAFF46A9BDFD76C31D598
 Dynarec.UnderclockFpu=1
+Emulation.ModVolMode=2
+Emulation.PaletteMode=2
 MVC2::1728B4188302B24E25F4E05C13A6451F
 Dynarec.UnderclockFpu=1
 Emulation.ModVolMode=2

@@ -312,16 +312,16 @@ Public Class NullDCLauncher
 
             ' [drkpvr]
             If line.StartsWith("Emulation.AlphaSortMode=") Then lines(linenumber) = "Emulation.AlphaSortMode=2"
-            If line.StartsWith("Emulation.PaletteMode=") Then lines(linenumber) = "Emulation.PaletteMode=1"
+            If line.StartsWith("Emulation.PaletteMode=") Then lines(linenumber) = "Emulation.PaletteMode=2"
             If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=0"
             If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
-            If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"
+            If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=1"
             If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
 
             ' [ImageReader]
-            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=0"
+            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=1"
             If line.StartsWith("LoadDefaultImage=") Then lines(linenumber) = "LoadDefaultImage=1"
             If line.StartsWith("DefaultImage=") Then lines(linenumber) = "DefaultImage=roms\" & MainformRef.ConfigFile.Game
             If line.StartsWith("LastImage=") Then lines(linenumber) = "LastImage=roms\" & MainformRef.ConfigFile.Game
@@ -360,7 +360,7 @@ Public Class NullDCLauncher
                 lines(linenumber + 9) = "Spectator=0" ' & IsSpectator
                 lines(linenumber + 10) = "P1Name=" & P1Name
                 lines(linenumber + 11) = "P2Name=" & P2Name
-                lines(linenumber + 12) = "File=" & MainformRef.ConfigFile.ReplayFile
+                lines(linenumber + 12) = "File=0" '& MainformRef.ConfigFile.ReplayFile
                 lines(linenumber + 13) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
                 lines(linenumber + 14) = "GameRom=" & MainformRef.ConfigFile.Game
                 lines(linenumber + 15) = "Region=" & Region

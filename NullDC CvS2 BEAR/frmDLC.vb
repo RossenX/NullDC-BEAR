@@ -178,8 +178,19 @@ Public Class frmDLC
     End Sub
 
     Private Sub btnRomsFolder_Click(sender As Object, e As EventArgs) Handles btnRomsFolder.Click
-        If Not Directory.Exists(MainformRef.NullDCPath & "\roms") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\roms")
-        Process.Start(MainformRef.NullDCPath & "\roms")
+        Select Case tc_games.SelectedIndex
+            Case 0
+                If Not Directory.Exists(MainformRef.NullDCPath & "\roms") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\roms")
+                Process.Start(MainformRef.NullDCPath & "\roms")
+            Case 1
+                If Not Directory.Exists(MainformRef.NullDCPath & "\roms") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\roms")
+                Process.Start(MainformRef.NullDCPath & "\roms")
+            Case 2
+                If Not Directory.Exists(MainformRef.NullDCPath & "\dc\roms") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\roms")
+                Process.Start(MainformRef.NullDCPath & "\dc\roms")
+        End Select
+
+
     End Sub
 
     Private Sub lvGamelist_Atomiswave_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvGamelist_Atomiswave.SelectedIndexChanged
@@ -200,6 +211,16 @@ Public Class frmDLC
 
     End Sub
 
+    Private Sub tc_games_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tc_games.SelectedIndexChanged
+        Select Case tc_games.SelectedIndex
+            Case 0
+                btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
+            Case 1
+                btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
+            Case 2
+                btnRomsFolder.Text = "Open Dreamcast Roms Folder"
+        End Select
+    End Sub
 End Class
 
 Class DownloadableGame

@@ -94,7 +94,7 @@ Public Class frmMain
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
 
         If GamesList.Count = 0 Then
-            'NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
+            NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
         End If
 
         'CreateCFGWatcher()
@@ -344,6 +344,7 @@ Public Class frmMain
         ' Just copy the beargamma plugin everytime the launcher starts, to make sure w.e version is in the launcher is the one that's in the plugins folder
         Try
             My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32, False)
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\dc\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32_dc, False)
             My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_GUI_Win32.dll", My.Resources.nullDC_GUI_Win32, False)
             My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe", My.Resources.nullDC_Win32_Release_NoTrace, False)
         Catch ex As Exception
@@ -377,9 +378,15 @@ Public Class frmMain
             UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
         End If
 
-
-
-
+        'Install Dependencies if needed
+        If Not File.Exists(NullDCPath & "\dc\XInputInterface.dll") Or
+            Not File.Exists(NullDCPath & "\dc\XInputDotNetPure.dll") Or
+            Not File.Exists(NullDCPath & "\dc\OpenTK.dll") Or
+            Not File.Exists(NullDCPath & "\dc\SDL2.dll") Or
+            Not File.Exists(NullDCPath & "\dc\SDL2_net.dll") Or
+            Not File.Exists(NullDCPath & "\dc\NAudio.dll") Then
+            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
+        End If
 
         If Not File.Exists(NullDCPath & "\dc\GameSpecificSettings.optibear") Then
             File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations.ToString)
@@ -452,21 +459,24 @@ Public Class frmMain
                     table.Rows.Add({RomName, GameName})
                 End If
             Next
-        End If
 
-        ' Generate the hash file in the dc roms
-        Dim _hashes As String = ""
-        For Each _key In GamesList.Keys
-            If Not GamesList(_key)(3) = "" Then
-                If _hashes = "" Then
-                    _hashes = GamesList(_key)(0) & "::" & GamesList(_key)(3)
-                Else
-                    _hashes = _hashes & vbNewLine & GamesList(_key)(0) & "::" & GamesList(_key)(3)
+            ' Generate the hash file in the dc roms
+            Dim _hashes As String = ""
+            For Each _key In GamesList.Keys
+                If Not GamesList(_key)(3) = "" Then
+                    If _hashes = "" Then
+                        _hashes = GamesList(_key)(0) & "::" & GamesList(_key)(3)
+                    Else
+                        _hashes = _hashes & vbNewLine & GamesList(_key)(0) & "::" & GamesList(_key)(3)
+                    End If
                 End If
-            End If
-        Next
+            Next
 
-        File.WriteAllLines(NullDCPath & "\dc\roms\romhashes.txt", _hashes.Split(vbNewLine))
+            If _hashes.Length > 0 Then
+                File.WriteAllLines(NullDCPath & "\dc\roms\romhashes.txt", _hashes.Split(vbNewLine))
+            End If
+
+        End If
 
         GameSelectForm.cbGameList.DataSource = table
         HostingForm.cbGameList.DataSource = table
@@ -536,7 +546,8 @@ Public Class frmMain
         ConfigFile.Delay = _delay
         ConfigFile.ReplayFile = ""
         ConfigFile.SaveFile()
-        NullDCLauncher.LaunchNaomi(ConfigFile.Game, _region)
+
+        GameLauncher(ConfigFile.Game, _region)
 
     End Sub
 
@@ -555,7 +566,8 @@ Public Class frmMain
         NullDCLauncher.P2Name = _p2name
         WaitingForm.Visible = False
         ChallengeSentForm.Visible = False
-        NullDCLauncher.LaunchNaomi(ConfigFile.Game, _region)
+
+        GameLauncher(ConfigFile.Game, _region)
     End Sub
 
     Public Delegate Sub RemovePlayerFromList_delegate(ByVal IP As String)

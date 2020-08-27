@@ -34,8 +34,6 @@ Partial Class frmHostPanel
         Me.cbGameList = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
-        Me.cbPlatform = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
@@ -187,30 +185,6 @@ Partial Class frmHostPanel
         Me.cbRegion.Size = New System.Drawing.Size(52, 21)
         Me.cbRegion.TabIndex = 25
         '
-        'cbPlatform
-        '
-        Me.cbPlatform.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.cbPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPlatform.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.cbPlatform.FormattingEnabled = True
-        Me.cbPlatform.Items.AddRange(New Object() {"All", "Dreamcast", "Naomi"})
-        Me.cbPlatform.Location = New System.Drawing.Point(187, 198)
-        Me.cbPlatform.Name = "cbPlatform"
-        Me.cbPlatform.Size = New System.Drawing.Size(75, 21)
-        Me.cbPlatform.TabIndex = 26
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(123, 200)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(65, 16)
-        Me.Label2.TabIndex = 27
-        Me.Label2.Text = "Platform"
-        '
         'frmHostPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -218,9 +192,7 @@ Partial Class frmHostPanel
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.SingleSquare
         Me.ClientSize = New System.Drawing.Size(450, 450)
-        Me.Controls.Add(Me.cbPlatform)
         Me.Controls.Add(Me.btnExit)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cbRegion)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.cbGameList)
@@ -256,6 +228,4 @@ Partial Class frmHostPanel
     Friend WithEvents cbGameList As ComboBox
     Friend WithEvents Button1 As Button
     Friend WithEvents cbRegion As ComboBox
-    Friend WithEvents cbPlatform As ComboBox
-    Friend WithEvents Label2 As Label
 End Class
