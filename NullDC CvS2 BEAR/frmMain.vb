@@ -12,7 +12,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.1"
+    Public Ver As String = "1.25"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -105,18 +105,19 @@ Public Class frmMain
     End Sub
 
     Dim RomFolderWatcher As FileSystemWatcher
+    Dim RomFolderWatcher_Dreamcast As FileSystemWatcher
+
     Private Sub CreateRomFolderWatcher()
+
         RomFolderWatcher = New FileSystemWatcher()
         RomFolderWatcher.IncludeSubdirectories = True
         RomFolderWatcher.Path = NullDCPath & "\roms"
 
-        RomFolderWatcher.NotifyFilter = NotifyFilters.Attributes Or
+        RomFolderWatcher.NotifyFilter =
             NotifyFilters.CreationTime Or
             NotifyFilters.DirectoryName Or
             NotifyFilters.FileName Or
-            NotifyFilters.LastAccess Or
             NotifyFilters.LastWrite Or
-            NotifyFilters.Security Or
             NotifyFilters.Size
 
         AddHandler RomFolderWatcher.Changed, AddressOf RomFolderChange
@@ -125,15 +126,36 @@ Public Class frmMain
         AddHandler RomFolderWatcher.Deleted, AddressOf RomFolderChange
 
         RomFolderWatcher.EnableRaisingEvents = True
+
+        RomFolderWatcher_Dreamcast = New FileSystemWatcher()
+        RomFolderWatcher_Dreamcast.IncludeSubdirectories = True
+        RomFolderWatcher_Dreamcast.Path = NullDCPath & "\dc\roms"
+
+        RomFolderWatcher_Dreamcast.NotifyFilter =
+            NotifyFilters.CreationTime Or
+            NotifyFilters.DirectoryName Or
+            NotifyFilters.FileName Or
+            NotifyFilters.LastWrite Or
+            NotifyFilters.Size
+
+        AddHandler RomFolderWatcher_Dreamcast.Changed, AddressOf RomFolderChange
+        AddHandler RomFolderWatcher_Dreamcast.Created, AddressOf RomFolderChange
+        AddHandler RomFolderWatcher_Dreamcast.Renamed, AddressOf RomFolderChange
+        AddHandler RomFolderWatcher_Dreamcast.Deleted, AddressOf RomFolderChange
+
+        RomFolderWatcher_Dreamcast.EnableRaisingEvents = True
+
     End Sub
 
     Private Sub RomFolderChange(ByVal source As Object, ByVal e As FileSystemEventArgs)
         If Not e.Name.Contains("eeprom") Then ' As long as it has nothing to do with eeproms, then reload the games.
             Console.WriteLine("Roms folder changed, check if we have new games")
             RomFolderWatcher.EnableRaisingEvents = False
+            RomFolderWatcher_Dreamcast.EnableRaisingEvents = False
             Thread.Sleep(500)
             Me.Invoke(Sub() GetGamesList())
             RomFolderWatcher.EnableRaisingEvents = True
+            RomFolderWatcher_Dreamcast.EnableRaisingEvents = True
         End If
     End Sub
 
@@ -200,6 +222,12 @@ Public Class frmMain
     End Function
 
     Private Sub CheckForUpdate()
+        ' Check if updating is turned off
+        For Each CommandLine In Environment.GetCommandLineArgs
+            If CommandLine = "-noupdate" Then Exit Sub
+
+        Next
+
         imgBeta.Visible = IsBeta
         If IsBeta Then Exit Sub
 
@@ -341,17 +369,6 @@ Public Class frmMain
             UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
         End If
 
-        ' Just copy the beargamma plugin everytime the launcher starts, to make sure w.e version is in the launcher is the one that's in the plugins folder
-        Try
-            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32, False)
-            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\dc\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32_dc, False)
-            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_GUI_Win32.dll", My.Resources.nullDC_GUI_Win32, False)
-            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe", My.Resources.nullDC_Win32_Release_NoTrace, False)
-        Catch ex As Exception
-            MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
-            End
-        End Try
-
         ' FPS Limited Doesn't Exist lets Create it
         If File.Exists(NullDCPath & "\d3d9.dll") Then
             File.SetAttributes(NullDCPath & "\d3d9.dll", FileAttributes.Normal)
@@ -398,7 +415,16 @@ Public Class frmMain
             End If
         End If
 
-
+        ' Just copy the beargamma plugin everytime the launcher starts, to make sure w.e version is in the launcher is the one that's in the plugins folder
+        Try
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32, False)
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\dc\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32_dc, False)
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_GUI_Win32.dll", My.Resources.nullDC_GUI_Win32, False)
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe", My.Resources.nullDC_Win32_Release_NoTrace, False)
+        Catch ex As Exception
+            MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
+            End
+        End Try
 
         GetGamesList()
     End Sub
@@ -422,7 +448,7 @@ Public Class frmMain
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
 
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 2)
+                Dim GameName As String = "NA- " & GameName_Split(GameName_Split.Count - 2).Trim
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -437,20 +463,25 @@ Public Class frmMain
             Dim hasher As MD5 = MD5.Create()
             Files = Directory.GetFiles(NullDCPath & "\dc\roms", "*.cdi", SearchOption.AllDirectories)
             For Each _file In Files
+                While IsFileInUse(_file)
+                    Thread.Sleep(1)
+                End While
+
                 Dim GameName_Split As String() = _file.Split("\")
 
                 ' hash Generation
                 Dim fs As New FileStream(_file, FileMode.Open)
                 Dim binary_reader As New BinaryReader(fs)
                 fs.Position = 0
-                Dim bytes() As Byte = hasher.ComputeHash(binary_reader.ReadBytes(1000000))
+                Dim bytes() As Byte = hasher.ComputeHash(binary_reader.ReadBytes(5000000))
+
                 Dim sBuilder As New StringBuilder()
                 For n As Integer = 0 To bytes.Length - 1
                     sBuilder.Append(bytes(n).ToString("X2"))
                 Next n
                 fs.Close()
 
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Replace(".cdi", "")
+                Dim GameName As String = "DC- " & StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", ""), vbProperCase).Split("[")(0).Split("(")(0).Trim
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -812,6 +843,8 @@ Public Class frmMain
                     Message = "Player is spectating or watching a replay, can't spectate them."
                 Case "DND"
                     Message = "Player is not accepting challenges right now."
+                Case "NDC"
+                    Message = "Dreamcast Spectating not implemented yet"
             End Select
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)

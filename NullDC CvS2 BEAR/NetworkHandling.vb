@@ -188,7 +188,12 @@ Public Class NetworkHandling
                         tmp_p2name = "Local Player 2"
                     End If
 
-                    SendMessage("@," & tmp_p1name & "," & tmp_p2name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, senderip)
+                    If MainformRef.NullDCLauncher.Platform = "dc" Then
+                        SendMessage(">,NDC", senderip)
+                    ElseIf MainformRef.NullDCLauncher.Platform = "na" Then
+                        SendMessage("@," & tmp_p1name & "," & tmp_p2name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, senderip)
+                    End If
+
                     Exit Sub
                 Else
                     SendMessage(">,NS", senderip)

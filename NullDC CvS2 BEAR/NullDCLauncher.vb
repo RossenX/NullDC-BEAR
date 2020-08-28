@@ -15,6 +15,7 @@ Public Class NullDCLauncher
     Dim AutoHotkey As Process
     Dim SingleInstance As Boolean = True
     Dim LoadRomThread As Thread
+    Public Platform As String = ""
 
 #Region "API"
     <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
@@ -76,6 +77,7 @@ Public Class NullDCLauncher
     End Sub
 
     Public Sub LaunchDreamcast(ByVal _romname As String, ByRef _region As String)
+        Platform = "dc"
         MainformRef.InputHandler.GetKeyboardConfigs("dc")
         MainformRef.InputHandler.NeedConfigReload = True
         Region = _region
@@ -90,6 +92,7 @@ Public Class NullDCLauncher
     End Sub
 
     Public Sub LaunchNaomi(ByVal _romname As String, ByRef _region As String)
+        Platform = "na"
         MainformRef.InputHandler.GetKeyboardConfigs("naomi")
         MainformRef.InputHandler.NeedConfigReload = True
         Region = _region
@@ -252,14 +255,16 @@ Public Class NullDCLauncher
         Dim StartGettingSettings As Boolean = False
 
         For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\dc\GameSpecificSettings.optibear")
-            line = line.Trim
+
             If line.Contains(MainformRef.GamesList(MainformRef.ConfigFile.Game)(3)) Then
                 StartGettingSettings = True
                 Continue For
             End If
 
             If line.Contains("::") And StartGettingSettings Then Exit For
-            If StartGettingSettings Then SpecialSettings.Add(line)
+            If StartGettingSettings = True And line.Trim.Length > 0 Then
+                SpecialSettings.Add(line)
+            End If
         Next
 
         Dim _regionID = 0
@@ -448,7 +453,7 @@ Public Class NullDCLauncher
 
             ' [drkpvr]
             If line.StartsWith("Emulation.AlphaSortMode=") Then lines(linenumber) = "Emulation.AlphaSortMode=1"
-            If line.StartsWith("Emulation.PaletteMode=") Then lines(linenumber) = "Emulation.PaletteMode=1"
+            If line.StartsWith("Emulation.PaletteMode=") Then lines(linenumber) = "Emulation.PaletteMode=2"
             If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=1"
             If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
             If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"

@@ -221,6 +221,10 @@ Public Class frmDLC
                 btnRomsFolder.Text = "Open Dreamcast Roms Folder"
         End Select
     End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Process.Start("https://cdromance.com/dc-iso/?sorted=downloads")
+    End Sub
 End Class
 
 Class DownloadableGame
