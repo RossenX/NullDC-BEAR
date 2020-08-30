@@ -406,12 +406,12 @@ Public Class frmMain
         End If
 
         If Not File.Exists(NullDCPath & "\dc\GameSpecificSettings.optibear") Then
-            File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations.ToString)
+            File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations)
         Else
             Dim _file() As String = File.ReadAllLines(NullDCPath & "\dc\GameSpecificSettings.optibear")
             If Not _file(0) = Ver Then
                 File.SetAttributes(NullDCPath & "\dc\GameSpecificSettings.optibear", FileAttributes.Normal)
-                File.WriteAllLines(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations.Split(vbNewLine))
+                File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations)
             End If
         End If
 
@@ -463,9 +463,9 @@ Public Class frmMain
             Dim hasher As MD5 = MD5.Create()
             Files = Directory.GetFiles(NullDCPath & "\dc\roms", "*.cdi", SearchOption.AllDirectories)
             For Each _file In Files
-                While IsFileInUse(_file)
-                    Thread.Sleep(1)
-                End While
+                If IsFileInUse(_file) Then
+                    Continue For
+                End If
 
                 Dim GameName_Split As String() = _file.Split("\")
 
@@ -541,7 +541,7 @@ Public Class frmMain
         niBEAR.Visible = False
         niBEAR.Icon = Nothing
 
-        If IsNullDCRunning() Then NullDCLauncher.NullDCproc.CloseMainWindow()
+        If IsNullDCRunning() Then NullDCLauncher.NullDCproc.Kill()
         If Not Challenger Is Nothing Then NetworkHandler.SendMessage(">, Q", Challenger.ip)
 
 
@@ -728,9 +728,9 @@ Public Class frmMain
                     Console.Write("New Challanger")
                     If IsNullDCRunning() Then
                         NullDCLauncher.DoNotSendNextExitEvent = True
-                        NullDCLauncher.NullDCproc.CloseMainWindow()
+                        NullDCLauncher.NullDCproc.Kill()
                         While IsNullDCRunning() ' Just to make sure it's dead before we accept
-                            NullDCLauncher.NullDCproc.CloseMainWindow()
+                            NullDCLauncher.NullDCproc.Kill()
                             Thread.Sleep(100)
                         End While
                     End If
@@ -751,9 +751,9 @@ Public Class frmMain
                 Case "New Host" ' You started a new host Just close the nullDC if it's open, disable raising it's event
                     If IsNullDCRunning() Then
                         NullDCLauncher.NullDCproc.EnableRaisingEvents = False ' Disable Event Raising so this doesn't automaticlly clear challenger data
-                        NullDCLauncher.NullDCproc.CloseMainWindow()
+                        NullDCLauncher.NullDCproc.Kill()
                         While IsNullDCRunning() ' Just to make sure it's dead before we accept
-                            NullDCLauncher.NullDCproc.CloseMainWindow()
+                            NullDCLauncher.NullDCproc.Kill()
                             Thread.Sleep(100)
                         End While
                     End If
@@ -795,10 +795,11 @@ Public Class frmMain
             WaitingForm.Visible = False
             HostingForm.Visible = False
 
-            'If IsNullDCRunning() Then NullDCLauncher.NullDCproc.CloseMainWindow() ' Close the NullDC Window
+            'If IsNullDCRunning() Then NullDCLauncher.NullDCproc.kill() ' Close the NullDC Window
 
             While IsNullDCRunning()
-                NullDCLauncher.NullDCproc.CloseMainWindow()
+                'NullDCLauncher.NullDCproc.kill()
+                NullDCLauncher.NullDCproc.Kill()
                 Thread.Sleep(100)
             End While
 
@@ -822,7 +823,7 @@ Public Class frmMain
                 Case "BI"
                     Message = "Player is already in a game"
                 Case "NG"
-                    Message = "Player doesn't have this game or rom (lst file) do not match"
+                    Message = "Player doesn't have this game or rom names(lst/cdi) do not match"
                 Case "BO"
                     Message = "Challanger got bored of waiting"
                 Case "HO"

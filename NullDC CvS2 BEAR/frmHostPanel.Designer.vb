@@ -44,9 +44,9 @@ Partial Class frmHostPanel
         Me.btnStartHosting.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnStartHosting.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnStartHosting.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.btnStartHosting.Location = New System.Drawing.Point(187, 353)
+        Me.btnStartHosting.Location = New System.Drawing.Point(172, 314)
         Me.btnStartHosting.Name = "btnStartHosting"
-        Me.btnStartHosting.Size = New System.Drawing.Size(75, 31)
+        Me.btnStartHosting.Size = New System.Drawing.Size(107, 48)
         Me.btnStartHosting.TabIndex = 3
         Me.btnStartHosting.Text = "Host"
         Me.btnStartHosting.UseVisualStyleBackColor = False
@@ -58,7 +58,7 @@ Partial Class frmHostPanel
         Me.cbDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.cbDelay.FormattingEnabled = True
         Me.cbDelay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
-        Me.cbDelay.Location = New System.Drawing.Point(187, 283)
+        Me.cbDelay.Location = New System.Drawing.Point(190, 252)
         Me.cbDelay.Name = "cbDelay"
         Me.cbDelay.Size = New System.Drawing.Size(75, 21)
         Me.cbDelay.TabIndex = 4
@@ -69,7 +69,7 @@ Partial Class frmHostPanel
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(184, 264)
+        Me.Label1.Location = New System.Drawing.Point(139, 255)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(49, 16)
         Me.Label1.TabIndex = 5
@@ -143,7 +143,7 @@ Partial Class frmHostPanel
         Me.btnSuggestDelay.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSuggestDelay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSuggestDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.btnSuggestDelay.Location = New System.Drawing.Point(187, 310)
+        Me.btnSuggestDelay.Location = New System.Drawing.Point(190, 279)
         Me.btnSuggestDelay.Name = "btnSuggestDelay"
         Me.btnSuggestDelay.Size = New System.Drawing.Size(75, 22)
         Me.btnSuggestDelay.TabIndex = 9
@@ -167,7 +167,7 @@ Partial Class frmHostPanel
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Button1.Location = New System.Drawing.Point(268, 296)
+        Me.Button1.Location = New System.Drawing.Point(271, 264)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(25, 25)
         Me.Button1.TabIndex = 11
@@ -182,7 +182,7 @@ Partial Class frmHostPanel
         Me.cbRegion.Items.AddRange(New Object() {"JPN", "USA", "EUR"})
         Me.cbRegion.Location = New System.Drawing.Point(346, 225)
         Me.cbRegion.Name = "cbRegion"
-        Me.cbRegion.Size = New System.Drawing.Size(52, 21)
+        Me.cbRegion.Size = New System.Drawing.Size(49, 21)
         Me.cbRegion.TabIndex = 25
         '
         'frmHostPanel

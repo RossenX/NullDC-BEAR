@@ -120,13 +120,12 @@
   <data name="RichTextBox1.Text" xml:space="preserve">
     <value>Delay is the amount of delay the client will have between the server.
 The suggestion is a 'safe' estimate based on 60fps being sent per second.
-If you have a solid connection to the person with less than 50ms you can usually set it to 1
 
 Explained:
 Delay 1 = Lan Tournament Quality
 Delay 2 = Online Tournament Quality
 Delay 3-7 = Great for Online Play, still better than SF5
-Delay 7-12 = Bassicly playing SF5 online, Pretty ok for online play but high chance of desync. Check below for how to identify desync as a host
-Delay 12+ = You'll slowly start to notice the delay more and more as this goes higher there's also a higher chance of desync</value>
+Delay 7-12 = Bassicly playing SF5 online, Pretty ok for casual games.
+Delay 12+ = Still not bad for playing the slower 3d fighting games that don't require frame perfect inputs or for playing games that arn't fighting games.</value>
   </data>
 </root>
