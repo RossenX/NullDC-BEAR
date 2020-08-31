@@ -7,7 +7,7 @@ Imports System.Threading
 Imports OpenTK
 
 Public Class frmMain
-    Dim IsBeta As Boolean = True
+    Dim IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
