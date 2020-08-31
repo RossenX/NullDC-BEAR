@@ -20,22 +20,16 @@ Public Class frmMain
     Public GamesList As New Dictionary(Of String, Array)
     Public ConfigFile As Configs
     Public FirstRun As Boolean = True
-
     Public ChallengeForm As frmChallenge
     Public ChallengeSentForm As frmChallengeSent
     Public HostingForm As frmHostPanel
     Public GameSelectForm As frmChallengeGameSelect
     Public WaitingForm As frmWaitingForHost
     Public NotificationForm As frmNotification
-
     Public KeyMappingForm As frmKeyMapping
-
     Public Challenger As NullDCPlayer
-
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
-
     Private FormLoaded As Boolean = False
-
     Public FinishedLoading As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -109,53 +103,43 @@ Public Class frmMain
 
     Private Sub CreateRomFolderWatcher()
 
-        RomFolderWatcher = New FileSystemWatcher()
-        RomFolderWatcher.IncludeSubdirectories = True
-        RomFolderWatcher.Path = NullDCPath & "\roms"
+        Dim RomFolders As String() = {
+            NullDCPath & "\roms",
+            NullDCPath & "\dc\roms"
+        }
 
-        RomFolderWatcher.NotifyFilter =
+        Dim Watchers(RomFolders.Count) As FileSystemWatcher
+        Dim RomFoldersCount = 0
+        For Each _romfolder In RomFolders
+            Watchers(RomFoldersCount) = New FileSystemWatcher()
+            Watchers(RomFoldersCount).IncludeSubdirectories = True
+            Watchers(RomFoldersCount).Path = RomFolders(RomFoldersCount)
+
+            Watchers(RomFoldersCount).NotifyFilter =
             NotifyFilters.CreationTime Or
             NotifyFilters.DirectoryName Or
             NotifyFilters.FileName Or
             NotifyFilters.LastWrite Or
             NotifyFilters.Size
 
-        AddHandler RomFolderWatcher.Changed, AddressOf RomFolderChange
-        AddHandler RomFolderWatcher.Created, AddressOf RomFolderChange
-        AddHandler RomFolderWatcher.Renamed, AddressOf RomFolderChange
-        AddHandler RomFolderWatcher.Deleted, AddressOf RomFolderChange
+            AddHandler Watchers(RomFoldersCount).Changed, AddressOf RomFolderChange
+            AddHandler Watchers(RomFoldersCount).Created, AddressOf RomFolderChange
+            AddHandler Watchers(RomFoldersCount).Renamed, AddressOf RomFolderChange
+            AddHandler Watchers(RomFoldersCount).Deleted, AddressOf RomFolderChange
 
-        RomFolderWatcher.EnableRaisingEvents = True
-
-        RomFolderWatcher_Dreamcast = New FileSystemWatcher()
-        RomFolderWatcher_Dreamcast.IncludeSubdirectories = True
-        RomFolderWatcher_Dreamcast.Path = NullDCPath & "\dc\roms"
-
-        RomFolderWatcher_Dreamcast.NotifyFilter =
-            NotifyFilters.CreationTime Or
-            NotifyFilters.DirectoryName Or
-            NotifyFilters.FileName Or
-            NotifyFilters.LastWrite Or
-            NotifyFilters.Size
-
-        AddHandler RomFolderWatcher_Dreamcast.Changed, AddressOf RomFolderChange
-        AddHandler RomFolderWatcher_Dreamcast.Created, AddressOf RomFolderChange
-        AddHandler RomFolderWatcher_Dreamcast.Renamed, AddressOf RomFolderChange
-        AddHandler RomFolderWatcher_Dreamcast.Deleted, AddressOf RomFolderChange
-
-        RomFolderWatcher_Dreamcast.EnableRaisingEvents = True
+            Watchers(RomFoldersCount).EnableRaisingEvents = True
+            RomFoldersCount += 1
+        Next
 
     End Sub
 
-    Private Sub RomFolderChange(ByVal source As Object, ByVal e As FileSystemEventArgs)
+    Private Sub RomFolderChange(ByVal source As FileSystemWatcher, ByVal e As FileSystemEventArgs)
         If Not e.Name.Contains("eeprom") Then ' As long as it has nothing to do with eeproms, then reload the games.
             Console.WriteLine("Roms folder changed, check if we have new games")
-            RomFolderWatcher.EnableRaisingEvents = False
-            RomFolderWatcher_Dreamcast.EnableRaisingEvents = False
+            source.EnableRaisingEvents = False
             Thread.Sleep(500)
             Me.Invoke(Sub() GetGamesList())
-            RomFolderWatcher.EnableRaisingEvents = True
-            RomFolderWatcher_Dreamcast.EnableRaisingEvents = True
+            source.EnableRaisingEvents = True
         End If
     End Sub
 
