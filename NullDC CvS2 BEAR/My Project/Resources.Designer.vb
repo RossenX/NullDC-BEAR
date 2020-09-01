@@ -192,21 +192,35 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.1
-        '''CVS2::E35A6720CB1DAFF46A9BDFD76C31D598
+        '''  Looks up a localized string similar to 1.25a
+        '''CVS2::4B5360E5C101756B04FB20F11D50C8C8
         '''Dynarec.UnderclockFpu=1
-        '''MVC2::1728B4188302B24E25F4E05C13A6451F
+        '''Emulation.ModVolMode=2
+        '''Emulation.PaletteMode=2
+        '''MVC2::9CE0220DCEF005912F3855D8BE98A35A
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
         '''Emulation.AlphaSortMode=1
-        '''SFA3::D87F4E83C47870135A81DEC63826238B
+        '''SFA3::502D2FA89666019D8E8222F49F40431C
         '''Dreamcast.Cable=0
-        '''Vampire Chronicle for Matching Service::AAD52ABB2A03E225C5745015549C6900
-        '''Dreamcast.Cable=0.
+        '''Vampire Chronicle for Matching Service::A43F42016C786654ACF02A4AFBFFC260
+        '''Dreamcast.Cable=0
+        '''Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1
+        '''Emulation.AlphaSortMode=1.
         '''</summary>
         Friend ReadOnly Property DreamcastGameOptimizations() As String
             Get
                 Return ResourceManager.GetString("DreamcastGameOptimizations", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property drkPvr_Win32_dc() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("drkPvr_Win32_dc", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
         

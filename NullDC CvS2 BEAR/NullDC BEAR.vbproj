@@ -339,6 +339,7 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\drkPvr_Win32_dc.dll" />
     <None Include="Resources\DcClean.zip" />
     <None Include="Resources\Deps.zip" />
     <None Include="Resources\BEARJamma_Win32_dc.dll" />

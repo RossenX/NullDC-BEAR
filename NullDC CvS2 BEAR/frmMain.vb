@@ -12,7 +12,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.25"
+    Public Ver As String = "1.25a"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -405,6 +405,7 @@ Public Class frmMain
             My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\dc\Plugins\BEARJamma_Win32.dll", My.Resources.BEARJamma_Win32_dc, False)
             My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_GUI_Win32.dll", My.Resources.nullDC_GUI_Win32, False)
             My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe", My.Resources.nullDC_Win32_Release_NoTrace, False)
+            My.Computer.FileSystem.WriteAllBytes(NullDCPath & "\dc\plugins\drkPvr_Win32.dll", My.Resources.drkPvr_Win32_dc, False)
         Catch ex As Exception
             MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
             End

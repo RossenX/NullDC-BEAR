@@ -1,4 +1,4 @@
-1.25
+1.25a
 CVS2::4B5360E5C101756B04FB20F11D50C8C8
 Dynarec.UnderclockFpu=1
 Emulation.ModVolMode=2
@@ -11,3 +11,5 @@ SFA3::502D2FA89666019D8E8222F49F40431C
 Dreamcast.Cable=0
 Vampire Chronicle for Matching Service::A43F42016C786654ACF02A4AFBFFC260
 Dreamcast.Cable=0
+Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1
+Emulation.AlphaSortMode=1

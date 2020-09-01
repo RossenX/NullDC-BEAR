@@ -510,7 +510,8 @@ Public Class InputHandling
         Console.WriteLine("Started Input Rolling")
         ' While loop is < 1ms
         While True
-            Thread.Sleep(2)
+            Thread.Sleep(7)
+
             If MainFormRef.ConfigFile.Status = "Spectator" Then
                 Try
                     If MainFormRef.IsNullDCRunning Then
