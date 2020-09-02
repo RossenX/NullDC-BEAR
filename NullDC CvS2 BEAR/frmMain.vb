@@ -12,7 +12,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.25a"
+    Public Ver As String = "1.25b"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -35,6 +35,7 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "DcClean.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
+        'SDL2.SDL.SDL_Init(SDL2.SDL.SDL_INIT_JOYSTICK)
 
         Me.Icon = My.Resources.NewNullDCBearIcon
         niBEAR.Icon = My.Resources.NewNullDCBearIcon
@@ -96,6 +97,7 @@ Public Class frmMain
         RefreshPlayerList(False)
 
         FinishedLoading = True
+
     End Sub
 
     Dim RomFolderWatcher As FileSystemWatcher
@@ -197,14 +199,16 @@ Public Class frmMain
 
     Public Function IsFileInUse(sFile As String) As Boolean
         Try
-            Using f As New IO.FileStream(sFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None)
+            Using f As New FileStream(sFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None)
                 f.Close()
             End Using
 
         Catch Ex As Exception
             Return True
         End Try
+
         Return False
+
     End Function
 
     Private Sub CheckForUpdate()

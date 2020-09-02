@@ -136,6 +136,7 @@ Public Class NullDCLauncher
         DoNotSendNextExitEvent = False
         P1Name = ""
         P2Name = ""
+
         MainformRef.InputHandler.GetKeyboardConfigs(Platform)
         MainformRef.InputHandler.NeedConfigReload = True
     End Sub

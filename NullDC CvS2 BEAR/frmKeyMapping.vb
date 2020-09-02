@@ -314,6 +314,7 @@ Public Class frmKeyMapping
                 End While
             End If
         End If
+
         RebindAllThread = New Thread(AddressOf StartQuickSetup)
         RebindAllThread.IsBackground = True
         RebindAllThread.Start()
@@ -321,7 +322,7 @@ Public Class frmKeyMapping
     End Sub
 
     Private Sub StartQuickSetup()
-        UnbindAll()
+        'UnbindAll()
         CalibrationForm.ShowDialog()
         Dim ButtonsToRebind() As String = {"up", "down", "left", "right", "LP", "MP", "HP", "LK", "MK", "HK", "coin", "start", "dpadup", "dpaddown", "dpadleft", "dpadright"}
         For Each Key As String In ButtonsToRebind

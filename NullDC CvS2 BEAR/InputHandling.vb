@@ -240,9 +240,7 @@ Public Class InputHandling
         PoVRest = cfg.<Configs>.<PoV>.Value
 
         ' Check Need to Resave the file to a newer version type
-        If Not cfg.<Configs>.<BEARver>.Value = MainFormRef.Ver Then
-            UpdateKeyMapConfigs()
-        End If
+        UpdateKeyMapConfigs()
 
         If Not MainFormRef.KeyMappingForm Is Nothing Then
             MainFormRef.KeyMappingForm.LoadingSettings = True
@@ -263,6 +261,7 @@ Public Class InputHandling
             For i = 0 To ListOfAllBinds.Count - 1
                 If KeyBind.Name = ListOfAllBinds(i) Then
                     ListOfAllBinds(i) = Nothing
+                    Exit For
                 End If
             Next
         Next
