@@ -13,3 +13,5 @@ Vampire Chronicle for Matching Service::A43F42016C786654ACF02A4AFBFFC260
 Dreamcast.Cable=0
 Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1
 Emulation.AlphaSortMode=1
+Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228677B27A1E9B6
+Emulation.AlphaSortMode=0
