@@ -7,7 +7,7 @@ Imports System.Threading
 Imports OpenTK
 
 Public Class frmMain
-    Dim IsBeta As Boolean = True
+    Dim IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -146,7 +146,7 @@ Public Class frmMain
     Dim CFGWatcher As FileSystemWatcher
     Private Sub CreateCFGWatcher()
         CFGWatcher = New FileSystemWatcher()
-        CFGWatcher.IncludeSubdirectories = False
+        CFGWatcher.IncludeSubdirectories = True
 
         CFGWatcher.Path = NullDCPath
         CFGWatcher.NotifyFilter = NotifyFilters.LastWrite
