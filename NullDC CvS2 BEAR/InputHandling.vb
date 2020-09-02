@@ -177,6 +177,19 @@ Public Class InputHandling
 
         End Select
 
+        Dim keycount = 0
+        Dim keycount2 = 0
+        For Each key As KeyValuePair(Of String, Array) In KeyBoardConfigs
+            For Each key2 As KeyValuePair(Of String, Array) In KeyBoardConfigs
+                If key.Value(0) = key2.Value(0) And Not key.Key = key2.Key And keycount2 > keycount Then
+                    MsgBox("Double Input Found: " & vbNewLine & key.Key & " and " & key2.Key & vbNewLine & "Please rebind them to something else in NullDC")
+                End If
+                keycount2 += 1
+            Next
+            keycount2 = 0
+            keycount += 1
+        Next
+
         KeyBoardConfigs.Add("LPLK", {KeyBoardConfigs("LP")(0), KeyBoardConfigs("LK")(0)})
         KeyBoardConfigs.Add("MPMK", {KeyBoardConfigs("MP")(0), KeyBoardConfigs("MK")(0)})
         KeyBoardConfigs.Add("HPHK", {KeyBoardConfigs("HP")(0), KeyBoardConfigs("HK")(0)})
@@ -189,10 +202,13 @@ Public Class InputHandling
         KeyBoardConfigs.Add("AP", {KeyBoardConfigs("LP")(0), KeyBoardConfigs("MP")(0), KeyBoardConfigs("HP")(0)})
         KeyBoardConfigs.Add("AK", {KeyBoardConfigs("LK")(0), KeyBoardConfigs("MK")(0), KeyBoardConfigs("HK")(0)})
 
+
+
     End Sub
 
     Public Sub ReloadConfigs()
         Console.WriteLine("InputHandling:ReloadConfigs")
+
         ProfileName = MainFormRef.ConfigFile.KeyMapProfile
         If Not File.Exists(GetXMLFile(True)) Then CreateKeyMapConfigs()
         Dim cfg As XDocument = XDocument.Load(GetXMLFile(True))
@@ -534,8 +550,6 @@ Public Class InputHandling
                 Thread.Sleep(1000)
             End While
 
-
-
             Dim xinputstate As XInputDotNetPure.GamePadState = XInputDotNetPure.GamePad.GetState(ControllerID)
             Dim RawrInputState As JoystickState = Joystick.GetState(ControllerID)
 
@@ -547,8 +561,6 @@ Public Class InputHandling
                 DoWinMMRoll()
             End If
 
-
-
             For i = 0 To RxButtons.Count - 1
                 If Not RxButtons(i) = LF_RxButtons(i) Then
                     If RxButtons(i) Then
@@ -557,9 +569,7 @@ Public Class InputHandling
                         RaiseEvent _KeyReleased(i)
                     End If
                 End If
-
             Next
-
 
             For Each key As String In RxAxis.Keys
                 If Not RxAxis(key)(4) = RxAxis(key)(0) Then
@@ -578,7 +588,6 @@ Public Class InputHandling
                 End If
                 RxAxis(key)(4) = RxAxis(key)(0)
             Next
-
 
             If NeedConfigReload Then
                 ReloadConfigs()

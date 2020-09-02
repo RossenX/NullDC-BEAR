@@ -7,12 +7,12 @@ Imports System.Threading
 Imports OpenTK
 
 Public Class frmMain
-    Dim IsBeta As Boolean = False
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.25"
+    Public Ver As String = "1.25a"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -198,7 +198,9 @@ Public Class frmMain
     Public Function IsFileInUse(sFile As String) As Boolean
         Try
             Using f As New IO.FileStream(sFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None)
+                f.Close()
             End Using
+
         Catch Ex As Exception
             Return True
         End Try

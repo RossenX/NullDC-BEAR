@@ -66,4 +66,29 @@ Module Rx
         End If
     End Sub
 
+    Public Function ReadVMU(ByVal _player As Int16) As String
+        Dim VMUFile As String = MainformRef.NullDCPath & "\dc\vmu_data_port01.bin"
+        Dim FileBytes As String
+
+        If _player = 2 Then VMUFile = MainformRef.NullDCPath & "\dc\vmu_data_port02.bin"
+
+        If File.Exists(VMUFile) Then
+            FileBytes = Convert.ToBase64String(File.ReadAllBytes(VMUFile))
+
+            ' FileBytes = BitConverter.ToString(File.ReadAllBytes(VMUFile)).Replace("-", String.Empty)
+            Console.WriteLine("Read VMU:" & FileBytes.ToString)
+        Else
+            Return ""
+        End If
+
+        ' Convert.ToBase64String(VMUFile)
+        ' Convert.FromBase64String(FileBytes)
+
+        Return FileBytes
+    End Function
+
+    Public Sub WriteVMU(ByVal _vmustring As String, ByVal _player As Int16)
+
+    End Sub
+
 End Module
