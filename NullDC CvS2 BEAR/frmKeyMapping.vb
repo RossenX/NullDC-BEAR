@@ -166,16 +166,18 @@ Public Class frmKeyMapping
         If Rebinding Then Exit Sub
         Dim kc As New KeysConverter
 
-        Dim ButtonToChange As Button = Nothing
+        Dim ButtonToChange As New ArrayList
         For Each key As KeyBind In MainformRef.InputHandler.KeybindConfigs
             If key.Rebind.Length > 1 Then Continue For
             If key.Rebind(0) = e.KeyCode Then
-                ButtonToChange = Me.Controls.Find("btn" & key.Name, True)(0)
+                ButtonToChange.add(Me.Controls.Find("btn" & key.Name, True)(0))
             End If
         Next
 
-        If Not ButtonToChange Is Nothing Then
-            ButtonToChange.BackColor = Color.Green
+        If Not ButtonToChange.Count = 0 Then
+            For Each button In ButtonToChange
+                button.BackColor = Color.Green
+            Next
         End If
 
     End Sub
@@ -183,16 +185,18 @@ Public Class frmKeyMapping
     Private Sub frmKeyMapping_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp
         Dim kc As New KeysConverter
 
-        Dim ButtonToChange As Button = Nothing
+        Dim ButtonToChange As New ArrayList
         For Each key As KeyBind In MainformRef.InputHandler.KeybindConfigs
             If key.Rebind.Length > 1 Then Continue For
             If key.Rebind(0) = e.KeyCode Then
-                ButtonToChange = Me.Controls.Find("btn" & key.Name, True)(0)
+                ButtonToChange.Add(Me.Controls.Find("btn" & key.Name, True)(0))
             End If
         Next
 
-        If Not ButtonToChange Is Nothing Then
-            ButtonToChange.BackColor = Color.White
+        If Not ButtonToChange.Count = 0 Then
+            For Each button In ButtonToChange
+                button.BackColor = Color.White
+            Next
         End If
 
     End Sub

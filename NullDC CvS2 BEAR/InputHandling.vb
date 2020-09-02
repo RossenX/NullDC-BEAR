@@ -81,7 +81,7 @@ Public Class InputHandling
         myjoyEX.dwSize = 64
         myjoyEX.dwFlags = &HFF
 
-        GetKeyboardConfigs("naomi")
+        GetKeyboardConfigs("na")
         ReloadConfigs()
 
         TurnedOn = MainFormRef.ConfigFile.UseRemap
@@ -151,7 +151,7 @@ Public Class InputHandling
                     If line.StartsWith("BPortA_I_COIN_KEY") Then KeyBoardConfigs.Add("coin", {CInt(line.Split("=")(1))})
                 Next
 
-            Case "naomi"
+            Case "na"
 
                 For Each line As String In KeyboardLines_Naomi
                     If line.StartsWith("BPortA_I_START_KEY=") Then KeyBoardConfigs.Add("start", {CInt(line.Split("=")(1))})
@@ -216,7 +216,9 @@ Public Class InputHandling
         'load configs to an easier to access variable
         KeybindConfigs.Clear()
         For Each node As XElement In cfg.<Configs>.<KeyMap>.Nodes
-            KeybindConfigs.Add(New KeyBind(node.Name.ToString, node.<button>.Value, KeyBoardConfigs(node.Name.ToString)))
+            If Not node.<button>.Value = "" Then
+                KeybindConfigs.Add(New KeyBind(node.Name.ToString, node.<button>.Value, KeyBoardConfigs(node.Name.ToString)))
+            End If
         Next
 
         ' Axis Cache

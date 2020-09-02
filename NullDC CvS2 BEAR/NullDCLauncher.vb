@@ -93,7 +93,7 @@ Public Class NullDCLauncher
 
     Public Sub LaunchNaomi(ByVal _romname As String, ByRef _region As String)
         Platform = "na"
-        MainformRef.InputHandler.GetKeyboardConfigs("naomi")
+        MainformRef.InputHandler.GetKeyboardConfigs("na")
         MainformRef.InputHandler.NeedConfigReload = True
         Region = _region
 
@@ -112,7 +112,9 @@ Public Class NullDCLauncher
             Thread.Sleep(10)
         End While
 
-        RestoreNvmem()
+        If Platform = "na" Then
+            RestoreNvmem()
+        End If
 
         If Not DoNotSendNextExitEvent Then
             If Not MainformRef.Challenger Is Nothing And (MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Client") Then
@@ -134,6 +136,8 @@ Public Class NullDCLauncher
         DoNotSendNextExitEvent = False
         P1Name = ""
         P2Name = ""
+        MainformRef.InputHandler.GetKeyboardConfigs(Platform)
+        MainformRef.InputHandler.NeedConfigReload = True
     End Sub
 
     Private Sub StartDreamcastEmulator(ByVal _romname As String)
