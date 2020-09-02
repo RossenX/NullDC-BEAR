@@ -244,6 +244,9 @@ Public Class NullDCLauncher
         ' Put in the VMU to keep it in sync for now
         My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin", My.Resources.vmu_data_port01, False)
 
+        Dim EnableOnline = "0"
+        If Not MainformRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
+
         Dim IsHosting = "0"
         If MainformRef.ConfigFile.Status = "Hosting" Then IsHosting = "1"
 
@@ -305,6 +308,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Current_ARM=") Then lines(linenumber) = "Current_ARM=vbaARM_Win32.dll"
             If line.StartsWith("Current_ExtDevice=") Then lines(linenumber) = "Current_ExtDevice=nullExtDev_Win32.dll"
 
+            ' [Plugins]
             If line.StartsWith("Current_maple") Then
                 lines(linenumber) = line.Split("=")(0) & "=NULL"
                 If line.StartsWith("Current_maple0_5") Then lines(linenumber) = "Current_maple0_5=BEARJamma_Win32.dll:0"
@@ -328,8 +332,8 @@ Public Class NullDCLauncher
             ' [ImageReader]
             If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=1"
             If line.StartsWith("LoadDefaultImage=") Then lines(linenumber) = "LoadDefaultImage=1"
-            If line.StartsWith("DefaultImage=") Then lines(linenumber) = "DefaultImage=roms\" & MainformRef.ConfigFile.Game
-            If line.StartsWith("LastImage=") Then lines(linenumber) = "LastImage=roms\" & MainformRef.ConfigFile.Game
+            If line.StartsWith("DefaultImage=") Then lines(linenumber) = "DefaultImage=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1).ToString.Replace("\roms\", "roms\")
+            If line.StartsWith("LastImage=") Then lines(linenumber) = "LastImage=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1).ToString.Replace("\roms\", "roms\")
 
             ' [nullAica]
             If line.StartsWith("BufferSize=") Then lines(linenumber) = "BufferSize=2048"
@@ -351,24 +355,28 @@ Public Class NullDCLauncher
             If line.StartsWith("ShowVMU=") Then lines(linenumber) = "ShowVMU=0"
 
             ' Change Netplay Shit
-            If line.StartsWith("[BEARPlay]") Then
-                Dim EnableOnline = "0"
-                If Not MainformRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
-                lines(linenumber + 1) = "Online=" & EnableOnline
-                lines(linenumber + 2) = "Host=" & MainformRef.ConfigFile.Host
-                lines(linenumber + 3) = "Hosting=" & IsHosting
-                lines(linenumber + 4) = "Port=" & MainformRef.ConfigFile.Port
-                lines(linenumber + 5) = "Delay=" & MainformRef.ConfigFile.Delay
-                lines(linenumber + 6) = "Record=0" ' & MainformRef.ConfigFile.RecordReplay
-                lines(linenumber + 7) = "Playback=0" ' & IsReplay
-                lines(linenumber + 8) = "AllowSpectators=0" ' & MainformRef.ConfigFile.AllowSpectators
-                lines(linenumber + 9) = "Spectator=0" ' & IsSpectator
-                lines(linenumber + 10) = "P1Name=" & P1Name
-                lines(linenumber + 11) = "P2Name=" & P2Name
-                lines(linenumber + 12) = "File=0" '& MainformRef.ConfigFile.ReplayFile
-                lines(linenumber + 13) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
-                lines(linenumber + 14) = "GameRom=" & MainformRef.ConfigFile.Game
-                lines(linenumber + 15) = "Region=" & Region
+            If line.StartsWith("Online=") Then lines(linenumber) = "Online=" & EnableOnline
+            If line.StartsWith("Host=") Then lines(linenumber) = "Host=" & MainformRef.ConfigFile.Host
+            If line.StartsWith("Hosting=") Then lines(linenumber) = "Hosting=" & IsHosting
+            If line.StartsWith("Port=") Then lines(linenumber) = "Port=" & MainformRef.ConfigFile.Port
+            If line.StartsWith("Delay=") Then lines(linenumber) = "Delay=" & MainformRef.ConfigFile.Delay
+            If line.StartsWith("Record=") Then lines(linenumber) = "Record=0" ' & MainformRef.ConfigFile.RecordReplay
+            If line.StartsWith("Playback=") Then lines(linenumber) = "Playback=0" ' & IsReplay
+            If line.StartsWith("AllowSpectators=") Then lines(linenumber) = "AllowSpectators=0" ' & MainformRef.ConfigFile.AllowSpectators
+            If line.StartsWith("Spectator=") Then lines(linenumber) = "Spectator=0" ' & IsSpectator
+            If line.StartsWith("P1Name=") Then lines(linenumber) = "P1Name=" & P1Name
+            If line.StartsWith("P2Name=") Then lines(linenumber) = "P2Name=" & P2Name
+            If line.StartsWith("File=") Then lines(linenumber) = "File=0" ' & MainformRef.ConfigFile.ReplayFile
+            If line.StartsWith("GameName=") Then lines(linenumber) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
+            If line.StartsWith("GameRom=") Then lines(linenumber) = "GameRom=" & MainformRef.ConfigFile.Game
+            If line.StartsWith("Region=") Then lines(linenumber) = "Region=" & Region
+
+            If line.StartsWith("Emulator.NoConsole=") Then
+                If MainformRef.ConfigFile.ShowConsole = 1 Then
+                    lines(linenumber) = "Emulator.NoConsole=0" '& con
+                Else
+                    lines(linenumber) = "Emulator.NoConsole=1" '& con
+                End If
             End If
 
             For Each SpecialSettingLine As String In SpecialSettings
@@ -377,6 +385,7 @@ Public Class NullDCLauncher
                     Console.WriteLine("Special Setting Applies: " & SpecialSettingLine)
                 End If
             Next
+
             linenumber += 1
         Next
 
@@ -394,6 +403,9 @@ Public Class NullDCLauncher
         Dim IsReplay As Int16 = 0
         Dim IsSpectator As Int16 = 0
         Dim IsHosting = "0"
+        Dim EnableOnline = "0"
+
+        If Not MainformRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
 
         If Not MainformRef.ConfigFile.ReplayFile = "" Then IsReplay = 1
         If MainformRef.ConfigFile.Status = "Spectator" Then IsSpectator = 1
@@ -432,8 +444,7 @@ Public Class NullDCLauncher
         Dim FPSLimiter = "0"
         If IsReplay = 1 Or IsSpectator = 1 Or MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then FPSLimiter = "1"
 
-        Dim thefile = MainformRef.NullDCPath & "\nullDC.cfg"
-        Dim lines() As String = File.ReadAllLines(thefile)
+        Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
         Dim linenumber = 0
         For Each line As String In lines
 
@@ -501,38 +512,29 @@ Public Class NullDCLauncher
             If line.StartsWith("LoadDefaultRom=") Then lines(linenumber) = "LoadDefaultRom=1"
             If line.StartsWith("DefaultRom=") Then lines(linenumber) = "DefaultRom=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1).ToString.Replace("\roms\", "roms\")
 
-
-            If line.StartsWith("Current_maple0_5=") Then
-                lines(linenumber) = "Current_maple0_5=BEARJamma_Win32.dll:0" ' Make sure that BEAR  is only plugin
-                lines(linenumber + 1) = "Current_maple1_5=NULL"
-                lines(linenumber + 2) = "Current_maple2_5=NULL"
-                lines(linenumber + 3) = "Current_maple3_5=NULL"
+            ' [Plugins]
+            If line.StartsWith("Current_maple") Then
+                lines(linenumber) = line.Split("=")(0) & "=NULL"
+                If line.StartsWith("Current_maple0_5") Then lines(linenumber) = "Current_maple0_5=BEARJamma_Win32.dll:0"
             End If
 
+            ' Netplay
+            If line.StartsWith("Online=") Then lines(linenumber) = "Online=" & EnableOnline
+            If line.StartsWith("Host=") Then lines(linenumber) = "Host=" & MainformRef.ConfigFile.Host
+            If line.StartsWith("Hosting=") Then lines(linenumber) = "Hosting=" & IsHosting
+            If line.StartsWith("Port=") Then lines(linenumber) = "Port=" & MainformRef.ConfigFile.Port
+            If line.StartsWith("Delay=") Then lines(linenumber) = "Delay=" & MainformRef.ConfigFile.Delay
+            If line.StartsWith("Record=") Then lines(linenumber) = "Record=" & MainformRef.ConfigFile.RecordReplay
+            If line.StartsWith("Playback=") Then lines(linenumber) = "Playback=" & IsReplay
+            If line.StartsWith("AllowSpectators=") Then lines(linenumber) = "AllowSpectators=" & MainformRef.ConfigFile.AllowSpectators
+            If line.StartsWith("Spectator=") Then lines(linenumber) = "Spectator=" & IsSpectator
+            If line.StartsWith("P1Name=") Then lines(linenumber) = "P1Name=" & P1Name
+            If line.StartsWith("P2Name=") Then lines(linenumber) = "P2Name=" & P2Name
+            If line.StartsWith("File=") Then lines(linenumber) = "File=" & MainformRef.ConfigFile.ReplayFile
+            If line.StartsWith("GameName=") Then lines(linenumber) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
+            If line.StartsWith("GameRom=") Then lines(linenumber) = "GameRom=" & MainformRef.ConfigFile.Game
+            If line.StartsWith("Region=") Then lines(linenumber) = "Region=" & Region
 
-            ' Change Netplay Shit
-            If line.StartsWith("[BEARPlay]") Then
-                Dim EnableOnline = "0"
-                If Not MainformRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
-
-                lines(linenumber + 1) = "Online=" & EnableOnline
-                lines(linenumber + 2) = "Host=" & MainformRef.ConfigFile.Host
-                lines(linenumber + 3) = "Hosting=" & IsHosting
-                lines(linenumber + 4) = "Port=" & MainformRef.ConfigFile.Port
-                lines(linenumber + 5) = "Delay=" & MainformRef.ConfigFile.Delay
-                lines(linenumber + 6) = "Record=" & MainformRef.ConfigFile.RecordReplay
-                lines(linenumber + 7) = "Playback=" & IsReplay
-                lines(linenumber + 8) = "AllowSpectators=" & MainformRef.ConfigFile.AllowSpectators
-                lines(linenumber + 9) = "Spectator=" & IsSpectator
-                lines(linenumber + 10) = "P1Name=" & P1Name
-                lines(linenumber + 11) = "P2Name=" & P2Name
-                lines(linenumber + 12) = "File=" & MainformRef.ConfigFile.ReplayFile
-                lines(linenumber + 13) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
-                lines(linenumber + 14) = "GameRom=" & MainformRef.ConfigFile.Game
-                lines(linenumber + 15) = "Region=" & Region
-            End If
-
-            ' Audio Sync on host only
             If line.StartsWith("Emulator.NoConsole=") Then
                 If MainformRef.ConfigFile.ShowConsole = 1 Then
                     lines(linenumber) = "Emulator.NoConsole=0" '& con
@@ -545,8 +547,8 @@ Public Class NullDCLauncher
         Next
 
         'Emulator.NoConsole
-        File.SetAttributes(thefile, FileAttributes.Normal)
-        File.WriteAllLines(thefile, lines)
+        File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", lines)
 
         ' Stuff to help Casters
         If File.Exists(MainformRef.NullDCPath & "\replays\Player1Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\replays\Player1Name.txt", FileAttributes.Normal)

@@ -682,7 +682,7 @@ Partial Class frmKeyMapping
         '
         Me.btnQuickSetup.BackColor = System.Drawing.Color.Cyan
         Me.btnQuickSetup.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnQuickSetup.Location = New System.Drawing.Point(15, 318)
+        Me.btnQuickSetup.Location = New System.Drawing.Point(15, 322)
         Me.btnQuickSetup.Name = "btnQuickSetup"
         Me.btnQuickSetup.Size = New System.Drawing.Size(225, 46)
         Me.btnQuickSetup.TabIndex = 18

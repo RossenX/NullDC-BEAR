@@ -174,6 +174,7 @@ Public Class frmKeyMapping
             End If
         Next
 
+        MsgBox(e.KeyValue)
         If Not ButtonToChange Is Nothing Then
             ButtonToChange.BackColor = Color.Green
         End If

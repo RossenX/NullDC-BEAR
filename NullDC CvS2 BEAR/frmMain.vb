@@ -12,7 +12,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.25a"
+    Public Ver As String = "1.25"
     Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -468,7 +468,7 @@ Public Class frmMain
 
                 Dim GameName As String = "DC- " & StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", ""), vbProperCase).Split("[")(0).Split("(")(0).Trim
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
-                Dim RomPath As String = _file.Replace(NullDCPath, "")
+                Dim RomPath As String = _file.Replace(NullDCPath & "\dc\", "")
 
                 If Not GamesList.ContainsKey(RomName) Then
                     GamesList.Add(RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
