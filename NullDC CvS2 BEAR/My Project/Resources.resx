@@ -118,71 +118,65 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Clippy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Clippy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NewChallanger" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NewChallanger.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Squares" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Squares.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MainMenuBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainMenuBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ConnectingNetplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConnectingNetplay.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SingleSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SingleSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="nullDC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nullDC.cfg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ThreeSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ThreeSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NewNullDCBearIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NewNullDCBearIcon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Deps" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Deps.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="NullDC_BEAR_UPDATER" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NullDC-BEAR-UPDATER.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Beta" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Beta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="be" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\be.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="bj" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bj.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="bu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bu.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BEARJamma_Win32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BEARJamma_Win32.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DcClean" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DcClean.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BEARPLAYlines" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BEARPLAYlines.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="Beta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Beta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Squares" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Squares.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NewChallanger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NewChallanger.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bj" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bj.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Updates" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Updates.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BEARJamma_Naomi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BEARJammaNaomi.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NullDCBEAR_Title" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NullDCBEAR-Title.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="nullDC_GUI_Win32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nullDC_GUI_Win32.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="MainMenuBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MainMenuBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Deps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Deps.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ThreeSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ThreeSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="be" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\be.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BEARJamma_ArcadeStick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dreamcast-ArcadeStick.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Clippy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Clippy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NewNullDCBearIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NewNullDCBearIcon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NullNaomiClean" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NullNaomiClean.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="nullDC_Win32_Release_NoTrace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nullDC_Win32_Release-NoTrace.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="DcClean" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DcClean.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DreamcastGameOptimizations" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DreamcastGameOptimizations.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -190,10 +184,16 @@
   <data name="vmu_data_port01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vmu_data_port01.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BEARJamma_Win32_dc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BEARJamma_Win32_dc.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BEARJamma_Dreamcast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BEARJamma_Dreamcast.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="drkPvr_Win32_dc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\drkPvr_Win32_dc.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Controls" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controls.bear;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="default_nullDC_dreamcast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\default_nullDC_dreamcast.cfg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="default_nullDC_naomi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\default_nullDC_naomi.cfg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

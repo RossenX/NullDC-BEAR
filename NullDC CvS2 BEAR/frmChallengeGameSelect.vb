@@ -38,6 +38,7 @@
         MainformRef.ConfigFile.ReplayFile = ""
         MainformRef.ConfigFile.Host = "127.0.0.1"
         MainformRef.ConfigFile.SaveFile()
+        MainformRef.ConfigFile.Delay = cbDelay.Text.Trim
 
         MainformRef.GameLauncher(cbGameList.SelectedValue, cbRegion.Text)
         'MainformRef.NullDCLauncher.LaunchDC(cbGameList.SelectedValue, cbRegion.Text)
@@ -75,9 +76,12 @@
             If Not _Challenger Is Nothing Then
                 cbRegion.Visible = False
                 Label4.Visible = False
+                SimDelayTB.Visible = False
             Else
                 cbRegion.Visible = True
                 Label4.Visible = True
+                SimDelayTB.Visible = True
+                cbDelay.Text = "0"
             End If
 
             If cbRegion.Text = "" Then
@@ -91,7 +95,7 @@
 
     End Sub
 
-    Private Sub btnDLC_Click(sender As Object, e As EventArgs) Handles btnDLC.Click
+    Private Sub btnDLC_Click(sender As Object, e As EventArgs)
         If Not Application.OpenForms().OfType(Of frmDLC).Any Then
             frmDLC.Show(Me)
             Me.Close()
@@ -101,4 +105,14 @@
         End If
     End Sub
 
+    Private Sub cbDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbDelay.KeyPress
+        If Not (Asc(e.KeyChar) = 8) Then
+            Dim allowedChars As String = "0123456789"
+            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Or (Asc(e.KeyChar) = 8) Then
+                e.KeyChar = ChrW(0)
+                e.Handled = True
+            End If
+        End If
+
+    End Sub
 End Class

@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NullDC-BEAR-UPDATER", "NullDC-BEAR-UPDATER\NullDC-BEAR-UPDATER.vbproj", "{D0ADE9C7-B28E-4248-B5E8-344A41DC0DDA}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NullDC BEAR Launcher", "NullDC BEAR Launcher\NullDC BEAR Launcher.vbproj", "{7FD5666F-1604-4053-A9D5-654FEEDADD96}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -25,10 +23,6 @@ Global
 		{D0ADE9C7-B28E-4248-B5E8-344A41DC0DDA}.Debug|x86.Build.0 = Debug|x86
 		{D0ADE9C7-B28E-4248-B5E8-344A41DC0DDA}.Release|x86.ActiveCfg = Release|x86
 		{D0ADE9C7-B28E-4248-B5E8-344A41DC0DDA}.Release|x86.Build.0 = Release|x86
-		{7FD5666F-1604-4053-A9D5-654FEEDADD96}.Debug|x86.ActiveCfg = Debug|x86
-		{7FD5666F-1604-4053-A9D5-654FEEDADD96}.Debug|x86.Build.0 = Debug|x86
-		{7FD5666F-1604-4053-A9D5-654FEEDADD96}.Release|x86.ActiveCfg = Release|x86
-		{7FD5666F-1604-4053-A9D5-654FEEDADD96}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

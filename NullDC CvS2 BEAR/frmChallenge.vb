@@ -2,6 +2,7 @@
 Imports NullDC_CvS2_BEAR.frmMain
 Imports NullDC_CvS2_BEAR.NetworkHandling
 Imports System.Windows
+Imports System.Net.NetworkInformation
 
 Public Class frmChallenge
 
@@ -14,13 +15,13 @@ Public Class frmChallenge
     End Sub
 
     Private Sub btnDeny_Click(sender As Object, e As EventArgs) Handles btnDeny.Click
-        MainFormRef.NetworkHandler.SendMessage(">,D", MainFormRef.Challenger.ip)
-        MainFormRef.EndSession("Denied")
+        MainformRef.NetworkHandler.SendMessage(">,D", MainformRef.Challenger.ip)
+        MainformRef.EndSession("Denied")
         MainformRef.Focus()
     End Sub
 
     Public Sub StartChallenge(ByRef _challenger As NullDCPlayer)
-        MainFormRef.Challenger = _challenger
+        MainformRef.Challenger = _challenger
         Me.Show()
 
     End Sub
@@ -31,18 +32,35 @@ Public Class frmChallenge
 
     End Sub
 
+    Private Sub GetPing()
+        Try
+            Dim ping As PingReply = New Ping().Send(MainformRef.Challenger.ip)
+            If ping.RoundtripTime = 0 Then
+                Label1.Invoke(Sub() Label1.Text = "Ping: N/A")
+                Exit Sub
+            End If
+            Dim DelayFrameRate = 32.66 '32.66
+            Dim delay = Math.Ceiling(ping.RoundtripTime / DelayFrameRate)
+            If delay = 0 Then delay = 1
+            Label1.Invoke(Sub() Label1.Text = "Ping: " & ping.RoundtripTime & vbNewLine & "Delay: " & (ping.RoundtripTime / DelayFrameRate).ToString("0.##"))
+        Catch ex As Exception
+            Label1.Invoke(Sub() Label1.Text = "Ping: N/A")
+        End Try
+
+    End Sub
+
     Private Sub Timeout_tick(sender As Object, e As EventArgs)
         If Not Visible Then Exit Sub
-        If Not MainFormRef.Challenger Is Nothing Then
-            MainFormRef.NetworkHandler.SendMessage(">,T", MainFormRef.Challenger.ip)
+        If Not MainformRef.Challenger Is Nothing Then
+            MainformRef.NetworkHandler.SendMessage(">,T", MainformRef.Challenger.ip)
         End If
 
         Timeout.Stop()
-        Dim INVOKATION As EndSession_delegate = AddressOf MainFormRef.EndSession
-        MainFormRef.Invoke(INVOKATION, {"TO", Nothing})
+        Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
+        MainformRef.Invoke(INVOKATION, {"TO", Nothing})
 
         frmMain.ConfigFile.Game = "None"
-        frmMain.ConfigFile.Status = MainformRef.Configfile.awaystatus
+        frmMain.ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
         frmMain.ConfigFile.SaveFile()
     End Sub
 
@@ -69,23 +87,26 @@ Public Class frmChallenge
 #End Region
 
     Private Sub btnAccept_Click(sender As Object, e As EventArgs) Handles btnAccept.Click
-        If MainFormRef.IsNullDCRunning Then MainFormRef.EndSession("New Challenger")
-        While MainFormRef.IsNullDCRunning
+        If MainformRef.IsNullDCRunning Then MainformRef.EndSession("New Challenger")
+        While MainformRef.IsNullDCRunning
             Thread.Sleep(10)
         End While
 
-        MainFormRef.ConfigFile.Port = MainFormRef.Challenger.port
-        MainFormRef.ConfigFile.Status = "Client"
-        MainFormRef.ConfigFile.Game = MainFormRef.Challenger.game
-        MainFormRef.ConfigFile.SaveFile()
-        MainFormRef.NetworkHandler.SendMessage("^," & MainFormRef.ConfigFile.Name & "," & MainFormRef.ConfigFile.IP & "," & MainFormRef.ConfigFile.Port & "," & MainFormRef.ConfigFile.Game, MainFormRef.Challenger.ip)
-        MainFormRef.WaitingForm.Show()
+        MainformRef.ConfigFile.Port = MainformRef.Challenger.port
+        MainformRef.ConfigFile.Status = "Client"
+        MainformRef.ConfigFile.Game = MainformRef.Challenger.game
+        MainformRef.ConfigFile.SaveFile()
+        MainformRef.NetworkHandler.SendMessage("^," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Peripheral, MainformRef.Challenger.ip)
+        MainformRef.WaitingForm.Show()
         Me.Close()
 
     End Sub
 
     Private Sub frmChallenge_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Visible Then
+            Dim pingThread As Thread = New Thread(AddressOf GetPing)
+            pingThread.IsBackground = True
+            pingThread.Start()
 
             wavePlayer.Dispose()
             wavePlayer = New NAudio.Wave.WaveOut
@@ -109,6 +130,12 @@ Public Class frmChallenge
     Private Sub frmChallenge_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         e.Cancel = True
         Me.Visible = False
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim pingThread As Thread = New Thread(AddressOf GetPing)
+        pingThread.IsBackground = True
+        pingThread.Start()
     End Sub
 
 End Class

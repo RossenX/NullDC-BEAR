@@ -71,53 +71,32 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property BEARJamma_Win32() As Byte()
+        Friend ReadOnly Property BEARJamma_ArcadeStick() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Win32", resourceCulture)
-                Return CType(obj,Byte())
+                Dim obj As Object = ResourceManager.GetObject("BEARJamma_ArcadeStick", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property BEARJamma_Win32_dc() As Byte()
+        Friend ReadOnly Property BEARJamma_Dreamcast() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Win32_dc", resourceCulture)
-                Return CType(obj,Byte())
+                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Dreamcast", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 
-        '''[BEARJamma]
-        '''BPortA_I_SERVICE_KEY_1=115
-        '''BPortA_I_TEST_KEY_1=116
-        '''BPortA_I_SERVICE_KEY_2=117
-        '''BPortA_I_TEST_KEY_2=118
-        '''BPortA_I_START_KEY=53
-        '''BPortA_I_COIN_KEY=49
-        '''BPortA_I_UP_KEY=87
-        '''BPortA_I_DOWN_KEY=83
-        '''BPortA_I_LEFT_KEY=65
-        '''BPortA_I_RIGHT_KEY=68
-        '''BPortA_I_BTN0_KEY=56
-        '''BPortA_I_BTN1_KEY=57
-        '''BPortA_I_BTN2_KEY=48
-        '''BPortA_I_BTN3_KEY=85
-        '''BPortA_I_BTN4_KEY=73
-        '''BPortA_I_BTN5_KEY=79
-        '''BPortB_I_SERVICE_KEY_1=115
-        '''BPortB_I_TEST_KEY_1=116
-        '''BPortB_I_SERVICE_KEY_2=117
-        '''BPortB_I_TEST_KEY_2=118
-        '''BPortB_I_START_KEY=13 [rest of string was truncated]&quot;;.
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property BEARPLAYlines() As String
+        Friend ReadOnly Property BEARJamma_Naomi() As System.Drawing.Bitmap
             Get
-                Return ResourceManager.GetString("BEARPLAYlines", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Naomi", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         
@@ -174,9 +153,39 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
+        Friend ReadOnly Property Controls() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controls", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
         Friend ReadOnly Property DcClean() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("DcClean", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property default_nullDC_dreamcast() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("default_nullDC_dreamcast", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property default_nullDC_naomi() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("default_nullDC_naomi", resourceCulture)
                 Return CType(obj,Byte())
             End Get
         End Property
@@ -192,7 +201,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.25a
+        '''  Looks up a localized string similar to 1.30
         '''CVS2::4B5360E5C101756B04FB20F11D50C8C8
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
@@ -206,21 +215,12 @@ Namespace My.Resources
         '''Vampire Chronicle for Matching Service::A43F42016C786654ACF02A4AFBFFC260
         '''Dreamcast.Cable=0
         '''Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1
-        '''Emulation.AlphaSortMode=1.
+        '''Emulation.AlphaSortMode=1
+        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228 [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property DreamcastGameOptimizations() As String
             Get
                 Return ResourceManager.GetString("DreamcastGameOptimizations", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property drkPvr_Win32_dc() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("drkPvr_Win32_dc", resourceCulture)
-                Return CType(obj,Byte())
             End Get
         End Property
         
@@ -256,39 +256,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
-        Friend ReadOnly Property nullDC() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("nullDC", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
         Friend ReadOnly Property NullDC_BEAR_UPDATER() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("NullDC_BEAR_UPDATER", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property nullDC_GUI_Win32() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("nullDC_GUI_Win32", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property nullDC_Win32_Release_NoTrace() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("nullDC_Win32_Release_NoTrace", resourceCulture)
                 Return CType(obj,Byte())
             End Get
         End Property
@@ -340,6 +310,16 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("ThreeSquare", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Updates() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Updates", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
         

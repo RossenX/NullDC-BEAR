@@ -12,15 +12,17 @@ Public Class NullDCLauncher
     Public DoNotSendNextExitEvent As Boolean
     Public P1Name As String = ""
     Public P2Name As String = ""
+    Public P1Peripheral As String = ""
+    Public P2Peripheral As String = ""
+
     Dim AutoHotkey As Process
     Dim SingleInstance As Boolean = True
     Dim LoadRomThread As Thread
+    Dim IsFullscreen = 0
     Public Platform As String = ""
 
+
 #Region "API"
-    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
-    Private Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Boolean
-    End Function
 
     <DllImport("user32.dll")>
     Private Shared Function GetForegroundWindow() As IntPtr
@@ -30,7 +32,13 @@ Public Class NullDCLauncher
     Public Shared Function GetWindowThreadProcessId(ByVal hWnd As IntPtr, <Out()> ByRef lpdwProcessId As UInteger) As UInteger
     End Function
 
-    Private Const WM_COMMAND As Integer = &H111
+    <DllImport("user32.dll")>
+    Public Shared Function MoveWindow(ByVal hWnd As IntPtr, ByVal x As Integer, ByVal y As Integer, ByVal nWidth As Integer, ByVal nHeight As Integer, ByVal bRepaint As Boolean) As Boolean
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Function GetWindowRect(ByVal hWnd As IntPtr, ByRef lpRect As Rectangle) As Boolean
+    End Function
 
 #End Region
 
@@ -45,13 +53,6 @@ Public Class NullDCLauncher
 
         Return False
     End Function
-
-    Public Sub FastForward()
-        If Not NullDCproc Is Nothing Then
-            PostMessage(NullDCproc.MainWindowHandle, WM_COMMAND, 118, 0)
-        End If
-
-    End Sub
 
     Public Sub LoadGame()
         If Not LoadRomThread Is Nothing Then If LoadRomThread.IsAlive Then LoadRomThread.Abort() ' Abort the old thread if it exists
@@ -68,6 +69,19 @@ Public Class NullDCLauncher
             End While
 
             NullDCproc.WaitForInputIdle()
+            If IsFullscreen = 0 Then
+                Dim UseCustomWindowSettings = CBool(MainformRef.ConfigFile.WindowSettings.Split("|")(0))
+                Dim x = CInt(MainformRef.ConfigFile.WindowSettings.Split("|")(1))
+                Dim y = CInt(MainformRef.ConfigFile.WindowSettings.Split("|")(2))
+                Dim width = CInt(MainformRef.ConfigFile.WindowSettings.Split("|")(3))
+                Dim height = CInt(MainformRef.ConfigFile.WindowSettings.Split("|")(4))
+
+                If UseCustomWindowSettings Then
+                    MoveWindow(NullDCproc.MainWindowHandle, x, y, width, height, True)
+                End If
+
+            End If
+
             GameLoaded()
 
         Catch ex As Exception
@@ -78,8 +92,8 @@ Public Class NullDCLauncher
 
     Public Sub LaunchDreamcast(ByVal _romname As String, ByRef _region As String)
         Platform = "dc"
-        MainformRef.InputHandler.GetKeyboardConfigs("dc")
-        MainformRef.InputHandler.NeedConfigReload = True
+        'MainformRef.InputHandler.GetKeyboardConfigs("dc")
+        'MainformRef.InputHandler.NeedConfigReload = True
         Region = _region
 
         If MainformRef.IsNullDCRunning And SingleInstance Then
@@ -93,8 +107,8 @@ Public Class NullDCLauncher
 
     Public Sub LaunchNaomi(ByVal _romname As String, ByRef _region As String)
         Platform = "na"
-        MainformRef.InputHandler.GetKeyboardConfigs("na")
-        MainformRef.InputHandler.NeedConfigReload = True
+        'MainformRef.InputHandler.GetKeyboardConfigs("na")
+        'MainformRef.InputHandler.NeedConfigReload = True
         Region = _region
 
         If MainformRef.IsNullDCRunning And SingleInstance Then
@@ -136,9 +150,12 @@ Public Class NullDCLauncher
         DoNotSendNextExitEvent = False
         P1Name = ""
         P2Name = ""
+        P1Peripheral = ""
+        P2Peripheral = ""
+        Rx.EEPROM = ""
 
-        MainformRef.InputHandler.GetKeyboardConfigs(Platform)
-        MainformRef.InputHandler.NeedConfigReload = True
+        'MainformRef.InputHandler.GetKeyboardConfigs(Platform)
+        'MainformRef.InputHandler.NeedConfigReload = True
     End Sub
 
     Private Sub StartDreamcastEmulator(ByVal _romname As String)
@@ -152,9 +169,7 @@ Public Class NullDCLauncher
 
     Private Sub StartNaomiEmulator(ByVal _romname As String)
         ChangeSettings_Naomi()
-
         Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
-
         NullDCproc = Process.Start(MainformRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
@@ -170,8 +185,12 @@ Public Class NullDCLauncher
 
     Private Sub GameLoaded()
         ' If we're a host then send out call to my partner to join
+        Console.WriteLine(NullDCproc.MainWindowHandle)
         Console.WriteLine("Game Launched")
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
+            If Platform = "dc" Then
+                Rx.EEPROM = ""
+            End If
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
         End If
     End Sub
@@ -245,9 +264,34 @@ Public Class NullDCLauncher
     End Sub
 
     Private Sub ChangeSettings_Dreamcast()
+        Dim linenumber = 0
+
+        ' Controls File
+        Dim ControlsFile() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+        ' Get Rid of the settings we don't want
+
+        Dim tempPeripheral As String() = {"", ""}
+        Dim tempJoystick As String() = {"", ""}
+        Dim TempDeadzone As String() = {"", ""}
+
+        For Each line As String In ControlsFile
+            If line.StartsWith("Peripheral=") Then
+                tempPeripheral(0) = line.Split("=")(1).Split("|")(0)
+                tempPeripheral(1) = line.Split("=")(1).Split("|")(1)
+            End If
+            If line.StartsWith("Joystick=") Then
+                tempJoystick(0) = line.Split("=")(1).Split("|")(0)
+                tempJoystick(1) = line.Split("=")(1).Split("|")(1)
+            End If
+            If line.StartsWith("Deadzone=") Then
+                TempDeadzone(0) = line.Split("=")(1).Split("|")(0)
+                TempDeadzone(1) = line.Split("=")(1).Split("|")(1)
+            End If
+        Next
 
         ' Put in the VMU to keep it in sync for now
         My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin", My.Resources.vmu_data_port01, False)
+        My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\data\vmu_default.bin", My.Resources.vmu_data_port01, False)
 
         Dim EnableOnline = "0"
         If Not MainformRef.ConfigFile.Status = "Offline" Then EnableOnline = "1"
@@ -257,6 +301,56 @@ Public Class NullDCLauncher
 
         Dim FPSLimiter = "0"
         If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then FPSLimiter = "1"
+
+        Dim Isspectator = "0"
+        If MainformRef.ConfigFile.Status = "Spectator" Then Isspectator = 1
+
+        ' Get P1/P2 Names
+        If P1Name = "" Or P2Name = "" Then ' Player names were not set beforehand 
+            If MainformRef.ConfigFile.Status = "Offline" Or MainformRef.ConfigFile.Status = "Spectator" Then
+                P1Name = MainformRef.ConfigFile.Name
+                P2Name = "Local P2"
+            Else
+                If IsHosting Then
+                    P1Name = MainformRef.ConfigFile.Name
+                    If MainformRef.Challenger Is Nothing Then
+                        P2Name = "Solo Host"
+                    Else
+                        P2Name = MainformRef.Challenger.name
+                    End If
+
+                Else
+                    P1Name = MainformRef.Challenger.name
+                    P2Name = MainformRef.ConfigFile.Name
+                End If
+            End If
+
+        End If
+
+        ' Get P1/P2 Peripherals
+        If P1Peripheral = "" Or P2Peripheral = "" Then ' Player periperals were not set beforehand 
+            If MainformRef.ConfigFile.Status = "Offline" Or MainformRef.ConfigFile.Status = "Spectator" Then
+
+                P1Peripheral = tempPeripheral(0)
+                P2Peripheral = tempPeripheral(1)
+
+            Else
+                If IsHosting Then
+                    P1Peripheral = MainformRef.ConfigFile.Peripheral
+                    If MainformRef.Challenger Is Nothing Then
+                        P2Peripheral = tempPeripheral(1)
+                    Else
+                        P2Peripheral = MainformRef.Challenger.peripheral
+                    End If
+
+                Else
+                    P1Peripheral = MainformRef.Challenger.peripheral
+                    P2Peripheral = MainformRef.ConfigFile.Peripheral
+                End If
+
+            End If
+
+        End If
 
         ' Get Game Specific Configs Here
         Dim SpecialSettings As New ArrayList
@@ -292,7 +386,7 @@ Public Class NullDCLauncher
 
         ' General Settings
         Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
-        Dim linenumber = 0
+        linenumber = 0
         For Each line As String In lines
             ' [nullDC]
             If line.StartsWith("Dynarec.Enabled=") Then lines(linenumber) = "Dynarec.Enabled=1"
@@ -323,14 +417,16 @@ Public Class NullDCLauncher
 
             ' [nullDC_GUI]
             If line.StartsWith("AutoHideMenu=") Then lines(linenumber) = "AutoHideMenu=0"
-
+            If line.StartsWith("Fullscreen=") Then
+                IsFullscreen = CInt(line.Split("=")(1))
+            End If
             ' [drkpvr]
             If line.StartsWith("Emulation.AlphaSortMode=") Then lines(linenumber) = "Emulation.AlphaSortMode=2"
             If line.StartsWith("Emulation.PaletteMode=") Then lines(linenumber) = "Emulation.PaletteMode=2"
             If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=0"
             If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
-            If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=1"
-            If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
+            If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"
+            'If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
 
@@ -367,8 +463,8 @@ Public Class NullDCLauncher
             If line.StartsWith("Delay=") Then lines(linenumber) = "Delay=" & MainformRef.ConfigFile.Delay
             If line.StartsWith("Record=") Then lines(linenumber) = "Record=0" ' & MainformRef.ConfigFile.RecordReplay
             If line.StartsWith("Playback=") Then lines(linenumber) = "Playback=0" ' & IsReplay
-            If line.StartsWith("AllowSpectators=") Then lines(linenumber) = "AllowSpectators=0" ' & MainformRef.ConfigFile.AllowSpectators
-            If line.StartsWith("Spectator=") Then lines(linenumber) = "Spectator=0" ' & IsSpectator
+            If line.StartsWith("AllowSpectators=") Then lines(linenumber) = "AllowSpectators=" & MainformRef.ConfigFile.AllowSpectators
+            If line.StartsWith("Spectator=") Then lines(linenumber) = "Spectator=" & IsSpectator
             If line.StartsWith("P1Name=") Then lines(linenumber) = "P1Name=" & P1Name
             If line.StartsWith("P2Name=") Then lines(linenumber) = "P2Name=" & P2Name
             If line.StartsWith("File=") Then lines(linenumber) = "File=0" ' & MainformRef.ConfigFile.ReplayFile
@@ -391,19 +487,84 @@ Public Class NullDCLauncher
                 End If
             Next
 
+            ' Controls DREAMCAST
+
+            If Not ControlsFile Is Nothing Then
+                If line.StartsWith("BPort") Then
+                    Dim player = 0
+                    Dim peri = P1Peripheral
+
+                    If line.StartsWith("BPortB") Then player = 1
+                    If player = 1 Then peri = P2Peripheral
+
+                    Dim KeyFound = False
+                    For Each control_line As String In ControlsFile
+                        If tempPeripheral(player) = "1" Then
+                            If control_line.StartsWith("STICK_") Then
+                                If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
+                                    lines(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                                    KeyFound = True
+                                    Exit For
+                                End If
+                            End If
+
+                        Else
+
+                            If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                                lines(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                                KeyFound = True
+                                Exit For
+                            End If
+
+                        End If
+
+
+                    Next
+
+                    If Not KeyFound Then lines(linenumber) = line.Split("=")(0) & "=k0"
+
+                End If
+            End If
+
+            If line.StartsWith("BPortA_Joystick=") Then lines(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
+            If line.StartsWith("BPortB_Joystick=") Then lines(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
+
+            If line.StartsWith("BPortA_Deadzone=") Then lines(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
+            If line.StartsWith("BPortB_Deadzone=") Then lines(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
+
+            If line.StartsWith("BPortA_Peripheral=") Then lines(linenumber) = "BPortA_Peripheral=" & P1Peripheral
+            If line.StartsWith("BPortB_Peripheral=") Then lines(linenumber) = "BPortB_Peripheral=" & P2Peripheral
+            ' Arcadestick sync here
             linenumber += 1
         Next
 
         File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
         File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", lines)
 
+        ' Stuff to help Casters
+        If File.Exists(MainformRef.NullDCPath & "\P1Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\P1Name.txt", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\P1Name.txt", {P1Name})
+
+        If File.Exists(MainformRef.NullDCPath & "\P2Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\P2Name.txt", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\P2Name.txt", {P2Name})
+
     End Sub
 
     Private Sub ChangeSettings_Naomi()
+        Dim linenumber = 0
 
         DealWithBios()
         BackupNvmem()
         lstCheck()
+
+        Dim ControlsFile() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+
+        For Each line In ControlsFile
+            If line.StartsWith("CONT_") Or line.StartsWith("STICK_") Then
+                ControlsFile(linenumber) = ""
+            End If
+            linenumber += 1
+        Next
 
         Dim IsReplay As Int16 = 0
         Dim IsSpectator As Int16 = 0
@@ -420,7 +581,7 @@ Public Class NullDCLauncher
         If P1Name = "" Or P2Name = "" Then ' Player names were not set beforehand 
             If MainformRef.ConfigFile.Status = "Offline" Or MainformRef.ConfigFile.Status = "Spectator" Then
                 P1Name = MainformRef.ConfigFile.Name
-                P2Name = "Local Player 2"
+                P2Name = "Local P2"
             Else
                 If IsHosting Then
                     P1Name = MainformRef.ConfigFile.Name
@@ -450,7 +611,7 @@ Public Class NullDCLauncher
         If IsReplay = 1 Or IsSpectator = 1 Or MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then FPSLimiter = "1"
 
         Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
-        Dim linenumber = 0
+        linenumber = 0
         For Each line As String In lines
 
             ' [nullDC]
@@ -458,7 +619,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Dynarec.DoConstantPropagation=") Then lines(linenumber) = "Dynarec.DoConstantPropagation=1"
             If line.StartsWith("Dynarec.UnderclockFpu=") Then lines(linenumber) = "Dynarec.UnderclockFpu=0"
             If line.StartsWith("Dreamcast.Cable=") Then lines(linenumber) = "Dreamcast.Cable=1"
-            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1543298463" ' 1917526710
+            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1917526710" ' 1917526710 ?1543298463
             If line.StartsWith("Dreamcast.Region=") Then lines(linenumber) = "Dreamcast.Region=0"
             If line.StartsWith("Dreamcast.Broadcast=") Then lines(linenumber) = "Dreamcast.Broadcast=0"
             If line.StartsWith("Emulator.AutoStart=") Then lines(linenumber) = "Emulator.AutoStart=0"
@@ -466,6 +627,9 @@ Public Class NullDCLauncher
 
             ' [nullDC_GUI]
             If line.StartsWith("AutoHideMenu=") Then lines(linenumber) = "AutoHideMenu=0"
+            If line.StartsWith("Fullscreen=") Then
+                IsFullscreen = CInt(line.Split("=")(1))
+            End If
 
             ' [drkpvr]
             If line.StartsWith("Emulation.AlphaSortMode=") Then lines(linenumber) = "Emulation.AlphaSortMode=1"
@@ -473,7 +637,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=1"
             If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
             If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"
-            If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
+            'If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
 
@@ -548,6 +712,26 @@ Public Class NullDCLauncher
                 End If
             End If
 
+            ' Check Buttons Configs
+
+            If Not ControlsFile Is Nothing Then
+                If line.StartsWith("BPort") Then
+                    Dim player = 0
+                    If line.StartsWith("BPortB") Then player = 1
+
+                    Dim KeyCount = False
+                    For Each control_line As String In ControlsFile
+                        If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                            lines(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                            KeyCount = True
+                            Exit For
+                        End If
+                    Next
+
+                    If Not KeyCount Then lines(linenumber) = line.Split("=")(0) & "=k0"
+
+                End If
+            End If
             linenumber += 1
         Next
 
@@ -556,11 +740,11 @@ Public Class NullDCLauncher
         File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", lines)
 
         ' Stuff to help Casters
-        If File.Exists(MainformRef.NullDCPath & "\replays\Player1Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\replays\Player1Name.txt", FileAttributes.Normal)
-        File.WriteAllLines(MainformRef.NullDCPath & "\replays\Player1Name.txt", {P1Name})
+        If File.Exists(MainformRef.NullDCPath & "\P1Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\P1Name.txt", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\P1Name.txt", {P1Name})
 
-        If File.Exists(MainformRef.NullDCPath & "\replays\Player2Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\replays\Player2Name.txt", FileAttributes.Normal)
-        File.WriteAllLines(MainformRef.NullDCPath & "\replays\Player2Name.txt", {P2Name})
+        If File.Exists(MainformRef.NullDCPath & "\P2Name.txt") Then File.SetAttributes(MainformRef.NullDCPath & "\P2Name.txt", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\P2Name.txt", {P2Name})
 
     End Sub
 

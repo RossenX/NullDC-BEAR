@@ -1,4 +1,4 @@
-1.25a
+1.30
 CVS2::4B5360E5C101756B04FB20F11D50C8C8
 Dynarec.UnderclockFpu=1
 Emulation.ModVolMode=2
@@ -15,3 +15,10 @@ Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1
 Emulation.AlphaSortMode=1
 Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228677B27A1E9B6
 Emulation.AlphaSortMode=0
+Capcom Fighting Collection::16960BD3F56F8C0D0023F60924E675DC
+Dynarec.UnderclockFpu=1
+Emulation.ModVolMode=2
+Emulation.PaletteMode=2
+Emulation.AlphaSortMode=1
+Plasma Sword - Nightmare Of Bilstein::F67DE9E36687521562165829BF0E0C4D
+Dynarec.UnderclockFpu=1

@@ -105,11 +105,6 @@ Public Class NetworkHandling
         ' Get the message string
         message = Split(1)
 
-        If message.StartsWith("!") And (MainformRef.ConfigFile.AwayStatus = "DND" Or MainformRef.ConfigFile.AwayStatus = "Hidden") Then
-            SendMessage(">,DND", senderip)
-            Exit Sub
-        End If
-
         If MainFormRef.ConfigFile.Status = "Spectator" And message.StartsWith("!") Then ' I'm spectating so don't let other people spectate my spectating
             SendMessage(">,NSS", senderip)
             Exit Sub
@@ -174,24 +169,14 @@ Public Class NetworkHandling
                         Exit Sub
                     End If
 
-                    Dim tmp_p1name = ""
-                    Dim tmp_p2name = ""
-
-                    If MainFormRef.ConfigFile.Status = "Client" Then
-                        tmp_p1name = MainFormRef.Challenger.name
-                        tmp_p2name = MainFormRef.ConfigFile.Name
-                    ElseIf MainFormRef.ConfigFile.Status = "Hosting" Then
-                        tmp_p1name = MainFormRef.ConfigFile.Name
-                        tmp_p2name = MainFormRef.Challenger.name
-                    ElseIf MainFormRef.ConfigFile.Status = "Offline" Then
-                        tmp_p1name = MainFormRef.ConfigFile.Name
-                        tmp_p2name = "Local Player 2"
-                    End If
-
                     If MainformRef.NullDCLauncher.Platform = "dc" Then
-                        SendMessage(">,NDC", senderip)
+                        If MainformRef.ConfigFile.Status = "Offline" Then
+                            SendMessage(">,NDC", senderip)
+                        End If
+                        SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
+                        'SendMessage(">,NDC", senderip)
                     ElseIf MainformRef.NullDCLauncher.Platform = "na" Then
-                        SendMessage("@," & tmp_p1name & "," & tmp_p2name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, senderip)
+                        SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
                     End If
 
                     Exit Sub
@@ -202,7 +187,12 @@ Public Class NetworkHandling
             End If
         End If
 
-        ' Wanna Fight !(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<host>(5)
+        If message.StartsWith("!") And (MainformRef.ConfigFile.AwayStatus = "DND" Or MainformRef.ConfigFile.AwayStatus = "Hidden") Then
+            SendMessage(">,DND", senderip)
+            Exit Sub
+        End If
+
+        ' Wanna Fight !(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<host>(5),<peripheral>(6)
         If message.StartsWith("!") Then
             Console.WriteLine("<-Being Challenged->")
 
@@ -225,7 +215,7 @@ Public Class NetworkHandling
 
                 If MainFormRef.ConfigFile.Status = "Hosting" Then ' Check if i'm still hosting
                     MainFormRef.Challenger = New NullDCPlayer(Split(1), Split(2), Split(3), Split(4), Split(5))
-                    SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, senderip)
+                    SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, senderip)
                 Else
                     SendMessage(">,HO", senderip)
                     Exit Sub
@@ -235,7 +225,7 @@ Public Class NetworkHandling
 
                 If Not MainFormRef.IsNullDCRunning Then
                     Dim INVOKATION As BeingChallenged_delegate = AddressOf MainFormRef.BeingChallenged
-                    MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), Split(5)})
+                    MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), Split(5), Split(6)})
                 Else
                     ' I have nullDC open check if i'm hosting SOLO or if i'm fighting someone else
                     If MainFormRef.ConfigFile.Status = "Hosting" Then
@@ -254,11 +244,11 @@ Public Class NetworkHandling
         If MainFormRef.Challenger Is Nothing Then Exit Sub ' You shouldn't have a challanger, ignore
         If Not MainFormRef.Challenger.ip = senderip Then Exit Sub ' The person sending request is not your challanger
 
-        ' Accept Fight ^(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4)
+        ' Accept Fight ^(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<peripheral>(5)
         If message.StartsWith("^") Then
             Console.WriteLine("<-Accepted Challenged->" & message)
             Dim INVOKATION As OpenHostingPanel_delegate = AddressOf MainFormRef.OpenHostingPanel
-            MainformRef.Invoke(INVOKATION, New NullDCPlayer(Split(1), senderip, Split(3), Split(4)))
+            MainformRef.Invoke(INVOKATION, New NullDCPlayer(Split(1), senderip, Split(3), Split(4),, Split(5)))
             Exit Sub
         End If
 
@@ -270,23 +260,23 @@ Public Class NetworkHandling
             Exit Sub
         End If
 
-        ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5),<region>(6),<EEPROM>(7) EEPROM HANDLING NOT YET IMPLEMENTED
+        ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5),<region>(6),<peripheral>(7), <EEPROM>(8) CHECK HERE FIX THIS
         If message.StartsWith("$") Then
             Console.WriteLine("<-Host Started->" & message)
             Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
             Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
             Dim delay As Int16 = CInt(Split(5))
-            MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Rx.EEPROM})
+            MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
             Exit Sub
         End If
 
-        ' Join As Spectator @(0),<p1name>(1),<p2name>(2),<ip>(3),<port>(4),<game>(5),<region>(6),<EEPROM>(7) EEPROM HANDLING NOT YET IMPLEMENTED
+        ' Join As Spectator @(0),<p1name>(1),<p2name>(2),<ip>(3),<port>(4),<game>(5),<region>(6),<p1peripheral>(7),<p2peripheral>(8), <EEPROM>(9)  CHECK HERE FIX THIS GET BOTH PLAYER PERIPHERALS
         ' Delay not required, spectating will always add delay based on how smooth it is.
         If message.StartsWith("@") Then
             Console.WriteLine("<-Join As Spectator->" & message)
             Dim INVOKATION As JoinAsSpectator_delegate = AddressOf MainformRef.JoinAsSpectator
             Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
-            MainformRef.Invoke(INVOKATION, {Split(1), Split(2), senderip, Split(4), Split(5), Split(6), Rx.EEPROM})
+            MainformRef.Invoke(INVOKATION, {Split(1), Split(2), senderip, Split(4), Split(5), Split(6), Split(7), Split(8), Rx.EEPROM})
         End If
 
     End Sub

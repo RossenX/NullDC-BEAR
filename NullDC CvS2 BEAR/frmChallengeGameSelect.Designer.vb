@@ -26,9 +26,12 @@ Partial Class frmChallengeGameSelect
         Me.btnLetsGo = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnDLC = New System.Windows.Forms.Button()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.SimDelayTB = New System.Windows.Forms.TableLayoutPanel()
+        Me.cbDelay = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.SimDelayTB.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbGameList
@@ -77,18 +80,6 @@ Partial Class frmChallengeGameSelect
         Me.Button1.Text = "Cancel"
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'btnDLC
-        '
-        Me.btnDLC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.btnDLC.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDLC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDLC.Location = New System.Drawing.Point(70, 235)
-        Me.btnDLC.Name = "btnDLC"
-        Me.btnDLC.Size = New System.Drawing.Size(142, 28)
-        Me.btnDLC.TabIndex = 22
-        Me.btnDLC.Text = "Get More Games"
-        Me.btnDLC.UseVisualStyleBackColor = False
-        '
         'cbRegion
         '
         Me.cbRegion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
@@ -113,6 +104,48 @@ Partial Class frmChallengeGameSelect
         Me.Label4.Text = "Region"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'SimDelayTB
+        '
+        Me.SimDelayTB.AutoSize = True
+        Me.SimDelayTB.BackColor = System.Drawing.Color.Transparent
+        Me.SimDelayTB.ColumnCount = 2
+        Me.SimDelayTB.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.SimDelayTB.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.SimDelayTB.Controls.Add(Me.cbDelay, 0, 0)
+        Me.SimDelayTB.Controls.Add(Me.Label2, 0, 0)
+        Me.SimDelayTB.Location = New System.Drawing.Point(70, 229)
+        Me.SimDelayTB.Name = "SimDelayTB"
+        Me.SimDelayTB.RowCount = 1
+        Me.SimDelayTB.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.SimDelayTB.Size = New System.Drawing.Size(141, 27)
+        Me.SimDelayTB.TabIndex = 25
+        '
+        'cbDelay
+        '
+        Me.cbDelay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.cbDelay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.cbDelay.FormattingEnabled = True
+        Me.cbDelay.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7"})
+        Me.cbDelay.Location = New System.Drawing.Point(88, 3)
+        Me.cbDelay.Name = "cbDelay"
+        Me.cbDelay.Size = New System.Drawing.Size(50, 21)
+        Me.cbDelay.TabIndex = 26
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.Label2.Location = New System.Drawing.Point(3, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(79, 27)
+        Me.Label2.TabIndex = 25
+        Me.Label2.Text = "Sim.Delay"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'frmChallengeGameSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -120,9 +153,9 @@ Partial Class frmChallengeGameSelect
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.SingleSquare
         Me.ClientSize = New System.Drawing.Size(450, 450)
+        Me.Controls.Add(Me.SimDelayTB)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.cbRegion)
-        Me.Controls.Add(Me.btnDLC)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnLetsGo)
@@ -132,6 +165,8 @@ Partial Class frmChallengeGameSelect
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Game Select"
         Me.TransparencyKey = System.Drawing.Color.DimGray
+        Me.SimDelayTB.ResumeLayout(False)
+        Me.SimDelayTB.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -141,7 +176,9 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents btnLetsGo As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Button1 As Button
-    Friend WithEvents btnDLC As Button
     Friend WithEvents cbRegion As ComboBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents SimDelayTB As TableLayoutPanel
+    Friend WithEvents Label2 As Label
+    Friend WithEvents cbDelay As ComboBox
 End Class
