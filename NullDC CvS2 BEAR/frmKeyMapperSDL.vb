@@ -24,35 +24,40 @@ Public Class frmKeyMapperSDL
     Private Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Boolean
     End Function
 
-    Private Sub frmKeyMapperSDL_Load(sender As Object, e As EventArgs) Handles MyBase.Shown
-        Me.CenterToParent()
-        Me.Icon = My.Resources.NewNullDCBearIcon
+    Private Sub frmKeyMapperSDL_Load(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        If Me.Visible Then
 
-        If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
-            SDL_Init(SDL_INIT_GAMECONTROLLER)
-            Console.WriteLine("SDL_INIT")
+            Me.CenterToParent()
+            Me.Icon = My.Resources.NewNullDCBearIcon
+
+            If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
+                SDL_Init(SDL_INIT_GAMECONTROLLER)
+                Console.WriteLine("SDL_INIT")
+            End If
+
+            DoInitialSetupShit()
+            LoadSettings()
+
+            _InputThread = New Threading.Thread(AddressOf InputThread)
+            _InputThread.IsBackground = True
+            _InputThread.Start()
+
+            AddHandler DeadzoneTB.MouseCaptureChanged, AddressOf DeadzoneTB_MouseCaptureChanged
+            AddHandler DeadzoneTB.ValueChanged, Sub() Deadzonetext.Text = "Deadzone: " & DeadzoneTB.Value
+            AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
+            AddHandler PlayerTab.SelectedIndexChanged, AddressOf PlayerTab_SelectedIndexChanged
+            AddHandler ControllersTab.SelectedIndexChanged, Sub() ActiveControl = Nothing
+
+            If MainformRef.IsNullDCRunning Then
+                PeripheralCB.Enabled = False
+                PeriWarning.Visible = True
+            Else
+                PeripheralCB.Enabled = True
+                PeriWarning.Visible = False
+            End If
+
         End If
 
-        DoInitialSetupShit()
-        LoadSettings()
-
-        _InputThread = New Threading.Thread(AddressOf InputThread)
-        _InputThread.IsBackground = True
-        _InputThread.Start()
-
-        AddHandler DeadzoneTB.MouseCaptureChanged, AddressOf DeadzoneTB_MouseCaptureChanged
-        AddHandler DeadzoneTB.ValueChanged, Sub() Deadzonetext.Text = "Deadzone: " & DeadzoneTB.Value
-        AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
-        AddHandler PlayerTab.SelectedIndexChanged, AddressOf PlayerTab_SelectedIndexChanged
-        AddHandler ControllersTab.SelectedIndexChanged, Sub() ActiveControl = Nothing
-
-        If MainformRef.IsNullDCRunning Then
-            PeripheralCB.Enabled = False
-            PeriWarning.Visible = True
-        Else
-            PeripheralCB.Enabled = True
-            PeriWarning.Visible = False
-        End If
 
     End Sub
 
@@ -242,7 +247,17 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub InputThread()
-        While Me.Visible
+        While _InputThread.IsAlive
+
+            Try
+                If Application.OpenForms().OfType(Of frmSDLMappingTool).Any Then
+                    SDL_Delay(100)
+                    Continue While
+                End If
+
+            Catch ex As Exception
+                Console.WriteLine("yup")
+            End Try
 
             Dim _event As SDL_Event
             While SDL_PollEvent(_event)
@@ -293,6 +308,8 @@ Public Class frmKeyMapperSDL
                     Case 1542 ' Disconnected using Joystick event cuz other seems to only work with opened
                         'Console.WriteLine("Disconnected: " & SDL_JoystickNameForIndex(_event.jdevice.which))
                         Me.Invoke(Sub() UpdateControllersList())
+                    Case 1539
+                        'MsgBox(_event.jbutton.button)
                 End Select
 
             End While
@@ -302,8 +319,11 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub UpdateControllersList()
+    Public Sub UpdateControllersList()
         RemoveHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
+
+        SDL_GameControllerAddMappingsFromFile(MainformRef.NullDCPath & "\gamecontrollerdb.txt")
+        SDL_GameControllerAddMappingsFromFile(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
 
         Dim OldConnectedIndex = ControllerCB.SelectedValue
         Dim FoundController As Boolean = False
@@ -311,10 +331,13 @@ Public Class frmKeyMapperSDL
         AvailableControllersList.Rows.Add({-1, "Keyboard Only"})
 
         For i = 0 To SDL_NumJoysticks() - 1
-            AvailableControllersList.Rows.Add({i, "(" & i & ") " & SDL_GameControllerNameForIndex(i)})
+
+            AvailableControllersList.Rows.Add({i, "(" & i & ") " & SDL_JoystickNameForIndex(i)})
+
             If i = OldConnectedIndex Then
                 FoundController = True
             End If
+
             'Console.WriteLine("Added: " & i & " | " & SDL_GameControllerNameForIndex(i))
         Next
 
@@ -339,9 +362,14 @@ Public Class frmKeyMapperSDL
         ' Disable SDL completly we dun need that shit in the background no more
         For i = 0 To SDL_NumJoysticks() - 1
             If SDL_GameControllerGetAttached(SDL_GameControllerFromInstanceID(i)) = SDL_bool.SDL_TRUE Then
+                Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
                 SDL_GameControllerClose(SDL_GameControllerFromInstanceID(i))
+
             End If
         Next
+
+        _InputThread.Abort()
+        SDL_Quit()
 
         ' Update the configs for hotloading new configs
         If MainformRef.IsNullDCRunning Then
@@ -609,6 +637,16 @@ Public Class frmKeyMapperSDL
         SaveSettings()
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSDL.Click
+        'MsgBox(SDL.SDL_GameControllerMapping(Joy))
+        'My.Computer.Clipboard.SetText(SDL.SDL_GameControllerMapping(Joy))
+        frmSDLMappingTool.ShowDialog(Me)
+    End Sub
+
+    Private Sub frmKeyMapperSDL_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Icon = My.Resources.NewNullDCBearIcon
+
+    End Sub
 End Class
 
 Public Class KeyBind

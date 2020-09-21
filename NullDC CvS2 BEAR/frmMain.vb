@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.30"
+    Public Ver As String = "1.30a"
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher

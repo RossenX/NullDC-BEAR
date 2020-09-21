@@ -207,6 +207,12 @@
     <Compile Include="frmReplays.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSDLMappingTool.Designer.vb">
+      <DependentUpon>frmSDLMappingTool.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSDLMappingTool.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSetup.Designer.vb">
       <DependentUpon>frmSetup.vb</DependentUpon>
     </Compile>
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReplays.resx">
       <DependentUpon>frmReplays.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSDLMappingTool.resx">
+      <DependentUpon>frmSDLMappingTool.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetup.resx">
       <DependentUpon>frmSetup.vb</DependentUpon>
