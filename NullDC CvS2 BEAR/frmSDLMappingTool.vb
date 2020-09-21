@@ -30,6 +30,12 @@ Public Class frmSDLMappingTool
                 Console.WriteLine("SDL_INIT")
             End If
 
+            If frmKeyMapperSDL.ControllerCB.SelectedValue >= 0 Then
+                Joy = SDL_JoystickOpen(frmKeyMapperSDL.ControllerCB.SelectedValue)
+            Else
+                Joy = Nothing
+            End If
+
             StartBinding()
         Else
             If Not _InputThread Is Nothing Then
@@ -215,6 +221,13 @@ Public Class frmSDLMappingTool
         Next
     End Sub
 
+    Private Sub frmSDLMappingTool_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If Not Joy Is Nothing Then
+            SDL_JoystickClose(Joy)
+            Joy = Nothing
+        End If
+
+    End Sub
 End Class
 
 
