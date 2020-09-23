@@ -16,10 +16,9 @@ Public Class frmSDLMappingTool
 
     Dim ListOfBinds(20) As String
     Dim _InputThread As Threading.Thread
-    Dim AxisDown As Boolean = False
     Dim _currentBindIndex = 0
-
     Dim Joy
+    Dim AxisDown As New Dictionary(Of Integer, Integer)
 
     Private Sub frmSDLMappingTool_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Me.Visible Then
@@ -36,6 +35,7 @@ Public Class frmSDLMappingTool
                 Joy = Nothing
             End If
 
+            AxisDown.Clear()
             StartBinding()
         Else
             If Not _InputThread Is Nothing Then
@@ -64,6 +64,7 @@ Public Class frmSDLMappingTool
     End Sub
 
     Private Sub InputThread()
+
         While _currentBindIndex < ListOfGamepadKeys.Count
             Dim KeyPressed As String = ""
 
@@ -78,10 +79,17 @@ Public Class frmSDLMappingTool
             Dim _event As SDL_Event
             While SDL_PollEvent(_event)
                 Select Case _event.type
-                    Case 1536 ' Axis Motion Down
-                        If Math.Abs(_event.jaxis.axisValue - 1) > 16380 And Not AxisDown Then ' Bout 50% Deadzone should be safe for most stuff
-                            AxisDown = True
-                            Console.WriteLine("Axis Down")
+                    Case SDL_EventType.SDL_JOYAXISMOTION ' Axis Motion Down
+                        'Console.WriteLine("Axis: " & _event.jaxis.axisValue)
+                        'Console.WriteLine("Device: " & _event.jdevice.which)
+
+                        Dim _deadzonetotal As Decimal
+                        Me.Invoke(Sub() _deadzonetotal = 32768 * Decimal.Divide(frmKeyMapperSDL.DeadzoneTB.Value, 100))
+                        Dim _axisnorm As Int32 = _event.jaxis.axisValue
+                        _axisnorm = Math.Abs(_axisnorm)
+
+                        If _axisnorm > 256 And _axisnorm > _deadzonetotal And Not AxisDown.ContainsKey(_event.jaxis.axis) Then
+                            'Console.WriteLine("Axis Down")
                             Dim prefix As Boolean = True
 
                             If ListOfGamepadKeys(_currentBindIndex) = "rightx" Or
@@ -105,19 +113,35 @@ Public Class frmSDLMappingTool
                                 End If
                             End If
 
-                        Else
-                            If Math.Abs(_event.jaxis.axisValue - 1) <= 16380 Then
-                                AxisDown = False
-                                Console.WriteLine("Axis Up")
-                            End If
+                            AxisDown.Add(_event.jaxis.axis, _event.jaxis.axisValue)
 
+                        Else
+
+                            If AxisDown.ContainsKey(_event.jaxis.axis) Then
+
+                                If AxisDown(_event.jaxis.axis) = _event.jaxis.axisValue Then
+                                    'Console.WriteLine("ignored")
+                                    Continue While
+                                End If
+
+                                If (Not _axisnorm > 256 And Not _axisnorm > _deadzonetotal) Or
+                                    (AxisDown(_event.jaxis.axis) > 0 And _event.jaxis.axisValue < 0) Or
+                                    (AxisDown(_event.jaxis.axis) < 0 And _event.jaxis.axisValue > 0) Then
+                                    ' Console.WriteLine("Rawr")
+                                    AxisDown.Remove(_event.jaxis.axis)
+                                End If
+
+                            End If
                         End If
 
-                    Case 1538 ' Hat Motion
+                        SDL_FlushEvents(1536, 1536)
+                        Exit While
+
+                    Case SDL_EventType.SDL_JOYHATMOTION  ' Hat Motion
                         If Not _event.jhat.hatValue = 0 Then
                             KeyPressed = "h" & (_event.jhat.hatValue / 10)
                         End If
-                    Case 1539 ' Button Down
+                    Case SDL_EventType.SDL_JOYBUTTONDOWN  ' Button Down
                         KeyPressed = "b" & _event.jbutton.button
                 End Select
 

@@ -647,6 +647,10 @@ Public Class frmKeyMapperSDL
         Me.Icon = My.Resources.NewNullDCBearIcon
 
     End Sub
+
+    Private Sub ControllerCB_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles ControllerCB.SelectedIndexChanged
+
+    End Sub
 End Class
 
 Public Class KeyBind
