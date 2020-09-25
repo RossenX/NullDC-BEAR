@@ -196,4 +196,10 @@
   <data name="default_nullDC_naomi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\default_nullDC_naomi.cfg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Vs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Vs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Vs_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Vs_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

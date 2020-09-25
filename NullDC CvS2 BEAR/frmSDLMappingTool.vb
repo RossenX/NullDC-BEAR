@@ -36,6 +36,7 @@ Public Class frmSDLMappingTool
             End If
 
             AxisDown.Clear()
+            AxisDown = New Dictionary(Of Integer, Integer)
             StartBinding()
         Else
             If Not _InputThread Is Nothing Then

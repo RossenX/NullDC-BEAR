@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.30c"
+    Public Ver As String = "1.35"
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -316,6 +316,11 @@ Public Class frmMain
         If Not My.Computer.FileSystem.DirectoryExists(NullDCPath & "\replays") Then
             My.Computer.FileSystem.CreateDirectory(NullDCPath & "\replays")
         End If
+
+        If Not File.Exists(NullDCPath & "\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\Vs.png")
+        If Not File.Exists(NullDCPath & "\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\Vs_2.png")
+        If Not File.Exists(NullDCPath & "\dc\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\dc\Vs.png")
+        If Not File.Exists(NullDCPath & "\dc\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\dc\Vs_2.png")
 
         'Install Dependencies if needed
         If Not File.Exists(NullDCPath & "\SDL2.dll") Or

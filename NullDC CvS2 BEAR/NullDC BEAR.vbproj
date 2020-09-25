@@ -363,6 +363,8 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Vs_2.png" />
+    <None Include="Resources\Vs.png" />
     <None Include="Resources\DcClean.zip" />
     <None Include="Resources\Deps.zip" />
     <None Include="Resources\BEARJammaNaomi.jpg" />
