@@ -413,7 +413,7 @@ Public Class frmKeyMapperSDL
                     File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
                     File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", lines)
 
-                    PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 134, 0)
+                    PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
 
                 Case "dc"
 
@@ -493,7 +493,7 @@ Public Class frmKeyMapperSDL
                     File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
                     File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", lines)
 
-                    PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 137, 0)
+                    PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0)
 
             End Select
 
