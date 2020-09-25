@@ -13,4 +13,4 @@ VC++ 2010 (If NullDC is giving error/crashing)
 https://www.microsoft.com/en-us/download/details.aspx?id=5555
 
 Directx 9 (NullDC is closing/crashing)
-https://www.microsoft.com/en-us/download/details.aspx?id=35
+https://www.microsoft.com/en-us/download/details.aspx?id=8109
