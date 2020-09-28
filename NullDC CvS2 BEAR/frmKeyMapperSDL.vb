@@ -541,7 +541,7 @@ Public Class frmKeyMapperSDL
             Joy = Nothing
         End If
 
-        If ControllerCB.Items.Count > Joystick(PlayerTab.SelectedIndex) Then
+        If Joystick(PlayerTab.SelectedIndex) < ControllerCB.Items.Count - 1 Then
             ControllerCB.SelectedIndex = Joystick(PlayerTab.SelectedIndex) + 1
         Else
             ControllerCB.SelectedIndex = 0

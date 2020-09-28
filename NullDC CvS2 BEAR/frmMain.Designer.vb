@@ -53,11 +53,13 @@ Partial Class frmMain
         Me.cbStatus = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.BEARTitle = New System.Windows.Forms.PictureBox()
+        Me.sus_i = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BEARTitle, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sus_i, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -433,6 +435,18 @@ Partial Class frmMain
         Me.BEARTitle.TabIndex = 17
         Me.BEARTitle.TabStop = False
         '
+        'sus_i
+        '
+        Me.sus_i.BackColor = System.Drawing.Color.Transparent
+        Me.sus_i.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.sus
+        Me.sus_i.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.sus_i.Location = New System.Drawing.Point(395, 40)
+        Me.sus_i.Name = "sus_i"
+        Me.sus_i.Size = New System.Drawing.Size(54, 70)
+        Me.sus_i.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.sus_i.TabIndex = 18
+        Me.sus_i.TabStop = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -452,8 +466,9 @@ Partial Class frmMain
         Me.Controls.Add(Me.btnMinimize)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.TableLayoutPanel4)
-        Me.Controls.Add(Me.imgBeta)
+        Me.Controls.Add(Me.sus_i)
         Me.Controls.Add(Me.BEARTitle)
+        Me.Controls.Add(Me.imgBeta)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmMain"
@@ -466,6 +481,7 @@ Partial Class frmMain
         Me.TableLayoutPanel1.PerformLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BEARTitle, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sus_i, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -500,4 +516,5 @@ Partial Class frmMain
     Friend WithEvents Label5 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents BEARTitle As PictureBox
+    Friend WithEvents sus_i As PictureBox
 End Class

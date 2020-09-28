@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.35b"
+    Public Ver As String = "1.35c"
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -109,6 +109,16 @@ Public Class frmMain
         CreateRomFolderWatcher()
         RefreshPlayerList(False)
 
+        ' Sus
+        Randomize()
+        Dim sus As Decimal = Rnd() * 10
+        If sus <= 1 Then
+            sus_i.Visible = True
+        Else
+            sus_i.Visible = False
+        End If
+
+        Console.WriteLine(sus)
         FinishedLoading = True
 
     End Sub
@@ -414,10 +424,11 @@ Public Class frmMain
         Catch ex As Exception
             MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
             End
+
         Finally
-            If needsUpdate Or IsBeta Then
-                NotificationForm.ShowMessage("Yo we have a new control system, go into the controls panel.")
-            End If
+            'If needsUpdate Or IsBeta Then
+            'NotificationForm.ShowMessage("Yo we have a new control system, go into the controls panel.")
+            'End If
         End Try
 
         If Not File.Exists(NullDCPath & "\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\Vs.png")
@@ -1085,6 +1096,9 @@ Public Class frmMain
         ActiveControl = Nothing
     End Sub
 
+    Private Sub PictureBox1_MouseClick(sender As Object, e As MouseEventArgs) Handles sus_i.MouseClick
+        Process.Start("http://www.innersloth.com/gameAmongUs.php")
+    End Sub
 End Class
 
 Public Class NullDCPlayer
