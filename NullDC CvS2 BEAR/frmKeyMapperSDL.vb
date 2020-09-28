@@ -81,8 +81,8 @@ Public Class frmKeyMapperSDL
 
         Joystick(0) = 0
         Joystick(1) = -1
-        Deadzone(0) = 0
-        Deadzone(1) = 0
+        Deadzone(0) = 15
+        Deadzone(1) = 15
         Peripheral(0) = 0
         Peripheral(1) = 0
 
