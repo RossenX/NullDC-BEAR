@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.35c"
+    Public Ver As String = "1.35d"
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -373,12 +373,14 @@ Public Class frmMain
 
         If Not File.Exists(NullDCPath & "\dc\GameSpecificSettings.optibear") Then
             File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations)
+
         Else
-            Dim _file() As String = File.ReadAllLines(NullDCPath & "\dc\GameSpecificSettings.optibear")
-            If Not _file(0) = Ver Then
+            If Not File.ReadAllLines(NullDCPath & "\dc\GameSpecificSettings.optibear")(0) = Ver Then
                 File.SetAttributes(NullDCPath & "\dc\GameSpecificSettings.optibear", FileAttributes.Normal)
                 File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations)
+                Console.WriteLine("Updated Optibear")
             End If
+
         End If
 
         If Not File.Exists(NullDCPath & "\Controls.bear") Then
