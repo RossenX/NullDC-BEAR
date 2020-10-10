@@ -181,16 +181,16 @@ Public Class NetworkHandling
 
                     If MainformRef.ConfigFile.Status = "Spectator" Then ' I'm running it as a spectator/replay
                         SendMessage(">,NSS", senderip)
-                        Exit Sub
+                        Exit Sub ' KEEP THIS HERE
                     End If
 
                     If MainformRef.NullDCLauncher.Platform = "na" Then ' Noami dun give no fucks about VMU
                         SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
                     End If
-                    Exit Sub
+                    Exit Sub ' KEEP THIS HERE
                 Else
                     SendMessage(">,NS", senderip)
-                    Exit Sub
+                    Exit Sub ' KEEP THIS HERE
                 End If
             End If
         End If

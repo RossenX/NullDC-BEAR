@@ -1020,6 +1020,11 @@ Public Class frmMain
         ' Skip game Selection if person is already in a game, try to spectate instead.
         If Not c_status = "Idle" Then ' this person is playing SOMETHING so lets try to challange them and see what they reply
 
+            If c_status = "DND" Then
+                NotificationForm.ShowMessage("Player is not accepting challenges right now.")
+                Exit Sub
+            End If
+
             ' Check if you have the game
             If Not GamesList.ContainsKey(c_gamerom) Then
                 'MsgBox(c_gamerom)

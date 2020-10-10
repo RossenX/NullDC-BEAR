@@ -174,10 +174,6 @@
     <Compile Include="frmKeyMapperSDL.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmKeyMapping.Designer.vb">
-      <DependentUpon>frmKeyMapping.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmKeyMapping.vb" />
     <Compile Include="frmLoLNerd.Designer.vb">
       <DependentUpon>frmLoLNerd.vb</DependentUpon>
     </Compile>
@@ -191,10 +187,6 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNewProfile.Designer.vb">
-      <DependentUpon>frmNewProfile.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmNewProfile.vb" />
     <Compile Include="frmNotification.Designer.vb">
       <DependentUpon>frmNotification.vb</DependentUpon>
     </Compile>
@@ -226,7 +218,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InputHandlingSDL.vb" />
-    <Compile Include="InputHandling.vb" />
     <Compile Include="keybindButton.Designer.vb">
       <DependentUpon>keybindButton.vb</DependentUpon>
     </Compile>
@@ -284,18 +275,12 @@
       <DependentUpon>frmKeyMapperSDL.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmKeyMapping.resx">
-      <DependentUpon>frmKeyMapping.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmLoLNerd.resx">
       <DependentUpon>frmLoLNerd.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmNewProfile.resx">
-      <DependentUpon>frmNewProfile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNotification.resx">
       <DependentUpon>frmNotification.vb</DependentUpon>
