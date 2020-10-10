@@ -14,4 +14,16 @@
         Me.Visible = False
     End Sub
 
+    Private Sub frmWaitingForHost_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        ' If this is a CDI (Dreamcast game) ask for the VMU Data
+        If Visible Then
+            If MainformRef.Challenger.game.ToLower.EndsWith(".cdi") Then
+                Label1.Text = "Syncing VMU..."
+                MainformRef.NetworkHandler.SendMessage("V", MainformRef.Challenger.ip)
+
+            End If
+        End If
+
+    End Sub
+
 End Class

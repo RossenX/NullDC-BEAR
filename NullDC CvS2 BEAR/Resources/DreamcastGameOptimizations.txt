@@ -1,4 +1,4 @@
-1.35d
+1.50
 CVS2::4B5360E5C101756B04FB20F11D50C8C8
 Dynarec.UnderclockFpu=1
 Emulation.ModVolMode=2
@@ -24,3 +24,9 @@ Plasma Sword - Nightmare Of Bilstein::F67DE9E36687521562165829BF0E0C4D
 Dynarec.UnderclockFpu=1
 Jojo's Bizarre Adventure::3B629661A49D3593D9030750EC4E1168
 Dreamcast.Cable=1
+The King Of Fighters Evolution::C4857E00B7584D34458F90BCB3973BDB
+Dreamcast.Cable=1
+Emulation.AlphaSortMode=1
+King Of Fighters - Dream Match 1999::63CCFAB035BD7441099B503E6FED8F8F
+Dreamcast.Cable=1
+Emulation.AlphaSortMode=1

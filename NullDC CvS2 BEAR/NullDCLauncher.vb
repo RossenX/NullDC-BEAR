@@ -52,6 +52,7 @@ Public Class NullDCLauncher
         End If
 
         Return False
+
     End Function
 
     Public Sub LoadGame()
@@ -153,6 +154,8 @@ Public Class NullDCLauncher
         P1Peripheral = ""
         P2Peripheral = ""
         Rx.EEPROM = ""
+        Rx.VMU = ""
+        Rx.VMUPieces_recieved.Clear()
 
         'MainformRef.InputHandler.GetKeyboardConfigs(Platform)
         'MainformRef.InputHandler.NeedConfigReload = True
@@ -192,6 +195,7 @@ Public Class NullDCLauncher
                 Rx.EEPROM = ""
             End If
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
+
         End If
     End Sub
 
@@ -290,7 +294,7 @@ Public Class NullDCLauncher
         Next
 
         ' Put in the VMU to keep it in sync for now
-        My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin", My.Resources.vmu_data_port01, False)
+        'My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin", My.Resources.vmu_data_port01, False)
         My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\data\vmu_default.bin", My.Resources.vmu_data_port01, False)
 
         Dim EnableOnline = "0"

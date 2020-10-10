@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = False
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.35d"
+    Public Ver As String = "1.50"
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -32,7 +32,7 @@ Public Class frmMain
     Public FinishedLoading As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "DcClean.zip")
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\Capcom Vs. SNK Millennium Fight 2000 Unlocked", "zip.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         Me.Icon = My.Resources.NewNullDCBearIcon
@@ -578,6 +578,10 @@ Public Class frmMain
 
     Public Delegate Sub JoinHost_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
     Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
+
+        ' Ignore being told to join the host if we havn't gotten the VMU yet
+        If Challenger.game.ToLower.EndsWith(".cdi") And Rx.VMU Is Nothing Then Exit Sub
+
         If WaitingForm.Visible Then WaitingForm.Visible = False
         Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
         Challenger = New NullDCPlayer(_name, _ip, _port, _game,, _peripheral)
@@ -656,60 +660,80 @@ Public Class frmMain
             PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
             Matchlist.Invoke(Sub() Matchlist.Items.Add(PlayerInfo))
 
+            If Not Player.name = MainformRef.ConfigFile.Name Then
+                Try
+                    Dim pingthread As Thread = New Thread(
+                        Sub()
+                            If My.Computer.Network.Ping(Player.ip) Then
+                                Thread.Sleep(250 + (250 * ItemNumber))
+                                Dim ping As PingReply = New Ping().Send(Player.ip)
+                                MainformRef.Matchlist.Invoke(
+                                Sub()
+                                    Try
+                                        MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = ping.RoundtripTime
+                                    Catch ex As Exception
 
-            Try
-                Dim pingthread As Thread = New Thread(Sub()
-                                                          If My.Computer.Network.Ping(Player.ip) Then
-                                                              Thread.Sleep(250 + (250 * ItemNumber))
-                                                              Dim ping As PingReply = New Ping().Send(Player.ip)
-                                                              MainformRef.Matchlist.Invoke(Sub()
-                                                                                               Try
-                                                                                                   MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = ping.RoundtripTime
-                                                                                               Catch ex As Exception
+                                    End Try
 
-                                                                                               End Try
+                                End Sub)
+                            End If
+                        End Sub)
 
-                                                                                           End Sub)
-                                                          End If
-                                                      End Sub)
-                pingthread.IsBackground = True
-                pingthread.Start()
-            Catch ex As Exception
+                    pingthread.IsBackground = True
+                    pingthread.Start()
 
-            End Try
+                Catch ex As Exception
+
+                End Try
+            Else
+                MainformRef.Invoke(Sub() MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = "0")
+
+            End If
+
 
         Else
-            Matchlist.Invoke(Sub()
-                                 Matchlist.Items(FoundEntryID).SubItems(0).Text = Player.name
-                                 Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
-                             End Sub)
+            Matchlist.Invoke(
+                Sub()
+                    Matchlist.Items(FoundEntryID).SubItems(0).Text = Player.name
+                    Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
+                End Sub)
 
+            If Not Player.name = MainformRef.ConfigFile.Name Then
+                Try
+                    Dim pingthread As Thread = New Thread(
+                        Sub()
+                            If My.Computer.Network.Ping(Player.ip) Then
+                                Thread.Sleep(250 + (250 * FoundEntryID))
+                                Dim ping As PingReply = New Ping().Send(Player.ip)
+                                MainformRef.Matchlist.Invoke(
+                                Sub()
+                                    Try
+                                        MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = ping.RoundtripTime
+                                    Catch ex As Exception
 
-            Try
-                Dim pingthread As Thread = New Thread(Sub()
-                                                          If My.Computer.Network.Ping(Player.ip) Then
-                                                              Thread.Sleep(250 + (250 * FoundEntryID))
-                                                              Dim ping As PingReply = New Ping().Send(Player.ip)
-                                                              MainformRef.Matchlist.Invoke(Sub()
-                                                                                               Try
-                                                                                                   MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = ping.RoundtripTime
-                                                                                               Catch ex As Exception
+                                    End Try
 
-                                                                                               End Try
+                                End Sub)
+                            End If
+                        End Sub)
 
-                                                                                           End Sub)
-                                                          End If
-                                                      End Sub)
-                pingthread.IsBackground = True
-                pingthread.Start()
-            Catch ex As Exception
+                    pingthread.IsBackground = True
+                    pingthread.Start()
 
-            End Try
+                Catch ex As Exception
 
-            Matchlist.Invoke(Sub()
-                                 Matchlist.Items(FoundEntryID).SubItems(3).Text = Player.game
-                                 Matchlist.Items(FoundEntryID).SubItems(4).Text = Player.status
-                             End Sub)
+                End Try
+            Else
+                MainformRef.Invoke(Sub() MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = "0")
+
+            End If
+
+            Matchlist.Invoke(
+                Sub()
+                    Matchlist.Items(FoundEntryID).SubItems(3).Text = Player.game
+                    Matchlist.Items(FoundEntryID).SubItems(4).Text = Player.status
+
+                End Sub)
         End If
 
     End Sub
@@ -990,10 +1014,7 @@ Public Class frmMain
         Console.WriteLine("Challange: " & c_ip)
         ' Skip game Selection if person is already in a game, try to spectate instead.
         If Not c_status = "Idle" Then ' this person is playing SOMETHING so lets try to challange them and see what they reply
-            If c_status = "DND" Then
-                NotificationForm.ShowMessage("Player is not accepting challenges right now.")
-                Exit Sub
-            End If
+
             ' Check if you have the game
             If Not GamesList.ContainsKey(c_gamerom) Then
                 'MsgBox(c_gamerom)
@@ -1002,7 +1023,12 @@ Public Class frmMain
             End If
 
             Challenger = New NullDCPlayer(c_name, c_ip, c_port, c_gamerom)
-            NetworkHandler.SendMessage("!," & ConfigFile.Name & "," & ConfigFile.IP & "," & ConfigFile.Port & "," & Challenger.game & ",0," & ConfigFile.Peripheral, Challenger.ip)
+
+            ' Don't instantly spectate a DC game, get the VMU first
+            If Not Challenger.game.ToLower.EndsWith(".cdi") Then
+                NetworkHandler.SendMessage("!," & ConfigFile.Name & "," & ConfigFile.IP & "," & ConfigFile.Port & "," & Challenger.game & ",0," & ConfigFile.Peripheral, Challenger.ip)
+            End If
+
             WaitingForm.Show()
         Else
             GameSelectForm.StartChallenge(New NullDCPlayer(c_name, c_ip, c_port)) ' If they not hosting then just start choosing game to challenge them to

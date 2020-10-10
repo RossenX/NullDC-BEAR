@@ -6,7 +6,8 @@ Imports System.Threading
 Module Rx
     Public MainformRef As frmMain ' Mainly here to have a constatn reference to the main form even after minimzing to tray
     Public EEPROM As String ' the EEPROM we're using saved here for people that wanna join as spectator
-    Public VMU(2) As String ' the p1 VMU
+    Public VMU As String ' the p1 VMU
+    Public VMUPieces_recieved As New ArrayList
 
     Public Function GetEEPROM(ByVal _romfullpath As String) As String
         Dim EEPROMPath As String = _romfullpath & ".eeprom"
@@ -68,60 +69,42 @@ Module Rx
     End Sub
 
     ' No real use for these yet just trying shit out
-    Public Function ReadVMU(ByVal _player As Int16) As String
+    Public Function ReadVMU() As String
 
-        If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin") Then
+        If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
             Return ""
         End If
 
-        Dim VMUFile As String = MainformRef.NullDCPath & "\dc\vmu_data_port01.bin"
+        Dim VMUFile As String = MainformRef.NullDCPath & "\dc\vmu_data_host.bin"
         Dim FileBytes As String
 
         If File.Exists(VMUFile) Then
             FileBytes = Convert.ToBase64String(File.ReadAllBytes(VMUFile))
-            'Console.WriteLine("Read VMU:" & FileBytes.ToString)
         Else
             Return ""
         End If
 
         File.Delete(MainformRef.NullDCPath & "\vmu_temp.zip")
 
-        VMU(_player) = FileBytes
-        ' Convert.ToBase64String(VMUFile)
-        ' Convert.FromBase64String(FileBytes)
+        VMU = FileBytes
 
         Return FileBytes
+
     End Function
 
-    Public Sub WriteVMU(ByVal _vmustring As String, ByVal _player As Int16)
-        Dim bytes = Convert.FromBase64String(_vmustring)
-        File.WriteAllBytes(MainformRef.NullDCPath & "\vmu_temp.zip", bytes)
+    Public Sub SendVMU(ByVal _ip As String)
+
 
     End Sub
 
+    Public Sub RecieveVMUPiece(ByVal _total, ByVal _this, ByVal _data)
 
-    Public Sub CompressVMU()
-        Dim mem As New IO.MemoryStream
-        Dim gz As New System.IO.Compression.GZipStream(mem, IO.Compression.CompressionMode.Compress)
-        Dim sw As New IO.StreamWriter(gz)
-        sw.WriteLine(Convert.ToBase64String(File.ReadAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin")))
-        'sw.Close()
-        'sw.Flush()
-        mem.Position = 0
 
-        Dim sr As New StreamReader(mem)
-        Dim myStr = sr.ReadToEnd()
-        Console.WriteLine(myStr.Length)
-        Clipboard.SetText(myStr)
     End Sub
 
-    Public Sub DecompressVMU(ByVal mem As MemoryStream)
-        Dim mem2 As New IO.MemoryStream(mem.ToArray)
-        Dim gz = New System.IO.Compression.GZipStream(mem2, IO.Compression.CompressionMode.Decompress)
-        Dim sr As New IO.StreamReader(gz)
-        MsgBox(sr.ReadLine)
-        sr.Close()
-    End Sub
+    Public Sub CombineVMU()
 
+
+    End Sub
 
 End Module
