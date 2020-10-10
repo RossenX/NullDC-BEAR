@@ -128,10 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="frmCalibration.Designer.vb">
-      <DependentUpon>frmCalibration.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmCalibration.vb" />
     <Compile Include="frmChallenge.Designer.vb">
       <DependentUpon>frmChallenge.vb</DependentUpon>
     </Compile>
@@ -217,7 +213,6 @@
     <Compile Include="frmWaitingForHost.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InputHandlingSDL.vb" />
     <Compile Include="keybindButton.Designer.vb">
       <DependentUpon>keybindButton.vb</DependentUpon>
     </Compile>
@@ -250,9 +245,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmCalibration.resx">
-      <DependentUpon>frmCalibration.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmChallenge.resx">
       <DependentUpon>frmChallenge.vb</DependentUpon>
     </EmbeddedResource>
