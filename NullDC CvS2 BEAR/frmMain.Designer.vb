@@ -132,7 +132,9 @@ Partial Class frmMain
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.btnDLC, 3, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.Matchlist, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.btnPatreon, 2, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.btnSearch, 0, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.BtnJoin, 1, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.btnOffline, 4, 1)
@@ -358,12 +360,14 @@ Partial Class frmMain
         'btnDLC
         '
         Me.btnDLC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnDLC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnDLC.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnDLC.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDLC.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnDLC.Location = New System.Drawing.Point(266, 420)
+        Me.btnDLC.Location = New System.Drawing.Point(318, 297)
+        Me.btnDLC.Margin = New System.Windows.Forms.Padding(0)
         Me.btnDLC.Name = "btnDLC"
-        Me.btnDLC.Size = New System.Drawing.Size(75, 23)
+        Me.btnDLC.Size = New System.Drawing.Size(106, 26)
         Me.btnDLC.TabIndex = 13
         Me.btnDLC.TabStop = False
         Me.btnDLC.Text = "Free DLC"
@@ -372,12 +376,14 @@ Partial Class frmMain
         'btnPatreon
         '
         Me.btnPatreon.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnPatreon.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnPatreon.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPatreon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPatreon.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnPatreon.Location = New System.Drawing.Point(245, 442)
+        Me.btnPatreon.Location = New System.Drawing.Point(212, 297)
+        Me.btnPatreon.Margin = New System.Windows.Forms.Padding(0)
         Me.btnPatreon.Name = "btnPatreon"
-        Me.btnPatreon.Size = New System.Drawing.Size(120, 23)
+        Me.btnPatreon.Size = New System.Drawing.Size(106, 26)
         Me.btnPatreon.TabIndex = 14
         Me.btnPatreon.TabStop = False
         Me.btnPatreon.Text = "Patreon o3o"
@@ -435,10 +441,8 @@ Partial Class frmMain
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.MainMenuBackground
         Me.ClientSize = New System.Drawing.Size(610, 495)
-        Me.Controls.Add(Me.btnDLC)
         Me.Controls.Add(Me.cbStatus)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.btnPatreon)
         Me.Controls.Add(Me.btnReplay)
         Me.Controls.Add(Me.lbVer)
         Me.Controls.Add(Me.Button1)

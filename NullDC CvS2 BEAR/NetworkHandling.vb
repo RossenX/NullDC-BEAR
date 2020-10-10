@@ -184,24 +184,12 @@ Public Class NetworkHandling
                         Exit Sub
                     End If
 
-                    If MainformRef.NullDCLauncher.Platform = "dc" Then
-                        If MainformRef.ConfigFile.Status = "Offline" Then
-                            SendMessage(">,NDC", senderip)
-                        End If
-
-                        ' Disabled this part of the spectator code, moved to handle this over to the VMU stuff, only tell them to join after they confirmed they got the VMU
-                        'SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
-                        'SendMessage(">,NDC", senderip)
-
-                    ElseIf MainformRef.NullDCLauncher.Platform = "na" Then ' Noami dun give no fucks about VMU
+                    If MainformRef.NullDCLauncher.Platform = "na" Then ' Noami dun give no fucks about VMU
                         SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
-
                     End If
-
                     Exit Sub
                 Else
                     SendMessage(">,NS", senderip)
-
                     Exit Sub
                 End If
             End If
@@ -210,6 +198,11 @@ Public Class NetworkHandling
         ' Someone requested VMU DATA V(0)
         If message.StartsWith("V") Then
             Console.WriteLine("<-VMU Data request recieved->" & message)
+            If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Or MainformRef.ConfigFile.Status = "Client" Then
+            Else
+                SendMessage(">,NSS", senderip)
+                Exit Sub
+            End If
 
             ' Lets check who we're sending the VMU to
             If MainformRef.ConfigFile.Status = "Offline" Then ' We're offline so check if we allow spectating
@@ -244,7 +237,6 @@ Public Class NetworkHandling
         End If
 
         ' VMU G Recived depending on who it is and which stage of the hosting we're on do stuff
-        ' G(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<host>(5),<peripheral>(6)
         If message.StartsWith("G") Then
             Console.WriteLine("<-VMU DATA RECIVED BY CLIENT SUCCESSFULLY->" & message)
 
@@ -253,7 +245,7 @@ Public Class NetworkHandling
 
             Else ' We're online, lets check if this is a spectator or my challanger and send them the appropriate response
                 If senderip = MainformRef.Challenger.ip Then
-                    If MainformRef.IsNullDCRunning Then ' We started the game, so tell em to join
+                    If MainformRef.IsNullDCRunning Then ' We started the game, so tell em to join ' this is only if the game starts before the VMU is finished sending
                         MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                     End If
                 Else ' This a Spectator
@@ -266,7 +258,6 @@ Public Class NetworkHandling
 
         If message.StartsWith("!") And (MainformRef.ConfigFile.AwayStatus = "DND" Or MainformRef.ConfigFile.AwayStatus = "Hidden") Then
             SendMessage(">,DND", senderip)
-
             Exit Sub
         End If
 

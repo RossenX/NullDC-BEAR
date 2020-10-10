@@ -128,7 +128,7 @@ Module Rx
 
                 For i = 0 To 9
                     MainformRef.NetworkHandler.SendMessage("#,9," & i & "," & VMUPiecesTosend(i), _ip)
-                    Thread.Sleep(500)
+                    Thread.Sleep(100)
                 Next
 
                 Console.WriteLine("Done Sending VMU to " & _ip)
@@ -176,7 +176,7 @@ Module Rx
 
         File.WriteAllBytes(MainformRef.NullDCPath + "\dc\vmu_data_client.bin", Convert.FromBase64String(CombinedVMU))
         Rx.VMU = CombinedVMU
-        MainformRef.NetworkHandler.SendMessage("G," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.Name & ",", MainformRef.Challenger.ip)
+        MainformRef.NetworkHandler.SendMessage("G", MainformRef.Challenger.ip)
 
         MainformRef.Invoke(
             Sub()

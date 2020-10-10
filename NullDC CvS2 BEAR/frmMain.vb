@@ -755,6 +755,9 @@ Public Class frmMain
         ChallengeSentForm.Visible = False
         WaitingForm.Visible = False
         HostingForm.Visible = False
+        Rx.EEPROM = ""
+        Rx.VMU = Nothing
+        Rx.VMUPieces.Clear()
 
         If _canceledby Is Nothing Then
             Select Case Reason
