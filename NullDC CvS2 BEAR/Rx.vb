@@ -72,22 +72,49 @@ Module Rx
     Public Function ReadVMU() As String
 
         Dim VMUFILE = MainformRef.NullDCPath & "\dc\vmu_data_host.bin"
-
         If Not File.Exists(VMUFILE) Then Return ""
 
+        Dim bytes = File.ReadAllBytes(VMUFILE)
+
         If File.Exists(VMUFILE) Then
-            Return Convert.ToBase64String(File.ReadAllBytes(VMUFILE))
+            Return Convert.ToBase64String(bytes)
         Else
             Return ""
         End If
 
     End Function
 
+    Public Sub TestSend()
+        Dim VMUPieceLength = Math.Floor(VMU.Length / 10)
+        Console.WriteLine(VMUPieceLength)
+        Console.WriteLine(VMU.Length)
+        Dim VMUPiecesTosend As New ArrayList
+
+        Dim CompleteSent As String = ""
+
+        For i = 0 To 9
+            If i = 9 Then
+                ' This is we have odd number of splits, the last one will get any left over bytes
+                VMUPiecesTosend.Add(VMU.Substring(i * VMUPieceLength, VMU.Length - (i * VMUPieceLength)))
+            Else
+                VMUPiecesTosend.Add(VMU.Substring(i * VMUPieceLength, VMUPieceLength))
+            End If
+        Next
+
+        For i = 0 To 9
+            CompleteSent += VMUPiecesTosend(i)
+            Thread.Sleep(50)
+        Next
+
+        File.WriteAllBytes(MainformRef.NullDCPath + "\dc\vmu_data_client.bin", Convert.FromBase64String(CompleteSent))
+
+    End Sub
+
     Public Sub SendVMU(ByVal _ip As String)
 
         Dim VMUSendingThread As Thread = New Thread(
             Sub()
-                Dim VMUPieceLength = VMU.Length / 10
+                Dim VMUPieceLength = Math.Floor(VMU.Length / 10)
                 Dim VMUPiecesTosend As New ArrayList
 
                 For i = 0 To 9
@@ -100,9 +127,10 @@ Module Rx
                 Next
 
                 For i = 0 To 9
-                    MainformRef.NetworkHandler.SendMessage("#,9," & i & "," & VMUPiecesTosend(i))
+                    MainformRef.NetworkHandler.SendMessage("#,9," & i & "," & VMUPiecesTosend(i), _ip)
                     Thread.Sleep(50)
                 Next
+
                 Console.WriteLine("Done Sending VMU to " & _ip)
 
             End Sub)
@@ -112,7 +140,8 @@ Module Rx
 
     End Sub
 
-    Public Sub RecieveVMUPiece(ByVal _total, ByVal _piece, ByVal _data)
+    Public Sub RecieveVMUPiece(ByVal _total As Int16, ByVal _piece As Int16, ByVal _data As String)
+        'Console.WriteLine("Recivefd Piece: " & _data)
 
         If VMUPieces.Count < 10 Then
             VMUPieces.Clear()
@@ -141,11 +170,12 @@ Module Rx
     Public Sub CombineVMUPieces()
         Dim CombinedVMU As String = ""
 
-        For Each _vmupiece As String In VMUPieces
-            CombinedVMU += _vmupiece
+        For i = 0 To 9
+            CombinedVMU += VMUPieces(i)
         Next
 
-        File.WriteAllBytes(MainformRef.NullDCPath + "\\dc\\vmu_data_client.bin", Convert.FromBase64String(CombinedVMU))
+        File.WriteAllBytes(MainformRef.NullDCPath + "\dc\vmu_data_client.bin", Convert.FromBase64String(CombinedVMU))
+        Rx.VMU = CombinedVMU
         MainformRef.NetworkHandler.SendMessage("G", MainformRef.Challenger.ip)
 
         MainformRef.Invoke(

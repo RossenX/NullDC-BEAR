@@ -154,7 +154,7 @@ Public Class NullDCLauncher
         P1Peripheral = ""
         P2Peripheral = ""
         Rx.EEPROM = ""
-        Rx.VMU = ""
+        Rx.VMU = Nothing
         Rx.VMUPieces.Clear()
 
         'MainformRef.InputHandler.GetKeyboardConfigs(Platform)
@@ -294,7 +294,10 @@ Public Class NullDCLauncher
         Next
 
         ' Put in the VMU to keep it in sync for now
-        'My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_port01.bin", My.Resources.vmu_data_port01, False)
+        If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
+            My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", My.Resources.vmu_data_port01, False)
+        End If
+
         My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\data\vmu_default.bin", My.Resources.vmu_data_port01, False)
 
         Dim EnableOnline = "0"

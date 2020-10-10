@@ -216,10 +216,8 @@ Public Class NetworkHandling
                     Rx.VMU = Rx.ReadVMU()
                 End If
                 Rx.SendVMU(senderip)
-
             Else
                 SendMessage(">,NS", senderip)
-
             End If
 
             Exit Sub

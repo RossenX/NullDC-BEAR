@@ -580,7 +580,10 @@ Public Class frmMain
     Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
 
         ' Ignore being told to join the host if we havn't gotten the VMU yet
-        If Challenger.game.ToLower.EndsWith(".cdi") And Rx.VMU Is Nothing Then Exit Sub
+        If Challenger.game.ToLower.EndsWith(".cdi") And Rx.VMU Is Nothing Then
+            Console.WriteLine("Host started before VMU Data was Recieved, wait")
+            Exit Sub
+        End If
 
         If WaitingForm.Visible Then WaitingForm.Visible = False
         Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
@@ -870,8 +873,6 @@ Public Class frmMain
                     Message = "Host hasn't started a game yet"
                 Case "BW"
                     Message = "Player is connecting to someone else"
-                Case "BB"
-                    Message = "Player is challenging someone else"
                 Case "BC"
                     Message = "Player is being challenged by someone else"
                 Case "SP"
@@ -891,6 +892,7 @@ Public Class frmMain
             ConfigFile.Game = "None"
             ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
             ConfigFile.SaveFile()
+
         End If
 
     End Sub

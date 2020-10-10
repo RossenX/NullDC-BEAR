@@ -60,8 +60,12 @@ Public Class frmHostPanel
                 cbGameList.Visible = True
             End If
 
+            If Rx.VMU Is Nothing Then
+                Rx.VMU = Rx.ReadVMU()
+            End If
+
             Me.CenterToParent()
-        Else
+
         End If
 
     End Sub
