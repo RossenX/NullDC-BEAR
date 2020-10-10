@@ -7,7 +7,7 @@ Module Rx
     Public MainformRef As frmMain ' Mainly here to have a constatn reference to the main form even after minimzing to tray
     Public EEPROM As String ' the EEPROM we're using saved here for people that wanna join as spectator
     Public VMU As String ' the p1 VMU
-    Public VMUPieces_recieved As New ArrayList
+    Public VMUPieces As New ArrayList
 
     Public Function GetEEPROM(ByVal _romfullpath As String) As String
         Dim EEPROMPath As String = _romfullpath & ".eeprom"
@@ -71,39 +71,89 @@ Module Rx
     ' No real use for these yet just trying shit out
     Public Function ReadVMU() As String
 
-        If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
-            Return ""
-        End If
+        Dim VMUFILE = MainformRef.NullDCPath & "\dc\vmu_data_host.bin"
 
-        Dim VMUFile As String = MainformRef.NullDCPath & "\dc\vmu_data_host.bin"
-        Dim FileBytes As String
+        If Not File.Exists(VMUFILE) Then Return ""
 
-        If File.Exists(VMUFile) Then
-            FileBytes = Convert.ToBase64String(File.ReadAllBytes(VMUFile))
+        If File.Exists(VMUFILE) Then
+            Return Convert.ToBase64String(File.ReadAllBytes(VMUFILE))
         Else
             Return ""
         End If
-
-        File.Delete(MainformRef.NullDCPath & "\vmu_temp.zip")
-
-        VMU = FileBytes
-
-        Return FileBytes
 
     End Function
 
     Public Sub SendVMU(ByVal _ip As String)
 
+        Dim VMUSendingThread As Thread = New Thread(
+            Sub()
+                Dim VMUPieceLength = VMU.Length / 10
+                Dim VMUPiecesTosend As New ArrayList
+
+                For i = 0 To 9
+                    If i = 9 Then
+                        ' This is we have odd number of splits, the last one will get any left over bytes
+                        VMUPiecesTosend.Add(VMU.Substring(i * VMUPieceLength, VMU.Length - (i * VMUPieceLength)))
+                    Else
+                        VMUPiecesTosend.Add(VMU.Substring(i * VMUPieceLength, VMUPieceLength))
+                    End If
+                Next
+
+                For i = 0 To 9
+                    MainformRef.NetworkHandler.SendMessage("#,9," & i & "," & VMUPiecesTosend(i))
+                    Thread.Sleep(50)
+                Next
+                Console.WriteLine("Done Sending VMU to " & _ip)
+
+            End Sub)
+
+        VMUSendingThread.IsBackground = True
+        VMUSendingThread.Start()
 
     End Sub
 
-    Public Sub RecieveVMUPiece(ByVal _total, ByVal _this, ByVal _data)
+    Public Sub RecieveVMUPiece(ByVal _total, ByVal _piece, ByVal _data)
 
+        If VMUPieces.Count < 10 Then
+            VMUPieces.Clear()
+            For i = 0 To 9
+                VMUPieces.Add("")
+            Next
+        End If
+
+        VMUPieces(_piece) = _data
+
+        Dim RecivedAllVMUPieces = True
+
+        For i = 0 To 9
+            If VMUPieces(i) = "" Then
+                RecivedAllVMUPieces = False
+                Exit For
+            End If
+        Next
+
+        If RecivedAllVMUPieces Then
+            CombineVMUPieces()
+        End If
 
     End Sub
 
-    Public Sub CombineVMU()
+    Public Sub CombineVMUPieces()
+        Dim CombinedVMU As String = ""
 
+        For Each _vmupiece As String In VMUPieces
+            CombinedVMU += _vmupiece
+        Next
+
+        File.WriteAllBytes(MainformRef.NullDCPath + "\\dc\\vmu_data_client.bin", Convert.FromBase64String(CombinedVMU))
+        MainformRef.NetworkHandler.SendMessage("G", MainformRef.Challenger.ip)
+
+        MainformRef.Invoke(
+            Sub()
+                If MainformRef.WaitingForm.Visible Then
+                    MainformRef.WaitingForm.Label1.Text = "Waiting for Host"
+                End If
+            End Sub)
 
     End Sub
 

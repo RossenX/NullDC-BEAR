@@ -155,7 +155,7 @@ Public Class NullDCLauncher
         P2Peripheral = ""
         Rx.EEPROM = ""
         Rx.VMU = ""
-        Rx.VMUPieces_recieved.Clear()
+        Rx.VMUPieces.Clear()
 
         'MainformRef.InputHandler.GetKeyboardConfigs(Platform)
         'MainformRef.InputHandler.NeedConfigReload = True
