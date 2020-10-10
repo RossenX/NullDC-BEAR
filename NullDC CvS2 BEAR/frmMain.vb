@@ -1038,7 +1038,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub btnHost_Click(sender As Object, e As EventArgs) Handles btnHost.Click
+    Private Sub btnHost_Click(sender As Object, e As EventArgs)
         If IsNullDCRunning() Then
             NotificationForm.ShowMessage("Can't Host and play at the same time!")
             Exit Sub

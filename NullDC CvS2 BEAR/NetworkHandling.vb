@@ -211,30 +211,54 @@ Public Class NetworkHandling
         If message.StartsWith("V") Then
             Console.WriteLine("<-VMU Data request recieved->" & message)
 
-            If MainformRef.ConfigFile.AllowSpectators = 1 Or MainformRef.Challenger.ip = senderip Then
-                If Rx.VMU Is Nothing Then
-                    Rx.VMU = Rx.ReadVMU()
+            ' Lets check who we're sending the VMU to
+            If MainformRef.ConfigFile.Status = "Offline" Then ' We're offline so check if we allow spectating
+                If MainformRef.ConfigFile.AllowSpectators = 1 Then
+                    If Rx.VMU Is Nothing Then
+                        Rx.VMU = Rx.ReadVMU()
+                    End If
+                    Rx.SendVMU(senderip)
+                Else
+                    SendMessage(">,NS", senderip)
                 End If
-                Rx.SendVMU(senderip)
-            Else
-                SendMessage(">,NS", senderip)
+
+            Else ' We're online, ether client or host doens't matter
+                If MainformRef.Challenger.ip = senderip Then ' We're sending this to our Challanger
+                    If Rx.VMU Is Nothing Then
+                        Rx.VMU = Rx.ReadVMU()
+                    End If
+                    Rx.SendVMU(senderip)
+                Else ' We're sending a VMU to someone else, a spectator probably
+                    If MainformRef.ConfigFile.AllowSpectators = 1 Then
+                        If Rx.VMU Is Nothing Then
+                            Rx.VMU = Rx.ReadVMU()
+                        End If
+                        Rx.SendVMU(senderip)
+                    Else
+                        SendMessage(">,NS", senderip)
+                    End If
+                End If
             End If
 
             Exit Sub
         End If
 
         ' VMU G Recived depending on who it is and which stage of the hosting we're on do stuff
+        ' G(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<host>(5),<peripheral>(6)
         If message.StartsWith("G") Then
             Console.WriteLine("<-VMU DATA RECIVED BY CLIENT SUCCESSFULLY->" & message)
-            If senderip = MainformRef.Challenger.ip Then
-                If MainformRef.IsNullDCRunning Then ' We started the game, so tell em to join
-                    MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
 
-                End If
-
-            Else ' This a Spectator
+            If MainformRef.ConfigFile.Status = "Offline" Then ' We're Offline, so this can only come from a spectator
                 SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
 
+            Else ' We're online, lets check if this is a spectator or my challanger and send them the appropriate response
+                If senderip = MainformRef.Challenger.ip Then
+                    If MainformRef.IsNullDCRunning Then ' We started the game, so tell em to join
+                        MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
+                    End If
+                Else ' This a Spectator
+                    SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
+                End If
             End If
 
             Exit Sub

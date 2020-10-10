@@ -34,7 +34,6 @@ Partial Class frmMain
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.BtnJoin = New System.Windows.Forms.Button()
         Me.btnOffline = New System.Windows.Forms.Button()
-        Me.btnHost = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnMinimize = New System.Windows.Forms.Button()
         Me.btnSetup = New System.Windows.Forms.Button()
@@ -137,7 +136,6 @@ Partial Class frmMain
         Me.TableLayoutPanel4.Controls.Add(Me.btnSearch, 0, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.BtnJoin, 1, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.btnOffline, 4, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.btnHost, 3, 1)
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(38, 93)
         Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
@@ -194,23 +192,6 @@ Partial Class frmMain
         Me.btnOffline.TabStop = False
         Me.btnOffline.Text = "Play Offline"
         Me.btnOffline.UseVisualStyleBackColor = False
-        '
-        'btnHost
-        '
-        Me.btnHost.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.btnHost.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnHost.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnHost.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHost.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnHost.Location = New System.Drawing.Point(318, 297)
-        Me.btnHost.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnHost.Name = "btnHost"
-        Me.btnHost.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.btnHost.Size = New System.Drawing.Size(106, 26)
-        Me.btnHost.TabIndex = 6
-        Me.btnHost.TabStop = False
-        Me.btnHost.Text = "Host"
-        Me.btnHost.UseVisualStyleBackColor = False
         '
         'btnExit
         '
@@ -495,7 +476,6 @@ Partial Class frmMain
     Friend WithEvents ColumnHeader4 As ColumnHeader
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents BtnJoin As Button
-    Friend WithEvents btnHost As Button
     Friend WithEvents ColumnHeader5 As ColumnHeader
     Friend WithEvents btnOffline As Button
     Friend WithEvents btnExit As Button
