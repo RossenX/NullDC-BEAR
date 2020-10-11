@@ -51,6 +51,8 @@ Partial Class frmSetup
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cbUseCustomWindowSize = New System.Windows.Forms.CheckBox()
+        Me.cbOverlay = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_Volume, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_eVolume, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -98,9 +100,9 @@ Partial Class frmSetup
         '
         Me.Button3.BackColor = System.Drawing.Color.Red
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button3.Location = New System.Drawing.Point(275, 142)
+        Me.Button3.Location = New System.Drawing.Point(275, 154)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(306, 40)
+        Me.Button3.Size = New System.Drawing.Size(306, 28)
         Me.Button3.TabIndex = 11
         Me.Button3.TabStop = False
         Me.Button3.Text = "Controls"
@@ -185,7 +187,7 @@ Partial Class frmSetup
         'cbShowConsole
         '
         Me.cbShowConsole.AutoSize = True
-        Me.cbShowConsole.Location = New System.Drawing.Point(278, 61)
+        Me.cbShowConsole.Location = New System.Drawing.Point(278, 131)
         Me.cbShowConsole.Name = "cbShowConsole"
         Me.cbShowConsole.Size = New System.Drawing.Size(130, 17)
         Me.cbShowConsole.TabIndex = 14
@@ -378,18 +380,39 @@ Partial Class frmSetup
         'cbUseCustomWindowSize
         '
         Me.cbUseCustomWindowSize.AutoSize = True
-        Me.cbUseCustomWindowSize.Location = New System.Drawing.Point(414, 61)
+        Me.cbUseCustomWindowSize.Location = New System.Drawing.Point(427, 131)
         Me.cbUseCustomWindowSize.Name = "cbUseCustomWindowSize"
         Me.cbUseCustomWindowSize.Size = New System.Drawing.Size(154, 17)
         Me.cbUseCustomWindowSize.TabIndex = 22
         Me.cbUseCustomWindowSize.Text = "Use Custom Window Size?"
         Me.cbUseCustomWindowSize.UseVisualStyleBackColor = True
         '
+        'cbOverlay
+        '
+        Me.cbOverlay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOverlay.FormattingEnabled = True
+        Me.cbOverlay.Items.AddRange(New Object() {"Off", "Top Full", "Top Minimal", "Bottom Full", "Bottom Minimal"})
+        Me.cbOverlay.Location = New System.Drawing.Point(420, 74)
+        Me.cbOverlay.Name = "cbOverlay"
+        Me.cbOverlay.Size = New System.Drawing.Size(150, 21)
+        Me.cbOverlay.TabIndex = 23
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(501, 58)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(69, 13)
+        Me.Label10.TabIndex = 24
+        Me.Label10.Text = "Overlay Style"
+        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(706, 407)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.cbOverlay)
         Me.Controls.Add(Me.GBCustomWindowSize)
         Me.Controls.Add(Me.cbUseCustomWindowSize)
         Me.Controls.Add(Me.GroupBox1)
@@ -452,4 +475,6 @@ Partial Class frmSetup
     Friend WithEvents Label9 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Button4 As Button
+    Friend WithEvents cbOverlay As ComboBox
+    Friend WithEvents Label10 As Label
 End Class

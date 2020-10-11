@@ -436,6 +436,7 @@ Public Class NullDCLauncher
             'If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
+            If line.StartsWith("OSD.ShowVsNames=") Then lines(linenumber) = "OSD.ShowVsNames=" & MainformRef.ConfigFile.VsNames
 
             ' [ImageReader]
             If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=1"
@@ -647,6 +648,7 @@ Public Class NullDCLauncher
             'If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
+            If line.StartsWith("OSD.ShowVsNames=") Then lines(linenumber) = "OSD.ShowVsNames=" & MainformRef.ConfigFile.VsNames
 
             'If line.StartsWith("Enhancements.AspectRatioMode=") Then lines(linenumber) = "Enhancements.AspectRatioMode=1"
 

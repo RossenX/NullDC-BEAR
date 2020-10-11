@@ -1181,6 +1181,7 @@ Public Class Configs
     Private _evolume As Int16 = 100
     Private _peripheral As Int16 = 0
     Private _windowsettings As String = "0|200|200|656|538"
+    Private _vsnames As Int16 = 3
 
 #Region "Properties"
 
@@ -1376,6 +1377,16 @@ Public Class Configs
         End Set
     End Property
 
+    Public Property VsNames() As Int16
+        Get
+            Return _vsnames
+        End Get
+        Set(ByVal value As Int16)
+            _vsnames = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -1402,7 +1413,8 @@ Public Class Configs
                 "eVolume=" & EmulatorVolume,
                 "ShowConsole=" & ShowConsole,
                 "Peripheral=" & Peripheral,
-                "WindowSettings=" & WindowSettings
+                "WindowSettings=" & WindowSettings,
+                "VsNames=" & VsNames
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -1461,6 +1473,7 @@ Public Class Configs
                 If line.StartsWith("ShowConsole") Then ShowConsole = line.Split("=")(1).Trim
                 If line.StartsWith("Peripheral") Then Peripheral = line.Split("=")(1).Trim
                 If line.StartsWith("WindowSettings") Then WindowSettings = line.Split("=")(1).Trim
+                If line.StartsWith("VsNames") Then VsNames = line.Split("=")(1).Trim
             Next
 
             Game = "None"

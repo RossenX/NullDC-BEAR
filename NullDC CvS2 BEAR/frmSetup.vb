@@ -44,6 +44,9 @@ Public Class frmSetup
         Else
             cbAllowSpectators.Text = "No"
         End If
+
+        cbOverlay.SelectedIndex = MainformRef.ConfigFile.VsNames
+
     End Sub
 
     Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
@@ -79,6 +82,8 @@ Public Class frmSetup
                 Next
             End If
         Next
+
+        MainformRef.ConfigFile.VsNames = cbOverlay.SelectedIndex
 
         Rx.MainformRef.ConfigFile.SaveFile()
         Me.Close()
