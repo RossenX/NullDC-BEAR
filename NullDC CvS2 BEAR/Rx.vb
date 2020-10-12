@@ -85,6 +85,7 @@ Module Rx
     End Function
 
     Public Sub TestSend()
+
         Dim VMUPieceLength = Math.Floor(VMU.Length / 10)
         Console.WriteLine(VMUPieceLength)
         Console.WriteLine(VMU.Length)

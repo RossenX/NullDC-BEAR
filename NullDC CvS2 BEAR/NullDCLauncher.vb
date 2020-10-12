@@ -438,7 +438,7 @@ Public Class NullDCLauncher
             If line.StartsWith("OSD.ShowVsNames=") Then lines(linenumber) = "OSD.ShowVsNames=" & MainformRef.ConfigFile.VsNames
 
             ' [ImageReader]
-            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=1"
+            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=0"
             If line.StartsWith("LoadDefaultImage=") Then lines(linenumber) = "LoadDefaultImage=1"
             If line.StartsWith("DefaultImage=") Then lines(linenumber) = "DefaultImage=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1).ToString.Replace("\roms\", "roms\")
             If line.StartsWith("LastImage=") Then lines(linenumber) = "LastImage=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1).ToString.Replace("\roms\", "roms\")
