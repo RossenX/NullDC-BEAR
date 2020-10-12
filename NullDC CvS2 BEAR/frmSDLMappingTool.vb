@@ -24,6 +24,11 @@ Public Class frmSDLMappingTool
         If Me.Visible Then
             Me.CenterToParent()
 
+            If SDL_WasInit(SDL_INIT_JOYSTICK) = 0 Then
+                SDL_Init(SDL_INIT_JOYSTICK)
+                Console.WriteLine("SDL_INIT")
+            End If
+
             If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
                 SDL_Init(SDL_INIT_GAMECONTROLLER)
                 Console.WriteLine("SDL_INIT")
@@ -31,6 +36,7 @@ Public Class frmSDLMappingTool
 
             If frmKeyMapperSDL.ControllerCB.SelectedValue >= 0 Then
                 Joy = SDL_JoystickOpen(frmKeyMapperSDL.ControllerCB.SelectedValue)
+                Console.WriteLine(Joy)
             Else
                 Joy = Nothing
             End If
@@ -69,13 +75,14 @@ Public Class frmSDLMappingTool
         While _currentBindIndex < ListOfGamepadKeys.Count
             Dim KeyPressed As String = ""
 
-            Me.Invoke(Sub()
-                          If Not ListOfGamepadKeysProper.Count - 1 < _currentBindIndex Then
-                              If Not ListOfGamepadKeysProper(_currentBindIndex) Is Nothing Then
-                                  Label1.Text = "Press " & ListOfGamepadKeysProper(_currentBindIndex) & vbNewLine & "ESCAPE to SKIP"
-                              End If
-                          End If
-                      End Sub)
+            Me.Invoke(
+                Sub()
+                    If Not ListOfGamepadKeysProper.Count - 1 < _currentBindIndex Then
+                        If Not ListOfGamepadKeysProper(_currentBindIndex) Is Nothing Then
+                            Label1.Text = "Press " & ListOfGamepadKeysProper(_currentBindIndex) & vbNewLine & "ESCAPE to SKIP"
+                        End If
+                    End If
+                End Sub)
 
             Dim _event As SDL_Event
             While SDL_PollEvent(_event)
@@ -143,6 +150,7 @@ Public Class frmSDLMappingTool
                             KeyPressed = "h" & (_event.jhat.hatValue / 10)
                         End If
                     Case SDL_EventType.SDL_JOYBUTTONDOWN  ' Button Down
+                        Console.WriteLine(_event.jbutton.button)
                         KeyPressed = "b" & _event.jbutton.button
                 End Select
 

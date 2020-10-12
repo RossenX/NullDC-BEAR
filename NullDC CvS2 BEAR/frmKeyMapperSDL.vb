@@ -30,9 +30,14 @@ Public Class frmKeyMapperSDL
             Me.CenterToParent()
             Me.Icon = My.Resources.NewNullDCBearIcon
 
+            If SDL_WasInit(SDL_INIT_JOYSTICK) = 0 Then
+                SDL_Init(SDL_INIT_JOYSTICK)
+                Console.WriteLine("SDL_INIT JOYSTICK")
+            End If
+
             If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
                 SDL_Init(SDL_INIT_GAMECONTROLLER)
-                Console.WriteLine("SDL_INIT")
+                Console.WriteLine("SDL_INIT GAME CONTROLLER")
             End If
 
             DoInitialSetupShit()
@@ -232,6 +237,7 @@ Public Class frmKeyMapperSDL
 
         If ControllerCB.SelectedIndex > -1 Then
             Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)
+            Console.WriteLine(Joy)
         End If
 
     End Sub
