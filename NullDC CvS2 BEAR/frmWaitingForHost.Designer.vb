@@ -25,6 +25,7 @@ Partial Class frmWaitingForHost
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnRetryVMU = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -62,6 +63,19 @@ Partial Class frmWaitingForHost
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
         '
+        'btnRetryVMU
+        '
+        Me.btnRetryVMU.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnRetryVMU.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnRetryVMU.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRetryVMU.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.btnRetryVMU.Location = New System.Drawing.Point(220, 190)
+        Me.btnRetryVMU.Name = "btnRetryVMU"
+        Me.btnRetryVMU.Size = New System.Drawing.Size(300, 38)
+        Me.btnRetryVMU.TabIndex = 3
+        Me.btnRetryVMU.Text = "Retry getting VMU"
+        Me.btnRetryVMU.UseVisualStyleBackColor = False
+        '
         'frmWaitingForHost
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -70,6 +84,7 @@ Partial Class frmWaitingForHost
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Squares
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(714, 228)
+        Me.Controls.Add(Me.btnRetryVMU)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox1)
@@ -87,4 +102,5 @@ Partial Class frmWaitingForHost
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnCancel As Button
+    Friend WithEvents btnRetryVMU As Button
 End Class

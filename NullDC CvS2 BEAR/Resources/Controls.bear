@@ -1,5 +1,5 @@
 Joystick=0|-1
-Deadzone=0|0
+Deadzone=15|15
 Peripheral=0|0
 I_BC_345=k0|k0
 I_BC_012=k0|k0

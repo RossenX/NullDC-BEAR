@@ -182,6 +182,8 @@ Module Rx
             Sub()
                 If MainformRef.WaitingForm.Visible Then
                     MainformRef.WaitingForm.Label1.Text = "Waiting for Host"
+                    MainformRef.WaitingForm.btnRetryVMU.Visible = False
+                    MainformRef.WaitingForm.VMUTimer.Stop()
                 End If
             End Sub)
 

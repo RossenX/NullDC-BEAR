@@ -188,7 +188,6 @@ Public Class NullDCLauncher
 
     Private Sub GameLoaded()
         ' If we're a host then send out call to my partner to join
-        Console.WriteLine(NullDCproc.MainWindowHandle)
         Console.WriteLine("Game Launched")
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
             If Platform = "dc" Then

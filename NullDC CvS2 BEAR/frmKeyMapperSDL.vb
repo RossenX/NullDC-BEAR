@@ -83,6 +83,7 @@ Public Class frmKeyMapperSDL
         Joystick(1) = -1
         Deadzone(0) = 15
         Deadzone(1) = 15
+        DeadzoneTB.Value = 15
         Peripheral(0) = 0
         Peripheral(1) = 0
 
@@ -182,6 +183,7 @@ Public Class frmKeyMapperSDL
         configLines = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
 
         RemoveHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
+
         For Each line In configLines
             If line.StartsWith("Joystick") Then
 
