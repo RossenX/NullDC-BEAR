@@ -86,6 +86,28 @@ Public Class frmSDLMappingTool
 
             Dim _event As SDL_Event
             While SDL_PollEvent(_event)
+                ' Write the capabilities
+                Dim ButtonText = "Buttons: ("
+
+                ButtonText += SDL_JoystickNumButtons(Joy).ToString & " "
+                For i = 0 To SDL_JoystickNumButtons(Joy)
+                    ButtonText += SDL_JoystickGetButton(Joy, i).ToString
+                Next
+                ButtonText += ")"
+
+                Dim AxisText = "Axis: ("
+                AxisText += SDL_JoystickNumAxes(Joy).ToString & " "
+                For i = 0 To SDL_JoystickNumAxes(Joy)
+                    AxisText += SDL_JoystickGetAxis(Joy, i).ToString & " "
+                Next
+                AxisText += ")"
+
+                Me.Invoke(
+                    Sub()
+                        Label2.Text = ButtonText
+                        Label4.Text = AxisText
+                    End Sub)
+
                 Select Case _event.type
                     Case SDL_EventType.SDL_JOYAXISMOTION ' Axis Motion Down
                         'Console.WriteLine("Axis: " & _event.jaxis.axisValue)
@@ -114,11 +136,9 @@ Public Class frmSDLMappingTool
                                     KeyPressed = "+a" & _event.jaxis.axis
                                 End If
                             Else
-                                If Not prefix Then
-                                    KeyPressed = "a" & _event.jaxis.axis
-                                Else
-                                    KeyPressed = "-a" & _event.jaxis.axis
-                                End If
+                                ' no prefix for negative values it seems to allow the game controller to pick up on negative buttons better
+                                KeyPressed = "a" & _event.jaxis.axis
+
                             End If
 
                             AxisDown.Add(_event.jaxis.axis, _event.jaxis.axisValue)
