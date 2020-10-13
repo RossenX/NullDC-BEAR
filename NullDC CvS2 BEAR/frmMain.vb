@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.50a"
+    Public Ver As String = "1.50b"
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -432,6 +432,11 @@ Public Class frmMain
             'NotificationForm.ShowMessage("Yo we have a new control system, go into the controls panel.")
             'End If
         End Try
+
+        ' Put in the VMU to keep it in sync for now
+        If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
+            My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", My.Resources.vmu_data_port01, False)
+        End If
 
         If Not File.Exists(NullDCPath & "\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\Vs.png")
         If Not File.Exists(NullDCPath & "\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\Vs_2.png")

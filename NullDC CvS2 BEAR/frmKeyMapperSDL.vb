@@ -272,7 +272,7 @@ Public Class frmKeyMapperSDL
                 'Console.WriteLine(_event.type)
                 Select Case _event.type
                     Case 1616 ' Axis Motion
-                        'Console.WriteLine("Axis Motion: " & _event.caxis.axis & "|" & _event.caxis.axisValue)
+                        Console.WriteLine("Axis Motion: " & _event.caxis.axis & "|" & _event.caxis.axisValue)
                         Me.Invoke(Sub()
 
                                       Dim _deadzonetotal As Decimal = 32768 * Decimal.Divide(DeadzoneTB.Value, 100)
