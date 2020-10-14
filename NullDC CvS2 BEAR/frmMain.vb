@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.50b"
+    Public Ver As String = "1.50c"
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -422,7 +422,10 @@ Public Class frmMain
         Try
             If needsUpdate Or IsBeta Then
                 UnzipResToDir(My.Resources.Updates, "bear_tmp_updates.zip", NullDCPath)
+                UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
+                UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
             End If
+
         Catch ex As Exception
             MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
             End

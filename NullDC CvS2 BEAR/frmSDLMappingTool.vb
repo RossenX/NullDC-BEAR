@@ -19,6 +19,8 @@ Public Class frmSDLMappingTool
     Dim _currentBindIndex = 0
     Dim Joy
     Dim AxisDown As New Dictionary(Of Integer, Integer)
+    Dim AxisIdle As New ArrayList
+    Dim _event As SDL_Event
 
     Private Sub frmSDLMappingTool_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Me.Visible Then
@@ -35,15 +37,26 @@ Public Class frmSDLMappingTool
             End If
 
             If frmKeyMapperSDL.ControllerCB.SelectedValue >= 0 Then
-                Joy = SDL_JoystickOpen(frmKeyMapperSDL.ControllerCB.SelectedValue)
+                Joy = SDL_GameControllerGetJoystick(frmKeyMapperSDL.Joy)
                 Console.WriteLine(Joy)
             Else
                 Joy = Nothing
             End If
 
+            If Joy Is Nothing Then
+                Exit Sub
+            End If
+
             AxisDown.Clear()
             AxisDown = New Dictionary(Of Integer, Integer)
             StartBinding()
+
+            ' Get the Default state of the axis
+            AxisIdle.Clear()
+            For i = 0 To SDL_JoystickNumAxes(Joy)
+                AxisIdle.Add(SDL_JoystickGetAxis(Joy, i))
+            Next
+
         Else
             If Not _InputThread Is Nothing Then
                 If _InputThread.IsAlive Then
@@ -84,7 +97,6 @@ Public Class frmSDLMappingTool
                     End If
                 End Sub)
 
-            Dim _event As SDL_Event
             While SDL_PollEvent(_event)
                 ' Write the capabilities
                 Dim ButtonText = "Buttons: ("
@@ -99,6 +111,7 @@ Public Class frmSDLMappingTool
                 AxisText += SDL_JoystickNumAxes(Joy).ToString & " "
                 For i = 0 To SDL_JoystickNumAxes(Joy)
                     AxisText += SDL_JoystickGetAxis(Joy, i).ToString & " "
+
                 Next
                 AxisText += ")"
 
@@ -120,25 +133,28 @@ Public Class frmSDLMappingTool
 
                         If _axisnorm > 256 And _axisnorm > _deadzonetotal And Not AxisDown.ContainsKey(_event.jaxis.axis) Then
                             'Console.WriteLine("Axis Down")
-                            Dim prefix As Boolean = True
+                            Dim IsTrigger As Boolean = False
 
-                            If ListOfGamepadKeys(_currentBindIndex) = "rightx" Or
-                                    ListOfGamepadKeys(_currentBindIndex) = "righty" Or
-                                    ListOfGamepadKeys(_currentBindIndex) = "leftx" Or
-                                    ListOfGamepadKeys(_currentBindIndex) = "lefty" Then
-                                prefix = False
+                            If ListOfGamepadKeys(_currentBindIndex) = "lefttrigger" Or ListOfGamepadKeys(_currentBindIndex) = "righttrigger" Then
+                                IsTrigger = True
                             End If
 
-                            If _event.jaxis.axisValue > 0 Then
-                                If Not prefix Then
-                                    KeyPressed = "a" & _event.jaxis.axis
-                                Else
-                                    KeyPressed = "+a" & _event.jaxis.axis
-                                End If
-                            Else
-                                ' no prefix for negative values it seems to allow the game controller to pick up on negative buttons better
-                                KeyPressed = "a" & _event.jaxis.axis
+                            If IsTrigger Then
+                                ' ok so triggers are tricky so going to need to have all these checks to account for all the types of triggers
 
+                                ' 0 to 1
+                                If AxisIdle(_event.jaxis.axis) >= -256 And AxisIdle(_event.jaxis.axis) <= 256 And _event.jaxis.axisValue >= 256 Then ' 0 to 1 (Possitive)
+                                    KeyPressed = "+a" & _event.jaxis.axis
+                                ElseIf AxisIdle(_event.jaxis.axis) >= -256 And AxisIdle(_event.jaxis.axis) <= 256 And _event.jaxis.axisValue <= -256 Then ' 0 to -1 (Negative)
+                                    KeyPressed = "-a" & _event.jaxis.axis
+                                ElseIf AxisIdle(_event.jaxis.axis) <= -256 And _event.jaxis.axisValue >= 256 Then ' -1 to 1 (Full Range)
+                                    KeyPressed = "a" & _event.jaxis.axis
+                                End If
+                                ' I'm pretty sure controllers that are -1 to 0 and 1 to 0 don't exist or even supported in SDL because it's mapping doens't seem to have anything to handle those sooooo lets hope that's true.
+
+                            Else
+                                    ' is not a trigger so don't need the - + stuff
+                                    KeyPressed = "a" & _event.jaxis.axis
                             End If
 
                             AxisDown.Add(_event.jaxis.axis, _event.jaxis.axisValue)
@@ -160,6 +176,7 @@ Public Class frmSDLMappingTool
                                 End If
 
                             End If
+
                         End If
 
                         SDL_FlushEvents(1536, 1536)
@@ -185,10 +202,10 @@ Public Class frmSDLMappingTool
 
         Dim DeviceGUIDasString(40) As Byte
 
-        Me.Invoke(Sub()
-                      SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(frmKeyMapperSDL.ControllerCB.SelectedValue), DeviceGUIDasString, 40)
-                  End Sub)
-
+        Me.Invoke(
+            Sub()
+                SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(frmKeyMapperSDL.ControllerCB.SelectedValue), DeviceGUIDasString, 40)
+            End Sub)
 
         Dim GUIDSTRING As String = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
 
@@ -269,14 +286,15 @@ Public Class frmSDLMappingTool
     Private Sub cbDeviceList_SelectedIndexChanged(sender As Object, e As EventArgs)
         For i = 0 To SDL_NumJoysticks() - 1
             If SDL_JoystickGetAttached(i) Then
-                SDL_JoystickClose(i)
+                'SDL_JoystickClose(i)
+                Joy = Nothing
             End If
         Next
     End Sub
 
     Private Sub frmSDLMappingTool_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If Not Joy Is Nothing Then
-            SDL_JoystickClose(Joy)
+            'SDL_JoystickClose(Joy)
             Joy = Nothing
         End If
 

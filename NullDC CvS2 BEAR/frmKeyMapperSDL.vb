@@ -10,7 +10,7 @@ Public Class frmKeyMapperSDL
     Dim Deadzone(2) As Int16
     Dim Peripheral(2) As Int16
 
-    Dim Joy As IntPtr
+    Public Joy As IntPtr
     Dim KeyConv As New KeysConverter
     Dim AvailableControllersList As New DataTable
 
