@@ -121,7 +121,12 @@ Public Class NetworkHandling
         End If
 
         If Not MainformRef.Challenger Is Nothing Then ' Only accept who is and challenge messages from none-challangers
-            If Not message.StartsWith("<") And Not message.StartsWith("?") And Not message.StartsWith("!") And Not message.StartsWith("&") Then
+            If Not message.StartsWith("<") And ' I am Request
+                Not message.StartsWith("?") And ' Who Is Request
+                Not message.StartsWith("!") And ' Being Challanged
+                Not message.StartsWith("&") And ' Someone left BEAR
+                Not message.StartsWith("V") And ' Asking for VMU
+                Not message.StartsWith("G") Then ' Successfuly got VMU
                 ' Message is not from challanger
                 If Not MainformRef.Challenger.ip = senderip And Not MainformRef.ConfigFile.IP = senderip Then
                     Console.WriteLine("<-DENIED->")
