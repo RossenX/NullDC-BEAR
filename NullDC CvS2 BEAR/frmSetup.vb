@@ -46,7 +46,7 @@ Public Class frmSetup
         End If
 
         cbOverlay.SelectedIndex = MainformRef.ConfigFile.VsNames
-
+        cb_ShowGameInTitle.Checked = MainformRef.ConfigFile.ShowGameNameInTitle
     End Sub
 
     Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
@@ -57,6 +57,7 @@ Public Class frmSetup
         MainformRef.ConfigFile.EmulatorVolume = tb_eVolume.Value
         MainformRef.ConfigFile.ShowConsole = Convert.ToInt32(cbShowConsole.Checked)
         MainformRef.ConfigFile.WindowSettings = CInt(cbUseCustomWindowSize.Checked).ToString & "|" & tbCWX.Text & "|" & tbCWY.Text & "|" & tbCWWidth.Text & "|" & tbCWHeight.Text
+        MainformRef.ConfigFile.ShowGameNameInTitle = Convert.ToInt32(cb_ShowGameInTitle.Checked)
 
         If cbAllowSpectators.Text = "Yes" Then
             MainformRef.ConfigFile.AllowSpectators = 1

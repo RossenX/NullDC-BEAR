@@ -306,7 +306,9 @@ Public Class NullDCLauncher
         If MainformRef.ConfigFile.Status = "Hosting" Then IsHosting = "1"
 
         Dim FPSLimiter = "0"
-        If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then FPSLimiter = "1"
+        If MainformRef.ConfigFile.Status = "Hosting" Or
+            MainformRef.ConfigFile.Status = "Offline" Or
+            MainformRef.ConfigFile.Status = "Spectator" Then FPSLimiter = "1"
 
         Dim Isspectator = "0"
         If MainformRef.ConfigFile.Status = "Spectator" Then Isspectator = 1
@@ -436,6 +438,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
             If line.StartsWith("OSD.ShowVsNames=") Then lines(linenumber) = "OSD.ShowVsNames=" & MainformRef.ConfigFile.VsNames
+            If line.StartsWith("Enhancements.ShowGameName=") Then lines(linenumber) = "Enhancements.ShowGameName=" & MainformRef.ConfigFile.ShowGameNameInTitle
 
             ' [ImageReader]
             If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=0"
@@ -648,6 +651,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
             If line.StartsWith("OSD.ShowVsNames=") Then lines(linenumber) = "OSD.ShowVsNames=" & MainformRef.ConfigFile.VsNames
+            If line.StartsWith("Enhancements.ShowGameName=") Then lines(linenumber) = "Enhancements.ShowGameName=" & MainformRef.ConfigFile.ShowGameNameInTitle
 
             'If line.StartsWith("Enhancements.AspectRatioMode=") Then lines(linenumber) = "Enhancements.AspectRatioMode=1"
 

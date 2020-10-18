@@ -1,4 +1,4 @@
-1.50d
+1.55
 CVS2::4B5360E5C101756B04FB20F11D50C8C8
 Dynarec.UnderclockFpu=1
 Emulation.ModVolMode=2
@@ -30,3 +30,7 @@ Emulation.AlphaSortMode=2
 King Of Fighters - Dream Match 1999::63CCFAB035BD7441099B503E6FED8F8F
 Dreamcast.Cable=1
 Emulation.AlphaSortMode=2
+Last Blade 2, The - Heart of the Samurai v1.002 (2001)(Agetec)(NTSC)(US)[!].gdi::55CF6C57F9A5084AC049406005A18EF2
+Dreamcast.Region=1
+Dreamcast.Cable=1
+Dynarec.UnderclockFpu=1

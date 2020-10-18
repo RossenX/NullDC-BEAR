@@ -53,6 +53,7 @@ Partial Class frmSetup
         Me.cbUseCustomWindowSize = New System.Windows.Forms.CheckBox()
         Me.cbOverlay = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.cb_ShowGameInTitle = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_Volume, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_eVolume, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -406,11 +407,22 @@ Partial Class frmSetup
         Me.Label10.TabIndex = 24
         Me.Label10.Text = "Overlay Style"
         '
+        'cb_ShowGameInTitle
+        '
+        Me.cb_ShowGameInTitle.AutoSize = True
+        Me.cb_ShowGameInTitle.Location = New System.Drawing.Point(278, 108)
+        Me.cb_ShowGameInTitle.Name = "cb_ShowGameInTitle"
+        Me.cb_ShowGameInTitle.Size = New System.Drawing.Size(134, 17)
+        Me.cb_ShowGameInTitle.TabIndex = 25
+        Me.cb_ShowGameInTitle.Text = "Show Game In Titlebar"
+        Me.cb_ShowGameInTitle.UseVisualStyleBackColor = True
+        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(706, 407)
+        Me.Controls.Add(Me.cb_ShowGameInTitle)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cbOverlay)
         Me.Controls.Add(Me.GBCustomWindowSize)
@@ -477,4 +489,5 @@ Partial Class frmSetup
     Friend WithEvents Button4 As Button
     Friend WithEvents cbOverlay As ComboBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents cb_ShowGameInTitle As CheckBox
 End Class

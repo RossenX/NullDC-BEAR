@@ -267,8 +267,8 @@ Partial Class frmDLC
         Me.LinkLabel1.Size = New System.Drawing.Size(408, 321)
         Me.LinkLabel1.TabIndex = 5
         Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "Click here to get games" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "NullDC REQUIRES .CDI FILES, PLEASE ONLY GET THE CDI FILE" &
-    "S." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.LinkLabel1.Text = "Click here to get games." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "GET THE CDI FILES THEY WORK BEST." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ONLY USE GDI IF THE " &
+    "CDI IS KNOWN NOT TO WORK." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.LinkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'frmDLC

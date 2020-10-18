@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = False
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.50d"
+    Public Ver As String = "1.55"
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -292,6 +292,11 @@ Public Class frmMain
                 Next
 
                 If Not FolderOnly Then
+                    If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
+                        File.SetAttributes(_dir & "\" & entry.FullName.Replace("/", "\"), FileAttribute.Normal)
+                        File.Delete(_dir & "\" & entry.FullName.Replace("/", "\"))
+                    End If
+
                     entry.ExtractToFile(_dir & "\" & entry.FullName.Replace("/", "\"), True)
                 End If
 
@@ -327,14 +332,6 @@ Public Class frmMain
             My.Computer.FileSystem.CreateDirectory(NullDCPath & "\replays")
         End If
 
-        'Install Dependencies if needed
-        If Not File.Exists(NullDCPath & "\SDL2.dll") Or
-            Not File.Exists(NullDCPath & "\SDL2-CS.dll") Or
-            Not File.Exists(NullDCPath & "\SDL2_net.dll") Or
-            Not File.Exists(NullDCPath & "\NAudio.dll") Then
-            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
-        End If
-
         ' FPS Limiter exists, lets remove it.
         If File.Exists(NullDCPath & "\antilag.cfg") Then
             File.SetAttributes(NullDCPath & "\antilag.cfg", FileAttributes.Normal)
@@ -361,14 +358,6 @@ Public Class frmMain
         If Not Directory.Exists(NullDCPath & "\dc") Then
             Directory.CreateDirectory(NullDCPath & "\dc")
             UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
-        End If
-
-        'Install Dependencies if needed
-        If Not File.Exists(NullDCPath & "\dc\SDL2.dll") Or
-            Not File.Exists(NullDCPath & "\dc\SDL2_net.dll") Or
-            Not File.Exists(NullDCPath & "\dc\SDL2-CS.dll") Or
-            Not File.Exists(NullDCPath & "\dc\NAudio.dll") Then
-            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
         End If
 
         If Not File.Exists(NullDCPath & "\dc\GameSpecificSettings.optibear") Then
@@ -461,7 +450,8 @@ Public Class frmMain
         table.Columns.Add("Game", GetType(String))
 
         ' New Get All Roms code that includes subfolders
-        Dim Files
+        Dim Files As String()
+
         If _system = "all" Or _system = "naomi" Then
             Files = Directory.GetFiles(NullDCPath & "\roms", "*.lst", SearchOption.AllDirectories)
             For Each _file In Files
@@ -481,6 +471,15 @@ Public Class frmMain
         If _system = "all" Or _system = "dc" Then
             Dim hasher As MD5 = MD5.Create()
             Files = Directory.GetFiles(NullDCPath & "\dc\roms", "*.cdi", SearchOption.AllDirectories)
+            Dim GDIFiles = Directory.GetFiles(NullDCPath & "\dc\roms", "*.gdi", SearchOption.AllDirectories)
+
+            Dim InsertAtIndex = 0
+            If Files.Count > 0 Then InsertAtIndex = Files.Count - 1
+
+            Array.Resize(Files, Files.Count + GDIFiles.Count)
+            GDIFiles.CopyTo(Files, InsertAtIndex)
+
+
             For Each _file In Files
                 If IsFileInUse(_file) Then
                     Continue For
@@ -492,7 +491,15 @@ Public Class frmMain
                 Dim fs As New FileStream(_file, FileMode.Open)
                 Dim binary_reader As New BinaryReader(fs)
                 fs.Position = 0
-                Dim bytes() As Byte = hasher.ComputeHash(binary_reader.ReadBytes(5000000))
+                Dim BytesToHash = binary_reader.ReadBytes(5000000)
+                ' GDI files put their actual name in the hash, because or how small the files are and they could have 2 files that are the same
+                If GameName_Split(GameName_Split.Count - 1).ToLower.EndsWith(".gdi") Then
+                    Dim NameAsByte = Encoding.ASCII.GetBytes(GameName_Split(GameName_Split.Count - 1).ToLower)
+                    NameAsByte.CopyTo(BytesToHash, 0)
+                End If
+
+
+                Dim bytes() As Byte = hasher.ComputeHash(BytesToHash)
 
                 Dim sBuilder As New StringBuilder()
                 For n As Integer = 0 To bytes.Length - 1
@@ -500,7 +507,7 @@ Public Class frmMain
                 Next n
                 fs.Close()
 
-                Dim GameName As String = "DC- " & StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", ""), vbProperCase).Split("[")(0).Split("(")(0).Trim
+                Dim GameName As String = "DC- " & StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", "").Replace(".gdi", ""), vbProperCase).Split("[")(0).Split("(")(0).Trim
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
                 Dim RomPath As String = _file.Replace(NullDCPath & "\dc\", "")
 
@@ -1190,6 +1197,7 @@ Public Class Configs
     Private _peripheral As Int16 = 0
     Private _windowsettings As String = "0|200|200|656|538"
     Private _vsnames As Int16 = 3
+    Private _ShowGameNameInTitle As Int16 = 1
 
 #Region "Properties"
 
@@ -1395,6 +1403,16 @@ Public Class Configs
 
     End Property
 
+    Public Property ShowGameNameInTitle() As Int16
+        Get
+            Return _ShowGameNameInTitle
+        End Get
+        Set(ByVal value As Int16)
+            _ShowGameNameInTitle = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -1422,7 +1440,8 @@ Public Class Configs
                 "ShowConsole=" & ShowConsole,
                 "Peripheral=" & Peripheral,
                 "WindowSettings=" & WindowSettings,
-                "VsNames=" & VsNames
+                "VsNames=" & VsNames,
+                "ShowGameNameInTitle=" & ShowGameNameInTitle
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -1482,6 +1501,7 @@ Public Class Configs
                 If line.StartsWith("Peripheral") Then Peripheral = line.Split("=")(1).Trim
                 If line.StartsWith("WindowSettings") Then WindowSettings = line.Split("=")(1).Trim
                 If line.StartsWith("VsNames") Then VsNames = line.Split("=")(1).Trim
+                If line.StartsWith("ShowGameNameInTitle") Then ShowGameNameInTitle = line.Split("=")(1).Trim
             Next
 
             Game = "None"
