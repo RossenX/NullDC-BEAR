@@ -455,7 +455,7 @@ Public Class frmMain
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
 
-                Dim GameName As String = "NA- " & GameName_Split(GameName_Split.Count - 2).Trim
+                Dim GameName As String = "NA- " & GameName_Split(GameName_Split.Count - 2).Trim.Replace(",", ".")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -505,7 +505,7 @@ Public Class frmMain
                 Next n
                 fs.Close()
 
-                Dim GameName As String = "DC- " & StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", "").Replace(".gdi", ""), vbProperCase).Split("[")(0).Split("(")(0).Trim
+                Dim GameName As String = "DC- " & StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", "").Replace(".gdi", "").Replace(",", "."), vbProperCase).Split("[")(0).Split("(")(0).Trim
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
 
                 Dim RomPath As String = _file.Replace(NullDCPath & "\dc\", "")
@@ -1455,7 +1455,7 @@ Public Class Configs
             Else
                 If SendIam Then
                     Dim GameNameAndRomName = "None"
-                    If Not Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
+                    If Not Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0).ToString.Replace(",", ".") & "|" & MainformRef.ConfigFile.Game
 
                     Dim NameToSend As String = Name
                     If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " Vs " & MainformRef.Challenger.name
