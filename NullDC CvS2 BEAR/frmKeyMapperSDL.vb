@@ -646,9 +646,12 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSDL.Click
-        'MsgBox(SDL.SDL_GameControllerMapping(Joy))
-        'My.Computer.Clipboard.SetText(SDL.SDL_GameControllerMapping(Joy))
-        frmSDLMappingTool.ShowDialog(Me)
+        If ControllerCB.SelectedIndex = 0 Then
+            MsgBox("Select a CONTROLLER from the list first. For Keyboard just click a button on the right, when it turns red press a key on your keyboard.")
+        Else
+            frmSDLMappingTool.ShowDialog(Me)
+        End If
+
     End Sub
 
     Private Sub frmKeyMapperSDL_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -656,9 +659,6 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub ControllerCB_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles ControllerCB.SelectedIndexChanged
-
-    End Sub
 End Class
 
 Public Class KeyBind

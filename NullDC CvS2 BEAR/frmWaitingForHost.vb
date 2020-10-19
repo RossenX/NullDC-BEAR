@@ -27,14 +27,13 @@
         ' If this is a CDI (Dreamcast game) ask for the VMU Data
         If Visible Then
             btnRetryVMU.Visible = False
-            If MainformRef.Challenger.game.ToLower.EndsWith(".cdi") Then
+            If MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" Then
                 Label1.Text = "Syncing VMU..."
                 MainformRef.NetworkHandler.SendMessage("V", MainformRef.Challenger.ip)
                 VMUTimer.Interval = 5000
                 VMUTimer.Start()
 
             End If
-
         End If
 
     End Sub

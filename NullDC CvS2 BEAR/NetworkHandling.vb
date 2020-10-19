@@ -272,8 +272,8 @@ Public Class NetworkHandling
 
             If Not MainformRef.GamesList.ContainsKey(Split(4)) Then ' Check if they have the game before anything else
                 SendMessage(">,NG", senderip)
-
                 Exit Sub
+
             End If
 
             If MainformRef.ChallengeForm.Visible Or MainformRef.GameSelectForm.Visible Then

@@ -320,9 +320,7 @@ Public Class frmMain
                 If line.StartsWith("Version") Then tmpVersion = line.Split("=")(1).Trim
             Next
 
-            If Not tmpVersion = Ver Then
-                needsUpdate = True
-            End If
+            If Not tmpVersion = Ver Then needsUpdate = True
 
         Else
             needsUpdate = True
@@ -458,7 +456,7 @@ Public Class frmMain
                 Dim GameName_Split As String() = _file.Split("\")
 
                 Dim GameName As String = "NA- " & GameName_Split(GameName_Split.Count - 2).Trim
-                Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
@@ -474,9 +472,9 @@ Public Class frmMain
             Dim GDIFiles = Directory.GetFiles(NullDCPath & "\dc\roms", "*.gdi", SearchOption.AllDirectories)
 
             Dim InsertAtIndex = 0
-            If Files.Count > 0 Then InsertAtIndex = Files.Count - 1
+            If Files.Count > 0 Then InsertAtIndex = Files.Count
 
-            Array.Resize(Files, Files.Count + GDIFiles.Count)
+            Array.Resize(Files, Files.Count + GDIFiles.Count + 1)
             GDIFiles.CopyTo(Files, InsertAtIndex)
 
 
@@ -508,13 +506,16 @@ Public Class frmMain
                 fs.Close()
 
                 Dim GameName As String = "DC- " & StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", "").Replace(".gdi", ""), vbProperCase).Split("[")(0).Split("(")(0).Trim
-                Dim RomName As String = GameName_Split(GameName_Split.Count - 1)
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+
                 Dim RomPath As String = _file.Replace(NullDCPath & "\dc\", "")
 
                 If Not GamesList.ContainsKey(RomName) Then
                     GamesList.Add(RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
+                    Console.WriteLine("Found Game: RomName:" & RomName & " GameName:" & GameName & " RomPath:" & RomPath & " Platform:dc" & " " & sBuilder.ToString())
                     table.Rows.Add({RomName, GameName})
                 End If
+
             Next
 
             ' Generate the hash file in the dc roms
@@ -553,7 +554,10 @@ Public Class frmMain
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "naomi"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
-
+            Case "Saturn"
+                Console.WriteLine("Room For Expansion")
+            Case "Genesis"
+                Console.WriteLine("Room For Expansion")
         End Select
 
     End Sub
@@ -595,7 +599,7 @@ Public Class frmMain
     Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
 
         ' Ignore being told to join the host if we havn't gotten the VMU yet
-        If Challenger.game.ToLower.EndsWith(".cdi") And Rx.VMU Is Nothing Then
+        If MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" And Rx.VMU Is Nothing Then
             Console.WriteLine("Host started before VMU Data was Recieved, wait")
             Exit Sub
         End If
@@ -1050,7 +1054,7 @@ Public Class frmMain
             Challenger = New NullDCPlayer(c_name, c_ip, c_port, c_gamerom)
 
             ' Don't instantly spectate a DC game, get the VMU first
-            If Not Challenger.game.ToLower.EndsWith(".cdi") Then
+            If Not MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" Then
                 NetworkHandler.SendMessage("!," & ConfigFile.Name & "," & ConfigFile.IP & "," & ConfigFile.Port & "," & Challenger.game & ",0," & ConfigFile.Peripheral, Challenger.ip)
             End If
 

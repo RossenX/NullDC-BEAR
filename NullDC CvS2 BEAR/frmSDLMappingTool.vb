@@ -44,8 +44,11 @@ Public Class frmSDLMappingTool
             End If
 
             If Joy Is Nothing Then
+                MsgBox("Couldn't open Joystick")
                 Exit Sub
             End If
+
+            UpdateHelpTest()
 
             AxisDown.Clear()
             AxisDown = New Dictionary(Of Integer, Integer)
@@ -83,6 +86,30 @@ Public Class frmSDLMappingTool
         _InputThread.Start()
     End Sub
 
+    Private Sub UpdateHelpTest()
+        Dim ButtonText = "Buttons: ("
+
+        ButtonText += SDL_JoystickNumButtons(Joy).ToString & " "
+        For i = 0 To SDL_JoystickNumButtons(Joy)
+            ButtonText += SDL_JoystickGetButton(Joy, i).ToString
+        Next
+        ButtonText += ")"
+
+        Dim AxisText = "Axis: ("
+        AxisText += SDL_JoystickNumAxes(Joy).ToString & " "
+        For i = 0 To SDL_JoystickNumAxes(Joy)
+            AxisText += SDL_JoystickGetAxis(Joy, i).ToString & " "
+
+        Next
+        AxisText += ")"
+
+        Me.Invoke(
+            Sub()
+                Label2.Text = ButtonText
+                Label4.Text = AxisText
+            End Sub)
+    End Sub
+
     Private Sub InputThread()
 
         While _currentBindIndex < ListOfGamepadKeys.Count
@@ -99,27 +126,7 @@ Public Class frmSDLMappingTool
 
             While SDL_PollEvent(_event)
                 ' Write the capabilities
-                Dim ButtonText = "Buttons: ("
-
-                ButtonText += SDL_JoystickNumButtons(Joy).ToString & " "
-                For i = 0 To SDL_JoystickNumButtons(Joy)
-                    ButtonText += SDL_JoystickGetButton(Joy, i).ToString
-                Next
-                ButtonText += ")"
-
-                Dim AxisText = "Axis: ("
-                AxisText += SDL_JoystickNumAxes(Joy).ToString & " "
-                For i = 0 To SDL_JoystickNumAxes(Joy)
-                    AxisText += SDL_JoystickGetAxis(Joy, i).ToString & " "
-
-                Next
-                AxisText += ")"
-
-                Me.Invoke(
-                    Sub()
-                        Label2.Text = ButtonText
-                        Label4.Text = AxisText
-                    End Sub)
+                UpdateHelpTest()
 
                 Select Case _event.type
                     Case SDL_EventType.SDL_JOYAXISMOTION ' Axis Motion Down
