@@ -6,12 +6,13 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = False
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.55a"
+    Public Ver As String = "1.55b" 'Psst make sure to also change DreamcastGameOptimizations.txt
+
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
@@ -32,7 +33,7 @@ Public Class frmMain
     Public FinishedLoading As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\Capcom VS SNK Millenium Fight 2000", "zip.zip")
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "zip.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         Me.Icon = My.Resources.NewNullDCBearIcon

@@ -1,4 +1,4 @@
-1.55
+1.55b
 CVS2::4B5360E5C101756B04FB20F11D50C8C8
 Dynarec.UnderclockFpu=1
 Emulation.ModVolMode=2
@@ -34,3 +34,9 @@ Last Blade 2, The - Heart of the Samurai v1.002 (2001)(Agetec)(NTSC)(US)[!].gdi:
 Dreamcast.Region=1
 Dreamcast.Cable=1
 Dynarec.UnderclockFpu=1
+Mortal Kombat Gold v1.001 (1999)(Midway)(NTSC)(US)[!].gdi::FCF0ADA99D6253EDBF888E62FEBB7FD2
+Dreamcast.Region=1
+Dreamcast.Cable=3
+CDDAMute=1
+DC- Mortal Kombat Gold::BAEB20F6CFFCA7C7453DE8A4EEE04983
+CDDAMute=1
