@@ -140,13 +140,16 @@ Public Class frmSDLMappingTool
 
                         If _axisnorm > 256 And _axisnorm > _deadzonetotal And Not AxisDown.ContainsKey(_event.jaxis.axis) Then
                             'Console.WriteLine("Axis Down")
-                            Dim IsTrigger As Boolean = False
+                            Dim IsThumbStick As Boolean = False
 
-                            If ListOfGamepadKeys(_currentBindIndex) = "lefttrigger" Or ListOfGamepadKeys(_currentBindIndex) = "righttrigger" Then
-                                IsTrigger = True
+                            If ListOfGamepadKeys(_currentBindIndex) = "leftx" Or
+                                ListOfGamepadKeys(_currentBindIndex) = "lefty" Or
+                                ListOfGamepadKeys(_currentBindIndex) = "rightx" Or
+                                ListOfGamepadKeys(_currentBindIndex) = "righty" Then
+                                IsThumbStick = True
                             End If
 
-                            If IsTrigger Then
+                            If Not IsThumbStick Then
                                 ' ok so triggers are tricky so going to need to have all these checks to account for all the types of triggers
 
                                 ' 0 to 1
@@ -160,8 +163,8 @@ Public Class frmSDLMappingTool
                                 ' I'm pretty sure controllers that are -1 to 0 and 1 to 0 don't exist or even supported in SDL because it's mapping doens't seem to have anything to handle those sooooo lets hope that's true.
 
                             Else
-                                    ' is not a trigger so don't need the - + stuff
-                                    KeyPressed = "a" & _event.jaxis.axis
+                                ' is not a trigger so don't need the - + stuff
+                                KeyPressed = "a" & _event.jaxis.axis
                             End If
 
                             AxisDown.Add(_event.jaxis.axis, _event.jaxis.axisValue)
