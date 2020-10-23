@@ -37,7 +37,7 @@ Public Class frmSDLMappingTool
             End If
 
             If frmKeyMapperSDL.ControllerCB.SelectedValue >= 0 Then
-                Joy = SDL_GameControllerGetJoystick(frmKeyMapperSDL.Joy)
+                Joy = SDL_JoystickOpen(frmKeyMapperSDL.ControllerCB.SelectedValue)
                 Console.WriteLine(Joy)
             Else
                 Joy = Nothing
