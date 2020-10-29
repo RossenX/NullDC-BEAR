@@ -7,7 +7,7 @@ Module Rx
     Public MainformRef As frmMain ' Mainly here to have a constatn reference to the main form even after minimzing to tray
     Public EEPROM As String ' the EEPROM we're using saved here for people that wanna join as spectator
     Public VMU As String ' the p1 VMU
-    Public VMUPieces As New ArrayList
+    Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
 
     Public Function GetEEPROM(ByVal _romfullpath As String) As String
         Dim EEPROMPath As String = _romfullpath & ".eeprom"
@@ -143,14 +143,6 @@ Module Rx
 
     Public Sub RecieveVMUPiece(ByVal _total As Int16, ByVal _piece As Int16, ByVal _data As String)
         'Console.WriteLine("Recivefd Piece: " & _data)
-
-        If VMUPieces.Count < 10 Then
-            VMUPieces.Clear()
-            For i = 0 To 9
-                VMUPieces.Add("")
-            Next
-        End If
-
         VMUPieces(_piece) = _data
 
         Dim RecivedAllVMUPieces = True

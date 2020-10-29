@@ -39,14 +39,14 @@ Partial Class frmDLC
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.lvGamesList_Dreamcast = New System.Windows.Forms.ListView()
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tc_games.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'lvGamesList_naomi
@@ -169,9 +169,9 @@ Partial Class frmDLC
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(316, 455)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(91, 39)
+        Me.Label2.Size = New System.Drawing.Size(99, 39)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Disclaimer: Some games might not work Online. "
+        Me.Label2.Text = "Disclaimer: " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Some games might not work."
         '
         'tc_games
         '
@@ -237,39 +237,38 @@ Partial Class frmDLC
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage3.Controls.Add(Me.TableLayoutPanel2)
+        Me.TabPage3.Controls.Add(Me.lvGamesList_Dreamcast)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.Size = New System.Drawing.Size(420, 327)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Dreamcast"
         '
-        'TableLayoutPanel2
+        'lvGamesList_Dreamcast
         '
-        Me.TableLayoutPanel2.ColumnCount = 1
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.LinkLabel1, 0, 0)
-        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 1
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(414, 321)
-        Me.TableLayoutPanel2.TabIndex = 0
+        Me.lvGamesList_Dreamcast.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lvGamesList_Dreamcast.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lvGamesList_Dreamcast.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvGamesList_Dreamcast.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lvGamesList_Dreamcast.FullRowSelect = True
+        Me.lvGamesList_Dreamcast.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.lvGamesList_Dreamcast.HideSelection = False
+        Me.lvGamesList_Dreamcast.Location = New System.Drawing.Point(0, 0)
+        Me.lvGamesList_Dreamcast.Margin = New System.Windows.Forms.Padding(0)
+        Me.lvGamesList_Dreamcast.MultiSelect = False
+        Me.lvGamesList_Dreamcast.Name = "lvGamesList_Dreamcast"
+        Me.lvGamesList_Dreamcast.Size = New System.Drawing.Size(420, 327)
+        Me.lvGamesList_Dreamcast.TabIndex = 3
+        Me.lvGamesList_Dreamcast.UseCompatibleStateImageBehavior = False
+        Me.lvGamesList_Dreamcast.View = System.Windows.Forms.View.Details
         '
-        'LinkLabel1
+        'ColumnHeader5
         '
-        Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LinkLabel1.Location = New System.Drawing.Point(3, 0)
-        Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(408, 321)
-        Me.LinkLabel1.TabIndex = 5
-        Me.LinkLabel1.TabStop = True
-        Me.LinkLabel1.Text = "Click here to get games." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "GET THE CDI FILES THEY WORK BEST." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ONLY USE GDI IF THE " &
-    "CDI IS KNOWN NOT TO WORK." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.LinkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ColumnHeader5.Width = 380
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Width = 0
         '
         'frmDLC
         '
@@ -287,8 +286,6 @@ Partial Class frmDLC
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
-        Me.TableLayoutPanel2.ResumeLayout(False)
-        Me.TableLayoutPanel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -310,6 +307,7 @@ Partial Class frmDLC
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ColumnHeader4 As ColumnHeader
     Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
-    Friend WithEvents LinkLabel1 As LinkLabel
+    Friend WithEvents lvGamesList_Dreamcast As ListView
+    Friend WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents ColumnHeader6 As ColumnHeader
 End Class

@@ -52,17 +52,29 @@ Public Class frmKeyMapperSDL
             AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
             AddHandler PlayerTab.SelectedIndexChanged, AddressOf PlayerTab_SelectedIndexChanged
             AddHandler ControllersTab.SelectedIndexChanged, Sub() ActiveControl = Nothing
+            AddHandler cbSDL.SelectedIndexChanged, AddressOf SDLVersionChanged
 
             If MainformRef.IsNullDCRunning Then
                 PeripheralCB.Enabled = False
                 PeriWarning.Visible = True
+                cbSDL.Enabled = False
             Else
                 PeripheralCB.Enabled = True
                 PeriWarning.Visible = False
+                cbSDL.Enabled = True
             End If
 
         End If
 
+
+    End Sub
+
+    Private Sub SDLVersionChanged(sender As ComboBox, e As EventArgs)
+        If Not cbSDL.SelectedItem = MainformRef.ConfigFile.SDLVersion Then
+            MainformRef.ConfigFile.SDLVersion = "+" & sender.SelectedItem
+            MainformRef.ConfigFile.SaveFile(False)
+            If MsgBox("Restart Required") = MsgBoxResult.Ok Then End
+        End If
 
     End Sub
 
@@ -239,6 +251,8 @@ Public Class frmKeyMapperSDL
             Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)
             Console.WriteLine(Joy)
         End If
+
+        cbSDL.SelectedItem = MainformRef.ConfigFile.SDLVersion
 
     End Sub
 

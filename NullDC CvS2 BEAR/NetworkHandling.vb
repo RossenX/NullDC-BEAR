@@ -209,32 +209,14 @@ Public Class NetworkHandling
                 Exit Sub
             End If
 
-            ' Lets check who we're sending the VMU to
-            If MainformRef.ConfigFile.Status = "Offline" Then ' We're offline so check if we allow spectating
-                If MainformRef.ConfigFile.AllowSpectators = 1 Then
-                    If Rx.VMU Is Nothing Then
-                        Rx.VMU = Rx.ReadVMU()
-                    End If
-                    Rx.SendVMU(senderip)
+
+            If MainformRef.Challenger.ip = senderip Then ' We're sending this to our Challanger
+                Rx.SendVMU(senderip)
+            Else ' We're sending a VMU to someone else, a spectator probably
+                If MainformRef.ConfigFile.AllowSpectators = 1 Then ' Check if we allow spectators
+                    Rx.SendVMU(senderip) ' If we do then start sending them the VMU
                 Else
                     SendMessage(">,NS", senderip)
-                End If
-
-            Else ' We're online, ether client or host doens't matter
-                If MainformRef.Challenger.ip = senderip Then ' We're sending this to our Challanger
-                    If Rx.VMU Is Nothing Then
-                        Rx.VMU = Rx.ReadVMU()
-                    End If
-                    Rx.SendVMU(senderip)
-                Else ' We're sending a VMU to someone else, a spectator probably
-                    If MainformRef.ConfigFile.AllowSpectators = 1 Then
-                        If Rx.VMU Is Nothing Then
-                            Rx.VMU = Rx.ReadVMU()
-                        End If
-                        Rx.SendVMU(senderip)
-                    Else
-                        SendMessage(">,NS", senderip)
-                    End If
                 End If
             End If
 

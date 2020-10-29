@@ -155,7 +155,7 @@ Public Class NullDCLauncher
         P2Peripheral = ""
         Rx.EEPROM = ""
         Rx.VMU = Nothing
-        Rx.VMUPieces.Clear()
+        Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
 
         'MainformRef.InputHandler.GetKeyboardConfigs(Platform)
         'MainformRef.InputHandler.NeedConfigReload = True
@@ -163,6 +163,12 @@ Public Class NullDCLauncher
 
     Private Sub StartDreamcastEmulator(ByVal _romname As String)
         ChangeSettings_Dreamcast()
+
+        ' If we hosting save the VMU for sending to spectators
+        If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then
+            Rx.VMU = Rx.ReadVMU()
+        End If
+
         NullDCproc = Process.Start(MainformRef.NullDCPath & "\dc\nullDC_Win32_Release-NoTrace.exe")
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
@@ -172,7 +178,10 @@ Public Class NullDCLauncher
 
     Private Sub StartNaomiEmulator(ByVal _romname As String)
         ChangeSettings_Naomi()
+
+        ' If we hosting save the EEPROM for sending to spectators
         Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
+
         NullDCproc = Process.Start(MainformRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
@@ -190,12 +199,12 @@ Public Class NullDCLauncher
         ' If we're a host then send out call to my partner to join
         Console.WriteLine("Game Launched")
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
-            If Platform = "dc" Then
-                Rx.EEPROM = ""
-            End If
+            If Platform = "dc" Then Rx.EEPROM = ""
+
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
 
         End If
+
     End Sub
 
     Private Sub RestoreNvmem() ' Mostly so it doesn't fuck up blue's launcher

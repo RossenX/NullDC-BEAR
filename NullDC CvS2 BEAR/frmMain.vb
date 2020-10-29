@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = False
+    Dim IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.55c" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.60" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -33,7 +33,7 @@ Public Class frmMain
     Public FinishedLoading As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "zip.zip")
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "SDL_Stable.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         Me.Icon = My.Resources.NewNullDCBearIcon
@@ -87,6 +87,25 @@ Public Class frmMain
 
         ConfigFile = New Configs(NullDCPath)
         cbStatus.Text = ConfigFile.Status
+
+        ' Check SDL Version Swap
+        If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Then ' We Need to Change SDL Version
+            If MainformRef.ConfigFile.SDLVersion = "+Stable" Then
+                UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath & "\dc")
+                UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath)
+                MainformRef.ConfigFile.SDLVersion = "Stable"
+                MainformRef.ConfigFile.SaveFile(False)
+                Console.WriteLine("SDL Changed to: Stable")
+
+            Else
+                UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
+                UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
+                MainformRef.ConfigFile.SDLVersion = "Dev"
+                MainformRef.ConfigFile.SaveFile(False)
+                Console.WriteLine("SDL Changed to: Dev")
+            End If
+
+        End If
 
         ' Update Stuff
         AddHandler UpdateCheckClient.DownloadStringCompleted, AddressOf UpdateCheckResult
@@ -349,6 +368,13 @@ Public Class frmMain
                 File.SetAttributes(_file, FileAttributes.Normal)
                 File.Delete(_file)
             Next
+
+            _honey = Directory.GetFiles(NullDCPath & "\dc\roms", "*.honey")
+            For Each _file In _honey
+                File.SetAttributes(_file, FileAttributes.Normal)
+                File.Delete(_file)
+            Next
+
         Catch ex As Exception
 
         End Try
@@ -363,7 +389,7 @@ Public Class frmMain
             File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations)
 
         Else
-            If Not File.ReadAllLines(NullDCPath & "\dc\GameSpecificSettings.optibear")(0) = Ver Then
+            If Not File.ReadAllLines(NullDCPath & "\dc\GameSpecificSettings.optibear")(0) = Ver Or IsBeta Then
                 File.SetAttributes(NullDCPath & "\dc\GameSpecificSettings.optibear", FileAttributes.Normal)
                 File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations)
                 Console.WriteLine("Updated Optibear")
@@ -1203,6 +1229,7 @@ Public Class Configs
     Private _windowsettings As String = "0|200|200|656|538"
     Private _vsnames As Int16 = 3
     Private _ShowGameNameInTitle As Int16 = 1
+    Private _sdlversopm As String = "Dev"
 
 #Region "Properties"
 
@@ -1418,6 +1445,17 @@ Public Class Configs
 
     End Property
 
+    Public Property SDLVersion() As String
+        Get
+            Return _sdlversopm
+        End Get
+
+        Set(ByVal value As String)
+            _sdlversopm = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -1446,7 +1484,8 @@ Public Class Configs
                 "Peripheral=" & Peripheral,
                 "WindowSettings=" & WindowSettings,
                 "VsNames=" & VsNames,
-                "ShowGameNameInTitle=" & ShowGameNameInTitle
+                "ShowGameNameInTitle=" & ShowGameNameInTitle,
+                "SDLVersion=" & SDLVersion
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -1507,6 +1546,7 @@ Public Class Configs
                 If line.StartsWith("WindowSettings") Then WindowSettings = line.Split("=")(1).Trim
                 If line.StartsWith("VsNames") Then VsNames = line.Split("=")(1).Trim
                 If line.StartsWith("ShowGameNameInTitle") Then ShowGameNameInTitle = line.Split("=")(1).Trim
+                If line.StartsWith("SDLVersion") Then SDLVersion = line.Split("=")(1).Trim
             Next
 
             Game = "None"

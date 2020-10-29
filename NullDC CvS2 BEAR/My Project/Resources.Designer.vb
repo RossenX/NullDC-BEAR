@@ -201,7 +201,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.30
+        '''  Looks up a localized string similar to 1.55c
         '''CVS2::4B5360E5C101756B04FB20F11D50C8C8
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
@@ -216,7 +216,7 @@ Namespace My.Resources
         '''Dreamcast.Cable=0
         '''Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1
         '''Emulation.AlphaSortMode=1
-        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228 [rest of string was truncated]&quot;;.
+        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F22 [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property DreamcastGameOptimizations() As String
             Get
@@ -279,6 +279,16 @@ Namespace My.Resources
         Friend ReadOnly Property NullNaomiClean() As Byte()
             Get
                 Dim obj As Object = ResourceManager.GetObject("NullNaomiClean", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property SDL_Stable() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("SDL_Stable", resourceCulture)
                 Return CType(obj,Byte())
             End Get
         End Property

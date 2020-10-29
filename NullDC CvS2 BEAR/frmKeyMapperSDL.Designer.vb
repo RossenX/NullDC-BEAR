@@ -135,6 +135,8 @@ Partial Class frmKeyMapperSDL
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.cbSDL = New System.Windows.Forms.ComboBox()
+        Me.Label37 = New System.Windows.Forms.Label()
         Me.PeripheralCB = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.btn_Close = New System.Windows.Forms.Button()
@@ -1684,7 +1686,7 @@ Partial Class frmKeyMapperSDL
         Me.ControllerCB.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ControllerCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ControllerCB.FormattingEnabled = True
-        Me.ControllerCB.Location = New System.Drawing.Point(3, 16)
+        Me.ControllerCB.Location = New System.Drawing.Point(3, 45)
         Me.ControllerCB.Name = "ControllerCB"
         Me.ControllerCB.Size = New System.Drawing.Size(200, 21)
         Me.ControllerCB.TabIndex = 55
@@ -1757,19 +1759,23 @@ Partial Class frmKeyMapperSDL
         '
         Me.TableLayoutPanel4.ColumnCount = 1
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.cbSDL, 0, 8)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label37, 0, 7)
         Me.TableLayoutPanel4.Controls.Add(Me.Label12, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.PeripheralCB, 0, 6)
         Me.TableLayoutPanel4.Controls.Add(Me.Label9, 0, 5)
         Me.TableLayoutPanel4.Controls.Add(Me.ControllerCB, 0, 2)
         Me.TableLayoutPanel4.Controls.Add(Me.Deadzonetext, 0, 3)
         Me.TableLayoutPanel4.Controls.Add(Me.DeadzoneTB, 0, 4)
-        Me.TableLayoutPanel4.Controls.Add(Me.btn_Close, 0, 9)
-        Me.TableLayoutPanel4.Controls.Add(Me.PeriWarning, 0, 7)
+        Me.TableLayoutPanel4.Controls.Add(Me.btn_Close, 0, 11)
+        Me.TableLayoutPanel4.Controls.Add(Me.PeriWarning, 0, 10)
         Me.TableLayoutPanel4.Controls.Add(Me.btnSDL, 0, 2)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 24)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 10
+        Me.TableLayoutPanel4.RowCount = 11
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -1780,9 +1786,28 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(206, 520)
         Me.TableLayoutPanel4.TabIndex = 4
+        '
+        'cbSDL
+        '
+        Me.cbSDL.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSDL.FormattingEnabled = True
+        Me.cbSDL.Items.AddRange(New Object() {"Stable", "Dev"})
+        Me.cbSDL.Location = New System.Drawing.Point(3, 189)
+        Me.cbSDL.Name = "cbSDL"
+        Me.cbSDL.Size = New System.Drawing.Size(197, 21)
+        Me.cbSDL.TabIndex = 68
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Location = New System.Drawing.Point(3, 173)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(66, 13)
+        Me.Label37.TabIndex = 69
+        Me.Label37.Text = "SDL Version"
+        Me.Label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'PeripheralCB
         '
@@ -1833,7 +1858,7 @@ Partial Class frmKeyMapperSDL
         '
         Me.btnSDL.BackColor = System.Drawing.Color.White
         Me.btnSDL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSDL.Location = New System.Drawing.Point(3, 43)
+        Me.btnSDL.Location = New System.Drawing.Point(3, 16)
         Me.btnSDL.Name = "btnSDL"
         Me.btnSDL.Size = New System.Drawing.Size(200, 23)
         Me.btnSDL.TabIndex = 67
@@ -2024,6 +2049,8 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents CONT_BC_CZ As keybindButton
     Friend WithEvents CONT_BC_YB As keybindButton
     Friend WithEvents CONT_BC_XA As keybindButton
-    Friend WithEvents PeriWarning As Label
     Friend WithEvents btnSDL As Button
+    Friend WithEvents cbSDL As ComboBox
+    Friend WithEvents Label37 As Label
+    Friend WithEvents PeriWarning As Label
 End Class
