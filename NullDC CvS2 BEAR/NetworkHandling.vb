@@ -209,14 +209,22 @@ Public Class NetworkHandling
                 Exit Sub
             End If
 
-
-            If MainformRef.Challenger.ip = senderip Then ' We're sending this to our Challanger
-                Rx.SendVMU(senderip)
-            Else ' We're sending a VMU to someone else, a spectator probably
+            If MainformRef.Challenger Is Nothing Then ' Offline Spectating
                 If MainformRef.ConfigFile.AllowSpectators = 1 Then ' Check if we allow spectators
                     Rx.SendVMU(senderip) ' If we do then start sending them the VMU
                 Else
                     SendMessage(">,NS", senderip)
+                End If
+
+            Else
+                If MainformRef.Challenger.ip = senderip Then ' We're sending this to our Challanger
+                    Rx.SendVMU(senderip)
+                Else ' We're sending a VMU to someone else, a spectator probably
+                    If MainformRef.ConfigFile.AllowSpectators = 1 Then ' Check if we allow spectators
+                        Rx.SendVMU(senderip) ' If we do then start sending them the VMU
+                    Else
+                        SendMessage(">,NS", senderip)
+                    End If
                 End If
             End If
 

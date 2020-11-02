@@ -88,24 +88,30 @@ Public Class frmMain
         ConfigFile = New Configs(NullDCPath)
         cbStatus.Text = ConfigFile.Status
 
-        ' Check SDL Version Swap
-        If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Then ' We Need to Change SDL Version
-            If MainformRef.ConfigFile.SDLVersion = "+Stable" Then
-                UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath & "\dc")
-                UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath)
-                MainformRef.ConfigFile.SDLVersion = "Stable"
-                MainformRef.ConfigFile.SaveFile(False)
-                Console.WriteLine("SDL Changed to: Stable")
+        Try
+            ' Check SDL Version Swap
+            If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Then ' We Need to Change SDL Version
+                If MainformRef.ConfigFile.SDLVersion = "+Stable" Then
+                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath & "\dc")
+                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath)
+                    MainformRef.ConfigFile.SDLVersion = "Stable"
+                    MainformRef.ConfigFile.SaveFile(False)
+                    Console.WriteLine("SDL Changed to: Stable")
 
-            Else
-                UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
-                UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
-                MainformRef.ConfigFile.SDLVersion = "Dev"
-                MainformRef.ConfigFile.SaveFile(False)
-                Console.WriteLine("SDL Changed to: Dev")
+                Else
+                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
+                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
+                    MainformRef.ConfigFile.SDLVersion = "Dev"
+                    MainformRef.ConfigFile.SaveFile(False)
+                    Console.WriteLine("SDL Changed to: Dev")
+                End If
+
             End If
+        Catch ex As Exception
+            MsgBox("Couldn't change SDL version make sure nullDC is closed. Error: " & vbNewLine & ex.Message)
+            End
+        End Try
 
-        End If
 
         ' Update Stuff
         AddHandler UpdateCheckClient.DownloadStringCompleted, AddressOf UpdateCheckResult
@@ -1013,7 +1019,6 @@ Public Class frmMain
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         For i = 0 To Application.OpenForms.Count - 1
             If i = 0 Then Continue For
-
             Application.OpenForms(i).Close()
         Next
 
