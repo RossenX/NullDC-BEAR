@@ -77,7 +77,7 @@ Q: Where to i put this in Fightcade?
 A: BEAR and Fightcade are different programs, Don't mix their files and stuff or you might mess them both up.
 
 Q: I only see myself in the list.
-A: Click the big green button in Options to add windows firewall exception for BEAR/NullDC.
+A: Click the big green button in Options to add windows firewall exception for BEAR/NullDC. VPN software like nordVPN can also interfeer with Radmin and cause it to be unable to establish a connection to others.
 
 Q: My <button> doesn't work.
 A: Click "Remap Controller" and follow the instructions. If your button is not recognized durring the Remapping window, change SDL version. (See Controls above)

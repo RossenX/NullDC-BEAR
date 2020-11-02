@@ -809,7 +809,7 @@ Public Class frmMain
         HostingForm.Visible = False
         Rx.EEPROM = ""
         Rx.VMU = Nothing
-        Rx.VMUPieces.Clear()
+        Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
 
         If _canceledby Is Nothing Then
             Select Case Reason

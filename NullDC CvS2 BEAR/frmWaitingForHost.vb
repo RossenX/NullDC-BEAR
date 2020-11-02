@@ -16,8 +16,10 @@
 
     Private Sub frmWaitingForHost_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         e.Cancel = True
+        btnRetryVMU.Visible = False
         If VMUTimer.Enabled Then
             VMUTimer.Stop()
+            VMUTimer.Interval = 5000
         End If
         Me.Visible = False
     End Sub
@@ -32,7 +34,6 @@
                 MainformRef.NetworkHandler.SendMessage("V", MainformRef.Challenger.ip)
                 VMUTimer.Interval = 5000
                 VMUTimer.Start()
-
             End If
         End If
 
