@@ -126,6 +126,9 @@ A: Just rebind the buttons (See controls above) and instead of clicking a contro
 Q: The game seems kinda stuttery not sure how to describe it, it's not lagging it just feels stuttery but the FPS is fine.  
 A: Try turning on Vsync that works better on some systems. In NullDC got to options->powervr->vsync and make sure it's checked. That should lead to a more consistent experiance for your system.
 
+Q: The player name overlay is in the way of my game.  
+A: In the OPTIONS part in BEAR there are 4 type of overlays to choose from and off. It can be up/down and be full(CVS2 Style background and names) or minimalistic(just player names nothing fancy) or off.
+
 
 ### BEAR or NullDC Crashes with some error
 You're probably missing one of these.
