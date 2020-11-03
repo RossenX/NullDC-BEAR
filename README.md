@@ -37,10 +37,13 @@ Most people use RadminVPN because it's the easiest to setup so that's what i'll 
 2. When it's installed you'll have a little blue shield icon on your desktop.
 3. Join a Network in RadminVPN
 ![JoinNetwork01](REARME%20Files/JoinNetwork01.png?raw=true "JoinNetwork01")
+
 4. Radmin has (As of right now) two nullDC public gaming networks. You can join any one of them.
 ![JoinNetwork02](REARME%20Files/JoinNetwork02.png?raw=true "JoinNetwork02")
+
 4a. Optionally you can create your own network if you want to just play with your friend or if the Gaming Network seems laggy tha day.
 ![JoinNetwork02](REARME%20Files/CreateNetwork.png?raw=true "JoinNetwork02")
+
 4b. Just create any network name/pass you want and give your friend the name/pass and they can join a private network.
 
 ## Usage Guide
@@ -54,6 +57,7 @@ To get a game click the "FreeDLC" button and check which games are available rig
 2a. If it says "Romname or game mismatch" that means the other person does not have the game you're trying to challange them to. OR they have a different rom than the one you are using. Both players must have the identical rom for netplay to work. I suggest always getting them from the freeDLC panel.
 3. When they accept you will be taken to the host panel.
 ![HostPanel](REARME%20Files/HostPanel.png?raw=true "HostPanel")
+
 Here you'll be given a couple of options.
 3a. "Delay" is how much delay you should have between you and the other person. The higher the ping the higher the delay required to play. If you get choppy gameplay or very low FPS, set the Delay Higher.
 Usually the "Suggest" button will do a fair job at estimating how much the delay should be.
