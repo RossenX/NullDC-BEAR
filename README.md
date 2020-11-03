@@ -2,8 +2,6 @@
 A nullDC ALL-IN-ONE Launcher and optimizer to ensure easy setup for nullDC(Naomi/Atomidwave) and optimized settings for a smooth gameplay experiance.
 Easy setup easy connection, minimal effort maximum performance.
 
-
-
 ## Setup Guide
 
 ### Downloading

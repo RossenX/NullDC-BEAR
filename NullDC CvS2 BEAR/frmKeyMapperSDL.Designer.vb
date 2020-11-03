@@ -1686,7 +1686,7 @@ Partial Class frmKeyMapperSDL
         Me.ControllerCB.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ControllerCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ControllerCB.FormattingEnabled = True
-        Me.ControllerCB.Location = New System.Drawing.Point(3, 45)
+        Me.ControllerCB.Location = New System.Drawing.Point(3, 16)
         Me.ControllerCB.Name = "ControllerCB"
         Me.ControllerCB.Size = New System.Drawing.Size(200, 21)
         Me.ControllerCB.TabIndex = 55
@@ -1764,7 +1764,7 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel4.Controls.Add(Me.Label12, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.PeripheralCB, 0, 6)
         Me.TableLayoutPanel4.Controls.Add(Me.Label9, 0, 5)
-        Me.TableLayoutPanel4.Controls.Add(Me.ControllerCB, 0, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.ControllerCB, 0, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.Deadzonetext, 0, 3)
         Me.TableLayoutPanel4.Controls.Add(Me.DeadzoneTB, 0, 4)
         Me.TableLayoutPanel4.Controls.Add(Me.btn_Close, 0, 11)
@@ -1858,7 +1858,7 @@ Partial Class frmKeyMapperSDL
         '
         Me.btnSDL.BackColor = System.Drawing.Color.White
         Me.btnSDL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSDL.Location = New System.Drawing.Point(3, 16)
+        Me.btnSDL.Location = New System.Drawing.Point(3, 43)
         Me.btnSDL.Name = "btnSDL"
         Me.btnSDL.Size = New System.Drawing.Size(200, 23)
         Me.btnSDL.TabIndex = 67

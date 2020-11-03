@@ -6,7 +6,7 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = True
+    Dim IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -607,6 +607,14 @@ Public Class frmMain
         If IsNullDCRunning() Then NullDCLauncher.NullDCproc.Kill()
         If Not Challenger Is Nothing Then NetworkHandler.SendMessage(">, Q", Challenger.ip)
 
+        ' Iono if i wanna have this to auto stop Radmin when BEAR closes
+        ' Dim processStartInfo As New ProcessStartInfo
+        ' ProcessStartInfo.FileName = "cmd.exe"
+        ' ProcessStartInfo.Verb = "runas"
+        ' ProcessStartInfo.UseShellExecute = True
+        ' ProcessStartInfo.CreateNoWindow = True
+        ' ProcessStartInfo.Arguments = "/c net stop RvControlSvc"
+        ' Process.Start(processStartInfo)
 
         End
 
