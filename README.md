@@ -87,53 +87,45 @@ Click "Play Offline" and Choose your game from the list. You can also simulate d
 
 ## FAQ (Or more correctly things most frequently yelled at me)
 
-Q: Where to i put this in Fightcade?
-
+Q: Where to i put this in Fightcade?  
 A: BEAR and Fightcade are different programs, Don't mix their files and stuff or you might mess them both up.
 
-Q: I only see myself in the list.
-
+Q: I only see myself in the list.  
 A: Click the big green button in Options to add windows firewall exception for BEAR/NullDC. VPN software like nordVPN can also interfeer with Radmin and cause it to be unable to establish a connection to others.
 
-Q: My <button> doesn't work.
-  
+Q: My <button> doesn't work.  
 A: Click "Remap Controller" and follow the instructions. If your button is not recognized durring the Remapping window, change SDL version. (See Controls above)
 
-Q: My buttons work but up left and right is down and they're all messed up WTF.
-
+Q: My buttons work but up left and right is down and they're all messed up WTF.  
 A: Rebind them, check controls above.
 
-Q: I can join other people's games but they can't join when i host.
-
+Q: I can join other people's games but they can't join when i host.  
 A: Firewall is blocking incoming connections. Click the big green button in Options to add windows firewall exception or check whatever firewall software you have.
 
-Q: Game runs really slow Online
-
+Q: Game runs really slow Online  
 A: The host has the delay set too low
 
-Q: The emulator instantly crashes when i try to play.
-
+Q: The emulator instantly crashes when i try to play.  
 A: You're missing one of the rerequired files below. (Check below)
 
-Q: <GAME NAME> Doesn't work!
-  
+Q: <GAME NAME> Doesn't work!  
 A: Not all games work but if you come across one that doens't work let me know i might be able to fix it in the next update.
 
-Q: The freeDLC menu only has like 2 games.
-
+Q: The freeDLC menu only has like 2 games.  
 A: That might rarely happen since it has to get a list of hundreds of games, close the freeDLC window and open it again.
 
-Q: <Game> says that i'm out of memory on my VMU what do i do?
-  
+Q: <Game> says that i'm out of memory on my VMU what do i do?  
 A: Press ABXY + Start to go into the dreamcast menu and then go to memory card and delete w.e games you don't want to play. BEAR comes with an almost full VMU(Memory card) with lot of saves for fighting games mostly, you can get rid of any you don't want to use.
 
-Q: Oh man i love your project is there any way i can support you?
-
+Q: Oh man i love your project is there any way i can support you?  
 A: Of course! Just click the patreon button and sign up, it only takes money at the start of the month so if you change your mind and cancel it early you won't be charged.
 
-Q: I only use a keyboard how do i play?
-
+Q: I only use a keyboard how do i play?  
 A: Just rebind the buttons (See controls above) and instead of clicking a controller, click a keyboard button.
+
+Q: The game seems kinda stuttery not sure how to describe it, it's not lagging it just feels stuttery but the FPS is fine.  
+A: Try turning on Vsync that works better on some systems. In NullDC got to options->powervr->vsync and make sure it's checked. That should lead to a more consistent experiance for your system.
+
 
 ### BEAR or NullDC Crashes with some error
 You're probably missing one of these.
