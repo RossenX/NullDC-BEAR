@@ -93,7 +93,7 @@ A: BEAR and Fightcade are different programs, Don't mix their files and stuff or
 Q: I only see myself in the list.  
 A: Click the big green button in Options to add windows firewall exception for BEAR/NullDC. VPN software like nordVPN can also interfeer with Radmin and cause it to be unable to establish a connection to others.
 
-Q: My <button> doesn't work.  
+Q: My button doesn't work.  
 A: Click "Remap Controller" and follow the instructions. If your button is not recognized durring the Remapping window, change SDL version. (See Controls above)
 
 Q: My buttons work but up left and right is down and they're all messed up WTF.  
@@ -108,7 +108,7 @@ A: The host has the delay set too low
 Q: The emulator instantly crashes when i try to play.  
 A: You're missing one of the rerequired files below. (Check below)
 
-Q: <GAME NAME> Doesn't work!  
+Q: GAME NAME Doesn't work!  
 A: Not all games work but if you come across one that doens't work let me know i might be able to fix it in the next update.
 
 Q: The freeDLC menu only has like 2 games.  
