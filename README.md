@@ -6,7 +6,7 @@ Easy setup easy connection, minimal effort maximum performance.
 
 ### Downloading
 Click "Releases" and download the newest NullDC.BEAR.exe You do not need any of the other files they're just the source code.
-![Downlaoding](REARME Files/Setup.gif?raw=true "Downlaoding")
+![Downlaoding](REARME%20Files/Setup.gif?raw=true "Downlaoding")
 
 ### Installing
 Put BEAR in an empty folder
