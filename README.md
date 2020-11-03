@@ -6,28 +6,36 @@ Easy setup easy connection, minimal effort maximum performance.
 
 ### Downloading
 Click "Releases" and download the newest NullDC.BEAR.exe You do not need any of the other files they're just the source code.
+
 ![Downlaoding](REARME%20Files/Downloading.gif?raw=true "Downlaoding")
 
 ### Installing
 Put BEAR in an empty folder
+
 ![Setup](REARME%20Files/Setup.gif?raw=true "Setup")
 
 ### Controls
 1. Click the Controls Button
+
 ![Controls01](REARME%20Files/Controls01.png?raw=true "Controls01")
 
 2. Choose your Controller from the list
+
 ![Controller](REARME%20Files/Controller.png?raw=true "Controller")
 
 3. Move your stick around and check which buttons light up GREEN
+
 ![GreenButtons](REARME%20Files/GreenButtons.gif?raw=true "GreenButtons")
 
 4. If Non Light up Green or some buttons on your controller do not work. click "Remap Controller"
+
 ![GreenButtons](REARME%20Files/RemapController.png?raw=true "GreenButtons")
 4a. If the bottom of the "Remap Controller" window says Buttons: (-1) or Buttons: (0 0). Cancel it and change the SDL version.
+
 ![SDL_Version](REARME%20Files/SDL_Version.png?raw=true "SDL_Version")
 
 5. If they want to change any button just click the button you want to change, it'll turn RED. Then press the button on your controller you want to bind it to.
+
 ![ReBinding](REARME%20Files/ReBinding.gif?raw=true "ReBinding")
 
 ## VPN Setup
@@ -36,12 +44,15 @@ Most people use RadminVPN because it's the easiest to setup so that's what i'll 
 1. Download RadminVPN: https://www.radmin-vpn.com/
 2. When it's installed you'll have a little blue shield icon on your desktop.
 3. Join a Network in RadminVPN
+
 ![JoinNetwork01](REARME%20Files/JoinNetwork01.png?raw=true "JoinNetwork01")
 
 4. Radmin has (As of right now) two nullDC public gaming networks. You can join any one of them.
+
 ![JoinNetwork02](REARME%20Files/JoinNetwork02.png?raw=true "JoinNetwork02")
 
 4a. Optionally you can create your own network if you want to just play with your friend or if the Gaming Network seems laggy tha day.
+
 ![JoinNetwork02](REARME%20Files/CreateNetwork.png?raw=true "JoinNetwork02")
 
 4b. Just create any network name/pass you want and give your friend the name/pass and they can join a private network.
@@ -56,6 +67,7 @@ To get a game click the "FreeDLC" button and check which games are available rig
 2. Choose the game you want to challange someone to from the list and click Challange. If they accept you'll be taken to the host panel.
 2a. If it says "Romname or game mismatch" that means the other person does not have the game you're trying to challange them to. OR they have a different rom than the one you are using. Both players must have the identical rom for netplay to work. I suggest always getting them from the freeDLC panel.
 3. When they accept you will be taken to the host panel.
+
 ![HostPanel](REARME%20Files/HostPanel.png?raw=true "HostPanel")
 
 Here you'll be given a couple of options.
