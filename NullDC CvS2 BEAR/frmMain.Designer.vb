@@ -31,6 +31,8 @@ Partial Class frmMain
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnDLC = New System.Windows.Forms.Button()
+        Me.btnPatreon = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.BtnJoin = New System.Windows.Forms.Button()
         Me.btnOffline = New System.Windows.Forms.Button()
@@ -47,12 +49,11 @@ Partial Class frmMain
         Me.imgBeta = New System.Windows.Forms.PictureBox()
         Me.niBEAR = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.btnReplay = New System.Windows.Forms.Button()
-        Me.btnDLC = New System.Windows.Forms.Button()
-        Me.btnPatreon = New System.Windows.Forms.Button()
         Me.cbStatus = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.BEARTitle = New System.Windows.Forms.PictureBox()
         Me.sus_i = New System.Windows.Forms.PictureBox()
+        Me.btnDiscord = New System.Windows.Forms.Button()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -144,8 +145,41 @@ Partial Class frmMain
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(533, 323)
         Me.TableLayoutPanel4.TabIndex = 5
+        '
+        'btnDLC
+        '
+        Me.btnDLC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnDLC.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnDLC.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDLC.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDLC.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
+        Me.btnDLC.Location = New System.Drawing.Point(318, 297)
+        Me.btnDLC.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnDLC.Name = "btnDLC"
+        Me.btnDLC.Size = New System.Drawing.Size(106, 26)
+        Me.btnDLC.TabIndex = 13
+        Me.btnDLC.TabStop = False
+        Me.btnDLC.Text = "Free DLC"
+        Me.btnDLC.UseVisualStyleBackColor = False
+        '
+        'btnPatreon
+        '
+        Me.btnPatreon.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnPatreon.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnPatreon.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnPatreon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPatreon.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
+        Me.btnPatreon.Location = New System.Drawing.Point(212, 297)
+        Me.btnPatreon.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnPatreon.Name = "btnPatreon"
+        Me.btnPatreon.Size = New System.Drawing.Size(106, 26)
+        Me.btnPatreon.TabIndex = 14
+        Me.btnPatreon.TabStop = False
+        Me.btnPatreon.Text = "Patreon o3o"
+        Me.btnPatreon.UseVisualStyleBackColor = False
         '
         'btnSearch
         '
@@ -357,38 +391,6 @@ Partial Class frmMain
         Me.btnReplay.Text = "Replays"
         Me.btnReplay.UseVisualStyleBackColor = False
         '
-        'btnDLC
-        '
-        Me.btnDLC.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.btnDLC.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnDLC.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDLC.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDLC.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnDLC.Location = New System.Drawing.Point(318, 297)
-        Me.btnDLC.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnDLC.Name = "btnDLC"
-        Me.btnDLC.Size = New System.Drawing.Size(106, 26)
-        Me.btnDLC.TabIndex = 13
-        Me.btnDLC.TabStop = False
-        Me.btnDLC.Text = "Free DLC"
-        Me.btnDLC.UseVisualStyleBackColor = False
-        '
-        'btnPatreon
-        '
-        Me.btnPatreon.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.btnPatreon.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnPatreon.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnPatreon.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPatreon.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnPatreon.Location = New System.Drawing.Point(212, 297)
-        Me.btnPatreon.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnPatreon.Name = "btnPatreon"
-        Me.btnPatreon.Size = New System.Drawing.Size(106, 26)
-        Me.btnPatreon.TabIndex = 14
-        Me.btnPatreon.TabStop = False
-        Me.btnPatreon.Text = "Patreon o3o"
-        Me.btnPatreon.UseVisualStyleBackColor = False
-        '
         'cbStatus
         '
         Me.cbStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
@@ -434,6 +436,21 @@ Partial Class frmMain
         Me.sus_i.TabIndex = 18
         Me.sus_i.TabStop = False
         '
+        'btnDiscord
+        '
+        Me.btnDiscord.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnDiscord.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDiscord.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDiscord.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
+        Me.btnDiscord.Location = New System.Drawing.Point(250, 419)
+        Me.btnDiscord.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnDiscord.Name = "btnDiscord"
+        Me.btnDiscord.Size = New System.Drawing.Size(106, 24)
+        Me.btnDiscord.TabIndex = 19
+        Me.btnDiscord.TabStop = False
+        Me.btnDiscord.Text = "Discord"
+        Me.btnDiscord.UseVisualStyleBackColor = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -441,6 +458,7 @@ Partial Class frmMain
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.MainMenuBackground
         Me.ClientSize = New System.Drawing.Size(610, 495)
+        Me.Controls.Add(Me.btnDiscord)
         Me.Controls.Add(Me.cbStatus)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnReplay)
@@ -501,4 +519,5 @@ Partial Class frmMain
     Friend WithEvents Label3 As Label
     Friend WithEvents BEARTitle As PictureBox
     Friend WithEvents sus_i As PictureBox
+    Friend WithEvents btnDiscord As Button
 End Class

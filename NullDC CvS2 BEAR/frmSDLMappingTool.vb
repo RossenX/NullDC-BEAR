@@ -204,7 +204,6 @@ Public Class frmSDLMappingTool
                                 ElseIf AxisIdle(_event.jaxis.axis) >= _deadzonetotal And _event.jaxis.axisValue <= -_deadzonetotal Then ' 1 to -1 (Full Range)
                                     KeyPressed = "a" & _event.jaxis.axis & "~"
                                 End If
-                                ' THIS COVERS ALL THE POSSIBLE ANALOG BULLSHIT
 
                             Else
                                 ' Is is a thumbstick so just use full range -1 to 1

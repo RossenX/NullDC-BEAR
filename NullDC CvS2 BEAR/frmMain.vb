@@ -1196,6 +1196,11 @@ Public Class frmMain
     Private Sub PictureBox1_MouseClick(sender As Object, e As MouseEventArgs) Handles sus_i.MouseClick
         Process.Start("http://www.innersloth.com/gameAmongUs.php")
     End Sub
+
+    Private Sub btnDiscord_Click(sender As Object, e As EventArgs) Handles btnDiscord.Click
+        Process.Start("https://discord.gg/H4npMH4Cdp")
+    End Sub
+
 End Class
 
 Public Class NullDCPlayer
