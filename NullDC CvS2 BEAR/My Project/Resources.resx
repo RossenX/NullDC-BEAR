@@ -208,4 +208,70 @@
   <data name="SDL_Stable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SDL_Stable.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Controller_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Dpad_Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Dpad-Down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Dpad_Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Dpad-Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Dpad_Right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Dpad-Right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Dpad_Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Dpad-Up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Guide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Guide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_LB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-LB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_LeftStick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-LeftStick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_LeftX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-LeftX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_LeftY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-LeftY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_LT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-LT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_RB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-RB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_RightStick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-RightStick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_RightX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-RightX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_RightY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-RightY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_RT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-RT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Start.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_X" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-X.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Y.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

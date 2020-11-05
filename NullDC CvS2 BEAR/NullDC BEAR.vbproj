@@ -349,6 +349,28 @@
     <None Include="Resources\BEARJammaNaomi.jpg" />
     <None Include="Resources\Dreamcast-ArcadeStick.jpg" />
     <None Include="Resources\BEARJamma_Dreamcast.jpg" />
+    <None Include="Resources\Controller Images\Controller-A.png" />
+    <None Include="Resources\Controller Images\Controller-B.png" />
+    <None Include="Resources\Controller Images\Controller-Back.png" />
+    <None Include="Resources\Controller Images\Controller-Background.png" />
+    <None Include="Resources\Controller Images\Controller-Dpad-Down.png" />
+    <None Include="Resources\Controller Images\Controller-Dpad-Left.png" />
+    <None Include="Resources\Controller Images\Controller-Dpad-Right.png" />
+    <None Include="Resources\Controller Images\Controller-Dpad-Up.png" />
+    <None Include="Resources\Controller Images\Controller-Guide.png" />
+    <None Include="Resources\Controller Images\Controller-LB.png" />
+    <None Include="Resources\Controller Images\Controller-LeftStick.png" />
+    <None Include="Resources\Controller Images\Controller-LeftX.png" />
+    <None Include="Resources\Controller Images\Controller-LeftY.png" />
+    <None Include="Resources\Controller Images\Controller-LT.png" />
+    <None Include="Resources\Controller Images\Controller-RB.png" />
+    <None Include="Resources\Controller Images\Controller-RightStick.png" />
+    <None Include="Resources\Controller Images\Controller-RightX.png" />
+    <None Include="Resources\Controller Images\Controller-RightY.png" />
+    <None Include="Resources\Controller Images\Controller-RT.png" />
+    <None Include="Resources\Controller Images\Controller-Start.png" />
+    <None Include="Resources\Controller Images\Controller-X.png" />
+    <None Include="Resources\Controller Images\Controller-Y.png" />
     <Content Include="Resources\DreamcastGameOptimizations.txt" />
   </ItemGroup>
   <ItemGroup>

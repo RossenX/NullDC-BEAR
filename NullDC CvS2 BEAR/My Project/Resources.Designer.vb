@@ -151,6 +151,226 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_A() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_A", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_B() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_B", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Back() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Back", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Background() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Background", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Dpad_Down() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Dpad_Down", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Dpad_Left() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Dpad_Left", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Dpad_Right() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Dpad_Right", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Dpad_Up() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Dpad_Up", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Guide() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Guide", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_LB() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_LB", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_LeftStick() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_LeftStick", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_LeftX() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_LeftX", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_LeftY() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_LeftY", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_LT() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_LT", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_RB() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_RB", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_RightStick() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_RightStick", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_RightX() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_RightX", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_RightY() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_RightY", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_RT() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_RT", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Start() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Start", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_X() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_X", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Controller_Y() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Controller_Y", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Byte[].
         '''</summary>
         Friend ReadOnly Property Controls() As Byte()
@@ -201,22 +421,19 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.55c
-        '''CVS2::4B5360E5C101756B04FB20F11D50C8C8
+        '''  Looks up a localized string similar to 1.65
+        '''CVS2::4B5360E5C101756B04FB20F11D50C8C8::5576B4A34D645C26C0BDE99D55F75FB0
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
         '''Emulation.PaletteMode=2
-        '''MVC2::9CE0220DCEF005912F3855D8BE98A35A
+        '''MVC2::9CE0220DCEF005912F3855D8BE98A35A::4A3B3DF3C475E9A0A01E0DE75FC0E87D::155E3EA07330912C61A93C1B4FD95B01
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
         '''Emulation.AlphaSortMode=1
-        '''SFA3::502D2FA89666019D8E8222F49F40431C
-        '''Dreamcast.Cable=0
-        '''Vampire Chronicle for Matching Service::A43F42016C786654ACF02A4AFBFFC260
-        '''Dreamcast.Cable=0
-        '''Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1
+        '''Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1::A09ED0A81635971E3D62431014D98F7A
         '''Emulation.AlphaSortMode=1
-        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F22 [rest of string was truncated]&quot;;.
+        '''CDDAMute=1
+        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228677B2 [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property DreamcastGameOptimizations() As String
             Get

@@ -6,23 +6,33 @@ Public Class frmSDLMappingTool
     Dim ListOfGamepadKeys As String() = {"a", "b", "x", "y", "leftshoulder", "rightshoulder",
         "lefttrigger", "righttrigger", "leftstick", "rightstick",
         "dpup", "dpdown", "dpleft", "dpright",
-        "leftx", "lefty", "rightx", "righty",
-        "back", "start", "guide"}
-    Dim ListOfGamepadKeysProper As String() = {"A", "B", "X", "Y", "Left Shoulder(L1)", "Right Shoulder(R1)",
+        "back", "start", "guide",
+        "leftx", "lefty", "rightx", "righty"}
+    Dim ListOfGamepadKeysProper As String() = {"A (Bottom Button)", "B (Right Button)", "X (Left Button)", "Y (Top Button)", "Left Shoulder(L1)", "Right Shoulder(R1)",
         "Left Trigger(L2)", "Right Trigger(R2)", "Left Stick(L3)", "Right Stick(R3)",
         "Digital Up (D-Pad or Digital Stick)", "Digital Down (D-Pad or Digital Stick)", "Digital Left (D-Pad or Digital Stick)", "Digital Right (D-Pad or Digital Stick)",
-        "Left Analog Stick Left or Right", "Left Analog Stick Up or Down", "Right Analog Stick Left or Right", "Right Analog Stick Up or Down",
-        "Back", "Start", "Guide/Logo Button"}
+        "Back", "Start", "Guide/Logo Button",
+        "Left Analog Stick Left or Right", "Left Analog Stick Up or Down", "Right Analog Stick Left or Right", "Right Analog Stick Up or Down"}
+
+    Dim ControllerImages As Image() = {My.Resources.Controller_A, My.Resources.Controller_B, My.Resources.Controller_X, My.Resources.Controller_Y, My.Resources.Controller_LB, My.Resources.Controller_RB,
+        My.Resources.Controller_LT, My.Resources.Controller_RT, My.Resources.Controller_LeftStick, My.Resources.Controller_RightStick,
+        My.Resources.Controller_Dpad_Up, My.Resources.Controller_Dpad_Down, My.Resources.Controller_Dpad_Left, My.Resources.Controller_Dpad_Right,
+        My.Resources.Controller_Back, My.Resources.Controller_Start, My.Resources.Controller_Guide,
+        My.Resources.Controller_LeftX, My.Resources.Controller_LeftY, My.Resources.Controller_RightX, My.Resources.Controller_RightY}
 
     Dim ListOfBinds(20) As String
     Dim _InputThread As Threading.Thread
     Dim _currentBindIndex = 0
     Dim Joy
-    Dim AxisDown As New Dictionary(Of Integer, Integer)
+    Dim AxisDown As New Dictionary(Of String, Integer)
     Dim AxisIdle As New ArrayList
     Dim _event As SDL_Event
+    Dim _deadzonetotal As Decimal
+    Dim ImageTimer As Timer = New Timer
 
     Private Sub frmSDLMappingTool_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        Me.Icon = My.Resources.NewNullDCBearIcon
+
         If Me.Visible Then
             Me.CenterToParent()
 
@@ -48,10 +58,13 @@ Public Class frmSDLMappingTool
                 Exit Sub
             End If
 
+            Me.Invoke(Sub() _deadzonetotal = 32768 * Decimal.Divide(frmKeyMapperSDL.DeadzoneTB.Value, 100))
+            _deadzonetotal += 256
+
             UpdateHelpTest()
 
             AxisDown.Clear()
-            AxisDown = New Dictionary(Of Integer, Integer)
+            AxisDown = New Dictionary(Of String, Integer)
             StartBinding()
 
             ' Get the Default state of the axis
@@ -68,6 +81,19 @@ Public Class frmSDLMappingTool
             End If
         End If
 
+        ImageTimer.Interval = 500
+        ImageTimer.Start()
+        AddHandler ImageTimer.Tick, Sub()
+                                        If PictureBox1.Image Is Nothing Then
+                                            If _currentBindIndex < ControllerImages.Count Then
+                                                PictureBox1.Image = ControllerImages(_currentBindIndex)
+                                            End If
+
+                                        Else
+                                            PictureBox1.Image = Nothing
+                                        End If
+
+                                    End Sub
 
     End Sub
 
@@ -87,26 +113,34 @@ Public Class frmSDLMappingTool
     End Sub
 
     Private Sub UpdateHelpTest()
-        Dim ButtonText = "Buttons: ("
+        Dim ButtonText = "Buttons: "
 
-        ButtonText += SDL_JoystickNumButtons(Joy).ToString & " "
-        For i = 0 To SDL_JoystickNumButtons(Joy)
+        ButtonText += SDL_JoystickNumButtons(Joy).ToString & " ("
+        For i = 0 To SDL_JoystickNumButtons(Joy) - 1
             ButtonText += SDL_JoystickGetButton(Joy, i).ToString
         Next
         ButtonText += ")"
 
-        Dim AxisText = "Axis: ("
-        AxisText += SDL_JoystickNumAxes(Joy).ToString & " "
-        For i = 0 To SDL_JoystickNumAxes(Joy)
+        Dim AxisText = "Axis: "
+        AxisText += SDL_JoystickNumAxes(Joy).ToString & " ("
+        For i = 0 To SDL_JoystickNumAxes(Joy) - 1
             AxisText += SDL_JoystickGetAxis(Joy, i).ToString & " "
 
         Next
-        AxisText += ")"
+        AxisText += ") Deadzone: " & (32768 * Decimal.Divide(frmKeyMapperSDL.DeadzoneTB.Value, 100)).ToString
+
+        Dim HatText = "Hats: "
+        HatText += SDL_JoystickNumHats(Joy).ToString & " ("
+        For i = 0 To SDL_JoystickNumHats(Joy) - 1
+            HatText += SDL_JoystickGetHat(Joy, i).ToString & " "
+        Next
+        HatText += ")"
 
         Me.Invoke(
             Sub()
-                Label2.Text = ButtonText
-                Label4.Text = AxisText
+                lbl_buttons.Text = ButtonText
+                lbl_axis.Text = AxisText
+                lbl_hats.Text = HatText
             End Sub)
     End Sub
 
@@ -133,12 +167,11 @@ Public Class frmSDLMappingTool
                         'Console.WriteLine("Axis: " & _event.jaxis.axisValue)
                         'Console.WriteLine("Device: " & _event.jdevice.which)
 
-                        Dim _deadzonetotal As Decimal
-                        Me.Invoke(Sub() _deadzonetotal = 32768 * Decimal.Divide(frmKeyMapperSDL.DeadzoneTB.Value, 100))
                         Dim _axisnorm As Int32 = _event.jaxis.axisValue
                         _axisnorm = Math.Abs(_axisnorm)
 
-                        If _axisnorm > 256 And _axisnorm > _deadzonetotal And Not AxisDown.ContainsKey(_event.jaxis.axis) Then
+                        ' _axisnorm > _deadzonetotal And 
+                        If Not AxisDown.ContainsKey(_event.jaxis.axis) Then
                             'Console.WriteLine("Axis Down")
                             Dim IsThumbStick As Boolean = False
 
@@ -152,39 +185,44 @@ Public Class frmSDLMappingTool
                             If Not IsThumbStick Then
                                 ' ok so triggers are tricky so going to need to have all these checks to account for all the types of triggers
 
-                                ' 0 to 1
-                                If AxisIdle(_event.jaxis.axis) >= -256 And AxisIdle(_event.jaxis.axis) <= 256 And _event.jaxis.axisValue >= 256 Then ' 0 to 1 (Possitive)
+                                ' Idle is Between Deadzone (0) and current is above deadzone (1)
+                                If AxisIdle(_event.jaxis.axis) >= -_deadzonetotal And AxisIdle(_event.jaxis.axis) <= _deadzonetotal And _event.jaxis.axisValue >= _deadzonetotal Then ' 0 to 1
                                     KeyPressed = "+a" & _event.jaxis.axis
-                                ElseIf AxisIdle(_event.jaxis.axis) >= -256 And AxisIdle(_event.jaxis.axis) <= 256 And _event.jaxis.axisValue <= -256 Then ' 0 to -1 (Negative)
+                                    ' Idle is Between Deadzone (0) and current is below deadzone (-1)
+                                ElseIf AxisIdle(_event.jaxis.axis) >= -_deadzonetotal And AxisIdle(_event.jaxis.axis) <= _deadzonetotal And _event.jaxis.axisValue <= -_deadzonetotal Then ' 0 to -1
                                     KeyPressed = "-a" & _event.jaxis.axis
-                                ElseIf AxisIdle(_event.jaxis.axis) <= -256 And _event.jaxis.axisValue >= 256 Then ' -1 to 1 (Full Range)
+                                    ' Idle is above deadzone (1) and current is in deadzone (0)
+                                ElseIf AxisIdle(_event.jaxis.axis) >= _deadzonetotal And _event.jaxis.axisValue <= _deadzonetotal And _event.jaxis.axisValue >= -_deadzonetotal Then ' 1 to 0
+                                    KeyPressed = "+a" & _event.jaxis.axis & "~"
+                                    ' Idle is below deadzone (-1) and current is in deadzone (0)
+                                ElseIf AxisIdle(_event.jaxis.axis) <= -_deadzonetotal And _event.jaxis.axisValue <= _deadzonetotal And _event.jaxis.axisValue >= -_deadzonetotal Then ' -1 to 0
+                                    KeyPressed = "-a" & _event.jaxis.axis & "~"
+                                    ' Idle is below deadzone (-1) and current is above deadzone (1)
+                                ElseIf AxisIdle(_event.jaxis.axis) <= -_deadzonetotal And _event.jaxis.axisValue >= _deadzonetotal Then ' -1 to 1 (Full Range)
                                     KeyPressed = "a" & _event.jaxis.axis
+                                    ' Idle is above deadzone (1) and current is below deadzone (-1)
+                                ElseIf AxisIdle(_event.jaxis.axis) >= _deadzonetotal And _event.jaxis.axisValue <= -_deadzonetotal Then ' 1 to -1 (Full Range)
+                                    KeyPressed = "a" & _event.jaxis.axis & "~"
                                 End If
-                                ' I'm pretty sure controllers that are -1 to 0 and 1 to 0 don't exist or even supported in SDL because it's mapping doens't seem to have anything to handle those sooooo lets hope that's true.
+                                ' THIS COVERS ALL THE POSSIBLE ANALOG BULLSHIT
 
                             Else
-                                ' is not a trigger so don't need the - + stuff
-                                KeyPressed = "a" & _event.jaxis.axis
+                                ' Is is a thumbstick so just use full range -1 to 1
+                                If Not AxisDown.ContainsKey("a" & _event.jaxis.axis) Then
+                                    If _event.jaxis.axisValue < 0 Then
+                                        KeyPressed = "a" & _event.jaxis.axis & "~"
+                                        AxisDown.Add("a" & _event.jaxis.axis, _event.jaxis.axisValue)
+                                    Else
+                                        KeyPressed = "a" & _event.jaxis.axis
+                                    End If
+                                End If
+
                             End If
 
-                            AxisDown.Add(_event.jaxis.axis, _event.jaxis.axisValue)
-
-                        Else
-
-                            If AxisDown.ContainsKey(_event.jaxis.axis) Then
-
-                                If AxisDown(_event.jaxis.axis) = _event.jaxis.axisValue Then
-                                    'Console.WriteLine("ignored")
-                                    Continue While
-                                End If
-
-                                If (Not _axisnorm > 256 And Not _axisnorm > _deadzonetotal) Or
-                                    (AxisDown(_event.jaxis.axis) > 0 And _event.jaxis.axisValue < 0) Or
-                                    (AxisDown(_event.jaxis.axis) < 0 And _event.jaxis.axisValue > 0) Then
-                                    ' Console.WriteLine("Rawr")
-                                    AxisDown.Remove(_event.jaxis.axis)
-                                End If
-
+                            If Not AxisDown.ContainsKey(KeyPressed) Then
+                                AxisDown.Add(KeyPressed, _event.jaxis.axisValue)
+                            Else
+                                KeyPressed = ""
                             End If
 
                         End If
@@ -194,11 +232,13 @@ Public Class frmSDLMappingTool
 
                     Case SDL_EventType.SDL_JOYHATMOTION  ' Hat Motion
                         If Not _event.jhat.hatValue = 0 Then
-                            KeyPressed = "h" & (_event.jhat.hatValue / 10)
+                            KeyPressed = "h" & CDec(_event.jhat.hatValue / 10).ToString
                         End If
+
                     Case SDL_EventType.SDL_JOYBUTTONDOWN  ' Button Down
                         Console.WriteLine(_event.jbutton.button)
                         KeyPressed = "b" & _event.jbutton.button
+
                 End Select
 
             End While
@@ -206,6 +246,16 @@ Public Class frmSDLMappingTool
             If KeyPressed.Length > 0 Then
                 ListOfBinds(_currentBindIndex) = ListOfGamepadKeys(_currentBindIndex) & ":" & KeyPressed
                 _currentBindIndex += 1
+                If _currentBindIndex < ControllerImages.Count Then
+                    Me.Invoke(Sub()
+                                  PictureBox1.Image = ControllerImages(_currentBindIndex)
+                                  ImageTimer.Enabled = False
+                                  ImageTimer.Enabled = True
+                                  ImageTimer.Start()
+                              End Sub)
+
+
+                End If
             End If
 
         End While
@@ -275,6 +325,14 @@ Public Class frmSDLMappingTool
             If _currentBindIndex < ListOfGamepadKeys.Count Then
                 ListOfBinds(_currentBindIndex) = ""
                 _currentBindIndex += 1
+                If _currentBindIndex < ControllerImages.Count Then
+                    Me.Invoke(Sub()
+                                  PictureBox1.Image = ControllerImages(_currentBindIndex)
+                                  ImageTimer.Enabled = False
+                                  ImageTimer.Enabled = True
+                                  ImageTimer.Start()
+                              End Sub)
+                End If
             End If
 
         End If
@@ -298,6 +356,8 @@ Public Class frmSDLMappingTool
             If SDL_JoystickGetAttached(i) Then
                 'SDL_JoystickClose(i)
                 Joy = Nothing
+                ImageTimer.Stop()
+                ImageTimer.Dispose()
             End If
         Next
     End Sub
