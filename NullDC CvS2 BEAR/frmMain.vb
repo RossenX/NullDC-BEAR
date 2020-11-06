@@ -1198,7 +1198,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnDiscord_Click(sender As Object, e As EventArgs) Handles btnDiscord.Click
-        Process.Start("https://discord.gg/H4npMH4Cdp")
+        Process.Start("https://discord.gg/u2YzdNB6SN")
     End Sub
 
 End Class
