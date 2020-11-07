@@ -127,7 +127,7 @@ Public Class frmSDLMappingTool
             AxisText += SDL_JoystickGetAxis(Joy, i).ToString & " "
 
         Next
-        AxisText += ") Deadzone: " & (32768 * Decimal.Divide(frmKeyMapperSDL.DeadzoneTB.Value, 100)).ToString
+        AxisText += ") Deadzone: " & (32768 * Decimal.Divide(frmKeyMapperSDL.DeadzoneTB.Value, 100)).ToString & vbNewLine & "If Deadzone is lower than your axis, raise the deadzone."
 
         Dim HatText = "Hats: "
         HatText += SDL_JoystickNumHats(Joy).ToString & " ("
@@ -260,6 +260,7 @@ Public Class frmSDLMappingTool
         End While
 
         Dim DeviceGUIDasString(40) As Byte
+
 
         Me.Invoke(
             Sub()

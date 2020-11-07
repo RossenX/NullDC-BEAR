@@ -33,7 +33,7 @@ Public Class frmMain
     Public FinishedLoading As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "SDL_Stable.zip")
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "King of Fighters XI.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         Me.Icon = My.Resources.NewNullDCBearIcon

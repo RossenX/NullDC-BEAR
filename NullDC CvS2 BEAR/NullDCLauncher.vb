@@ -319,8 +319,8 @@ Public Class NullDCLauncher
             MainformRef.ConfigFile.Status = "Offline" Or
             MainformRef.ConfigFile.Status = "Spectator" Then FPSLimiter = "1"
 
-        Dim Isspectator = "0"
-        If MainformRef.ConfigFile.Status = "Spectator" Then Isspectator = 1
+        Dim IsSpectator = "0"
+        If MainformRef.ConfigFile.Status = "Spectator" Then IsSpectator = 1
 
         ' Get P1/P2 Names
         If P1Name = "" Or P2Name = "" Then ' Player names were not set beforehand 
@@ -443,7 +443,13 @@ Public Class NullDCLauncher
             If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=0"
             If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
             If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"
-            'If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
+
+            If IsSpectator Then
+                If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
+            Else
+                If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=1"
+            End If
+
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
             If line.StartsWith("OSD.ShowVsNames=") Then lines(linenumber) = "OSD.ShowVsNames=" & MainformRef.ConfigFile.VsNames
@@ -463,7 +469,13 @@ Public Class NullDCLauncher
             If line.StartsWith("CDDAMute=") Then lines(linenumber) = "CDDAMute=0"
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
-            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
+
+            If IsSpectator Then
+                If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
+            Else
+                If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=0" ' & FPSLimiter
+            End If
+
             If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
 
             ' [nullExtDev]
@@ -656,7 +668,14 @@ Public Class NullDCLauncher
             If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=1"
             If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
             If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"
-            'If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
+
+            If IsSpectator Then
+                If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
+            Else
+                If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=1"
+            End If
+
+
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
             If line.StartsWith("Enhancements.MultiSampleQuality=") Then lines(linenumber) = "Enhancements.MultiSampleQuality=0"
             If line.StartsWith("OSD.ShowVsNames=") Then lines(linenumber) = "OSD.ShowVsNames=" & MainformRef.ConfigFile.VsNames
@@ -672,7 +691,13 @@ Public Class NullDCLauncher
             If line.StartsWith("CDDAMute=") Then lines(linenumber) = "CDDAMute=0"
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
-            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
+
+            If IsSpectator Then
+                If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
+            Else
+                If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=0" ' & FPSLimiter
+            End If
+
             If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
 
             ' [nullExtDev]

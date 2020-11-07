@@ -168,6 +168,16 @@ Public Class frmKeyMapperSDL
         Dim lines(128) As String
         ' BPortA_I_
         ' BPortA_CONT_
+        ' get GUIDs
+        Dim DeviceGUIDasString1(40) As Byte
+        Dim DeviceGUIDasString2(40) As Byte
+
+        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(0)), DeviceGUIDasString1, 40)
+        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(1)), DeviceGUIDasString2, 40)
+
+        Dim Joy1GUID = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString1).ToString.Replace(vbNullChar, "").Trim
+        Dim Joy2GUID = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString2).ToString.Replace(vbNullChar, "").Trim
+
         lines(0) = MainformRef.Ver
         lines(1) = "Joystick=" & Joystick(0) & "|" & Joystick(1)
         lines(2) = "Deadzone=" & Deadzone(0) & "|" & Deadzone(1)
