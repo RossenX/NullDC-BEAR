@@ -76,6 +76,7 @@ Public Class frmDLC
             ArchiveDotOrgParse("https://archive.org/details/DreamcastSelfBoot&output=json", lvGamesList_Dreamcast)
             AddDirectLink("https://archive.org/download/neo-geo-battle-coliseum-unlocked/NeoGeo%20Battle%20Coliseum%20-%20Unlocked.zip", "Neo Geo Battle Coliseum Unlocked", lvGamelist_Atomiswave)
             AddDirectLink("https://archive.org/download/capcom-vs-snk-millenium-fight-2000-unlocked_202010/Capcom_VS_SNK_Millenium_Fight_2000_Unlocked.zip", "Capcom VS SNK Millenium Fight 2000 Unlocked", lvGamesList_naomi)
+            AddDirectLink("https://archive.org/download/king-of-fighters-xi/King%20of%20Fighters%20XI.zip", "King of Fighters XI", lvGamesList_Dreamcast)
         Catch ex As Exception
             MsgBox(ex.InnerException)
         End Try
