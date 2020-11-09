@@ -104,9 +104,16 @@ Public Class frmChallenge
 
     Private Sub frmChallenge_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Visible Then
-            Dim pingThread As Thread = New Thread(AddressOf GetPing)
-            pingThread.IsBackground = True
-            pingThread.Start()
+
+            Try
+                Dim pingThread As Thread = New Thread(AddressOf GetPing)
+                pingThread.IsBackground = True
+                pingThread.Start()
+                'pingThread.Join()
+
+            Catch ex As Exception
+                MsgBox("Error Pinging Player")
+            End Try
 
             wavePlayer.Dispose()
             wavePlayer = New NAudio.Wave.WaveOut

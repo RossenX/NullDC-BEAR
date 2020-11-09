@@ -50,9 +50,17 @@ Public Class frmHostPanel
                 Console.WriteLine("Game Is:  " & Game)
                 If MainformRef.Challenger.game = "None" Then cbGameList.Visible = True
 
-                SuggestThread = New Thread(AddressOf SuggestDelay)
-                SuggestThread.IsBackground = True
-                SuggestThread.Start(True)
+                Try
+                    SuggestThread = New Thread(AddressOf SuggestDelay)
+                    SuggestThread.IsBackground = True
+                    SuggestThread.Start(True)
+                    'SuggestThread.Join()
+
+                Catch ex As Exception
+                    MsgBox("Error Pinging Player")
+
+                End Try
+
             Else
                 lbInfo.Text = "Hosting Solo"
                 cbDelay.Text = "1"

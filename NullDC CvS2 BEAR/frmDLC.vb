@@ -71,9 +71,11 @@ Public Class frmDLC
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
 
         Try
+
             ArchiveDotOrgParse("https://archive.org/details/NaomiRomsReuploadByGhostware&output=json", lvGamesList_naomi)
             ArchiveDotOrgParse("https://archive.org/details/AtomiswaveReuploadByGhostware&output=json", lvGamelist_Atomiswave)
             ArchiveDotOrgParse("https://archive.org/details/DreamcastSelfBoot&output=json", lvGamesList_Dreamcast)
+            'GetRomPacks()
             AddDirectLink("https://archive.org/download/neo-geo-battle-coliseum-unlocked/NeoGeo%20Battle%20Coliseum%20-%20Unlocked.zip", "Neo Geo Battle Coliseum Unlocked", lvGamelist_Atomiswave)
             AddDirectLink("https://archive.org/download/capcom-vs-snk-millenium-fight-2000-unlocked_202010/Capcom_VS_SNK_Millenium_Fight_2000_Unlocked.zip", "Capcom VS SNK Millenium Fight 2000 Unlocked", lvGamesList_naomi)
             AddDirectLink("https://archive.org/download/king-of-fighters-xi/King%20of%20Fighters%20XI.zip", "King of Fighters XI", lvGamesList_Dreamcast)
@@ -81,6 +83,19 @@ Public Class frmDLC
             MsgBox(ex.InnerException)
         End Try
 
+
+    End Sub
+
+    'Naomi.bearpack
+    'Atomiswave.bearpack
+    'Dreamcast.bearpack
+    '
+    Private Sub GetRomPacks()
+        Dim Files = Directory.GetFiles(MainformRef.NullDCPath, "*.bearpack", SearchOption.AllDirectories)
+
+        For Each _file In Files
+            ArchiveDotOrgParse(_file, lvGamesList_naomi)
+        Next
 
     End Sub
 
