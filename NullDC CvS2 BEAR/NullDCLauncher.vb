@@ -470,11 +470,7 @@ Public Class NullDCLauncher
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
 
-            If IsSpectator Then
-                If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
-            Else
-                If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=0" ' & FPSLimiter
-            End If
+            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
 
             If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
 
@@ -692,11 +688,7 @@ Public Class NullDCLauncher
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
 
-            If IsSpectator Then
-                If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
-            Else
-                If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=0" ' & FPSLimiter
-            End If
+            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
 
             If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
 
