@@ -54,6 +54,8 @@ Partial Class frmSetup
         Me.cbOverlay = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cb_ShowGameInTitle = New System.Windows.Forms.CheckBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cbVsync = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_Volume, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_eVolume, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -417,11 +419,32 @@ Partial Class frmSetup
         Me.cb_ShowGameInTitle.Text = "Show Game In Titlebar"
         Me.cb_ShowGameInTitle.UseVisualStyleBackColor = True
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(275, 58)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(36, 13)
+        Me.Label11.TabIndex = 26
+        Me.Label11.Text = "Vsync"
+        '
+        'cbVsync
+        '
+        Me.cbVsync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbVsync.FormattingEnabled = True
+        Me.cbVsync.Items.AddRange(New Object() {"Off", "On"})
+        Me.cbVsync.Location = New System.Drawing.Point(278, 74)
+        Me.cbVsync.Name = "cbVsync"
+        Me.cbVsync.Size = New System.Drawing.Size(67, 21)
+        Me.cbVsync.TabIndex = 27
+        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(706, 407)
+        Me.Controls.Add(Me.cbVsync)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.cb_ShowGameInTitle)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cbOverlay)
@@ -490,4 +513,6 @@ Partial Class frmSetup
     Friend WithEvents cbOverlay As ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents cb_ShowGameInTitle As CheckBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents cbVsync As ComboBox
 End Class

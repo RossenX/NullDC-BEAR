@@ -47,6 +47,7 @@ Public Class frmUpdate
         End If
 
         File.Copy(My.Computer.FileSystem.SpecialDirectories.Temp & "\NullDC.BEAR.exe", Application.StartupPath & "\NullDC.BEAR.exe", True)
+
     End Sub
 
     Private Sub _GifLoop()

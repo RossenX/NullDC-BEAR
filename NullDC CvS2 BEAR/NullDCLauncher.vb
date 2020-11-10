@@ -447,7 +447,7 @@ Public Class NullDCLauncher
             If IsSpectator Then
                 If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             Else
-                If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=1"
+                If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=" & MainformRef.ConfigFile.Vsync
             End If
 
             If line.StartsWith("Enhancements.MultiSampleCount=") Then lines(linenumber) = "Enhancements.MultiSampleCount=0"
@@ -470,7 +470,7 @@ Public Class NullDCLauncher
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
 
-            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
+            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
 
             If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
 
@@ -668,7 +668,7 @@ Public Class NullDCLauncher
             If IsSpectator Then
                 If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=0"
             Else
-                If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=1"
+                If line.StartsWith("Video.VSync=") Then lines(linenumber) = "Video.VSync=" & MainformRef.ConfigFile.Vsync
             End If
 
 
@@ -688,7 +688,7 @@ Public Class NullDCLauncher
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
 
-            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=" & FPSLimiter
+            If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
 
             If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
 

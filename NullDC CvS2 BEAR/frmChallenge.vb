@@ -6,7 +6,6 @@ Imports System.Net.NetworkInformation
 
 Public Class frmChallenge
 
-    Dim Timeout As Forms.Timer = New Forms.Timer
     Dim wavePlayer As New NAudio.Wave.WaveOut
 
     Public Sub New(ByRef _mf As frmMain)
@@ -28,7 +27,6 @@ Public Class frmChallenge
 
     Private Sub frmChallenge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
-        AddHandler Timeout.Tick, AddressOf Timeout_tick
 
     End Sub
 
@@ -47,21 +45,6 @@ Public Class frmChallenge
             Label1.Invoke(Sub() Label1.Text = "Ping: N/A")
         End Try
 
-    End Sub
-
-    Private Sub Timeout_tick(sender As Object, e As EventArgs)
-        If Not Visible Then Exit Sub
-        If Not MainformRef.Challenger Is Nothing Then
-            MainformRef.NetworkHandler.SendMessage(">,T", MainformRef.Challenger.ip)
-        End If
-
-        Timeout.Stop()
-        Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
-        MainformRef.Invoke(INVOKATION, {"TO", Nothing})
-
-        frmMain.ConfigFile.Game = "None"
-        frmMain.ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
-        frmMain.ConfigFile.SaveFile()
     End Sub
 
 #Region "Moving Window"
@@ -92,11 +75,14 @@ Public Class frmChallenge
             Thread.Sleep(10)
         End While
 
+        ' Ok so this causes crashes on some systems so lets try to find a workaround MOVED TO VisibleChanged
         MainformRef.ConfigFile.Port = MainformRef.Challenger.port
         MainformRef.ConfigFile.Status = "Client"
         MainformRef.ConfigFile.Game = MainformRef.Challenger.game
         MainformRef.ConfigFile.SaveFile()
+
         MainformRef.NetworkHandler.SendMessage("^," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Peripheral, MainformRef.Challenger.ip)
+
         MainformRef.WaitingForm.Show()
         Me.Close()
 
@@ -123,13 +109,14 @@ Public Class frmChallenge
             wavePlayer.Play()
 
             'My.Computer.Audio.Play(My.Resources.NewChallanger, AudioPlayMode.Background)
-            Timeout.Interval = 10000
-            'Timeout.Start()
+
+            'MainformRef.ConfigFile.Port = MainformRef.Challenger.port
+            'MainformRef.ConfigFile.Status = "Client"
+            'MainformRef.ConfigFile.Game = MainformRef.Challenger.game
+            'MainformRef.ConfigFile.SaveFile()
+
             Dim GameName As String = MainformRef.GamesList(MainformRef.Challenger.game)(0)
             lbChallengeText.Text = MainformRef.Challenger.name & " Has challenged you to " & vbCrLf & GameName
-        Else
-            Timeout.Stop()
-
         End If
 
     End Sub

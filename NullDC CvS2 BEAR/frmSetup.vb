@@ -47,6 +47,7 @@ Public Class frmSetup
 
         cbOverlay.SelectedIndex = MainformRef.ConfigFile.VsNames
         cb_ShowGameInTitle.Checked = MainformRef.ConfigFile.ShowGameNameInTitle
+        cbVsync.SelectedIndex = MainformRef.ConfigFile.Vsync
     End Sub
 
     Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
@@ -58,6 +59,7 @@ Public Class frmSetup
         MainformRef.ConfigFile.ShowConsole = Convert.ToInt32(cbShowConsole.Checked)
         MainformRef.ConfigFile.WindowSettings = CInt(cbUseCustomWindowSize.Checked).ToString & "|" & tbCWX.Text & "|" & tbCWY.Text & "|" & tbCWWidth.Text & "|" & tbCWHeight.Text
         MainformRef.ConfigFile.ShowGameNameInTitle = Convert.ToInt32(cb_ShowGameInTitle.Checked)
+        MainformRef.ConfigFile.Vsync = cbVsync.SelectedIndex
 
         If cbAllowSpectators.Text = "Yes" Then
             MainformRef.ConfigFile.AllowSpectators = 1

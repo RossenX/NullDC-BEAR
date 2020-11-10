@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = True
+    Dim IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.65a" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.65b" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -314,7 +314,7 @@ Public Class frmMain
                         Directory.CreateDirectory(_dir & "\" & _dirbuilt & "\" & _subdir)
                     End If
 
-                    _dirbuilt +=  _subdir & "\"
+                    _dirbuilt += _subdir & "\"
                 Next
 
                 If Not FolderOnly Then
@@ -723,7 +723,7 @@ Public Class frmMain
             PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
             Matchlist.Invoke(Sub() Matchlist.Items.Add(PlayerInfo))
 
-            If Not Player.name = MainformRef.ConfigFile.Name Then
+            If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
                 Try
                     Dim pingthread As Thread = New Thread(
                         Sub()
@@ -761,7 +761,7 @@ Public Class frmMain
                     Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
                 End Sub)
 
-            If Not Player.name = MainformRef.ConfigFile.Name Then
+            If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
                 Try
                     Dim pingthread As Thread = New Thread(
                         Sub()
@@ -1248,6 +1248,7 @@ Public Class Configs
     Private _vsnames As Int16 = 3
     Private _ShowGameNameInTitle As Int16 = 1
     Private _sdlversopm As String = "Dev"
+    Private _vsync As Int16 = 0
 
 #Region "Properties"
 
@@ -1474,6 +1475,16 @@ Public Class Configs
 
     End Property
 
+    Public Property Vsync() As Int16
+        Get
+            Return _vsync
+        End Get
+        Set(ByVal value As Int16)
+            _vsync = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -1503,7 +1514,8 @@ Public Class Configs
                 "WindowSettings=" & WindowSettings,
                 "VsNames=" & VsNames,
                 "ShowGameNameInTitle=" & ShowGameNameInTitle,
-                "SDLVersion=" & SDLVersion
+                "SDLVersion=" & SDLVersion,
+                "Vsync=" & Vsync
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -1518,7 +1530,13 @@ Public Class Configs
                     Dim NameToSend As String = Name
                     If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " Vs " & MainformRef.Challenger.name
 
-                    MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
+                    ' Delayed Task to hopefully remove some crashes related to this being send along with other message too quickly
+                    Dim t As Task = New Task(Async Sub()
+                                                 ' 2 Second Delay just to avoid crashing some rare PCs that don't like to send data too quickly
+                                                 Await Task.Delay(2000)
+                                                 MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
+                                             End Sub)
+                    t.Start()
                 End If
             End If
         End If
@@ -1565,6 +1583,7 @@ Public Class Configs
                 If line.StartsWith("VsNames") Then VsNames = line.Split("=")(1).Trim
                 If line.StartsWith("ShowGameNameInTitle") Then ShowGameNameInTitle = line.Split("=")(1).Trim
                 If line.StartsWith("SDLVersion") Then SDLVersion = line.Split("=")(1).Trim
+                If line.StartsWith("Vsync") Then Vsync = line.Split("=")(1).Trim
             Next
 
             Game = "None"
