@@ -104,7 +104,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_AB = New NullDC_CvS2_BEAR.keybindButton()
         Me.STICK_BC_YZ = New NullDC_CvS2_BEAR.keybindButton()
         Me.STICK_BC_XY = New NullDC_CvS2_BEAR.keybindButton()
-        Me.STICK_BC_ZC = New NullDC_CvS2_BEAR.keybindButton()
+        Me.STICK_BC_CZ = New NullDC_CvS2_BEAR.keybindButton()
         Me.STICK_BC_YB = New NullDC_CvS2_BEAR.keybindButton()
         Me.STICK_BC_XA = New NullDC_CvS2_BEAR.keybindButton()
         Me.Label24 = New System.Windows.Forms.Label()
@@ -1244,7 +1244,7 @@ Partial Class frmKeyMapperSDL
         Me.Arcadestick_Tab.Controls.Add(Me.STICK_BC_AB)
         Me.Arcadestick_Tab.Controls.Add(Me.STICK_BC_YZ)
         Me.Arcadestick_Tab.Controls.Add(Me.STICK_BC_XY)
-        Me.Arcadestick_Tab.Controls.Add(Me.STICK_BC_ZC)
+        Me.Arcadestick_Tab.Controls.Add(Me.STICK_BC_CZ)
         Me.Arcadestick_Tab.Controls.Add(Me.STICK_BC_YB)
         Me.Arcadestick_Tab.Controls.Add(Me.STICK_BC_XA)
         Me.Arcadestick_Tab.Controls.Add(Me.Label24)
@@ -1364,20 +1364,20 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_XY.Text = "None"
         Me.STICK_BC_XY.UseVisualStyleBackColor = False
         '
-        'STICK_BC_ZC
+        'STICK_BC_CZ
         '
-        Me.STICK_BC_ZC.BackColor = System.Drawing.Color.White
-        Me.STICK_BC_ZC.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.STICK_BC_ZC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.STICK_BC_ZC.ForeColor = System.Drawing.Color.Black
-        Me.STICK_BC_ZC.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_ZC.Location = New System.Drawing.Point(596, 386)
-        Me.STICK_BC_ZC.Name = "STICK_BC_ZC"
-        Me.STICK_BC_ZC.Size = New System.Drawing.Size(41, 28)
-        Me.STICK_BC_ZC.TabIndex = 82
-        Me.STICK_BC_ZC.TabStop = False
-        Me.STICK_BC_ZC.Text = "None"
-        Me.STICK_BC_ZC.UseVisualStyleBackColor = False
+        Me.STICK_BC_CZ.BackColor = System.Drawing.Color.White
+        Me.STICK_BC_CZ.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.STICK_BC_CZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_BC_CZ.ForeColor = System.Drawing.Color.Black
+        Me.STICK_BC_CZ.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_CZ.Location = New System.Drawing.Point(596, 386)
+        Me.STICK_BC_CZ.Name = "STICK_BC_CZ"
+        Me.STICK_BC_CZ.Size = New System.Drawing.Size(41, 28)
+        Me.STICK_BC_CZ.TabIndex = 82
+        Me.STICK_BC_CZ.TabStop = False
+        Me.STICK_BC_CZ.Text = "None"
+        Me.STICK_BC_CZ.UseVisualStyleBackColor = False
         '
         'STICK_BC_YB
         '
@@ -1491,7 +1491,7 @@ Partial Class frmKeyMapperSDL
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(42, 20)
         Me.Label30.TabIndex = 83
-        Me.Label30.Text = "Z+C"
+        Me.Label30.Text = "C+Z"
         '
         'Label32
         '
@@ -2037,7 +2037,7 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents STICK_BC_AB As keybindButton
     Friend WithEvents STICK_BC_YZ As keybindButton
     Friend WithEvents STICK_BC_XY As keybindButton
-    Friend WithEvents STICK_BC_ZC As keybindButton
+    Friend WithEvents STICK_BC_CZ As keybindButton
     Friend WithEvents STICK_BC_YB As keybindButton
     Friend WithEvents STICK_BC_XA As keybindButton
     Friend WithEvents CONT_BC_ABC As keybindButton
