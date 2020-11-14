@@ -160,7 +160,11 @@ Public Class frmMain
         Dim RomFolders As String() = {
             NullDCPath & "\roms",
             NullDCPath & "\dc\roms",
-            NullDCPath & "\mednafen\roms\sg"
+            NullDCPath & "\mednafen\roms\sg",
+            NullDCPath & "\mednafen\roms\ss",
+            NullDCPath & "\mednafen\roms\nes",
+            NullDCPath & "\mednafen\roms\snes",
+            NullDCPath & "\mednafen\roms\ngp"
         }
 
         Dim Watchers(RomFolders.Count) As FileSystemWatcher
@@ -444,12 +448,18 @@ Public Class frmMain
 
         ' FIX MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
         ' Mednafen unpack
-        If Not Directory.Exists(NullDCPath & "\mednafen") Then Directory.CreateDirectory(NullDCPath & "\mednafen")
-        UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen")
+        If Not Directory.Exists(NullDCPath & "\mednafen") Then
+            Directory.CreateDirectory(NullDCPath & "\mednafen")
+            UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen")
+        End If
+
 
         ' Mednafen Server
-        If Not Directory.Exists(NullDCPath & "\mednafen\server") Then Directory.CreateDirectory(NullDCPath & "\mednafen\server")
-        UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server")
+        If Not Directory.Exists(NullDCPath & "\mednafen\server") Then
+            Directory.CreateDirectory(NullDCPath & "\mednafen\server")
+            UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server")
+        End If
+
 
         ' Just copy the beargamma plugin everytime the launcher starts, to make sure w.e version is in the launcher is the one that's in the plugins folder
         Try
@@ -522,6 +532,70 @@ Public Class frmMain
 
                 If Not GamesList.ContainsKey(RomName) Then
                     GamesList.Add(RomName, {GameName, RomPath, "sg", ""})
+                    table.Rows.Add({RomName, GameName})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "ss" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.cue", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = "SG- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "ss", ""})
+                    table.Rows.Add({RomName, GameName})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "nes" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.nes", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = "NES- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".nes", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "nes", ""})
+                    table.Rows.Add({RomName, GameName})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "snes" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\snes", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = "SNES- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "snes", ""})
+                    table.Rows.Add({RomName, GameName})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "ngp" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ngp", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = "NGP- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "ngp", ""})
                     table.Rows.Add({RomName, GameName})
                 End If
             Next
@@ -616,7 +690,7 @@ Public Class frmMain
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "naomi"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
-            Case "sg", "ss"
+            Case "sg", "ss", "nes", "ngp", "snes"
                 MednafenLauncher.LaunchEmulator(_romname)
             Case Else
                 MsgBox("Missing emulator type: " & Emulator)
@@ -635,6 +709,16 @@ Public Class frmMain
 
         If IsNullDCRunning() Then NullDCLauncher.NullDCproc.Kill()
         If Not Challenger Is Nothing Then NetworkHandler.SendMessage(">, Q", Challenger.ip)
+
+        If Not MednafenLauncher.MednafenServerInstance Is Nothing Then
+            MednafenLauncher.MednafenServerInstance.Kill()
+            MednafenLauncher.MednafenServerInstance = Nothing
+        End If
+
+        If Not MednafenLauncher.MednafenInstance Is Nothing Then
+            MednafenLauncher.MednafenInstance.CloseMainWindow()
+            MednafenLauncher.MednafenInstance = Nothing
+        End If
 
         ' Iono if i wanna have this to auto stop Radmin when BEAR closes
         ' Dim processStartInfo As New ProcessStartInfo

@@ -15,6 +15,7 @@ Public Class frmDLC
 
     Dim DownloadClient As New WebClient
     Dim DownloadCanceled As Boolean = False
+    Dim CurrentlySelectedGame As DownloadableGame = Nothing
     Dim CurrentlyDownloadingGame As DownloadableGame = Nothing
 
     Dim ExternalURLs As ArrayList = New ArrayList ' Used for the link to manually download games
@@ -88,7 +89,7 @@ Public Class frmDLC
     Private Sub GetDownloadableGamesList()
         Try
             GetRomPacks()
-            'ArchiveDotOrgParse("https://archive.org/details/SegaSaturnRomCollectionByGhostware&output=json")
+            'ArchiveDotOrgParse("https://archive.org/details/PlaystationNorthAmericaCollectionByGhostware&output=json")
         Catch ex As Exception
             MsgBox("Error Getting RomPacks: " & ex.Message)
 
@@ -134,7 +135,7 @@ Public Class frmDLC
             AddHandler tmpListView.SelectedIndexChanged, AddressOf SelectedNewGameFromList
 
             For i = 7 To _lines.Count - 1
-                Dim url = Strings.Split(_lines(i), "|,|")(0)
+                Dim url = Strings.Split(_lines(i), "|,|")(0).Replace("#", "%23").Replace(" ", "%20")
                 Dim name = Strings.Split(_lines(i), "|,|")(1)
                 Dim _it As New ListViewItem(name)
                 _it.SubItems.Add(url)
@@ -150,7 +151,7 @@ Public Class frmDLC
     End Sub
 
     Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
-        If CurrentlyDownloadingGame Is Nothing Then Exit Sub
+        If CurrentlySelectedGame Is Nothing Then Exit Sub
 
         If DownloadClient.IsBusy Then
             DownloadCanceled = True
@@ -160,6 +161,8 @@ Public Class frmDLC
         End If
 
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
+        CurrentlyDownloadingGame = New DownloadableGame(CurrentlySelectedGame.URL, CurrentlySelectedGame.Name, CurrentlySelectedGame.Platform, CurrentlySelectedGame.Folder, CurrentlySelectedGame.Extract)
 
         Dim _tmp As String() = CurrentlyDownloadingGame.URL.Split("/")
         Dim DownloadingZipName = _tmp(_tmp.Count - 1).Replace(".zip", ".honey")
@@ -174,7 +177,7 @@ Public Class frmDLC
             btnDownload.Text = "Downloading... " & CurrentlyDownloadingGame.Name
             DownloadCanceled = False
 
-            Console.WriteLine("Downloading: {0}", CurrentlyDownloadingGame.Name)
+            Console.WriteLine("Downloading: {0} {1}", CurrentlyDownloadingGame.Name, CurrentlyDownloadingGame.URL)
             ProgressBar1.Value = 0
 
         Catch ex As Exception
@@ -250,6 +253,7 @@ Public Class frmDLC
                                    MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & CurrentlyDownloadingGame.Name))
                                Catch ex As Exception
                                    MsgBox("Rom install Error: " & ex.Message)
+                                   CurrentlyDownloadingGame = Nothing
 
                                End Try
 
@@ -258,6 +262,7 @@ Public Class frmDLC
                            If File.Exists(HoneyFilePath) Then
                                File.SetAttributes(HoneyFilePath, FileAttributes.Normal)
                                File.Delete(HoneyFilePath)
+
                            End If
 
                            MainformRef.Invoke(
@@ -266,13 +271,12 @@ Public Class frmDLC
                                    ProgressBar1.Visible = False
                                    btnDownload.Text = "Download"
                                    DownloadCanceled = False
-
+                                   CurrentlyDownloadingGame = Nothing
                                End If
-
+                               CurrentlyDownloadingGame = Nothing
                            End Sub)
-
+                           CurrentlyDownloadingGame = Nothing
                        End Sub)
-
         InstallThread.Start()
 
     End Sub
@@ -290,13 +294,11 @@ Public Class frmDLC
 
     Private Sub SelectedNewGameFromList(sender As ListView, e As EventArgs)
         If sender.SelectedItems.Count = 0 Then
-            CurrentlyDownloadingGame = Nothing
-
+            CurrentlySelectedGame = Nothing
         Else
-            CurrentlyDownloadingGame = New DownloadableGame(sender.SelectedItems(0).SubItems(1).Text, sender.SelectedItems(0).SubItems(0).Text, sender.SelectedItems(0).SubItems(2).Text, sender.SelectedItems(0).SubItems(3).Text, sender.SelectedItems(0).SubItems(4).Text)
+            CurrentlySelectedGame = New DownloadableGame(sender.SelectedItems(0).SubItems(1).Text, sender.SelectedItems(0).SubItems(0).Text, sender.SelectedItems(0).SubItems(2).Text, sender.SelectedItems(0).SubItems(3).Text, sender.SelectedItems(0).SubItems(4).Text)
 
         End If
-
     End Sub
 
     Private Sub tc_games_SelectedIndexChanged(sender As TabControl, e As EventArgs) Handles tc_games.SelectedIndexChanged

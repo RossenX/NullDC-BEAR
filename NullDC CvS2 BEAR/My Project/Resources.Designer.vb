@@ -472,6 +472,40 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to gb.system_type auto
+        '''gba.bios 
+        '''md.cdbios us_scd1_9210.bin
+        '''md.input.auto 1
+        '''md.region game
+        '''md.reported_region same
+        '''nes.fnscan 1
+        '''nes.gg 0
+        '''nes.ggrom gg.rom
+        '''nes.input.fcexp none
+        '''nes.nofs 0
+        '''nes.pal 0
+        '''nes.fnscan 1
+        '''ngp.language english
+        '''pce.input.multitap 1
+        '''pce.arcadecard 1
+        '''pce.cdbios syscard3.pce
+        '''pce.disable_bram_cd 0
+        '''pce.disable_bram_hucard 0
+        '''pce.forcesgx 0
+        '''pce.gecdbios gecard.pce
+        '''pce_fast.arcadecard 1
+        '''pce_fast.cdbios syscard3.pce
+        '''pce_fast.cdspeed 1
+        '''pce_fast.forcesgx 0
+        '''pce_fast.ocmultiplier [rest of string was truncated]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property MednafenOptimizations() As String
+            Get
+                Return ResourceManager.GetString("MednafenOptimizations", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         '''</summary>
         Friend ReadOnly Property NewChallanger() As System.IO.UnmanagedMemoryStream
