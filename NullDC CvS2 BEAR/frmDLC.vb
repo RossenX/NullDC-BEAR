@@ -2,14 +2,28 @@
 Imports System.Net
 Imports System.Threading
 
+' freedlc Format
+'DLCv= <Version>
+'Platform= <Short Platform Name> NA/DC
+'Disc= <Description>
+'Tab= <Tab Name>
+'Folder= <Relative Rom Folder Path>
+'Extract= <0 No Extract, 1 Extract, 2 Extract and place in folder, 3 do not extract and place in folder>
+'ExternalURL= <URL when clicking the blue 'get manually' text>
+
 Public Class frmDLC
 
     Dim DownloadClient As New WebClient
-    Dim DownloadingGameName As String = ""
     Dim DownloadingZipName As String = ""
     Dim DownloadCanceled As Boolean = False
-    Dim SelectedGameURL As DownloadableGame = Nothing
+    Dim CurrentlyDownloadingGame As DownloadableGame = Nothing
     Dim CurrentDownloadingPlatform As String = ""
+
+    Dim ExportCount = 0
+
+    ' New Downlaoder Stuff
+    Dim ExternalURL As ArrayList = New ArrayList
+    Dim RomFolder As ArrayList = New ArrayList
 
     Private Sub frmDLC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
@@ -22,13 +36,7 @@ Public Class frmDLC
 
     End Sub
 
-    Private Sub AddDirectLink(ByVal _url As String, ByVal _name As String, ByRef _listtoadd As ListView)
-        Dim _it As New ListViewItem(_name)
-        _it.SubItems.Add(_url)
-        _listtoadd.Items.Add(_it)
-    End Sub
-
-    Private Sub ArchiveDotOrgParse(ByVal URL As String, ListView As ListView)
+    Private Sub ArchiveDotOrgParse(ByVal URL As String)
         Dim StrippedURL = URL.Replace("&output=json", "")
         StrippedURL = StrippedURL.Replace("/details/", "/download/")
 
@@ -41,6 +49,16 @@ Public Class frmDLC
         AddHandler GamesListClient.DownloadStringCompleted,
             Sub(ByVal sender As WebClient, e As DownloadStringCompletedEventArgs)
 
+                Dim GameCount = 0
+                Dim Exportedlist As New ArrayList
+                Exportedlist.Add("DLCv=1")
+                Exportedlist.Add("Platform=NA")
+                Exportedlist.Add("Disc=Atomiswave DLC")
+                Exportedlist.Add("Tab=Atomiswave")
+                Exportedlist.Add("Folder=roms")
+                Exportedlist.Add("Extract=2")
+                Exportedlist.Add("ExternalURL=https://archive.org/details/NaomiRomsReuploadByGhostware")
+
                 If Not e.Error Is Nothing Then
                     MsgBox("Error Getting Downloadable Games List")
                     Exit Sub
@@ -50,59 +68,86 @@ Public Class frmDLC
                     If _sp.Contains(".zip") Then
                         Dim _gameName = _sp.Split("/")(_sp.Split("/").Count - 1).Replace(".zip", "").Replace("_", " ").Trim
                         Dim _GameLink = StrippedURL & _sp.Replace("\/", "/").Replace("#", "%23")
-
                         If Not _gameName.Contains("(Windows CE)") Then
-                            Dim _it As New ListViewItem(_gameName)
-                            _it.SubItems.Add(_GameLink)
-                            'Console.WriteLine("Added Game: " & _gameName & " URL: " & _GameLink)
-                            ListView.Items.Add(_it)
+                            Exportedlist.Add(_GameLink & "|,|" & _gameName)
+                            GameCount += 1
                         End If
-
                     End If
                 Next
 
-                ListView.Sorting = SortOrder.Ascending
-                ListView.Sort()
+                File.WriteAllLines(MainformRef.NullDCPath & "\Export" & URL.Split("/")(URL.Split("/").Count - 1) & ".freedlc", Exportedlist)
+                ExportCount += 1
             End Sub
 
     End Sub
 
     Private Sub GetDownloadableGamesList()
-        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
-
         Try
-
-            ArchiveDotOrgParse("https://archive.org/details/NaomiRomsReuploadByGhostware&output=json", lvGamesList_naomi)
-            ArchiveDotOrgParse("https://archive.org/details/AtomiswaveReuploadByGhostware&output=json", lvGamelist_Atomiswave)
-            ArchiveDotOrgParse("https://archive.org/details/DreamcastSelfBoot&output=json", lvGamesList_Dreamcast)
-            'GetRomPacks()
-            AddDirectLink("https://archive.org/download/neo-geo-battle-coliseum-unlocked/NeoGeo%20Battle%20Coliseum%20-%20Unlocked.zip", "Neo Geo Battle Coliseum Unlocked", lvGamelist_Atomiswave)
-            AddDirectLink("https://archive.org/download/capcom-vs-snk-millenium-fight-2000-unlocked_202010/Capcom_VS_SNK_Millenium_Fight_2000_Unlocked.zip", "Capcom VS SNK Millenium Fight 2000 Unlocked", lvGamesList_naomi)
-            AddDirectLink("https://archive.org/download/king-of-fighters-xi/King%20of%20Fighters%20XI.zip", "King of Fighters XI", lvGamesList_Dreamcast)
+            GetRomPacks()
         Catch ex As Exception
-            MsgBox(ex.InnerException)
+            MsgBox("Error Getting RomPacks: " & ex.Message)
         End Try
 
+        btnRomsFolder.Text = "Open " & tc_games.SelectedTab.Text & " Roms Folder"
 
     End Sub
 
-    'Naomi.bearpack
-    'Atomiswave.bearpack
-    'Dreamcast.bearpack
-    '
     Private Sub GetRomPacks()
-        Dim Files = Directory.GetFiles(MainformRef.NullDCPath, "*.bearpack", SearchOption.AllDirectories)
+        Dim Files = Directory.GetFiles(MainformRef.NullDCPath, "*.freedlc", SearchOption.TopDirectoryOnly)
 
+        ' Get allt he freedlc files and parse them into their own tabs and lists
         For Each _file In Files
-            ArchiveDotOrgParse(_file, lvGamesList_naomi)
+            Dim _lines = File.ReadAllLines(_file)
+
+            Dim TabName = _lines(3).Split("=")(1)
+
+            tc_games.TabPages.Add(TabName)
+            tc_games.TabPages.Item(tc_games.TabCount - 1).BackColor = Color.FromArgb(250, 200, 0)
+
+            Dim tmpListView As New ListView
+            tmpListView.Dock = DockStyle.Fill
+            tmpListView.MultiSelect = False
+            tmpListView.View = View.Details
+            tmpListView.HeaderStyle = ColumnHeaderStyle.None
+            tmpListView.BackColor = Color.FromArgb(250, 200, 0)
+            tmpListView.FullRowSelect = True
+
+            tmpListView.Parent = tc_games.TabPages.Item(tc_games.TabCount - 1)
+
+            tmpListView.Columns.Add("Name")
+            tmpListView.Columns.Add("URL")
+            tmpListView.Columns.Add("Platform")
+            tmpListView.Columns.Add("folder")
+            tmpListView.Columns.Add("extract")
+            tmpListView.Columns.Item(0).Width = tmpListView.Width - 25
+            tmpListView.Columns.Item(1).Width = 0
+            tmpListView.Columns.Item(2).Width = 0
+            tmpListView.Columns.Item(3).Width = 0
+            tmpListView.Columns.Item(4).Width = 0
+
+            ExternalURL.Add(_lines(6).Split("=")(1))
+            RomFolder.Add(_lines(4).Split("=")(1))
+
+            AddHandler tmpListView.SelectedIndexChanged, AddressOf SelectedNewGameFromList
+
+            For i = 7 To _lines.Count - 1
+                Dim url = Strings.Split(_lines(i), "|,|")(0)
+                Dim name = Strings.Split(_lines(i), "|,|")(1)
+
+                Dim _it As New ListViewItem(name)
+                _it.SubItems.Add(url)
+                _it.SubItems.Add(_lines(1).Split("=")(1)) ' Platform
+                _it.SubItems.Add(_lines(4).Split("=")(1)) ' Folder
+                _it.SubItems.Add(_lines(5).Split("=")(1)) ' Extract
+                tmpListView.Items.Add(_it)
+            Next
+
         Next
 
     End Sub
 
     Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
-        If SelectedGameURL Is Nothing Then
-            Exit Sub
-        End If
+        If CurrentlyDownloadingGame Is Nothing Then Exit Sub
 
         If DownloadClient.IsBusy Then
             DownloadCanceled = True
@@ -110,27 +155,23 @@ Public Class frmDLC
             Exit Sub
         End If
 
-        DownloadingGameName = SelectedGameURL.Name
-        Dim _tmp As String() = SelectedGameURL.URL.Split("/")
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
+        Dim _tmp As String() = CurrentlyDownloadingGame.URL.Split("/")
         DownloadingZipName = _tmp(_tmp.Count - 1).Replace(".zip", ".honey")
-        CurrentDownloadingPlatform = SelectedGameURL.Platform
+        CurrentDownloadingPlatform = CurrentlyDownloadingGame.Platform
 
         Try
             DownloadClient.Credentials = New NetworkCredential()
-            Select Case CurrentDownloadingPlatform
-                Case "NA"
-                    DownloadClient.DownloadFileTaskAsync(SelectedGameURL.URL, MainformRef.NullDCPath & "\roms\" & DownloadingZipName)
+            If Not Directory.Exists(MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder) Then Directory.CreateDirectory(MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder)
 
-                Case "DC"
-                    DownloadClient.DownloadFileTaskAsync(SelectedGameURL.URL, MainformRef.NullDCPath & "\dc\roms\" & DownloadingZipName)
-
-            End Select
+            DownloadClient.DownloadFileTaskAsync(CurrentlyDownloadingGame.URL, MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder & "\" & DownloadingZipName)
 
             ProgressBar1.Visible = True
-            btnDownload.Text = "Downloading... " & DownloadingGameName
+            btnDownload.Text = "Downloading... " & CurrentlyDownloadingGame.Name
             DownloadCanceled = False
 
-            Console.WriteLine("Downloading: {0}", SelectedGameURL.Name)
+            Console.WriteLine("Downloading: {0}", CurrentlyDownloadingGame.Name)
             ProgressBar1.Value = 0
         Catch ex As Exception
             MsgBox("Downlaod Error: " & ex.Message)
@@ -146,10 +187,10 @@ Public Class frmDLC
         ProgressBar1.Value = e.BytesReceived
         ProgressBar1.Visible = True
         Dim _NameLength = 20
-        If DownloadingGameName.Length < 20 Then
-            _NameLength = DownloadingGameName.Length
+        If CurrentlyDownloadingGame.Name.Length < 20 Then
+            _NameLength = CurrentlyDownloadingGame.Name.Length
         End If
-        btnDownload.Text = String.Format("Downloading... {0} (Click again to Cancel)" & vbNewLine & "({1}mb/{2}mb)", DownloadingGameName.Substring(0, _NameLength), Math.Round(e.BytesReceived / 1000000, 2), Math.Round(e.TotalBytesToReceive / 1000000, 2))
+        btnDownload.Text = String.Format("Downloading... {0} (Click again to Cancel)" & vbNewLine & "({1}mb/{2}mb)", CurrentlyDownloadingGame.Name.Substring(0, _NameLength), Math.Round(e.BytesReceived / 1000000, 2), Math.Round(e.TotalBytesToReceive / 1000000, 2))
     End Sub
 
     Private Sub DownloadComplete()
@@ -158,14 +199,8 @@ Public Class frmDLC
         Dim zipPath = ""
         Dim RomDirectory = ""
 
-        Select Case CurrentDownloadingPlatform
-            Case "NA"
-                zipPath = MainformRef.NullDCPath & "\roms\" & DownloadingZipName
-                RomDirectory = MainformRef.NullDCPath & "\roms\" & DownloadingGameName
-            Case "DC"
-                zipPath = MainformRef.NullDCPath & "\dc\roms\" & DownloadingZipName
-                RomDirectory = MainformRef.NullDCPath & "\dc\roms"
-        End Select
+        zipPath = MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder & "\" & DownloadingZipName
+        RomDirectory = MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder
 
         'btnDownload.Text = "Installing..."
 
@@ -175,21 +210,37 @@ Public Class frmDLC
                                Try
                                    MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
 
-                                   If CurrentDownloadingPlatform = "NA" Then ' Naomi has to delete the whole folder if it exists
-                                       If Not Directory.Exists(RomDirectory) Then
-                                           Directory.CreateDirectory(RomDirectory)
-                                       Else
-                                           Directory.Delete(RomDirectory, True)
-                                           Directory.CreateDirectory(RomDirectory)
-                                       End If
+                                   Select Case CurrentlyDownloadingGame.Extract
+                                       Case "0" ' Do not Unzip
+                                           File.Copy(zipPath, RomDirectory & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
+                                       Case "1" ' Unzip
+                                           If File.Exists(zipPath) Then
+                                               ZipFile.ExtractToDirectory(zipPath, RomDirectory)
+                                           End If
 
-                                   End If
+                                       Case "2" ' Unzip and place in own folder
+                                           If Not Directory.Exists(RomDirectory & "\" & CurrentlyDownloadingGame.Name) Then
+                                               Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                           Else
+                                               Directory.Delete(RomDirectory & "\" & CurrentlyDownloadingGame.Name, True)
+                                               Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                           End If
 
-                                   If File.Exists(zipPath) Then
-                                       ZipFile.ExtractToDirectory(zipPath, RomDirectory)
-                                   End If
+                                           If File.Exists(zipPath) Then
+                                               ZipFile.ExtractToDirectory(zipPath, RomDirectory)
+                                           End If
+                                       Case "3" ' Do not Unzip, but place in folder
+                                           If Not Directory.Exists(RomDirectory & "\" & CurrentlyDownloadingGame.Name) Then
+                                               Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                           Else
+                                               Directory.Delete(RomDirectory & "\" & CurrentlyDownloadingGame.Name, True)
+                                               Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                           End If
 
-                                   MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & DownloadingGameName))
+                                           File.Copy(zipPath, RomDirectory & "\" & CurrentlyDownloadingGame.Name & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
+                                   End Select
+
+                                   MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & CurrentlyDownloadingGame.Name))
                                Catch ex As Exception
                                    MsgBox("Rom install Error: " & ex.Message)
                                End Try
@@ -216,92 +267,57 @@ Public Class frmDLC
 
     End Sub
 
+    Private Sub lnkRoms_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkRoms.LinkClicked
+        Process.Start(ExternalURL(tc_games.SelectedIndex))
+    End Sub
+
+    Private Sub btnRomsFolder_Click(sender As Object, e As EventArgs) Handles btnRomsFolder.Click
+        If Not Directory.Exists(MainformRef.NullDCPath & "\" & RomFolder(tc_games.SelectedIndex)) Then Directory.CreateDirectory(MainformRef.NullDCPath & "\" & RomFolder(tc_games.SelectedIndex))
+        Process.Start(MainformRef.NullDCPath & "\" & RomFolder(tc_games.SelectedIndex))
+    End Sub
+
+    Private Sub SelectedNewGameFromList(sender As ListView, e As EventArgs)
+        If sender.SelectedItems.Count = 0 Then
+            CurrentlyDownloadingGame = Nothing
+        Else
+            CurrentlyDownloadingGame = New DownloadableGame(sender.SelectedItems(0).SubItems(1).Text, sender.SelectedItems(0).SubItems(0).Text, sender.SelectedItems(0).SubItems(2).Text, sender.SelectedItems(0).SubItems(3).Text, sender.SelectedItems(0).SubItems(4).Text)
+        End If
+
+    End Sub
+
+    Private Sub tc_games_SelectedIndexChanged(sender As TabControl, e As EventArgs) Handles tc_games.SelectedIndexChanged
+        btnRomsFolder.Text = "Open " & sender.SelectedTab.Text & " Roms Folder"
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
+        Process.Start("https://cdromance.com/dc-iso/?sorted=downloads")
+    End Sub
+
     Private Sub frmDLC_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If DownloadClient.IsBusy Then
             DownloadCanceled = True
             DownloadClient.CancelAsync()
         End If
         My.Application.OpenForms(0).Activate()
-    End Sub
-
-    Private Sub lnkRoms_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkRoms.LinkClicked
-        If tc_games.SelectedIndex = 0 Or tc_games.SelectedIndex = 1 Then
-            Process.Start("https://archive.org/details/NaomiRomsReuploadByGhostware")
-        Else
-            Process.Start("https://archive.org/details/DreamcastSelfBoot")
-        End If
 
     End Sub
 
-    Private Sub btnRomsFolder_Click(sender As Object, e As EventArgs) Handles btnRomsFolder.Click
-        Select Case tc_games.SelectedIndex
-            Case 0
-                If Not Directory.Exists(MainformRef.NullDCPath & "\roms") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\roms")
-                Process.Start(MainformRef.NullDCPath & "\roms")
-            Case 1
-                If Not Directory.Exists(MainformRef.NullDCPath & "\roms") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\roms")
-                Process.Start(MainformRef.NullDCPath & "\roms")
-            Case 2
-                If Not Directory.Exists(MainformRef.NullDCPath & "\dc\roms") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\roms")
-                Process.Start(MainformRef.NullDCPath & "\dc\roms")
-        End Select
-
-
-    End Sub
-
-    Private Sub lvGamelist_Atomiswave_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvGamelist_Atomiswave.SelectedIndexChanged
-        If lvGamelist_Atomiswave.SelectedItems.Count = 0 Then
-            SelectedGameURL = Nothing
-        Else
-            SelectedGameURL = New DownloadableGame(lvGamelist_Atomiswave.SelectedItems(0).SubItems(1).Text, lvGamelist_Atomiswave.SelectedItems(0).SubItems(0).Text, "NA")
-        End If
-
-    End Sub
-
-    Private Sub lvGamesList_naomi_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvGamesList_naomi.SelectedIndexChanged
-        If lvGamesList_naomi.SelectedItems.Count = 0 Then
-            SelectedGameURL = Nothing
-        Else
-            SelectedGameURL = New DownloadableGame(lvGamesList_naomi.SelectedItems(0).SubItems(1).Text, lvGamesList_naomi.SelectedItems(0).SubItems(0).Text, "NA")
-        End If
-
-    End Sub
-
-    Private Sub lvGamesList_Dreamcast_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvGamesList_Dreamcast.SelectedIndexChanged
-        If lvGamesList_Dreamcast.SelectedItems.Count = 0 Then
-            SelectedGameURL = Nothing
-        Else
-            SelectedGameURL = New DownloadableGame(lvGamesList_Dreamcast.SelectedItems(0).SubItems(1).Text, lvGamesList_Dreamcast.SelectedItems(0).SubItems(0).Text, "DC")
-        End If
-
-    End Sub
-
-    Private Sub tc_games_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tc_games.SelectedIndexChanged
-        Select Case tc_games.SelectedIndex
-            Case 0
-                btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
-            Case 1
-                btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
-            Case 2
-                btnRomsFolder.Text = "Open Dreamcast Roms Folder"
-        End Select
-    End Sub
-
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
-        Process.Start("https://cdromance.com/dc-iso/?sorted=downloads")
-    End Sub
 End Class
 
 Class DownloadableGame
 
-    Public URL = ""
-    Public Name = ""
-    Public Platform = ""
+    Public URL As String = ""
+    Public Name As String = ""
+    Public Platform As String = ""
+    Public Folder As String = ""
+    Public Extract As String = ""
 
-    Public Sub New(ByVal _url As String, ByVal _name As String, ByVal _platform As String)
+    Public Sub New(ByVal _url As String, ByVal _name As String, ByVal _platform As String, ByVal _folder As String, ByVal _extract As String)
         URL = _url
         Name = _name
         Platform = _platform
+        Folder = _folder
+        Extract = _extract
 
     End Sub
 

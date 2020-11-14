@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.65c" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.75" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -69,7 +69,9 @@ Public Class frmMain
                     Catch ex As Exception
                         MsgBox(ex.StackTrace)
                     End Try
-
+                Else
+                    MsgBox("Oh ok, see ya.")
+                    End
                 End If
             Else
                 MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")

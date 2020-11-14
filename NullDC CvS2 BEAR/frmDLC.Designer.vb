@@ -22,9 +22,6 @@ Partial Class frmDLC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lvGamesList_naomi = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnDownload = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnRomsFolder = New System.Windows.Forms.Button()
@@ -33,46 +30,8 @@ Partial Class frmDLC
         Me.lnkRoms = New System.Windows.Forms.LinkLabel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tc_games = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.lvGamelist_Atomiswave = New System.Windows.Forms.ListView()
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.lvGamesList_Dreamcast = New System.Windows.Forms.ListView()
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.tc_games.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'lvGamesList_naomi
-        '
-        Me.lvGamesList_naomi.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lvGamesList_naomi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lvGamesList_naomi.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.lvGamesList_naomi.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lvGamesList_naomi.FullRowSelect = True
-        Me.lvGamesList_naomi.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        Me.lvGamesList_naomi.HideSelection = False
-        Me.lvGamesList_naomi.Location = New System.Drawing.Point(0, 0)
-        Me.lvGamesList_naomi.MultiSelect = False
-        Me.lvGamesList_naomi.Name = "lvGamesList_naomi"
-        Me.lvGamesList_naomi.Size = New System.Drawing.Size(420, 327)
-        Me.lvGamesList_naomi.TabIndex = 0
-        Me.lvGamesList_naomi.UseCompatibleStateImageBehavior = False
-        Me.lvGamesList_naomi.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Width = 380
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Width = 0
         '
         'btnDownload
         '
@@ -176,9 +135,6 @@ Partial Class frmDLC
         'tc_games
         '
         Me.TableLayoutPanel1.SetColumnSpan(Me.tc_games, 2)
-        Me.tc_games.Controls.Add(Me.TabPage1)
-        Me.tc_games.Controls.Add(Me.TabPage2)
-        Me.tc_games.Controls.Add(Me.TabPage3)
         Me.tc_games.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tc_games.Location = New System.Drawing.Point(0, 25)
         Me.tc_games.Margin = New System.Windows.Forms.Padding(0)
@@ -186,89 +142,6 @@ Partial Class frmDLC
         Me.tc_games.SelectedIndex = 0
         Me.tc_games.Size = New System.Drawing.Size(428, 353)
         Me.tc_games.TabIndex = 7
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Controls.Add(Me.lvGamesList_naomi)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(420, 327)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Naomi"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.lvGamelist_Atomiswave)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Size = New System.Drawing.Size(420, 327)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Atomiswave"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'lvGamelist_Atomiswave
-        '
-        Me.lvGamelist_Atomiswave.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lvGamelist_Atomiswave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lvGamelist_Atomiswave.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader4})
-        Me.lvGamelist_Atomiswave.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lvGamelist_Atomiswave.FullRowSelect = True
-        Me.lvGamelist_Atomiswave.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        Me.lvGamelist_Atomiswave.HideSelection = False
-        Me.lvGamelist_Atomiswave.Location = New System.Drawing.Point(0, 0)
-        Me.lvGamelist_Atomiswave.MultiSelect = False
-        Me.lvGamelist_Atomiswave.Name = "lvGamelist_Atomiswave"
-        Me.lvGamelist_Atomiswave.Size = New System.Drawing.Size(420, 327)
-        Me.lvGamelist_Atomiswave.TabIndex = 1
-        Me.lvGamelist_Atomiswave.UseCompatibleStateImageBehavior = False
-        Me.lvGamelist_Atomiswave.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Width = 380
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Width = 0
-        '
-        'TabPage3
-        '
-        Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage3.Controls.Add(Me.lvGamesList_Dreamcast)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(420, 327)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Dreamcast"
-        '
-        'lvGamesList_Dreamcast
-        '
-        Me.lvGamesList_Dreamcast.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lvGamesList_Dreamcast.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lvGamesList_Dreamcast.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader6})
-        Me.lvGamesList_Dreamcast.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lvGamesList_Dreamcast.FullRowSelect = True
-        Me.lvGamesList_Dreamcast.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
-        Me.lvGamesList_Dreamcast.HideSelection = False
-        Me.lvGamesList_Dreamcast.Location = New System.Drawing.Point(0, 0)
-        Me.lvGamesList_Dreamcast.Margin = New System.Windows.Forms.Padding(0)
-        Me.lvGamesList_Dreamcast.MultiSelect = False
-        Me.lvGamesList_Dreamcast.Name = "lvGamesList_Dreamcast"
-        Me.lvGamesList_Dreamcast.Size = New System.Drawing.Size(420, 327)
-        Me.lvGamesList_Dreamcast.TabIndex = 3
-        Me.lvGamesList_Dreamcast.UseCompatibleStateImageBehavior = False
-        Me.lvGamesList_Dreamcast.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Width = 380
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Width = 0
         '
         'frmDLC
         '
@@ -282,18 +155,10 @@ Partial Class frmDLC
         Me.Text = "Downloadable Content"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        Me.tc_games.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents lvGamesList_naomi As ListView
     Friend WithEvents btnDownload As Button
-    Friend WithEvents ColumnHeader1 As ColumnHeader
-    Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Label1 As Label
     Friend WithEvents ProgressBar1 As ProgressBar
@@ -301,13 +166,4 @@ Partial Class frmDLC
     Friend WithEvents Label2 As Label
     Friend WithEvents btnRomsFolder As Button
     Friend WithEvents tc_games As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents lvGamelist_Atomiswave As ListView
-    Friend WithEvents ColumnHeader3 As ColumnHeader
-    Friend WithEvents ColumnHeader4 As ColumnHeader
-    Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents lvGamesList_Dreamcast As ListView
-    Friend WithEvents ColumnHeader5 As ColumnHeader
-    Friend WithEvents ColumnHeader6 As ColumnHeader
 End Class
