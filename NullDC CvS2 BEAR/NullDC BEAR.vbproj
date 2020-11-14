@@ -219,6 +219,7 @@
     <Compile Include="keybindButton.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MednafenLauncher.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -317,6 +318,8 @@
     <None Include="Resources\Controls.bear" />
     <None Include="Resources\default_nullDC_dreamcast.cfg" />
     <None Include="Resources\default_nullDC_naomi.cfg" />
+    <None Include="Resources\mednafen-server.zip" />
+    <None Include="Resources\mednafen.zip" />
     <None Include="Resources\SDL_Stable.zip" />
     <None Include="Resources\Updates.zip" />
     <None Include="Resources\vmu_data_port01.bin" />

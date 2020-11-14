@@ -16,6 +16,7 @@ Public Class frmMain
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
     Public NullDCLauncher As NullDCLauncher
+    Public MednafenLauncher As New MednafenLauncher
     Public NullDCPath As String = Application.StartupPath
     Public GamesList As New Dictionary(Of String, Array)
     Public ConfigFile As Configs
@@ -33,7 +34,7 @@ Public Class frmMain
     Public FinishedLoading As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "King of Fighters XI.zip")
+        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "mednafen-server.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
         Me.Icon = My.Resources.NewNullDCBearIcon
@@ -158,7 +159,8 @@ Public Class frmMain
 
         Dim RomFolders As String() = {
             NullDCPath & "\roms",
-            NullDCPath & "\dc\roms"
+            NullDCPath & "\dc\roms",
+            NullDCPath & "\mednafen\roms\sg"
         }
 
         Dim Watchers(RomFolders.Count) As FileSystemWatcher
@@ -440,6 +442,15 @@ Public Class frmMain
             File.WriteAllBytes(NullDCPath & "\dc\nullDC.cfg", My.Resources.default_nullDC_dreamcast)
         End If
 
+        ' FIX MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        ' Mednafen unpack
+        If Not Directory.Exists(NullDCPath & "\mednafen") Then Directory.CreateDirectory(NullDCPath & "\mednafen")
+        UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen")
+
+        ' Mednafen Server
+        If Not Directory.Exists(NullDCPath & "\mednafen\server") Then Directory.CreateDirectory(NullDCPath & "\mednafen\server")
+        UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server")
+
         ' Just copy the beargamma plugin everytime the launcher starts, to make sure w.e version is in the launcher is the one that's in the plugins folder
         Try
             If needsUpdate Or IsBeta Then
@@ -485,7 +496,7 @@ Public Class frmMain
         ' New Get All Roms code that includes subfolders
         Dim Files As String()
 
-        If _system = "all" Or _system = "naomi" Then
+        If _system = "all" Or _system = "na" Then
             Files = Directory.GetFiles(NullDCPath & "\roms", "*.lst", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -499,6 +510,22 @@ Public Class frmMain
                     table.Rows.Add({RomName, GameName})
                 End If
             Next
+        End If
+
+        If _system = "all" Or _system = "sg" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = "SG- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "sg", ""})
+                    table.Rows.Add({RomName, GameName})
+                End If
+            Next
+
         End If
 
         If _system = "all" Or _system = "dc" Then
@@ -589,10 +616,10 @@ Public Class frmMain
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "naomi"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
-            Case "Saturn"
-                Console.WriteLine("Room For Expansion")
-            Case "Genesis"
-                Console.WriteLine("Room For Expansion")
+            Case "sg", "ss"
+                MednafenLauncher.LaunchEmulator(_romname)
+            Case Else
+                MsgBox("Missing emulator type: " & Emulator)
         End Select
 
     End Sub

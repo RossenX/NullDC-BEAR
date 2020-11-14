@@ -421,7 +421,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.65
+        '''  Looks up a localized string similar to 1.65c
         '''CVS2::4B5360E5C101756B04FB20F11D50C8C8::5576B4A34D645C26C0BDE99D55F75FB0
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
@@ -433,7 +433,7 @@ Namespace My.Resources
         '''Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1::A09ED0A81635971E3D62431014D98F7A
         '''Emulation.AlphaSortMode=1
         '''CDDAMute=1
-        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228677B2 [rest of string was truncated]&quot;;.
+        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228677B [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property DreamcastGameOptimizations() As String
             Get
@@ -448,6 +448,26 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("MainMenuBackground", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property mednafen() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("mednafen", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property mednafen_server() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("mednafen_server", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
         
