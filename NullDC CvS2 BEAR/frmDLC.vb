@@ -135,7 +135,7 @@ Public Class frmDLC
             AddHandler tmpListView.SelectedIndexChanged, AddressOf SelectedNewGameFromList
 
             For i = 7 To _lines.Count - 1
-                Dim url = Strings.Split(_lines(i), "|,|")(0).Replace("#", "%23").Replace(" ", "%20")
+                Dim url = Strings.Split(_lines(i), "|,|")(0)
                 Dim name = Strings.Split(_lines(i), "|,|")(1)
                 Dim _it As New ListViewItem(name)
                 _it.SubItems.Add(url)
@@ -160,7 +160,7 @@ Public Class frmDLC
 
         End If
 
-        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
 
         CurrentlyDownloadingGame = New DownloadableGame(CurrentlySelectedGame.URL, CurrentlySelectedGame.Name, CurrentlySelectedGame.Platform, CurrentlySelectedGame.Folder, CurrentlySelectedGame.Extract)
 
@@ -169,6 +169,8 @@ Public Class frmDLC
 
         Try
             DownloadClient.Credentials = New NetworkCredential()
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
             If Not Directory.Exists(MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder) Then Directory.CreateDirectory(MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder)
 
             DownloadClient.DownloadFileTaskAsync(CurrentlyDownloadingGame.URL, MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder & "\" & DownloadingZipName)

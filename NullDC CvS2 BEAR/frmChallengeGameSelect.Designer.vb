@@ -39,9 +39,9 @@ Partial Class frmChallengeGameSelect
         Me.cbGameList.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cbGameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGameList.FormattingEnabled = True
-        Me.cbGameList.Location = New System.Drawing.Point(70, 208)
+        Me.cbGameList.Location = New System.Drawing.Point(52, 208)
         Me.cbGameList.Name = "cbGameList"
-        Me.cbGameList.Size = New System.Drawing.Size(316, 21)
+        Me.cbGameList.Size = New System.Drawing.Size(344, 21)
         Me.cbGameList.TabIndex = 0
         '
         'btnLetsGo

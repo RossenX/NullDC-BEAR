@@ -554,11 +554,27 @@ Public Class frmMain
 
         End If
 
+        If _system = "all" Or _system = "psx" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.cue", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = "PSX- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "ss", ""})
+                    table.Rows.Add({RomName, GameName})
+                End If
+            Next
+
+        End If
+
         If _system = "all" Or _system = "nes" Then
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.nes", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = "NES- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".nes", "").Replace(",", ".")
+                Dim GameName As String = "NES- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".nes", "").Replace(",", ".").Replace(".NES", "").Replace("# NES", "")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
