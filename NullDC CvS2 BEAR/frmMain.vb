@@ -160,11 +160,7 @@ Public Class frmMain
         Dim RomFolders As String() = {
             NullDCPath & "\roms",
             NullDCPath & "\dc\roms",
-            NullDCPath & "\mednafen\roms\sg",
-            NullDCPath & "\mednafen\roms\ss",
-            NullDCPath & "\mednafen\roms\nes",
-            NullDCPath & "\mednafen\roms\snes",
-            NullDCPath & "\mednafen\roms\ngp"
+            NullDCPath & "\mednafen\roms"
         }
 
         Dim Watchers(RomFolders.Count) As FileSystemWatcher
@@ -494,14 +490,6 @@ Public Class frmMain
 
     Public Sub GetGamesList(Optional ByVal _system As String = "all")
         GamesList.Clear()
-        GameSelectForm.cbGameList.ValueMember = "Rom"
-        GameSelectForm.cbGameList.DisplayMember = "Game"
-        HostingForm.cbGameList.ValueMember = "Rom"
-        HostingForm.cbGameList.DisplayMember = "Game"
-
-        Dim table As New DataTable
-        table.Columns.Add("Rom", GetType(String))
-        table.Columns.Add("Game", GetType(String))
 
         ' New Get All Roms code that includes subfolders
         Dim Files As String()
@@ -511,111 +499,14 @@ Public Class frmMain
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
 
-                Dim GameName As String = "NA- " & GameName_Split(GameName_Split.Count - 2).Trim.Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 2).Trim.Replace(",", ".")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
                     GamesList.Add(RomName, {GameName, RomPath, "naomi", ""})
-                    table.Rows.Add({RomName, GameName})
                 End If
             Next
-        End If
-
-        If _system = "all" Or _system = "sg" Then
-            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.zip", SearchOption.AllDirectories)
-            For Each _file In Files
-                Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = "SG- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
-                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
-                Dim RomPath As String = _file.Replace(NullDCPath, "")
-
-                If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "sg", ""})
-                    table.Rows.Add({RomName, GameName})
-                End If
-            Next
-
-        End If
-
-        If _system = "all" Or _system = "ss" Then
-            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.cue", SearchOption.AllDirectories)
-            For Each _file In Files
-                Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = "SG- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".")
-                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
-                Dim RomPath As String = _file.Replace(NullDCPath, "")
-
-                If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "ss", ""})
-                    table.Rows.Add({RomName, GameName})
-                End If
-            Next
-
-        End If
-
-        If _system = "all" Or _system = "psx" Then
-            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.cue", SearchOption.AllDirectories)
-            For Each _file In Files
-                Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = "PSX- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".")
-                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
-                Dim RomPath As String = _file.Replace(NullDCPath, "")
-
-                If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "ss", ""})
-                    table.Rows.Add({RomName, GameName})
-                End If
-            Next
-
-        End If
-
-        If _system = "all" Or _system = "nes" Then
-            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.nes", SearchOption.AllDirectories)
-            For Each _file In Files
-                Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = "NES- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".nes", "").Replace(",", ".").Replace(".NES", "").Replace("# NES", "")
-                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
-                Dim RomPath As String = _file.Replace(NullDCPath, "")
-
-                If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "nes", ""})
-                    table.Rows.Add({RomName, GameName})
-                End If
-            Next
-
-        End If
-
-        If _system = "all" Or _system = "snes" Then
-            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\snes", "*.zip", SearchOption.AllDirectories)
-            For Each _file In Files
-                Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = "SNES- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
-                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
-                Dim RomPath As String = _file.Replace(NullDCPath, "")
-
-                If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "snes", ""})
-                    table.Rows.Add({RomName, GameName})
-                End If
-            Next
-
-        End If
-
-        If _system = "all" Or _system = "ngp" Then
-            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ngp", "*.zip", SearchOption.AllDirectories)
-            For Each _file In Files
-                Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = "NGP- " & GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
-                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
-                Dim RomPath As String = _file.Replace(NullDCPath, "")
-
-                If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "ngp", ""})
-                    table.Rows.Add({RomName, GameName})
-                End If
-            Next
-
         End If
 
         If _system = "all" Or _system = "dc" Then
@@ -657,7 +548,7 @@ Public Class frmMain
                 Next n
                 fs.Close()
 
-                Dim GameName As String = "DC- " & StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", "").Replace(".gdi", "").Replace(",", "."), vbProperCase).Split("[")(0).Split("(")(0).Trim
+                Dim GameName As String = StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", "").Replace(".gdi", "").Replace(",", "."), vbProperCase).Split("[")(0).Split("(")(0).Trim
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
 
                 Dim RomPath As String = _file.Replace(NullDCPath & "\dc\", "")
@@ -665,7 +556,6 @@ Public Class frmMain
                 If Not GamesList.ContainsKey(RomName) Then
                     GamesList.Add(RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
                     Console.WriteLine("Found Game: RomName:" & RomName & " GameName:" & GameName & " RomPath:" & RomPath & " Platform:dc" & " " & sBuilder.ToString())
-                    table.Rows.Add({RomName, GameName})
                 End If
 
             Next
@@ -688,8 +578,179 @@ Public Class frmMain
 
         End If
 
-        GameSelectForm.cbGameList.DataSource = table
-        HostingForm.cbGameList.DataSource = table
+        If _system = "all" Or _system = "ss" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.cue", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "ss", ""})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "sg" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "sg", ""})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "psx" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.cue", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "psx", ""})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "nes" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.nes", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".nes", "").Replace(",", ".").Replace(".NES", "").Replace("# NES", "")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "nes", ""})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "snes" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\snes", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "snes", ""})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "ngp" Then
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ngp", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "ngp", ""})
+                End If
+            Next
+
+        End If
+
+        ' New Games List Code
+        PopulateGameLists(GameSelectForm.tc_games, AddressOf MainformRef.GameSelectForm.SelectedIndexChange)
+
+    End Sub
+
+    Private Sub PopulateGameLists(ByRef TabControl As TabControl, ByRef SelectedIndexChangeEventHandler As EventHandler)
+        TabControl.TabPages.Clear()
+
+        'RomFileName - Game Name, Rom Path, Platform, Hash
+        For i = 0 To GamesList.Count - 1
+
+            Dim TabIndex = -1
+            Dim TabName = ""
+
+            Select Case GamesList(GamesList.Keys(i))(2)
+                Case "naomi"
+                    TabName = "Naomi"
+                Case "dc"
+                    TabName = "Dreamcast"
+                Case "sg"
+                    TabName = "Genesis"
+                Case "ss"
+                    TabName = "Saturn"
+                Case "psx"
+                    TabName = "PSX"
+                Case "nes"
+                    TabName = "NES"
+                Case "snes"
+                    TabName = "SNES"
+                Case "ngp"
+                    TabName = "Neo-Geo Pocket"
+                Case Else
+                    TabName = "Unknown"
+                    Console.WriteLine("No System?")
+            End Select
+
+            ' Check if Tab Exists
+            For Each _tab As TabPage In TabControl.TabPages
+                If _tab.Text = TabName Then
+                    TabIndex = _tab.TabIndex
+                    Exit For
+                End If
+            Next
+
+            ' Tab not found, create the tab
+            If TabIndex = -1 Then
+                TabControl.TabPages.Add(TabName)
+                TabControl.TabPages.Item(TabControl.TabCount - 1).BackColor = Color.FromArgb(250, 200, 0)
+
+                Dim tmpListView As New ListView
+                tmpListView.Dock = DockStyle.Fill
+                tmpListView.MultiSelect = False
+                tmpListView.View = View.Details
+                tmpListView.HeaderStyle = ColumnHeaderStyle.None
+                tmpListView.BackColor = Color.FromArgb(250, 200, 0)
+                tmpListView.FullRowSelect = True
+                tmpListView.Parent = TabControl.TabPages.Item(TabControl.TabCount - 1)
+
+                tmpListView.Columns.Add("Game Name")
+                tmpListView.Columns.Add("Rom Name")
+                tmpListView.Columns.Item(0).Width = tmpListView.Width - 25
+                tmpListView.Columns.Item(1).Width = 0
+
+                TabIndex = TabControl.TabPages.Count - 1
+
+                AddHandler tmpListView.SelectedIndexChanged, SelectedIndexChangeEventHandler
+
+            End If
+
+            Dim tmp2ListView = TabControl.TabPages.Item(TabIndex).Controls.OfType(Of ListView).First
+
+            Dim RomName = ""
+            Dim GameName = ""
+
+            Dim _it As New ListViewItem(GamesList(GamesList.Keys(i))(0).ToString)
+            _it.SubItems.Add(GamesList.Keys(i).ToString)
+            tmp2ListView.Items.Add(_it)
+
+
+
+        Next
+
+
 
     End Sub
 
@@ -706,7 +767,7 @@ Public Class frmMain
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "naomi"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
-            Case "sg", "ss", "nes", "ngp", "snes"
+            Case "sg", "ss", "nes", "ngp", "snes", "psx"
                 MednafenLauncher.LaunchEmulator(_romname)
             Case Else
                 MsgBox("Missing emulator type: " & Emulator)

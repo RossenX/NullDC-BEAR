@@ -21,8 +21,6 @@ Public Class frmHostPanel
     Private Sub frmHostPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Icon = My.Resources.NewNullDCBearIcon
         cbDelay.Text = "1"
-        If cbGameList.Items.Count > 0 Then cbGameList.SelectedIndex = 0
-
     End Sub
 
     Private Sub frmHostPanel_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -45,10 +43,8 @@ Public Class frmHostPanel
                 lbInfo.Text = "Hosting " & MainformRef.Challenger.name
                 cbDelay.Text = "1"
                 lbPing.Text = ""
-                cbGameList.Visible = False
                 Dim Game = MainformRef.Challenger.game
                 Console.WriteLine("Game Is:  " & Game)
-                If MainformRef.Challenger.game = "None" Then cbGameList.Visible = True
 
                 Try
                     SuggestThread = New Thread(AddressOf SuggestDelay)
@@ -65,7 +61,6 @@ Public Class frmHostPanel
                 lbInfo.Text = "Hosting Solo"
                 cbDelay.Text = "1"
                 lbPing.Text = ""
-                cbGameList.Visible = True
             End If
 
             If Rx.VMU Is Nothing Then
@@ -113,13 +108,13 @@ Public Class frmHostPanel
     End Sub
 
     Private Sub btnStartHosting_Click(sender As Object, e As EventArgs) Handles btnStartHosting.Click
-        If cbGameList.Text = "" Then
+        If MainformRef.ConfigFile.Game = "None" Then
             MainformRef.NotificationForm.ShowMessage("No Game Selected")
             Exit Sub
         End If
 
         Dim HostType As String = "0"
-        Dim RomName As String = cbGameList.SelectedValue
+        Dim RomName As String = MainformRef.ConfigFile.Game
         If Not MainformRef.Challenger Is Nothing Then RomName = MainformRef.Challenger.game
 
         MainformRef.ConfigFile.Host = MainformRef.ConfigFile.IP

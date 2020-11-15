@@ -1904,7 +1904,7 @@ Partial Class frmKeyMapperSDL
         Me.BackColor = System.Drawing.Color.Pink
         Me.ClientSize = New System.Drawing.Size(907, 547)
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False

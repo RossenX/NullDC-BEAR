@@ -31,7 +31,6 @@ Partial Class frmHostPanel
         Me.lbPing = New System.Windows.Forms.Label()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnSuggestDelay = New System.Windows.Forms.Button()
-        Me.cbGameList = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -150,17 +149,6 @@ Partial Class frmHostPanel
         Me.btnSuggestDelay.Text = "Suggest"
         Me.btnSuggestDelay.UseVisualStyleBackColor = False
         '
-        'cbGameList
-        '
-        Me.cbGameList.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.cbGameList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbGameList.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.cbGameList.FormattingEnabled = True
-        Me.cbGameList.Location = New System.Drawing.Point(58, 225)
-        Me.cbGameList.Name = "cbGameList"
-        Me.cbGameList.Size = New System.Drawing.Size(282, 21)
-        Me.cbGameList.TabIndex = 10
-        '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
@@ -195,7 +183,6 @@ Partial Class frmHostPanel
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.cbRegion)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.cbGameList)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.btnSuggestDelay)
         Me.Controls.Add(Me.TableLayoutPanel1)
@@ -225,7 +212,6 @@ Partial Class frmHostPanel
     Friend WithEvents btnExit As Button
     Friend WithEvents lbPing As Label
     Friend WithEvents btnSuggestDelay As Button
-    Friend WithEvents cbGameList As ComboBox
     Friend WithEvents Button1 As Button
     Friend WithEvents cbRegion As ComboBox
 End Class

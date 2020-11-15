@@ -1,6 +1,7 @@
 ﻿Public Class frmChallengeGameSelect
 
     Public _Challenger As NullDCPlayer
+    Dim SelectedGame = {"", ""}
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
@@ -18,8 +19,8 @@
     End Sub
 
     Private Sub btnLetsGo_Click(sender As Object, e As EventArgs) Handles btnLetsGo.Click
-        If cbGameList.Text = "" Then
-            MainFormRef.NotificationForm.ShowMessage("No Game Selected")
+        If SelectedGame(0) = "" Then
+            MainformRef.NotificationForm.ShowMessage("No Game Selected")
             Exit Sub
         End If
 
@@ -34,13 +35,13 @@
     Public Sub StartOffline()
 
         MainformRef.ConfigFile.Status = "Offline"
-        MainFormRef.ConfigFile.Game = cbGameList.SelectedValue
+        MainformRef.ConfigFile.Game = SelectedGame(0)
         MainformRef.ConfigFile.ReplayFile = ""
         MainformRef.ConfigFile.Host = "127.0.0.1"
         MainformRef.ConfigFile.SaveFile()
         MainformRef.ConfigFile.Delay = cbDelay.Text.Trim
 
-        MainformRef.GameLauncher(cbGameList.SelectedValue, cbRegion.Text)
+        MainformRef.GameLauncher(SelectedGame(0), cbRegion.Text)
         'MainformRef.NullDCLauncher.LaunchDC(cbGameList.SelectedValue, cbRegion.Text)
 
         Me.Close()
@@ -48,8 +49,8 @@
     End Sub
 
     Public Sub StartOnline()
-        Dim GameRom As String = cbGameList.SelectedValue
-        MainformRef.Challenger = New NullDCPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, GameRom)
+
+        MainformRef.Challenger = New NullDCPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, SelectedGame(0))
         MainformRef.ChallengeSentForm.StartChallenge(MainformRef.Challenger)
         Me.Close()
 
@@ -68,19 +69,35 @@
 
     Private Sub frmChallengeGameSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
+        tb_mednafen.Visible = False
+        tb_nulldc.Visible = False
+    End Sub
 
+    Public Sub SelectedIndexChange(sender As ListView, e As EventArgs)
+        If sender.SelectedItems.Count = 0 Then
+            SelectedGame = {"", ""}
+        Else
+            SelectedGame = {sender.SelectedItems(0).SubItems(1).Text, sender.SelectedItems(0).SubItems(0).Text}
+        End If
+
+        If SelectedGame(0) = "" Then
+            Label1.Text = "Game Select"
+        Else
+            Label1.Text = SelectedGame(1)
+        End If
     End Sub
 
     Private Sub frmChallengeGameSelect_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Visible Then
+            tc_games.SelectedIndex = 0
             If Not _Challenger Is Nothing Then
                 cbRegion.Visible = False
                 Label4.Visible = False
-                SimDelayTB.Visible = False
+                tb_nulldc.Visible = False
             Else
                 cbRegion.Visible = True
                 Label4.Visible = True
-                SimDelayTB.Visible = True
+                tb_nulldc.Visible = True
                 cbDelay.Text = "0"
             End If
 
@@ -115,4 +132,19 @@
         End If
 
     End Sub
+
+    Private Sub tc_games_SelectedIndexChanged(sender As TabControl, e As EventArgs) Handles tc_games.SelectedIndexChanged
+        If Not sender.SelectedTab Is Nothing Then
+            If sender.SelectedTab.Text = "Naomi" Or sender.SelectedTab.Text = "Dreamcast" Then
+                tb_nulldc.Visible = True
+                tb_mednafen.Visible = False
+            Else
+                tb_nulldc.Visible = False
+                tb_mednafen.Visible = True
+            End If
+        End If
+
+
+    End Sub
+
 End Class
