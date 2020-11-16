@@ -504,7 +504,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "naomi", ""})
+                    GamesList.Add(RomName, {GameName, RomPath, "na", ""})
                 End If
             Next
         End If
@@ -683,7 +683,7 @@ Public Class frmMain
             Dim TabName = ""
 
             Select Case GamesList(GamesList.Keys(i))(2)
-                Case "naomi"
+                Case "na"
                     TabName = "Naomi"
                 Case "dc"
                     TabName = "Dreamcast"
@@ -765,7 +765,7 @@ Public Class frmMain
         Select Case Emulator
             Case "dc"
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
-            Case "naomi"
+            Case "na"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
             Case "sg", "ss", "nes", "ngp", "snes", "psx"
                 MednafenLauncher.LaunchEmulator(_romname)
@@ -1138,6 +1138,10 @@ Public Class frmMain
                     Message = "Player is not accepting challenges right now."
                 Case "NDC"
                     Message = "Cannot Spectate Offline Dreamcast game (Yet)"
+                Case "MDH"
+                    Message = "Try connecting to the HOST"
+                Case "MDN"
+                    Message = "Player does not allow drop-in"
             End Select
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
@@ -1439,6 +1443,7 @@ Public Class Configs
     Private _ShowGameNameInTitle As Int16 = 1
     Private _sdlversopm As String = "Dev"
     Private _vsync As Int16 = 0
+    Private _dropin As Int16 = 0
 
 #Region "Properties"
 
@@ -1675,6 +1680,16 @@ Public Class Configs
 
     End Property
 
+    Public Property DropIn() As Int16
+        Get
+            Return _dropin
+        End Get
+        Set(ByVal value As Int16)
+            _dropin = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -1705,7 +1720,8 @@ Public Class Configs
                 "VsNames=" & VsNames,
                 "ShowGameNameInTitle=" & ShowGameNameInTitle,
                 "SDLVersion=" & SDLVersion,
-                "Vsync=" & Vsync
+                "Vsync=" & Vsync,
+                "DropIn=" & DropIn
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -1774,6 +1790,7 @@ Public Class Configs
                 If line.StartsWith("ShowGameNameInTitle") Then ShowGameNameInTitle = line.Split("=")(1).Trim
                 If line.StartsWith("SDLVersion") Then SDLVersion = line.Split("=")(1).Trim
                 If line.StartsWith("Vsync") Then Vsync = line.Split("=")(1).Trim
+                If line.StartsWith("DropIn") Then DropIn = line.Split("=")(1).Trim
             Next
 
             Game = "None"

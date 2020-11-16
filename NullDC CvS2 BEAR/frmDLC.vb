@@ -89,7 +89,7 @@ Public Class frmDLC
     Private Sub GetDownloadableGamesList()
         Try
             GetRomPacks()
-            'ArchiveDotOrgParse("https://archive.org/details/PlaystationNorthAmericaCollectionByGhostware&output=json")
+            ArchiveDotOrgParse("https://archive.org/details/Sony-Playstation-USA-Redump.org-2019-05-27&output=json")
         Catch ex As Exception
             MsgBox("Error Getting RomPacks: " & ex.Message)
 

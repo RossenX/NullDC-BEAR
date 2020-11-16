@@ -19,7 +19,6 @@ Public Class NullDCLauncher
     Dim SingleInstance As Boolean = True
     Dim LoadRomThread As Thread
     Dim IsFullscreen = 0
-    Public Platform As String = ""
 
 
 #Region "API"

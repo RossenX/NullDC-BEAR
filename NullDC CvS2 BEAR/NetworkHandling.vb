@@ -179,24 +179,44 @@ Public Class NetworkHandling
             Exit Sub
         End If
 
-        ' Check if we should tell them to spectate
+
+
+
+        ' Joining Games in Progress
         If message.StartsWith("!") Then
             If MainformRef.IsNullDCRunning And (Not MainformRef.Challenger Is Nothing Or MainformRef.ConfigFile.Status = "Offline") Then ' I'm running nullDC so obviously can't accept the challenge.
                 If MainformRef.ConfigFile.AllowSpectators = 1 Then
-
+                    'This is NULLDC and it allows spectators
                     If MainformRef.ConfigFile.Status = "Spectator" Then ' I'm running it as a spectator/replay
                         SendMessage(">,NSS", senderip)
                         Exit Sub ' KEEP THIS HERE
                     End If
 
-                    If MainformRef.NullDCLauncher.Platform = "na" Then ' Noami dun give no fucks about VMU
+                    ' Naomi Tells em to join right away, DC uses "V" to ask for VMU and confirm VMU sync, then join
+                    If Rx.platform = "na" Then
                         SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
                     End If
+
                     Exit Sub ' KEEP THIS HERE
                 Else
                     SendMessage(">,NS", senderip)
                     Exit Sub ' KEEP THIS HERE
                 End If
+            ElseIf Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then ' We're on Mednafen
+                ' Mednafen "Spectator" and normal player are no different.
+
+                If MainformRef.MednafenLauncher.MednafenServerInstance Is Nothing Then ' But the server is not here
+                    SendMessage(">,MDH", senderip)
+                    Exit Sub ' KEEP THIS HERE
+                End If
+
+                If MainformRef.ConfigFile.DropIn = 0 Then ' We do not allow DropIn It's kinda impossible to now allow dropin while having a server running but i mean just in case
+                    SendMessage(">,MDN", senderip)
+                    Exit Sub ' KEEP THIS HERE
+                End If
+
+                ' ok so at this point we have a host on this PC and we allow drop in so we should tell em to join in
+
             End If
         End If
 

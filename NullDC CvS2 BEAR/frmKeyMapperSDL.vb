@@ -405,7 +405,7 @@ Public Class frmKeyMapperSDL
 
         ' Update the configs for hotloading new configs
         If MainformRef.IsNullDCRunning Then
-            Select Case MainformRef.NullDCLauncher.Platform
+            Select Case Rx.platform
                 Case "na"
 
                     Dim ControlsFile() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")

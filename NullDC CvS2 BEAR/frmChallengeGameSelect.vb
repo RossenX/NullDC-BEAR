@@ -24,6 +24,13 @@
             Exit Sub
         End If
 
+        Rx.platform = MainformRef.GamesList(SelectedGame(0))(2)
+
+
+
+
+
+
         If _Challenger Is Nothing Then
             StartOffline()
         Else
@@ -105,6 +112,8 @@
                 cbRegion.SelectedIndex = 0
             End If
 
+            CheckBox1.Checked = MainformRef.ConfigFile.DropIn
+
             Me.CenterToParent()
         Else
             _Challenger = Nothing
@@ -144,6 +153,12 @@
             End If
         End If
 
+
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As CheckBox, e As EventArgs) Handles CheckBox1.CheckedChanged
+        MainformRef.ConfigFile.DropIn = sender.CheckState
+        MainformRef.ConfigFile.SaveFile(False)
 
     End Sub
 

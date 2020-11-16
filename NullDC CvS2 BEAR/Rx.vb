@@ -9,6 +9,8 @@ Module Rx
     Public VMU As String ' the p1 VMU
     Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
 
+    Public platform As String = ""
+
     Public Function GetEEPROM(ByVal _romfullpath As String) As String
         Dim EEPROMPath As String = _romfullpath & ".eeprom"
         Dim FileBytes As String
