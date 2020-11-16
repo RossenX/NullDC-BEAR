@@ -42,7 +42,7 @@ Partial Class frmDLC
         Me.btnDownload.Location = New System.Drawing.Point(0, 401)
         Me.btnDownload.Margin = New System.Windows.Forms.Padding(0)
         Me.btnDownload.Name = "btnDownload"
-        Me.btnDownload.Size = New System.Drawing.Size(569, 41)
+        Me.btnDownload.Size = New System.Drawing.Size(407, 41)
         Me.btnDownload.TabIndex = 1
         Me.btnDownload.Text = "Download"
         Me.btnDownload.UseVisualStyleBackColor = False
@@ -69,7 +69,7 @@ Partial Class frmDLC
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(569, 496)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(407, 496)
         Me.TableLayoutPanel1.TabIndex = 2
         '
         'btnRomsFolder
@@ -80,7 +80,7 @@ Partial Class frmDLC
         Me.btnRomsFolder.Location = New System.Drawing.Point(0, 455)
         Me.btnRomsFolder.Margin = New System.Windows.Forms.Padding(0)
         Me.btnRomsFolder.Name = "btnRomsFolder"
-        Me.btnRomsFolder.Size = New System.Drawing.Size(416, 41)
+        Me.btnRomsFolder.Size = New System.Drawing.Size(297, 41)
         Me.btnRomsFolder.TabIndex = 6
         Me.btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
         Me.btnRomsFolder.UseVisualStyleBackColor = False
@@ -96,7 +96,7 @@ Partial Class frmDLC
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(5)
-        Me.Label1.Size = New System.Drawing.Size(569, 25)
+        Me.Label1.Size = New System.Drawing.Size(407, 25)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Downloadable Games"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -108,7 +108,7 @@ Partial Class frmDLC
         Me.ProgressBar1.Location = New System.Drawing.Point(0, 378)
         Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(0)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(569, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(407, 23)
         Me.ProgressBar1.TabIndex = 3
         Me.ProgressBar1.Visible = False
         '
@@ -126,9 +126,9 @@ Partial Class frmDLC
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(419, 455)
+        Me.Label2.Location = New System.Drawing.Point(300, 455)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(143, 26)
+        Me.Label2.Size = New System.Drawing.Size(99, 39)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Disclaimer: " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Some games might not work."
         '
@@ -138,9 +138,10 @@ Partial Class frmDLC
         Me.tc_games.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tc_games.Location = New System.Drawing.Point(0, 25)
         Me.tc_games.Margin = New System.Windows.Forms.Padding(0)
+        Me.tc_games.Multiline = True
         Me.tc_games.Name = "tc_games"
         Me.tc_games.SelectedIndex = 0
-        Me.tc_games.Size = New System.Drawing.Size(569, 353)
+        Me.tc_games.Size = New System.Drawing.Size(407, 353)
         Me.tc_games.TabIndex = 7
         '
         'frmDLC
@@ -148,7 +149,7 @@ Partial Class frmDLC
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(569, 496)
+        Me.ClientSize = New System.Drawing.Size(407, 496)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmDLC"

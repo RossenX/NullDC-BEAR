@@ -26,11 +26,6 @@
 
         Rx.platform = MainformRef.GamesList(SelectedGame(0))(2)
 
-
-
-
-
-
         If _Challenger Is Nothing Then
             StartOffline()
         Else
@@ -41,15 +36,31 @@
 
     Public Sub StartOffline()
 
-        MainformRef.ConfigFile.Status = "Offline"
+        Select Case Rx.platform
+            Case "na", "dc" 'NullDC
+                MainformRef.ConfigFile.Status = "Offline"
+                MainformRef.ConfigFile.Host = ""
+            Case Else ' Mednafen
+                Select Case cb_Serverlist.Text
+                    Case "Offline"
+                        MainformRef.ConfigFile.Status = "Offline"
+                        MainformRef.ConfigFile.Host = ""
+                    Case "Localhost"
+                        MainformRef.ConfigFile.Status = "Hosting"
+                        MainformRef.ConfigFile.Host = "127.0.0.1"
+                    Case Else
+                        MainformRef.ConfigFile.Status = "Public"
+                        MainformRef.ConfigFile.Host = cb_Serverlist.SelectedValue
+                End Select
+
+        End Select
+
         MainformRef.ConfigFile.Game = SelectedGame(0)
         MainformRef.ConfigFile.ReplayFile = ""
-        MainformRef.ConfigFile.Host = "127.0.0.1"
         MainformRef.ConfigFile.SaveFile()
         MainformRef.ConfigFile.Delay = cbDelay.Text.Trim
 
         MainformRef.GameLauncher(SelectedGame(0), cbRegion.Text)
-        'MainformRef.NullDCLauncher.LaunchDC(cbGameList.SelectedValue, cbRegion.Text)
 
         Me.Close()
 
@@ -112,8 +123,6 @@
                 cbRegion.SelectedIndex = 0
             End If
 
-            CheckBox1.Checked = MainformRef.ConfigFile.DropIn
-
             Me.CenterToParent()
         Else
             _Challenger = Nothing
@@ -153,12 +162,6 @@
             End If
         End If
 
-
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As CheckBox, e As EventArgs) Handles CheckBox1.CheckedChanged
-        MainformRef.ConfigFile.DropIn = sender.CheckState
-        MainformRef.ConfigFile.SaveFile(False)
 
     End Sub
 

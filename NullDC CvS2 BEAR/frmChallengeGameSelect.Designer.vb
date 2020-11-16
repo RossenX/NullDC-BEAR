@@ -35,8 +35,7 @@ Partial Class frmChallengeGameSelect
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_mednafen = New System.Windows.Forms.TableLayoutPanel()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cb_Serverlist = New System.Windows.Forms.ComboBox()
         Me.tb_nulldc.SuspendLayout()
         Me.tc_games.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -144,6 +143,7 @@ Partial Class frmChallengeGameSelect
         Me.tc_games.Controls.Add(Me.TabPage1)
         Me.tc_games.Controls.Add(Me.TabPage2)
         Me.tc_games.Location = New System.Drawing.Point(12, 35)
+        Me.tc_games.Multiline = True
         Me.tc_games.Name = "tc_games"
         Me.tc_games.SelectedIndex = 0
         Me.tc_games.Size = New System.Drawing.Size(464, 253)
@@ -199,36 +199,24 @@ Partial Class frmChallengeGameSelect
         '
         Me.tb_mednafen.ColumnCount = 1
         Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tb_mednafen.Controls.Add(Me.CheckBox1, 0, 0)
-        Me.tb_mednafen.Controls.Add(Me.ComboBox1, 0, 1)
-        Me.tb_mednafen.Location = New System.Drawing.Point(223, 294)
+        Me.tb_mednafen.Controls.Add(Me.cb_Serverlist, 0, 1)
+        Me.tb_mednafen.Location = New System.Drawing.Point(12, 294)
         Me.tb_mednafen.Name = "tb_mednafen"
         Me.tb_mednafen.RowCount = 2
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tb_mednafen.Size = New System.Drawing.Size(145, 57)
+        Me.tb_mednafen.Size = New System.Drawing.Size(197, 27)
         Me.tb_mednafen.TabIndex = 28
         '
-        'CheckBox1
+        'cb_Serverlist
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CheckBox1.Location = New System.Drawing.Point(3, 3)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(139, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "Allow Others to Join"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(3, 26)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(139, 21)
-        Me.ComboBox1.TabIndex = 29
+        Me.cb_Serverlist.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cb_Serverlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_Serverlist.FormattingEnabled = True
+        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 3)
+        Me.cb_Serverlist.Name = "cb_Serverlist"
+        Me.cb_Serverlist.Size = New System.Drawing.Size(191, 21)
+        Me.cb_Serverlist.TabIndex = 29
         '
         'frmChallengeGameSelect
         '
@@ -254,7 +242,6 @@ Partial Class frmChallengeGameSelect
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.tb_mednafen.ResumeLayout(False)
-        Me.tb_mednafen.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -272,6 +259,5 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Label1 As Label
     Friend WithEvents tb_mednafen As TableLayoutPanel
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cb_Serverlist As ComboBox
 End Class

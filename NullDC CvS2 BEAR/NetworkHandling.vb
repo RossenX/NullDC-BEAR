@@ -210,11 +210,6 @@ Public Class NetworkHandling
                     Exit Sub ' KEEP THIS HERE
                 End If
 
-                If MainformRef.ConfigFile.DropIn = 0 Then ' We do not allow DropIn It's kinda impossible to now allow dropin while having a server running but i mean just in case
-                    SendMessage(">,MDN", senderip)
-                    Exit Sub ' KEEP THIS HERE
-                End If
-
                 ' ok so at this point we have a host on this PC and we allow drop in so we should tell em to join in
 
             End If

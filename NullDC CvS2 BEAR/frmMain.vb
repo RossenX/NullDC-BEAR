@@ -490,7 +490,26 @@ Public Class frmMain
     End Sub
 
     Private Sub GetServerList()
+        Dim Files = Directory.GetFiles(NullDCPath, "*.slist", SearchOption.TopDirectoryOnly)
+        Dim table As New DataTable
+        table.Columns.Add("IP", GetType(String))
+        table.Columns.Add("Name", GetType(String))
 
+        GameSelectForm.cb_Serverlist.ValueMember = "IP"
+        GameSelectForm.cb_Serverlist.DisplayMember = "Name"
+
+        table.Rows.Add({"Offline", "Offline"})
+        table.Rows.Add({"Localhost", "Localhost"})
+
+        For Each _file In Files
+            For Each _line In File.ReadAllLines(_file)
+                If _line.Length > 2 Then
+                    table.Rows.Add({_line.Split(":")(1), _line.Split(":")(0)})
+                End If
+            Next
+        Next
+
+        GameSelectForm.cb_Serverlist.DataSource = table
     End Sub
 
     Public Sub GetGamesList(Optional ByVal _system As String = "all")
@@ -500,6 +519,7 @@ Public Class frmMain
         Dim Files As String()
 
         If _system = "all" Or _system = "na" Then
+            If Not Directory.Exists(NullDCPath & "\roms") Then Directory.CreateDirectory(NullDCPath & "\roms")
             Files = Directory.GetFiles(NullDCPath & "\roms", "*.lst", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -515,6 +535,7 @@ Public Class frmMain
         End If
 
         If _system = "all" Or _system = "dc" Then
+            If Not Directory.Exists(NullDCPath & "\dc\roms") Then Directory.CreateDirectory(NullDCPath & "\dc\roms")
             Dim hasher As MD5 = MD5.Create()
             Files = Directory.GetFiles(NullDCPath & "\dc\roms", "*.cdi", SearchOption.AllDirectories)
             Dim GDIFiles = Directory.GetFiles(NullDCPath & "\dc\roms", "*.gdi", SearchOption.AllDirectories)
@@ -584,6 +605,7 @@ Public Class frmMain
         End If
 
         If _system = "all" Or _system = "ss" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\ss") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\ss")
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.cue", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -599,6 +621,7 @@ Public Class frmMain
         End If
 
         If _system = "all" Or _system = "sg" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\sg") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\sg")
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -614,6 +637,7 @@ Public Class frmMain
         End If
 
         If _system = "all" Or _system = "psx" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\psx") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\psx")
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.cue", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -629,6 +653,7 @@ Public Class frmMain
         End If
 
         If _system = "all" Or _system = "nes" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\nes") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\nes")
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.nes", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -644,6 +669,7 @@ Public Class frmMain
         End If
 
         If _system = "all" Or _system = "snes" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\snes") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\snes")
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\snes", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -659,6 +685,7 @@ Public Class frmMain
         End If
 
         If _system = "all" Or _system = "ngp" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\ngp") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\ngp")
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ngp", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -673,8 +700,40 @@ Public Class frmMain
 
         End If
 
-        ' New Games List Code
-        PopulateGameLists(GameSelectForm.tc_games, AddressOf MainformRef.GameSelectForm.SelectedIndexChange)
+        If _system = "all" Or _system = "gba" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\gba") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\gba")
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gba", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey(RomName) Then
+                    GamesList.Add(RomName, {GameName, RomPath, "gba", ""})
+                End If
+            Next
+
+        End If
+
+        If _system = "all" Or _system = "gbc" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\gbc") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\gbc")
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gbc", "*.zip", SearchOption.AllDirectories)
+                For Each _file In Files
+                    Dim GameName_Split As String() = _file.Split("\")
+                    Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                    Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                    Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                    If Not GamesList.ContainsKey(RomName) Then
+                        GamesList.Add(RomName, {GameName, RomPath, "gbc", ""})
+                    End If
+                Next
+
+            End If
+
+            ' New Games List Code
+            PopulateGameLists(GameSelectForm.tc_games, AddressOf MainformRef.GameSelectForm.SelectedIndexChange)
 
     End Sub
 
@@ -704,6 +763,10 @@ Public Class frmMain
                     TabName = "SNES"
                 Case "ngp"
                     TabName = "Neo-Geo Pocket"
+                Case "gba"
+                    TabName = "GBA"
+                Case "gbc"
+                    TabName = "GBC"
                 Case Else
                     TabName = "Unknown"
                     Console.WriteLine("No System?")
@@ -772,7 +835,7 @@ Public Class frmMain
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "na"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
-            Case "sg", "ss", "nes", "ngp", "snes", "psx"
+            Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc"
                 MednafenLauncher.LaunchEmulator(_romname)
             Case Else
                 MsgBox("Missing emulator type: " & Emulator)
@@ -1448,7 +1511,6 @@ Public Class Configs
     Private _ShowGameNameInTitle As Int16 = 1
     Private _sdlversopm As String = "Dev"
     Private _vsync As Int16 = 0
-    Private _dropin As Int16 = 0
 
 #Region "Properties"
 
@@ -1685,16 +1747,6 @@ Public Class Configs
 
     End Property
 
-    Public Property DropIn() As Int16
-        Get
-            Return _dropin
-        End Get
-        Set(ByVal value As Int16)
-            _dropin = value
-        End Set
-
-    End Property
-
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -1725,8 +1777,7 @@ Public Class Configs
                 "VsNames=" & VsNames,
                 "ShowGameNameInTitle=" & ShowGameNameInTitle,
                 "SDLVersion=" & SDLVersion,
-                "Vsync=" & Vsync,
-                "DropIn=" & DropIn
+                "Vsync=" & Vsync
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -1795,7 +1846,6 @@ Public Class Configs
                 If line.StartsWith("ShowGameNameInTitle") Then ShowGameNameInTitle = line.Split("=")(1).Trim
                 If line.StartsWith("SDLVersion") Then SDLVersion = line.Split("=")(1).Trim
                 If line.StartsWith("Vsync") Then Vsync = line.Split("=")(1).Trim
-                If line.StartsWith("DropIn") Then DropIn = line.Split("=")(1).Trim
             Next
 
             Game = "None"

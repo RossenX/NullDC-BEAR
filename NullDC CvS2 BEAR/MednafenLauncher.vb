@@ -6,7 +6,7 @@ Public Class MednafenLauncher
 
     Public Sub LaunchEmulator(ByVal _romname)
         If MednafenServerInstance Is Nothing Then
-            If MainformRef.ConfigFile.DropIn = 1 Or MainformRef.ConfigFile.Status = "Hosting" Then
+            If MainformRef.ConfigFile.Status = "Hosting" Then
                 StartServer()
             End If
         End If
@@ -38,7 +38,7 @@ Public Class MednafenLauncher
                 Console.WriteLine("launching Mednagen: " & _romname)
                 Dim MednafenInfo As New ProcessStartInfo
                 MednafenInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
-                If MainformRef.ConfigFile.DropIn = "1" Or MainformRef.ConfigFile.Status = "Hosting" Then
+                If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Then
                     MednafenInfo.Arguments = " -connect -netplay.host " & MainformRef.ConfigFile.Host & " -netplay.nick " & MainformRef.ConfigFile.Name & " "
                 End If
                 MednafenInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
