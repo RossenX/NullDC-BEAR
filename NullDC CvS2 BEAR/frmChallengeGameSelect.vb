@@ -123,6 +123,9 @@
                 cbRegion.SelectedIndex = 0
             End If
 
+            SelectedGame = {"", ""}
+            Label1.Text = "Game Select"
+
             Me.CenterToParent()
         Else
             _Challenger = Nothing

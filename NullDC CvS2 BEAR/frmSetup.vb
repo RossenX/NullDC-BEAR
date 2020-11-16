@@ -67,25 +67,6 @@ Public Class frmSetup
             MainformRef.ConfigFile.AllowSpectators = 0
         End If
 
-        ' Get IP
-        Dim nics As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
-        For Each netadapter As NetworkInterface In nics
-            ' Get the Valid IP
-            If netadapter.Name = Rx.MainformRef.ConfigFile.Network Then
-                Dim i = 0
-                For Each Address In netadapter.GetIPProperties.UnicastAddresses
-                    Dim OutAddress As IPAddress = New IPAddress(2130706433)
-                    If IPAddress.TryParse(netadapter.GetIPProperties.UnicastAddresses(i).Address.ToString(), OutAddress) Then
-                        If OutAddress.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork Then
-                            Rx.MainformRef.ConfigFile.IP = netadapter.GetIPProperties.UnicastAddresses(i).Address.ToString()
-                            Exit For
-                        End If
-                    End If
-                    i += 1
-                Next
-            End If
-        Next
-
         MainformRef.ConfigFile.VsNames = cbOverlay.SelectedIndex
 
         Rx.MainformRef.ConfigFile.SaveFile()

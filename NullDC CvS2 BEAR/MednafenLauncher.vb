@@ -6,10 +6,11 @@ Public Class MednafenLauncher
 
     Public Sub LaunchEmulator(ByVal _romname)
         If MednafenServerInstance Is Nothing Then
-            If MainformRef.ConfigFile.Status = "Hosting" Then
+            If MainformRef.ConfigFile.Status = "Hosting" Then ' If we're set to host then we host
                 StartServer()
             End If
         End If
+
 
         Dim t As Task = New Task(
             Async Sub()
@@ -38,7 +39,7 @@ Public Class MednafenLauncher
                 Console.WriteLine("launching Mednagen: " & _romname)
                 Dim MednafenInfo As New ProcessStartInfo
                 MednafenInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
-                If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Then
+                If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Or MainformRef.ConfigFile.Status = "Client" Then
                     MednafenInfo.Arguments = " -connect -netplay.host " & MainformRef.ConfigFile.Host & " -netplay.nick " & MainformRef.ConfigFile.Name & " "
                 End If
                 MednafenInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
@@ -47,21 +48,7 @@ Public Class MednafenLauncher
                 MednafenInstance = Process.Start(MednafenInfo)
                 MednafenInstance.EnableRaisingEvents = True
 
-                AddHandler MednafenInstance.Exited,
-                Sub()
-                    If Not MednafenInstance Is Nothing Then
-                        If Not MednafenServerInstance Is Nothing Then
-                            MednafenServerInstance.CloseMainWindow()
-                        End If
-
-                        MednafenInstance = Nothing
-
-                        Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
-                        MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
-
-                    End If
-
-                End Sub
+                AddHandler MednafenInstance.Exited, AddressOf MednafenExited
 
             End Sub)
 
@@ -85,5 +72,23 @@ Public Class MednafenLauncher
                     MednafenServerInstance = Nothing
                 End Sub
     End Sub
+
+    Private Sub MednafenExited()
+
+        If Not MednafenInstance Is Nothing Then
+            If Not MednafenServerInstance Is Nothing Then
+                MednafenServerInstance.CloseMainWindow()
+            End If
+
+            MednafenInstance = Nothing
+
+            Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
+            MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
+
+        End If
+
+    End Sub
+
+
 
 End Class

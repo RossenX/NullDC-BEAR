@@ -57,6 +57,15 @@ Public Class frmHostPanel
 
                 End Try
 
+                Select Case MainformRef.GamesList(MainformRef.ConfigFile.Game)(2)
+                    Case "na", "dc"
+                        tb_nulldc.Visible = True
+                        tb_mednafen.Visible = False
+                    Case Else
+                        tb_nulldc.Visible = False
+                        tb_mednafen.Visible = True
+                End Select
+
             Else
                 lbInfo.Text = "Hosting Solo"
                 cbDelay.Text = "1"
@@ -113,11 +122,22 @@ Public Class frmHostPanel
             Exit Sub
         End If
 
+
+        Select Case MainformRef.GamesList(MainformRef.ConfigFile.Game)(2)
+            Case "na", "dc"
+                tb_nulldc.Visible = True
+                tb_mednafen.Visible = False
+            Case Else
+                tb_nulldc.Visible = False
+                tb_mednafen.Visible = True
+        End Select
+
+
         Dim HostType As String = "0"
         Dim RomName As String = MainformRef.ConfigFile.Game
         If Not MainformRef.Challenger Is Nothing Then RomName = MainformRef.Challenger.game
 
-        MainformRef.ConfigFile.Host = MainformRef.ConfigFile.IP
+        MainformRef.ConfigFile.Host = "127.0.0.1"
         MainformRef.ConfigFile.Status = "Hosting"
         MainformRef.ConfigFile.Delay = cbDelay.Text
         MainformRef.ConfigFile.Game = RomName

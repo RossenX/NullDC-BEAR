@@ -813,9 +813,6 @@ Public Class frmMain
             Dim _it As New ListViewItem(GamesList(GamesList.Keys(i))(0).ToString)
             _it.SubItems.Add(GamesList.Keys(i).ToString)
             tmp2ListView.Items.Add(_it)
-
-
-
         Next
 
 
@@ -898,17 +895,29 @@ Public Class frmMain
     Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
 
         ' Ignore being told to join the host if we havn't gotten the VMU yet
-        If MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" And Rx.VMU Is Nothing Then
+        If MainformRef.GamesList(_game)(2) = "dc" And Rx.VMU Is Nothing Then
             Console.WriteLine("Host started before VMU Data was Recieved, wait")
             Exit Sub
         End If
+
+        Select Case MainformRef.GamesList(_game)(2)
+            Case "na", "dc"
+                ConfigFile.Status = "Client"
+                ConfigFile.Port = _port
+            Case Else ' For Mednafen the 'region' setting is used as an indicator if it's public server or not
+                If _region = "0" Then
+                    ConfigFile.Status = "Client"
+                Else
+                    ConfigFile.Status = "Public"
+                End If
+
+                ConfigFile.Port = "4046" ' Mednafen always uses this for now maybe i'll change it later but all the public servers use this IP
+        End Select
 
         If WaitingForm.Visible Then WaitingForm.Visible = False
         Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
         Challenger = New NullDCPlayer(_name, _ip, _port, _game,, _peripheral)
         ConfigFile.Host = _ip
-        ConfigFile.Port = _port
-        ConfigFile.Status = "Client"
         ConfigFile.Game = _game
         ConfigFile.Delay = _delay
         ConfigFile.ReplayFile = ""
@@ -1272,14 +1281,14 @@ Public Class frmMain
                 RefreshTimer.Interval = 5000
                 RefreshTimer.Start()
             End If
-            NetworkHandler.SendMessage("?," & ConfigFile.IP)
+            NetworkHandler.SendMessage("?,")
 
             Dim NameToSend As String = MainformRef.ConfigFile.Name
             If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " vs " & MainformRef.Challenger.name
 
             Dim GameNameAndRomName = "None"
             If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
-            NetworkHandler.SendMessage("<," & NameToSend & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & MainformRef.ConfigFile.Status)
+            NetworkHandler.SendMessage("<," & NameToSend & ",," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & MainformRef.ConfigFile.Status)
         Else
             NotificationForm.ShowMessage("Slow down cowboy, wait at least 5 seconds between refreshing")
         End If
@@ -1357,7 +1366,7 @@ Public Class frmMain
 
             ' Don't instantly spectate a DC game, get the VMU first
             If Not MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" Then
-                NetworkHandler.SendMessage("!," & ConfigFile.Name & "," & ConfigFile.IP & "," & ConfigFile.Port & "," & Challenger.game & ",0," & ConfigFile.Peripheral, Challenger.ip)
+                NetworkHandler.SendMessage("!," & ConfigFile.Name & ",," & ConfigFile.Port & "," & Challenger.game & ",0," & ConfigFile.Peripheral, Challenger.ip)
             End If
 
             WaitingForm.Show()
@@ -1491,7 +1500,6 @@ Public Class Configs
     Private _port = "27886"
     Private _useremapper As Boolean = True
     Private _firstrun As Boolean = True
-    Private _ip As String = "127.0.0.1"
     Private _host As String = "127.0.0.1"
     Private _status As String = "Idle"
     Private _delay As Int16 = 1
@@ -1548,15 +1556,6 @@ Public Class Configs
         End Get
         Set(ByVal value As String)
             _port = value
-        End Set
-    End Property
-
-    Public Property IP() As String
-        Get
-            Return _ip
-        End Get
-        Set(ByVal value As String)
-            _ip = value
         End Set
     End Property
 
@@ -1759,7 +1758,6 @@ Public Class Configs
                 "Network=" & Network,
                 "Port=" & Port,
                 "Reclaw=" & UseRemap,
-                "IP=" & IP,
                 "Host=" & Host,
                 "Status=" & Status,
                 "Delay=" & Delay,
@@ -1796,7 +1794,7 @@ Public Class Configs
                     Dim t As Task = New Task(Async Sub()
                                                  ' 2 Second Delay just to avoid crashing some rare PCs that don't like to send data too quickly
                                                  Await Task.Delay(2000)
-                                                 MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & IP & "," & Port & "," & GameNameAndRomName & "," & Status)
+                                                 MainformRef.NetworkHandler.SendMessage("<," & NameToSend & ",," & Port & "," & GameNameAndRomName & "," & Status)
                                              End Sub)
                     t.Start()
                 End If
@@ -1821,7 +1819,6 @@ Public Class Configs
                 If line.StartsWith("Network") Then Network = line.Split("=")(1).Trim
                 If line.StartsWith("Port") Then Port = line.Split("=")(1).Trim
                 If line.StartsWith("Reclaw") Then UseRemap = line.Split("=")(1).Trim
-                If line.StartsWith("IP") Then IP = line.Split("=")(1).Trim
                 If line.StartsWith("Host") Then Host = line.Split("=")(1).Trim
                 If line.StartsWith("Delay") Then Delay = line.Split("=")(1).Trim
                 If line.StartsWith("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim

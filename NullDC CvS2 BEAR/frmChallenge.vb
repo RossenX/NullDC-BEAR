@@ -81,7 +81,7 @@ Public Class frmChallenge
         MainformRef.ConfigFile.Game = MainformRef.Challenger.game
         MainformRef.ConfigFile.SaveFile()
 
-        MainformRef.NetworkHandler.SendMessage("^," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Peripheral, MainformRef.Challenger.ip)
+        MainformRef.NetworkHandler.SendMessage("^," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Peripheral, MainformRef.Challenger.ip)
 
         MainformRef.WaitingForm.Show()
         Me.Close()

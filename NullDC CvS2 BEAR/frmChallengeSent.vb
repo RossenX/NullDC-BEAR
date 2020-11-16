@@ -12,7 +12,7 @@ Public Class frmChallengeSent
     Public Sub StartChallenge(ByVal _challanger As NullDCPlayer)
         MainFormRef.Challenger = _challanger
         With MainformRef
-            .NetworkHandler.SendMessage("!," & .ConfigFile.Name & "," & .ConfigFile.IP & "," & .ConfigFile.Port & "," & _challanger.game & ",1," & .ConfigFile.Peripheral, _challanger.ip)
+            .NetworkHandler.SendMessage("!," & .ConfigFile.Name & ",," & .ConfigFile.Port & "," & _challanger.game & ",1," & .ConfigFile.Peripheral, _challanger.ip)
         End With
 
         Me.Show()

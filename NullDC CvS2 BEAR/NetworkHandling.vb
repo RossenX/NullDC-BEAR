@@ -16,35 +16,6 @@ Public Class NetworkHandling
     Private receivingThread As Thread
 
     Public Sub New(ByVal mf As frmMain)
-        Dim MyIPAddress As String = ""
-
-        ' Get IP
-        Dim nics As NetworkInterface() = NetworkInterface.GetAllNetworkInterfaces()
-        For Each netadapter As NetworkInterface In nics
-            ' Get the Valid IP
-            If netadapter.Name = MainformRef.ConfigFile.Network Then
-
-                Dim i = 0
-                For Each Address In netadapter.GetIPProperties.UnicastAddresses
-                    Dim OutAddress As IPAddress = New IPAddress(2130706433)
-                    If IPAddress.TryParse(netadapter.GetIPProperties.UnicastAddresses(i).Address.ToString(), OutAddress) Then
-                        If OutAddress.AddressFamily = System.Net.Sockets.AddressFamily.InterNetwork Then
-                            MyIPAddress = netadapter.GetIPProperties.UnicastAddresses(i).Address.ToString()
-                            Exit For
-                        End If
-                    End If
-                    i += 1
-                Next
-            End If
-        Next
-
-        MainformRef.ConfigFile.IP = MyIPAddress
-        MainformRef.ConfigFile.SaveFile()
-
-        'If MyIPAddress = "" Then
-        ' MsgBox("Yo, i couldn't find your IP, you sure this network is all good, dawg?")
-        'End If
-
         InitializeReceiver()
     End Sub
 
@@ -128,7 +99,7 @@ Public Class NetworkHandling
                 Not message.StartsWith("V") And ' Asking for VMU
                 Not message.StartsWith("G") Then ' Successfuly got VMU
                 ' Message is not from challanger
-                If Not MainformRef.Challenger.ip = senderip And Not MainformRef.ConfigFile.IP = senderip Then
+                If Not MainformRef.Challenger.ip = senderip Then
                     Console.WriteLine("<-DENIED->")
                     SendMessage(">,BB", senderip)
                     Exit Sub
@@ -157,7 +128,7 @@ Public Class NetworkHandling
             If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " vs " & MainformRef.Challenger.name
             Dim GameNameAndRomName = "None"
             If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
-            SendMessage("<," & NameToSend & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & Status, senderip)
+            SendMessage("<," & NameToSend & ",," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & Status, senderip)
 
             Exit Sub
         End If
@@ -194,7 +165,7 @@ Public Class NetworkHandling
 
                     ' Naomi Tells em to join right away, DC uses "V" to ask for VMU and confirm VMU sync, then join
                     If Rx.platform = "na" Then
-                        SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
+                        SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
                     End If
 
                     Exit Sub ' KEEP THIS HERE
@@ -202,18 +173,33 @@ Public Class NetworkHandling
                     SendMessage(">,NS", senderip)
                     Exit Sub ' KEEP THIS HERE
                 End If
+
+
+
+
+
             ElseIf Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then ' We're on Mednafen
                 ' Mednafen "Spectator" and normal player are no different.
 
                 If MainformRef.MednafenLauncher.MednafenServerInstance Is Nothing Then ' But the server is not here
-                    SendMessage(">,MDH", senderip)
-                    Exit Sub ' KEEP THIS HERE
+                    If MainformRef.ConfigFile.Status = "Client" Then ' We're a mednafen client so tell them to join the host
+                        SendMessage(">,MDH", senderip)
+                        Exit Sub ' KEEP THIS HERE
+                    ElseIf MainformRef.ConfigFile.Status = "Hosting" Then ' We're on a public mednafen server so tell them to join
+                        ' TELLT HEM TO JOIN HERE
+                        Exit Sub ' Stop here don't go furhter down
+
+                    ElseIf MainformRef.ConfigFile.Status = "Public" Then ' We're on a public mednafen server so give them the host info to join
+                        ' GIVE THEM THE INFO TO JOIN HERE
+                        Exit Sub
+                    End If
+
                 End If
-
-                ' ok so at this point we have a host on this PC and we allow drop in so we should tell em to join in
-
             End If
+
+            ' ok so at this point we're not playing anything so continue down to the challange request
         End If
+
 
         ' Someone requested VMU DATA V(0)
         If message.StartsWith("V") Then
@@ -251,15 +237,15 @@ Public Class NetworkHandling
             Console.WriteLine("<-VMU DATA RECIVED BY CLIENT SUCCESSFULLY->" & message)
 
             If MainformRef.ConfigFile.Status = "Offline" Then ' We're Offline, so this can only come from a spectator
-                SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
+                SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
 
             Else ' We're online, lets check if this is a spectator or my challanger and send them the appropriate response
                 If senderip = MainformRef.Challenger.ip Then
                     If MainformRef.IsNullDCRunning Then ' We started the game, so tell em to join ' this is only if the game starts before the VMU is finished sending
-                        MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
+                        MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                     End If
                 Else ' This a Spectator
-                    SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
+                    SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
                 End If
             End If
 
@@ -295,7 +281,7 @@ Public Class NetworkHandling
 
                 If MainformRef.ConfigFile.Status = "Hosting" Then ' Check if i'm still hosting
                     MainformRef.Challenger = New NullDCPlayer(Split(1), Split(2), Split(3), Split(4), Split(5))
-                    SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.IP & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, senderip)
+                    SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, senderip)
                 Else
                     SendMessage(">,HO", senderip)
                     Exit Sub
@@ -346,7 +332,14 @@ Public Class NetworkHandling
             Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
             Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
             Dim delay As Int16 = CInt(Split(5))
-            MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+
+            ' If we were not send an IP to join we join the senderip, otherwise we join w.e IP the host told u sto
+            If Split(2) = "" Then
+                MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+            Else
+                MainformRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+            End If
+
             Exit Sub
 
         End If
