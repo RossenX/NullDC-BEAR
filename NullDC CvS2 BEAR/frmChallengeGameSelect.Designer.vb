@@ -36,6 +36,7 @@ Partial Class frmChallengeGameSelect
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_mednafen = New System.Windows.Forms.TableLayoutPanel()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.tb_nulldc.SuspendLayout()
         Me.tc_games.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -47,7 +48,7 @@ Partial Class frmChallengeGameSelect
         Me.btnLetsGo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnLetsGo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLetsGo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLetsGo.Location = New System.Drawing.Point(370, 290)
+        Me.btnLetsGo.Location = New System.Drawing.Point(374, 300)
         Me.btnLetsGo.Name = "btnLetsGo"
         Me.btnLetsGo.Size = New System.Drawing.Size(102, 88)
         Me.btnLetsGo.TabIndex = 1
@@ -59,7 +60,7 @@ Partial Class frmChallengeGameSelect
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(16, 357)
+        Me.Button1.Location = New System.Drawing.Point(12, 360)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(82, 28)
         Me.Button1.TabIndex = 3
@@ -103,7 +104,7 @@ Partial Class frmChallengeGameSelect
         Me.tb_nulldc.Controls.Add(Me.Label2, 0, 0)
         Me.tb_nulldc.Controls.Add(Me.Label4, 0, 1)
         Me.tb_nulldc.Controls.Add(Me.cbRegion, 1, 1)
-        Me.tb_nulldc.Location = New System.Drawing.Point(16, 294)
+        Me.tb_nulldc.Location = New System.Drawing.Point(12, 294)
         Me.tb_nulldc.Name = "tb_nulldc"
         Me.tb_nulldc.RowCount = 2
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -197,24 +198,37 @@ Partial Class frmChallengeGameSelect
         'tb_mednafen
         '
         Me.tb_mednafen.ColumnCount = 1
-        Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tb_mednafen.Controls.Add(Me.CheckBox1, 0, 0)
-        Me.tb_mednafen.Location = New System.Drawing.Point(16, 294)
+        Me.tb_mednafen.Controls.Add(Me.ComboBox1, 0, 1)
+        Me.tb_mednafen.Location = New System.Drawing.Point(223, 294)
         Me.tb_mednafen.Name = "tb_mednafen"
-        Me.tb_mednafen.RowCount = 1
-        Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tb_mednafen.RowCount = 2
+        Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_mednafen.Size = New System.Drawing.Size(145, 57)
         Me.tb_mednafen.TabIndex = 28
         '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CheckBox1.Location = New System.Drawing.Point(3, 3)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(119, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(139, 17)
         Me.CheckBox1.TabIndex = 0
         Me.CheckBox1.Text = "Allow Others to Join"
         Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(3, 26)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(139, 21)
+        Me.ComboBox1.TabIndex = 29
         '
         'frmChallengeGameSelect
         '
@@ -259,4 +273,5 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents Label1 As Label
     Friend WithEvents tb_mednafen As TableLayoutPanel
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents ComboBox1 As ComboBox
 End Class

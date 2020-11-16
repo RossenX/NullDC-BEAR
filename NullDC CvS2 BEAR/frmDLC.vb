@@ -89,7 +89,10 @@ Public Class frmDLC
     Private Sub GetDownloadableGamesList()
         Try
             GetRomPacks()
-            ArchiveDotOrgParse("https://archive.org/details/Sony-Playstation-USA-Redump.org-2019-05-27&output=json")
+            If MainformRef.IsBeta Then ' Just in case i forget to remove this in the release
+                'ArchiveDotOrgParse("https://archive.org/details/Sony-Playstation-USA-Redump.org-2019-05-27&output=json")
+            End If
+
         Catch ex As Exception
             MsgBox("Error Getting RomPacks: " & ex.Message)
 
@@ -108,6 +111,10 @@ Public Class frmDLC
 
             tc_games.TabPages.Add(TabName)
             tc_games.TabPages.Item(tc_games.TabCount - 1).BackColor = Color.FromArgb(250, 200, 0)
+
+
+
+
 
             Dim tmpListView As New ListView
             tmpListView.Dock = DockStyle.Fill
@@ -128,6 +135,10 @@ Public Class frmDLC
             tmpListView.Columns.Item(2).Width = 0
             tmpListView.Columns.Item(3).Width = 0
             tmpListView.Columns.Item(4).Width = 0
+
+
+
+
 
             ExternalURLs.Add(_lines(6).Split("=")(1))
             RomFolders.Add(_lines(4).Split("=")(1))

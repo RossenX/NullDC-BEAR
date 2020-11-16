@@ -6,7 +6,7 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Dim IsBeta As Boolean = True
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -486,6 +486,11 @@ Public Class frmMain
         If Not File.Exists(NullDCPath & "\dc\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\dc\Vs_2.png")
 
         GetGamesList()
+        GetServerList()
+    End Sub
+
+    Private Sub GetServerList()
+
     End Sub
 
     Public Sub GetGamesList(Optional ByVal _system As String = "all")
