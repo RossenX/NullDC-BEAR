@@ -107,7 +107,6 @@
 
     Private Sub frmChallengeGameSelect_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Visible Then
-            tc_games.SelectedIndex = 0
             If Not _Challenger Is Nothing Then
                 cbRegion.Visible = False
                 Label4.Visible = False
@@ -123,8 +122,7 @@
                 cbRegion.SelectedIndex = 0
             End If
 
-            SelectedGame = {"", ""}
-            Label1.Text = "Game Select"
+            ShowExtraSettings()
 
             Me.CenterToParent()
         Else
@@ -155,8 +153,12 @@
     End Sub
 
     Private Sub tc_games_SelectedIndexChanged(sender As TabControl, e As EventArgs) Handles tc_games.SelectedIndexChanged
-        If Not sender.SelectedTab Is Nothing Then
-            If sender.SelectedTab.Text = "Naomi" Or sender.SelectedTab.Text = "Dreamcast" Then
+        ShowExtraSettings()
+    End Sub
+
+    Private Sub ShowExtraSettings()
+        If Not tc_games.SelectedTab Is Nothing Then
+            If tc_games.SelectedTab.Text = "Naomi" Or tc_games.SelectedTab.Text = "Dreamcast" Then
                 tb_nulldc.Visible = True
                 tb_mednafen.Visible = False
             Else
@@ -164,8 +166,6 @@
                 tb_mednafen.Visible = True
             End If
         End If
-
-
     End Sub
 
 End Class

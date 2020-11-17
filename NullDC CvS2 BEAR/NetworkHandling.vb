@@ -97,7 +97,8 @@ Public Class NetworkHandling
                 Not message.StartsWith("!") And ' Being Challanged
                 Not message.StartsWith("&") And ' Someone left BEAR
                 Not message.StartsWith("V") And ' Asking for VMU
-                Not message.StartsWith("G") Then ' Successfuly got VMU
+                Not message.StartsWith("G") And
+                Not message.StartsWith("$") Then ' Successfuly got VMU
                 ' Message is not from challanger
                 If Not MainformRef.Challenger.ip = senderip Then
                     Console.WriteLine("<-DENIED->")
@@ -127,10 +128,12 @@ Public Class NetworkHandling
             Dim NameToSend As String = MainformRef.ConfigFile.Name
             If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " vs " & MainformRef.Challenger.name
             Dim GameNameAndRomName = "None"
+
             If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
             SendMessage("<," & NameToSend & ",," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & Status, senderip)
 
             Exit Sub
+
         End If
 
         ' I am <(0),<name>(1),<ip>(2),<port>(3),<gamename|gamerom>(4),<status>(5)
@@ -181,20 +184,29 @@ Public Class NetworkHandling
             ElseIf Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then ' We're on Mednafen
                 ' Mednafen "Spectator" and normal player are no different.
 
-                If MainformRef.MednafenLauncher.MednafenServerInstance Is Nothing Then ' But the server is not here
-                    If MainformRef.ConfigFile.Status = "Client" Then ' We're a mednafen client so tell them to join the host
+                Select Case MainformRef.ConfigFile.Status
+                    Case "Client"
                         SendMessage(">,MDH", senderip)
                         Exit Sub ' KEEP THIS HERE
-                    ElseIf MainformRef.ConfigFile.Status = "Hosting" Then ' We're on a public mednafen server so tell them to join
-                        ' TELLT HEM TO JOIN HERE
-                        Exit Sub ' Stop here don't go furhter down
+                    Case "Hosting"
+                        MainformRef.NetworkHandler.SendMessage("$," &
+                                                               MainformRef.ConfigFile.Name & ",," &
+                                                               MainformRef.ConfigFile.Port & "," &
+                                                               MainformRef.ConfigFile.Game & "," &
+                                                               MainformRef.ConfigFile.Delay & ",0" &
+                                                               ",eeprom,", senderip)
+                        Exit Sub ' KEEP THIS HERE
+                    Case "Public"
+                        MainformRef.NetworkHandler.SendMessage("$," &
+                                                               MainformRef.ConfigFile.Name & "," &
+                                                               MainformRef.ConfigFile.Host & "," &
+                                                               MainformRef.ConfigFile.Port & "," &
+                                                               MainformRef.ConfigFile.Game & "," &
+                                                               MainformRef.ConfigFile.Delay & ",1" &
+                                                               ",eeprom,", senderip)
+                        Exit Sub ' KEEP THIS HERE
+                End Select
 
-                    ElseIf MainformRef.ConfigFile.Status = "Public" Then ' We're on a public mednafen server so give them the host info to join
-                        ' GIVE THEM THE INFO TO JOIN HERE
-                        Exit Sub
-                    End If
-
-                End If
             End If
 
             ' ok so at this point we're not playing anything so continue down to the challange request
@@ -250,6 +262,31 @@ Public Class NetworkHandling
             End If
 
             Exit Sub
+        End If
+
+        ' Being told to join a game, inprogress or not.
+        ' It's up above the DND stuff, so it can bypass the DND
+        ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5),<region>(6),<peripheral>(7), <EEPROM>(8) CHECK HERE FIX THIS
+        If message.StartsWith("$") Then
+
+            If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then ' We were told to join a game but we're already in a game
+                Exit Sub
+            End If
+
+            Console.WriteLine("<-Host Started->" & message)
+            Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
+            Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
+            Dim delay As Int16 = CInt(Split(5))
+
+            ' If we were not send an IP to join we join the senderip, otherwise we join w.e IP the host told u sto
+            If Split(2) = "" Then
+                MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+            Else
+                MainformRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+            End If
+
+            Exit Sub
+
         End If
 
         If message.StartsWith("!") And (MainformRef.ConfigFile.AwayStatus = "DND" Or MainformRef.ConfigFile.AwayStatus = "Hidden") Then
@@ -324,24 +361,6 @@ Public Class NetworkHandling
             Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
             MainformRef.Invoke(INVOKATION, {Split(1), senderip})
             Exit Sub
-        End If
-
-        ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5),<region>(6),<peripheral>(7), <EEPROM>(8) CHECK HERE FIX THIS
-        If message.StartsWith("$") Then
-            Console.WriteLine("<-Host Started->" & message)
-            Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
-            Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
-            Dim delay As Int16 = CInt(Split(5))
-
-            ' If we were not send an IP to join we join the senderip, otherwise we join w.e IP the host told u sto
-            If Split(2) = "" Then
-                MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
-            Else
-                MainformRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
-            End If
-
-            Exit Sub
-
         End If
 
         ' Join As Spectator @(0),<p1name>(1),<p2name>(2),<ip>(3),<port>(4),<game>(5),<region>(6),<p1peripheral>(7),<p2peripheral>(8), <EEPROM>(9)  CHECK HERE FIX THIS GET BOTH PLAYER PERIPHERALS

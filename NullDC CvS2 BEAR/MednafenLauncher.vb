@@ -50,6 +50,31 @@ Public Class MednafenLauncher
 
                 AddHandler MednafenInstance.Exited, AddressOf MednafenExited
 
+                Await Task.Delay(2000)
+
+                ' Check if we should tell someone else to also start up
+                If Not MainformRef.Challenger Is Nothing And (MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public") Then
+                    Select Case MainformRef.ConfigFile.Status
+                        Case "Hosting"
+                            MainformRef.NetworkHandler.SendMessage("$," &
+                                                           MainformRef.ConfigFile.Name & ",," &
+                                                           MainformRef.ConfigFile.Port & "," &
+                                                           MainformRef.ConfigFile.Game & "," &
+                                                           MainformRef.ConfigFile.Delay & ",0" &
+                                                            ",eeprom,", MainformRef.Challenger.ip)
+                        Case "Public"
+                            MainformRef.NetworkHandler.SendMessage("$," &
+                                                           MainformRef.ConfigFile.Name & "," &
+                                                           MainformRef.ConfigFile.Host & "," &
+                                                           MainformRef.ConfigFile.Port & "," &
+                                                           MainformRef.ConfigFile.Game & "," &
+                                                           MainformRef.ConfigFile.Delay & ",1" &
+                                                            ",eeprom,", MainformRef.Challenger.ip)
+                    End Select
+
+                End If
+
+
             End Sub)
 
         t.Start()

@@ -969,7 +969,7 @@ Public Class frmMain
 
         Matchlist.Invoke(Sub()
                              For Each playerentry As ListViewItem In Matchlist.Items
-                                 If playerentry.SubItems(1).Text = Player.ip & ":" & Player.port Then
+                                 If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
                                      FoundEntry = playerentry
                                      Exit For
                                  End If
@@ -1266,6 +1266,10 @@ Public Class frmMain
     End Sub
 
     Private Sub btnOffline_Click(sender As Object, e As EventArgs) Handles btnOffline.Click
+        If GamesList.Count = 0 Then
+            NotificationForm.ShowMessage("You don't have any games, click the freeDLC to get some.")
+            Exit Sub
+        End If
         GameSelectForm.StartChallenge()
     End Sub
 
