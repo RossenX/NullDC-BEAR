@@ -101,12 +101,17 @@ Public Class frmChallenge
                 MsgBox("Error Pinging Player")
             End Try
 
-            wavePlayer.Dispose()
-            wavePlayer = New NAudio.Wave.WaveOut
-            Dim ChallangeSound As New NAudio.Wave.WaveFileReader(My.Resources.NewChallanger)
-            wavePlayer.Init(ChallangeSound)
-            wavePlayer.Volume = MainformRef.ConfigFile.Volume / 100
-            wavePlayer.Play()
+            Try
+                wavePlayer.Dispose()
+                wavePlayer = New NAudio.Wave.WaveOut
+                Dim ChallangeSound As New NAudio.Wave.WaveFileReader(My.Resources.NewChallanger)
+                wavePlayer.Init(ChallangeSound)
+                wavePlayer.Volume = MainformRef.ConfigFile.Volume / 100
+                wavePlayer.Play()
+            Catch ex As Exception
+
+            End Try
+
 
             'My.Computer.Audio.Play(My.Resources.NewChallanger, AudioPlayMode.Background)
 

@@ -116,12 +116,17 @@ Public Class frmSetup
     End Sub
 
     Private Sub tb_Volume_MouseCaptureChanged(sender As TrackBar, e As EventArgs) Handles tb_Volume.MouseCaptureChanged, tb_eVolume.MouseCaptureChanged
-        wavePlayer.Dispose()
-        wavePlayer = New NAudio.Wave.WaveOut
-        Dim ChallangeSound As New NAudio.Wave.WaveFileReader(My.Resources.NewChallanger)
-        wavePlayer.Init(ChallangeSound)
-        wavePlayer.Volume = sender.Value / 100
-        wavePlayer.Play()
+        Try
+            wavePlayer.Dispose()
+            wavePlayer = New NAudio.Wave.WaveOut
+            Dim ChallangeSound As New NAudio.Wave.WaveFileReader(My.Resources.NewChallanger)
+            wavePlayer.Init(ChallangeSound)
+            wavePlayer.Volume = sender.Value / 100
+            wavePlayer.Play()
+        Catch ex As Exception
+
+        End Try
+
 
     End Sub
 

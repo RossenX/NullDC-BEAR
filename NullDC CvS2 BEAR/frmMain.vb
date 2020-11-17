@@ -912,21 +912,27 @@ Public Class frmMain
         End If
 
         Select Case MainformRef.GamesList(_game)(2)
-            Case "na", "dc"
+            Case "na"
+                Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
                 ConfigFile.Status = "Client"
                 ConfigFile.Port = _port
-            Case Else ' For Mednafen the 'region' setting is used as an indicator if it's public server or not
+            Case "dc"
+                ConfigFile.Status = "Client"
+                ConfigFile.Port = _port
+            Case Else ' For Mednafen the 'region' setting is used as an indicator if it's public server or not the eeprom setting is used as the gamekey in mednafen
                 If _region = "0" Then
                     ConfigFile.Status = "Client"
+                    Rx.EEPROM = _eeprom
                 Else
                     ConfigFile.Status = "Public"
+                    Rx.EEPROM = _eeprom
                 End If
-
                 ConfigFile.Port = "4046" ' Mednafen always uses this for now maybe i'll change it later but all the public servers use this IP
+
         End Select
 
         If WaitingForm.Visible Then WaitingForm.Visible = False
-        Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
+
         Challenger = New NullDCPlayer(_name, _ip, _port, _game,, _peripheral)
         ConfigFile.Host = _ip
         ConfigFile.Game = _game
@@ -1217,7 +1223,7 @@ Public Class frmMain
                 Case "MDH"
                     Message = "Try connecting to the HOST"
                 Case "MDN"
-                    Message = "Player does not allow drop-in"
+                    Message = "Player is playing offline"
             End Select
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
@@ -1265,11 +1271,17 @@ Public Class frmMain
     End Sub
 
     Private Sub btnOffline_Click(sender As Object, e As EventArgs) Handles btnOffline.Click
+        If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+            NotificationForm.ShowMessage("You're already playing...")
+            Exit Sub
+        End If
+
         If GamesList.Count = 0 Then
             NotificationForm.ShowMessage("You don't have any games, click the freeDLC to get some.")
             Exit Sub
         End If
         GameSelectForm.StartChallenge()
+
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click

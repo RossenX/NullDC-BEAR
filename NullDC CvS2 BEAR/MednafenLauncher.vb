@@ -5,12 +5,14 @@ Public Class MednafenLauncher
     Public MednafenServerInstance As Process = Nothing
 
     Public Sub LaunchEmulator(ByVal _romname)
+
         If MednafenServerInstance Is Nothing Then
             If MainformRef.ConfigFile.Status = "Hosting" Then ' If we're set to host then we host
                 StartServer()
             End If
         End If
 
+        If Rx.EEPROM = "" Then Rx.EEPROM = GenerateGameKey()
 
         Dim t As Task = New Task(
             Async Sub()
@@ -40,7 +42,7 @@ Public Class MednafenLauncher
                 Dim MednafenInfo As New ProcessStartInfo
                 MednafenInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
                 If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Or MainformRef.ConfigFile.Status = "Client" Then
-                    MednafenInfo.Arguments = " -connect -netplay.host " & MainformRef.ConfigFile.Host & " -netplay.nick " & MainformRef.ConfigFile.Name & " "
+                    MednafenInfo.Arguments = " -connect -netplay.host " & MainformRef.ConfigFile.Host & " -netplay.gamekey " & Rx.EEPROM & " -netplay.nick " & MainformRef.ConfigFile.Name & " "
                 End If
                 MednafenInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
 
@@ -61,7 +63,7 @@ Public Class MednafenLauncher
                                                            MainformRef.ConfigFile.Port & "," &
                                                            MainformRef.ConfigFile.Game & "," &
                                                            MainformRef.ConfigFile.Delay & ",0" &
-                                                            ",eeprom,", MainformRef.Challenger.ip)
+                                                            ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                         Case "Public"
                             MainformRef.NetworkHandler.SendMessage("$," &
                                                            MainformRef.ConfigFile.Name & "," &
@@ -69,7 +71,7 @@ Public Class MednafenLauncher
                                                            MainformRef.ConfigFile.Port & "," &
                                                            MainformRef.ConfigFile.Game & "," &
                                                            MainformRef.ConfigFile.Delay & ",1" &
-                                                            ",eeprom,", MainformRef.Challenger.ip)
+                                                            ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                     End Select
 
                 End If
@@ -96,21 +98,20 @@ Public Class MednafenLauncher
                 Sub()
                     MednafenServerInstance = Nothing
                 End Sub
+
     End Sub
 
     Private Sub MednafenExited()
 
-        If Not MednafenInstance Is Nothing Then
-            If Not MednafenServerInstance Is Nothing Then
-                MednafenServerInstance.CloseMainWindow()
-            End If
+        Rx.EEPROM = ""
 
-            MednafenInstance = Nothing
-
-            Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
-            MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
-
+        If Not MednafenServerInstance Is Nothing Then
+            MednafenServerInstance.CloseMainWindow()
         End If
+
+        MednafenInstance = Nothing
+        Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
+        MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
 
     End Sub
 

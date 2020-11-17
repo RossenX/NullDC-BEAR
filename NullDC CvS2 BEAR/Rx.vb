@@ -8,8 +8,20 @@ Module Rx
     Public EEPROM As String ' the EEPROM we're using saved here for people that wanna join as spectator
     Public VMU As String ' the p1 VMU
     Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
-
     Public platform As String = ""
+
+    Public Function GenerateGameKey() As String
+        Dim r As New Random
+        Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        Dim sb As New StringBuilder
+        For i As Integer = 1 To 20
+            Dim idx As Integer = r.Next(0, s.Length)
+            sb.Append(s.Substring(idx, 1))
+        Next
+
+        Return sb.ToString()
+    End Function
+
 
     Public Function GetEEPROM(ByVal _romfullpath As String) As String
         Dim EEPROMPath As String = _romfullpath & ".eeprom"

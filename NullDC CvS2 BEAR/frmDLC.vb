@@ -102,7 +102,11 @@ Public Class frmDLC
     End Sub
 
     Private Sub GetRomPacks()
-        Dim Files = Directory.GetFiles(MainformRef.NullDCPath, "*.freedlc", SearchOption.TopDirectoryOnly)
+        If Not Directory.Exists(MainformRef.NullDCPath & "\DLC") Then
+            Directory.CreateDirectory(MainformRef.NullDCPath & "\DLC")
+        End If
+
+        Dim Files = Directory.GetFiles(MainformRef.NullDCPath & "\DLC", "*.freedlc", SearchOption.TopDirectoryOnly)
 
         ' Get allt he freedlc files and parse them into their own tabs and lists
         For Each _file In Files
@@ -227,6 +231,9 @@ Public Class frmDLC
 
                                    Select Case CurrentlyDownloadingGame.Extract
                                        Case "0" ' Do not Unzip
+                                           If File.Exists(RomDirectory & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1)) Then
+                                               File.Delete(RomDirectory & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
+                                           End If
                                            File.Copy(HoneyFilePath, RomDirectory & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
                                        Case "1" ' Unzip
                                            If File.Exists(HoneyFilePath) Then

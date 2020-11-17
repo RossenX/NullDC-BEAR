@@ -214,12 +214,12 @@ Partial Class frmHostPanel
         Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tb_mednafen.Controls.Add(Me.Label2, 0, 0)
         Me.tb_mednafen.Controls.Add(Me.cb_Serverlist, 0, 1)
-        Me.tb_mednafen.Location = New System.Drawing.Point(127, 368)
+        Me.tb_mednafen.Location = New System.Drawing.Point(127, 245)
         Me.tb_mednafen.Name = "tb_mednafen"
         Me.tb_mednafen.RowCount = 2
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tb_mednafen.Size = New System.Drawing.Size(200, 53)
+        Me.tb_mednafen.Size = New System.Drawing.Size(200, 46)
         Me.tb_mednafen.TabIndex = 27
         '
         'Label2
@@ -231,7 +231,7 @@ Partial Class frmHostPanel
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.Label2.Location = New System.Drawing.Point(3, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(194, 26)
+        Me.Label2.Size = New System.Drawing.Size(194, 19)
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "Server"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -239,8 +239,9 @@ Partial Class frmHostPanel
         'cb_Serverlist
         '
         Me.cb_Serverlist.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cb_Serverlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_Serverlist.FormattingEnabled = True
-        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 29)
+        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 22)
         Me.cb_Serverlist.Name = "cb_Serverlist"
         Me.cb_Serverlist.Size = New System.Drawing.Size(194, 21)
         Me.cb_Serverlist.TabIndex = 0

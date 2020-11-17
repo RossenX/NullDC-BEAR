@@ -36,6 +36,7 @@ Partial Class frmChallengeGameSelect
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_mednafen = New System.Windows.Forms.TableLayoutPanel()
         Me.cb_Serverlist = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.tb_nulldc.SuspendLayout()
         Me.tc_games.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -197,15 +198,19 @@ Partial Class frmChallengeGameSelect
         '
         'tb_mednafen
         '
+        Me.tb_mednafen.AutoSize = True
+        Me.tb_mednafen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.tb_mednafen.ColumnCount = 1
         Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tb_mednafen.Controls.Add(Me.Label3, 0, 0)
         Me.tb_mednafen.Controls.Add(Me.cb_Serverlist, 0, 1)
-        Me.tb_mednafen.Location = New System.Drawing.Point(12, 294)
+        Me.tb_mednafen.Location = New System.Drawing.Point(15, 294)
         Me.tb_mednafen.Name = "tb_mednafen"
         Me.tb_mednafen.RowCount = 2
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tb_mednafen.Size = New System.Drawing.Size(197, 27)
+        Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tb_mednafen.Size = New System.Drawing.Size(197, 43)
         Me.tb_mednafen.TabIndex = 28
         '
         'cb_Serverlist
@@ -213,10 +218,24 @@ Partial Class frmChallengeGameSelect
         Me.cb_Serverlist.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cb_Serverlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_Serverlist.FormattingEnabled = True
-        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 3)
+        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 19)
         Me.cb_Serverlist.Name = "cb_Serverlist"
         Me.cb_Serverlist.Size = New System.Drawing.Size(191, 21)
         Me.cb_Serverlist.TabIndex = 29
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(3, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(191, 16)
+        Me.Label3.TabIndex = 30
+        Me.Label3.Text = "Server"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'frmChallengeGameSelect
         '
@@ -242,6 +261,7 @@ Partial Class frmChallengeGameSelect
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.tb_mednafen.ResumeLayout(False)
+        Me.tb_mednafen.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -260,4 +280,5 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents Label1 As Label
     Friend WithEvents tb_mednafen As TableLayoutPanel
     Friend WithEvents cb_Serverlist As ComboBox
+    Friend WithEvents Label3 As Label
 End Class

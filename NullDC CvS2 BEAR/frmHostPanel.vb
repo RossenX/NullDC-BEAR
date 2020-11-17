@@ -127,28 +127,37 @@ Public Class frmHostPanel
     End Sub
 
     Private Sub btnStartHosting_Click(sender As Object, e As EventArgs) Handles btnStartHosting.Click
+
         If MainformRef.ConfigFile.Game = "None" Then
             MainformRef.NotificationForm.ShowMessage("No Game Selected")
             Exit Sub
         End If
 
-
         Select Case MainformRef.GamesList(MainformRef.ConfigFile.Game)(2)
             Case "na", "dc"
                 tb_nulldc.Visible = True
                 tb_mednafen.Visible = False
+                MainformRef.ConfigFile.Host = "127.0.0.1"
+                MainformRef.ConfigFile.Status = "Hosting"
+
             Case Else
                 tb_nulldc.Visible = False
                 tb_mednafen.Visible = True
-        End Select
 
+                If cb_Serverlist.Text = "Localhost" Then
+                    MainformRef.ConfigFile.Host = "127.0.0.1"
+                    MainformRef.ConfigFile.Status = "Hosting"
+                Else
+                    MainformRef.ConfigFile.Host = cb_Serverlist.SelectedValue
+                    MainformRef.ConfigFile.Status = "Public"
+                End If
+
+        End Select
 
         Dim HostType As String = "0"
         Dim RomName As String = MainformRef.ConfigFile.Game
         If Not MainformRef.Challenger Is Nothing Then RomName = MainformRef.Challenger.game
 
-        MainformRef.ConfigFile.Host = "127.0.0.1"
-        MainformRef.ConfigFile.Status = "Hosting"
         MainformRef.ConfigFile.Delay = cbDelay.Text
         MainformRef.ConfigFile.Game = RomName
         MainformRef.ConfigFile.ReplayFile = ""

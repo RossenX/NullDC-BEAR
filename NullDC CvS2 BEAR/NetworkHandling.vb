@@ -185,6 +185,9 @@ Public Class NetworkHandling
                 ' Mednafen "Spectator" and normal player are no different.
 
                 Select Case MainformRef.ConfigFile.Status
+                    Case "Offline"
+                        SendMessage(">,MDN", senderip)
+                        Exit Sub ' KEEP THIS HERE
                     Case "Client"
                         SendMessage(">,MDH", senderip)
                         Exit Sub ' KEEP THIS HERE
@@ -194,7 +197,7 @@ Public Class NetworkHandling
                                                                MainformRef.ConfigFile.Port & "," &
                                                                MainformRef.ConfigFile.Game & "," &
                                                                MainformRef.ConfigFile.Delay & ",0" &
-                                                               ",eeprom,", senderip)
+                                                               ",eeprom," & Rx.EEPROM, senderip)
                         Exit Sub ' KEEP THIS HERE
                     Case "Public"
                         MainformRef.NetworkHandler.SendMessage("$," &
@@ -203,7 +206,7 @@ Public Class NetworkHandling
                                                                MainformRef.ConfigFile.Port & "," &
                                                                MainformRef.ConfigFile.Game & "," &
                                                                MainformRef.ConfigFile.Delay & ",1" &
-                                                               ",eeprom,", senderip)
+                                                               ",eeprom," & Rx.EEPROM, senderip)
                         Exit Sub ' KEEP THIS HERE
                 End Select
 
@@ -254,7 +257,7 @@ Public Class NetworkHandling
             Else ' We're online, lets check if this is a spectator or my challanger and send them the appropriate response
                 If senderip = MainformRef.Challenger.ip Then
                     If MainformRef.IsNullDCRunning Then ' We started the game, so tell em to join ' this is only if the game starts before the VMU is finished sending
-                        MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
+                        MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom,", MainformRef.Challenger.ip)
                     End If
                 Else ' This a Spectator
                     SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom,", senderip)
@@ -266,7 +269,8 @@ Public Class NetworkHandling
 
         ' Being told to join a game, inprogress or not.
         ' It's up above the DND stuff, so it can bypass the DND
-        ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5),<region>(6),<peripheral>(7), <EEPROM>(8) CHECK HERE FIX THIS
+        ' EEPROM value is used in Mednafen for the gamekey
+        ' Host Started $(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<delay>(5),<region>(6),<peripheral>(7), <EEPROM>(8)
         If message.StartsWith("$") Then
 
             If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then ' We were told to join a game but we're already in a game
@@ -275,14 +279,17 @@ Public Class NetworkHandling
 
             Console.WriteLine("<-Host Started->" & message)
             Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
+
             Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
             Dim delay As Int16 = CInt(Split(5))
 
             ' If we were not send an IP to join we join the senderip, otherwise we join w.e IP the host told u sto
             If Split(2) = "" Then
                 MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+
             Else
                 MainformRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+
             End If
 
             Exit Sub
