@@ -491,25 +491,36 @@ Public Class frmMain
 
     Private Sub GetServerList()
         Dim Files = Directory.GetFiles(NullDCPath, "*.slist", SearchOption.TopDirectoryOnly)
-        Dim table As New DataTable
-        table.Columns.Add("IP", GetType(String))
-        table.Columns.Add("Name", GetType(String))
+        Dim GameSelectServerList As New DataTable
+        GameSelectServerList.Columns.Add("IP", GetType(String))
+        GameSelectServerList.Columns.Add("Name", GetType(String))
 
         GameSelectForm.cb_Serverlist.ValueMember = "IP"
         GameSelectForm.cb_Serverlist.DisplayMember = "Name"
 
-        table.Rows.Add({"Offline", "Offline"})
-        table.Rows.Add({"Localhost", "Localhost"})
+        GameSelectServerList.Rows.Add({"Offline", "Offline"})
+        GameSelectServerList.Rows.Add({"Localhost", "Localhost"})
+
+        Dim HostPanelServerList As New DataTable
+        HostPanelServerList.Columns.Add("IP", GetType(String))
+        HostPanelServerList.Columns.Add("Name", GetType(String))
+
+        HostingForm.cb_Serverlist.ValueMember = "IP"
+        HostingForm.cb_Serverlist.DisplayMember = "Name"
+
+        HostPanelServerList.Rows.Add({"Localhost", "Localhost"})
 
         For Each _file In Files
             For Each _line In File.ReadAllLines(_file)
                 If _line.Length > 2 Then
-                    table.Rows.Add({_line.Split(":")(1), _line.Split(":")(0)})
+                    GameSelectServerList.Rows.Add({_line.Split(":")(1), _line.Split(":")(0)})
+                    HostPanelServerList.Rows.Add({_line.Split(":")(1), _line.Split(":")(0)})
                 End If
             Next
         Next
 
-        GameSelectForm.cb_Serverlist.DataSource = table
+        GameSelectForm.cb_Serverlist.DataSource = GameSelectServerList
+        HostingForm.cb_Serverlist.DataSource = HostPanelServerList
     End Sub
 
     Public Sub GetGamesList(Optional ByVal _system As String = "all")
@@ -1118,18 +1129,6 @@ Public Class frmMain
                     RemoveChallenger()
                     ConfigFile.Game = "None"
                     ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
-                    ConfigFile.SaveFile()
-                Case "New Host" ' You started a new host Just close the nullDC if it's open, disable raising it's event
-                    If IsNullDCRunning() Then
-                        NullDCLauncher.NullDCproc.EnableRaisingEvents = False ' Disable Event Raising so this doesn't automaticlly clear challenger data
-                        NullDCLauncher.NullDCproc.Kill()
-                        While IsNullDCRunning() ' Just to make sure it's dead before we accept
-                            NullDCLauncher.NullDCproc.Kill()
-                            Thread.Sleep(100)
-                        End While
-                    End If
-                    ConfigFile.Status = "Hosting"
-                    ConfigFile.Game = "None"
                     ConfigFile.SaveFile()
             End Select
         Else

@@ -13,7 +13,13 @@ Public Class frmHostPanel
 
     Public Sub BeginHost(Optional ByVal _challenger As NullDCPlayer = Nothing)
         MainformRef.Challenger = _challenger
-        MainformRef.EndSession("New Host")
+
+        MainformRef.WaitingForm.Visible = False
+        MainformRef.ChallengeSentForm.Visible = False
+
+        MainformRef.ConfigFile.Game = _challenger.game
+        MainformRef.ConfigFile.Status = "Hosting"
+        MainformRef.ConfigFile.SaveFile()
         Me.Show(MainformRef)
 
     End Sub
@@ -58,12 +64,21 @@ Public Class frmHostPanel
                 End Try
 
                 Select Case MainformRef.GamesList(MainformRef.ConfigFile.Game)(2)
-                    Case "na", "dc"
+                    Case "na"
                         tb_nulldc.Visible = True
                         tb_mednafen.Visible = False
+
+                    Case "dc"
+                        tb_nulldc.Visible = True
+                        tb_mednafen.Visible = False
+                        If Rx.VMU Is Nothing Then
+                            Rx.VMU = Rx.ReadVMU()
+                        End If
+
                     Case Else
                         tb_nulldc.Visible = False
                         tb_mednafen.Visible = True
+
                 End Select
 
             Else
@@ -71,11 +86,6 @@ Public Class frmHostPanel
                 cbDelay.Text = "1"
                 lbPing.Text = ""
             End If
-
-            If Rx.VMU Is Nothing Then
-                Rx.VMU = Rx.ReadVMU()
-            End If
-
             Me.CenterToParent()
 
         End If

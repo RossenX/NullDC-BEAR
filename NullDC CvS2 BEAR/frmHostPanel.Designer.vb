@@ -35,8 +35,8 @@ Partial Class frmHostPanel
         Me.cbRegion = New System.Windows.Forms.ComboBox()
         Me.tb_nulldc = New System.Windows.Forms.TableLayoutPanel()
         Me.tb_mednafen = New System.Windows.Forms.TableLayoutPanel()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.cb_Serverlist = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tb_nulldc.SuspendLayout()
@@ -78,7 +78,7 @@ Partial Class frmHostPanel
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.Label1.Location = New System.Drawing.Point(3, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(63, 31)
+        Me.Label1.Size = New System.Drawing.Size(63, 30)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Delay"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -152,9 +152,9 @@ Partial Class frmHostPanel
         Me.btnSuggestDelay.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSuggestDelay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSuggestDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.btnSuggestDelay.Location = New System.Drawing.Point(72, 34)
+        Me.btnSuggestDelay.Location = New System.Drawing.Point(72, 33)
         Me.btnSuggestDelay.Name = "btnSuggestDelay"
-        Me.btnSuggestDelay.Size = New System.Drawing.Size(102, 22)
+        Me.btnSuggestDelay.Size = New System.Drawing.Size(102, 23)
         Me.btnSuggestDelay.TabIndex = 9
         Me.btnSuggestDelay.Text = "Suggest"
         Me.btnSuggestDelay.UseVisualStyleBackColor = False
@@ -192,7 +192,7 @@ Partial Class frmHostPanel
         Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
         Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108.0!))
         Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 44.0!))
-        Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58.0!))
         Me.tb_nulldc.Controls.Add(Me.cbDelay, 1, 0)
         Me.tb_nulldc.Controls.Add(Me.btnSuggestDelay, 1, 1)
         Me.tb_nulldc.Controls.Add(Me.cbRegion, 3, 0)
@@ -205,6 +205,7 @@ Partial Class frmHostPanel
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.45763!))
         Me.tb_nulldc.Size = New System.Drawing.Size(279, 59)
         Me.tb_nulldc.TabIndex = 26
+        Me.tb_nulldc.Visible = False
         '
         'tb_mednafen
         '
@@ -212,23 +213,14 @@ Partial Class frmHostPanel
         Me.tb_mednafen.ColumnCount = 1
         Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tb_mednafen.Controls.Add(Me.Label2, 0, 0)
-        Me.tb_mednafen.Controls.Add(Me.ComboBox1, 0, 1)
-        Me.tb_mednafen.Location = New System.Drawing.Point(122, 235)
+        Me.tb_mednafen.Controls.Add(Me.cb_Serverlist, 0, 1)
+        Me.tb_mednafen.Location = New System.Drawing.Point(127, 368)
         Me.tb_mednafen.Name = "tb_mednafen"
         Me.tb_mednafen.RowCount = 2
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_mednafen.Size = New System.Drawing.Size(200, 53)
         Me.tb_mednafen.TabIndex = 27
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(3, 29)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(194, 21)
-        Me.ComboBox1.TabIndex = 0
         '
         'Label2
         '
@@ -243,6 +235,15 @@ Partial Class frmHostPanel
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "Server"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'cb_Serverlist
+        '
+        Me.cb_Serverlist.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cb_Serverlist.FormattingEnabled = True
+        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 29)
+        Me.cb_Serverlist.Name = "cb_Serverlist"
+        Me.cb_Serverlist.Size = New System.Drawing.Size(194, 21)
+        Me.cb_Serverlist.TabIndex = 0
         '
         'frmHostPanel
         '
@@ -288,5 +289,5 @@ Partial Class frmHostPanel
     Friend WithEvents tb_nulldc As TableLayoutPanel
     Friend WithEvents tb_mednafen As TableLayoutPanel
     Friend WithEvents Label2 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cb_Serverlist As ComboBox
 End Class

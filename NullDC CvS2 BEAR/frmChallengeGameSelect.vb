@@ -68,6 +68,8 @@
 
     Public Sub StartOnline()
 
+        MainformRef.ConfigFile.Game = SelectedGame(0)
+
         MainformRef.Challenger = New NullDCPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, SelectedGame(0))
         MainformRef.ChallengeSentForm.StartChallenge(MainformRef.Challenger)
         Me.Close()
@@ -157,15 +159,21 @@
     End Sub
 
     Private Sub ShowExtraSettings()
-        If Not tc_games.SelectedTab Is Nothing Then
-            If tc_games.SelectedTab.Text = "Naomi" Or tc_games.SelectedTab.Text = "Dreamcast" Then
-                tb_nulldc.Visible = True
-                tb_mednafen.Visible = False
-            Else
-                tb_nulldc.Visible = False
-                tb_mednafen.Visible = True
+        If _Challenger Is Nothing Then
+            If Not tc_games.SelectedTab Is Nothing Then
+                If tc_games.SelectedTab.Text = "Naomi" Or tc_games.SelectedTab.Text = "Dreamcast" Then
+                    tb_nulldc.Visible = True
+                    tb_mednafen.Visible = False
+                Else
+                    tb_nulldc.Visible = False
+                    tb_mednafen.Visible = True
+                End If
             End If
+        Else
+            tb_nulldc.Visible = False
+            tb_mednafen.Visible = False
         End If
+
     End Sub
 
 End Class
