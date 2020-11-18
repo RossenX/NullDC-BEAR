@@ -243,6 +243,7 @@ Public Class frmSDLMappingTool
             End While
 
             If KeyPressed.Length > 0 Then
+                KeyPressed.Replace(",", ".")
                 ListOfBinds(_currentBindIndex) = ListOfGamepadKeys(_currentBindIndex) & ":" & KeyPressed
                 _currentBindIndex += 1
                 If _currentBindIndex < ControllerImages.Count Then
