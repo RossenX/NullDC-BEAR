@@ -196,4 +196,15 @@ Module Rx
 
     End Sub
 
+    Public Function RemoveAnnoyingRomNumbersFromString(ByVal RomName As String) As String
+        Dim _romname = RomName
+        If RomName.Length > 7 Then
+            If IsNumeric(_romname.Split(" ")(0)) And _romname.Substring(4, 3) = " - " Then
+                _romname = _romname.Substring(7, _romname.Length - 7)
+            End If
+        End If
+
+        Return _romname
+    End Function
+
 End Module

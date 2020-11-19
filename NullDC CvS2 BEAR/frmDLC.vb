@@ -143,7 +143,12 @@ Public Class frmDLC
 
             For i = 7 To _lines.Count - 1
                 Dim url = Strings.Split(_lines(i), "|,|")(0)
-                Dim name = Strings.Split(_lines(i), "|,|")(1)
+                Dim tmpSplit = Strings.Split(_lines(i), "|,|")(0).Split("/")
+                Dim tmpExtention = tmpSplit(tmpSplit.Count - 1).Split(".")
+                Dim GameFormatedName = tmpSplit(tmpSplit.Count - 1).Replace("." & tmpExtention(tmpExtention.Count - 1), "")
+                Dim name = WebUtility.UrlDecode(GameFormatedName.Replace("_", " ")).Replace("# NES", "")
+                name = RemoveAnnoyingRomNumbersFromString(name)
+
                 Dim _it As New ListViewItem(name)
                 _it.SubItems.Add(url)
                 _it.SubItems.Add(_lines(1).Split("=")(1)) ' Platform
@@ -153,6 +158,9 @@ Public Class frmDLC
 
             Next
 
+
+            tmpListView.Sorting = SortOrder.Ascending
+            tmpListView.Sort()
         Next
 
     End Sub
@@ -228,13 +236,14 @@ Public Class frmDLC
                            If Not DownloadCanceled Then
                                Try
                                    MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
+                                   Dim RomFileName = RemoveAnnoyingRomNumbersFromString(CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
 
                                    Select Case CurrentlyDownloadingGame.Extract
                                        Case "0" ' Do not Unzip
-                                           If File.Exists(RomDirectory & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1)) Then
-                                               File.Delete(RomDirectory & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
+                                           If File.Exists(RomDirectory & "\" & RomFileName) Then
+                                               File.Delete(RomDirectory & "\" & RomFileName)
                                            End If
-                                           File.Copy(HoneyFilePath, RomDirectory & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
+                                           File.Copy(HoneyFilePath, RomDirectory & "\" & RomFileName)
                                        Case "1" ' Unzip
                                            If File.Exists(HoneyFilePath) Then
                                                ZipFile.ExtractToDirectory(HoneyFilePath, RomDirectory)
@@ -259,7 +268,7 @@ Public Class frmDLC
                                                Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
                                            End If
 
-                                           File.Copy(HoneyFilePath, RomDirectory & "\" & CurrentlyDownloadingGame.Name & "\" & CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
+                                           File.Copy(HoneyFilePath, RomDirectory & "\" & CurrentlyDownloadingGame.Name & "\" & RomFileName)
                                    End Select
 
                                    MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & CurrentlyDownloadingGame.Name))
