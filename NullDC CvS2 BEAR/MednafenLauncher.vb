@@ -1,4 +1,5 @@
-﻿Imports NullDC_CvS2_BEAR.frmMain
+﻿Imports System.IO
+Imports NullDC_CvS2_BEAR.frmMain
 
 Public Class MednafenLauncher
     Public MednafenInstance As Process = Nothing
@@ -30,7 +31,13 @@ Public Class MednafenLauncher
                                 End If
                             End If
                         Next
+
+                        If _line.StartsWith("sound.volume") Then
+                            _mednafenConfigs(LineCount) = "sound.volume " & MainformRef.ConfigFile.EmulatorVolume
+                        End If
+
                     End If
+
                     LineCount += 1
                 Next
 
@@ -112,6 +119,22 @@ Public Class MednafenLauncher
         MednafenInstance = Nothing
         Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
         MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
+
+        If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_") Then
+            If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav") Then
+                Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav", True)
+            End If
+            FileSystem.Rename(MainformRef.NullDCPath & "\mednafen\sav_", MainformRef.NullDCPath & "\mednafen\sav")
+
+        End If
+
+        If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs_") Then
+            If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs") Then
+                Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs", True)
+            End If
+            FileSystem.Rename(MainformRef.NullDCPath & "\mednafen\mcs_", MainformRef.NullDCPath & "\mednafen\mcs")
+
+        End If
 
     End Sub
 

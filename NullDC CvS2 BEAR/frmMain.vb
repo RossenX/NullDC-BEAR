@@ -540,7 +540,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "na", ""})
+                    GamesList.Add("NA-" & RomName, {GameName, RomPath, "na", ""})
                 End If
             Next
         End If
@@ -591,7 +591,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath & "\dc\", "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
+                    GamesList.Add("DC-" & RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
                     Console.WriteLine("Found Game: RomName:" & RomName & " GameName:" & GameName & " RomPath:" & RomPath & " Platform:dc" & " " & sBuilder.ToString())
                 End If
 
@@ -625,7 +625,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "ss", ""})
+                    GamesList.Add("SS-" & RomName, {GameName, RomPath, "ss", ""})
                 End If
             Next
 
@@ -641,7 +641,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "sg", ""})
+                    GamesList.Add("SG-" & RomName, {GameName, RomPath, "sg", ""})
                 End If
             Next
 
@@ -657,7 +657,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "psx", ""})
+                    GamesList.Add("PSX-" & RomName, {GameName, RomPath, "psx", ""})
                 End If
             Next
 
@@ -673,7 +673,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "nes", ""})
+                    GamesList.Add("NES-" & RomName, {GameName, RomPath, "nes", ""})
                 End If
             Next
 
@@ -689,7 +689,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "snes", ""})
+                    GamesList.Add("SNES-" & RomName, {GameName, RomPath, "snes", ""})
                 End If
             Next
 
@@ -705,7 +705,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "ngp", ""})
+                    GamesList.Add("NGP-" & RomName, {GameName, RomPath, "ngp", ""})
                 End If
             Next
 
@@ -721,7 +721,7 @@ Public Class frmMain
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey(RomName) Then
-                    GamesList.Add(RomName, {GameName, RomPath, "gba", ""})
+                    GamesList.Add("GBA-" & RomName, {GameName, RomPath, "gba", ""})
                 End If
             Next
 
@@ -737,8 +737,8 @@ Public Class frmMain
                     Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                     If Not GamesList.ContainsKey(RomName) Then
-                        GamesList.Add(RomName, {GameName, RomPath, "gbc", ""})
-                    End If
+                    GamesList.Add("GBC-" & RomName, {GameName, RomPath, "gbc", ""})
+                End If
                 Next
 
             End If
@@ -928,6 +928,24 @@ Public Class frmMain
                     Rx.EEPROM = _eeprom
                 End If
                 ConfigFile.Port = "4046" ' Mednafen always uses this for now maybe i'll change it later but all the public servers use this IP
+
+                If Directory.Exists(NullDCPath & "\mednafen\sav") Then
+                    If Directory.Exists(NullDCPath & "\mednafen\sav_") Then
+                        Directory.Delete(NullDCPath & "\mednafen\sav", True)
+                    Else
+                        FileSystem.Rename(NullDCPath & "\mednafen\sav", NullDCPath & "\mednafen\sav_")
+                    End If
+
+                End If
+
+                If Directory.Exists(NullDCPath & "\mednafen\mcs") Then
+                    If Directory.Exists(NullDCPath & "\mednafen\mcs_") Then
+                        Directory.Delete(NullDCPath & "\mednafen\mcs", True)
+                    Else
+                        FileSystem.Rename(NullDCPath & "\mednafen\mcs", NullDCPath & "\mednafen\mcs_")
+                    End If
+
+                End If
 
         End Select
 
