@@ -23,6 +23,9 @@ Public Class frmDLC
 
     Dim ExportCount = 0
 
+    Dim DownloadSize = 0
+    Dim Downloaded = 0
+
     Private Sub frmDLC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToParent()
@@ -50,12 +53,12 @@ Public Class frmDLC
                 Dim GameCount = 0
                 Dim Exportedlist As New ArrayList
                 Exportedlist.Add("DLCv=1")
-                Exportedlist.Add("Platform=NA")
-                Exportedlist.Add("Disc=Atomiswave DLC")
-                Exportedlist.Add("Tab=Atomiswave")
-                Exportedlist.Add("Folder=roms")
-                Exportedlist.Add("Extract=2")
-                Exportedlist.Add("ExternalURL=https://archive.org/details/NaomiRomsReuploadByGhostware")
+                Exportedlist.Add("Platform=SNES")
+                Exportedlist.Add("Disc=SNES DLC")
+                Exportedlist.Add("Tab=SNES")
+                Exportedlist.Add("Folder=mednafen\roms\snes")
+                Exportedlist.Add("Extract=0")
+                Exportedlist.Add("ExternalURL=" & URL.Replace("&output=json", ""))
 
                 If Not e.Error Is Nothing Then
                     MsgBox("Error Getting Downloadable Games List")
@@ -65,9 +68,8 @@ Public Class frmDLC
 
                 For Each _sp As String In e.Result.Split("""")
                     If _sp.Contains(".zip") Then
-                        Dim _gameName = _sp.Split("/")(_sp.Split("/").Count - 1).Replace(".zip", "").Replace("_", " ").Trim
                         Dim _GameLink = StrippedURL & _sp.Replace("\/", "/").Replace("#", "%23")
-                        Exportedlist.Add((_GameLink & "|,|" & _gameName).ToString)
+                        Exportedlist.Add(_GameLink)
                         GameCount += 1
 
                     End If
@@ -90,7 +92,7 @@ Public Class frmDLC
         Try
             GetRomPacks()
             If MainformRef.IsBeta Then ' Just in case i forget to remove this in the release
-                'ArchiveDotOrgParse("https://archive.org/details/GameboyAdvanceRomCollectionByGhostware&output=json")
+                ArchiveDotOrgParse("https://archive.org/details/SuperNintendoUSACollectionByGhostware&output=json")
             End If
 
         Catch ex As Exception
@@ -142,8 +144,8 @@ Public Class frmDLC
             AddHandler tmpListView.SelectedIndexChanged, AddressOf SelectedNewGameFromList
 
             For i = 7 To _lines.Count - 1
-                Dim url = Strings.Split(_lines(i), "|,|")(0)
-                Dim tmpSplit = Strings.Split(_lines(i), "|,|")(0).Split("/")
+                Dim url = _lines(i)
+                Dim tmpSplit = _lines(i).Split("/")
                 Dim tmpExtention = tmpSplit(tmpSplit.Count - 1).Split(".")
                 Dim GameFormatedName = tmpSplit(tmpSplit.Count - 1).Replace("." & tmpExtention(tmpExtention.Count - 1), "")
                 Dim name = WebUtility.UrlDecode(GameFormatedName.Replace("_", " ")).Replace("# NES", "")
@@ -209,6 +211,9 @@ Public Class frmDLC
     Private Sub DownloadProgress(ByVal sender As WebClient, e As DownloadProgressChangedEventArgs)
         ProgressBar1.Maximum = e.TotalBytesToReceive
         ProgressBar1.Value = e.BytesReceived
+        Downloaded = e.BytesReceived
+        DownloadSize = e.TotalBytesToReceive
+
         ProgressBar1.Visible = True
         Dim _NameLength = 20
         If CurrentlyDownloadingGame.Name.Length < 20 Then
@@ -221,6 +226,8 @@ Public Class frmDLC
 
     Private Sub DownloadComplete()
         Console.WriteLine("Download Done")
+
+
 
         Dim HoneyFilePath = ""
         Dim RomDirectory = ""
@@ -236,7 +243,7 @@ Public Class frmDLC
                            If Not DownloadCanceled Then
                                Try
                                    MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
-                                   Dim RomFileName = RemoveAnnoyingRomNumbersFromString(CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1))
+                                   Dim RomFileName = RemoveAnnoyingRomNumbersFromString(WebUtility.UrlDecode(CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1)))
 
                                    Select Case CurrentlyDownloadingGame.Extract
                                        Case "0" ' Do not Unzip
@@ -298,7 +305,31 @@ Public Class frmDLC
                            End Sub)
                            CurrentlyDownloadingGame = Nothing
                        End Sub)
-        InstallThread.Start()
+        If Not Downloaded = DownloadSize And Not DownloadCanceled And Not Downloaded = 0 Then
+            MsgBox("Download closed by the server, try again.")
+
+            If File.Exists(HoneyFilePath) Then
+                File.SetAttributes(HoneyFilePath, FileAttributes.Normal)
+                File.Delete(HoneyFilePath)
+
+            End If
+
+            MainformRef.Invoke(
+                           Sub()
+                               If Me.Visible Then
+                                   ProgressBar1.Visible = False
+                                   btnDownload.Text = "Download"
+                                   DownloadCanceled = False
+                                   CurrentlyDownloadingGame = Nothing
+                               End If
+                               CurrentlyDownloadingGame = Nothing
+                           End Sub)
+
+            Exit Sub
+        Else
+            InstallThread.Start()
+        End If
+
 
     End Sub
 

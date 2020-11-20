@@ -96,6 +96,10 @@ Public Class frmReplays
             Dim FileAsStrings = File.ReadAllText(ReplayPath)
             Dim FileStringSplitUp = FileAsStrings.Split("|")
 
+            If Not FileStringSplitUp(4).StartsWith("NA-") Then
+                FileStringSplitUp(4) = "NA-" & FileStringSplitUp(4)
+            End If
+
             If Not MainformRef.GamesList.ContainsKey(FileStringSplitUp(4)) Then
                 MsgBox("Couldn't fine game: " & FileStringSplitUp(3) & vbNewLine & "Romfile: " & FileStringSplitUp(4))
                 Exit Sub
