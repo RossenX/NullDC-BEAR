@@ -105,6 +105,12 @@ Public Class frmSetup
                                      String.Format(" & netsh advfirewall firewall delete rule name=""NullDC"" program=""{0}"" & netsh advfirewall firewall delete rule name=""nulldc_win32_release-notrace.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""NullDC"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""NullDC"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\nullDC_Win32_Release-NoTrace.exe")
         processStartInfo.Arguments = processStartInfo.Arguments &
                                      String.Format(" & netsh advfirewall firewall delete rule name=""NullDC DC"" program=""{0}"" & netsh advfirewall firewall delete rule name=""nulldc_win32_release-notrace.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""NullDC DC"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""NullDC DC"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\dc\nullDC_Win32_Release-NoTrace.exe")
+        ' Mednafen
+        processStartInfo.Arguments = processStartInfo.Arguments &
+                                     String.Format(" & netsh advfirewall firewall delete rule name=""Mednafen"" program=""{0}"" & netsh advfirewall firewall delete rule name=""mednafen.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""Mednafen"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""Mednafen"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\mednafen\mednafen.exe")
+        ' Mednafen Server
+        processStartInfo.Arguments = processStartInfo.Arguments &
+                                     String.Format(" & netsh advfirewall firewall delete rule name=""Mednafen Server"" program=""{0}"" & netsh advfirewall firewall delete rule name=""mednafen-server.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""Mednafen Server"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""Mednafen Server"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\mednafen\server\mednafen-server.exe")
         Dim Firewall = Process.Start(processStartInfo)
 
     End Sub

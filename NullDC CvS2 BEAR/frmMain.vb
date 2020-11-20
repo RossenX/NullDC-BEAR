@@ -927,7 +927,9 @@ Public Class frmMain
                     ConfigFile.Status = "Public"
                     Rx.EEPROM = _eeprom
                 End If
-                ConfigFile.Port = "4046" ' Mednafen always uses this for now maybe i'll change it later but all the public servers use this IP
+
+                ' Don't use the nullDC port for Mednafen
+                ' ConfigFile.Port = "4046" ' Mednafen always uses this for now maybe i'll change it later but all the public servers use this IP
 
                 If Directory.Exists(NullDCPath & "\mednafen\sav") Then
                     If Directory.Exists(NullDCPath & "\mednafen\sav_") Then

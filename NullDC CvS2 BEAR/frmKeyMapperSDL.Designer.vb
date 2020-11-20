@@ -145,6 +145,8 @@ Partial Class frmKeyMapperSDL
         Me.PlayerTab = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.OtherSystems = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.ControllersTab.SuspendLayout()
         Me.Naomi_Tab.SuspendLayout()
         Me.Dreamcast_Tab.SuspendLayout()
@@ -155,6 +157,7 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.PlayerTab.SuspendLayout()
+        Me.OtherSystems.SuspendLayout()
         Me.SuspendLayout()
         '
         'ControllersTab
@@ -162,6 +165,7 @@ Partial Class frmKeyMapperSDL
         Me.ControllersTab.Controls.Add(Me.Naomi_Tab)
         Me.ControllersTab.Controls.Add(Me.Dreamcast_Tab)
         Me.ControllersTab.Controls.Add(Me.Arcadestick_Tab)
+        Me.ControllersTab.Controls.Add(Me.OtherSystems)
         Me.ControllersTab.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ControllersTab.Location = New System.Drawing.Point(212, 0)
         Me.ControllersTab.Margin = New System.Windows.Forms.Padding(0)
@@ -1897,6 +1901,31 @@ Partial Class frmKeyMapperSDL
         Me.TabPage5.Text = "Player 2"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'OtherSystems
+        '
+        Me.OtherSystems.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.OtherSystems.Controls.Add(Me.TableLayoutPanel3)
+        Me.OtherSystems.Location = New System.Drawing.Point(4, 22)
+        Me.OtherSystems.Name = "OtherSystems"
+        Me.OtherSystems.Padding = New System.Windows.Forms.Padding(3)
+        Me.OtherSystems.Size = New System.Drawing.Size(687, 521)
+        Me.OtherSystems.TabIndex = 3
+        Me.OtherSystems.Text = "Other Systems"
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 2
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(681, 515)
+        Me.TableLayoutPanel3.TabIndex = 0
+        '
         'frmKeyMapperSDL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1926,6 +1955,7 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanel4.PerformLayout()
         Me.PlayerTab.ResumeLayout(False)
+        Me.OtherSystems.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -2053,4 +2083,6 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents cbSDL As ComboBox
     Friend WithEvents Label37 As Label
     Friend WithEvents PeriWarning As Label
+    Friend WithEvents OtherSystems As TabPage
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
 End Class

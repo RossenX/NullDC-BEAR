@@ -140,7 +140,7 @@ Partial Class frmSetup
         Me.Button2.Size = New System.Drawing.Size(306, 54)
         Me.Button2.TabIndex = 7
         Me.Button2.TabStop = False
-        Me.Button2.Text = "Add Firewall Entry for BEAR and NullDC to Windows Firewall"
+        Me.Button2.Text = "Add Firewall Entry for BEAR and Emulators"
         Me.Button2.UseVisualStyleBackColor = False
         '
         'tbPort
