@@ -214,11 +214,6 @@ Public Class NetworkHandling
                 If MainformRef.Challenger Is Nothing Then Exit Sub ' You didn't challange anyone, who tf accepted it
                 If Not MainformRef.Challenger.ip = senderip Then Exit Sub ' you didn't challange THIS person why he accepting.
 
-                If MainformRef.ConfigFile.AwayStatus = "DND" Or MainformRef.ConfigFile.AwayStatus = "Hidden" Then
-                    SendMessage(">,DND", senderip)
-                    Exit Sub
-                End If
-
                 Console.WriteLine("<-Join As Spectator->" & message)
                 Dim INVOKATION As JoinAsSpectator_delegate = AddressOf MainformRef.JoinAsSpectator
                 Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
