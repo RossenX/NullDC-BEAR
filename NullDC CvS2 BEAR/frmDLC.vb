@@ -92,7 +92,7 @@ Public Class frmDLC
         Try
             GetRomPacks()
             If MainformRef.IsBeta Then ' Just in case i forget to remove this in the release
-                ArchiveDotOrgParse("https://archive.org/details/SuperNintendoUSACollectionByGhostware&output=json")
+                'ArchiveDotOrgParse("https://archive.org/details/SuperNintendoUSACollectionByGhostware&output=json")
             End If
 
         Catch ex As Exception
