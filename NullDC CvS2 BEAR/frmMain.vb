@@ -6,7 +6,7 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -539,7 +539,7 @@ Public Class frmMain
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("NA-" & RomName) Then
                     GamesList.Add("NA-" & RomName, {GameName, RomPath, "na", ""})
                 End If
             Next
@@ -590,7 +590,7 @@ Public Class frmMain
 
                 Dim RomPath As String = _file.Replace(NullDCPath & "\dc\", "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("DC-" & RomName) Then
                     GamesList.Add("DC-" & RomName, {GameName, RomPath, "dc", sBuilder.ToString()})
                     Console.WriteLine("Found Game: RomName:" & RomName & " GameName:" & GameName & " RomPath:" & RomPath & " Platform:dc" & " " & sBuilder.ToString())
                 End If
@@ -624,7 +624,7 @@ Public Class frmMain
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("SS-" & RomName) Then
                     GamesList.Add("SS-" & RomName, {GameName, RomPath, "ss", ""})
                 End If
             Next
@@ -640,7 +640,7 @@ Public Class frmMain
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("SG-" & RomName) Then
                     GamesList.Add("SG-" & RomName, {GameName, RomPath, "sg", ""})
                 End If
             Next
@@ -656,7 +656,7 @@ Public Class frmMain
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("PSX-" & RomName) Then
                     GamesList.Add("PSX-" & RomName, {GameName, RomPath, "psx", ""})
                 End If
             Next
@@ -672,7 +672,7 @@ Public Class frmMain
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("NES-" & RomName) Then
                     GamesList.Add("NES-" & RomName, {GameName, RomPath, "nes", ""})
                 End If
             Next
@@ -688,7 +688,7 @@ Public Class frmMain
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("SNES-" & RomName) Then
                     GamesList.Add("SNES-" & RomName, {GameName, RomPath, "snes", ""})
                 End If
             Next
@@ -704,7 +704,7 @@ Public Class frmMain
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("NGP-" & RomName) Then
                     GamesList.Add("NGP-" & RomName, {GameName, RomPath, "ngp", ""})
                 End If
             Next
@@ -720,7 +720,7 @@ Public Class frmMain
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("GBA-" & RomName) Then
                     GamesList.Add("GBA-" & RomName, {GameName, RomPath, "gba", ""})
                 End If
             Next
@@ -736,10 +736,10 @@ Public Class frmMain
                     Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                     Dim RomPath As String = _file.Replace(NullDCPath, "")
 
-                    If Not GamesList.ContainsKey(RomName) Then
+                If Not GamesList.ContainsKey("GBC-" & RomName) Then
                     GamesList.Add("GBC-" & RomName, {GameName, RomPath, "gbc", ""})
                 End If
-                Next
+            Next
 
             End If
 
