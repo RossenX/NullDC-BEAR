@@ -69,7 +69,7 @@ Public Class MednafenLauncher
                                                            MainformRef.ConfigFile.Name & ",," &
                                                            MainformRef.ConfigFile.Port & "," &
                                                            MainformRef.ConfigFile.Game & "," &
-                                                           MainformRef.ConfigFile.Delay & ",0" &
+                                                            "0,0" &
                                                             ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                         Case "Public"
                             MainformRef.NetworkHandler.SendMessage("$," &
@@ -77,7 +77,7 @@ Public Class MednafenLauncher
                                                            MainformRef.ConfigFile.Host & "," &
                                                            MainformRef.ConfigFile.Port & "," &
                                                            MainformRef.ConfigFile.Game & "," &
-                                                           MainformRef.ConfigFile.Delay & ",1" &
+                                                            "1,0" &
                                                             ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                     End Select
 
@@ -103,6 +103,11 @@ Public Class MednafenLauncher
 
         AddHandler MednafenServerInstance.Exited,
                 Sub()
+                    If Not MednafenInstance Is Nothing And MainformRef.ConfigFile.Status = "Hosting" Then
+                        MainformRef.ConfigFile.Status = "Offline"
+                        MainformRef.ConfigFile.SaveFile()
+
+                    End If
                     MednafenServerInstance = Nothing
                 End Sub
 

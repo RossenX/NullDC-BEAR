@@ -743,12 +743,12 @@ Public Class frmMain
 
             End If
 
-            ' New Games List Code
-            PopulateGameLists(GameSelectForm.tc_games, AddressOf MainformRef.GameSelectForm.SelectedIndexChange)
+        ' New Games List Code
+        PopulateGameLists(GameSelectForm.tc_games)
 
     End Sub
 
-    Private Sub PopulateGameLists(ByRef TabControl As TabControl, ByRef SelectedIndexChangeEventHandler As EventHandler)
+    Private Sub PopulateGameLists(ByRef TabControl As TabControl)
         TabControl.TabPages.Clear()
 
         'RomFileName - Game Name, Rom Path, Platform, Hash
@@ -812,8 +812,9 @@ Public Class frmMain
 
                 TabIndex = TabControl.TabPages.Count - 1
 
-                AddHandler tmpListView.SelectedIndexChanged, SelectedIndexChangeEventHandler
-
+                AddHandler tmpListView.SelectedIndexChanged, AddressOf MainformRef.GameSelectForm.SelectedIndexChange
+                AddHandler tmpListView.Click, AddressOf MainformRef.GameSelectForm.SelectedIndexChange
+                AddHandler tmpListView.DoubleClick, AddressOf MainformRef.GameSelectForm.btnLetsGo_Click
             End If
 
             Dim tmp2ListView = TabControl.TabPages.Item(TabIndex).Controls.OfType(Of ListView).First
@@ -902,6 +903,13 @@ Public Class frmMain
         ConfigFile.SaveFile()
     End Sub
 
+    ' Notable Differences for Mednafen
+    ' EEPROM = Gamekey
+    ' IP =  can be host IP or a public server
+    ' Delay = Public or Client or Private (TODO)
+    ' Port =  Never used using the default port because that's what all the servers use
+    ' Region = USE FOR PASSWORD (?)
+
     Public Delegate Sub JoinHost_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
     Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
 
@@ -916,18 +924,25 @@ Public Class frmMain
                 Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
                 ConfigFile.Status = "Client"
                 ConfigFile.Port = _port
+                ConfigFile.Delay = _delay
             Case "dc"
                 ConfigFile.Status = "Client"
                 ConfigFile.Port = _port
+                ConfigFile.Delay = _delay
             Case Else ' For Mednafen the 'region' setting is used as an indicator if it's public server or not the eeprom setting is used as the gamekey in mednafen
-                If _region = "0" Then
-                    ConfigFile.Status = "Client"
-                    Rx.EEPROM = _eeprom
-                Else
-                    ConfigFile.Status = "Public"
-                    Rx.EEPROM = _eeprom
-                End If
+                Select Case _delay
+                    Case 0
+                        ConfigFile.Status = "Client"
+                        Rx.EEPROM = _eeprom
+                    Case 1
+                        ConfigFile.Status = "Public"
+                        Rx.EEPROM = _eeprom
+                    Case 2
+                        ConfigFile.Status = "Private"
+                        Rx.EEPROM = _eeprom
+                    Case Else
 
+                End Select
                 ' Don't use the nullDC port for Mednafen
                 ' ConfigFile.Port = "4046" ' Mednafen always uses this for now maybe i'll change it later but all the public servers use this IP
 
@@ -956,7 +971,6 @@ Public Class frmMain
         Challenger = New NullDCPlayer(_name, _ip, _port, _game,, _peripheral)
         ConfigFile.Host = _ip
         ConfigFile.Game = _game
-        ConfigFile.Delay = _delay
         ConfigFile.ReplayFile = ""
         ConfigFile.SaveFile()
 
@@ -1219,7 +1233,7 @@ Public Class frmMain
                 Case "BI"
                     Message = "Player is already in a game"
                 Case "NG"
-                    Message = "Player doesn't have this game or rom names(lst/cdi) do not match"
+                    Message = "Player doesn't have this game or rom names do not match"
                 Case "BO"
                     Message = "Challanger got bored of waiting"
                 Case "HO"
@@ -1244,6 +1258,8 @@ Public Class frmMain
                     Message = "Try connecting to the HOST"
                 Case "MDN"
                     Message = "Player is playing offline"
+                Case "MDP"
+                    Message = "You cannot join Private Games"
             End Select
 
             If Not Message = "" Then NotificationForm.ShowMessage(Message)
@@ -1319,7 +1335,7 @@ Public Class frmMain
             NetworkHandler.SendMessage("?,")
 
             Dim NameToSend As String = MainformRef.ConfigFile.Name
-            If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " vs " & MainformRef.Challenger.name
+            If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " Vs " & MainformRef.Challenger.name
 
             Dim GameNameAndRomName = "None"
             If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
@@ -1383,7 +1399,7 @@ Public Class frmMain
 
         Console.WriteLine("Challange: " & c_ip)
         ' Skip game Selection if person is already in a game, try to spectate instead.
-        If Not c_status = "Idle" Then ' this person is playing SOMETHING so lets try to challange them and see what they reply
+        If Not c_status = "Idle" And Not c_status = "LFG" Then ' this person is playing SOMETHING so lets try to challange them and see what they reply
 
             If c_status = "DND" Then
                 NotificationForm.ShowMessage("Player is not accepting challenges right now.")

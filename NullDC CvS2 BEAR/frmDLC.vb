@@ -148,7 +148,7 @@ Public Class frmDLC
                 Dim tmpSplit = _lines(i).Split("/")
                 Dim tmpExtention = tmpSplit(tmpSplit.Count - 1).Split(".")
                 Dim GameFormatedName = tmpSplit(tmpSplit.Count - 1).Replace("." & tmpExtention(tmpExtention.Count - 1), "")
-                Dim name = WebUtility.UrlDecode(GameFormatedName.Replace("_", " ")).Replace("# NES", "")
+                Dim name = WebUtility.UrlDecode(GameFormatedName.Replace("+", "%2B")).Replace("_", " ").Replace("# NES", "")
                 name = RemoveAnnoyingRomNumbersFromString(name)
 
                 Dim _it As New ListViewItem(name)
@@ -176,8 +176,6 @@ Public Class frmDLC
             Exit Sub
 
         End If
-
-
 
         CurrentlyDownloadingGame = New DownloadableGame(CurrentlySelectedGame.URL, CurrentlySelectedGame.Name, CurrentlySelectedGame.Platform, CurrentlySelectedGame.Folder, CurrentlySelectedGame.Extract)
 
@@ -215,6 +213,7 @@ Public Class frmDLC
         DownloadSize = e.TotalBytesToReceive
 
         ProgressBar1.Visible = True
+
         Dim _NameLength = 20
         If CurrentlyDownloadingGame.Name.Length < 20 Then
             _NameLength = CurrentlyDownloadingGame.Name.Length

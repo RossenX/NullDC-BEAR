@@ -6,6 +6,7 @@ Imports System.Net.NetworkInformation
 
 Public Class frmChallenge
 
+    Dim _Challenger As NullDCPlayer
     Dim wavePlayer As New NAudio.Wave.WaveOut
 
     Public Sub New(ByRef _mf As frmMain)
@@ -14,13 +15,13 @@ Public Class frmChallenge
     End Sub
 
     Private Sub btnDeny_Click(sender As Object, e As EventArgs) Handles btnDeny.Click
-        MainformRef.NetworkHandler.SendMessage(">,D", MainformRef.Challenger.ip)
+        MainformRef.NetworkHandler.SendMessage(">,D", _Challenger.ip)
         MainformRef.EndSession("Denied")
         MainformRef.Focus()
     End Sub
 
-    Public Sub StartChallenge(ByRef _challenger As NullDCPlayer)
-        MainformRef.Challenger = _challenger
+    Public Sub StartChallenge(ByRef _challengerInc As NullDCPlayer)
+        _Challenger = _challengerInc
         Me.Show()
 
     End Sub
@@ -32,7 +33,7 @@ Public Class frmChallenge
 
     Private Sub GetPing()
         Try
-            Dim ping As PingReply = New Ping().Send(MainformRef.Challenger.ip)
+            Dim ping As PingReply = New Ping().Send(_Challenger.ip)
             If ping.RoundtripTime = 0 Then
                 Label1.Invoke(Sub() Label1.Text = "Ping: N/A")
                 Exit Sub
@@ -71,10 +72,12 @@ Public Class frmChallenge
 
     Private Sub btnAccept_Click(sender As Object, e As EventArgs) Handles btnAccept.Click
         If MainformRef.IsNullDCRunning Then MainformRef.EndSession("New Challenger")
+
         While MainformRef.IsNullDCRunning
             Thread.Sleep(10)
         End While
 
+        MainformRef.Challenger = _Challenger
         ' Ok so this causes crashes on some systems so lets try to find a workaround MOVED TO VisibleChanged
         MainformRef.ConfigFile.Port = MainformRef.Challenger.port
         MainformRef.ConfigFile.Status = "Client"
@@ -112,16 +115,10 @@ Public Class frmChallenge
 
             End Try
 
-
-            'My.Computer.Audio.Play(My.Resources.NewChallanger, AudioPlayMode.Background)
-
-            'MainformRef.ConfigFile.Port = MainformRef.Challenger.port
-            'MainformRef.ConfigFile.Status = "Client"
-            'MainformRef.ConfigFile.Game = MainformRef.Challenger.game
-            'MainformRef.ConfigFile.SaveFile()
-
-            Dim GameName As String = MainformRef.GamesList(MainformRef.Challenger.game)(0)
-            lbChallengeText.Text = MainformRef.Challenger.name & " Has challenged you to " & vbCrLf & GameName
+            Dim GameName As String = MainformRef.GamesList(_Challenger.game)(0)
+            lbChallengeText.Text = _Challenger.name & " Has challenged you to " & vbCrLf & GameName
+        Else
+            _Challenger = Nothing
         End If
 
     End Sub

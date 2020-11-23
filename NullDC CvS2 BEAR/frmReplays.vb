@@ -110,12 +110,11 @@ Public Class frmReplays
             MainformRef.ConfigFile.ReplayFile = ReplayPath
             MainformRef.ConfigFile.SaveFile()
             MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(1)
-            MainformRef.NullDCLauncher.P1Name = FileStringSplitUp(2)
+            MainformRef.NullDCLauncher.P2Name = FileStringSplitUp(2)
 
             If FileAsStrings.Contains("|eeprom|") Then
                 Dim eeprom As String() = FileAsStrings.Split(New String() {"|eeprom|"}, StringSplitOptions.None)
                 Rx.WriteEEPROM(eeprom(1), MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1))
-
             Else
                 Rx.WriteEEPROM("", MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1))
             End If

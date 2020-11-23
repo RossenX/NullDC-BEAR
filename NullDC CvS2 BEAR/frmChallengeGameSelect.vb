@@ -18,7 +18,7 @@
 
     End Sub
 
-    Private Sub btnLetsGo_Click(sender As Object, e As EventArgs) Handles btnLetsGo.Click
+    Public Sub btnLetsGo_Click(sender As Object, e As EventArgs) Handles btnLetsGo.Click
         If SelectedGame(0) = "" Then
             MainformRef.NotificationForm.ShowMessage("No Game Selected")
             Exit Sub
