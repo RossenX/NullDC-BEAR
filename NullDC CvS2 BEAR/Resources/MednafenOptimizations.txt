@@ -65,3 +65,4 @@ wswan.byear 1988
 wswan.language english
 wswan.name Mednafen
 wswan.sex M
+video.deinterlacer blend

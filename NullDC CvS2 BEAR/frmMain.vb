@@ -6,7 +6,7 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = True
+    Public IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -32,6 +32,8 @@ Public Class frmMain
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
     Private FormLoaded As Boolean = False
     Public FinishedLoading As Boolean = False
+
+    Dim needsUpdate As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "mednafen-server.zip")
@@ -93,8 +95,8 @@ Public Class frmMain
 
         Try
             ' Check SDL Version Swap
-            If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Then ' We Need to Change SDL Version
-                If MainformRef.ConfigFile.SDLVersion = "+Stable" Then
+            If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Or needsUpdate Then ' We Need to Change SDL Version
+                If MainformRef.ConfigFile.SDLVersion = "+Stable" Or MainformRef.ConfigFile.SDLVersion = "Stable" Then
                     UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath & "\dc")
                     UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath)
                     MainformRef.ConfigFile.SDLVersion = "Stable"
@@ -340,7 +342,7 @@ Public Class frmMain
         ' Check the EXE name and all that shit from now on use the NullDC.BEAR.exe format since that's what github saves it as, since it hates spaces apperanly
         ' Why do this you may ask? Well mostly so people who downloaded it from github have the same exe name after they update, for firewall reasons
 
-        Dim needsUpdate As Boolean = False
+
         If File.Exists(NullDCPath & "\NullDC_BEAR.cfg") Then
             Dim thefile = NullDCPath & "\NullDC_BEAR.cfg"
             Dim lines() As String = File.ReadAllLines(thefile)
