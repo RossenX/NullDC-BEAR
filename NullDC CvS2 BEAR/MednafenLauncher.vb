@@ -49,7 +49,7 @@ Public Class MednafenLauncher
                 Dim MednafenInfo As New ProcessStartInfo
                 MednafenInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
                 If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Or MainformRef.ConfigFile.Status = "Client" Then
-                    MednafenInfo.Arguments = " -connect -netplay.host " & MainformRef.ConfigFile.Host & " -netplay.gamekey " & Rx.EEPROM & " -netplay.nick " & MainformRef.ConfigFile.Name & " "
+                    MednafenInfo.Arguments = " -connect -netplay.host " & MainformRef.ConfigFile.Host & " -netplay.gamekey " & Rx.EEPROM & " -netplay.nick """ & MainformRef.ConfigFile.Name & """ "
                 End If
                 MednafenInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
 
