@@ -53,10 +53,10 @@ Public Class frmDLC
                 Dim GameCount = 0
                 Dim Exportedlist As New ArrayList
                 Exportedlist.Add("DLCv=1")
-                Exportedlist.Add("Platform=SNES")
-                Exportedlist.Add("Disc=SNES DLC")
-                Exportedlist.Add("Tab=SNES")
-                Exportedlist.Add("Folder=mednafen\roms\snes")
+                Exportedlist.Add("Platform=FDS")
+                Exportedlist.Add("Disc=Nintendo Famicom Disk System DLC")
+                Exportedlist.Add("Tab=Famicom Disk System")
+                Exportedlist.Add("Folder=mednafen\roms\fds")
                 Exportedlist.Add("Extract=0")
                 Exportedlist.Add("ExternalURL=" & URL.Replace("&output=json", ""))
 
@@ -92,7 +92,7 @@ Public Class frmDLC
         Try
             GetRomPacks()
             If MainformRef.IsBeta Then ' Just in case i forget to remove this in the release
-                'ArchiveDotOrgParse("https://archive.org/details/SuperNintendoUSACollectionByGhostware&output=json")
+                'ArchiveDotOrgParse("https://archive.org/details/famicom-disk-system-museum&output=json")
             End If
 
         Catch ex As Exception

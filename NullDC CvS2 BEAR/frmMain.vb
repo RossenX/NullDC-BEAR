@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.75b" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.75c" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -697,6 +697,22 @@ Public Class frmMain
 
         End If
 
+        If _system = "all" Or _system = "fds" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\fds") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\fds")
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\fds", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("FDS-" & RomName) Then
+                    GamesList.Add("FDS-" & RomName, {GameName, RomPath, "fds", ""})
+                End If
+            Next
+
+        End If
+
         If _system = "all" Or _system = "ngp" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\ngp") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\ngp")
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ngp", "*.zip", SearchOption.AllDirectories)
@@ -780,6 +796,8 @@ Public Class frmMain
                     TabName = "GBA"
                 Case "gbc"
                     TabName = "GBC"
+                Case "fds"
+                    TabName = "Famicom Disk System"
                 Case Else
                     TabName = "Unknown"
                     Console.WriteLine("No System?")
@@ -846,7 +864,7 @@ Public Class frmMain
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "na"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
-            Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc"
+            Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc", "fds"
                 MednafenLauncher.LaunchEmulator(_romname)
             Case Else
                 MsgBox("Missing emulator type: " & Emulator)
@@ -1508,7 +1526,7 @@ Public Class frmMain
         If Not NetworkHandler Is Nothing Then
             ConfigFile.AwayStatus = cbStatus.Text
 
-            If Not IsNullDCRunning() Then
+            If Not IsNullDCRunning() And MednafenLauncher.MednafenInstance Is Nothing Then
                 ConfigFile.Status = cbStatus.Text
                 ConfigFile.SaveFile()
             End If
