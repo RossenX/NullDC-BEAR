@@ -11,7 +11,7 @@ Public Class frmHostPanel
 
     End Sub
 
-    Public Sub BeginHost(Optional ByVal _challenger As NullDCPlayer = Nothing)
+    Public Sub BeginHost(Optional ByVal _challenger As BEARPlayer = Nothing)
         MainformRef.Challenger = _challenger
 
         MainformRef.WaitingForm.Visible = False

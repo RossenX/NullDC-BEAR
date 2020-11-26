@@ -344,6 +344,12 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\System Icons\icon_PSX.png" />
+    <None Include="Resources\System Icons\icon_NES.png" />
+    <None Include="Resources\System Icons\icon_GBC.png" />
+    <None Include="Resources\System Icons\icon_GBA.png" />
+    <None Include="Resources\System Icons\icon_SNES.png" />
+    <None Include="Resources\System Icons\icon_dreamcast.png" />
     <None Include="Resources\MednafenOptimizations.txt" />
     <None Include="Resources\sus.png" />
     <None Include="Resources\Vs_2.png" />

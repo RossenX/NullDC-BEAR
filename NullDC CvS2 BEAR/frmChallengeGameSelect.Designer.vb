@@ -22,6 +22,8 @@ Partial Class frmChallengeGameSelect
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmChallengeGameSelect))
         Me.btnLetsGo = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
@@ -38,6 +40,7 @@ Partial Class frmChallengeGameSelect
         Me.cb_Serverlist = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.tb_nulldc.SuspendLayout()
         Me.tc_games.SuspendLayout()
         Me.tb_mednafen.SuspendLayout()
@@ -51,7 +54,7 @@ Partial Class frmChallengeGameSelect
         Me.btnLetsGo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnLetsGo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLetsGo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLetsGo.Location = New System.Drawing.Point(491, 388)
+        Me.btnLetsGo.Location = New System.Drawing.Point(481, 378)
         Me.btnLetsGo.Name = "btnLetsGo"
         Me.TableLayoutPanel2.SetRowSpan(Me.btnLetsGo, 2)
         Me.btnLetsGo.Size = New System.Drawing.Size(161, 95)
@@ -65,7 +68,7 @@ Partial Class frmChallengeGameSelect
         Me.Button1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(3, 450)
+        Me.Button1.Location = New System.Drawing.Point(13, 440)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(82, 33)
         Me.Button1.TabIndex = 3
@@ -115,7 +118,7 @@ Partial Class frmChallengeGameSelect
         Me.tb_nulldc.RowCount = 2
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tb_nulldc.Size = New System.Drawing.Size(394, 56)
+        Me.tb_nulldc.Size = New System.Drawing.Size(374, 56)
         Me.tb_nulldc.TabIndex = 25
         '
         'cbDelay
@@ -150,11 +153,11 @@ Partial Class frmChallengeGameSelect
         Me.tc_games.Controls.Add(Me.TabPage1)
         Me.tc_games.Controls.Add(Me.TabPage2)
         Me.tc_games.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tc_games.Location = New System.Drawing.Point(3, 43)
+        Me.tc_games.Location = New System.Drawing.Point(13, 53)
         Me.tc_games.Multiline = True
         Me.tc_games.Name = "tc_games"
         Me.tc_games.SelectedIndex = 0
-        Me.tc_games.Size = New System.Drawing.Size(649, 339)
+        Me.tc_games.Size = New System.Drawing.Size(629, 319)
         Me.tc_games.TabIndex = 26
         '
         'TabPage1
@@ -162,7 +165,7 @@ Partial Class frmChallengeGameSelect
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(641, 313)
+        Me.TabPage1.Size = New System.Drawing.Size(621, 293)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -172,7 +175,7 @@ Partial Class frmChallengeGameSelect
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(641, 313)
+        Me.TabPage2.Size = New System.Drawing.Size(621, 293)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -180,15 +183,15 @@ Partial Class frmChallengeGameSelect
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.TableLayoutPanel2.SetColumnSpan(Me.Label1, 3)
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(3, 0)
+        Me.Label1.Location = New System.Drawing.Point(13, 10)
         Me.Label1.MinimumSize = New System.Drawing.Size(0, 40)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(649, 40)
+        Me.Label1.Size = New System.Drawing.Size(629, 40)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Game Select"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -208,7 +211,7 @@ Partial Class frmChallengeGameSelect
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tb_mednafen.Size = New System.Drawing.Size(394, 56)
+        Me.tb_mednafen.Size = New System.Drawing.Size(374, 56)
         Me.tb_mednafen.TabIndex = 28
         '
         'Label3
@@ -220,7 +223,7 @@ Partial Class frmChallengeGameSelect
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.Label3.Location = New System.Drawing.Point(3, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(388, 16)
+        Me.Label3.Size = New System.Drawing.Size(368, 16)
         Me.Label3.TabIndex = 30
         Me.Label3.Text = "Server"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -232,7 +235,7 @@ Partial Class frmChallengeGameSelect
         Me.cb_Serverlist.FormattingEnabled = True
         Me.cb_Serverlist.Location = New System.Drawing.Point(3, 19)
         Me.cb_Serverlist.Name = "cb_Serverlist"
-        Me.cb_Serverlist.Size = New System.Drawing.Size(388, 21)
+        Me.cb_Serverlist.Size = New System.Drawing.Size(368, 21)
         Me.cb_Serverlist.TabIndex = 29
         '
         'TableLayoutPanel2
@@ -249,6 +252,7 @@ Partial Class frmChallengeGameSelect
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.Padding = New System.Windows.Forms.Padding(10)
         Me.TableLayoutPanel2.RowCount = 4
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -262,10 +266,26 @@ Partial Class frmChallengeGameSelect
         Me.Panel1.Controls.Add(Me.tb_nulldc)
         Me.Panel1.Controls.Add(Me.tb_mednafen)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(91, 388)
+        Me.Panel1.Location = New System.Drawing.Point(101, 378)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(394, 56)
+        Me.Panel1.Size = New System.Drawing.Size(374, 56)
         Me.Panel1.TabIndex = 4
+        '
+        'SystemIcons
+        '
+        Me.SystemIcons.ImageStream = CType(resources.GetObject("SystemIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.SystemIcons.TransparentColor = System.Drawing.Color.Transparent
+        Me.SystemIcons.Images.SetKeyName(0, "icon_Naomi.png")
+        Me.SystemIcons.Images.SetKeyName(1, "icon_dreamcast.png")
+        Me.SystemIcons.Images.SetKeyName(2, "Icon_SegaSaturn.png")
+        Me.SystemIcons.Images.SetKeyName(3, "icon_Genesis.png")
+        Me.SystemIcons.Images.SetKeyName(4, "icon_PSX.png")
+        Me.SystemIcons.Images.SetKeyName(5, "icon_NES.png")
+        Me.SystemIcons.Images.SetKeyName(6, "icon_SNES.png")
+        Me.SystemIcons.Images.SetKeyName(7, "icon_fds.png")
+        Me.SystemIcons.Images.SetKeyName(8, "icon_NGP.png")
+        Me.SystemIcons.Images.SetKeyName(9, "icon_GBA.png")
+        Me.SystemIcons.Images.SetKeyName(10, "icon_GBC.png")
         '
         'frmChallengeGameSelect
         '
@@ -275,7 +295,7 @@ Partial Class frmChallengeGameSelect
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(655, 486)
         Me.Controls.Add(Me.TableLayoutPanel2)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "frmChallengeGameSelect"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Game Select"
@@ -308,4 +328,5 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents Label3 As Label
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents SystemIcons As ImageList
 End Class

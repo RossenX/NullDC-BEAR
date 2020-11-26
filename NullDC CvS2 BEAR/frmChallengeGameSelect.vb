@@ -1,13 +1,13 @@
 ﻿Public Class frmChallengeGameSelect
 
-    Public _Challenger As NullDCPlayer
+    Public _Challenger As BEARPlayer
     Dim SelectedGame = {"", ""}
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
     End Sub
 
-    Public Sub StartChallenge(Optional ByVal _challenger As NullDCPlayer = Nothing)
+    Public Sub StartChallenge(Optional ByVal _challenger As BEARPlayer = Nothing)
         Me._Challenger = _challenger
 
         If Me.Visible Then
@@ -70,7 +70,7 @@
 
         MainformRef.ConfigFile.Game = SelectedGame(0)
 
-        MainformRef.Challenger = New NullDCPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, SelectedGame(0))
+        MainformRef.Challenger = New BEARPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, SelectedGame(0))
         MainformRef.ChallengeSentForm.StartChallenge(MainformRef.Challenger)
         Me.Close()
 

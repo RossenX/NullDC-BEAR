@@ -125,14 +125,14 @@ Public Class NetworkHandling
             Case "?"
                 Dim Status As String = MainformRef.ConfigFile.Status
                 Dim NameToSend As String = MainformRef.ConfigFile.Name
-                If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " vs " & MainformRef.Challenger.name
+                If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " & " & MainformRef.Challenger.name
                 Dim GameNameAndRomName = "None"
 
                 If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
                 SendMessage("<," & NameToSend & ",," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & Status, senderip)
 
             Case "<"
-                MainformRef.AddPlayerToList(New NullDCPlayer(Split(1), senderip, Split(3), Split(4), Split(5)))
+                MainformRef.AddPlayerToList(New BEARPlayer(Split(1), senderip, Split(3), Split(4), Split(5)))
 
             Case "!"
 
@@ -182,7 +182,7 @@ Public Class NetworkHandling
 
                 Console.WriteLine("<-Accepted Challenged->" & message)
                 Dim INVOKATION As OpenHostingPanel_delegate = AddressOf MainformRef.OpenHostingPanel
-                MainformRef.Invoke(INVOKATION, New NullDCPlayer(Split(1), senderip, Split(3), Split(4),, Split(5)))
+                MainformRef.Invoke(INVOKATION, New BEARPlayer(Split(1), senderip, Split(3), Split(4),, Split(5)))
 
             Case ">"
                 If MainformRef.Challenger Is Nothing Then Exit Sub ' You didn't challange anyone, who tf accepted it

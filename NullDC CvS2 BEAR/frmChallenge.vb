@@ -6,7 +6,7 @@ Imports System.Net.NetworkInformation
 
 Public Class frmChallenge
 
-    Dim _Challenger As NullDCPlayer
+    Dim _Challenger As BEARPlayer
     Dim wavePlayer As New NAudio.Wave.WaveOut
 
     Public Sub New(ByRef _mf As frmMain)
@@ -20,7 +20,7 @@ Public Class frmChallenge
         MainformRef.Focus()
     End Sub
 
-    Public Sub StartChallenge(ByRef _challengerInc As NullDCPlayer)
+    Public Sub StartChallenge(ByRef _challengerInc As BEARPlayer)
         _Challenger = _challengerInc
         Me.Show()
 

@@ -9,7 +9,7 @@ Public Class frmChallengeSent
         InitializeComponent()
     End Sub
 
-    Public Sub StartChallenge(ByVal _challanger As NullDCPlayer)
+    Public Sub StartChallenge(ByVal _challanger As BEARPlayer)
         MainFormRef.Challenger = _challanger
         With MainformRef
             .NetworkHandler.SendMessage("!," & .ConfigFile.Name & ",," & .ConfigFile.Port & "," & _challanger.game & ",1," & .ConfigFile.Peripheral, _challanger.ip)

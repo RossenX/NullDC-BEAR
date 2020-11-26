@@ -283,4 +283,22 @@
   <data name="MednafenOptimizations" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MednafenOptimizations.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="icon_dreamcast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\System Icons\icon_dreamcast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_SNES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\System Icons\icon_SNES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_GBA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\System Icons\icon_GBA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_GBC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\System Icons\icon_GBC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_NES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\System Icons\icon_NES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_PSX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\System Icons\icon_PSX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

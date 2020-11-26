@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.75c" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.75b" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -28,23 +28,68 @@ Public Class frmMain
     Public WaitingForm As frmWaitingForHost
     Public NotificationForm As frmNotification
     'Public KeyMappingForm As frmKeyMapping
-    Public Challenger As NullDCPlayer
+    Public Challenger As BEARPlayer
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
     Private FormLoaded As Boolean = False
     Public FinishedLoading As Boolean = False
 
+    Dim SelectedPlayer As BEARPlayer
+
     Dim needsUpdate As Boolean = False
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "mednafen-server.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
-
         Me.Icon = My.Resources.NewNullDCBearIcon
         niBEAR.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToScreen()
 
-        imgBeta.Visible = IsBeta
+        ' Theme Stuff
 
+        Me.BackColor = BEARTheme.PrimaryColor
+
+        PlayerList.BackColor = BEARTheme.SecondaryColor
+        Matchlist.BackColor = BEARTheme.TertiaryColor
+
+        ' Buttons
+        btnDLC.BackColor = BEARTheme.ButtonBackground
+        BtnJoin.BackColor = BEARTheme.ButtonBackground
+        btnOffline.BackColor = BEARTheme.ButtonBackground
+        btnSearch.BackColor = BEARTheme.ButtonBackground
+
+        ' Labels
+        Label1.BackColor = BEARTheme.SecondaryColor
+        Label2.BackColor = BEARTheme.SecondaryColor
+        Label4.BackColor = BEARTheme.SecondaryColor
+
+        'MenyStrip
+        MainMenuStrip.BackColor = BEARTheme.SecondaryColor
+        lbVer.BackColor = BEARTheme.SecondaryColor
+        imgBeta.BackColor = BEARTheme.SecondaryColor
+
+        cbStatus.BackColor = BEARTheme.ButtonBackground
+
+
+
+
+
+
+
+
+
+
+
+        imgBeta.Visible = IsBeta
         Rx.MainformRef = Me
         lbVer.Text = Ver
 
@@ -148,6 +193,14 @@ Public Class frmMain
         Else
             sus_i.Visible = False
         End If
+
+        AddPlayerToList(New BEARPlayer("Tester vs some other guy or some ", "123.123.123.1", "40631", "Capcom vs snk|NA-SHUT.zip", "Hosting"))
+        AddPlayerToList(New BEARPlayer("Tester2", "123.123.123.2", "40631"))
+        AddPlayerToList(New BEARPlayer("Tester3", "123.123.123.3", "40631"))
+        AddPlayerToList(New BEARPlayer("Tester4", "123.123.123.4", "40631"))
+        AddPlayerToList(New BEARPlayer("Tester5", "123.123.123.5", "40631"))
+        AddPlayerToList(New BEARPlayer("Tester6", "123.123.123.6", "40631"))
+        AddPlayerToList(New BEARPlayer("Tester7", "123.123.123.7", "40631"))
 
         Console.WriteLine(sus)
         FinishedLoading = True
@@ -395,6 +448,7 @@ Public Class frmMain
         If Not Directory.Exists(NullDCPath & "\dc") Then
             Directory.CreateDirectory(NullDCPath & "\dc")
             UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
+            needsUpdate = True
         End If
 
         If Not File.Exists(NullDCPath & "\dc\GameSpecificSettings.optibear") Then
@@ -449,6 +503,7 @@ Public Class frmMain
         If Not Directory.Exists(NullDCPath & "\mednafen") Then
             Directory.CreateDirectory(NullDCPath & "\mednafen")
             UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen")
+            needsUpdate = True
         End If
 
 
@@ -472,23 +527,35 @@ Public Class frmMain
             End
 
         Finally
-            'If needsUpdate Or IsBeta Then
-            'NotificationForm.ShowMessage("Yo we have a new control system, go into the controls panel.")
-            'End If
+            ' Just in case BEAR crashed when you were a client and there is a backup of the saves without them being restored, this will restore them.
+            If Directory.Exists(NullDCPath & "/mednafen/sav_") Then
+                If Directory.Exists(NullDCPath & "/mednagen/sav") Then Directory.Delete(NullDCPath & "/mednagen/sav")
+                My.Computer.FileSystem.RenameDirectory(NullDCPath & "/mednagen/sav_", NullDCPath & "/mednagen/sav")
+
+            End If
+
+            If Directory.Exists(NullDCPath & "/mednagen/mcs_") Then
+                If Directory.Exists(NullDCPath & "/mednagen/mcs") Then Directory.Delete(NullDCPath & "/mednagen/mcs")
+                My.Computer.FileSystem.RenameDirectory(NullDCPath & "/mednagen/mcs_", NullDCPath & "/mednagen/mcs")
+
+            End If
+
+            ' Put in the VMU to keep it in sync for now
+            If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
+                My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", My.Resources.vmu_data_port01, False)
+
+            End If
+
+            If Not File.Exists(NullDCPath & "\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\Vs.png")
+            If Not File.Exists(NullDCPath & "\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\Vs_2.png")
+            If Not File.Exists(NullDCPath & "\dc\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\dc\Vs.png")
+            If Not File.Exists(NullDCPath & "\dc\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\dc\Vs_2.png")
+
+            GetGamesList()
+            GetServerList()
+
         End Try
 
-        ' Put in the VMU to keep it in sync for now
-        If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
-            My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", My.Resources.vmu_data_port01, False)
-        End If
-
-        If Not File.Exists(NullDCPath & "\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\Vs.png")
-        If Not File.Exists(NullDCPath & "\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\Vs_2.png")
-        If Not File.Exists(NullDCPath & "\dc\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\dc\Vs.png")
-        If Not File.Exists(NullDCPath & "\dc\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\dc\Vs_2.png")
-
-        GetGamesList()
-        GetServerList()
     End Sub
 
     Private Sub GetServerList()
@@ -635,10 +702,35 @@ Public Class frmMain
 
         If _system = "all" Or _system = "sg" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\sg") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\sg")
+
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
                 Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("SG-" & RomName) Then
+                    GamesList.Add("SG-" & RomName, {GameName, RomPath, "sg", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.bin", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".bin", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("SG-" & RomName) Then
+                    GamesList.Add("SG-" & RomName, {GameName, RomPath, "sg", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.md", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".md", "").Replace(",", ".")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -667,6 +759,19 @@ Public Class frmMain
 
         If _system = "all" Or _system = "nes" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\nes") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\nes")
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace(".NES", "").Replace("# NES", "")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("NES-" & RomName) Then
+                    GamesList.Add("NES-" & RomName, {GameName, RomPath, "nes", ""})
+                End If
+            Next
+
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.nes", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -683,10 +788,23 @@ Public Class frmMain
 
         If _system = "all" Or _system = "snes" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\snes") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\snes")
+
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\snes", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
                 Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("SNES-" & RomName) Then
+                    GamesList.Add("SNES-" & RomName, {GameName, RomPath, "snes", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\snes", "*.sfc", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".sfc", "").Replace(",", ".")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -731,6 +849,7 @@ Public Class frmMain
 
         If _system = "all" Or _system = "gba" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\gba") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\gba")
+
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gba", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
@@ -743,23 +862,47 @@ Public Class frmMain
                 End If
             Next
 
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gba", "*.gba", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".gba", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("GBA-" & RomName) Then
+                    GamesList.Add("GBA-" & RomName, {GameName, RomPath, "gba", ""})
+                End If
+            Next
         End If
 
         If _system = "all" Or _system = "gbc" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\gbc") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\gbc")
+
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gbc", "*.zip", SearchOption.AllDirectories)
-                For Each _file In Files
-                    Dim GameName_Split As String() = _file.Split("\")
-                    Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
-                    Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
-                    Dim RomPath As String = _file.Replace(NullDCPath, "")
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
 
                 If Not GamesList.ContainsKey("GBC-" & RomName) Then
                     GamesList.Add("GBC-" & RomName, {GameName, RomPath, "gbc", ""})
                 End If
             Next
 
-            End If
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gbc", "*.gbc", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".gbc", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("GBC-" & RomName) Then
+                    GamesList.Add("GBC-" & RomName, {GameName, RomPath, "gbc", ""})
+                End If
+            Next
+
+        End If
 
         ' New Games List Code
         PopulateGameLists(GameSelectForm.tc_games)
@@ -988,7 +1131,7 @@ Public Class frmMain
 
         If WaitingForm.Visible Then WaitingForm.Visible = False
 
-        Challenger = New NullDCPlayer(_name, _ip, _port, _game,, _peripheral)
+        Challenger = New BEARPlayer(_name, _ip, _port, _game,, _peripheral)
         ConfigFile.Host = _ip
         ConfigFile.Game = _game
         ConfigFile.ReplayFile = ""
@@ -1030,36 +1173,75 @@ Public Class frmMain
             End If
         Next
 
+        For Each playerentry As ListViewItem In PlayerList.Items
+            If playerentry.SubItems(1).Text.Split(":")(0) = IP Then
+                PlayerList.Items.Remove(playerentry)
+                Exit For
+            End If
+        Next
+
     End Sub
 
-    Public Delegate Sub AddPlayerToList_delegate(ByVal Player As NullDCPlayer)
-    Public Sub AddPlayerToList(ByVal Player As NullDCPlayer)
+    Public Delegate Sub AddPlayerToList_delegate(ByVal Player As BEARPlayer)
+    Public Sub AddPlayerToList(ByVal Player As BEARPlayer)
         'Check if this IP:Port combo exists
         Dim FoundEntry As ListViewItem = Nothing
         Dim FoundEntryID = 0
 
-        Matchlist.Invoke(Sub()
-                             For Each playerentry As ListViewItem In Matchlist.Items
-                                 If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
-                                     FoundEntry = playerentry
-                                     Exit For
-                                 End If
-                                 FoundEntryID += 1
-                             Next
-                         End Sub)
+        Dim ListViewToUse As ListView = PlayerList
+        If Not Player.game = "None" Then ListViewToUse = Matchlist
+
+        Dim IconIndex = 0
+        If Not Player.game = "None" Then
+            Select Case Player.game.Split("|")(1).Split("-")(0)
+                Case "NA" : IconIndex = 0
+                Case "DC" : IconIndex = 1
+                Case "SS" : IconIndex = 2
+                Case "SG" : IconIndex = 3
+                Case "PSX" : IconIndex = 4
+                Case "NES" : IconIndex = 5
+                Case "SNES" : IconIndex = 6
+                Case "FDS" : IconIndex = 7
+                Case "NGP" : IconIndex = 8
+                Case "GBA" : IconIndex = 9
+                Case "GBC" : IconIndex = 10
+            End Select
+        End If
+
+        ListViewToUse.Invoke(Sub()
+                                 For Each playerentry As ListViewItem In ListViewToUse.Items
+                                     If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
+                                         FoundEntry = playerentry
+                                         Exit For
+                                     End If
+                                     FoundEntryID += 1
+                                 Next
+                             End Sub)
 
 
         If FoundEntry Is Nothing Then
 
-            Dim ItemNumber As Int16 = Matchlist.Items.Count
+            Dim ItemNumber As Int16 = ListViewToUse.Items.Count
             Dim PlayerInfo As ListViewItem = New ListViewItem(Player.name, Player.name)
+            PlayerInfo.ImageIndex = IconIndex
             PlayerInfo.SubItems.Add(Player.ip & ":" & Player.port)
             PlayerInfo.SubItems.Add("T/O")
             PlayerInfo.SubItems.Add(Player.game)
             PlayerInfo.SubItems.Add(Player.status)
-            PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
+            If ListViewToUse Is PlayerList Then
+                If Player.status = "Idle" Then
+                    PlayerInfo.Group = ListViewToUse.Groups(0)
+                Else
+                    PlayerInfo.Group = ListViewToUse.Groups(1)
+                End If
+            Else
+                PlayerInfo.Group = Nothing
+            End If
+
+
+            'PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
             PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
-            Matchlist.Invoke(Sub() Matchlist.Items.Add(PlayerInfo))
+            ListViewToUse.Invoke(Sub() ListViewToUse.Items.Add(PlayerInfo))
 
             If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
                 Try
@@ -1068,10 +1250,10 @@ Public Class frmMain
                             If My.Computer.Network.Ping(Player.ip) Then
                                 Thread.Sleep(250 + (250 * ItemNumber))
                                 Dim ping As PingReply = New Ping().Send(Player.ip)
-                                MainformRef.Matchlist.Invoke(
+                                ListViewToUse.Invoke(
                                 Sub()
                                     Try
-                                        MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = ping.RoundtripTime
+                                        ListViewToUse.Items(ItemNumber).SubItems(2).Text = ping.RoundtripTime
                                     Catch ex As Exception
 
                                     End Try
@@ -1087,16 +1269,17 @@ Public Class frmMain
 
                 End Try
             Else
-                MainformRef.Invoke(Sub() MainformRef.Matchlist.Items(ItemNumber).SubItems(2).Text = "0")
+                MainformRef.Invoke(Sub() ListViewToUse.Items(ItemNumber).SubItems(2).Text = "0")
 
             End If
 
 
         Else
-            Matchlist.Invoke(
+            ListViewToUse.Invoke(
                 Sub()
-                    Matchlist.Items(FoundEntryID).SubItems(0).Text = Player.name
-                    Matchlist.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
+                    ListViewToUse.Items(FoundEntryID).SubItems(0).Text = Player.name
+                    ListViewToUse.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
+
                 End Sub)
 
             If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
@@ -1106,10 +1289,10 @@ Public Class frmMain
                             If My.Computer.Network.Ping(Player.ip) Then
                                 Thread.Sleep(250 + (250 * FoundEntryID))
                                 Dim ping As PingReply = New Ping().Send(Player.ip)
-                                MainformRef.Matchlist.Invoke(
+                                ListViewToUse.Invoke(
                                 Sub()
                                     Try
-                                        MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = ping.RoundtripTime
+                                        ListViewToUse.Items(FoundEntryID).SubItems(2).Text = ping.RoundtripTime
                                     Catch ex As Exception
 
                                     End Try
@@ -1125,23 +1308,66 @@ Public Class frmMain
 
                 End Try
             Else
-                MainformRef.Invoke(Sub() MainformRef.Matchlist.Items(FoundEntryID).SubItems(2).Text = "0")
+                MainformRef.Invoke(Sub() ListViewToUse.Items(FoundEntryID).SubItems(2).Text = "0")
 
             End If
 
-            Matchlist.Invoke(
+            ListViewToUse.Invoke(
                 Sub()
-                    Matchlist.Items(FoundEntryID).SubItems(3).Text = Player.game
-                    Matchlist.Items(FoundEntryID).SubItems(4).Text = Player.status
+                    ListViewToUse.Items(FoundEntryID).SubItems(3).Text = Player.game
+                    ListViewToUse.Items(FoundEntryID).SubItems(4).Text = Player.status
+                    ListViewToUse.Items(FoundEntryID).ImageIndex = IconIndex
+
+                    If ListViewToUse Is PlayerList Then
+                        If Player.status = "Idle" Then
+                            ListViewToUse.Items(FoundEntryID).Group = ListViewToUse.Groups(0)
+                        Else
+                            ListViewToUse.Items(FoundEntryID).Group = ListViewToUse.Groups(1)
+
+                        End If
+                    Else
+                        ListViewToUse.Items(FoundEntryID).Group = Nothing
+                    End If
+
 
                 End Sub)
         End If
+
+        MainformRef.Invoke(Sub()
+                               ' Remove from the other list
+                               If ListViewToUse Is Matchlist Then
+
+                                   For Each playerentry As ListViewItem In PlayerList.Items
+                                       If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
+                                           PlayerList.Items.Remove(playerentry)
+                                           Exit For
+                                       End If
+                                   Next
+
+                               Else
+                                   For Each playerentry As ListViewItem In Matchlist.Items
+                                       If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
+                                           Matchlist.Items.Remove(playerentry)
+                                           Exit For
+                                       End If
+                                   Next
+                               End If
+
+                               'Matchlist.ListViewItemSorter = New ListViewItemComparer(1, SortOrder.Ascending)
+                               'Matchlist.Sorting = SortOrder.Ascending
+                               Matchlist.Sort()
+
+                               'PlayerList.ListViewItemSorter = New ListViewItemComparer(1, SortOrder.Ascending)
+                               'PlayerList.Sorting = SortOrder.Ascending
+                               PlayerList.Sort()
+                           End Sub)
+
 
     End Sub
 
     Public Delegate Sub BeingChallenged_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _hosting As String, ByVal _peripheral As String)
     Public Sub BeingChallenged(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _hosting As String, ByVal _peripheral As String)
-        ChallengeForm.StartChallenge(New NullDCPlayer(_name, _ip, _port, _game,, _peripheral))
+        ChallengeForm.StartChallenge(New BEARPlayer(_name, _ip, _port, _game,, _peripheral))
     End Sub
 
     ' Partner has terminated the session with a reason, or maybe you did with no reason etherway this handles it
@@ -1292,8 +1518,8 @@ Public Class frmMain
 
     End Sub
 
-    Public Delegate Sub OpenHostingPanel_delegate(ByRef _player As NullDCPlayer)
-    Public Sub OpenHostingPanel(Optional ByRef _player As NullDCPlayer = Nothing)
+    Public Delegate Sub OpenHostingPanel_delegate(ByRef _player As BEARPlayer)
+    Public Sub OpenHostingPanel(Optional ByRef _player As BEARPlayer = Nothing)
         HostingForm.BeginHost(_player)
     End Sub
 
@@ -1303,12 +1529,12 @@ Public Class frmMain
     Private xpos1 As Integer
     Private ypos1 As Integer
 
-    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown, BEARTitle.MouseDown, imgBeta.MouseDown, lbVer.MouseDown, TableLayoutPanel4.MouseDown
+    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown, lbVer.MouseDown, imgBeta.MouseDown, BEARTitle.MouseDown
         xpos1 = Control.MousePosition.X - Me.Location.X
         ypos1 = Control.MousePosition.Y - Me.Location.Y
     End Sub
 
-    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove, BEARTitle.MouseMove, imgBeta.MouseMove, lbVer.MouseMove, TableLayoutPanel4.MouseMove
+    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove, lbVer.MouseMove, imgBeta.MouseMove, BEARTitle.MouseMove
         If e.Button = MouseButtons.Left Then
             newpoint = Control.MousePosition
             newpoint.X -= (xpos1)
@@ -1320,7 +1546,7 @@ Public Class frmMain
 #End Region
 
 #Region "Button Clicks"
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         If Not Application.OpenForms().OfType(Of frmKeyMapperSDL).Any Then
             frmKeyMapperSDL.Show(Me)
         End If
@@ -1349,13 +1575,15 @@ Public Class frmMain
         If Not RefreshTimer.Enabled Then
             If StartTimer Then
                 Matchlist.Items.Clear()
+                PlayerList.Items.Clear()
                 RefreshTimer.Interval = 5000
                 RefreshTimer.Start()
+                SelectedPlayer = Nothing
             End If
             NetworkHandler.SendMessage("?,")
 
             Dim NameToSend As String = MainformRef.ConfigFile.Name
-            If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " Vs " & MainformRef.Challenger.name
+            If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " & " & MainformRef.Challenger.name
 
             Dim GameNameAndRomName = "None"
             If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
@@ -1366,7 +1594,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+    Private Sub btnExit_Click(sender As Object, e As EventArgs)
         For i = 0 To Application.OpenForms.Count - 1
             If i = 0 Then Continue For
             Application.OpenForms(i).Close()
@@ -1376,12 +1604,12 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimize.Click
+    Private Sub btnMinimize_Click(sender As Object, e As EventArgs)
         Me.WindowState() = FormWindowState.Minimized
 
     End Sub
 
-    Private Sub btnSetup_Click(sender As Object, e As EventArgs) Handles btnSetup.Click
+    Private Sub btnSetup_Click(sender As Object, e As EventArgs)
         If Not Application.OpenForms().OfType(Of frmSetup).Any Then
             frmSetup.Show(Me)
         End If
@@ -1399,23 +1627,24 @@ Public Class frmMain
             Exit Sub
         End If
 
-        If Matchlist.SelectedItems().Count = 0 Then
+        If SelectedPlayer Is Nothing Then
             NotificationForm.ShowMessage("You can't the fight wall, choose a player from the list")
             Exit Sub
         End If
 
-        If Matchlist.SelectedItems(0).SubItems(0).Text.Trim = ConfigFile.Name.Trim Then
+        If SelectedPlayer.name.StartsWith(ConfigFile.Name.Trim) Then
             NotificationForm.ShowMessage("I can't really help you with your inner demons if you want to fight yourself.")
             Exit Sub
+
         End If
 
         ' Check if player is already hosting, if they are then just join and skip all the checks
-        Dim c_name As String = Matchlist.SelectedItems(0).SubItems(0).Text
-        Dim c_ip As String = Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(0)
-        Dim c_port As String = Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(1)
-        Dim c_gamerom As String = Matchlist.SelectedItems(0).SubItems(3).Text
+        Dim c_name As String = SelectedPlayer.name
+        Dim c_ip As String = SelectedPlayer.ip
+        Dim c_port As String = SelectedPlayer.port
+        Dim c_gamerom As String = SelectedPlayer.game
         If Not c_gamerom = "None" Then c_gamerom = c_gamerom.Split("|")(1) ' Game is not None, so get what rom it is.
-        Dim c_status As String = Matchlist.SelectedItems(0).SubItems(4).Text
+        Dim c_status As String = SelectedPlayer.status
 
         Console.WriteLine("Challange: " & c_ip)
         ' Skip game Selection if person is already in a game, try to spectate instead.
@@ -1433,7 +1662,7 @@ Public Class frmMain
                 Exit Sub
             End If
 
-            Challenger = New NullDCPlayer(c_name, c_ip, c_port, c_gamerom)
+            Challenger = New BEARPlayer(c_name, c_ip, c_port, c_gamerom)
 
             ' Don't instantly spectate a DC game, get the VMU first
             If Not MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" Then
@@ -1442,7 +1671,7 @@ Public Class frmMain
 
             WaitingForm.Show()
         Else
-            GameSelectForm.StartChallenge(New NullDCPlayer(c_name, c_ip, c_port)) ' If they not hosting then just start choosing game to challenge them to
+            GameSelectForm.StartChallenge(New BEARPlayer(c_name, c_ip, c_port)) ' If they not hosting then just start choosing game to challenge them to
         End If
 
     End Sub
@@ -1470,17 +1699,14 @@ Public Class frmMain
 
     End Function
 
-    Private Sub Matchlist_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles Matchlist.MouseDoubleClick
-        TryToChallenge()
-    End Sub
-
     Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
 
-        Matchlist.Columns(0).Width = Matchlist.Width * 0.32
-        Matchlist.Columns(1).Width = 0
-        Matchlist.Columns(2).Width = Matchlist.Width * 0.11
-        Matchlist.Columns(3).Width = Matchlist.Width * 0.39
-        Matchlist.Columns(4).Width = Matchlist.Width * 0.18 - 25
+        Matchlist.Columns(0).Width = Matchlist.Width * 0.5 ' name
+        Matchlist.Columns(1).Width = 0 ' IP
+        Matchlist.Columns(2).Width = 50 ' Ping
+        Matchlist.Columns(3).Width = Matchlist.Width * 0.5 - 150 ' Game
+        Matchlist.Columns(4).Width = 75 ' Status
+        Matchlist.Columns(4).TextAlign = HorizontalAlignment.Right
 
         If Me.WindowState = FormWindowState.Minimized Then
             niBEAR.Visible = True
@@ -1500,7 +1726,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub btnReplay_Click(sender As Object, e As EventArgs) Handles btnReplay.Click
+    Private Sub btnReplay_Click(sender As Object, e As EventArgs)
         If Not Application.OpenForms().OfType(Of frmReplays).Any Then
             frmReplays.Show(Me)
         Else
@@ -1518,7 +1744,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub btnPatreon_Click(sender As Object, e As EventArgs) Handles btnPatreon.Click
+    Private Sub btnPatreon_Click(sender As Object, e As EventArgs)
         Process.Start("https://www.patreon.com/NullDCBEAR")
     End Sub
 
@@ -1539,13 +1765,118 @@ Public Class frmMain
         Process.Start("http://www.innersloth.com/gameAmongUs.php")
     End Sub
 
-    Private Sub btnDiscord_Click(sender As Object, e As EventArgs) Handles btnDiscord.Click
+    Private Sub btnDiscord_Click(sender As Object, e As EventArgs)
         Process.Start("https://discord.gg/u2YzdNB6SN")
+    End Sub
+
+    Private Sub ReplaysToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReplaysToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmReplays).Any Then
+            frmReplays.Show(Me)
+        Else
+            frmReplays.Focus()
+        End If
+    End Sub
+
+    Private Sub ControlsToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        If Not Application.OpenForms().OfType(Of frmKeyMapperSDL).Any Then
+            frmKeyMapperSDL.Show(Me)
+        End If
+
+    End Sub
+
+    Private Sub GeneralToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        If Not Application.OpenForms().OfType(Of frmSetup).Any Then
+            frmSetup.Show(Me)
+        End If
+
+    End Sub
+
+    Private Sub PlayerList_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles PlayerList.MouseDoubleClick, Matchlist.MouseDoubleClick
+        TryToChallenge()
+    End Sub
+
+    Private Sub Matchlist_MouseClick(sender As Object, e As EventArgs) Handles Matchlist.Click
+        If Matchlist.SelectedItems.Count = 0 Then
+            SelectedPlayer = Nothing
+        Else
+            PlayerList.SelectedItems.Clear()
+            SelectedPlayer = New BEARPlayer(Matchlist.SelectedItems(0).SubItems(0).Text,
+                                            Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(0),
+                                            Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(1),
+                                            Matchlist.SelectedItems(0).SubItems(3).Text,
+                                            Matchlist.SelectedItems(0).SubItems(4).Text)
+        End If
+
+    End Sub
+
+    Private Sub PlayerList_Click(sender As Object, e As EventArgs) Handles PlayerList.Click
+        If PlayerList.SelectedItems.Count = 0 Then
+            SelectedPlayer = Nothing
+        Else
+            Matchlist.SelectedItems.Clear()
+            SelectedPlayer = New BEARPlayer(PlayerList.SelectedItems(0).SubItems(0).Text,
+                                            PlayerList.SelectedItems(0).SubItems(1).Text.Split(":")(0),
+                                            PlayerList.SelectedItems(0).SubItems(1).Text.Split(":")(1),
+                                            PlayerList.SelectedItems(0).SubItems(3).Text,
+                                            PlayerList.SelectedItems(0).SubItems(4).Text)
+        End If
+
+    End Sub
+
+    Private Sub PlayerList_MouseDown(sender As Object, e As MouseEventArgs) Handles PlayerList.MouseDown
+        If Matchlist.SelectedItems.Count > 0 Then
+            SelectedPlayer = Nothing
+            Matchlist.SelectedItems.Clear()
+        End If
+
+    End Sub
+
+    Private Sub Matchlist_MouseDown(sender As Object, e As MouseEventArgs) Handles Matchlist.MouseDown
+        If PlayerList.SelectedItems.Count > 0 Then
+            SelectedPlayer = Nothing
+            PlayerList.SelectedItems.Clear()
+        End If
+
+    End Sub
+
+    Private Sub Matchlist_ItemSelectionChanged(sender As ListView, e As ListViewItemSelectionChangedEventArgs) Handles Matchlist.ItemSelectionChanged, PlayerList.ItemSelectionChanged
+        If Not sender.SelectedItems.Count > 0 Then
+            SelectedPlayer = Nothing
+        End If
+
+    End Sub
+
+    Private Sub ControlsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ControlsToolStripMenuItem1.Click
+        If Not Application.OpenForms().OfType(Of frmKeyMapperSDL).Any Then
+            frmKeyMapperSDL.Show(Me)
+        End If
+    End Sub
+
+    Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmSetup).Any Then
+            frmSetup.Show(Me)
+        End If
+    End Sub
+
+    Private Sub DiscordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscordToolStripMenuItem.Click
+        Process.Start("https://discord.gg/u2YzdNB6SN")
+    End Sub
+
+    Private Sub PatreonO3oToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatreonO3oToolStripMenuItem.Click
+        Process.Start("https://www.patreon.com/NullDCBEAR")
+    End Sub
+
+    Private Sub PingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PingToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub ChallengeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChallengeToolStripMenuItem.Click
+
     End Sub
 
 End Class
 
-Public Class NullDCPlayer
+Public Class BEARPlayer
     Public name As String
     Public ip As String
     Public port As String
@@ -1859,7 +2190,7 @@ Public Class Configs
                     If Not Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0).ToString.Replace(",", ".") & "|" & MainformRef.ConfigFile.Game
 
                     Dim NameToSend As String = Name
-                    If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " Vs " & MainformRef.Challenger.name
+                    If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " & " & MainformRef.Challenger.name
 
                     ' Delayed Task to hopefully remove some crashes related to this being send along with other message too quickly
                     Dim t As Task = New Task(Async Sub()
