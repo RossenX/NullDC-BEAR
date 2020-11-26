@@ -218,11 +218,13 @@ Module BEARTheme
     ' #9AD4D6
     ' #101935
 
-    Public PrimaryColor As Color = ColorTranslator.FromHtml("#564787")
-    Public SecondaryColor As Color = ColorTranslator.FromHtml("#DBCBD8")
-    Public TertiaryColor As Color = ColorTranslator.FromHtml("#F2FDFF")
+    Public PrimaryColor As Color = ColorTranslator.FromHtml("#202225")
+    Public PrimaryFontColor As Color = ColorTranslator.FromHtml("#FFFFFF")
 
-    Public ButtonBackground As Color = ColorTranslator.FromHtml("#9AD4D6")
+    Public SecondaryColor As Color = ColorTranslator.FromHtml("#2f3136")
+    Public TertiaryColor As Color = ColorTranslator.FromHtml("#36393f")
+
+    Public ButtonBackground As Color = ColorTranslator.FromHtml("#fec800")
 
 
 

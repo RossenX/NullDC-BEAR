@@ -24,8 +24,8 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Idle", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DND", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Idle", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DND", System.Windows.Forms.HorizontalAlignment.Center)
         Me.Matchlist = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -67,7 +67,6 @@ Partial Class frmMain
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
         Me.sus_i = New System.Windows.Forms.PictureBox()
-        Me.BEARTitle = New System.Windows.Forms.PictureBox()
         Me.OptionsToolStrip.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
@@ -78,7 +77,6 @@ Partial Class frmMain
         Me.MainMenuStrip.SuspendLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sus_i, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BEARTitle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Matchlist
@@ -261,16 +259,15 @@ Partial Class frmMain
         Me.PlayerList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9, Me.ColumnHeader10})
         Me.PlayerList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PlayerList.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerList.ForeColor = System.Drawing.Color.Black
         Me.PlayerList.FullRowSelect = True
         Me.PlayerList.GridLines = True
-        ListViewGroup3.Header = "Idle"
-        ListViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup3.Name = "Idle"
-        ListViewGroup4.Header = "DND"
-        ListViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup4.Name = "DND"
-        Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup3, ListViewGroup4})
+        ListViewGroup1.Header = "Idle"
+        ListViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup1.Name = "Idle"
+        ListViewGroup2.Header = "DND"
+        ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup2.Name = "DND"
+        Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2})
         Me.PlayerList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.PlayerList.HideSelection = False
         Me.PlayerList.Location = New System.Drawing.Point(10, 40)
@@ -498,7 +495,6 @@ Partial Class frmMain
         '
         Me.OptionsToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
         Me.OptionsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.OptionsToolStripMenuItem.ForeColor = System.Drawing.Color.Black
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 24)
         Me.OptionsToolStripMenuItem.Text = "Options"
@@ -523,36 +519,26 @@ Partial Class frmMain
         Me.imgBeta.BackColor = System.Drawing.Color.Transparent
         Me.imgBeta.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Beta
         Me.imgBeta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.imgBeta.Location = New System.Drawing.Point(775, -8)
+        Me.imgBeta.Location = New System.Drawing.Point(792, 1)
         Me.imgBeta.Margin = New System.Windows.Forms.Padding(0)
         Me.imgBeta.Name = "imgBeta"
-        Me.imgBeta.Size = New System.Drawing.Size(67, 34)
+        Me.imgBeta.Size = New System.Drawing.Size(48, 18)
         Me.imgBeta.TabIndex = 11
         Me.imgBeta.TabStop = False
         '
         'sus_i
         '
+        Me.sus_i.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sus_i.BackColor = System.Drawing.Color.Transparent
         Me.sus_i.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.sus
         Me.sus_i.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.sus_i.Location = New System.Drawing.Point(743, -1)
+        Me.sus_i.Location = New System.Drawing.Point(836, 34)
         Me.sus_i.Margin = New System.Windows.Forms.Padding(0)
         Me.sus_i.Name = "sus_i"
         Me.sus_i.Size = New System.Drawing.Size(32, 29)
         Me.sus_i.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.sus_i.TabIndex = 18
         Me.sus_i.TabStop = False
-        '
-        'BEARTitle
-        '
-        Me.BEARTitle.BackColor = System.Drawing.Color.Transparent
-        Me.BEARTitle.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.NullDCBEAR_Title
-        Me.BEARTitle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.BEARTitle.Location = New System.Drawing.Point(493, 0)
-        Me.BEARTitle.Name = "BEARTitle"
-        Me.BEARTitle.Size = New System.Drawing.Size(58, 26)
-        Me.BEARTitle.TabIndex = 17
-        Me.BEARTitle.TabStop = False
         '
         'frmMain
         '
@@ -562,7 +548,6 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(878, 517)
         Me.Controls.Add(Me.sus_i)
         Me.Controls.Add(Me.imgBeta)
-        Me.Controls.Add(Me.BEARTitle)
         Me.Controls.Add(Me.TableLayoutPanel2)
         Me.Controls.Add(Me.lbVer)
         Me.Controls.Add(Me.MainMenuStrip)
@@ -583,7 +568,6 @@ Partial Class frmMain
         Me.MainMenuStrip.PerformLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sus_i, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BEARTitle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -629,5 +613,4 @@ Partial Class frmMain
     Friend WithEvents DownloadRomToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents imgBeta As PictureBox
     Friend WithEvents sus_i As PictureBox
-    Friend WithEvents BEARTitle As PictureBox
 End Class

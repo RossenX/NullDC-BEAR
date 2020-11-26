@@ -69,13 +69,23 @@ Public Class frmMain
 
         ' Labels
         Label1.BackColor = BEARTheme.SecondaryColor
+        Label1.ForeColor = BEARTheme.PrimaryFontColor
+
         Label2.BackColor = BEARTheme.SecondaryColor
+        Label2.ForeColor = BEARTheme.PrimaryFontColor
+
         Label4.BackColor = BEARTheme.SecondaryColor
+        Label4.ForeColor = BEARTheme.PrimaryFontColor
 
         'MenyStrip
         MainMenuStrip.BackColor = BEARTheme.SecondaryColor
+        MainMenuStrip.ForeColor = BEARTheme.PrimaryFontColor
+
         lbVer.BackColor = BEARTheme.SecondaryColor
+        lbVer.ForeColor = BEARTheme.PrimaryFontColor
+
         imgBeta.BackColor = BEARTheme.SecondaryColor
+        sus_i.BackColor = BEARTheme.SecondaryColor
 
         cbStatus.BackColor = BEARTheme.ButtonBackground
 
@@ -188,7 +198,7 @@ Public Class frmMain
         ' Sus
         Randomize()
         Dim sus As Decimal = Rnd() * 10
-        If sus <= 1 Then
+        If sus <= 1 Or IsBeta Then
             sus_i.Visible = True
         Else
             sus_i.Visible = False
@@ -986,6 +996,8 @@ Public Class frmMain
             Dim GameName = ""
 
             Dim _it As New ListViewItem(GamesList(GamesList.Keys(i))(0).ToString)
+            _it.ForeColor = BEARTheme.PrimaryFontColor
+
             _it.SubItems.Add(GamesList.Keys(i).ToString)
             tmp2ListView.Items.Add(_it)
         Next
@@ -1228,6 +1240,7 @@ Public Class frmMain
             PlayerInfo.SubItems.Add("T/O")
             PlayerInfo.SubItems.Add(Player.game)
             PlayerInfo.SubItems.Add(Player.status)
+
             If ListViewToUse Is PlayerList Then
                 If Player.status = "Idle" Then
                     PlayerInfo.Group = ListViewToUse.Groups(0)
@@ -1240,7 +1253,7 @@ Public Class frmMain
 
 
             'PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
-            PlayerInfo.ForeColor = Color.FromArgb(1, 5, 5, 5)
+            PlayerInfo.ForeColor = BEARTheme.PrimaryFontColor
             ListViewToUse.Invoke(Sub() ListViewToUse.Items.Add(PlayerInfo))
 
             If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
@@ -1529,12 +1542,12 @@ Public Class frmMain
     Private xpos1 As Integer
     Private ypos1 As Integer
 
-    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown, lbVer.MouseDown, imgBeta.MouseDown, BEARTitle.MouseDown
+    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown, lbVer.MouseDown, imgBeta.MouseDown
         xpos1 = Control.MousePosition.X - Me.Location.X
         ypos1 = Control.MousePosition.Y - Me.Location.Y
     End Sub
 
-    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove, lbVer.MouseMove, imgBeta.MouseMove, BEARTitle.MouseMove
+    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove, lbVer.MouseMove, imgBeta.MouseMove
         If e.Button = MouseButtons.Left Then
             newpoint = Control.MousePosition
             newpoint.X -= (xpos1)
