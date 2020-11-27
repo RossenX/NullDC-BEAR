@@ -5,6 +5,24 @@
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
+
+
+        GameSelectContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
+        Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+
+        btnCancel.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnCancel.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+
+        btnLetsGo.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnLetsGo.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+
+        cbDelay.BackColor = BEARTheme.LoadColor(ThemeKeys.DropdownColor)
+        cbDelay.ForeColor = BEARTheme.LoadColor(ThemeKeys.DropdownFontColor)
+
+        Label2.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label3.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label4.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
     End Sub
 
     Public Sub StartChallenge(Optional ByVal _challenger As BEARPlayer = Nothing)
@@ -82,7 +100,7 @@
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
         MainformRef.Focus()
     End Sub

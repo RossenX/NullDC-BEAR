@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Drawing.Drawing2D
+Imports System.IO
 Imports System.Net.NetworkInformation
 Imports System.Text
 Imports System.Threading
@@ -211,24 +212,74 @@ End Module
 
 Module BEARTheme
 
-    Public BEARLogo As Image = My.Resources.NullDCBEAR_Title
-    ' #564787
-    ' #DBCBD8
-    ' #F2FDFF
-    ' #9AD4D6
-    ' #101935
 
-    Public PrimaryColor As Color = ColorTranslator.FromHtml("#202225")
-    Public PrimaryFontColor As Color = ColorTranslator.FromHtml("#FFFFFF")
+    Enum ThemeKeys
+        PrimaryColor
+        PrimaryFontColor
+        PrimaryFontSize
+        SecondaryColor
+        SecondaryFontColor
+        SecondaryFontSize
+        TertiaryColor
+        TertiaryFontColor
+        TertiaryFontSize
+        ButtonColor
+        ButtonFontColor
+        ButtonFontSize
+        DropdownColor
+        DropdownFontColor
+        DropdownFontSize
+        MenuStripColor
+        MenuStripHighlightColor
+        MenuStripFontColor
+        LogoImage
+        PlayersListBackgroundImage
+        MatchesListBackgroundImage
+        HostBackgroundImage
+        WaitBackgroundImage
+        ReplyBackgroundImage
+        ChallBackgroundImage
+        MenuStripFontSize
+        MainMenuBackground
 
-    Public SecondaryColor As Color = ColorTranslator.FromHtml("#2f3136")
-    Public TertiaryColor As Color = ColorTranslator.FromHtml("#36393f")
+    End Enum
 
-    Public ButtonBackground As Color = ColorTranslator.FromHtml("#fec800")
+    Public Theme As New Dictionary(Of String, String)
 
+    Public Function LoadSize(ByVal _font As ThemeKeys) As Single
+        If Theme.ContainsKey(_font.ToString().ToLower) Then
+            If Not Theme(_font.ToString().ToLower) = "" Then
+                Return CDec(Theme(_font.ToString().ToLower))
+            Else
+                Return 8.2
+            End If
+        Else
+            Return 8.2
+        End If
 
+    End Function
 
+    Public Function LoadColor(ByVal _color As ThemeKeys) As Color
+        If Theme.ContainsKey(_color.ToString().ToLower) Then
+            If Not Theme(_color.ToString().ToLower) = "" Then
+                Return ColorTranslator.FromHtml(Theme(_color.ToString().ToLower))
+            Else
+                Return Color.FromArgb(255, 0, 255)
+            End If
+        Else
+            Return Color.FromArgb(255, 0, 255)
+        End If
 
+    End Function
+
+    Public Function LoadImage(ByVal _image As ThemeKeys) As Image
+        If Theme.ContainsKey(_image.ToString.ToLower) Then
+            Return Bitmap.FromFile(MainformRef.NullDCPath & "\themes\default\images\" & Theme(_image.ToString.ToLower))
+        Else
+            Return Nothing
+        End If
+
+    End Function
 
 End Module
 
@@ -262,3 +313,29 @@ Class ListViewItemComparer
         Return returnVal
     End Function
 End Class
+
+Public Class MenuStripRenderer : Inherits ToolStripProfessionalRenderer
+
+    Protected Overrides Sub OnRenderMenuItemBackground(ByVal e As System.Windows.Forms.ToolStripItemRenderEventArgs)
+        If e.Item.Selected Then
+            Dim rc As New Rectangle(Point.Empty, e.Item.Size)
+            Dim Pen = New Pen(BEARTheme.LoadColor(ThemeKeys.SecondaryColor), 2)
+            Pen.Alignment = PenAlignment.Inset
+
+            'Set the highlight color
+            e.Graphics.FillRectangle(New SolidBrush(BEARTheme.LoadColor(ThemeKeys.MenuStripHighlightColor)), rc)
+            'e.Graphics.DrawRectangle(Pens.Beige, 1, 0, rc.Width - 2, rc.Height - 1)
+        Else
+            Dim rc As New Rectangle(Point.Empty, e.Item.Size)
+            Dim Pen = New Pen(BEARTheme.LoadColor(ThemeKeys.SecondaryColor), 2)
+            Pen.Alignment = PenAlignment.Inset
+
+            'Set the default color
+            e.Graphics.FillRectangle(New SolidBrush(BEARTheme.LoadColor(ThemeKeys.MenuStripColor)), rc)
+            'e.Graphics.DrawRectangle(Pens.Gray, 1, 0, rc.Width - 2, rc.Height - 1)
+
+        End If
+    End Sub
+
+End Class
+

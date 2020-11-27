@@ -26,6 +26,31 @@ Public Class frmDLC
     Dim DownloadSize = 0
     Dim Downloaded = 0
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        DLCContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
+
+        Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+
+        btnDownload.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnDownload.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnDownload.Font = New Font(btnDownload.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        btnRomsFolder.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnRomsFolder.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnRomsFolder.Font = New Font(btnRomsFolder.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        btnClose.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnClose.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnClose.Font = New Font(btnClose.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+    End Sub
+
     Private Sub frmDLC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToParent()
@@ -116,14 +141,16 @@ Public Class frmDLC
             Dim TabName = _lines(3).Split("=")(1)
 
             tc_games.TabPages.Add(TabName)
-            tc_games.TabPages.Item(tc_games.TabCount - 1).BackColor = Color.FromArgb(250, 200, 0)
+            tc_games.TabPages.Item(tc_games.TabCount - 1).BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
+            tc_games.TabPages.Item(tc_games.TabCount - 1).ForeColor = BEARTheme.LoadColor(ThemeKeys.TertiaryFontColor)
 
             Dim tmpListView As New ListView
             tmpListView.Dock = DockStyle.Fill
             tmpListView.MultiSelect = False
             tmpListView.View = View.Details
             tmpListView.HeaderStyle = ColumnHeaderStyle.None
-            tmpListView.BackColor = Color.FromArgb(250, 200, 0)
+            tmpListView.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
+            tmpListView.ForeColor = BEARTheme.LoadColor(ThemeKeys.TertiaryFontColor)
             tmpListView.FullRowSelect = True
             tmpListView.Parent = tc_games.TabPages.Item(tc_games.TabCount - 1)
 
@@ -372,7 +399,7 @@ Public Class frmDLC
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
 
     End Sub

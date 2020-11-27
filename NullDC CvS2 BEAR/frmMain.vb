@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.75b" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.80" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -37,6 +37,19 @@ Public Class frmMain
 
     Dim needsUpdate As Boolean = False
 
+    Private Sub LoadThemeVariable(ByVal _line As String, ByVal _stringname As String, ByRef _var As Object)
+        If _stringname.ToLower.EndsWith("color") Then
+            If Not _line.Split("=")(1).Trim = "" Then
+                _var = ColorTranslator.FromHtml(_line.Split("=")(1))
+            End If
+        ElseIf _stringname.ToLower.EndsWith("image") Then
+            If Not _line.Split("=")(1).Trim = "" Then
+                _var = _line.Split("=")(1).Trim
+            End If
+        End If
+
+    End Sub
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -44,6 +57,65 @@ Public Class frmMain
 
         ' Add any initialization after the InitializeComponent() call.
 
+        ' Theme Stuff
+        ' Load The Theme Stuff
+        Rx.MainformRef = Me
+
+        Try
+            For Each _line In File.ReadAllLines(NullDCPath & "\themes\default\Scheme.BearTheme")
+
+                If Not _line.StartsWith("//") And _line.Trim.Length > 0 Then
+                    BEARTheme.Theme.Add(_line.Split("=")(0).ToLower, _line.Split("=")(1))
+                End If
+            Next
+
+        Catch ex As Exception
+            MsgBox("Error Loading Theme: " & ex.Message)
+        End Try
+
+        MainMenuContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
+        'MainMenuContainer.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.MainMenuBackground)
+
+        PlayerList.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        Matchlist.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
+
+        ' Buttons
+        BtnJoin.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnOffline.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnSearch.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+
+        BtnJoin.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnOffline.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnSearch.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+
+        BtnJoin.Font = New Font(BtnJoin.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+        btnOffline.Font = New Font(btnOffline.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+        btnSearch.Font = New Font(btnSearch.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        ' Labels
+        Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label1.Font = New Font(Label1.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
+
+        Label2.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        Label2.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label2.Font = New Font(Label2.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
+
+        'MenuStrip
+        MainMenuStrip.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
+        MainMenuStrip.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
+        MainMenuStrip.Renderer = New MenuStripRenderer
+        MainMenuStrip.Font = New Font(MainMenuStrip.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
+
+        lbVer.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        lbVer.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+
+        imgBeta.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        sus_i.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+
+        cbStatus.BackColor = BEARTheme.LoadColor(ThemeKeys.DropdownColor)
+        cbStatus.ForeColor = BEARTheme.LoadColor(ThemeKeys.DropdownFontColor)
+        cbStatus.Font = New Font(cbStatus.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.DropdownFontSize))
     End Sub
 
 
@@ -54,53 +126,7 @@ Public Class frmMain
         niBEAR.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToScreen()
 
-        ' Theme Stuff
-
-        Me.BackColor = BEARTheme.PrimaryColor
-
-        PlayerList.BackColor = BEARTheme.SecondaryColor
-        Matchlist.BackColor = BEARTheme.TertiaryColor
-
-        ' Buttons
-        btnDLC.BackColor = BEARTheme.ButtonBackground
-        BtnJoin.BackColor = BEARTheme.ButtonBackground
-        btnOffline.BackColor = BEARTheme.ButtonBackground
-        btnSearch.BackColor = BEARTheme.ButtonBackground
-
-        ' Labels
-        Label1.BackColor = BEARTheme.SecondaryColor
-        Label1.ForeColor = BEARTheme.PrimaryFontColor
-
-        Label2.BackColor = BEARTheme.SecondaryColor
-        Label2.ForeColor = BEARTheme.PrimaryFontColor
-
-        Label4.BackColor = BEARTheme.SecondaryColor
-        Label4.ForeColor = BEARTheme.PrimaryFontColor
-
-        'MenyStrip
-        MainMenuStrip.BackColor = BEARTheme.SecondaryColor
-        MainMenuStrip.ForeColor = BEARTheme.PrimaryFontColor
-
-        lbVer.BackColor = BEARTheme.SecondaryColor
-        lbVer.ForeColor = BEARTheme.PrimaryFontColor
-
-        imgBeta.BackColor = BEARTheme.SecondaryColor
-        sus_i.BackColor = BEARTheme.SecondaryColor
-
-        cbStatus.BackColor = BEARTheme.ButtonBackground
-
-
-
-
-
-
-
-
-
-
-
         imgBeta.Visible = IsBeta
-        Rx.MainformRef = Me
         lbVer.Text = Ver
 
         If Not IsBeta Then
@@ -974,7 +1000,7 @@ Public Class frmMain
                 tmpListView.MultiSelect = False
                 tmpListView.View = View.Details
                 tmpListView.HeaderStyle = ColumnHeaderStyle.None
-                tmpListView.BackColor = Color.FromArgb(250, 200, 0)
+                tmpListView.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
                 tmpListView.FullRowSelect = True
                 tmpListView.Parent = TabControl.TabPages.Item(TabControl.TabCount - 1)
 
@@ -996,7 +1022,7 @@ Public Class frmMain
             Dim GameName = ""
 
             Dim _it As New ListViewItem(GamesList(GamesList.Keys(i))(0).ToString)
-            _it.ForeColor = BEARTheme.PrimaryFontColor
+            _it.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
 
             _it.SubItems.Add(GamesList.Keys(i).ToString)
             tmp2ListView.Items.Add(_it)
@@ -1253,7 +1279,9 @@ Public Class frmMain
 
 
             'PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
-            PlayerInfo.ForeColor = BEARTheme.PrimaryFontColor
+            PlayerInfo.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+            PlayerInfo.Font = New Font(PlayerInfo.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.SecondaryFontSize))
+
             ListViewToUse.Invoke(Sub() ListViewToUse.Items.Add(PlayerInfo))
 
             If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
@@ -1748,7 +1776,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub btnDLC_Click(sender As Object, e As EventArgs) Handles btnDLC.Click
+    Private Sub btnDLC_Click(sender As Object, e As EventArgs)
         If Not Application.OpenForms().OfType(Of frmDLC).Any Then
             frmDLC.Show(Me)
         Else
@@ -1887,6 +1915,13 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub FreeDLCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FreeDLCToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmDLC).Any Then
+            frmDLC.Show(Me)
+        Else
+            frmDLC.Focus()
+        End If
+    End Sub
 End Class
 
 Public Class BEARPlayer

@@ -344,6 +344,7 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\MainMenuBackground1.png" />
     <None Include="Resources\System Icons\icon_PSX.png" />
     <None Include="Resources\System Icons\icon_NES.png" />
     <None Include="Resources\System Icons\icon_GBC.png" />
