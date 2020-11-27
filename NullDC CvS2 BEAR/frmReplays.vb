@@ -3,6 +3,46 @@
 Public Class frmReplays
     Dim OpenFileDialog As New OpenFileDialog
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+        Me.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
+
+        TableLayoutPanel1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        lvReplays.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
+
+        btnClose.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnClose.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnClose.Font = New Font(btnClose.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        btnFolder.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnFolder.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnFolder.Font = New Font(btnFolder.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        btnOpen.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnOpen.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnOpen.Font = New Font(btnOpen.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        btnDelete.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnDelete.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnDelete.Font = New Font(btnDelete.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        btnPlay.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnPlay.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnPlay.Font = New Font(btnPlay.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label2.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label3.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label4.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label5.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+
+    End Sub
+
     Private Sub frmReplays_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToParent()
@@ -37,6 +77,9 @@ Public Class frmReplays
                 listviewItem.SubItems.Add(FileStringSplitUp(2))
                 listviewItem.SubItems.Add(FileStringSplitUp(3) & "|" & FileStringSplitUp(4))
                 listviewItem.SubItems.Add(FileStringSplitUp(6))
+                listviewItem.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
+                listviewItem.ForeColor = BEARTheme.LoadColor(ThemeKeys.TertiaryFontColor)
+                listviewItem.Font = New Font(listviewItem.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.TertiaryFontSize))
                 lvReplays.Items.Add(listviewItem)
             Catch ex As Exception
 
@@ -60,7 +103,7 @@ Public Class frmReplays
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnFolder.Click
         If Not Directory.Exists(MainformRef.NullDCPath & "\replays") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\replays")
         Process.Start(MainformRef.NullDCPath & "\replays")
 
@@ -139,7 +182,7 @@ Public Class frmReplays
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
         MainformRef.Focus()
 

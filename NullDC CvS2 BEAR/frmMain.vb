@@ -15,8 +15,10 @@ Public Class frmMain
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
-    Public NullDCLauncher As NullDCLauncher
+
+    Public NullDCLauncher As New NullDCLauncher
     Public MednafenLauncher As New MednafenLauncher
+
     Public NullDCPath As String = Application.StartupPath
     Public GamesList As New Dictionary(Of String, Array)
     Public ConfigFile As Configs
@@ -31,24 +33,10 @@ Public Class frmMain
     Public Challenger As BEARPlayer
     Private RefreshTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
     Private FormLoaded As Boolean = False
-    Public FinishedLoading As Boolean = False
 
     Dim SelectedPlayer As BEARPlayer
 
     Dim needsUpdate As Boolean = False
-
-    Private Sub LoadThemeVariable(ByVal _line As String, ByVal _stringname As String, ByRef _var As Object)
-        If _stringname.ToLower.EndsWith("color") Then
-            If Not _line.Split("=")(1).Trim = "" Then
-                _var = ColorTranslator.FromHtml(_line.Split("=")(1))
-            End If
-        ElseIf _stringname.ToLower.EndsWith("image") Then
-            If Not _line.Split("=")(1).Trim = "" Then
-                _var = _line.Split("=")(1).Trim
-            End If
-        End If
-
-    End Sub
 
     Public Sub New()
 
@@ -61,67 +49,17 @@ Public Class frmMain
         ' Load The Theme Stuff
         Rx.MainformRef = Me
 
-        Try
-            For Each _line In File.ReadAllLines(NullDCPath & "\themes\default\Scheme.BearTheme")
 
-                If Not _line.StartsWith("//") And _line.Trim.Length > 0 Then
-                    BEARTheme.Theme.Add(_line.Split("=")(0).ToLower, _line.Split("=")(1))
-                End If
-            Next
 
-        Catch ex As Exception
-            MsgBox("Error Loading Theme: " & ex.Message)
-        End Try
 
-        MainMenuContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-        'MainMenuContainer.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.MainMenuBackground)
 
-        PlayerList.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        Matchlist.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
-
-        ' Buttons
-        BtnJoin.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
-        btnOffline.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
-        btnSearch.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
-
-        BtnJoin.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
-        btnOffline.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
-        btnSearch.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
-
-        BtnJoin.Font = New Font(BtnJoin.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
-        btnOffline.Font = New Font(btnOffline.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
-        btnSearch.Font = New Font(btnSearch.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
-
-        ' Labels
-        Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
-        Label1.Font = New Font(Label1.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
-
-        Label2.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        Label2.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
-        Label2.Font = New Font(Label2.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
-
-        'MenuStrip
-        MainMenuStrip.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
-        MainMenuStrip.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
-        MainMenuStrip.Renderer = New MenuStripRenderer
-        MainMenuStrip.Font = New Font(MainMenuStrip.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
-
-        lbVer.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        lbVer.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-
-        imgBeta.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        sus_i.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-
-        cbStatus.BackColor = BEARTheme.LoadColor(ThemeKeys.DropdownColor)
-        cbStatus.ForeColor = BEARTheme.LoadColor(ThemeKeys.DropdownFontColor)
-        cbStatus.Font = New Font(cbStatus.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.DropdownFontSize))
     End Sub
 
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "mednafen-server.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
+
         Me.Icon = My.Resources.NewNullDCBearIcon
         niBEAR.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToScreen()
@@ -163,16 +101,24 @@ Public Class frmMain
             End If
         End If
 
+
+
+        ConfigFile = New Configs(NullDCPath)
+
+        LoadThemeSettings()
+        LoadTheme()
+
         ChallengeSentForm = New frmChallengeSent(Me)
         HostingForm = New frmHostPanel(Me)
         GameSelectForm = New frmChallengeGameSelect(Me)
         WaitingForm = New frmWaitingForHost
         NotificationForm = New frmNotification(Me)
+        NetworkHandler = New NetworkHandling(Me)
 
         CheckFilesAndShit()
 
-        ConfigFile = New Configs(NullDCPath)
-        cbStatus.Text = ConfigFile.Status
+        ' This needs to be created after updating, becuase of NAUDIO
+        ChallengeForm = New frmChallenge(Me)
 
         Try
             ' Check SDL Version Swap
@@ -203,32 +149,16 @@ Public Class frmMain
         AddHandler UpdateCheckClient.DownloadStringCompleted, AddressOf UpdateCheckResult
         CheckForUpdate()
 
-        ' Create all the usual shit
-        ChallengeForm = New frmChallenge(Me)
-        'InputHandler = New InputHandling(Me)
-        NetworkHandler = New NetworkHandling(Me)
-        'KeyMappingForm = New frmKeyMapping(Me)
-        NullDCLauncher = New NullDCLauncher
-        ' 
-
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
 
-        If GamesList.Count = 0 Then
-            NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
-        End If
+        If GamesList.Count = 0 Then NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
 
         CreateRomFolderWatcher()
         RefreshPlayerList(False)
 
         ' Sus
-        Randomize()
-        Dim sus As Decimal = Rnd() * 10
-        If sus <= 1 Or IsBeta Then
-            sus_i.Visible = True
-        Else
-            sus_i.Visible = False
-        End If
+        Randomize() : Dim sus As Decimal = Rnd() * 10 : If sus <= 1 Or IsBeta Then : sus_i.Visible = True : Else : sus_i.Visible = False : End If
 
         AddPlayerToList(New BEARPlayer("Tester vs some other guy or some ", "123.123.123.1", "40631", "Capcom vs snk|NA-SHUT.zip", "Hosting"))
         AddPlayerToList(New BEARPlayer("Tester2", "123.123.123.2", "40631"))
@@ -238,13 +168,76 @@ Public Class frmMain
         AddPlayerToList(New BEARPlayer("Tester6", "123.123.123.6", "40631"))
         AddPlayerToList(New BEARPlayer("Tester7", "123.123.123.7", "40631"))
 
-        Console.WriteLine(sus)
-        FinishedLoading = True
+        cbStatus.Text = ConfigFile.Status
 
     End Sub
 
-    Dim RomFolderWatcher As FileSystemWatcher
-    Dim RomFolderWatcher_Dreamcast As FileSystemWatcher
+    Private Sub LoadThemeSettings()
+        Try
+            If Not File.Exists(NullDCPath & "\themes\" & ConfigFile.Theme & "\Scheme.BearTheme") Then
+                MsgBox("Couldn't find theme file")
+                Exit Sub
+            End If
+
+            For Each _line In File.ReadAllLines(NullDCPath & "\themes\" & ConfigFile.Theme & "\Scheme.BearTheme")
+
+                If Not _line.StartsWith("//") And _line.Trim.Length > 0 Then
+                    BEARTheme.Theme.Add(_line.Split("=")(0).ToLower, _line.Split("=")(1))
+                End If
+            Next
+
+        Catch ex As Exception
+            MsgBox("Error Loading Theme: " & ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub LoadTheme()
+
+        MainMenuContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
+
+        PlayerList.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        Matchlist.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
+
+        ' Buttons
+        BtnJoin.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnOffline.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+        btnSearch.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
+
+        BtnJoin.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnOffline.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        btnSearch.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+
+        BtnJoin.Font = New Font(BtnJoin.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+        btnOffline.Font = New Font(btnOffline.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+        btnSearch.Font = New Font(btnSearch.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        ' Labels
+        Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label1.Font = New Font(Label1.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
+
+        Label2.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        Label2.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+        Label2.Font = New Font(Label2.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
+
+        'MenuStrip
+        MainMenuStrip.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
+        MainMenuStrip.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
+        MainMenuStrip.Renderer = New MenuStripRenderer
+        MainMenuStrip.Font = New Font(MainMenuStrip.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
+
+        lbVer.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        lbVer.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+
+        imgBeta.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        sus_i.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+
+        cbStatus.BackColor = BEARTheme.LoadColor(ThemeKeys.DropdownColor)
+        cbStatus.ForeColor = BEARTheme.LoadColor(ThemeKeys.DropdownFontColor)
+        cbStatus.Font = New Font(cbStatus.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.DropdownFontSize))
+
+    End Sub
 
     Private Sub CreateRomFolderWatcher()
 
@@ -1954,7 +1947,7 @@ Public Class Configs
     Private _status As String = "Idle"
     Private _delay As Int16 = 1
     Private _game As String = "None"
-    Private _ver As String = frmMain.Ver
+    Private _ver As String = MainformRef.Ver
     Private _keyprofile As String = "Default"
     Private _recordreplay As Int16 = 0
     Private _ReplayFile As String = ""
@@ -1969,6 +1962,7 @@ Public Class Configs
     Private _ShowGameNameInTitle As Int16 = 1
     Private _sdlversopm As String = "Dev"
     Private _vsync As Int16 = 0
+    Private _theme As String = "default"
 
 #Region "Properties"
 
@@ -2196,6 +2190,15 @@ Public Class Configs
 
     End Property
 
+    Public Property Theme() As String
+        Get
+            Return _theme
+        End Get
+        Set(ByVal value As String)
+            _theme = value
+        End Set
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -2225,7 +2228,8 @@ Public Class Configs
                 "VsNames=" & VsNames,
                 "ShowGameNameInTitle=" & ShowGameNameInTitle,
                 "SDLVersion=" & SDLVersion,
-                "Vsync=" & Vsync
+                "Vsync=" & Vsync,
+                "Theme=" & Theme
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -2264,35 +2268,36 @@ Public Class Configs
             Dim lines() As String = File.ReadAllLines(thefile)
             Dim tmpVersion = ""
             For Each line As String In lines
-                If line.StartsWith("Version") Then tmpVersion = line.Split("=")(1).Trim
-                If line.StartsWith("Name") Then Name = line.Split("=")(1).Trim
-                If line.StartsWith("Network") Then Network = line.Split("=")(1).Trim
-                If line.StartsWith("Port") Then Port = line.Split("=")(1).Trim
-                If line.StartsWith("Reclaw") Then UseRemap = line.Split("=")(1).Trim
-                If line.StartsWith("Host") Then Host = line.Split("=")(1).Trim
-                If line.StartsWith("Delay") Then Delay = line.Split("=")(1).Trim
-                If line.StartsWith("KeyProfile") Then KeyMapProfile = line.Split("=")(1).Trim
-                If line.StartsWith("RecordReplay") Then RecordReplay = line.Split("=")(1).Trim
-                If line.StartsWith("ReplayFile") Then ReplayFile = line.Split("=")(1).Trim
-                If line.StartsWith("AllowSpectators") Then AllowSpectators = line.Split("=")(1).Trim
-                If line.StartsWith("AwayStatus") Then
+                If line.StartsWith("Version=") Then tmpVersion = line.Split("=")(1).Trim
+                If line.StartsWith("Name=") Then Name = line.Split("=")(1).Trim
+                If line.StartsWith("Network=") Then Network = line.Split("=")(1).Trim
+                If line.StartsWith("Port=") Then Port = line.Split("=")(1).Trim
+                If line.StartsWith("Reclaw=") Then UseRemap = line.Split("=")(1).Trim
+                If line.StartsWith("Host=") Then Host = line.Split("=")(1).Trim
+                If line.StartsWith("Delay=") Then Delay = line.Split("=")(1).Trim
+                If line.StartsWith("KeyProfile=") Then KeyMapProfile = line.Split("=")(1).Trim
+                If line.StartsWith("RecordReplay=") Then RecordReplay = line.Split("=")(1).Trim
+                If line.StartsWith("ReplayFile=") Then ReplayFile = line.Split("=")(1).Trim
+                If line.StartsWith("AllowSpectators=") Then AllowSpectators = line.Split("=")(1).Trim
+                If line.StartsWith("AwayStatus=") Then
                     AwayStatus = line.Split("=")(1).Trim
                     Status = line.Split("=")(1).Trim
                 End If
 
-                If line.StartsWith("Volume") Then
+                If line.StartsWith("Volume=") Then
                     Volume = line.Split("=")(1).Trim
                     EmulatorVolume = line.Split("=")(1).Trim
                 End If
 
-                If line.StartsWith("eVolume") Then EmulatorVolume = line.Split("=")(1).Trim
-                If line.StartsWith("ShowConsole") Then ShowConsole = line.Split("=")(1).Trim
-                If line.StartsWith("Peripheral") Then Peripheral = line.Split("=")(1).Trim
-                If line.StartsWith("WindowSettings") Then WindowSettings = line.Split("=")(1).Trim
-                If line.StartsWith("VsNames") Then VsNames = line.Split("=")(1).Trim
-                If line.StartsWith("ShowGameNameInTitle") Then ShowGameNameInTitle = line.Split("=")(1).Trim
-                If line.StartsWith("SDLVersion") Then SDLVersion = line.Split("=")(1).Trim
-                If line.StartsWith("Vsync") Then Vsync = line.Split("=")(1).Trim
+                If line.StartsWith("eVolume=") Then EmulatorVolume = line.Split("=")(1).Trim
+                If line.StartsWith("ShowConsole=") Then ShowConsole = line.Split("=")(1).Trim
+                If line.StartsWith("Peripheral=") Then Peripheral = line.Split("=")(1).Trim
+                If line.StartsWith("WindowSettings=") Then WindowSettings = line.Split("=")(1).Trim
+                If line.StartsWith("VsNames=") Then VsNames = line.Split("=")(1).Trim
+                If line.StartsWith("ShowGameNameInTitle=") Then ShowGameNameInTitle = line.Split("=")(1).Trim
+                If line.StartsWith("SDLVersion=") Then SDLVersion = line.Split("=")(1).Trim
+                If line.StartsWith("Vsync=") Then Vsync = line.Split("=")(1).Trim
+                If line.StartsWith("Theme=") Then Theme = line.Split("=")(1).Trim
             Next
 
             Game = "None"

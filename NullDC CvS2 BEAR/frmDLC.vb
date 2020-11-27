@@ -34,9 +34,6 @@ Public Class frmDLC
         ' Add any initialization after the InitializeComponent() call.
         DLCContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
 
-        Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-
         btnDownload.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
         btnDownload.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
         btnDownload.Font = New Font(btnDownload.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
@@ -48,6 +45,11 @@ Public Class frmDLC
         btnClose.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
         btnClose.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
         btnClose.Font = New Font(btnClose.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+
+        MenuStrip1.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
+        MenuStrip1.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
+        MenuStrip1.Font = New Font(MenuStrip1.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
+        MenuStrip1.Renderer = New MenuStripRenderer
 
     End Sub
 

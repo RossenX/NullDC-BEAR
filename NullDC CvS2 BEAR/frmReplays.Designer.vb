@@ -30,10 +30,10 @@ Partial Class frmReplays
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnOn = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnFolder = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnPlay = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -47,7 +47,7 @@ Partial Class frmReplays
         '
         Me.btnOpen.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnOpen.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnOpen.Location = New System.Drawing.Point(398, 263)
+        Me.btnOpen.Location = New System.Drawing.Point(384, 264)
         Me.btnOpen.Name = "btnOpen"
         Me.btnOpen.Size = New System.Drawing.Size(75, 23)
         Me.btnOpen.TabIndex = 0
@@ -57,7 +57,7 @@ Partial Class frmReplays
         'lvReplays
         '
         Me.lvReplays.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lvReplays.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lvReplays.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvReplays.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.TableLayoutPanel1.SetColumnSpan(Me.lvReplays, 4)
         Me.lvReplays.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
@@ -109,16 +109,16 @@ Partial Class frmReplays
         Me.btnOn.Text = "ON"
         Me.btnOn.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnFolder
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Location = New System.Drawing.Point(479, 262)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(87, 23)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Replays Folder"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnFolder.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnFolder.Location = New System.Drawing.Point(465, 264)
+        Me.btnFolder.Name = "btnFolder"
+        Me.btnFolder.Size = New System.Drawing.Size(101, 23)
+        Me.btnFolder.TabIndex = 3
+        Me.btnFolder.Text = "Replays Folder"
+        Me.btnFolder.UseVisualStyleBackColor = False
         '
         'Label1
         '
@@ -133,27 +133,27 @@ Partial Class frmReplays
         '
         Me.btnPlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnPlay.Location = New System.Drawing.Point(572, 262)
+        Me.btnPlay.Location = New System.Drawing.Point(572, 264)
         Me.btnPlay.Name = "btnPlay"
         Me.btnPlay.Size = New System.Drawing.Size(75, 23)
         Me.btnPlay.TabIndex = 6
         Me.btnPlay.Text = "Play"
         Me.btnPlay.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btnClose
         '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Location = New System.Drawing.Point(573, 327)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 7
-        Me.Button2.Text = "Close"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnClose.Location = New System.Drawing.Point(573, 327)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 7
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = False
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Black
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 4
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
@@ -175,7 +175,7 @@ Partial Class frmReplays
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label5.Location = New System.Drawing.Point(474, 0)
@@ -190,7 +190,7 @@ Partial Class frmReplays
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label4.Location = New System.Drawing.Point(316, 0)
@@ -205,7 +205,7 @@ Partial Class frmReplays
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label3.Location = New System.Drawing.Point(158, 0)
@@ -220,7 +220,7 @@ Partial Class frmReplays
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.Label2.Location = New System.Drawing.Point(0, 0)
@@ -236,7 +236,7 @@ Partial Class frmReplays
         '
         Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDelete.Location = New System.Drawing.Point(305, 263)
+        Me.btnDelete.Location = New System.Drawing.Point(291, 264)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(87, 23)
         Me.btnDelete.TabIndex = 9
@@ -248,13 +248,13 @@ Partial Class frmReplays
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(660, 362)
+        Me.ClientSize = New System.Drawing.Size(657, 359)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnPlay)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnFolder)
         Me.Controls.Add(Me.btnOn)
         Me.Controls.Add(Me.btnOpen)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -270,7 +270,7 @@ Partial Class frmReplays
     Friend WithEvents btnOpen As Button
     Friend WithEvents lvReplays As ListView
     Friend WithEvents btnOn As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnFolder As Button
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents ColumnHeader3 As ColumnHeader
@@ -278,7 +278,7 @@ Partial Class frmReplays
     Friend WithEvents Label1 As Label
     Friend WithEvents btnPlay As Button
     Friend WithEvents ColumnHeader5 As ColumnHeader
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnClose As Button
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label

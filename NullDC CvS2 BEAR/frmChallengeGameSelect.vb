@@ -8,8 +8,6 @@
 
 
         GameSelectContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-        Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
 
         btnCancel.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
         btnCancel.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
@@ -23,6 +21,11 @@
         Label2.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
         Label3.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
         Label4.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+
+        MenuStrip1.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
+        MenuStrip1.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
+        MenuStrip1.Font = New Font(MenuStrip1.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
+        MenuStrip1.Renderer = New MenuStripRenderer
     End Sub
 
     Public Sub StartChallenge(Optional ByVal _challenger As BEARPlayer = Nothing)
@@ -118,11 +121,6 @@
             SelectedGame = {sender.SelectedItems(0).SubItems(1).Text, sender.SelectedItems(0).SubItems(0).Text}
         End If
 
-        If SelectedGame(0) = "" Then
-            Label1.Text = "Game Select"
-        Else
-            Label1.Text = SelectedGame(1)
-        End If
     End Sub
 
     Private Sub frmChallengeGameSelect_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
@@ -194,5 +192,11 @@
 
     End Sub
 
-
+    Private Sub DLCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DLCToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmDLC).Any Then
+            frmDLC.Show(Me)
+        Else
+            frmDLC.Focus()
+        End If
+    End Sub
 End Class

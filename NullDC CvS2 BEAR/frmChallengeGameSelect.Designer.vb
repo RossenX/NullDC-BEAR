@@ -29,7 +29,6 @@ Partial Class frmChallengeGameSelect
         Me.tc_games = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.tb_mednafen = New System.Windows.Forms.TableLayoutPanel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cb_Serverlist = New System.Windows.Forms.ComboBox()
@@ -41,11 +40,14 @@ Partial Class frmChallengeGameSelect
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
         Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.DLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tc_games.SuspendLayout()
         Me.tb_mednafen.SuspendLayout()
         Me.GameSelectContainer.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.tb_nulldc.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnLetsGo
@@ -54,7 +56,7 @@ Partial Class frmChallengeGameSelect
         Me.btnLetsGo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnLetsGo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLetsGo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLetsGo.Location = New System.Drawing.Point(480, 365)
+        Me.btnLetsGo.Location = New System.Drawing.Point(480, 341)
         Me.btnLetsGo.Name = "btnLetsGo"
         Me.GameSelectContainer.SetRowSpan(Me.btnLetsGo, 2)
         Me.btnLetsGo.Size = New System.Drawing.Size(161, 95)
@@ -68,7 +70,7 @@ Partial Class frmChallengeGameSelect
         Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(13, 427)
+        Me.btnCancel.Location = New System.Drawing.Point(13, 403)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(82, 33)
         Me.btnCancel.TabIndex = 3
@@ -81,11 +83,11 @@ Partial Class frmChallengeGameSelect
         Me.tc_games.Controls.Add(Me.TabPage1)
         Me.tc_games.Controls.Add(Me.TabPage2)
         Me.tc_games.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tc_games.Location = New System.Drawing.Point(13, 53)
+        Me.tc_games.Location = New System.Drawing.Point(13, 13)
         Me.tc_games.Multiline = True
         Me.tc_games.Name = "tc_games"
         Me.tc_games.SelectedIndex = 0
-        Me.tc_games.Size = New System.Drawing.Size(628, 306)
+        Me.tc_games.Size = New System.Drawing.Size(628, 322)
         Me.tc_games.TabIndex = 26
         '
         'TabPage1
@@ -93,7 +95,7 @@ Partial Class frmChallengeGameSelect
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(620, 280)
+        Me.TabPage1.Size = New System.Drawing.Size(620, 296)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -103,26 +105,10 @@ Partial Class frmChallengeGameSelect
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(620, 271)
+        Me.TabPage2.Size = New System.Drawing.Size(620, 296)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.GameSelectContainer.SetColumnSpan(Me.Label1, 3)
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(13, 10)
-        Me.Label1.MinimumSize = New System.Drawing.Size(0, 40)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(628, 40)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Game Select"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tb_mednafen
         '
@@ -173,22 +159,21 @@ Partial Class frmChallengeGameSelect
         Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 167.0!))
-        Me.GameSelectContainer.Controls.Add(Me.Label1, 0, 0)
-        Me.GameSelectContainer.Controls.Add(Me.Panel1, 1, 2)
-        Me.GameSelectContainer.Controls.Add(Me.btnCancel, 0, 3)
-        Me.GameSelectContainer.Controls.Add(Me.btnLetsGo, 2, 2)
-        Me.GameSelectContainer.Controls.Add(Me.tc_games, 0, 1)
+        Me.GameSelectContainer.Controls.Add(Me.Panel1, 1, 1)
+        Me.GameSelectContainer.Controls.Add(Me.btnCancel, 0, 2)
+        Me.GameSelectContainer.Controls.Add(Me.btnLetsGo, 2, 1)
+        Me.GameSelectContainer.Controls.Add(Me.tc_games, 0, 0)
         Me.GameSelectContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GameSelectContainer.Location = New System.Drawing.Point(0, 0)
+        Me.GameSelectContainer.Location = New System.Drawing.Point(0, 24)
         Me.GameSelectContainer.Margin = New System.Windows.Forms.Padding(0)
         Me.GameSelectContainer.Name = "GameSelectContainer"
         Me.GameSelectContainer.Padding = New System.Windows.Forms.Padding(10)
-        Me.GameSelectContainer.RowCount = 4
-        Me.GameSelectContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.GameSelectContainer.RowCount = 3
         Me.GameSelectContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.GameSelectContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
         Me.GameSelectContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39.0!))
-        Me.GameSelectContainer.Size = New System.Drawing.Size(654, 473)
+        Me.GameSelectContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.GameSelectContainer.Size = New System.Drawing.Size(654, 449)
         Me.GameSelectContainer.TabIndex = 29
         '
         'Panel1
@@ -196,7 +181,7 @@ Partial Class frmChallengeGameSelect
         Me.Panel1.Controls.Add(Me.tb_nulldc)
         Me.Panel1.Controls.Add(Me.tb_mednafen)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(101, 365)
+        Me.Panel1.Location = New System.Drawing.Point(101, 341)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(373, 56)
         Me.Panel1.TabIndex = 4
@@ -289,14 +274,31 @@ Partial Class frmChallengeGameSelect
         Me.SystemIcons.Images.SetKeyName(9, "icon_GBA.png")
         Me.SystemIcons.Images.SetKeyName(10, "icon_GBC.png")
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DLCToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(654, 24)
+        Me.MenuStrip1.TabIndex = 30
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'DLCToolStripMenuItem
+        '
+        Me.DLCToolStripMenuItem.Name = "DLCToolStripMenuItem"
+        Me.DLCToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
+        Me.DLCToolStripMenuItem.Text = "Free DLC"
+        '
         'frmChallengeGameSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(654, 473)
         Me.Controls.Add(Me.GameSelectContainer)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximumSize = New System.Drawing.Size(670, 9000)
-        Me.MinimumSize = New System.Drawing.Size(670, 0)
+        Me.MinimumSize = New System.Drawing.Size(670, 38)
         Me.Name = "frmChallengeGameSelect"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Game Select"
@@ -304,12 +306,14 @@ Partial Class frmChallengeGameSelect
         Me.tb_mednafen.ResumeLayout(False)
         Me.tb_mednafen.PerformLayout()
         Me.GameSelectContainer.ResumeLayout(False)
-        Me.GameSelectContainer.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.tb_nulldc.ResumeLayout(False)
         Me.tb_nulldc.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnLetsGo As Button
@@ -317,7 +321,6 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents tc_games As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents Label1 As Label
     Friend WithEvents tb_mednafen As TableLayoutPanel
     Friend WithEvents cb_Serverlist As ComboBox
     Friend WithEvents Label3 As Label
@@ -329,4 +332,6 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents Label2 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents cbRegion As ComboBox
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents DLCToolStripMenuItem As ToolStripMenuItem
 End Class
