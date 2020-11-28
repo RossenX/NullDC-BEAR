@@ -393,6 +393,13 @@ Public Class frmDLC
 
     End Sub
 
+    Private Sub PaidDLCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PaidDLCToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of FrmPaidDLC).Any Then
+            FrmPaidDLC.Show(Me)
+        Else
+            FrmPaidDLC.Focus()
+        End If
+    End Sub
 End Class
 
 Class DownloadableGame

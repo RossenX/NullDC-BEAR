@@ -30,7 +30,9 @@ Partial Class frmDLC
         Me.lnkRoms = New System.Windows.Forms.LinkLabel()
         Me.tc_games = New System.Windows.Forms.TabControl()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.PaidDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DLCContainer.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnDownload
@@ -80,7 +82,7 @@ Partial Class frmDLC
         Me.btnClose.Location = New System.Drawing.Point(10, 506)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(0)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(139, 41)
+        Me.btnClose.Size = New System.Drawing.Size(138, 41)
         Me.btnClose.TabIndex = 8
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = False
@@ -90,10 +92,10 @@ Partial Class frmDLC
         Me.btnRomsFolder.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnRomsFolder.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnRomsFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnRomsFolder.Location = New System.Drawing.Point(149, 506)
+        Me.btnRomsFolder.Location = New System.Drawing.Point(148, 506)
         Me.btnRomsFolder.Margin = New System.Windows.Forms.Padding(0)
         Me.btnRomsFolder.Name = "btnRomsFolder"
-        Me.btnRomsFolder.Size = New System.Drawing.Size(499, 41)
+        Me.btnRomsFolder.Size = New System.Drawing.Size(500, 41)
         Me.btnRomsFolder.TabIndex = 6
         Me.btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
         Me.btnRomsFolder.UseVisualStyleBackColor = False
@@ -134,11 +136,18 @@ Partial Class frmDLC
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PaidDLCToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(658, 24)
         Me.MenuStrip1.TabIndex = 3
         Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'PaidDLCToolStripMenuItem
+        '
+        Me.PaidDLCToolStripMenuItem.Name = "PaidDLCToolStripMenuItem"
+        Me.PaidDLCToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
+        Me.PaidDLCToolStripMenuItem.Text = "Paid DLC"
         '
         'frmDLC
         '
@@ -152,6 +161,8 @@ Partial Class frmDLC
         Me.Text = "Downloadable Content"
         Me.DLCContainer.ResumeLayout(False)
         Me.DLCContainer.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -164,4 +175,5 @@ Partial Class frmDLC
     Friend WithEvents tc_games As TabControl
     Friend WithEvents btnClose As Button
     Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents PaidDLCToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -1879,6 +1879,7 @@ Public Class frmMain
             frmDLC.Focus()
         End If
     End Sub
+
 End Class
 
 Public Class BEARPlayer
