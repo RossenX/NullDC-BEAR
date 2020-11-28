@@ -52,7 +52,13 @@ Public Class frmMain
 
         DeleteMednafenClientFiles()
 
-        UnpackUpdate()
+        Try
+            UnpackUpdate()
+        Catch ex As Exception
+            MsgBox("Unable to unpack emulator/update, error: " & ex.Message)
+            End
+        End Try
+
 
     End Sub
 
@@ -127,18 +133,10 @@ Public Class frmMain
             needsUpdate = True
         End If
 
-        If needsUpdate Then
-            Try
-                If needsUpdate Or IsBeta Then
-                    UnzipResToDir(My.Resources.Updates, "bear_tmp_updates.zip", NullDCPath)
-                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
-                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
-                End If
-
-            Catch ex As Exception
-                MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
-                End
-            End Try
+        If needsUpdate Or IsBeta Then
+            UnzipResToDir(My.Resources.Updates, "bear_tmp_updates.zip", NullDCPath)
+            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
+            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
         End If
 
     End Sub

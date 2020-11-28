@@ -50,10 +50,10 @@ Partial Class frmDLC
         'DLCContainer
         '
         Me.DLCContainer.ColumnCount = 2
-        Me.DLCContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.21814!))
-        Me.DLCContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.78186!))
-        Me.DLCContainer.Controls.Add(Me.btnClose, 1, 4)
-        Me.DLCContainer.Controls.Add(Me.btnRomsFolder, 0, 4)
+        Me.DLCContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.78683!))
+        Me.DLCContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.21317!))
+        Me.DLCContainer.Controls.Add(Me.btnClose, 0, 4)
+        Me.DLCContainer.Controls.Add(Me.btnRomsFolder, 1, 4)
         Me.DLCContainer.Controls.Add(Me.btnDownload, 0, 2)
         Me.DLCContainer.Controls.Add(Me.ProgressBar1, 0, 1)
         Me.DLCContainer.Controls.Add(Me.lnkRoms, 0, 3)
@@ -77,10 +77,10 @@ Partial Class frmDLC
         Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnClose.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnClose.Location = New System.Drawing.Point(477, 506)
+        Me.btnClose.Location = New System.Drawing.Point(10, 506)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(0)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(171, 41)
+        Me.btnClose.Size = New System.Drawing.Size(139, 41)
         Me.btnClose.TabIndex = 8
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = False
@@ -90,10 +90,10 @@ Partial Class frmDLC
         Me.btnRomsFolder.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnRomsFolder.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnRomsFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnRomsFolder.Location = New System.Drawing.Point(10, 506)
+        Me.btnRomsFolder.Location = New System.Drawing.Point(149, 506)
         Me.btnRomsFolder.Margin = New System.Windows.Forms.Padding(0)
         Me.btnRomsFolder.Name = "btnRomsFolder"
-        Me.btnRomsFolder.Size = New System.Drawing.Size(467, 41)
+        Me.btnRomsFolder.Size = New System.Drawing.Size(499, 41)
         Me.btnRomsFolder.TabIndex = 6
         Me.btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
         Me.btnRomsFolder.UseVisualStyleBackColor = False
