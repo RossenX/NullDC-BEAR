@@ -7,14 +7,6 @@
         ' This call is required by the designer.
         InitializeComponent()
 
-        ' Add any initialization after the InitializeComponent() call.
-        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
-        PictureBox1.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
-
-        ApplyThemeToControl(Label1)
-        ApplyThemeToControl(btnRetryVMU)
-        ApplyThemeToControl(btnCancel)
-
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -27,6 +19,15 @@
         AddHandler VMUTimer.Tick, Sub()
                                       btnRetryVMU.Visible = True
                                   End Sub
+
+        ' Add any initialization after the InitializeComponent() call.
+        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
+        PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
+
+        ApplyThemeToControl(Label1)
+        ApplyThemeToControl(btnRetryVMU)
+        ApplyThemeToControl(btnCancel)
+
     End Sub
 
     Private Sub frmWaitingForHost_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

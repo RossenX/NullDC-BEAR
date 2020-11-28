@@ -45,7 +45,6 @@ Partial Class frmWaitingForHost
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.NullDC_CvS2_BEAR.My.Resources.Resources.ConnectingNetplay
         Me.PictureBox1.Location = New System.Drawing.Point(220, 35)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(300, 149)
@@ -82,7 +81,6 @@ Partial Class frmWaitingForHost
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
-        Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Squares
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(714, 228)
         Me.Controls.Add(Me.btnRetryVMU)

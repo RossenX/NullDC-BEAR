@@ -35,8 +35,8 @@ Partial Class frmHostPanel
         Me.cbRegion = New System.Windows.Forms.ComboBox()
         Me.tb_nulldc = New System.Windows.Forms.TableLayoutPanel()
         Me.tb_mednafen = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.cb_Serverlist = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.tb_nulldc.SuspendLayout()
@@ -85,7 +85,6 @@ Partial Class frmHostPanel
         '
         'PictureBox1
         '
-        Me.PictureBox1.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.ConnectingNetplay
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PictureBox1.Location = New System.Drawing.Point(75, 1)
         Me.PictureBox1.Name = "PictureBox1"
@@ -223,6 +222,16 @@ Partial Class frmHostPanel
         Me.tb_mednafen.Size = New System.Drawing.Size(200, 46)
         Me.tb_mednafen.TabIndex = 27
         '
+        'cb_Serverlist
+        '
+        Me.cb_Serverlist.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cb_Serverlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_Serverlist.FormattingEnabled = True
+        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 22)
+        Me.cb_Serverlist.Name = "cb_Serverlist"
+        Me.cb_Serverlist.Size = New System.Drawing.Size(194, 21)
+        Me.cb_Serverlist.TabIndex = 0
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -237,22 +246,11 @@ Partial Class frmHostPanel
         Me.Label2.Text = "Server"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'cb_Serverlist
-        '
-        Me.cb_Serverlist.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cb_Serverlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cb_Serverlist.FormattingEnabled = True
-        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 22)
-        Me.cb_Serverlist.Name = "cb_Serverlist"
-        Me.cb_Serverlist.Size = New System.Drawing.Size(194, 21)
-        Me.cb_Serverlist.TabIndex = 0
-        '
         'frmHostPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
-        Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.SingleSquare
         Me.ClientSize = New System.Drawing.Size(450, 450)
         Me.Controls.Add(Me.tb_nulldc)
         Me.Controls.Add(Me.btnExit)

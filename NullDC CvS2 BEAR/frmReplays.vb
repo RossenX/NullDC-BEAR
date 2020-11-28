@@ -10,19 +10,7 @@ Public Class frmReplays
 
         ' Add any initialization after the InitializeComponent() call.
 
-        Me.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-        ApplyThemeToControl(TableLayoutPanel1, 2)
-        ApplyThemeToControl(lvReplays, 2)
-        ApplyThemeToControl(btnClose)
-        ApplyThemeToControl(btnFolder)
-        ApplyThemeToControl(btnOpen)
-        ApplyThemeToControl(btnDelete)
-        ApplyThemeToControl(btnPlay)
-        ApplyThemeToControl(Label1)
-        ApplyThemeToControl(Label2)
-        ApplyThemeToControl(Label3)
-        ApplyThemeToControl(Label4)
-        ApplyThemeToControl(Label5)
+
 
     End Sub
 
@@ -43,6 +31,20 @@ Public Class frmReplays
         End If
 
         GetReplayList()
+
+        Me.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
+        ApplyThemeToControl(TableLayoutPanel1, 2)
+        ApplyThemeToControl(lvReplays, 2)
+        ApplyThemeToControl(btnClose)
+        ApplyThemeToControl(btnFolder)
+        ApplyThemeToControl(btnOpen)
+        ApplyThemeToControl(btnDelete)
+        ApplyThemeToControl(btnPlay)
+        ApplyThemeToControl(Label1)
+        ApplyThemeToControl(Label2)
+        ApplyThemeToControl(Label3)
+        ApplyThemeToControl(Label4)
+        ApplyThemeToControl(Label5)
 
     End Sub
 

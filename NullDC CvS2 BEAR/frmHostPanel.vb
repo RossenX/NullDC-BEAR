@@ -9,23 +9,7 @@ Public Class frmHostPanel
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
 
-        PictureBox1.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostAnimation)
-        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostBackground)
 
-        ApplyThemeToControl(btnExit)
-        ApplyThemeToControl(btnStartHosting)
-
-        ApplyThemeToControl(lbInfo, 2)
-        ApplyThemeToControl(lbPing, 2)
-
-        ApplyThemeToControl(Label2, 2)
-        ApplyThemeToControl(cb_Serverlist)
-
-        ApplyThemeToControl(Label1, 2)
-        ApplyThemeToControl(cbDelay)
-        ApplyThemeToControl(btnSuggestDelay)
-        ApplyThemeToControl(Button1)
-        ApplyThemeToControl(cbRegion)
 
 
     End Sub
@@ -46,6 +30,25 @@ Public Class frmHostPanel
     Private Sub frmHostPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Icon = My.Resources.NewNullDCBearIcon
         cbDelay.Text = "1"
+
+        PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.HostAnimation)
+        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostBackground)
+
+        ApplyThemeToControl(btnExit)
+        ApplyThemeToControl(btnStartHosting)
+
+        ApplyThemeToControl(lbInfo, 2)
+        ApplyThemeToControl(lbPing, 2)
+
+        ApplyThemeToControl(Label2, 2)
+        ApplyThemeToControl(cb_Serverlist)
+
+        ApplyThemeToControl(Label1, 2)
+        ApplyThemeToControl(cbDelay)
+        ApplyThemeToControl(btnSuggestDelay)
+        ApplyThemeToControl(Button1)
+        ApplyThemeToControl(cbRegion)
+
     End Sub
 
     Private Sub frmHostPanel_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

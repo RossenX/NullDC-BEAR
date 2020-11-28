@@ -58,8 +58,84 @@ Public Class frmMain
             Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs_client")
         End If
 
+        UnpackUpdate()
+
     End Sub
 
+    Private Sub UnpackUpdate()
+
+        ' Unpack The Basic Shit
+
+        If Not File.Exists(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe") Then
+            Dim result As DialogResult = MessageBox.Show("NullDC was not found in this folder, INSTALL NULLDC INTO THIS FOLDER?", "NullDC Install", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+                Dim result2 As DialogResult = MessageBox.Show("This will create a bunch of files in the same folder as NullDC BEAR.exe, OK?", "NullDC Extraction", MessageBoxButtons.YesNo)
+                If result2 = DialogResult.Yes Then
+                    Try
+                        UnzipResToDir(My.Resources.NullNaomiClean, "bear_tmp_nulldc.zip", NullDCPath)
+                    Catch ex As Exception
+                        MsgBox(ex.StackTrace)
+                    End Try
+                Else
+                    MsgBox("Oh ok, see ya.")
+                    End
+                End If
+            Else
+                MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
+                End
+            End If
+        End If
+
+        ' Check if Update or unpack is Required
+        If File.Exists(NullDCPath & "\NullDC_BEAR.cfg") Then
+            Dim thefile = NullDCPath & "\NullDC_BEAR.cfg"
+            Dim lines() As String = File.ReadAllLines(thefile)
+            Dim tmpVersion = ""
+
+            For Each line In lines
+                If line.StartsWith("Version") Then tmpVersion = line.Split("=")(1).Trim
+            Next
+
+            If Not tmpVersion = Ver Then needsUpdate = True
+
+        Else
+            needsUpdate = True
+        End If
+
+        'unpack Dreamcast
+        If Not Directory.Exists(NullDCPath & "\dc") Then
+            Directory.CreateDirectory(NullDCPath & "\dc")
+            UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
+        End If
+
+        ' Mednafen unpack
+        If Not Directory.Exists(NullDCPath & "\mednafen") Then
+            Directory.CreateDirectory(NullDCPath & "\mednafen")
+            UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen")
+            needsUpdate = True
+        End If
+
+        ' Mednafen Server
+        If Not Directory.Exists(NullDCPath & "\mednafen\server") Then
+            Directory.CreateDirectory(NullDCPath & "\mednafen\server")
+            UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server")
+        End If
+
+        If needsUpdate Then
+            Try
+                If needsUpdate Or IsBeta Then
+                    UnzipResToDir(My.Resources.Updates, "bear_tmp_updates.zip", NullDCPath)
+                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
+                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
+                End If
+
+            Catch ex As Exception
+                MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
+                End
+            End Try
+        End If
+
+    End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "mednafen-server.zip")
@@ -85,28 +161,6 @@ Public Class frmMain
                 End If
             Next
         End If
-
-        If Not File.Exists(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe") Then
-            Dim result As DialogResult = MessageBox.Show("NullDC was not found in this folder, INSTALL NULLDC INTO THIS FOLDER?", "NullDC Install", MessageBoxButtons.YesNo)
-            If result = DialogResult.Yes Then
-                Dim result2 As DialogResult = MessageBox.Show("This will create a bunch of files in the same folder as NullDC BEAR.exe, OK?", "NullDC Extraction", MessageBoxButtons.YesNo)
-                If result2 = DialogResult.Yes Then
-                    Try
-                        UnzipResToDir(My.Resources.NullNaomiClean, "bear_tmp_nulldc.zip", NullDCPath)
-                    Catch ex As Exception
-                        MsgBox(ex.StackTrace)
-                    End Try
-                Else
-                    MsgBox("Oh ok, see ya.")
-                    End
-                End If
-            Else
-                MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
-                End
-            End If
-        End If
-
-
 
         ConfigFile = New Configs(NullDCPath)
 
@@ -406,22 +460,6 @@ Public Class frmMain
         ' Check the EXE name and all that shit from now on use the NullDC.BEAR.exe format since that's what github saves it as, since it hates spaces apperanly
         ' Why do this you may ask? Well mostly so people who downloaded it from github have the same exe name after they update, for firewall reasons
 
-
-        If File.Exists(NullDCPath & "\NullDC_BEAR.cfg") Then
-            Dim thefile = NullDCPath & "\NullDC_BEAR.cfg"
-            Dim lines() As String = File.ReadAllLines(thefile)
-            Dim tmpVersion = ""
-
-            For Each line In lines
-                If line.StartsWith("Version") Then tmpVersion = line.Split("=")(1).Trim
-            Next
-
-            If Not tmpVersion = Ver Then needsUpdate = True
-
-        Else
-            needsUpdate = True
-        End If
-
         If Not My.Computer.FileSystem.DirectoryExists(NullDCPath & "\replays") Then
             My.Computer.FileSystem.CreateDirectory(NullDCPath & "\replays")
         End If
@@ -456,11 +494,7 @@ Public Class frmMain
         End Try
 
         ' Extract Dreamcast Emulator if it does not exist
-        If Not Directory.Exists(NullDCPath & "\dc") Then
-            Directory.CreateDirectory(NullDCPath & "\dc")
-            UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
-            needsUpdate = True
-        End If
+
 
         If Not File.Exists(NullDCPath & "\dc\GameSpecificSettings.optibear") Then
             File.WriteAllText(NullDCPath & "\dc\GameSpecificSettings.optibear", My.Resources.DreamcastGameOptimizations)
@@ -509,52 +543,14 @@ Public Class frmMain
             File.WriteAllBytes(NullDCPath & "\dc\nullDC.cfg", My.Resources.default_nullDC_dreamcast)
         End If
 
-        ' FIX MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-        ' Mednafen unpack
-        If Not Directory.Exists(NullDCPath & "\mednafen") Then
-            Directory.CreateDirectory(NullDCPath & "\mednafen")
-            UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen")
-            needsUpdate = True
+        ' Put in the VMU to keep it in sync for now
+        If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
+            My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", My.Resources.vmu_data_port01, False)
+
         End If
 
-
-        ' Mednafen Server
-        If Not Directory.Exists(NullDCPath & "\mednafen\server") Then
-            Directory.CreateDirectory(NullDCPath & "\mednafen\server")
-            UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server")
-        End If
-
-
-        ' Just copy the beargamma plugin everytime the launcher starts, to make sure w.e version is in the launcher is the one that's in the plugins folder
-        Try
-            If needsUpdate Or IsBeta Then
-                UnzipResToDir(My.Resources.Updates, "bear_tmp_updates.zip", NullDCPath)
-                UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
-                UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
-            End If
-
-        Catch ex As Exception
-            MsgBox("Could not access nullDC files, exit nullDC before starting BEAR.")
-            End
-
-        Finally
-
-            ' Put in the VMU to keep it in sync for now
-            If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
-                My.Computer.FileSystem.WriteAllBytes(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", My.Resources.vmu_data_port01, False)
-
-            End If
-
-            If Not File.Exists(NullDCPath & "\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\Vs.png")
-            If Not File.Exists(NullDCPath & "\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\Vs_2.png")
-            If Not File.Exists(NullDCPath & "\dc\Vs.png") Then My.Resources.Vs.Save(NullDCPath & "\dc\Vs.png")
-            If Not File.Exists(NullDCPath & "\dc\Vs_2.png") Then My.Resources.Vs_2.Save(NullDCPath & "\dc\Vs_2.png")
-
-            GetGamesList()
-            GetServerList()
-
-        End Try
-
+        GetGamesList()
+        GetServerList()
     End Sub
 
     Private Sub GetServerList()

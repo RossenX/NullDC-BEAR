@@ -76,7 +76,6 @@ Partial Class frmNotification
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
-        Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.ThreeSquare
         Me.ClientSize = New System.Drawing.Size(500, 250)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None

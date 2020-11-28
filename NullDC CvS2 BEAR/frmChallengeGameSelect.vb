@@ -6,18 +6,6 @@
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
 
-
-        GameSelectContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-
-        ApplyThemeToControl(btnCancel)
-        ApplyThemeToControl(btnLetsGo)
-        ApplyThemeToControl(cbDelay)
-        ApplyThemeToControl(Label2)
-        ApplyThemeToControl(Label3)
-        ApplyThemeToControl(Label4)
-        ApplyThemeToControl(btnLetsGo)
-        ApplyThemeToControl(MenuStrip1)
-
     End Sub
 
     Public Sub StartChallenge(Optional ByVal _challenger As BEARPlayer = Nothing)
@@ -105,6 +93,18 @@
         Me.Icon = My.Resources.NewNullDCBearIcon
         tb_mednafen.Visible = False
         tb_nulldc.Visible = False
+
+        GameSelectContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
+
+        ApplyThemeToControl(btnCancel)
+        ApplyThemeToControl(btnLetsGo)
+        ApplyThemeToControl(cbDelay)
+        ApplyThemeToControl(Label2)
+        ApplyThemeToControl(Label3)
+        ApplyThemeToControl(Label4)
+        ApplyThemeToControl(btnLetsGo)
+        ApplyThemeToControl(MenuStrip1)
+
     End Sub
 
     Public Sub SelectedIndexChange(sender As ListView, e As EventArgs)

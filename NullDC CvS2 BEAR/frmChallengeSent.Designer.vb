@@ -73,7 +73,6 @@ Partial Class frmChallengeSent
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.DimGray
-        Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Squares
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(714, 228)
         Me.Controls.Add(Me.TableLayoutPanel1)

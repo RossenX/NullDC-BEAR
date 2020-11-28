@@ -11,13 +11,6 @@ Public Class frmChallenge
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
-        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.ChallengeBackground)
-        ApplyThemeToControl(btnAccept)
-        ApplyThemeToControl(btnDeny)
-        ApplyThemeToControl(btnPing)
-
-        ApplyThemeToControl(Label1, 2)
-        ApplyThemeToControl(lbChallengeText, 3)
 
     End Sub
 
@@ -35,6 +28,14 @@ Public Class frmChallenge
 
     Private Sub frmChallenge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
+
+        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.ChallengeBackground)
+        ApplyThemeToControl(btnAccept)
+        ApplyThemeToControl(btnDeny)
+        ApplyThemeToControl(btnPing)
+
+        ApplyThemeToControl(Label1, 2)
+        ApplyThemeToControl(lbChallengeText, 3)
 
     End Sub
 

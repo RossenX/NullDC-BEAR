@@ -31,12 +31,7 @@ Public Class frmDLC
         ' This call is required by the designer.
         InitializeComponent()
 
-        ' Add any initialization after the InitializeComponent() call.
-        ApplyThemeToControl(DLCContainer, 1)
-        ApplyThemeToControl(btnDownload)
-        ApplyThemeToControl(btnRomsFolder)
-        ApplyThemeToControl(btnClose)
-        ApplyThemeToControl(MenuStrip1)
+
 
     End Sub
 
@@ -48,6 +43,13 @@ Public Class frmDLC
 
         AddHandler DownloadClient.DownloadFileCompleted, AddressOf DownloadComplete
         AddHandler DownloadClient.DownloadProgressChanged, AddressOf DownloadProgress
+
+        ' Add any initialization after the InitializeComponent() call.
+        ApplyThemeToControl(DLCContainer, 1)
+        ApplyThemeToControl(btnDownload)
+        ApplyThemeToControl(btnRomsFolder)
+        ApplyThemeToControl(btnClose)
+        ApplyThemeToControl(MenuStrip1)
 
     End Sub
 

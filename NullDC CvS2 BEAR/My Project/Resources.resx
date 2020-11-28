@@ -118,12 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ConnectingNetplay" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ConnectingNetplay.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SingleSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SingleSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="default_nullDC_dreamcast" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\default_nullDC_dreamcast.cfg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -174,9 +168,6 @@
   </data>
   <data name="mednafen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mednafen.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Squares" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Squares.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Controller_Guide" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-Guide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,9 +223,6 @@
   <data name="NullDCBEAR_Title" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NullDCBEAR-Title.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MainMenuBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MainMenuBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Controller_LeftY" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-LeftY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -246,9 +234,6 @@
   </data>
   <data name="Deps" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Deps.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ThreeSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ThreeSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="be" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\be.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -285,9 +270,6 @@
   </data>
   <data name="NullNaomiClean" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NullNaomiClean.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="sus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Controller_Dpad_Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-Dpad-Up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
