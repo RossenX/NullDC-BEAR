@@ -5,10 +5,11 @@ Imports System.Net.NetworkInformation
 Public Class frmSetup
 
     Dim wavePlayer As New NAudio.Wave.WaveOut
+    Dim FormFilled As Boolean = False
 
     Private Sub frmSetup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
-        Me.CenterToParent()
+
 
         FillSettings()
 
@@ -22,6 +23,12 @@ Public Class frmSetup
             ApplyThemeToControl(CustomSizeContainer.Controls(i), 2)
         Next
         ApplyThemeToControl(Button2)
+
+        Button2.BackColor = Color.FromArgb(0, 255, 0)
+        Button2.ForeColor = Color.Black
+        Me.Height = OptionsContainer.Height + 50
+        Me.Width = OptionsContainer.Width + 25
+        Me.CenterToParent()
 
     End Sub
 
@@ -62,7 +69,8 @@ Public Class frmSetup
         Next
 
         cbThemes.DataSource = ThemesFound
-
+        cbThemes.SelectedValue = MainformRef.ConfigFile.Theme
+        FormFilled = True
     End Sub
 
     Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
@@ -75,6 +83,7 @@ Public Class frmSetup
         MainformRef.ConfigFile.WindowSettings = CInt(cbUseCustomWindowSize.Checked).ToString & "|" & tbCWX.Text & "|" & tbCWY.Text & "|" & tbCWWidth.Text & "|" & tbCWHeight.Text
         MainformRef.ConfigFile.ShowGameNameInTitle = Convert.ToInt32(cb_ShowGameInTitle.Checked)
         MainformRef.ConfigFile.Vsync = cbVsync.SelectedIndex
+        MainformRef.ConfigFile.Theme = cbThemes.SelectedValue
 
         If cbAllowSpectators.Text = "Yes" Then
             MainformRef.ConfigFile.AllowSpectators = 1
@@ -210,6 +219,13 @@ Public Class frmSetup
         tbCWY.Text = 250
         tbCWWidth.Text = 656
         tbCWHeight.Text = 538
+    End Sub
+
+    Private Sub cbThemes_SelectedIndexChanged(sender As ComboBox, e As EventArgs) Handles cbThemes.SelectedIndexChanged
+        If Not sender.SelectedValue = "" And Not sender.SelectedValue = MainformRef.ConfigFile.Theme And FormFilled Then
+            MsgBox("Theme changed require a restart")
+        End If
+
     End Sub
 
 

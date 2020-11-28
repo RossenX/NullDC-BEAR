@@ -37,13 +37,13 @@ Public Class frmHostPanel
         ApplyThemeToControl(btnExit)
         ApplyThemeToControl(btnStartHosting)
 
-        ApplyThemeToControl(lbInfo, 2)
-        ApplyThemeToControl(lbPing, 2)
+        ApplyThemeToControl(lbInfo, 3)
+        ApplyThemeToControl(lbPing, 3)
 
-        ApplyThemeToControl(Label2, 2)
+        ApplyThemeToControl(Label2, 3)
         ApplyThemeToControl(cb_Serverlist)
 
-        ApplyThemeToControl(Label1, 2)
+        ApplyThemeToControl(Label1, 3)
         ApplyThemeToControl(cbDelay)
         ApplyThemeToControl(btnSuggestDelay)
         ApplyThemeToControl(Button1)

@@ -54,7 +54,7 @@
 
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.NotificationBackground)
         ApplyThemeToControl(Button1)
-        ApplyThemeToControl(Label1)
+        ApplyThemeToControl(Label1, 3)
 
     End Sub
 End Class

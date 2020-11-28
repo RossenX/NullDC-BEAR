@@ -397,19 +397,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NullNaomiClean.zip" />
-    <None Include="Resources\Squares.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MainMenuBackground.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SingleSquare.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ConnectingNetplay.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ThreeSquare.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NewNullDCBearIcon.ico" />

@@ -24,7 +24,7 @@
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
         PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
 
-        ApplyThemeToControl(Label1)
+        ApplyThemeToControl(Label1, 3)
         ApplyThemeToControl(btnRetryVMU)
         ApplyThemeToControl(btnCancel)
 

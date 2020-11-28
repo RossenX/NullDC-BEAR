@@ -240,12 +240,21 @@ Module BEARTheme
         WaitHostBackground
         ChallengeBackground
         NotificationBackground
-        OverlayTop
-        OverlayBottom
         HostBackground
 
         WaitHostAnimation
         HostAnimation
+
+        OverlayTop
+        OverlayBottom
+
+        PlayerListColor
+        PlayerListFontColor
+        PlayerListFontSize
+        MatchListColor
+        MatchListFontColor
+        MatchListFontSize
+
     End Enum
 
     Public Theme As New Dictionary(Of String, String)
@@ -313,6 +322,14 @@ Module BEARTheme
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
                 _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+            Case 4
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PlayerListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PlayerListFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.PlayerListFontSize), _Control.Font.Style)
+            Case 5
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.MatchListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.MatchListFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.MatchListFontSize), _Control.Font.Style)
         End Select
     End Sub
 

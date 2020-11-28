@@ -135,7 +135,7 @@ Partial Class frmSetup
         Me.Button2.Size = New System.Drawing.Size(257, 54)
         Me.Button2.TabIndex = 7
         Me.Button2.TabStop = False
-        Me.Button2.Text = "CLICK ME" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Add Firewall Entry for BEAR"
+        Me.Button2.Text = "CLICK ME" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Add Windows Firewall Entry for BEAR" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.Button2.UseVisualStyleBackColor = False
         '
         'tbPort
@@ -160,7 +160,7 @@ Partial Class frmSetup
         Me.btnSaveExit.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSaveExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnSaveExit.Location = New System.Drawing.Point(393, 367)
+        Me.btnSaveExit.Location = New System.Drawing.Point(393, 364)
         Me.btnSaveExit.Name = "btnSaveExit"
         Me.btnSaveExit.Size = New System.Drawing.Size(144, 51)
         Me.btnSaveExit.TabIndex = 4
@@ -225,6 +225,7 @@ Partial Class frmSetup
         'GroupBox1
         '
         Me.GroupBox1.AutoSize = True
+        Me.GroupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel1)
         Me.GroupBox1.Location = New System.Drawing.Point(276, 13)
         Me.GroupBox1.Name = "GroupBox1"
@@ -257,34 +258,38 @@ Partial Class frmSetup
         'tbCWWidth
         '
         Me.tbCWWidth.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbCWWidth.Location = New System.Drawing.Point(125, 29)
+        Me.tbCWWidth.Location = New System.Drawing.Point(128, 29)
         Me.tbCWWidth.Name = "tbCWWidth"
-        Me.tbCWWidth.Size = New System.Drawing.Size(117, 20)
+        Me.tbCWWidth.Size = New System.Drawing.Size(120, 20)
         Me.tbCWWidth.TabIndex = 18
         Me.tbCWWidth.Text = "656"
         '
         'tbCWHeight
         '
         Me.tbCWHeight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbCWHeight.Location = New System.Drawing.Point(125, 3)
+        Me.tbCWHeight.Location = New System.Drawing.Point(128, 3)
         Me.tbCWHeight.Name = "tbCWHeight"
-        Me.tbCWHeight.Size = New System.Drawing.Size(117, 20)
+        Me.tbCWHeight.Size = New System.Drawing.Size(120, 20)
         Me.tbCWHeight.TabIndex = 19
         Me.tbCWHeight.Text = "538"
         '
         'GBCustomWindowSize
         '
+        Me.GBCustomWindowSize.AutoSize = True
+        Me.GBCustomWindowSize.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.OptionsContainer.SetColumnSpan(Me.GBCustomWindowSize, 2)
         Me.GBCustomWindowSize.Controls.Add(Me.CustomSizeContainer)
+        Me.GBCustomWindowSize.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GBCustomWindowSize.Location = New System.Drawing.Point(13, 267)
         Me.GBCustomWindowSize.Name = "GBCustomWindowSize"
-        Me.GBCustomWindowSize.Size = New System.Drawing.Size(257, 151)
+        Me.GBCustomWindowSize.Size = New System.Drawing.Size(257, 148)
         Me.GBCustomWindowSize.TabIndex = 20
         Me.GBCustomWindowSize.TabStop = False
         Me.GBCustomWindowSize.Text = "Custom Window Size"
         '
         'CustomSizeContainer
         '
+        Me.CustomSizeContainer.AutoSize = True
         Me.CustomSizeContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CustomSizeContainer.ColumnCount = 2
         Me.CustomSizeContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -298,7 +303,8 @@ Partial Class frmSetup
         Me.CustomSizeContainer.Controls.Add(Me.Label4, 0, 0)
         Me.CustomSizeContainer.Controls.Add(Me.tbCWWidth, 1, 1)
         Me.CustomSizeContainer.Controls.Add(Me.tbCWHeight, 1, 0)
-        Me.CustomSizeContainer.Location = New System.Drawing.Point(6, 19)
+        Me.CustomSizeContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CustomSizeContainer.Location = New System.Drawing.Point(3, 16)
         Me.CustomSizeContainer.Margin = New System.Windows.Forms.Padding(0)
         Me.CustomSizeContainer.Name = "CustomSizeContainer"
         Me.CustomSizeContainer.RowCount = 5
@@ -307,7 +313,7 @@ Partial Class frmSetup
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.CustomSizeContainer.Size = New System.Drawing.Size(245, 126)
+        Me.CustomSizeContainer.Size = New System.Drawing.Size(251, 129)
         Me.CustomSizeContainer.TabIndex = 21
         '
         'Button4
@@ -317,7 +323,7 @@ Partial Class frmSetup
         Me.Button4.Location = New System.Drawing.Point(0, 104)
         Me.Button4.Margin = New System.Windows.Forms.Padding(0)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(122, 22)
+        Me.Button4.Size = New System.Drawing.Size(125, 25)
         Me.Button4.TabIndex = 23
         Me.Button4.Text = "Default"
         Me.Button4.UseVisualStyleBackColor = True
@@ -325,18 +331,18 @@ Partial Class frmSetup
         'tbCWY
         '
         Me.tbCWY.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbCWY.Location = New System.Drawing.Point(125, 81)
+        Me.tbCWY.Location = New System.Drawing.Point(128, 81)
         Me.tbCWY.Name = "tbCWY"
-        Me.tbCWY.Size = New System.Drawing.Size(117, 20)
+        Me.tbCWY.Size = New System.Drawing.Size(120, 20)
         Me.tbCWY.TabIndex = 25
         Me.tbCWY.Text = "250"
         '
         'tbCWX
         '
         Me.tbCWX.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbCWX.Location = New System.Drawing.Point(125, 55)
+        Me.tbCWX.Location = New System.Drawing.Point(128, 55)
         Me.tbCWX.Name = "tbCWX"
-        Me.tbCWX.Size = New System.Drawing.Size(117, 20)
+        Me.tbCWX.Size = New System.Drawing.Size(120, 20)
         Me.tbCWX.TabIndex = 24
         Me.tbCWX.Text = "250"
         '
@@ -346,7 +352,7 @@ Partial Class frmSetup
         Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label9.Location = New System.Drawing.Point(3, 78)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(116, 26)
+        Me.Label9.Size = New System.Drawing.Size(119, 26)
         Me.Label9.TabIndex = 23
         Me.Label9.Text = "Screen Y"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -357,7 +363,7 @@ Partial Class frmSetup
         Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label7.Location = New System.Drawing.Point(3, 52)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(116, 26)
+        Me.Label7.Size = New System.Drawing.Size(119, 26)
         Me.Label7.TabIndex = 22
         Me.Label7.Text = "Screen X"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -368,7 +374,7 @@ Partial Class frmSetup
         Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label5.Location = New System.Drawing.Point(3, 26)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(116, 26)
+        Me.Label5.Size = New System.Drawing.Size(119, 26)
         Me.Label5.TabIndex = 21
         Me.Label5.Text = "Width"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -379,7 +385,7 @@ Partial Class frmSetup
         Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label4.Location = New System.Drawing.Point(3, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(116, 26)
+        Me.Label4.Size = New System.Drawing.Size(119, 26)
         Me.Label4.TabIndex = 20
         Me.Label4.Text = "Height"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -444,6 +450,8 @@ Partial Class frmSetup
         '
         'OptionsContainer
         '
+        Me.OptionsContainer.AutoSize = True
+        Me.OptionsContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.OptionsContainer.ColumnCount = 5
         Me.OptionsContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.OptionsContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -512,9 +520,10 @@ Partial Class frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(543, 428)
         Me.Controls.Add(Me.OptionsContainer)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "frmSetup"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "BEAR Setup"
@@ -526,11 +535,13 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.GBCustomWindowSize.ResumeLayout(False)
+        Me.GBCustomWindowSize.PerformLayout()
         Me.CustomSizeContainer.ResumeLayout(False)
         Me.CustomSizeContainer.PerformLayout()
         Me.OptionsContainer.ResumeLayout(False)
         Me.OptionsContainer.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

@@ -69,6 +69,7 @@ Partial Class frmReplays
         Me.lvReplays.Margin = New System.Windows.Forms.Padding(0)
         Me.lvReplays.MultiSelect = False
         Me.lvReplays.Name = "lvReplays"
+        Me.lvReplays.ShowItemToolTips = True
         Me.lvReplays.Size = New System.Drawing.Size(633, 227)
         Me.lvReplays.TabIndex = 1
         Me.lvReplays.UseCompatibleStateImageBehavior = False

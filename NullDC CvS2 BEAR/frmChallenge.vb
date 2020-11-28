@@ -34,7 +34,7 @@ Public Class frmChallenge
         ApplyThemeToControl(btnDeny)
         ApplyThemeToControl(btnPing)
 
-        ApplyThemeToControl(Label1, 2)
+        ApplyThemeToControl(Label1, 3)
         ApplyThemeToControl(lbChallengeText, 3)
 
     End Sub

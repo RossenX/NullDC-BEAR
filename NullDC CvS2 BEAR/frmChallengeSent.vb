@@ -22,7 +22,7 @@ Public Class frmChallengeSent
     Private Sub frmChallengeSent_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitBackground)
-        ApplyThemeToControl(Label1, 1)
+        ApplyThemeToControl(Label1, 3)
         ApplyThemeToControl(btnNope)
 
     End Sub

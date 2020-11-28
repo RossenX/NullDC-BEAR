@@ -50,6 +50,13 @@ Public Class frmMain
         ' Load The Theme Stuff
         Rx.MainformRef = Me
 
+        DeleteMednafenClientFiles()
+
+        UnpackUpdate()
+
+    End Sub
+
+    Private Sub DeleteMednafenClientFiles()
         If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_client") Then
             Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav_client")
         End If
@@ -57,9 +64,6 @@ Public Class frmMain
         If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs_client") Then
             Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs_client")
         End If
-
-        UnpackUpdate()
-
     End Sub
 
     Private Sub UnpackUpdate()
@@ -106,6 +110,7 @@ Public Class frmMain
         If Not Directory.Exists(NullDCPath & "\dc") Then
             Directory.CreateDirectory(NullDCPath & "\dc")
             UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
+            needsUpdate = True
         End If
 
         ' Mednafen unpack
@@ -119,6 +124,7 @@ Public Class frmMain
         If Not Directory.Exists(NullDCPath & "\mednafen\server") Then
             Directory.CreateDirectory(NullDCPath & "\mednafen\server")
             UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server")
+            needsUpdate = True
         End If
 
         If needsUpdate Then
@@ -234,8 +240,7 @@ Public Class frmMain
     Private Sub LoadThemeSettings()
         Try
             If Not File.Exists(NullDCPath & "\themes\" & ConfigFile.Theme & "\Scheme.BearTheme") Then
-                MsgBox("Couldn't find theme file")
-                Exit Sub
+                ConfigFile.Theme = "Dark"
             End If
 
             For Each _line In File.ReadAllLines(NullDCPath & "\themes\" & ConfigFile.Theme & "\Scheme.BearTheme")
@@ -245,17 +250,47 @@ Public Class frmMain
                 End If
             Next
 
+            If Not BEARTheme.Theme(ThemeKeys.OverlayTop.ToString.ToLower) = "" Then
+                If File.Exists(NullDCPath & "\themes\" & ConfigFile.Theme & "\images\" & BEARTheme.Theme(ThemeKeys.OverlayTop.ToString.ToLower)) Then
+                    File.Copy(NullDCPath & "\themes\" & ConfigFile.Theme & "\images\" & BEARTheme.Theme(ThemeKeys.OverlayTop.ToString.ToLower), NullDCPath & "\Vs.png", True)
+                    File.Copy(NullDCPath & "\themes\" & ConfigFile.Theme & "\images\" & BEARTheme.Theme(ThemeKeys.OverlayTop.ToString.ToLower), NullDCPath & "\dc\Vs.png", True)
+                Else
+                    My.Resources.Vs.Save(NullDCPath & "\Vs.png")
+                    My.Resources.Vs.Save(NullDCPath & "\dc\Vs.png")
+                End If
+
+            Else
+                My.Resources.Vs.Save(NullDCPath & "\Vs.png")
+                My.Resources.Vs.Save(NullDCPath & "\dc\Vs.png")
+            End If
+
+            If Not BEARTheme.Theme(ThemeKeys.OverlayBottom.ToString.ToLower) = "" Then
+                If File.Exists(NullDCPath & "\themes\" & ConfigFile.Theme & "\images\" & BEARTheme.Theme(ThemeKeys.OverlayBottom.ToString.ToLower)) Then
+                    File.Copy(NullDCPath & "\themes\" & ConfigFile.Theme & "\images\" & BEARTheme.Theme(ThemeKeys.OverlayBottom.ToString.ToLower), NullDCPath & "\Vs_2.png", True)
+                    File.Copy(NullDCPath & "\themes\" & ConfigFile.Theme & "\images\" & BEARTheme.Theme(ThemeKeys.OverlayBottom.ToString.ToLower), NullDCPath & "\dc\Vs_2.png", True)
+                Else
+                    My.Resources.Vs_2.Save(NullDCPath & "\Vs_2.png")
+                    My.Resources.Vs_2.Save(NullDCPath & "\dc\Vs_2.png")
+                End If
+
+            Else
+                My.Resources.Vs_2.Save(NullDCPath & "\Vs_2.png")
+                My.Resources.Vs_2.Save(NullDCPath & "\dc\Vs_2.png")
+            End If
+
         Catch ex As Exception
             MsgBox("Error Loading Theme: " & ex.Message)
         End Try
+
+
 
     End Sub
 
     Private Sub LoadTheme()
 
         ApplyThemeToControl(MainMenuContainer)
-        ApplyThemeToControl(PlayerList, 2)
-        ApplyThemeToControl(Matchlist, 3)
+        ApplyThemeToControl(PlayerList, 4)
+        ApplyThemeToControl(Matchlist, 5)
 
         ' Buttons
         ApplyThemeToControl(BtnJoin)
@@ -955,7 +990,7 @@ Public Class frmMain
                 TabControl.TabPages.Item(TabControl.TabCount - 1).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
 
                 Dim tmpListView As New ListView
-                ApplyThemeToControl(tmpListView, 3)
+                ApplyThemeToControl(tmpListView, 2)
                 tmpListView.Dock = DockStyle.Fill
                 tmpListView.MultiSelect = False
                 tmpListView.View = View.Details
@@ -1109,8 +1144,7 @@ Public Class frmMain
                         Rx.EEPROM = _eeprom
                     Case Else
                 End Select
-                ' Don't use the nullDC port for Mednafen
-                ' ConfigFile.Port = "4046" ' Mednafen always uses this for now maybe i'll change it later but all the public servers use this IP
+                DeleteMednafenClientFiles()
                 MainformRef.MednafenLauncher.IsHost = False
 
         End Select
@@ -1894,7 +1928,7 @@ Public Class Configs
     Private _ShowGameNameInTitle As Int16 = 1
     Private _sdlversopm As String = "Dev"
     Private _vsync As Int16 = 0
-    Private _theme As String = "default"
+    Private _theme As String = "Dark"
 
 #Region "Properties"
 

@@ -68,7 +68,7 @@ Partial Class frmMain
         Me.Matchlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.MainMenuContainer.SetColumnSpan(Me.Matchlist, 4)
         Me.Matchlist.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Matchlist.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Matchlist.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Matchlist.ForeColor = System.Drawing.Color.Red
         Me.Matchlist.FullRowSelect = True
         Me.Matchlist.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -206,7 +206,7 @@ Partial Class frmMain
         Me.PlayerList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9, Me.ColumnHeader10})
         Me.MainMenuContainer.SetColumnSpan(Me.PlayerList, 2)
         Me.PlayerList.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PlayerList.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerList.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerList.FullRowSelect = True
         Me.PlayerList.GridLines = True
         ListViewGroup1.Header = "Idle"

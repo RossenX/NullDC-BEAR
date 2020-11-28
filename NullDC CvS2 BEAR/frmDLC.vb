@@ -136,7 +136,7 @@ Public Class frmDLC
             tc_games.TabPages.Item(tc_games.TabCount - 1).ForeColor = BEARTheme.LoadColor(ThemeKeys.TertiaryFontColor)
 
             Dim tmpListView As New ListView
-            ApplyThemeToControl(tmpListView, 3)
+            ApplyThemeToControl(tmpListView, 2)
             tmpListView.Dock = DockStyle.Fill
             tmpListView.MultiSelect = False
             tmpListView.View = View.Details
