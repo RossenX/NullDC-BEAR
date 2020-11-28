@@ -42,6 +42,7 @@
         End If
 
         Rx.platform = MainformRef.GamesList(SelectedGame(0))(2)
+        MainformRef.MednafenLauncher.IsHost = True
 
         If _Challenger Is Nothing Then
             StartOffline()

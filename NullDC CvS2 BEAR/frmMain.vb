@@ -50,23 +50,6 @@ Public Class frmMain
         ' Load The Theme Stuff
         Rx.MainformRef = Me
 
-        ' Double check for Mednafen Backupfiles to restore This is in case someone joined a host and then forcequit BEAR or something
-        If Directory.Exists(NullDCPath & "\mednafen\sav_") Then
-            If Directory.Exists(NullDCPath & "\mednafen\sav") Then
-                Directory.Delete(NullDCPath & "\mednafen\sav", True)
-            End If
-            FileSystem.Rename(NullDCPath & "\mednafen\sav_", NullDCPath & "\mednafen\sav")
-
-        End If
-
-        If Directory.Exists(NullDCPath & "\mednafen\mcs_") Then
-            If Directory.Exists(NullDCPath & "\mednafen\mcs") Then
-                Directory.Delete(NullDCPath & "\mednafen\mcs", True)
-            End If
-            FileSystem.Rename(NullDCPath & "\mednafen\mcs_", NullDCPath & "\mednafen\mcs")
-
-        End If
-
     End Sub
 
 
@@ -563,18 +546,6 @@ Public Class frmMain
             End
 
         Finally
-            ' Just in case BEAR crashed when you were a client and there is a backup of the saves without them being restored, this will restore them.
-            If Directory.Exists(NullDCPath & "/mednafen/sav_") Then
-                If Directory.Exists(NullDCPath & "/mednagen/sav") Then Directory.Delete(NullDCPath & "/mednagen/sav")
-                My.Computer.FileSystem.RenameDirectory(NullDCPath & "/mednagen/sav_", NullDCPath & "/mednagen/sav")
-
-            End If
-
-            If Directory.Exists(NullDCPath & "/mednagen/mcs_") Then
-                If Directory.Exists(NullDCPath & "/mednagen/mcs") Then Directory.Delete(NullDCPath & "/mednagen/mcs")
-                My.Computer.FileSystem.RenameDirectory(NullDCPath & "/mednagen/mcs_", NullDCPath & "/mednagen/mcs")
-
-            End If
 
             ' Put in the VMU to keep it in sync for now
             If Not File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
@@ -1151,28 +1122,10 @@ Public Class frmMain
                         ConfigFile.Status = "Private"
                         Rx.EEPROM = _eeprom
                     Case Else
-
                 End Select
                 ' Don't use the nullDC port for Mednafen
                 ' ConfigFile.Port = "4046" ' Mednafen always uses this for now maybe i'll change it later but all the public servers use this IP
-
-                If Directory.Exists(NullDCPath & "\mednafen\sav") Then
-                    If Directory.Exists(NullDCPath & "\mednafen\sav_") Then
-                        Directory.Delete(NullDCPath & "\mednafen\sav", True)
-                    Else
-                        FileSystem.Rename(NullDCPath & "\mednafen\sav", NullDCPath & "\mednafen\sav_")
-                    End If
-
-                End If
-
-                If Directory.Exists(NullDCPath & "\mednafen\mcs") Then
-                    If Directory.Exists(NullDCPath & "\mednafen\mcs_") Then
-                        Directory.Delete(NullDCPath & "\mednafen\mcs", True)
-                    Else
-                        FileSystem.Rename(NullDCPath & "\mednafen\mcs", NullDCPath & "\mednafen\mcs_")
-                    End If
-
-                End If
+                MainformRef.MednafenLauncher.IsHost = False
 
         End Select
 

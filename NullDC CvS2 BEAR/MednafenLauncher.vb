@@ -5,6 +5,8 @@ Public Class MednafenLauncher
     Public MednafenInstance As Process = Nothing
     Public MednafenServerInstance As Process = Nothing
 
+    Public IsHost As Boolean = True
+
     Public Sub LaunchEmulator(ByVal _romname)
 
         If MednafenServerInstance Is Nothing Then
@@ -48,9 +50,18 @@ Public Class MednafenLauncher
                 Console.WriteLine("launching Mednagen: " & _romname)
                 Dim MednafenInfo As New ProcessStartInfo
                 MednafenInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
+
                 If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Or MainformRef.ConfigFile.Status = "Client" Then
                     MednafenInfo.Arguments = " -connect -netplay.host " & MainformRef.ConfigFile.Host & " -netplay.gamekey " & Rx.EEPROM & " -netplay.nick """ & MainformRef.ConfigFile.Name & """ "
                 End If
+                ' Save Backing up
+
+                If IsHost Then
+                    MednafenInfo.Arguments += " -filesys.path_sav sav -filesys.path_state mcs "
+                Else
+                    MednafenInfo.Arguments += " -filesys.path_sav sav_client -filesys.path_state mcs_client "
+                End If
+
                 MednafenInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
 
                 Console.WriteLine("Command: " & MednafenInfo.Arguments)
@@ -124,23 +135,6 @@ Public Class MednafenLauncher
         If Not MainformRef.IsClosing Then
             Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
             MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
-        End If
-
-
-        If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_") Then
-            If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav") Then
-                Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav", True)
-            End If
-            FileSystem.Rename(MainformRef.NullDCPath & "\mednafen\sav_", MainformRef.NullDCPath & "\mednafen\sav")
-
-        End If
-
-        If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs_") Then
-            If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs") Then
-                Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs", True)
-            End If
-            FileSystem.Rename(MainformRef.NullDCPath & "\mednafen\mcs_", MainformRef.NullDCPath & "\mednafen\mcs")
-
         End If
 
         MednafenInstance = Nothing

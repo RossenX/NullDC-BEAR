@@ -143,6 +143,7 @@ Public Class frmHostPanel
             Case Else
                 tb_nulldc.Visible = False
                 tb_mednafen.Visible = True
+                MainformRef.MednafenLauncher.IsHost = True
 
                 If cb_Serverlist.Text = "Localhost" Then
                     MainformRef.ConfigFile.Host = "127.0.0.1"
