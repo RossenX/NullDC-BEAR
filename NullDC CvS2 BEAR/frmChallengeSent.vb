@@ -7,6 +7,9 @@ Public Class frmChallengeSent
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
+        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitBackground)
+        ApplyThemeToControl(Label1, 1)
+        ApplyThemeToControl(btnNope)
     End Sub
 
     Public Sub StartChallenge(ByVal _challanger As BEARPlayer)

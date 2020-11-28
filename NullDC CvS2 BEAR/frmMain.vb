@@ -50,6 +50,14 @@ Public Class frmMain
         ' Load The Theme Stuff
         Rx.MainformRef = Me
 
+        If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_client") Then
+            Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav_client")
+        End If
+
+        If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs_client") Then
+            Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs_client")
+        End If
+
     End Sub
 
 
@@ -191,40 +199,24 @@ Public Class frmMain
 
     Private Sub LoadTheme()
 
-        MainMenuContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-
-        PlayerList.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        Matchlist.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
+        ApplyThemeToControl(MainMenuContainer)
+        ApplyThemeToControl(PlayerList, 2)
+        ApplyThemeToControl(Matchlist, 3)
 
         ' Buttons
-        ApplyButtonTheme(BtnJoin)
-        ApplyButtonTheme(btnOffline)
-        ApplyButtonTheme(btnSearch)
+        ApplyThemeToControl(BtnJoin)
+        ApplyThemeToControl(btnOffline)
+        ApplyThemeToControl(btnSearch)
 
-        ' Labels
-        Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        Label1.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
-        Label1.Font = New Font(Label1.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
+        ApplyThemeToControl(Label1, 1)
+        ApplyThemeToControl(Label2, 1)
 
-        Label2.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        Label2.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
-        Label2.Font = New Font(Label2.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
-
-        'MenuStrip
-        _MainMenuStrip.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
-        _MainMenuStrip.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
-        _MainMenuStrip.Renderer = New MenuStripRenderer
-        _MainMenuStrip.Font = New Font(_MainMenuStrip.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
-
-        lbVer.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        lbVer.ForeColor = BEARTheme.LoadColor(ThemeKeys.TertiaryFontColor)
+        ApplyThemeToControl(_MainMenuStrip)
+        ApplyThemeToControl(lbVer, 2)
 
         imgBeta.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
         'sus_i.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-
-        cbStatus.BackColor = BEARTheme.LoadColor(ThemeKeys.DropdownColor)
-        cbStatus.ForeColor = BEARTheme.LoadColor(ThemeKeys.DropdownFontColor)
-        cbStatus.Font = New Font(cbStatus.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.DropdownFontSize))
+        ApplyThemeToControl(cbStatus)
 
     End Sub
 
@@ -967,11 +959,11 @@ Public Class frmMain
                 TabControl.TabPages.Item(TabControl.TabCount - 1).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
 
                 Dim tmpListView As New ListView
+                ApplyThemeToControl(tmpListView, 3)
                 tmpListView.Dock = DockStyle.Fill
                 tmpListView.MultiSelect = False
                 tmpListView.View = View.Details
                 tmpListView.HeaderStyle = ColumnHeaderStyle.None
-                tmpListView.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
                 tmpListView.FullRowSelect = True
                 tmpListView.Parent = TabControl.TabPages.Item(TabControl.TabCount - 1)
 
@@ -993,8 +985,6 @@ Public Class frmMain
             Dim GameName = ""
 
             Dim _it As New ListViewItem(GamesList(GamesList.Keys(i))(0).ToString)
-            _it.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-            _it.Font = New Font(_it.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.SecondaryFontSize))
 
             _it.SubItems.Add(GamesList.Keys(i).ToString)
             tmp2ListView.Items.Add(_it)
@@ -1241,8 +1231,8 @@ Public Class frmMain
 
 
             'PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
-            PlayerInfo.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-            PlayerInfo.Font = New Font(PlayerInfo.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.SecondaryFontSize))
+            'PlayerInfo.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+            'PlayerInfo.Font = New Font(PlayerInfo.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.SecondaryFontSize))
 
             ListViewToUse.Invoke(Sub() ListViewToUse.Items.Add(PlayerInfo))
 

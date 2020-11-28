@@ -32,16 +32,11 @@ Public Class frmDLC
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        DLCContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-
-        ApplyButtonTheme(btnDownload)
-        ApplyButtonTheme(btnRomsFolder)
-        ApplyButtonTheme(btnClose)
-
-        MenuStrip1.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
-        MenuStrip1.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
-        MenuStrip1.Font = New Font(MenuStrip1.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
-        MenuStrip1.Renderer = New MenuStripRenderer
+        ApplyThemeToControl(DLCContainer, 1)
+        ApplyThemeToControl(btnDownload)
+        ApplyThemeToControl(btnRomsFolder)
+        ApplyThemeToControl(btnClose)
+        ApplyThemeToControl(MenuStrip1)
 
     End Sub
 
@@ -139,12 +134,11 @@ Public Class frmDLC
             tc_games.TabPages.Item(tc_games.TabCount - 1).ForeColor = BEARTheme.LoadColor(ThemeKeys.TertiaryFontColor)
 
             Dim tmpListView As New ListView
+            ApplyThemeToControl(tmpListView, 3)
             tmpListView.Dock = DockStyle.Fill
             tmpListView.MultiSelect = False
             tmpListView.View = View.Details
             tmpListView.HeaderStyle = ColumnHeaderStyle.None
-            tmpListView.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
-            tmpListView.ForeColor = BEARTheme.LoadColor(ThemeKeys.TertiaryFontColor)
             tmpListView.FullRowSelect = True
             tmpListView.Parent = tc_games.TabPages.Item(tc_games.TabCount - 1)
 
@@ -180,7 +174,6 @@ Public Class frmDLC
                 tmpListView.Items.Add(_it)
 
             Next
-
 
             tmpListView.Sorting = SortOrder.Ascending
             tmpListView.Sort()

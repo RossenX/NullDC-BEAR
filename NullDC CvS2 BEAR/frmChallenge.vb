@@ -11,6 +11,13 @@ Public Class frmChallenge
 
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
+        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.ChallengeBackground)
+        ApplyThemeToControl(btnAccept)
+        ApplyThemeToControl(btnDeny)
+        ApplyThemeToControl(btnPing)
+
+        ApplyThemeToControl(Label1, 2)
+        ApplyThemeToControl(lbChallengeText, 3)
 
     End Sub
 
@@ -128,7 +135,7 @@ Public Class frmChallenge
         Me.Visible = False
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnPing.Click
         Dim pingThread As Thread = New Thread(AddressOf GetPing)
         pingThread.IsBackground = True
         pingThread.Start()

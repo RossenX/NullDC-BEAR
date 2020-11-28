@@ -232,31 +232,175 @@ Module BEARTheme
         MenuStripColor
         MenuStripHighlightColor
         MenuStripFontColor
-        LogoImage
-        PlayersListBackgroundImage
-        MatchesListBackgroundImage
-        HostBackgroundImage
-        WaitBackgroundImage
-        ReplyBackgroundImage
-        ChallBackgroundImage
         MenuStripFontSize
         MainMenuBackground
 
+        LogoImage
+        WaitBackground
+        WaitHostBackground
+        ChallengeBackground
+        NotificationBackground
+        OverlayTop
+        OverlayBottom
+        HostBackground
+
+        WaitHostAnimation
+        HostAnimation
     End Enum
 
     Public Theme As New Dictionary(Of String, String)
 
-    Public Sub ApplyButtonTheme(ByRef _button As Button)
-        _button.BackColor = LoadColor(ThemeKeys.ButtonColor)
-        _button.ForeColor = LoadColor(ThemeKeys.ButtonFontColor)
-        _button.Font = New Font(_button.Font.FontFamily, LoadSize(ThemeKeys.ButtonFontSize))
+    Public Sub ApplyThemeToControl(ByRef _control As Object, Optional _which As Single = 1)
+
+        Select Case _control.GetType()
+            Case GetType(Button)
+                ApplyButtonTheme(_control)
+            Case GetType(CheckBox)
+                ApplyCheckBoxTheme(_control, _which)
+            Case GetType(ComboBox)
+                ApplyComboBoxTheme(_control)
+            Case GetType(Label)
+                ApplyLabelTheme(_control, _which)
+            Case GetType(GroupBox)
+                ApplyGroupBoxTheme(_control, _which)
+            Case GetType(MenuStrip)
+                ApplyMenuStripTheme(_control)
+            Case GetType(TableLayoutPanel)
+                ApplyTableLayoutPanelTheme(_control, _which)
+            Case GetType(ListView)
+                ApplyListViewTheme(_control, _which)
+            Case GetType(RichTextBox)
+                ApplyRichTextBoxTheme(_control, _which)
+        End Select
 
     End Sub
 
-    Public Function LoadSize(ByVal _font As ThemeKeys) As Single
+    Private Sub ApplyButtonTheme(ByRef _button As Button)
+        _button.BackColor = LoadColor(ThemeKeys.ButtonColor)
+        _button.ForeColor = LoadColor(ThemeKeys.ButtonFontColor)
+        _button.Font = New Font(_button.Font.FontFamily, _button.Font.Size * LoadSize(ThemeKeys.ButtonFontSize), _button.Font.Style)
+
+    End Sub
+
+    Private Sub ApplyRichTextBoxTheme(ByRef _Control As RichTextBox, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+        End Select
+    End Sub
+
+    Private Sub ApplyListViewTheme(ByRef _Control As ListView, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+        End Select
+    End Sub
+
+    Private Sub ApplyTableLayoutPanelTheme(ByRef _Control As TableLayoutPanel, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+        End Select
+    End Sub
+
+
+    Private Sub ApplyMenuStripTheme(ByRef _Control As MenuStrip)
+        _Control.BackColor = LoadColor(ThemeKeys.MenuStripColor)
+        _Control.ForeColor = LoadColor(ThemeKeys.MenuStripFontColor)
+        _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.MenuStripFontSize), _Control.Font.Style)
+        _Control.Renderer = New MenuStripRenderer
+    End Sub
+
+    Private Sub ApplyGroupBoxTheme(ByRef _Control As GroupBox, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+        End Select
+    End Sub
+
+    Private Sub ApplyCheckBoxTheme(ByRef _Control As CheckBox, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+                _Control.Font = New Font(_Control.Font.FontFamily, _Control.Font.Size * LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+        End Select
+
+    End Sub
+
+    Private Sub ApplyLabelTheme(ByRef _control As Label, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _control.BackColor = Color.Transparent Then _control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+                _control.Font = New Font(_control.Font.FontFamily, _control.Font.Size * LoadSize(ThemeKeys.PrimaryFontSize), _control.Font.Style)
+            Case 2
+                If Not _control.BackColor = Color.Transparent Then _control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+                _control.Font = New Font(_control.Font.FontFamily, _control.Font.Size * LoadSize(ThemeKeys.SecondaryFontSize), _control.Font.Style)
+            Case 3
+                If Not _control.BackColor = Color.Transparent Then _control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+                _control.Font = New Font(_control.Font.FontFamily, _control.Font.Size * LoadSize(ThemeKeys.TertiaryFontSize), _control.Font.Style)
+        End Select
+
+    End Sub
+
+    Private Sub ApplyComboBoxTheme(ByRef _control As ComboBox)
+        _control.BackColor = LoadColor(ThemeKeys.DropdownColor)
+        _control.ForeColor = LoadColor(ThemeKeys.DropdownFontColor)
+        _control.Font = New Font(_control.Font.FontFamily, _control.Font.Size * LoadSize(ThemeKeys.DropdownFontSize), _control.Font.Style)
+
+    End Sub
+
+    Public Function LoadSize(ByVal _font As ThemeKeys) As Decimal
         If Theme.ContainsKey(_font.ToString().ToLower) Then
             If Not Theme(_font.ToString().ToLower) = "" Then
-                Return CDec(Theme(_font.ToString().ToLower))
+                Dim a As Decimal
+                Decimal.TryParse(Theme(_font.ToString().ToLower), a)
+                Return a
             Else
                 Return 8.2
             End If
@@ -281,7 +425,7 @@ Module BEARTheme
 
     Public Function LoadImage(ByVal _image As ThemeKeys) As Image
         If Theme.ContainsKey(_image.ToString.ToLower) Then
-            Return Bitmap.FromFile(MainformRef.NullDCPath & "\themes\default\images\" & Theme(_image.ToString.ToLower))
+            Return Bitmap.FromFile(MainformRef.NullDCPath & "\themes\" & MainformRef.ConfigFile.Theme & "\images\" & Theme(_image.ToString.ToLower))
         Else
             Return Nothing
         End If

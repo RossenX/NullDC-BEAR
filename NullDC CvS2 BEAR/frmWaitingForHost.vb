@@ -2,6 +2,21 @@
 
     Public VMUTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
+        PictureBox1.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
+
+        ApplyThemeToControl(Label1)
+        ApplyThemeToControl(btnRetryVMU)
+        ApplyThemeToControl(btnCancel)
+
+    End Sub
+
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         If Not MainformRef.Challenger Is Nothing Then frmMain.NetworkHandler.SendMessage(">,BO", frmMain.Challenger.ip)
         frmMain.EndSession("Denied")

@@ -28,7 +28,7 @@ Partial Class frmChallenge
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnPing = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
@@ -93,7 +93,7 @@ Partial Class frmChallenge
         Me.TableLayoutPanel2.ColumnCount = 1
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Label1, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Button1, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnPing, 0, 1)
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(488, 125)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 2
@@ -114,18 +114,18 @@ Partial Class frmChallenge
         Me.Label1.Text = "Ping: N/A"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Button1
+        'btnPing
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.Button1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(1, 38)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(0)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(113, 24)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Re-Ping"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnPing.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.btnPing.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnPing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPing.Location = New System.Drawing.Point(1, 38)
+        Me.btnPing.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnPing.Name = "btnPing"
+        Me.btnPing.Size = New System.Drawing.Size(113, 24)
+        Me.btnPing.TabIndex = 1
+        Me.btnPing.Text = "Re-Ping"
+        Me.btnPing.UseVisualStyleBackColor = False
         '
         'frmChallenge
         '
@@ -157,5 +157,5 @@ Partial Class frmChallenge
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnPing As Button
 End Class

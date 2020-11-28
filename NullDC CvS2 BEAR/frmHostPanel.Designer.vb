@@ -85,7 +85,8 @@ Partial Class frmHostPanel
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.NullDC_CvS2_BEAR.My.Resources.Resources.ConnectingNetplay
+        Me.PictureBox1.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.ConnectingNetplay
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PictureBox1.Location = New System.Drawing.Point(75, 1)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(300, 149)
@@ -212,8 +213,8 @@ Partial Class frmHostPanel
         Me.tb_mednafen.BackColor = System.Drawing.Color.Transparent
         Me.tb_mednafen.ColumnCount = 1
         Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tb_mednafen.Controls.Add(Me.Label2, 0, 0)
         Me.tb_mednafen.Controls.Add(Me.cb_Serverlist, 0, 1)
+        Me.tb_mednafen.Controls.Add(Me.Label2, 0, 0)
         Me.tb_mednafen.Location = New System.Drawing.Point(127, 245)
         Me.tb_mednafen.Name = "tb_mednafen"
         Me.tb_mednafen.RowCount = 2
@@ -253,12 +254,12 @@ Partial Class frmHostPanel
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.SingleSquare
         Me.ClientSize = New System.Drawing.Size(450, 450)
-        Me.Controls.Add(Me.tb_mednafen)
         Me.Controls.Add(Me.tb_nulldc)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.btnStartHosting)
+        Me.Controls.Add(Me.tb_mednafen)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximumSize = New System.Drawing.Size(450, 450)
         Me.MinimumSize = New System.Drawing.Size(450, 450)

@@ -6,6 +6,9 @@
         HideTimer.Interval = 5000
         AddHandler HideTimer.Tick, AddressOf HideTimer_tick
 
+        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.NotificationBackground)
+        ApplyThemeToControl(Button1)
+        ApplyThemeToControl(Label1)
     End Sub
 
     Private Sub HideTimer_tick(sender As Object, e As EventArgs)

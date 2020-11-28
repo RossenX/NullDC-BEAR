@@ -8,20 +8,16 @@
 
 
         GameSelectContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-        ApplyButtonTheme(btnCancel)
-        ApplyButtonTheme(btnLetsGo)
 
-        cbDelay.BackColor = BEARTheme.LoadColor(ThemeKeys.DropdownColor)
-        cbDelay.ForeColor = BEARTheme.LoadColor(ThemeKeys.DropdownFontColor)
+        ApplyThemeToControl(btnCancel)
+        ApplyThemeToControl(btnLetsGo)
+        ApplyThemeToControl(cbDelay)
+        ApplyThemeToControl(Label2)
+        ApplyThemeToControl(Label3)
+        ApplyThemeToControl(Label4)
+        ApplyThemeToControl(btnLetsGo)
+        ApplyThemeToControl(MenuStrip1)
 
-        Label2.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
-        Label3.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
-        Label4.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
-
-        MenuStrip1.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
-        MenuStrip1.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
-        MenuStrip1.Font = New Font(MenuStrip1.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
-        MenuStrip1.Renderer = New MenuStripRenderer
     End Sub
 
     Public Sub StartChallenge(Optional ByVal _challenger As BEARPlayer = Nothing)

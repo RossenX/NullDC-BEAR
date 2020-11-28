@@ -9,6 +9,25 @@ Public Class frmHostPanel
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
 
+        PictureBox1.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostAnimation)
+        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostBackground)
+
+        ApplyThemeToControl(btnExit)
+        ApplyThemeToControl(btnStartHosting)
+
+        ApplyThemeToControl(lbInfo, 2)
+        ApplyThemeToControl(lbPing, 2)
+
+        ApplyThemeToControl(Label2, 2)
+        ApplyThemeToControl(cb_Serverlist)
+
+        ApplyThemeToControl(Label1, 2)
+        ApplyThemeToControl(cbDelay)
+        ApplyThemeToControl(btnSuggestDelay)
+        ApplyThemeToControl(Button1)
+        ApplyThemeToControl(cbRegion)
+
+
     End Sub
 
     Public Sub BeginHost(Optional ByVal _challenger As BEARPlayer = Nothing)

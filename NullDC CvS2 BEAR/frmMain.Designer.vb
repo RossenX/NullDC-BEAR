@@ -307,6 +307,7 @@ Partial Class frmMain
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.MainMenuContainer.SetColumnSpan(Me.Label1, 2)
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(10, 10)
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
@@ -319,7 +320,7 @@ Partial Class frmMain
         '
         Me.lbVer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbVer.AutoSize = True
-        Me.lbVer.BackColor = System.Drawing.Color.Transparent
+        Me.lbVer.BackColor = System.Drawing.Color.LightGray
         Me.lbVer.Location = New System.Drawing.Point(843, 3)
         Me.lbVer.Name = "lbVer"
         Me.lbVer.Size = New System.Drawing.Size(34, 13)

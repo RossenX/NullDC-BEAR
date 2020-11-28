@@ -137,6 +137,14 @@ Public Class MednafenLauncher
             MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
         End If
 
+        If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_client") Then
+            Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav_client")
+        End If
+
+        If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs_client") Then
+            Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs_client")
+        End If
+
         MednafenInstance = Nothing
 
     End Sub

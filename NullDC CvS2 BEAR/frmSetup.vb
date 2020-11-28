@@ -12,45 +12,17 @@ Public Class frmSetup
 
         FillSettings()
 
-        OptionsContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        ApplyThemeToControl(OptionsContainer, 2)
 
         For i = 0 To OptionsContainer.Controls.Count - 1
-            Select Case OptionsContainer.Controls(i).GetType()
-                Case GetType(Button)
-                    ApplyButtonTheme(OptionsContainer.Controls(i))
-                Case GetType(CheckBox)
-                    OptionsContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-                    OptionsContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-                Case GetType(ComboBox)
-                    OptionsContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-                    OptionsContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-                Case GetType(Label)
-                    OptionsContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-                    OptionsContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-                Case GetType(GroupBox)
-                    OptionsContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-                    OptionsContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-            End Select
+            ApplyThemeToControl(OptionsContainer.Controls(i), 2)
         Next
 
         For i = 0 To CustomSizeContainer.Controls.Count - 1
-            Select Case CustomSizeContainer.Controls(i).GetType()
-                Case GetType(Button)
-                    ApplyButtonTheme(CustomSizeContainer.Controls(i))
-                Case GetType(CheckBox)
-                    CustomSizeContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-                    CustomSizeContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-                Case GetType(ComboBox)
-                    CustomSizeContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-                    CustomSizeContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-                Case GetType(Label)
-                    CustomSizeContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-                    CustomSizeContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-            End Select
+            ApplyThemeToControl(CustomSizeContainer.Controls(i), 2)
         Next
+        ApplyThemeToControl(Button2)
 
-        Button2.BackColor = Color.FromArgb(0, 255, 0)
-        Button2.ForeColor = Color.FromArgb(0, 0, 0)
     End Sub
 
     Private Sub FillSettings()
