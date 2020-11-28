@@ -8,12 +8,8 @@
 
 
         GameSelectContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-
-        btnCancel.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
-        btnCancel.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
-
-        btnLetsGo.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
-        btnLetsGo.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
+        ApplyButtonTheme(btnCancel)
+        ApplyButtonTheme(btnLetsGo)
 
         cbDelay.BackColor = BEARTheme.LoadColor(ThemeKeys.DropdownColor)
         cbDelay.ForeColor = BEARTheme.LoadColor(ThemeKeys.DropdownFontColor)

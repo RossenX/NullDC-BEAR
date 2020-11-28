@@ -158,6 +158,12 @@
     <Compile Include="frmDLC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDM.Designer.vb">
+      <DependentUpon>frmDM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDM.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmHostPanel.Designer.vb">
       <DependentUpon>frmHostPanel.vb</DependentUpon>
     </Compile>
@@ -261,6 +267,9 @@
     <EmbeddedResource Include="frmDLC.resx">
       <DependentUpon>frmDLC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDM.resx">
+      <DependentUpon>frmDM.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHostPanel.resx">
       <DependentUpon>frmHostPanel.vb</DependentUpon>
     </EmbeddedResource>
@@ -344,7 +353,6 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\MainMenuBackground1.png" />
     <None Include="Resources\System Icons\icon_PSX.png" />
     <None Include="Resources\System Icons\icon_NES.png" />
     <None Include="Resources\System Icons\icon_GBC.png" />

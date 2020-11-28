@@ -25,7 +25,6 @@ Partial Class frmSetup
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tb_Volume = New System.Windows.Forms.TrackBar()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.cbAllowSpectators = New System.Windows.Forms.ComboBox()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -42,7 +41,7 @@ Partial Class frmSetup
         Me.tbCWWidth = New System.Windows.Forms.TextBox()
         Me.tbCWHeight = New System.Windows.Forms.TextBox()
         Me.GBCustomWindowSize = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.CustomSizeContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.tbCWY = New System.Windows.Forms.TextBox()
         Me.tbCWX = New System.Windows.Forms.TextBox()
@@ -56,22 +55,28 @@ Partial Class frmSetup
         Me.cb_ShowGameInTitle = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.cbVsync = New System.Windows.Forms.ComboBox()
+        Me.OptionsContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.cbThemes = New System.Windows.Forms.ComboBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_Volume, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_eVolume, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GBCustomWindowSize.SuspendLayout()
-        Me.TableLayoutPanel2.SuspendLayout()
+        Me.CustomSizeContainer.SuspendLayout()
+        Me.OptionsContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Clippy
+        Me.PictureBox1.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Clippy
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PictureBox1.InitialImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Clippy
-        Me.PictureBox1.Location = New System.Drawing.Point(12, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(393, 66)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(257, 227)
+        Me.OptionsContainer.SetRowSpan(Me.PictureBox1, 4)
+        Me.PictureBox1.Size = New System.Drawing.Size(140, 135)
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
         '
@@ -99,22 +104,11 @@ Partial Class frmSetup
         Me.tb_Volume.TickFrequency = 10
         Me.tb_Volume.TickStyle = System.Windows.Forms.TickStyle.Both
         '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.Red
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button3.Location = New System.Drawing.Point(275, 154)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(306, 28)
-        Me.Button3.TabIndex = 11
-        Me.Button3.TabStop = False
-        Me.Button3.Text = "Controls"
-        Me.Button3.UseVisualStyleBackColor = False
-        '
         'Label8
         '
+        Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(484, 18)
+        Me.Label8.Location = New System.Drawing.Point(173, 100)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(86, 13)
         Me.Label8.TabIndex = 10
@@ -125,36 +119,37 @@ Partial Class frmSetup
         Me.cbAllowSpectators.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbAllowSpectators.FormattingEnabled = True
         Me.cbAllowSpectators.Items.AddRange(New Object() {"Yes", "No"})
-        Me.cbAllowSpectators.Location = New System.Drawing.Point(487, 34)
+        Me.cbAllowSpectators.Location = New System.Drawing.Point(173, 116)
         Me.cbAllowSpectators.Name = "cbAllowSpectators"
-        Me.cbAllowSpectators.Size = New System.Drawing.Size(83, 21)
+        Me.cbAllowSpectators.Size = New System.Drawing.Size(97, 21)
         Me.cbAllowSpectators.TabIndex = 9
         Me.cbAllowSpectators.TabStop = False
         '
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.Color.Lime
+        Me.OptionsContainer.SetColumnSpan(Me.Button2, 2)
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Location = New System.Drawing.Point(275, 185)
+        Me.Button2.Location = New System.Drawing.Point(13, 207)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(306, 54)
+        Me.Button2.Size = New System.Drawing.Size(257, 54)
         Me.Button2.TabIndex = 7
         Me.Button2.TabStop = False
-        Me.Button2.Text = "Add Firewall Entry for BEAR and Emulators"
+        Me.Button2.Text = "CLICK ME" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Add Firewall Entry for BEAR"
         Me.Button2.UseVisualStyleBackColor = False
         '
         'tbPort
         '
-        Me.tbPort.Location = New System.Drawing.Point(381, 35)
+        Me.tbPort.Location = New System.Drawing.Point(173, 26)
         Me.tbPort.Name = "tbPort"
-        Me.tbPort.Size = New System.Drawing.Size(100, 20)
+        Me.tbPort.Size = New System.Drawing.Size(97, 20)
         Me.tbPort.TabIndex = 6
         Me.tbPort.TabStop = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(381, 19)
+        Me.Label6.Location = New System.Drawing.Point(173, 10)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(62, 13)
         Me.Label6.TabIndex = 5
@@ -162,9 +157,12 @@ Partial Class frmSetup
         '
         'btnSaveExit
         '
-        Me.btnSaveExit.Location = New System.Drawing.Point(587, 188)
+        Me.btnSaveExit.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSaveExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnSaveExit.Location = New System.Drawing.Point(393, 367)
         Me.btnSaveExit.Name = "btnSaveExit"
-        Me.btnSaveExit.Size = New System.Drawing.Size(111, 51)
+        Me.btnSaveExit.Size = New System.Drawing.Size(144, 51)
         Me.btnSaveExit.TabIndex = 4
         Me.btnSaveExit.TabStop = False
         Me.btnSaveExit.Text = "Save"
@@ -173,7 +171,7 @@ Partial Class frmSetup
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(275, 19)
+        Me.Label2.Location = New System.Drawing.Point(13, 10)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(98, 13)
         Me.Label2.TabIndex = 1
@@ -181,16 +179,19 @@ Partial Class frmSetup
         '
         'tbPlayerName
         '
-        Me.tbPlayerName.Location = New System.Drawing.Point(275, 35)
+        Me.tbPlayerName.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tbPlayerName.Location = New System.Drawing.Point(13, 26)
         Me.tbPlayerName.Name = "tbPlayerName"
-        Me.tbPlayerName.Size = New System.Drawing.Size(100, 20)
+        Me.tbPlayerName.Size = New System.Drawing.Size(154, 20)
         Me.tbPlayerName.TabIndex = 0
         Me.tbPlayerName.TabStop = False
         '
         'cbShowConsole
         '
         Me.cbShowConsole.AutoSize = True
-        Me.cbShowConsole.Location = New System.Drawing.Point(278, 131)
+        Me.cbShowConsole.Location = New System.Drawing.Point(13, 116)
         Me.cbShowConsole.Name = "cbShowConsole"
         Me.cbShowConsole.Size = New System.Drawing.Size(130, 17)
         Me.cbShowConsole.TabIndex = 14
@@ -225,8 +226,9 @@ Partial Class frmSetup
         '
         Me.GroupBox1.AutoSize = True
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel1)
-        Me.GroupBox1.Location = New System.Drawing.Point(587, 1)
+        Me.GroupBox1.Location = New System.Drawing.Point(276, 13)
         Me.GroupBox1.Name = "GroupBox1"
+        Me.OptionsContainer.SetRowSpan(Me.GroupBox1, 7)
         Me.GroupBox1.Size = New System.Drawing.Size(111, 184)
         Me.GroupBox1.TabIndex = 17
         Me.GroupBox1.TabStop = False
@@ -272,44 +274,46 @@ Partial Class frmSetup
         '
         'GBCustomWindowSize
         '
-        Me.GBCustomWindowSize.Controls.Add(Me.TableLayoutPanel2)
-        Me.GBCustomWindowSize.Location = New System.Drawing.Point(12, 245)
+        Me.OptionsContainer.SetColumnSpan(Me.GBCustomWindowSize, 2)
+        Me.GBCustomWindowSize.Controls.Add(Me.CustomSizeContainer)
+        Me.GBCustomWindowSize.Location = New System.Drawing.Point(13, 267)
         Me.GBCustomWindowSize.Name = "GBCustomWindowSize"
         Me.GBCustomWindowSize.Size = New System.Drawing.Size(257, 151)
         Me.GBCustomWindowSize.TabIndex = 20
         Me.GBCustomWindowSize.TabStop = False
         Me.GBCustomWindowSize.Text = "Custom Window Size"
         '
-        'TableLayoutPanel2
+        'CustomSizeContainer
         '
-        Me.TableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.Button4, 0, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.tbCWY, 1, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.tbCWX, 1, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label9, 0, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label7, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label5, 0, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label4, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.tbCWWidth, 1, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.tbCWHeight, 1, 0)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(6, 19)
-        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 5
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(245, 126)
-        Me.TableLayoutPanel2.TabIndex = 21
+        Me.CustomSizeContainer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.CustomSizeContainer.ColumnCount = 2
+        Me.CustomSizeContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.CustomSizeContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.CustomSizeContainer.Controls.Add(Me.Button4, 0, 4)
+        Me.CustomSizeContainer.Controls.Add(Me.tbCWY, 1, 3)
+        Me.CustomSizeContainer.Controls.Add(Me.tbCWX, 1, 2)
+        Me.CustomSizeContainer.Controls.Add(Me.Label9, 0, 3)
+        Me.CustomSizeContainer.Controls.Add(Me.Label7, 0, 2)
+        Me.CustomSizeContainer.Controls.Add(Me.Label5, 0, 1)
+        Me.CustomSizeContainer.Controls.Add(Me.Label4, 0, 0)
+        Me.CustomSizeContainer.Controls.Add(Me.tbCWWidth, 1, 1)
+        Me.CustomSizeContainer.Controls.Add(Me.tbCWHeight, 1, 0)
+        Me.CustomSizeContainer.Location = New System.Drawing.Point(6, 19)
+        Me.CustomSizeContainer.Margin = New System.Windows.Forms.Padding(0)
+        Me.CustomSizeContainer.Name = "CustomSizeContainer"
+        Me.CustomSizeContainer.RowCount = 5
+        Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.CustomSizeContainer.Size = New System.Drawing.Size(245, 126)
+        Me.CustomSizeContainer.TabIndex = 21
         '
         'Button4
         '
         Me.Button4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button4.Location = New System.Drawing.Point(0, 104)
         Me.Button4.Margin = New System.Windows.Forms.Padding(0)
         Me.Button4.Name = "Button4"
@@ -383,7 +387,7 @@ Partial Class frmSetup
         'cbUseCustomWindowSize
         '
         Me.cbUseCustomWindowSize.AutoSize = True
-        Me.cbUseCustomWindowSize.Location = New System.Drawing.Point(427, 131)
+        Me.cbUseCustomWindowSize.Location = New System.Drawing.Point(13, 143)
         Me.cbUseCustomWindowSize.Name = "cbUseCustomWindowSize"
         Me.cbUseCustomWindowSize.Size = New System.Drawing.Size(154, 17)
         Me.cbUseCustomWindowSize.TabIndex = 22
@@ -395,15 +399,15 @@ Partial Class frmSetup
         Me.cbOverlay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOverlay.FormattingEnabled = True
         Me.cbOverlay.Items.AddRange(New Object() {"Off", "Top Full", "Top Minimal", "Bottom Full", "Bottom Minimal"})
-        Me.cbOverlay.Location = New System.Drawing.Point(420, 74)
+        Me.cbOverlay.Location = New System.Drawing.Point(13, 66)
         Me.cbOverlay.Name = "cbOverlay"
-        Me.cbOverlay.Size = New System.Drawing.Size(150, 21)
+        Me.cbOverlay.Size = New System.Drawing.Size(154, 21)
         Me.cbOverlay.TabIndex = 23
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(501, 58)
+        Me.Label10.Location = New System.Drawing.Point(13, 50)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(69, 13)
         Me.Label10.TabIndex = 24
@@ -412,7 +416,7 @@ Partial Class frmSetup
         'cb_ShowGameInTitle
         '
         Me.cb_ShowGameInTitle.AutoSize = True
-        Me.cb_ShowGameInTitle.Location = New System.Drawing.Point(278, 108)
+        Me.cb_ShowGameInTitle.Location = New System.Drawing.Point(13, 93)
         Me.cb_ShowGameInTitle.Name = "cb_ShowGameInTitle"
         Me.cb_ShowGameInTitle.Size = New System.Drawing.Size(134, 17)
         Me.cb_ShowGameInTitle.TabIndex = 25
@@ -422,7 +426,7 @@ Partial Class frmSetup
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(275, 58)
+        Me.Label11.Location = New System.Drawing.Point(173, 50)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(36, 13)
         Me.Label11.TabIndex = 26
@@ -433,35 +437,83 @@ Partial Class frmSetup
         Me.cbVsync.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbVsync.FormattingEnabled = True
         Me.cbVsync.Items.AddRange(New Object() {"Off", "On"})
-        Me.cbVsync.Location = New System.Drawing.Point(278, 74)
+        Me.cbVsync.Location = New System.Drawing.Point(173, 66)
         Me.cbVsync.Name = "cbVsync"
-        Me.cbVsync.Size = New System.Drawing.Size(67, 21)
+        Me.cbVsync.Size = New System.Drawing.Size(97, 21)
         Me.cbVsync.TabIndex = 27
+        '
+        'OptionsContainer
+        '
+        Me.OptionsContainer.ColumnCount = 5
+        Me.OptionsContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.OptionsContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.OptionsContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.OptionsContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.OptionsContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
+        Me.OptionsContainer.Controls.Add(Me.Label2, 0, 0)
+        Me.OptionsContainer.Controls.Add(Me.PictureBox1, 4, 3)
+        Me.OptionsContainer.Controls.Add(Me.GBCustomWindowSize, 0, 8)
+        Me.OptionsContainer.Controls.Add(Me.cb_ShowGameInTitle, 0, 4)
+        Me.OptionsContainer.Controls.Add(Me.cbUseCustomWindowSize, 0, 6)
+        Me.OptionsContainer.Controls.Add(Me.Button2, 0, 7)
+        Me.OptionsContainer.Controls.Add(Me.cbShowConsole, 0, 5)
+        Me.OptionsContainer.Controls.Add(Me.tbPlayerName, 0, 1)
+        Me.OptionsContainer.Controls.Add(Me.Label6, 1, 0)
+        Me.OptionsContainer.Controls.Add(Me.tbPort, 1, 1)
+        Me.OptionsContainer.Controls.Add(Me.GroupBox1, 3, 0)
+        Me.OptionsContainer.Controls.Add(Me.Label10, 0, 2)
+        Me.OptionsContainer.Controls.Add(Me.cbOverlay, 0, 3)
+        Me.OptionsContainer.Controls.Add(Me.Label11, 1, 2)
+        Me.OptionsContainer.Controls.Add(Me.cbVsync, 1, 3)
+        Me.OptionsContainer.Controls.Add(Me.cbAllowSpectators, 1, 5)
+        Me.OptionsContainer.Controls.Add(Me.Label8, 1, 4)
+        Me.OptionsContainer.Controls.Add(Me.cbThemes, 4, 1)
+        Me.OptionsContainer.Controls.Add(Me.Label12, 4, 0)
+        Me.OptionsContainer.Controls.Add(Me.btnSaveExit, 4, 8)
+        Me.OptionsContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.OptionsContainer.Location = New System.Drawing.Point(0, 0)
+        Me.OptionsContainer.Name = "OptionsContainer"
+        Me.OptionsContainer.Padding = New System.Windows.Forms.Padding(10)
+        Me.OptionsContainer.RowCount = 9
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.OptionsContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.OptionsContainer.Size = New System.Drawing.Size(543, 428)
+        Me.OptionsContainer.TabIndex = 28
+        '
+        'cbThemes
+        '
+        Me.cbThemes.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cbThemes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbThemes.FormattingEnabled = True
+        Me.cbThemes.Location = New System.Drawing.Point(393, 26)
+        Me.cbThemes.Name = "cbThemes"
+        Me.cbThemes.Size = New System.Drawing.Size(144, 21)
+        Me.cbThemes.TabIndex = 28
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(393, 10)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(40, 13)
+        Me.Label12.TabIndex = 29
+        Me.Label12.Text = "Theme"
         '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(706, 407)
-        Me.Controls.Add(Me.cbVsync)
-        Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.cb_ShowGameInTitle)
-        Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.cbOverlay)
-        Me.Controls.Add(Me.GBCustomWindowSize)
-        Me.Controls.Add(Me.cbUseCustomWindowSize)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.cbShowConsole)
-        Me.Controls.Add(Me.btnSaveExit)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.tbPort)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.cbAllowSpectators)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.tbPlayerName)
+        Me.ClientSize = New System.Drawing.Size(543, 428)
+        Me.Controls.Add(Me.OptionsContainer)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmSetup"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -474,10 +526,11 @@ Partial Class frmSetup
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.GBCustomWindowSize.ResumeLayout(False)
-        Me.TableLayoutPanel2.ResumeLayout(False)
-        Me.TableLayoutPanel2.PerformLayout()
+        Me.CustomSizeContainer.ResumeLayout(False)
+        Me.CustomSizeContainer.PerformLayout()
+        Me.OptionsContainer.ResumeLayout(False)
+        Me.OptionsContainer.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -490,7 +543,6 @@ Partial Class frmSetup
     Friend WithEvents Button2 As Button
     Friend WithEvents Label8 As Label
     Friend WithEvents cbAllowSpectators As ComboBox
-    Friend WithEvents Button3 As Button
     Friend WithEvents tb_Volume As TrackBar
     Friend WithEvents Label3 As Label
     Friend WithEvents cbShowConsole As CheckBox
@@ -501,7 +553,7 @@ Partial Class frmSetup
     Friend WithEvents tbCWWidth As TextBox
     Friend WithEvents tbCWHeight As TextBox
     Friend WithEvents GBCustomWindowSize As GroupBox
-    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents CustomSizeContainer As TableLayoutPanel
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents cbUseCustomWindowSize As CheckBox
@@ -515,4 +567,7 @@ Partial Class frmSetup
     Friend WithEvents cb_ShowGameInTitle As CheckBox
     Friend WithEvents Label11 As Label
     Friend WithEvents cbVsync As ComboBox
+    Friend WithEvents OptionsContainer As TableLayoutPanel
+    Friend WithEvents cbThemes As ComboBox
+    Friend WithEvents Label12 As Label
 End Class

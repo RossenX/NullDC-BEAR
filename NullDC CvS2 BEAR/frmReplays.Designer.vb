@@ -45,6 +45,7 @@ Partial Class frmReplays
         '
         'btnOpen
         '
+        Me.btnOpen.AutoSize = True
         Me.btnOpen.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnOpen.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnOpen.Location = New System.Drawing.Point(384, 264)
@@ -111,6 +112,7 @@ Partial Class frmReplays
         '
         'btnFolder
         '
+        Me.btnFolder.AutoSize = True
         Me.btnFolder.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnFolder.Location = New System.Drawing.Point(465, 264)
@@ -131,6 +133,7 @@ Partial Class frmReplays
         '
         'btnPlay
         '
+        Me.btnPlay.AutoSize = True
         Me.btnPlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnPlay.Location = New System.Drawing.Point(572, 264)
@@ -234,6 +237,7 @@ Partial Class frmReplays
         '
         'btnDelete
         '
+        Me.btnDelete.AutoSize = True
         Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnDelete.Location = New System.Drawing.Point(291, 264)

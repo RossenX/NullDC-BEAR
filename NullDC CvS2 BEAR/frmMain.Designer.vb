@@ -24,18 +24,14 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim ListViewGroup11 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Idle", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup12 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DND", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Idle", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DND", System.Windows.Forms.HorizontalAlignment.Center)
         Me.Matchlist = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.OptionsToolStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ChallengeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DownloadRomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.BtnJoin = New System.Windows.Forms.Button()
@@ -52,7 +48,7 @@ Partial Class frmMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lbVer = New System.Windows.Forms.Label()
-        Me.MainMenuStrip = New System.Windows.Forms.MenuStrip()
+        Me._MainMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.ReplaysToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -60,12 +56,9 @@ Partial Class frmMain
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
-        Me.sus_i = New System.Windows.Forms.PictureBox()
-        Me.OptionsToolStrip.SuspendLayout()
         Me.MainMenuContainer.SuspendLayout()
-        Me.MainMenuStrip.SuspendLayout()
+        Me._MainMenuStrip.SuspendLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.sus_i, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Matchlist
@@ -74,7 +67,6 @@ Partial Class frmMain
         Me.Matchlist.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.Matchlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.MainMenuContainer.SetColumnSpan(Me.Matchlist, 4)
-        Me.Matchlist.ContextMenuStrip = Me.OptionsToolStrip
         Me.Matchlist.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Matchlist.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Matchlist.ForeColor = System.Drawing.Color.Red
@@ -86,7 +78,7 @@ Partial Class frmMain
         Me.Matchlist.MultiSelect = False
         Me.Matchlist.Name = "Matchlist"
         Me.Matchlist.ShowItemToolTips = True
-        Me.Matchlist.Size = New System.Drawing.Size(609, 411)
+        Me.Matchlist.Size = New System.Drawing.Size(609, 403)
         Me.Matchlist.SmallImageList = Me.SystemIcons
         Me.Matchlist.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.Matchlist.TabIndex = 3
@@ -121,30 +113,6 @@ Partial Class frmMain
         Me.ColumnHeader5.Text = "Status"
         Me.ColumnHeader5.Width = 70
         '
-        'OptionsToolStrip
-        '
-        Me.OptionsToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChallengeToolStripMenuItem, Me.DownloadRomToolStripMenuItem, Me.PingToolStripMenuItem})
-        Me.OptionsToolStrip.Name = "OptionsToolStrip"
-        Me.OptionsToolStrip.Size = New System.Drawing.Size(178, 70)
-        '
-        'ChallengeToolStripMenuItem
-        '
-        Me.ChallengeToolStripMenuItem.Name = "ChallengeToolStripMenuItem"
-        Me.ChallengeToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.ChallengeToolStripMenuItem.Text = "Challenge/Spectate"
-        '
-        'DownloadRomToolStripMenuItem
-        '
-        Me.DownloadRomToolStripMenuItem.Name = "DownloadRomToolStripMenuItem"
-        Me.DownloadRomToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.DownloadRomToolStripMenuItem.Text = "Download Rom"
-        '
-        'PingToolStripMenuItem
-        '
-        Me.PingToolStripMenuItem.Name = "PingToolStripMenuItem"
-        Me.PingToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
-        Me.PingToolStripMenuItem.Text = "Ping"
-        '
         'SystemIcons
         '
         Me.SystemIcons.ImageStream = CType(resources.GetObject("SystemIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -163,15 +131,16 @@ Partial Class frmMain
         '
         'btnSearch
         '
+        Me.btnSearch.AutoSize = True
         Me.btnSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnSearch.Location = New System.Drawing.Point(260, 456)
+        Me.btnSearch.Location = New System.Drawing.Point(260, 448)
         Me.btnSearch.Margin = New System.Windows.Forms.Padding(0)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(152, 28)
+        Me.btnSearch.Size = New System.Drawing.Size(152, 36)
         Me.btnSearch.TabIndex = 4
         Me.btnSearch.TabStop = False
         Me.btnSearch.Text = "Refresh ↺"
@@ -179,15 +148,16 @@ Partial Class frmMain
         '
         'BtnJoin
         '
+        Me.BtnJoin.AutoSize = True
         Me.BtnJoin.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.BtnJoin.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BtnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnJoin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnJoin.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.BtnJoin.Location = New System.Drawing.Point(412, 456)
+        Me.BtnJoin.Location = New System.Drawing.Point(412, 448)
         Me.BtnJoin.Margin = New System.Windows.Forms.Padding(0)
         Me.BtnJoin.Name = "BtnJoin"
-        Me.BtnJoin.Size = New System.Drawing.Size(152, 28)
+        Me.BtnJoin.Size = New System.Drawing.Size(152, 36)
         Me.BtnJoin.TabIndex = 5
         Me.BtnJoin.TabStop = False
         Me.BtnJoin.Text = "Challenge"
@@ -195,15 +165,16 @@ Partial Class frmMain
         '
         'btnOffline
         '
+        Me.btnOffline.AutoSize = True
         Me.btnOffline.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnOffline.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnOffline.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnOffline.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOffline.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnOffline.Location = New System.Drawing.Point(716, 456)
+        Me.btnOffline.Location = New System.Drawing.Point(716, 448)
         Me.btnOffline.Margin = New System.Windows.Forms.Padding(0)
         Me.btnOffline.Name = "btnOffline"
-        Me.btnOffline.Size = New System.Drawing.Size(153, 28)
+        Me.btnOffline.Size = New System.Drawing.Size(153, 36)
         Me.btnOffline.TabIndex = 7
         Me.btnOffline.TabStop = False
         Me.btnOffline.Text = "Play Offline"
@@ -221,7 +192,7 @@ Partial Class frmMain
         Me.cbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbStatus.FormattingEnabled = True
         Me.cbStatus.Items.AddRange(New Object() {"Idle", "DND", "Hidden"})
-        Me.cbStatus.Location = New System.Drawing.Point(10, 456)
+        Me.cbStatus.Location = New System.Drawing.Point(10, 448)
         Me.cbStatus.Margin = New System.Windows.Forms.Padding(0)
         Me.cbStatus.Name = "cbStatus"
         Me.cbStatus.Size = New System.Drawing.Size(125, 21)
@@ -238,13 +209,13 @@ Partial Class frmMain
         Me.PlayerList.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerList.FullRowSelect = True
         Me.PlayerList.GridLines = True
-        ListViewGroup11.Header = "Idle"
-        ListViewGroup11.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup11.Name = "Idle"
-        ListViewGroup12.Header = "DND"
-        ListViewGroup12.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup12.Name = "DND"
-        Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup11, ListViewGroup12})
+        ListViewGroup1.Header = "Idle"
+        ListViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup1.Name = "Idle"
+        ListViewGroup2.Header = "DND"
+        ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup2.Name = "DND"
+        Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2})
         Me.PlayerList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.PlayerList.HideSelection = False
         Me.PlayerList.Location = New System.Drawing.Point(10, 45)
@@ -252,7 +223,7 @@ Partial Class frmMain
         Me.PlayerList.MultiSelect = False
         Me.PlayerList.Name = "PlayerList"
         Me.PlayerList.ShowItemToolTips = True
-        Me.PlayerList.Size = New System.Drawing.Size(250, 411)
+        Me.PlayerList.Size = New System.Drawing.Size(250, 403)
         Me.PlayerList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.PlayerList.TabIndex = 20
         Me.PlayerList.UseCompatibleStateImageBehavior = False
@@ -310,7 +281,7 @@ Partial Class frmMain
         Me.MainMenuContainer.RowCount = 3
         Me.MainMenuContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
         Me.MainMenuContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.MainMenuContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
+        Me.MainMenuContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36.0!))
         Me.MainMenuContainer.Size = New System.Drawing.Size(879, 494)
         Me.MainMenuContainer.TabIndex = 21
         '
@@ -336,7 +307,6 @@ Partial Class frmMain
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.MainMenuContainer.SetColumnSpan(Me.Label1, 2)
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(10, 10)
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
@@ -357,17 +327,17 @@ Partial Class frmMain
         Me.lbVer.Text = "0.00a"
         Me.lbVer.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'MainMenuStrip
+        '_MainMenuStrip
         '
-        Me.MainMenuStrip.BackColor = System.Drawing.Color.Transparent
-        Me.MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem})
-        Me.MainMenuStrip.Location = New System.Drawing.Point(0, 0)
-        Me.MainMenuStrip.Name = "MainMenuStrip"
-        Me.MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
-        Me.MainMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.MainMenuStrip.Size = New System.Drawing.Size(879, 24)
-        Me.MainMenuStrip.TabIndex = 22
-        Me.MainMenuStrip.Text = "MainMenuStrip"
+        Me._MainMenuStrip.BackColor = System.Drawing.Color.Transparent
+        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem})
+        Me._MainMenuStrip.Location = New System.Drawing.Point(0, 0)
+        Me._MainMenuStrip.Name = "_MainMenuStrip"
+        Me._MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
+        Me._MainMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me._MainMenuStrip.Size = New System.Drawing.Size(879, 24)
+        Me._MainMenuStrip.TabIndex = 22
+        Me._MainMenuStrip.Text = "MainMenuStrip"
         '
         'ReplaysToolStripMenuItem
         '
@@ -423,41 +393,25 @@ Partial Class frmMain
         Me.imgBeta.TabIndex = 11
         Me.imgBeta.TabStop = False
         '
-        'sus_i
-        '
-        Me.sus_i.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sus_i.BackColor = System.Drawing.Color.Transparent
-        Me.sus_i.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.sus
-        Me.sus_i.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.sus_i.Location = New System.Drawing.Point(829, 37)
-        Me.sus_i.Margin = New System.Windows.Forms.Padding(0)
-        Me.sus_i.Name = "sus_i"
-        Me.sus_i.Size = New System.Drawing.Size(32, 29)
-        Me.sus_i.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.sus_i.TabIndex = 18
-        Me.sus_i.TabStop = False
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(879, 518)
-        Me.Controls.Add(Me.sus_i)
         Me.Controls.Add(Me.imgBeta)
         Me.Controls.Add(Me.MainMenuContainer)
         Me.Controls.Add(Me.lbVer)
-        Me.Controls.Add(Me.MainMenuStrip)
+        Me.Controls.Add(Me._MainMenuStrip)
         Me.DoubleBuffered = True
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NullDC BEAR"
-        Me.OptionsToolStrip.ResumeLayout(False)
         Me.MainMenuContainer.ResumeLayout(False)
         Me.MainMenuContainer.PerformLayout()
-        Me.MainMenuStrip.ResumeLayout(False)
-        Me.MainMenuStrip.PerformLayout()
+        Me._MainMenuStrip.ResumeLayout(False)
+        Me._MainMenuStrip.PerformLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.sus_i, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -483,18 +437,13 @@ Partial Class frmMain
     Friend WithEvents lbVer As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents SystemIcons As ImageList
-    Friend WithEvents MainMenuStrip As MenuStrip
+    Friend WithEvents _MainMenuStrip As MenuStrip
     Friend WithEvents OptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReplaysToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ControlsToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents DiscordToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PatreonO3oToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OptionsToolStrip As ContextMenuStrip
-    Friend WithEvents PingToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ChallengeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DownloadRomToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents imgBeta As PictureBox
-    Friend WithEvents sus_i As PictureBox
     Friend WithEvents FreeDLCToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label1 As Label
 End Class

@@ -121,10 +121,7 @@ Public Class NullDCLauncher
     End Sub
 
     Private Sub EmulatorExited()
-        Console.Write("Emulator Exited")
-        While MainformRef.IsNullDCRunning
-            Thread.Sleep(10)
-        End While
+        Console.WriteLine("Emulator Exited")
 
         If Platform = "na" Then
             RestoreNvmem()
@@ -136,8 +133,10 @@ Public Class NullDCLauncher
                 MainformRef.NetworkHandler.SendMessage(">,E", MainformRef.Challenger.ip)
             End If
 
-            Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
-            MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
+            If Not MainformRef.IsClosing Then
+                Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
+                MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
+            End If
 
         Else
             ' Set State Back to None and Idle since Emulator Closed
@@ -156,6 +155,7 @@ Public Class NullDCLauncher
         Rx.VMU = Nothing
         Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
 
+        NullDCproc = Nothing
         'MainformRef.InputHandler.GetKeyboardConfigs(Platform)
         'MainformRef.InputHandler.NeedConfigReload = True
     End Sub

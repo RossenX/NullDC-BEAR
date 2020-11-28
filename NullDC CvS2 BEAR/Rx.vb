@@ -246,6 +246,13 @@ Module BEARTheme
 
     Public Theme As New Dictionary(Of String, String)
 
+    Public Sub ApplyButtonTheme(ByRef _button As Button)
+        _button.BackColor = LoadColor(ThemeKeys.ButtonColor)
+        _button.ForeColor = LoadColor(ThemeKeys.ButtonFontColor)
+        _button.Font = New Font(_button.Font.FontFamily, LoadSize(ThemeKeys.ButtonFontSize))
+
+    End Sub
+
     Public Function LoadSize(ByVal _font As ThemeKeys) As Single
         If Theme.ContainsKey(_font.ToString().ToLower) Then
             If Not Theme(_font.ToString().ToLower) = "" Then

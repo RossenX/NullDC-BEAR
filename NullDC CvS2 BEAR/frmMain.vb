@@ -37,6 +37,7 @@ Public Class frmMain
     Dim SelectedPlayer As BEARPlayer
 
     Dim needsUpdate As Boolean = False
+    Public IsClosing As Boolean = False
 
     Public Sub New()
 
@@ -49,9 +50,22 @@ Public Class frmMain
         ' Load The Theme Stuff
         Rx.MainformRef = Me
 
+        ' Double check for Mednafen Backupfiles to restore This is in case someone joined a host and then forcequit BEAR or something
+        If Directory.Exists(NullDCPath & "\mednafen\sav_") Then
+            If Directory.Exists(NullDCPath & "\mednafen\sav") Then
+                Directory.Delete(NullDCPath & "\mednafen\sav", True)
+            End If
+            FileSystem.Rename(NullDCPath & "\mednafen\sav_", NullDCPath & "\mednafen\sav")
 
+        End If
 
+        If Directory.Exists(NullDCPath & "\mednafen\mcs_") Then
+            If Directory.Exists(NullDCPath & "\mednafen\mcs") Then
+                Directory.Delete(NullDCPath & "\mednafen\mcs", True)
+            End If
+            FileSystem.Rename(NullDCPath & "\mednafen\mcs_", NullDCPath & "\mednafen\mcs")
 
+        End If
 
     End Sub
 
@@ -158,7 +172,7 @@ Public Class frmMain
         RefreshPlayerList(False)
 
         ' Sus
-        Randomize() : Dim sus As Decimal = Rnd() * 10 : If sus <= 1 Or IsBeta Then : sus_i.Visible = True : Else : sus_i.Visible = False : End If
+        ' Randomize() : Dim sus As Decimal = Rnd() * 10 : If sus <= 1 Or IsBeta Then : sus_i.Visible = True : Else : sus_i.Visible = False : End If
 
         AddPlayerToList(New BEARPlayer("Tester vs some other guy or some ", "123.123.123.1", "40631", "Capcom vs snk|NA-SHUT.zip", "Hosting"))
         AddPlayerToList(New BEARPlayer("Tester2", "123.123.123.2", "40631"))
@@ -200,17 +214,9 @@ Public Class frmMain
         Matchlist.BackColor = BEARTheme.LoadColor(ThemeKeys.TertiaryColor)
 
         ' Buttons
-        BtnJoin.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
-        btnOffline.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
-        btnSearch.BackColor = BEARTheme.LoadColor(ThemeKeys.ButtonColor)
-
-        BtnJoin.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
-        btnOffline.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
-        btnSearch.ForeColor = BEARTheme.LoadColor(ThemeKeys.ButtonFontColor)
-
-        BtnJoin.Font = New Font(BtnJoin.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
-        btnOffline.Font = New Font(btnOffline.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
-        btnSearch.Font = New Font(btnSearch.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.ButtonFontSize))
+        ApplyButtonTheme(BtnJoin)
+        ApplyButtonTheme(btnOffline)
+        ApplyButtonTheme(btnSearch)
 
         ' Labels
         Label1.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
@@ -222,16 +228,16 @@ Public Class frmMain
         Label2.Font = New Font(Label2.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.PrimaryFontSize))
 
         'MenuStrip
-        MainMenuStrip.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
-        MainMenuStrip.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
-        MainMenuStrip.Renderer = New MenuStripRenderer
-        MainMenuStrip.Font = New Font(MainMenuStrip.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
+        _MainMenuStrip.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
+        _MainMenuStrip.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
+        _MainMenuStrip.Renderer = New MenuStripRenderer
+        _MainMenuStrip.Font = New Font(_MainMenuStrip.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.MenuStripFontSize))
 
         lbVer.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        lbVer.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+        lbVer.ForeColor = BEARTheme.LoadColor(ThemeKeys.TertiaryFontColor)
 
         imgBeta.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        sus_i.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        'sus_i.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
 
         cbStatus.BackColor = BEARTheme.LoadColor(ThemeKeys.DropdownColor)
         cbStatus.ForeColor = BEARTheme.LoadColor(ThemeKeys.DropdownFontColor)
@@ -273,6 +279,7 @@ Public Class frmMain
     End Sub
 
     Private Sub RomFolderChange(ByVal source As FileSystemWatcher, ByVal e As FileSystemEventArgs)
+        If IsClosing Then Exit Sub
         If Not e.Name.Contains("eeprom") Then ' As long as it has nothing to do with eeproms, then reload the games.
             Console.WriteLine("Roms folder changed, check if we have new games")
             source.EnableRaisingEvents = False
@@ -986,7 +993,7 @@ Public Class frmMain
             ' Tab not found, create the tab
             If TabIndex = -1 Then
                 TabControl.TabPages.Add(TabName)
-                TabControl.TabPages.Item(TabControl.TabCount - 1).BackColor = Color.FromArgb(250, 200, 0)
+                TabControl.TabPages.Item(TabControl.TabCount - 1).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
 
                 Dim tmpListView As New ListView
                 tmpListView.Dock = DockStyle.Fill
@@ -1015,7 +1022,8 @@ Public Class frmMain
             Dim GameName = ""
 
             Dim _it As New ListViewItem(GamesList(GamesList.Keys(i))(0).ToString)
-            _it.ForeColor = BEARTheme.LoadColor(ThemeKeys.PrimaryFontColor)
+            _it.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+            _it.Font = New Font(_it.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.SecondaryFontSize))
 
             _it.SubItems.Add(GamesList.Keys(i).ToString)
             tmp2ListView.Items.Add(_it)
@@ -1047,6 +1055,8 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        IsClosing = True
+
         ConfigFile.Status = ConfigFile.AwayStatus
         ConfigFile.SaveFile(False)
 
@@ -1055,7 +1065,10 @@ Public Class frmMain
         niBEAR.Visible = False
         niBEAR.Icon = Nothing
 
-        If IsNullDCRunning() Then NullDCLauncher.NullDCproc.Kill()
+        If IsNullDCRunning() Then
+            NullDCLauncher.NullDCproc.CloseMainWindow()
+        End If
+
         If Not Challenger Is Nothing Then NetworkHandler.SendMessage(">, Q", Challenger.ip)
 
         If Not MednafenLauncher.MednafenServerInstance Is Nothing Then
@@ -1065,8 +1078,11 @@ Public Class frmMain
 
         If Not MednafenLauncher.MednafenInstance Is Nothing Then
             MednafenLauncher.MednafenInstance.CloseMainWindow()
-            MednafenLauncher.MednafenInstance = Nothing
         End If
+
+        While Not MednafenLauncher.MednafenInstance Is Nothing Or IsNullDCRunning()
+            Thread.Sleep(100)
+        End While
 
         ' Iono if i wanna have this to auto stop Radmin when BEAR closes
         ' Dim processStartInfo As New ProcessStartInfo
@@ -1557,28 +1573,6 @@ Public Class frmMain
         HostingForm.BeginHost(_player)
     End Sub
 
-#Region "Moving The Window Around"
-    ' Moving the window
-    Private newpoint As System.Drawing.Point
-    Private xpos1 As Integer
-    Private ypos1 As Integer
-
-    Private Sub pnlTopBorder_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown, lbVer.MouseDown, imgBeta.MouseDown
-        xpos1 = Control.MousePosition.X - Me.Location.X
-        ypos1 = Control.MousePosition.Y - Me.Location.Y
-    End Sub
-
-    Private Sub pnlTopBorder_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseMove, lbVer.MouseMove, imgBeta.MouseMove
-        If e.Button = MouseButtons.Left Then
-            newpoint = Control.MousePosition
-            newpoint.X -= (xpos1)
-            newpoint.Y -= (ypos1)
-            Me.Location = newpoint
-        End If
-
-    End Sub
-#End Region
-
 #Region "Button Clicks"
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         If Not Application.OpenForms().OfType(Of frmKeyMapperSDL).Any Then
@@ -1728,7 +1722,6 @@ Public Class frmMain
 
     Public Function IsNullDCRunning() As Boolean
         If NullDCLauncher.NullDCproc Is Nothing Then Return False
-        If NullDCLauncher.NullDCproc.HasExited Then Return False
         Return True
 
     End Function
@@ -1795,7 +1788,7 @@ Public Class frmMain
         ActiveControl = Nothing
     End Sub
 
-    Private Sub PictureBox1_MouseClick(sender As Object, e As MouseEventArgs) Handles sus_i.MouseClick
+    Private Sub PictureBox1_MouseClick(sender As Object, e As MouseEventArgs)
         Process.Start("http://www.innersloth.com/gameAmongUs.php")
     End Sub
 
@@ -1900,11 +1893,11 @@ Public Class frmMain
         Process.Start("https://www.patreon.com/NullDCBEAR")
     End Sub
 
-    Private Sub PingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PingToolStripMenuItem.Click
+    Private Sub PingToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub ChallengeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChallengeToolStripMenuItem.Click
+    Private Sub ChallengeToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
     End Sub
 

@@ -121,9 +121,11 @@ Public Class MednafenLauncher
             MednafenServerInstance.CloseMainWindow()
         End If
 
-        MednafenInstance = Nothing
-        Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
-        MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
+        If Not MainformRef.IsClosing Then
+            Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
+            MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
+        End If
+
 
         If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_") Then
             If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav") Then
@@ -140,6 +142,8 @@ Public Class MednafenLauncher
             FileSystem.Rename(MainformRef.NullDCPath & "\mednafen\mcs_", MainformRef.NullDCPath & "\mednafen\mcs")
 
         End If
+
+        MednafenInstance = Nothing
 
     End Sub
 

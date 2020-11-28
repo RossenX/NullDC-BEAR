@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports System.IO
+Imports System.Net
 Imports System.Net.NetworkInformation
 
 Public Class frmSetup
@@ -8,20 +9,48 @@ Public Class frmSetup
     Private Sub frmSetup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToParent()
-        AddHandler cbUseCustomWindowSize.CheckedChanged, AddressOf CustomWindowSizeChanged
 
         FillSettings()
-    End Sub
 
-    Private Sub CustomWindowSizeChanged()
-        GBCustomWindowSize.Visible = cbUseCustomWindowSize.Checked
-        If cbUseCustomWindowSize.Checked Then
-            Me.Height = 442
-        Else
-            Me.Height = 280
-        End If
+        OptionsContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
 
+        For i = 0 To OptionsContainer.Controls.Count - 1
+            Select Case OptionsContainer.Controls(i).GetType()
+                Case GetType(Button)
+                    ApplyButtonTheme(OptionsContainer.Controls(i))
+                Case GetType(CheckBox)
+                    OptionsContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+                    OptionsContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+                Case GetType(ComboBox)
+                    OptionsContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+                    OptionsContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+                Case GetType(Label)
+                    OptionsContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+                    OptionsContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+                Case GetType(GroupBox)
+                    OptionsContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+                    OptionsContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+            End Select
+        Next
 
+        For i = 0 To CustomSizeContainer.Controls.Count - 1
+            Select Case CustomSizeContainer.Controls(i).GetType()
+                Case GetType(Button)
+                    ApplyButtonTheme(CustomSizeContainer.Controls(i))
+                Case GetType(CheckBox)
+                    CustomSizeContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+                    CustomSizeContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+                Case GetType(ComboBox)
+                    CustomSizeContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+                    CustomSizeContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+                Case GetType(Label)
+                    CustomSizeContainer.Controls(i).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+                    CustomSizeContainer.Controls(i).ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
+            End Select
+        Next
+
+        Button2.BackColor = Color.FromArgb(0, 255, 0)
+        Button2.ForeColor = Color.FromArgb(0, 0, 0)
     End Sub
 
     Private Sub FillSettings()
@@ -37,7 +66,6 @@ Public Class frmSetup
         tbCWY.Text = CInt(MainformRef.ConfigFile.WindowSettings.Split("|")(2))
         tbCWWidth.Text = CInt(MainformRef.ConfigFile.WindowSettings.Split("|")(3))
         tbCWHeight.Text = CInt(MainformRef.ConfigFile.WindowSettings.Split("|")(4))
-        CustomWindowSizeChanged()
 
         If MainformRef.ConfigFile.AllowSpectators = 1 Then
             cbAllowSpectators.Text = "Yes"
@@ -48,6 +76,21 @@ Public Class frmSetup
         cbOverlay.SelectedIndex = MainformRef.ConfigFile.VsNames
         cb_ShowGameInTitle.Checked = MainformRef.ConfigFile.ShowGameNameInTitle
         cbVsync.SelectedIndex = MainformRef.ConfigFile.Vsync
+
+        ' Themes
+        Dim ThemesFound As New DataTable
+        ThemesFound.Columns.Add("Theme", GetType(String))
+        ThemesFound.Columns.Add("ThemeName", GetType(String))
+
+        cbThemes.ValueMember = "Theme"
+        cbThemes.DisplayMember = "ThemeName"
+
+        For Each Dir As String In Directory.GetDirectories(MainformRef.NullDCPath & "\themes")
+            ThemesFound.Rows.Add(Dir.Split("\")(Dir.Split("\").Count - 1), Dir.Split("\")(Dir.Split("\").Count - 1))
+        Next
+
+        cbThemes.DataSource = ThemesFound
+
     End Sub
 
     Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
@@ -84,7 +127,7 @@ Public Class frmSetup
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) 
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         frmLoLNerd.Show()
 
     End Sub
@@ -115,7 +158,7 @@ Public Class frmSetup
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         If Not Application.OpenForms().OfType(Of frmKeyMapperSDL).Any Then
             frmKeyMapperSDL.Show(Me)
         End If
@@ -196,6 +239,8 @@ Public Class frmSetup
         tbCWWidth.Text = 656
         tbCWHeight.Text = 538
     End Sub
+
+
 
 #End Region
 
