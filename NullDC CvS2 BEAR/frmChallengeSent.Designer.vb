@@ -31,7 +31,7 @@ Partial Class frmChallengeSent
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Label1.BackColor = System.Drawing.Color.White
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -58,6 +58,7 @@ Partial Class frmChallengeSent
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)

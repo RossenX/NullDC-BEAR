@@ -83,7 +83,7 @@ Partial Class FrmPaidDLC
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(227, 40)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Extra Sexy Morigan Outfits " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "CVS2 and Dark Stalkers." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label2.Text = "Extra Sexy Morigan Outfits " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "CVS2/MVC2 Only"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label3

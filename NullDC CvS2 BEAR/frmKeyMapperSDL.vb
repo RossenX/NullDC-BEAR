@@ -525,7 +525,7 @@ Public Class frmKeyMapperSDL
                     File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
                     File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", lines)
 
-                    PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 180, 0) ' 180 144
+                    PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
 
             End Select
 

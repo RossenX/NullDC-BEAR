@@ -22,7 +22,7 @@ Public Class frmChallengeSent
     Private Sub frmChallengeSent_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitBackground)
-        ApplyThemeToControl(Label1, 3)
+        ApplyThemeToControl(Label1, 2)
         ApplyThemeToControl(btnNope)
 
     End Sub
@@ -54,7 +54,7 @@ Public Class frmChallengeSent
 
     Private Sub frmChallengeSent_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         If Me.Visible Then
-            Label1.Text = "Waiting for reply from " & vbCrLf & frmMain.Challenger.name
+            Label1.Text = "Waiting for reply from " & vbCrLf & MainformRef.Challenger.name
         End If
 
     End Sub

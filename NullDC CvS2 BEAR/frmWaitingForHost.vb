@@ -10,8 +10,8 @@
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        If Not MainformRef.Challenger Is Nothing Then frmMain.NetworkHandler.SendMessage(">,BO", frmMain.Challenger.ip)
-        frmMain.EndSession("Denied")
+        If Not MainformRef.Challenger Is Nothing Then MainformRef.NetworkHandler.SendMessage(">,BO", MainformRef.Challenger.ip)
+        MainformRef.EndSession("Denied")
     End Sub
 
     Private Sub frmWaitingForHost_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -24,7 +24,7 @@
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
         PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
 
-        ApplyThemeToControl(Label1, 3)
+        ApplyThemeToControl(lbWaitingForHost, 2)
         ApplyThemeToControl(btnRetryVMU)
         ApplyThemeToControl(btnCancel)
 
@@ -46,7 +46,7 @@
         If Visible Then
             btnRetryVMU.Visible = False
             If MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" Then ' Only if it's a DC game ask for VMU
-                Label1.Text = "Syncing VMU..."
+                lbWaitingForHost.Text = "Syncing VMU..."
                 MainformRef.NetworkHandler.SendMessage("V", MainformRef.Challenger.ip)
                 VMUTimer.Interval = 5000
                 VMUTimer.Start()

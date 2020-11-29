@@ -1,7 +1,4 @@
 ﻿Imports System.Threading
-Imports NullDC_CvS2_BEAR.frmMain
-Imports NullDC_CvS2_BEAR.NetworkHandling
-Imports System.Windows
 Imports System.Net.NetworkInformation
 
 Public Class frmChallenge
@@ -34,8 +31,8 @@ Public Class frmChallenge
         ApplyThemeToControl(btnDeny)
         ApplyThemeToControl(btnPing)
 
-        ApplyThemeToControl(Label1, 3)
-        ApplyThemeToControl(lbChallengeText, 3)
+        ApplyThemeToControl(Label1, 2)
+        ApplyThemeToControl(lbChallengeText, 2)
 
     End Sub
 

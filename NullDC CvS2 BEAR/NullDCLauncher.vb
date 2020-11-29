@@ -97,7 +97,7 @@ Public Class NullDCLauncher
         Region = _region
 
         If MainformRef.IsNullDCRunning And SingleInstance Then
-            frmMain.NotificationForm.ShowMessage("An Instance of NullDC online is already running.")
+            MainformRef.NotificationForm.ShowMessage("An Instance of NullDC online is already running.")
             Exit Sub
         Else
             StartDreamcastEmulator(_romname)
@@ -112,7 +112,7 @@ Public Class NullDCLauncher
         Region = _region
 
         If MainformRef.IsNullDCRunning And SingleInstance Then
-            frmMain.NotificationForm.ShowMessage("An Instance of NullDC online is already running.")
+            MainformRef.NotificationForm.ShowMessage("An Instance of NullDC online is already running.")
             Exit Sub
         Else
             StartNaomiEmulator(_romname)

@@ -138,11 +138,11 @@ Public Class MednafenLauncher
         End If
 
         If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_client") Then
-            Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav_client")
+            Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav_client", True)
         End If
 
         If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs_client") Then
-            Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs_client")
+            Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs_client", True)
         End If
 
         MednafenInstance = Nothing

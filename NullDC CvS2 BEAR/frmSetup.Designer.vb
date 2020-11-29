@@ -73,7 +73,7 @@ Partial Class frmSetup
         Me.PictureBox1.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Clippy
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PictureBox1.InitialImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Clippy
-        Me.PictureBox1.Location = New System.Drawing.Point(393, 66)
+        Me.PictureBox1.Location = New System.Drawing.Point(394, 66)
         Me.PictureBox1.Name = "PictureBox1"
         Me.OptionsContainer.SetRowSpan(Me.PictureBox1, 4)
         Me.PictureBox1.Size = New System.Drawing.Size(140, 135)
@@ -160,7 +160,7 @@ Partial Class frmSetup
         Me.btnSaveExit.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSaveExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnSaveExit.Location = New System.Drawing.Point(393, 364)
+        Me.btnSaveExit.Location = New System.Drawing.Point(394, 364)
         Me.btnSaveExit.Name = "btnSaveExit"
         Me.btnSaveExit.Size = New System.Drawing.Size(144, 51)
         Me.btnSaveExit.TabIndex = 4
@@ -227,7 +227,7 @@ Partial Class frmSetup
         Me.GroupBox1.AutoSize = True
         Me.GroupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel1)
-        Me.GroupBox1.Location = New System.Drawing.Point(276, 13)
+        Me.GroupBox1.Location = New System.Drawing.Point(277, 13)
         Me.GroupBox1.Name = "GroupBox1"
         Me.OptionsContainer.SetRowSpan(Me.GroupBox1, 7)
         Me.GroupBox1.Size = New System.Drawing.Size(111, 184)
@@ -258,7 +258,7 @@ Partial Class frmSetup
         'tbCWWidth
         '
         Me.tbCWWidth.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbCWWidth.Location = New System.Drawing.Point(128, 29)
+        Me.tbCWWidth.Location = New System.Drawing.Point(129, 29)
         Me.tbCWWidth.Name = "tbCWWidth"
         Me.tbCWWidth.Size = New System.Drawing.Size(120, 20)
         Me.tbCWWidth.TabIndex = 18
@@ -267,7 +267,7 @@ Partial Class frmSetup
         'tbCWHeight
         '
         Me.tbCWHeight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbCWHeight.Location = New System.Drawing.Point(128, 3)
+        Me.tbCWHeight.Location = New System.Drawing.Point(129, 3)
         Me.tbCWHeight.Name = "tbCWHeight"
         Me.tbCWHeight.Size = New System.Drawing.Size(120, 20)
         Me.tbCWHeight.TabIndex = 19
@@ -282,7 +282,7 @@ Partial Class frmSetup
         Me.GBCustomWindowSize.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GBCustomWindowSize.Location = New System.Drawing.Point(13, 267)
         Me.GBCustomWindowSize.Name = "GBCustomWindowSize"
-        Me.GBCustomWindowSize.Size = New System.Drawing.Size(257, 148)
+        Me.GBCustomWindowSize.Size = New System.Drawing.Size(258, 148)
         Me.GBCustomWindowSize.TabIndex = 20
         Me.GBCustomWindowSize.TabStop = False
         Me.GBCustomWindowSize.Text = "Custom Window Size"
@@ -313,7 +313,7 @@ Partial Class frmSetup
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.CustomSizeContainer.Size = New System.Drawing.Size(251, 129)
+        Me.CustomSizeContainer.Size = New System.Drawing.Size(252, 129)
         Me.CustomSizeContainer.TabIndex = 21
         '
         'Button4
@@ -323,7 +323,7 @@ Partial Class frmSetup
         Me.Button4.Location = New System.Drawing.Point(0, 104)
         Me.Button4.Margin = New System.Windows.Forms.Padding(0)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(125, 25)
+        Me.Button4.Size = New System.Drawing.Size(126, 25)
         Me.Button4.TabIndex = 23
         Me.Button4.Text = "Default"
         Me.Button4.UseVisualStyleBackColor = True
@@ -331,7 +331,7 @@ Partial Class frmSetup
         'tbCWY
         '
         Me.tbCWY.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbCWY.Location = New System.Drawing.Point(128, 81)
+        Me.tbCWY.Location = New System.Drawing.Point(129, 81)
         Me.tbCWY.Name = "tbCWY"
         Me.tbCWY.Size = New System.Drawing.Size(120, 20)
         Me.tbCWY.TabIndex = 25
@@ -340,7 +340,7 @@ Partial Class frmSetup
         'tbCWX
         '
         Me.tbCWX.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbCWX.Location = New System.Drawing.Point(128, 55)
+        Me.tbCWX.Location = New System.Drawing.Point(129, 55)
         Me.tbCWX.Name = "tbCWX"
         Me.tbCWX.Size = New System.Drawing.Size(120, 20)
         Me.tbCWX.TabIndex = 24
@@ -352,7 +352,7 @@ Partial Class frmSetup
         Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label9.Location = New System.Drawing.Point(3, 78)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(119, 26)
+        Me.Label9.Size = New System.Drawing.Size(120, 26)
         Me.Label9.TabIndex = 23
         Me.Label9.Text = "Screen Y"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -363,7 +363,7 @@ Partial Class frmSetup
         Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label7.Location = New System.Drawing.Point(3, 52)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(119, 26)
+        Me.Label7.Size = New System.Drawing.Size(120, 26)
         Me.Label7.TabIndex = 22
         Me.Label7.Text = "Screen X"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -374,7 +374,7 @@ Partial Class frmSetup
         Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label5.Location = New System.Drawing.Point(3, 26)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(119, 26)
+        Me.Label5.Size = New System.Drawing.Size(120, 26)
         Me.Label5.TabIndex = 21
         Me.Label5.Text = "Width"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -385,7 +385,7 @@ Partial Class frmSetup
         Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label4.Location = New System.Drawing.Point(3, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(119, 26)
+        Me.Label4.Size = New System.Drawing.Size(120, 26)
         Me.Label4.TabIndex = 20
         Me.Label4.Text = "Height"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -502,7 +502,7 @@ Partial Class frmSetup
         Me.cbThemes.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbThemes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbThemes.FormattingEnabled = True
-        Me.cbThemes.Location = New System.Drawing.Point(393, 26)
+        Me.cbThemes.Location = New System.Drawing.Point(394, 26)
         Me.cbThemes.Name = "cbThemes"
         Me.cbThemes.Size = New System.Drawing.Size(144, 21)
         Me.cbThemes.TabIndex = 28
@@ -510,7 +510,7 @@ Partial Class frmSetup
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(393, 10)
+        Me.Label12.Location = New System.Drawing.Point(394, 10)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(40, 13)
         Me.Label12.TabIndex = 29

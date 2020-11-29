@@ -40,20 +40,24 @@ Public Class frmMain
     Public IsClosing As Boolean = False
 
     Public Sub New()
-
+        Console.WriteLine("NullDC BEAR NEW")
         ' This call is required by the designer.
         InitializeComponent()
 
-        ' Add any initialization after the InitializeComponent() call.
-
-        ' Theme Stuff
-        ' Load The Theme Stuff
+        ' Basics
         Rx.MainformRef = Me
-
+        Me.Icon = My.Resources.NewNullDCBearIcon
+        niBEAR.Icon = My.Resources.NewNullDCBearIcon
+        Me.CenterToScreen()
+        imgBeta.Visible = IsBeta
+        lbVer.Text = Ver
         DeleteMednafenClientFiles()
+
+        ConfigFile = New Configs(NullDCPath)
 
         Try
             UnpackUpdate()
+            CheckSDLVersion()
         Catch ex As Exception
             MsgBox("Unable to unpack emulator/update, error: " & ex.Message)
             End
@@ -62,18 +66,45 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub CheckSDLVersion()
+
+        Try
+            ' Check SDL Version Swap
+            If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Or needsUpdate Then ' We Need to Change SDL Version
+                If MainformRef.ConfigFile.SDLVersion = "+Stable" Or MainformRef.ConfigFile.SDLVersion = "Stable" Then
+                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath & "\dc")
+                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath)
+                    MainformRef.ConfigFile.SDLVersion = "Stable"
+                    MainformRef.ConfigFile.SaveFile(False)
+                    Console.WriteLine("SDL Changed to: Stable")
+
+                Else
+                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
+                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
+                    MainformRef.ConfigFile.SDLVersion = "Dev"
+                    MainformRef.ConfigFile.SaveFile(False)
+                    Console.WriteLine("SDL Changed to: Dev")
+                End If
+
+            End If
+        Catch ex As Exception
+            MsgBox("Couldn't change SDL version make sure nullDC is closed. Error: " & vbNewLine & ex.Message)
+            End
+        End Try
+    End Sub
+
+
     Private Sub DeleteMednafenClientFiles()
         If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_client") Then
-            Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav_client")
+            Directory.Delete(MainformRef.NullDCPath & "\mednafen\sav_client", True)
         End If
 
         If Directory.Exists(MainformRef.NullDCPath & "\mednafen\mcs_client") Then
-            Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs_client")
+            Directory.Delete(MainformRef.NullDCPath & "\mednafen\mcs_client", True)
         End If
     End Sub
 
     Private Sub UnpackUpdate()
-
         ' Unpack The Basic Shit
 
         If Not File.Exists(NullDCPath & "\nullDC_Win32_Release-NoTrace.exe") Then
@@ -145,13 +176,6 @@ Public Class frmMain
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "mednafen-server.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
 
-        Me.Icon = My.Resources.NewNullDCBearIcon
-        niBEAR.Icon = My.Resources.NewNullDCBearIcon
-        Me.CenterToScreen()
-
-        imgBeta.Visible = IsBeta
-        lbVer.Text = Ver
-
         If Not IsBeta Then
             Dim files As String() = Directory.GetFiles(NullDCPath & "\", "*.exe")
             For Each file In files
@@ -165,8 +189,6 @@ Public Class frmMain
                 End If
             Next
         End If
-
-        ConfigFile = New Configs(NullDCPath)
 
         LoadThemeSettings()
         LoadTheme()
@@ -182,31 +204,6 @@ Public Class frmMain
 
         ' This needs to be created after updating, becuase of NAUDIO
         ChallengeForm = New frmChallenge(Me)
-
-        Try
-            ' Check SDL Version Swap
-            If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Or needsUpdate Then ' We Need to Change SDL Version
-                If MainformRef.ConfigFile.SDLVersion = "+Stable" Or MainformRef.ConfigFile.SDLVersion = "Stable" Then
-                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath & "\dc")
-                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath)
-                    MainformRef.ConfigFile.SDLVersion = "Stable"
-                    MainformRef.ConfigFile.SaveFile(False)
-                    Console.WriteLine("SDL Changed to: Stable")
-
-                Else
-                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
-                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
-                    MainformRef.ConfigFile.SDLVersion = "Dev"
-                    MainformRef.ConfigFile.SaveFile(False)
-                    Console.WriteLine("SDL Changed to: Dev")
-                End If
-
-            End If
-        Catch ex As Exception
-            MsgBox("Couldn't change SDL version make sure nullDC is closed. Error: " & vbNewLine & ex.Message)
-            End
-        End Try
-
 
         ' Update Stuff
         AddHandler UpdateCheckClient.DownloadStringCompleted, AddressOf UpdateCheckResult
@@ -1295,7 +1292,10 @@ Public Class frmMain
 
                 End Try
             Else
-                MainformRef.Invoke(Sub() ListViewToUse.Items(ItemNumber).SubItems(2).Text = "0")
+                MainformRef.Invoke(Sub()
+                                       ListViewToUse.Items(ItemNumber).SubItems(2).Text = "0"
+                                       ListViewToUse.Sort()
+                                   End Sub)
             End If
 
 
@@ -1689,10 +1689,10 @@ Public Class frmMain
 
     Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
 
-        Matchlist.Columns(0).Width = Matchlist.Width * 0.5 ' name
+        Matchlist.Columns(0).Width = Matchlist.Width * 0.4 ' name
         Matchlist.Columns(1).Width = 0 ' IP
         Matchlist.Columns(2).Width = 50 ' Ping
-        Matchlist.Columns(3).Width = Matchlist.Width * 0.5 - 150 ' Game
+        Matchlist.Columns(3).Width = Matchlist.Width * 0.6 - 150 ' Game
         Matchlist.Columns(4).Width = 75 ' Status
         Matchlist.Columns(4).TextAlign = HorizontalAlignment.Right
 
@@ -2157,7 +2157,8 @@ Public Class Configs
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
-        Dim NullDCPath = frmMain.NullDCPath
+        Dim NullDCPath = MainformRef.NullDCPath
+
         Dim lines() As String =
             {
                 "[BEAR]",
