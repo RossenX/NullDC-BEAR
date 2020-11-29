@@ -79,10 +79,8 @@ Public Class frmChallenge
 #End Region
 
     Private Sub btnAccept_Click(sender As Object, e As EventArgs) Handles btnAccept.Click
-        If MainformRef.IsNullDCRunning Then MainformRef.EndSession("New Challenger")
-
         While MainformRef.IsNullDCRunning
-            Thread.Sleep(10)
+            Thread.Sleep(100)
         End While
 
         MainformRef.Challenger = _Challenger

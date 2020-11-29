@@ -123,10 +123,6 @@ Public Class NullDCLauncher
     Private Sub EmulatorExited()
         Console.WriteLine("Emulator Exited")
 
-        If Platform = "na" Then
-            RestoreNvmem()
-        End If
-
         If Not DoNotSendNextExitEvent Then
             If Not MainformRef.Challenger Is Nothing And (MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Client") Then
                 Console.WriteLine("Telling challenger i quit")
@@ -206,44 +202,14 @@ Public Class NullDCLauncher
 
     End Sub
 
-    Private Sub RestoreNvmem() ' Mostly so it doesn't fuck up blue's launcher
-        Dim nvmemPath = MainformRef.NullDCPath & "\data\naomi_nvmem.bin"
-        Dim nvmemPathBackup = MainformRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
-
-        Try
-            If File.Exists(nvmemPath) Then ' nvmem exists
-                File.SetAttributes(nvmemPath, FileAttributes.Normal)
-                File.Delete(nvmemPath)
-
-                If File.Exists(nvmemPathBackup) Then ' Backup Exists
-                    File.SetAttributes(nvmemPathBackup, FileAttributes.Normal)
-                    My.Computer.FileSystem.RenameFile(nvmemPathBackup, "naomi_nvmem.bin")
-                    File.SetAttributes(nvmemPath, FileAttributes.ReadOnly)
-                End If
-            End If
-        Catch ex As Exception
-            MsgBox("Couldn't restore nvmem: " & ex.Message)
-        End Try
-
-        Rx.RestoreEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1))
-
-    End Sub
-
-    Private Sub BackupNvmem()
+    Private Sub DeleteNVMEM()
         ' Fuck nvMEM get rid of that shit
         Dim nvmemPath = MainformRef.NullDCPath & "\data\naomi_nvmem.bin"
-        Dim nvmemPathBackup = MainformRef.NullDCPath & "\data\naomi_nvmem.bin_backup"
 
         Try
             If File.Exists(nvmemPath) Then
-                If File.Exists(nvmemPathBackup) Then
-                    File.SetAttributes(nvmemPath, FileAttributes.Normal)
-                    File.Delete(nvmemPath)
-                Else
-                    File.SetAttributes(nvmemPath, FileAttributes.Normal)
-                    My.Computer.FileSystem.RenameFile(nvmemPath, "naomi_nvmem.bin_backup")
-                    File.SetAttributes(nvmemPathBackup, FileAttributes.ReadOnly)
-                End If
+                File.SetAttributes(nvmemPath, FileAttributes.Normal)
+                File.Delete(nvmemPath)
             Else
                 Console.WriteLine("No nvmem, we all good")
             End If
@@ -409,7 +375,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Dynarec.DoConstantPropagation=") Then lines(linenumber) = "Dynarec.DoConstantPropagation=1"
             If line.StartsWith("Dynarec.UnderclockFpu=") Then lines(linenumber) = "Dynarec.UnderclockFpu=0"
             If line.StartsWith("Dreamcast.Cable=") Then lines(linenumber) = "Dreamcast.Cable=0"
-            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1543276807" ' 1543276807
+            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1543276807"
             If line.StartsWith("Dreamcast.Region=") Then lines(linenumber) = "Dreamcast.Region=" & _regionID
             If line.StartsWith("Dreamcast.Broadcast=") Then lines(linenumber) = "Dreamcast.Broadcast=" & _broadcast
             If line.StartsWith("Emulator.AutoStart=") Then lines(linenumber) = "Emulator.AutoStart=1"
@@ -580,7 +546,7 @@ Public Class NullDCLauncher
         Dim linenumber = 0
 
         DealWithBios()
-        BackupNvmem()
+        DeleteNVMEM()
         lstCheck()
 
         Dim ControlsFile() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
@@ -645,7 +611,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Dynarec.DoConstantPropagation=") Then lines(linenumber) = "Dynarec.DoConstantPropagation=1"
             If line.StartsWith("Dynarec.UnderclockFpu=") Then lines(linenumber) = "Dynarec.UnderclockFpu=0"
             If line.StartsWith("Dreamcast.Cable=") Then lines(linenumber) = "Dreamcast.Cable=1"
-            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1917526710" ' 1917526710 ?1543298463
+            If line.StartsWith("Dreamcast.RTC=") Then lines(linenumber) = "Dreamcast.RTC=1917526710"
             If line.StartsWith("Dreamcast.Region=") Then lines(linenumber) = "Dreamcast.Region=0"
             If line.StartsWith("Dreamcast.Broadcast=") Then lines(linenumber) = "Dreamcast.Broadcast=0"
             If line.StartsWith("Emulator.AutoStart=") Then lines(linenumber) = "Emulator.AutoStart=0"
@@ -730,7 +696,17 @@ Public Class NullDCLauncher
             If line.StartsWith("Hosting=") Then lines(linenumber) = "Hosting=" & IsHosting
             If line.StartsWith("Port=") Then lines(linenumber) = "Port=" & MainformRef.ConfigFile.Port
             If line.StartsWith("Delay=") Then lines(linenumber) = "Delay=" & MainformRef.ConfigFile.Delay
-            If line.StartsWith("Record=") Then lines(linenumber) = "Record=" & MainformRef.ConfigFile.RecordReplay
+
+            If EnableOnline Then
+                If line.StartsWith("Record=") Then lines(linenumber) = "Record=" & MainformRef.ConfigFile.RecordReplay
+            Else
+                If MainformRef.ConfigFile.Status = "Spectator" Then
+                    If line.StartsWith("Record=") Then lines(linenumber) = "Record=0"
+                Else
+                    If line.StartsWith("Record=") Then lines(linenumber) = "Record=" & MainformRef.ConfigFile.RecordReplay
+                End If
+            End If
+
             If line.StartsWith("Playback=") Then lines(linenumber) = "Playback=" & IsReplay
             If line.StartsWith("AllowSpectators=") Then lines(linenumber) = "AllowSpectators=" & MainformRef.ConfigFile.AllowSpectators
             If line.StartsWith("Spectator=") Then lines(linenumber) = "Spectator=" & IsSpectator

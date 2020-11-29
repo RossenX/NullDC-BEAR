@@ -36,6 +36,7 @@ Public Class frmHostPanel
 
         ApplyThemeToControl(btnExit)
         ApplyThemeToControl(btnStartHosting)
+        ApplyThemeToControl(TableLayoutPanel1, 3)
 
         ApplyThemeToControl(lbInfo, 3)
         ApplyThemeToControl(lbPing, 3)

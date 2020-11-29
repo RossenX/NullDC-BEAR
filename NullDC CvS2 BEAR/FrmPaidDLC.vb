@@ -13,16 +13,16 @@
                 Process.Start("https://www.youtube.com/watch?v=J48orv6InGI")
             Case 5
                 Process.Start("https://www.youtube.com/watch?v=czcqx17yQJI")
+            Case 6
+                Process.Start("https://www.youtube.com/watch?v=OudCsiYXDnU")
             Case Else
                 Process.Start("https://www.youtube.com/watch?v=AGrIR_jlLno")
         End Select
-        If NumberOfClicks = 0 Then
 
-        Else
+        If NumberOfClicks < 7 Then NumberOfClicks += 1
 
-        End If
+        Button2.Text = (9 + NumberOfClicks).ToString & ".99$ + Free " & ((NumberOfClicks + 1) * 12).ToString & " Months FREE"
 
-        NumberOfClicks += 1
     End Sub
 
     Private Sub FrmPaidDLC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -38,7 +38,7 @@
                                                                                 While True
                                                                                     Dim m_Rnd As New Random
                                                                                     Button2.BackColor = Color.FromArgb(255, m_Rnd.Next(0, 255), m_Rnd.Next(0, 255), m_Rnd.Next(0, 255))
-                                                                                    Threading.Thread.Sleep(150)
+                                                                                    Threading.Thread.Sleep(250)
                                                                                 End While
 
                                                                             End Sub)

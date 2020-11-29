@@ -50,6 +50,7 @@ Public Class frmDLC
         ApplyThemeToControl(btnRomsFolder)
         ApplyThemeToControl(btnClose)
         ApplyThemeToControl(MenuStrip1)
+        ApplyThemeToControl(lbDisclaimer)
 
     End Sub
 

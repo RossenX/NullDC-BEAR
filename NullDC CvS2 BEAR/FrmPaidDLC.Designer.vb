@@ -89,11 +89,11 @@ Partial Class FrmPaidDLC
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(131, 443)
+        Me.Label3.Location = New System.Drawing.Point(207, 436)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(228, 13)
+        Me.Label3.Size = New System.Drawing.Size(113, 13)
         Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Hah, yeah right. Sorry but not going to happen."
+        Me.Label3.Text = "You look nice today. ;)"
         '
         'Label4
         '
@@ -111,7 +111,7 @@ Partial Class FrmPaidDLC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(513, 430)
+        Me.ClientSize = New System.Drawing.Size(507, 433)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)

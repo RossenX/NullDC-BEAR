@@ -61,7 +61,7 @@ Partial Class frmChallenge
         'lbChallengeText
         '
         Me.lbChallengeText.AutoSize = True
-        Me.lbChallengeText.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lbChallengeText.BackColor = System.Drawing.Color.WhiteSmoke
         Me.lbChallengeText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbChallengeText.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbChallengeText.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -88,7 +88,6 @@ Partial Class frmChallenge
         '
         'TableLayoutPanel2
         '
-        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.TableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
         Me.TableLayoutPanel2.ColumnCount = 1
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))

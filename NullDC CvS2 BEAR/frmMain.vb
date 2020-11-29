@@ -223,13 +223,13 @@ Public Class frmMain
         ' Sus
         ' Randomize() : Dim sus As Decimal = Rnd() * 10 : If sus <= 1 Or IsBeta Then : sus_i.Visible = True : Else : sus_i.Visible = False : End If
 
-        AddPlayerToList(New BEARPlayer("Tester vs some other guy or some ", "123.123.123.1", "40631", "Capcom vs snk|NA-SHUT.zip", "Hosting"))
-        AddPlayerToList(New BEARPlayer("Tester2", "123.123.123.2", "40631"))
-        AddPlayerToList(New BEARPlayer("Tester3", "123.123.123.3", "40631"))
-        AddPlayerToList(New BEARPlayer("Tester4", "123.123.123.4", "40631"))
-        AddPlayerToList(New BEARPlayer("Tester5", "123.123.123.5", "40631"))
-        AddPlayerToList(New BEARPlayer("Tester6", "123.123.123.6", "40631"))
-        AddPlayerToList(New BEARPlayer("Tester7", "123.123.123.7", "40631"))
+        'AddPlayerToList(New BEARPlayer("Tester vs some other guy or some ", "123.123.123.1", "40631", "Capcom vs snk|NA-SHUT.zip", "Hosting"))
+        'AddPlayerToList(New BEARPlayer("Tester2", "123.123.123.2", "40631"))
+        'AddPlayerToList(New BEARPlayer("Tester3", "123.123.123.3", "40631"))
+        'AddPlayerToList(New BEARPlayer("Tester4", "123.123.123.4", "40631"))
+        'AddPlayerToList(New BEARPlayer("Tester5", "123.123.123.5", "40631"))
+        'AddPlayerToList(New BEARPlayer("Tester6", "123.123.123.6", "40631"))
+        'AddPlayerToList(New BEARPlayer("Tester7", "123.123.123.7", "40631"))
 
         cbStatus.Text = ConfigFile.Status
 
@@ -304,6 +304,12 @@ Public Class frmMain
         imgBeta.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
         'sus_i.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
         ApplyThemeToControl(cbStatus)
+
+        Matchlist.ListViewItemSorter = New ListViewItemComparer(2, SortOrder.Ascending)
+        Matchlist.Sorting = SortOrder.Ascending
+
+        PlayerList.ListViewItemSorter = New ListViewItemComparer(2, SortOrder.Ascending)
+        PlayerList.Sorting = SortOrder.Ascending
 
     End Sub
 
@@ -1204,7 +1210,6 @@ Public Class frmMain
     Public Sub AddPlayerToList(ByVal Player As BEARPlayer)
         'Check if this IP:Port combo exists
         Dim FoundEntry As ListViewItem = Nothing
-        Dim FoundEntryID = 0
 
         Dim ListViewToUse As ListView = PlayerList
         If Not Player.game = "None" Then ListViewToUse = Matchlist
@@ -1232,7 +1237,6 @@ Public Class frmMain
                                          FoundEntry = playerentry
                                          Exit For
                                      End If
-                                     FoundEntryID += 1
                                  Next
                              End Sub)
 
@@ -1262,7 +1266,9 @@ Public Class frmMain
             'PlayerInfo.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
             'PlayerInfo.Font = New Font(PlayerInfo.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.SecondaryFontSize))
 
-            ListViewToUse.Invoke(Sub() ListViewToUse.Items.Add(PlayerInfo))
+            ListViewToUse.Invoke(Sub()
+                                     ListViewToUse.Items.Add(PlayerInfo)
+                                 End Sub)
 
             If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
                 Try
@@ -1274,11 +1280,10 @@ Public Class frmMain
                                 ListViewToUse.Invoke(
                                 Sub()
                                     Try
-                                        ListViewToUse.Items(ItemNumber).SubItems(2).Text = ping.RoundtripTime
+                                        PlayerInfo.SubItems(2).Text = ping.RoundtripTime
+                                        ListViewToUse.Sort()
                                     Catch ex As Exception
-
                                     End Try
-
                                 End Sub)
                             End If
                         End Sub)
@@ -1291,15 +1296,15 @@ Public Class frmMain
                 End Try
             Else
                 MainformRef.Invoke(Sub() ListViewToUse.Items(ItemNumber).SubItems(2).Text = "0")
-
             End If
+
 
 
         Else
             ListViewToUse.Invoke(
                 Sub()
-                    ListViewToUse.Items(FoundEntryID).SubItems(0).Text = Player.name
-                    ListViewToUse.Items(FoundEntryID).SubItems(1).Text = Player.ip & ":" & Player.port
+                    FoundEntry.SubItems(0).Text = Player.name
+                    FoundEntry.SubItems(1).Text = Player.ip & ":" & Player.port
 
                 End Sub)
 
@@ -1308,12 +1313,13 @@ Public Class frmMain
                     Dim pingthread As Thread = New Thread(
                         Sub()
                             If My.Computer.Network.Ping(Player.ip) Then
-                                Thread.Sleep(250 + (250 * FoundEntryID))
+                                Thread.Sleep(250)
                                 Dim ping As PingReply = New Ping().Send(Player.ip)
                                 ListViewToUse.Invoke(
                                 Sub()
                                     Try
-                                        ListViewToUse.Items(FoundEntryID).SubItems(2).Text = ping.RoundtripTime
+                                        FoundEntry.SubItems(2).Text = ping.RoundtripTime
+                                        ListViewToUse.Sort()
                                     Catch ex As Exception
 
                                     End Try
@@ -1329,25 +1335,25 @@ Public Class frmMain
 
                 End Try
             Else
-                MainformRef.Invoke(Sub() ListViewToUse.Items(FoundEntryID).SubItems(2).Text = "0")
+                MainformRef.Invoke(Sub() FoundEntry.SubItems(2).Text = "0")
 
             End If
 
             ListViewToUse.Invoke(
                 Sub()
-                    ListViewToUse.Items(FoundEntryID).SubItems(3).Text = Player.game
-                    ListViewToUse.Items(FoundEntryID).SubItems(4).Text = Player.status
-                    ListViewToUse.Items(FoundEntryID).ImageIndex = IconIndex
+                    FoundEntry.SubItems(3).Text = Player.game
+                    FoundEntry.SubItems(4).Text = Player.status
+                    FoundEntry.ImageIndex = IconIndex
 
                     If ListViewToUse Is PlayerList Then
                         If Player.status = "Idle" Then
-                            ListViewToUse.Items(FoundEntryID).Group = ListViewToUse.Groups(0)
+                            FoundEntry.Group = ListViewToUse.Groups(0)
                         Else
-                            ListViewToUse.Items(FoundEntryID).Group = ListViewToUse.Groups(1)
+                            FoundEntry.Group = ListViewToUse.Groups(1)
 
                         End If
                     Else
-                        ListViewToUse.Items(FoundEntryID).Group = Nothing
+                        FoundEntry.Group = Nothing
                     End If
 
 
@@ -1374,13 +1380,7 @@ Public Class frmMain
                                    Next
                                End If
 
-                               'Matchlist.ListViewItemSorter = New ListViewItemComparer(1, SortOrder.Ascending)
-                               'Matchlist.Sorting = SortOrder.Ascending
-                               Matchlist.Sort()
-
-                               'PlayerList.ListViewItemSorter = New ListViewItemComparer(1, SortOrder.Ascending)
-                               'PlayerList.Sorting = SortOrder.Ascending
-                               PlayerList.Sort()
+                               ListViewToUse.Sort()
                            End Sub)
 
 
@@ -1404,6 +1404,14 @@ Public Class frmMain
         Rx.VMU = Nothing
         Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
 
+        If Not MainformRef.NullDCLauncher.NullDCproc Is Nothing Then
+            If Not MainformRef.NullDCLauncher.NullDCproc.HasExited Then
+                MainformRef.NullDCLauncher.NullDCproc.CloseMainWindow()
+                MainformRef.NullDCLauncher.NullDCproc.Close()
+                MainformRef.NullDCLauncher.NullDCproc = Nothing
+            End If
+        End If
+
         If _canceledby Is Nothing Then
             Select Case Reason
                 Case "Window Closed" ' This is only fired automatically by the emulator when it closes, sometimes we need to ignore this
@@ -1412,20 +1420,6 @@ Public Class frmMain
                     ' Set game to none and back to idle
                     ConfigFile.Game = "None"
                     ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
-                    ConfigFile.SaveFile()
-                Case "New Challenger" ' This is fired when you accept to fight a new challanger
-                    Console.Write("New Challanger")
-                    If IsNullDCRunning() Then
-                        NullDCLauncher.DoNotSendNextExitEvent = True
-                        NullDCLauncher.NullDCproc.Kill()
-                        While IsNullDCRunning() ' Just to make sure it's dead before we accept
-                            NullDCLauncher.NullDCproc.Kill()
-                            Thread.Sleep(100)
-                        End While
-                    End If
-                    ' Set out game to w.e our challenger wants to play and set outself to client
-                    ConfigFile.Game = Challenger.game
-                    ConfigFile.Status = "Client"
                     ConfigFile.SaveFile()
                 Case "Denied", "TO" ' T/O or Denied
                     RemoveChallenger()
@@ -1440,7 +1434,7 @@ Public Class frmMain
             End Select
         Else
             ' This end session was called by someone else, IE: person left the game etc
-            Console.WriteLine("End Session :" & _canceledby)
+            Console.WriteLine("End Session:" & _canceledby)
             Dim Message = ""
 
             ' Very Rare instances where we need to send an error but not related to your challanger
@@ -1472,13 +1466,7 @@ Public Class frmMain
             WaitingForm.Visible = False
             HostingForm.Visible = False
 
-            'If IsNullDCRunning() Then NullDCLauncher.NullDCproc.kill() ' Close the NullDC Window
-
-            While IsNullDCRunning()
-                'NullDCLauncher.NullDCproc.kill()
-                NullDCLauncher.NullDCproc.Kill()
-                Thread.Sleep(100)
-            End While
+            'If IsNullDCRunning() Then NullDCLauncher.NullDCproc.CloseMainWindow() ' Close the NullDC Window
 
             Select Case Reason
                 Case "D"
@@ -1692,7 +1680,9 @@ Public Class frmMain
 #End Region
 
     Public Function IsNullDCRunning() As Boolean
-        If NullDCLauncher.NullDCproc Is Nothing Then Return False
+        If NullDCLauncher.NullDCproc Is Nothing Then
+            Return False
+        End If
         Return True
 
     End Function
