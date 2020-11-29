@@ -44,14 +44,17 @@ Public Class frmDLC
         AddHandler DownloadClient.DownloadFileCompleted, AddressOf DownloadComplete
         AddHandler DownloadClient.DownloadProgressChanged, AddressOf DownloadProgress
 
-        ' Add any initialization after the InitializeComponent() call.
+        ReloadTheme()
+
+    End Sub
+
+    Public Sub ReloadTheme()
         ApplyThemeToControl(DLCContainer, 1)
         ApplyThemeToControl(btnDownload)
         ApplyThemeToControl(btnRomsFolder)
         ApplyThemeToControl(btnClose)
         ApplyThemeToControl(MenuStrip1)
         ApplyThemeToControl(lbDisclaimer)
-
     End Sub
 
     Private Sub ArchiveDotOrgParse(ByVal URL As String)

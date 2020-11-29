@@ -54,10 +54,16 @@
 
     Private Sub frmNotification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
+        ReloadTheme()
 
+
+    End Sub
+
+    Public Sub ReloadTheme()
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.NotificationBackground)
         ApplyThemeToControl(Button1)
         ApplyThemeToControl(Label1, 3)
 
     End Sub
+
 End Class

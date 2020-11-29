@@ -19,7 +19,11 @@
         AddHandler VMUTimer.Tick, Sub()
                                       btnRetryVMU.Visible = True
                                   End Sub
+        ReloadTheme()
 
+    End Sub
+
+    Public Sub ReloadTheme()
         ' Add any initialization after the InitializeComponent() call.
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
         PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
@@ -27,7 +31,6 @@
         ApplyThemeToControl(lbWaitingForHost, 2)
         ApplyThemeToControl(btnRetryVMU)
         ApplyThemeToControl(btnCancel)
-
     End Sub
 
     Private Sub frmWaitingForHost_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

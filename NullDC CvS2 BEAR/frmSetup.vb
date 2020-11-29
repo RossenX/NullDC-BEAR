@@ -12,9 +12,18 @@ Public Class frmSetup
 
 
         FillSettings()
+        ReloadTheme()
+
+        Me.CenterToParent()
+
+
+
+
+    End Sub
+
+    Public Sub ReloadTheme()
 
         ApplyThemeToControl(OptionsContainer, 2)
-
         For i = 0 To OptionsContainer.Controls.Count - 1
             ApplyThemeToControl(OptionsContainer.Controls(i), 2)
         Next
@@ -26,9 +35,10 @@ Public Class frmSetup
 
         Button2.BackColor = Color.FromArgb(0, 255, 0)
         Button2.ForeColor = Color.Black
-        Me.Height = OptionsContainer.Height + 50
-        Me.Width = OptionsContainer.Width + 25
-        Me.CenterToParent()
+
+        'Me.Height = OptionsContainer.Height
+        'Me.Width = OptionsContainer.Width
+
 
     End Sub
 
@@ -223,7 +233,11 @@ Public Class frmSetup
 
     Private Sub cbThemes_SelectedIndexChanged(sender As ComboBox, e As EventArgs) Handles cbThemes.SelectedIndexChanged
         If Not sender.SelectedValue = "" And Not sender.SelectedValue = MainformRef.ConfigFile.Theme And FormFilled Then
-            MsgBox("Theme changed require a restart")
+            MainformRef.ConfigFile.Theme = sender.SelectedValue
+            MainformRef.LoadThemeSettings()
+            BEARTheme.LoadNewTheme()
+
+            'MsgBox("Theme changed require a restart")
         End If
 
     End Sub

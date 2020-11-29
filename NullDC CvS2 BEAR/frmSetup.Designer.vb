@@ -160,7 +160,7 @@ Partial Class frmSetup
         Me.btnSaveExit.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSaveExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnSaveExit.Location = New System.Drawing.Point(394, 364)
+        Me.btnSaveExit.Location = New System.Drawing.Point(394, 369)
         Me.btnSaveExit.Name = "btnSaveExit"
         Me.btnSaveExit.Size = New System.Drawing.Size(144, 51)
         Me.btnSaveExit.TabIndex = 4
@@ -282,7 +282,7 @@ Partial Class frmSetup
         Me.GBCustomWindowSize.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GBCustomWindowSize.Location = New System.Drawing.Point(13, 267)
         Me.GBCustomWindowSize.Name = "GBCustomWindowSize"
-        Me.GBCustomWindowSize.Size = New System.Drawing.Size(258, 148)
+        Me.GBCustomWindowSize.Size = New System.Drawing.Size(258, 153)
         Me.GBCustomWindowSize.TabIndex = 20
         Me.GBCustomWindowSize.TabStop = False
         Me.GBCustomWindowSize.Text = "Custom Window Size"
@@ -312,8 +312,8 @@ Partial Class frmSetup
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.CustomSizeContainer.Size = New System.Drawing.Size(252, 129)
+        Me.CustomSizeContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.CustomSizeContainer.Size = New System.Drawing.Size(252, 134)
         Me.CustomSizeContainer.TabIndex = 21
         '
         'Button4
@@ -323,7 +323,7 @@ Partial Class frmSetup
         Me.Button4.Location = New System.Drawing.Point(0, 104)
         Me.Button4.Margin = New System.Windows.Forms.Padding(0)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(126, 25)
+        Me.Button4.Size = New System.Drawing.Size(126, 30)
         Me.Button4.TabIndex = 23
         Me.Button4.Text = "Default"
         Me.Button4.UseVisualStyleBackColor = True
@@ -521,6 +521,7 @@ Partial Class frmSetup
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoSize = True
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(543, 428)
         Me.Controls.Add(Me.OptionsContainer)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow

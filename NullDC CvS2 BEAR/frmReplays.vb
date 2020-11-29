@@ -32,6 +32,11 @@ Public Class frmReplays
 
         GetReplayList()
 
+        ReloadTheme()
+
+    End Sub
+
+    Public Sub ReloadTheme()
         Me.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
         ApplyThemeToControl(TableLayoutPanel1, 2)
         ApplyThemeToControl(lvReplays, 2)
@@ -45,8 +50,8 @@ Public Class frmReplays
         ApplyThemeToControl(Label3)
         ApplyThemeToControl(Label4)
         ApplyThemeToControl(Label5)
-
     End Sub
+
 
     Private Sub GetReplayList()
         Dim files As String() = Directory.GetFiles(MainformRef.NullDCPath & "\replays", "*.bearplay2")

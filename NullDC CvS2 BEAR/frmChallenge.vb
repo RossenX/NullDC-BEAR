@@ -25,7 +25,12 @@ Public Class frmChallenge
 
     Private Sub frmChallenge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
+        ReloadTheme()
 
+
+    End Sub
+
+    Public Sub ReloadTheme()
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.ChallengeBackground)
         ApplyThemeToControl(btnAccept)
         ApplyThemeToControl(btnDeny)
@@ -33,7 +38,6 @@ Public Class frmChallenge
 
         ApplyThemeToControl(Label1, 2)
         ApplyThemeToControl(lbChallengeText, 2)
-
     End Sub
 
     Private Sub GetPing()

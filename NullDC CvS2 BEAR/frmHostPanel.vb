@@ -30,7 +30,12 @@ Public Class frmHostPanel
     Private Sub frmHostPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Icon = My.Resources.NewNullDCBearIcon
         cbDelay.Text = "1"
+        ReloadTheme()
 
+
+    End Sub
+
+    Public Sub ReloadTheme()
         PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.HostAnimation)
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostBackground)
 
@@ -49,7 +54,6 @@ Public Class frmHostPanel
         ApplyThemeToControl(btnSuggestDelay)
         ApplyThemeToControl(Button1)
         ApplyThemeToControl(cbRegion)
-
     End Sub
 
     Private Sub frmHostPanel_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

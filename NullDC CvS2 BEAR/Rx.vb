@@ -227,9 +227,17 @@ Module BEARTheme
 
     End Enum
 
+    Private FontTracker As New Dictionary(Of Control, Font)
     Public Theme As New Dictionary(Of String, String)
 
-    Public Sub ApplyThemeToControl(ByRef _control As Object, Optional _which As Single = 1)
+    Public Sub ApplyThemeToControl(ByRef _control As Control, Optional _which As Single = 1)
+        _control.SuspendLayout()
+
+        If Not FontTracker.ContainsKey(_control) Then
+            FontTracker.Add(_control, _control.Font)
+        Else
+            _control.Font = FontTracker(_control)
+        End If
 
         Select Case _control.GetType()
             Case GetType(Button)
@@ -251,7 +259,7 @@ Module BEARTheme
             Case GetType(RichTextBox)
                 ApplyRichTextBoxTheme(_control, _which)
         End Select
-
+        _control.ResumeLayout()
     End Sub
 
     Private Sub ApplyButtonTheme(ByRef _button As Button)
@@ -418,6 +426,45 @@ Module BEARTheme
         End If
 
     End Function
+
+    Public Sub LoadNewTheme()
+
+        MainformRef.LoadThemeSettings()
+
+        For Each _form As Form In Application.OpenForms
+
+            Select Case _form.GetType
+                Case GetType(frmChallenge)
+                    DirectCast(_form, frmChallenge).ReloadTheme()
+                Case GetType(frmChallengeGameSelect)
+                    DirectCast(_form, frmChallengeGameSelect).ReloadTheme()
+                Case GetType(frmChallengeSent)
+                    DirectCast(_form, frmChallengeSent).ReloadTheme()
+                Case GetType(frmDelayHelp)
+                    DirectCast(_form, frmDelayHelp).ReloadTheme()
+                Case GetType(frmDLC)
+                    DirectCast(_form, frmDLC).ReloadTheme()
+                Case GetType(frmHostPanel)
+                    DirectCast(_form, frmHostPanel).ReloadTheme()
+                Case GetType(frmLoLNerd)
+                    DirectCast(_form, frmLoLNerd).ReloadTheme()
+                Case GetType(frmMain)
+                    DirectCast(_form, frmMain).ReloadTheme()
+                Case GetType(frmNotification)
+                    DirectCast(_form, frmNotification).ReloadTheme()
+                Case GetType(FrmPaidDLC)
+                    DirectCast(_form, FrmPaidDLC).ReloadTheme()
+                Case GetType(frmReplays)
+                    DirectCast(_form, frmReplays).ReloadTheme()
+                Case GetType(frmSetup)
+                    DirectCast(_form, frmSetup).ReloadTheme()
+                Case GetType(frmWaitingForHost)
+                    DirectCast(_form, frmWaitingForHost).ReloadTheme()
+            End Select
+        Next
+
+    End Sub
+
 
 End Module
 

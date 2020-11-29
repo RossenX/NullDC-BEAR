@@ -191,7 +191,7 @@ Public Class frmMain
         End If
 
         LoadThemeSettings()
-        LoadTheme()
+        ReloadTheme()
 
         ChallengeSentForm = New frmChallengeSent(Me)
         HostingForm = New frmHostPanel(Me)
@@ -232,7 +232,9 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub LoadThemeSettings()
+    Public Sub LoadThemeSettings()
+        BEARTheme.Theme.Clear()
+
         Try
             If Not File.Exists(NullDCPath & "\themes\" & ConfigFile.Theme & "\Scheme.BearTheme") Then
                 ConfigFile.Theme = "Dark"
@@ -281,7 +283,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub LoadTheme()
+    Public Sub ReloadTheme()
 
         ApplyThemeToControl(MainMenuContainer)
         ApplyThemeToControl(PlayerList, 4)

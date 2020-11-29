@@ -93,7 +93,11 @@
         Me.Icon = My.Resources.NewNullDCBearIcon
         tb_mednafen.Visible = False
         tb_nulldc.Visible = False
+        ReloadTheme()
 
+    End Sub
+
+    Public Sub ReloadTheme()
         GameSelectContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
 
         ApplyThemeToControl(btnCancel)
@@ -104,6 +108,10 @@
         ApplyThemeToControl(Label4)
         ApplyThemeToControl(btnLetsGo)
         ApplyThemeToControl(MenuStrip1)
+
+        For Each _tab As TabPage In tc_games.TabPages
+            ApplyThemeToControl(_tab.Controls.OfType(Of ListView).First, 2)
+        Next
 
     End Sub
 

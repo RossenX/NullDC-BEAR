@@ -21,10 +21,14 @@ Public Class frmChallengeSent
 
     Private Sub frmChallengeSent_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
+        ReloadTheme()
+
+    End Sub
+
+    Public Sub ReloadTheme()
         Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitBackground)
         ApplyThemeToControl(Label1, 2)
         ApplyThemeToControl(btnNope)
-
     End Sub
 
     Private Sub btnNope_Click(sender As Object, e As EventArgs) Handles btnNope.Click

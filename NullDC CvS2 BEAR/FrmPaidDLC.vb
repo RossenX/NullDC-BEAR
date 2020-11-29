@@ -26,11 +26,7 @@
     End Sub
 
     Private Sub FrmPaidDLC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
-        ApplyThemeToControl(Label1)
-        ApplyThemeToControl(Label2)
-        ApplyThemeToControl(Label3)
-        ApplyThemeToControl(Label4)
+        ReloadTheme()
 
         Me.CenterToParent()
 
@@ -46,4 +42,11 @@
         ButtonFlashingThread.IsBackground = True
     End Sub
 
+    Public Sub ReloadTheme()
+        Me.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
+        ApplyThemeToControl(Label1)
+        ApplyThemeToControl(Label2)
+        ApplyThemeToControl(Label3)
+        ApplyThemeToControl(Label4)
+    End Sub
 End Class
