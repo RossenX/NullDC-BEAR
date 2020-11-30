@@ -80,7 +80,7 @@ Public Class MednafenLauncher
                                                            MainformRef.ConfigFile.Name & ",," &
                                                            MainformRef.ConfigFile.Port & "," &
                                                            MainformRef.ConfigFile.Game & "," &
-                                                            "0,0" &
+                                                            "0,0," & Rx.GetCurrentPeripherals &
                                                             ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                         Case "Public"
                             MainformRef.NetworkHandler.SendMessage("$," &
@@ -88,7 +88,7 @@ Public Class MednafenLauncher
                                                            MainformRef.ConfigFile.Host & "," &
                                                            MainformRef.ConfigFile.Port & "," &
                                                            MainformRef.ConfigFile.Game & "," &
-                                                            "1,0" &
+                                                            "1,0," & Rx.GetCurrentPeripherals &
                                                             ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                     End Select
 

@@ -249,8 +249,6 @@ Public Class frmDLC
     Private Sub DownloadComplete()
         Console.WriteLine("Download Done")
 
-
-
         Dim HoneyFilePath = ""
         Dim RomDirectory = ""
 
@@ -327,6 +325,7 @@ Public Class frmDLC
                            End Sub)
                            CurrentlyDownloadingGame = Nothing
                        End Sub)
+
         If Not Downloaded = DownloadSize And Not DownloadCanceled And Not Downloaded = 0 Then
             MsgBox("Download closed by the server, try again.")
 

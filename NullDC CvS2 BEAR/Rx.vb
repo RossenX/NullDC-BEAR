@@ -178,6 +178,95 @@ Module Rx
         Return _romname
     End Function
 
+    Public Function GetCurrentPeripherals() As String
+        Dim cfgEntry = ""
+        Dim PeripheralList = ""
+
+        Select Case MainformRef.GamesList(MainformRef.ConfigFile.Game)(2)
+            Case "dc", "na"
+
+            Case "sg"
+                cfgEntry = "md"
+            Case "ss"
+                cfgEntry = "ss"
+            Case "nes"
+                cfgEntry = "nes"
+            Case "ngp"
+                cfgEntry = "ngp"
+            Case "snes"
+                cfgEntry = "snes"
+            Case "psx"
+                cfgEntry = "psx"
+            Case "gba"
+                cfgEntry = "gba"
+            Case "gbc"
+                cfgEntry = "gb"
+            Case "fds"
+                cfgEntry = "nes"
+            Case Else
+                MsgBox("Missing emulator type: " & MainformRef.GamesList(MainformRef.ConfigFile.Game)(2))
+        End Select
+        cfgEntry += ".input.port"
+        Dim EntryCount As Int16 = 1
+        For Each _line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
+            If _line.StartsWith(cfgEntry & EntryCount & " ") Then
+                If PeripheralList.Count > 0 Then PeripheralList += "|"
+                PeripheralList += _line.Replace(cfgEntry & EntryCount & " ", "").Trim
+                EntryCount += 1
+            End If
+        Next
+
+        Return PeripheralList
+    End Function
+
+    Public Sub SetCurrentPeripheralsFromString(ByVal _string As String, _game As String)
+        Dim _peri = _string.Split("|")
+
+        Dim cfgEntry = ""
+
+        Select Case MainformRef.GamesList(_game)(2)
+            Case "dc", "na"
+            Case "sg"
+                cfgEntry = "md"
+            Case "ss"
+                cfgEntry = "ss"
+            Case "nes"
+                cfgEntry = "nes"
+            Case "ngp"
+                cfgEntry = "ngp"
+            Case "snes"
+                cfgEntry = "snes"
+            Case "psx"
+                cfgEntry = "psx"
+            Case "gba"
+                cfgEntry = "gba"
+            Case "gbc"
+                cfgEntry = "gb"
+            Case "fds"
+                cfgEntry = "nes"
+            Case Else
+                MsgBox("Missing emulator type: " & MainformRef.GamesList(MainformRef.ConfigFile.Game)(2))
+        End Select
+
+        cfgEntry += ".input.port"
+        Dim EntryCount As Int16 = 1
+        Dim LineCount As Int16 = 0
+
+        File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
+        Dim _Lines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
+        For Each _line As String In _Lines
+            If _line.StartsWith(cfgEntry & EntryCount & " ") Then
+                _Lines(LineCount) = cfgEntry & EntryCount & " " & _peri(EntryCount - 1)
+                EntryCount += 1
+            End If
+            LineCount += 1
+        Next
+
+        File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", _Lines)
+
+
+    End Sub
+
 End Module
 
 Module BEARTheme
@@ -194,6 +283,8 @@ Module BEARTheme
         TertiaryFontColor
         TertiaryFontSize
         ButtonColor
+        ButtonOverColor
+        ButtonBorderColor
         ButtonFontColor
         ButtonFontSize
         DropdownColor
@@ -204,27 +295,22 @@ Module BEARTheme
         MenuStripFontColor
         MenuStripFontSize
         MainMenuBackground
-
         LogoImage
         WaitBackground
         WaitHostBackground
         ChallengeBackground
         NotificationBackground
         HostBackground
-
         WaitHostAnimation
         HostAnimation
-
         OverlayTop
         OverlayBottom
-
         PlayerListColor
         PlayerListFontColor
         PlayerListFontSize
         MatchListColor
         MatchListFontColor
         MatchListFontSize
-
     End Enum
 
     Private FontTracker As New Dictionary(Of Control, Font)
@@ -263,8 +349,11 @@ Module BEARTheme
     End Sub
 
     Private Sub ApplyButtonTheme(ByRef _button As Button)
+        _button.FlatStyle = FlatStyle.Flat
         _button.BackColor = LoadColor(ThemeKeys.ButtonColor)
         _button.ForeColor = LoadColor(ThemeKeys.ButtonFontColor)
+        _button.FlatAppearance.BorderColor = LoadColor(ThemeKeys.ButtonBorderColor)
+        _button.FlatAppearance.MouseOverBackColor = LoadColor(ThemeKeys.ButtonOverColor)
         _button.Font = New Font(_button.Font.FontFamily, _button.Font.Size * LoadSize(ThemeKeys.ButtonFontSize), _button.Font.Style)
 
     End Sub

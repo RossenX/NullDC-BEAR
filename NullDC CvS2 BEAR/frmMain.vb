@@ -1157,6 +1157,7 @@ Public Class frmMain
                 DeleteMednafenClientFiles()
                 MainformRef.MednafenLauncher.IsHost = False
 
+                Rx.SetCurrentPeripheralsFromString(_peripheral, _game)
         End Select
 
         If WaitingForm.Visible Then WaitingForm.Visible = False

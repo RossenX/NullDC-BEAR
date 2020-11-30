@@ -147,10 +147,10 @@ Public Class NetworkHandling
                         Case "Offline" : SendMessage(">,MDN", senderip) : Exit Sub
                         Case "Client" : SendMessage(">,MDH", senderip) : Exit Sub
                         Case "Hosting"
-                            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & "0,0" & ",eeprom," & Rx.EEPROM, senderip)
+                            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & "0,0," & Rx.GetCurrentPeripherals & ",eeprom," & Rx.EEPROM, senderip)
                             Exit Sub
                         Case "Public"
-                            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.Host & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & "1,1" & ",eeprom," & Rx.EEPROM, senderip)
+                            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & "," & MainformRef.ConfigFile.Host & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & "1,0," & Rx.GetCurrentPeripherals & ",eeprom," & Rx.EEPROM, senderip)
                             Exit Sub
                         Case "Private" : SendMessage(">,MDP", senderip) : Exit Sub
                     End Select

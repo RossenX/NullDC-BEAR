@@ -108,6 +108,8 @@
         ApplyThemeToControl(Label4)
         ApplyThemeToControl(btnLetsGo)
         ApplyThemeToControl(MenuStrip1)
+        ApplyThemeToControl(cbRegion)
+        ApplyThemeToControl(cb_Serverlist)
 
         For Each _tab As TabPage In tc_games.TabPages
             ApplyThemeToControl(_tab.Controls.OfType(Of ListView).First, 2)

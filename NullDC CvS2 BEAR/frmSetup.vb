@@ -35,7 +35,7 @@ Public Class frmSetup
 
         Button2.BackColor = Color.FromArgb(0, 255, 0)
         Button2.ForeColor = Color.Black
-
+        Button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 255, 50)
         'Me.Height = OptionsContainer.Height
         'Me.Width = OptionsContainer.Width
 
