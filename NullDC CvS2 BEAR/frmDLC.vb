@@ -55,6 +55,9 @@ Public Class frmDLC
         ApplyThemeToControl(btnClose)
         ApplyThemeToControl(MenuStrip1)
         ApplyThemeToControl(lbDisclaimer)
+        For Each _tab As TabPage In tc_games.TabPages
+            ApplyThemeToControl(_tab.Controls.OfType(Of ListView).First, 2)
+        Next
     End Sub
 
     Private Sub ArchiveDotOrgParse(ByVal URL As String)

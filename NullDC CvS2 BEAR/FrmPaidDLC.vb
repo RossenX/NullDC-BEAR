@@ -46,7 +46,6 @@
         Me.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
         ApplyThemeToControl(Label1)
         ApplyThemeToControl(Label2)
-        ApplyThemeToControl(Label3)
         ApplyThemeToControl(Label4)
     End Sub
 End Class

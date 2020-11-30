@@ -73,12 +73,12 @@ Partial Class frmMain
         Me.Matchlist.FullRowSelect = True
         Me.Matchlist.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.Matchlist.HideSelection = False
-        Me.Matchlist.Location = New System.Drawing.Point(260, 45)
-        Me.Matchlist.Margin = New System.Windows.Forms.Padding(0)
+        Me.Matchlist.Location = New System.Drawing.Point(213, 37)
+        Me.Matchlist.Margin = New System.Windows.Forms.Padding(2, 2, 0, 0)
         Me.Matchlist.MultiSelect = False
         Me.Matchlist.Name = "Matchlist"
         Me.Matchlist.ShowItemToolTips = True
-        Me.Matchlist.Size = New System.Drawing.Size(609, 403)
+        Me.Matchlist.Size = New System.Drawing.Size(749, 411)
         Me.Matchlist.SmallImageList = Me.SystemIcons
         Me.Matchlist.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.Matchlist.TabIndex = 3
@@ -137,10 +137,10 @@ Partial Class frmMain
         Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnSearch.Location = New System.Drawing.Point(260, 448)
-        Me.btnSearch.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnSearch.Location = New System.Drawing.Point(213, 448)
+        Me.btnSearch.Margin = New System.Windows.Forms.Padding(2, 0, 0, 0)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(152, 36)
+        Me.btnSearch.Size = New System.Drawing.Size(185, 36)
         Me.btnSearch.TabIndex = 4
         Me.btnSearch.TabStop = False
         Me.btnSearch.Text = "Refresh ↺"
@@ -154,10 +154,10 @@ Partial Class frmMain
         Me.BtnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnJoin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnJoin.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.BtnJoin.Location = New System.Drawing.Point(412, 448)
+        Me.BtnJoin.Location = New System.Drawing.Point(398, 448)
         Me.BtnJoin.Margin = New System.Windows.Forms.Padding(0)
         Me.BtnJoin.Name = "BtnJoin"
-        Me.BtnJoin.Size = New System.Drawing.Size(152, 36)
+        Me.BtnJoin.Size = New System.Drawing.Size(187, 36)
         Me.BtnJoin.TabIndex = 5
         Me.BtnJoin.TabStop = False
         Me.BtnJoin.Text = "Challenge"
@@ -171,10 +171,10 @@ Partial Class frmMain
         Me.btnOffline.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnOffline.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOffline.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnOffline.Location = New System.Drawing.Point(716, 448)
+        Me.btnOffline.Location = New System.Drawing.Point(772, 448)
         Me.btnOffline.Margin = New System.Windows.Forms.Padding(0)
         Me.btnOffline.Name = "btnOffline"
-        Me.btnOffline.Size = New System.Drawing.Size(153, 36)
+        Me.btnOffline.Size = New System.Drawing.Size(190, 36)
         Me.btnOffline.TabIndex = 7
         Me.btnOffline.TabStop = False
         Me.btnOffline.Text = "Play Offline"
@@ -195,7 +195,7 @@ Partial Class frmMain
         Me.cbStatus.Location = New System.Drawing.Point(10, 448)
         Me.cbStatus.Margin = New System.Windows.Forms.Padding(0)
         Me.cbStatus.Name = "cbStatus"
-        Me.cbStatus.Size = New System.Drawing.Size(125, 21)
+        Me.cbStatus.Size = New System.Drawing.Size(75, 21)
         Me.cbStatus.TabIndex = 15
         Me.cbStatus.TabStop = False
         '
@@ -207,6 +207,7 @@ Partial Class frmMain
         Me.MainMenuContainer.SetColumnSpan(Me.PlayerList, 2)
         Me.PlayerList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PlayerList.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerList.ForeColor = System.Drawing.Color.Black
         Me.PlayerList.FullRowSelect = True
         Me.PlayerList.GridLines = True
         ListViewGroup1.Header = "Idle"
@@ -218,12 +219,12 @@ Partial Class frmMain
         Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2})
         Me.PlayerList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.PlayerList.HideSelection = False
-        Me.PlayerList.Location = New System.Drawing.Point(10, 45)
-        Me.PlayerList.Margin = New System.Windows.Forms.Padding(0)
+        Me.PlayerList.Location = New System.Drawing.Point(10, 37)
+        Me.PlayerList.Margin = New System.Windows.Forms.Padding(0, 2, 2, 0)
         Me.PlayerList.MultiSelect = False
         Me.PlayerList.Name = "PlayerList"
         Me.PlayerList.ShowItemToolTips = True
-        Me.PlayerList.Size = New System.Drawing.Size(250, 403)
+        Me.PlayerList.Size = New System.Drawing.Size(199, 411)
         Me.PlayerList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.PlayerList.TabIndex = 20
         Me.PlayerList.UseCompatibleStateImageBehavior = False
@@ -259,12 +260,12 @@ Partial Class frmMain
         'MainMenuContainer
         '
         Me.MainMenuContainer.ColumnCount = 6
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125.0!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125.0!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.4385!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
         Me.MainMenuContainer.Controls.Add(Me.btnOffline, 5, 2)
         Me.MainMenuContainer.Controls.Add(Me.btnSearch, 2, 2)
         Me.MainMenuContainer.Controls.Add(Me.BtnJoin, 3, 2)
@@ -277,12 +278,12 @@ Partial Class frmMain
         Me.MainMenuContainer.Location = New System.Drawing.Point(0, 24)
         Me.MainMenuContainer.Margin = New System.Windows.Forms.Padding(0)
         Me.MainMenuContainer.Name = "MainMenuContainer"
-        Me.MainMenuContainer.Padding = New System.Windows.Forms.Padding(10)
+        Me.MainMenuContainer.Padding = New System.Windows.Forms.Padding(10, 0, 10, 10)
         Me.MainMenuContainer.RowCount = 3
         Me.MainMenuContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
         Me.MainMenuContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.MainMenuContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36.0!))
-        Me.MainMenuContainer.Size = New System.Drawing.Size(879, 494)
+        Me.MainMenuContainer.Size = New System.Drawing.Size(972, 494)
         Me.MainMenuContainer.TabIndex = 21
         '
         'Label2
@@ -293,10 +294,10 @@ Partial Class frmMain
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(260, 10)
+        Me.Label2.Location = New System.Drawing.Point(211, 0)
         Me.Label2.Margin = New System.Windows.Forms.Padding(0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(609, 35)
+        Me.Label2.Size = New System.Drawing.Size(751, 35)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Current Network Games"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -308,10 +309,10 @@ Partial Class frmMain
         Me.MainMenuContainer.SetColumnSpan(Me.Label1, 2)
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(10, 10)
+        Me.Label1.Location = New System.Drawing.Point(10, 0)
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(250, 35)
+        Me.Label1.Size = New System.Drawing.Size(201, 35)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Network Players"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -321,7 +322,7 @@ Partial Class frmMain
         Me.lbVer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbVer.AutoSize = True
         Me.lbVer.BackColor = System.Drawing.Color.LightGray
-        Me.lbVer.Location = New System.Drawing.Point(843, 3)
+        Me.lbVer.Location = New System.Drawing.Point(936, 3)
         Me.lbVer.Name = "lbVer"
         Me.lbVer.Size = New System.Drawing.Size(34, 13)
         Me.lbVer.TabIndex = 10
@@ -336,7 +337,7 @@ Partial Class frmMain
         Me._MainMenuStrip.Name = "_MainMenuStrip"
         Me._MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
         Me._MainMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me._MainMenuStrip.Size = New System.Drawing.Size(879, 24)
+        Me._MainMenuStrip.Size = New System.Drawing.Size(972, 24)
         Me._MainMenuStrip.TabIndex = 22
         Me._MainMenuStrip.Text = "MainMenuStrip"
         '
@@ -387,7 +388,7 @@ Partial Class frmMain
         Me.imgBeta.BackColor = System.Drawing.Color.Transparent
         Me.imgBeta.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Beta
         Me.imgBeta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.imgBeta.Location = New System.Drawing.Point(785, 1)
+        Me.imgBeta.Location = New System.Drawing.Point(878, 1)
         Me.imgBeta.Margin = New System.Windows.Forms.Padding(0)
         Me.imgBeta.Name = "imgBeta"
         Me.imgBeta.Size = New System.Drawing.Size(48, 18)
@@ -399,7 +400,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(879, 518)
+        Me.ClientSize = New System.Drawing.Size(972, 518)
         Me.Controls.Add(Me.imgBeta)
         Me.Controls.Add(Me.MainMenuContainer)
         Me.Controls.Add(Me.lbVer)

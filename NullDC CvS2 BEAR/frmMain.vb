@@ -63,7 +63,14 @@ Public Class frmMain
             End
         End Try
 
-
+        ' Header Owner Draw Shit
+        PlayerList.OwnerDraw = True
+        AddHandler PlayerList.DrawItem, Sub(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawListViewItemEventArgs)
+                                            e.DrawDefault = True
+                                        End Sub
+        AddHandler PlayerList.DrawSubItem, Sub(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawListViewSubItemEventArgs)
+                                               e.DrawDefault = True
+                                           End Sub
     End Sub
 
     Private Sub CheckSDLVersion()
@@ -637,7 +644,7 @@ Public Class frmMain
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
 
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 2).Trim.Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 2).Trim.Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -687,7 +694,7 @@ Public Class frmMain
                 Next n
                 fs.Close()
 
-                Dim GameName As String = StrConv(GameName_Split(GameName_Split.Count - 1).ToLower.Replace(".cdi", "").Replace(".gdi", "").Replace(",", "."), vbProperCase).Split("[")(0).Split("(")(0).Trim
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Replace(".cdi", "").Replace(".gdi", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
 
                 Dim RomPath As String = _file.Replace(NullDCPath & "\dc\", "")
@@ -722,7 +729,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.cue", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -739,7 +746,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -751,7 +758,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.bin", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".bin", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".bin", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -763,7 +770,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sg", "*.md", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".md", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".md", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -779,7 +786,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.cue", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -796,7 +803,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace(".NES", "").Replace("# NES", "")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace(".NES", "").Replace("# NES", "").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -808,7 +815,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\nes", "*.nes", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".nes", "").Replace(",", ".").Replace(".NES", "").Replace("# NES", "")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".nes", "").Replace(",", ".").Replace(".NES", "").Replace("# NES", "").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -825,7 +832,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\snes", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -837,7 +844,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\snes", "*.sfc", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".sfc", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".sfc", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -853,7 +860,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\fds", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -869,7 +876,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ngp", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -886,7 +893,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gba", "*.zip", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -898,7 +905,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gba", "*.gba", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".gba", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".gba", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -926,7 +933,7 @@ Public Class frmMain
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\gbc", "*.gbc", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".gbc", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".gbc", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -1259,11 +1266,6 @@ Public Class frmMain
             Else
                 PlayerInfo.Group = Nothing
             End If
-
-
-            'PlayerInfo.BackColor = Color.FromArgb(1, 255, 250, 50)
-            'PlayerInfo.ForeColor = BEARTheme.LoadColor(ThemeKeys.SecondaryFontColor)
-            'PlayerInfo.Font = New Font(PlayerInfo.Font.FontFamily, BEARTheme.LoadSize(ThemeKeys.SecondaryFontSize))
 
             ListViewToUse.Invoke(Sub()
                                      ListViewToUse.Items.Add(PlayerInfo)
@@ -1691,12 +1693,15 @@ Public Class frmMain
 
     Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
 
-        Matchlist.Columns(0).Width = Matchlist.Width * 0.4 ' name
+        Matchlist.Columns(0).Width = Matchlist.Width * 0.35 ' name
         Matchlist.Columns(1).Width = 0 ' IP
         Matchlist.Columns(2).Width = 50 ' Ping
-        Matchlist.Columns(3).Width = Matchlist.Width * 0.6 - 150 ' Game
+        Matchlist.Columns(3).Width = Matchlist.Width * 0.65 - 150 ' Game
         Matchlist.Columns(4).Width = 75 ' Status
         Matchlist.Columns(4).TextAlign = HorizontalAlignment.Right
+
+        PlayerList.Columns(0).Width = PlayerList.Width * 1 - 75
+        PlayerList.Columns(2).Width = 50
 
         If Me.WindowState = FormWindowState.Minimized Then
             niBEAR.Visible = True

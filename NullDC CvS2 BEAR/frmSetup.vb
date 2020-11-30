@@ -234,15 +234,12 @@ Public Class frmSetup
     Private Sub cbThemes_SelectedIndexChanged(sender As ComboBox, e As EventArgs) Handles cbThemes.SelectedIndexChanged
         If Not sender.SelectedValue = "" And Not sender.SelectedValue = MainformRef.ConfigFile.Theme And FormFilled Then
             MainformRef.ConfigFile.Theme = sender.SelectedValue
+            MainformRef.ConfigFile.SaveFile(False)
             MainformRef.LoadThemeSettings()
             BEARTheme.LoadNewTheme()
-
-            'MsgBox("Theme changed require a restart")
         End If
 
     End Sub
-
-
 
 #End Region
 
