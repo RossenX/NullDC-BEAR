@@ -189,7 +189,6 @@ Partial Class frmMain
         Me.cbStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cbStatus.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbStatus.FormattingEnabled = True
         Me.cbStatus.Items.AddRange(New Object() {"Idle", "DND", "Hidden"})
         Me.cbStatus.Location = New System.Drawing.Point(10, 448)

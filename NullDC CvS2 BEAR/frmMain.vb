@@ -6,7 +6,7 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = True
+    Public IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -53,6 +53,7 @@ Public Class frmMain
         lbVer.Text = Ver
         DeleteMednafenClientFiles()
 
+        CheckifUpdateRequired()
         ConfigFile = New Configs(NullDCPath)
 
         Try
@@ -63,16 +64,30 @@ Public Class frmMain
             End
         End Try
 
-        ' Header Owner Draw Shit
-        PlayerList.OwnerDraw = True
-        AddHandler PlayerList.DrawItem, Sub(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawListViewItemEventArgs)
-                                            e.DrawDefault = True
-                                        End Sub
-        AddHandler PlayerList.DrawSubItem, Sub(ByVal sender As Object, ByVal e As System.Windows.Forms.DrawListViewSubItemEventArgs)
-                                               e.DrawDefault = True
-                                           End Sub
+        ' Once we're all done then add the version name so if it fails we try to update again next run
+        ConfigFile.Version = Ver
+        ConfigFile.SaveFile(False)
+
     End Sub
 
+    Private Sub CheckifUpdateRequired()
+        ' Check if Update or unpack is Required
+        If File.Exists(NullDCPath & "\NullDC_BEAR.cfg") Then
+            Dim thefile = NullDCPath & "\NullDC_BEAR.cfg"
+            Dim lines() As String = File.ReadAllLines(thefile)
+            Dim tmpVersion = ""
+
+            For Each line In lines
+                If line.StartsWith("Version=") Then tmpVersion = line.Split("=")(1).Trim
+            Next
+
+            If Not tmpVersion = Ver Then needsUpdate = True
+
+        Else
+            needsUpdate = True
+        End If
+
+    End Sub
     Private Sub CheckSDLVersion()
 
         Try
@@ -132,22 +147,6 @@ Public Class frmMain
                 MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
                 End
             End If
-        End If
-
-        ' Check if Update or unpack is Required
-        If File.Exists(NullDCPath & "\NullDC_BEAR.cfg") Then
-            Dim thefile = NullDCPath & "\NullDC_BEAR.cfg"
-            Dim lines() As String = File.ReadAllLines(thefile)
-            Dim tmpVersion = ""
-
-            For Each line In lines
-                If line.StartsWith("Version") Then tmpVersion = line.Split("=")(1).Trim
-            Next
-
-            If Not tmpVersion = Ver Then needsUpdate = True
-
-        Else
-            needsUpdate = True
         End If
 
         'unpack Dreamcast
@@ -1411,8 +1410,7 @@ Public Class frmMain
 
         If Not MainformRef.NullDCLauncher.NullDCproc Is Nothing Then
             If Not MainformRef.NullDCLauncher.NullDCproc.HasExited Then
-                MainformRef.NullDCLauncher.NullDCproc.CloseMainWindow()
-                MainformRef.NullDCLauncher.NullDCproc.Close()
+                MainformRef.NullDCLauncher.NullDCproc.Kill()
                 MainformRef.NullDCLauncher.NullDCproc = Nothing
             End If
         End If
@@ -1910,7 +1908,7 @@ Public Class Configs
     Private _status As String = "Idle"
     Private _delay As Int16 = 1
     Private _game As String = "None"
-    Private _ver As String = MainformRef.Ver
+    Private _ver As String = "0.0"
     Private _keyprofile As String = "Default"
     Private _recordreplay As Int16 = 0
     Private _ReplayFile As String = ""
@@ -2230,9 +2228,8 @@ Public Class Configs
             FirstRun = False
             Dim thefile = NullDCPath & "\NullDC_BEAR.cfg"
             Dim lines() As String = File.ReadAllLines(thefile)
-            Dim tmpVersion = ""
             For Each line As String In lines
-                If line.StartsWith("Version=") Then tmpVersion = line.Split("=")(1).Trim
+                If line.StartsWith("Version=") Then Version = line.Split("=")(1).Trim
                 If line.StartsWith("Name=") Then Name = line.Split("=")(1).Trim
                 If line.StartsWith("Network=") Then Network = line.Split("=")(1).Trim
                 If line.StartsWith("Port=") Then Port = line.Split("=")(1).Trim
