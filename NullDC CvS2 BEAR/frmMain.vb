@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.80" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.80b" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -43,30 +43,6 @@ Public Class frmMain
         Console.WriteLine("NullDC BEAR NEW")
         ' This call is required by the designer.
         InitializeComponent()
-
-        ' Basics
-        Rx.MainformRef = Me
-        Me.Icon = My.Resources.NewNullDCBearIcon
-        niBEAR.Icon = My.Resources.NewNullDCBearIcon
-        Me.CenterToScreen()
-        imgBeta.Visible = IsBeta
-        lbVer.Text = Ver
-        DeleteMednafenClientFiles()
-
-        CheckifUpdateRequired()
-        ConfigFile = New Configs(NullDCPath)
-
-        Try
-            UnpackUpdate()
-            CheckSDLVersion()
-        Catch ex As Exception
-            MsgBox("Unable to unpack emulator/update, error: " & ex.Message)
-            End
-        End Try
-
-        ' Once we're all done then add the version name so if it fails we try to update again next run
-        ConfigFile.Version = Ver
-        ConfigFile.SaveFile(False)
 
     End Sub
 
@@ -181,6 +157,31 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "mednafen-server.zip")
         'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
+
+        ' Basics
+        Rx.MainformRef = Me
+        Me.Icon = My.Resources.NewNullDCBearIcon
+        niBEAR.Icon = My.Resources.NewNullDCBearIcon
+        Me.CenterToScreen()
+        imgBeta.Visible = IsBeta
+        lbVer.Text = Ver
+        DeleteMednafenClientFiles()
+
+        CheckifUpdateRequired()
+        ConfigFile = New Configs(NullDCPath)
+
+        Try
+            UnpackUpdate()
+            CheckSDLVersion()
+        Catch ex As Exception
+            MsgBox("Unable to unpack emulator/update, error: " & ex.Message)
+            End
+        End Try
+
+        ' Once we're all done then add the version name so if it fails we try to update again next run
+        ConfigFile.Version = Ver
+        ConfigFile.SaveFile(False)
+
 
         If Not IsBeta Then
             Dim files As String() = Directory.GetFiles(NullDCPath & "\", "*.exe")
