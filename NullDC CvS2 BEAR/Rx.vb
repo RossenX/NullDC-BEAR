@@ -564,20 +564,24 @@ Class ListViewItemComparer
         Me.order = order
     End Sub
 
-    Public Function Compare(x As Object, y As Object) As Integer _
-                        Implements System.Collections.IComparer.Compare
-        Dim returnVal As Integer = -1
-        returnVal = [String].Compare(CType(x,
-                        ListViewItem).SubItems(col).Text,
-                        CType(y, ListViewItem).SubItems(col).Text)
-        ' Determine whether the sort order is descending.
-        If order = SortOrder.Descending Then
-            ' Invert the value returned by String.Compare.
-            returnVal *= -1
-        End If
+    Public Function Compare(x As Object, y As Object) As Integer Implements IComparer.Compare
 
+        Dim returnVal As Integer = -1
+        returnVal = [String].Compare(CType(x, ListViewItem).SubItems(col).Text, CType(y, ListViewItem).SubItems(col).Text)
+
+        ' If IsNumeric(CType(x, ListViewItem).SubItems(col).Text) And IsNumeric(CType(y, ListViewItem).SubItems(col).Text) Then
+        ' If CInt(CType(x, ListViewItem).SubItems(col).Text) > CInt(CType(y, ListViewItem).SubItems(col).Text) Then
+        ' returnVal = 1
+        ' End If
+        ' Else
+        ' returnVal = 1
+        ' End If
+
+        If order = SortOrder.Descending Then returnVal *= -1
         Return returnVal
+
     End Function
+
 End Class
 
 Public Class MenuStripRenderer : Inherits ToolStripProfessionalRenderer

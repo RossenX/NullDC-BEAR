@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.80b" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.80c" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -155,8 +155,9 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'ZipFile.CreateFromDirectory("D:\VS_Projects\NullDC-BEAR\NullDC CvS2 BEAR\bin\x86\Debug\zip", "mednafen-server.zip")
-        'If Debugger.IsAttached Then NullDCPath = "D:\Games\Emulators\NullDC\nulldc-1-0-4-en-win"
+        If Directory.Exists(NullDCPath & "\zip") Then
+            ZipFile.CreateFromDirectory(NullDCPath & "\zip", "zipped.zip")
+        End If
 
         ' Basics
         Rx.MainformRef = Me
@@ -223,17 +224,6 @@ Public Class frmMain
 
         CreateRomFolderWatcher()
         RefreshPlayerList(False)
-
-        ' Sus
-        ' Randomize() : Dim sus As Decimal = Rnd() * 10 : If sus <= 1 Or IsBeta Then : sus_i.Visible = True : Else : sus_i.Visible = False : End If
-
-        'AddPlayerToList(New BEARPlayer("Tester vs some other guy or some ", "123.123.123.1", "40631", "Capcom vs snk|NA-SHUT.zip", "Hosting"))
-        'AddPlayerToList(New BEARPlayer("Tester2", "123.123.123.2", "40631"))
-        'AddPlayerToList(New BEARPlayer("Tester3", "123.123.123.3", "40631"))
-        'AddPlayerToList(New BEARPlayer("Tester4", "123.123.123.4", "40631"))
-        'AddPlayerToList(New BEARPlayer("Tester5", "123.123.123.5", "40631"))
-        'AddPlayerToList(New BEARPlayer("Tester6", "123.123.123.6", "40631"))
-        'AddPlayerToList(New BEARPlayer("Tester7", "123.123.123.7", "40631"))
 
         cbStatus.Text = ConfigFile.Status
 

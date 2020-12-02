@@ -231,11 +231,10 @@ Public Class frmSDLMappingTool
 
                     Case SDL_EventType.SDL_JOYHATMOTION  ' Hat Motion
                         If Not _event.jhat.hatValue = 0 Then
-                            KeyPressed = "h" & CDec(_event.jhat.hatValue / 10).ToString
+                            KeyPressed = "h" & CDec(_event.jhat.hatValue / 10).ToString.Replace(",", ".")
                         End If
 
                     Case SDL_EventType.SDL_JOYBUTTONDOWN  ' Button Down
-                        Console.WriteLine(_event.jbutton.button)
                         KeyPressed = "b" & _event.jbutton.button
 
                 End Select
@@ -243,7 +242,6 @@ Public Class frmSDLMappingTool
             End While
 
             If KeyPressed.Length > 0 Then
-                KeyPressed.Replace(",", ".")
                 ListOfBinds(_currentBindIndex) = ListOfGamepadKeys(_currentBindIndex) & ":" & KeyPressed
                 _currentBindIndex += 1
                 If _currentBindIndex < ControllerImages.Count Then
