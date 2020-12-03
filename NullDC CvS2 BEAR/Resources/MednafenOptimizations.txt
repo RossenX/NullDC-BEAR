@@ -66,14 +66,3 @@ wswan.language english
 wswan.name Mednafen
 wswan.sex M
 video.deinterlacer blend
-md.input.multitap none
-pcfx.input.port1.multitap 1
-pcfx.input.port2.multitap 1
-psx.input.pport1.multitap 1
-psx.input.pport2.multitap 1
-snes.input.port1.multitap 1
-snes.input.port2.multitap 1
-snes_faust.input.sport1.multitap 1
-snes_faust.input.sport2.multitap 1
-ss.input.sport1.multitap 1
-ss.input.sport2.multitap 1

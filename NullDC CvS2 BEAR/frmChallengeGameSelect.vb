@@ -25,6 +25,8 @@
             Exit Sub
         End If
 
+        Rx.MultiTap = cb_Multitap.SelectedIndex
+        Console.WriteLine("Multitap=" & Rx.MultiTap)
         Rx.platform = MainformRef.GamesList(SelectedGame(0))(2)
         MainformRef.MednafenLauncher.IsHost = True
 
@@ -93,6 +95,8 @@
         Me.Icon = My.Resources.NewNullDCBearIcon
         tb_mednafen.Visible = False
         tb_nulldc.Visible = False
+        cb_Multitap.SelectedIndex = 0
+
         ReloadTheme()
 
     End Sub
@@ -110,6 +114,7 @@
         ApplyThemeToControl(MenuStrip1)
         ApplyThemeToControl(cbRegion)
         ApplyThemeToControl(cb_Serverlist)
+        ApplyThemeToControl(Label1)
 
         For Each _tab As TabPage In tc_games.TabPages
             ApplyThemeToControl(_tab.Controls.OfType(Of ListView).First, 2)
@@ -186,11 +191,24 @@
                 Else
                     tb_nulldc.Visible = False
                     tb_mednafen.Visible = True
+                    cb_Serverlist.Visible = True
+                    Label3.Visible = True
+                    Label1.Visible = True
+                    cb_Multitap.Visible = True
                 End If
             End If
         Else
+
             tb_nulldc.Visible = False
-            tb_mednafen.Visible = False
+            If tc_games.SelectedTab.Text = "Naomi" Or tc_games.SelectedTab.Text = "Dreamcast" Then
+                tb_mednafen.Visible = False
+            Else
+                tb_mednafen.Visible = True
+                cb_Serverlist.Visible = False
+                Label3.Visible = False
+                Label1.Visible = True
+                cb_Multitap.Visible = True
+            End If
         End If
 
     End Sub

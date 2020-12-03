@@ -566,6 +566,82 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to md.input.multitap tp1
+        '''pcfx.input.port1.multitap 1
+        '''pcfx.input.port2.multitap 0
+        '''psx.input.pport1.multitap 1
+        '''psx.input.pport2.multitap 0
+        '''snes.input.port1.multitap 1
+        '''snes.input.port2.multitap 0
+        '''snes_faust.input.sport1.multitap 1
+        '''snes_faust.input.sport2.multitap 0
+        '''ss.input.sport1.multitap 1
+        '''ss.input.sport2.multitap 0.
+        '''</summary>
+        Friend ReadOnly Property Multitap_1() As String
+            Get
+                Return ResourceManager.GetString("Multitap_1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to md.input.multitap tp2
+        '''pcfx.input.port1.multitap 0
+        '''pcfx.input.port2.multitap 1
+        '''psx.input.pport1.multitap 0
+        '''psx.input.pport2.multitap 1
+        '''snes.input.port1.multitap 0
+        '''snes.input.port2.multitap 1
+        '''snes_faust.input.sport1.multitap 0
+        '''snes_faust.input.sport2.multitap 1
+        '''ss.input.sport1.multitap 0
+        '''ss.input.sport2.multitap 1.
+        '''</summary>
+        Friend ReadOnly Property Multitap_2() As String
+            Get
+                Return ResourceManager.GetString("Multitap_2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to md.input.multitap tpd
+        '''pcfx.input.port1.multitap 1
+        '''pcfx.input.port2.multitap 1
+        '''psx.input.pport1.multitap 1
+        '''psx.input.pport2.multitap 1
+        '''snes.input.port1.multitap 1
+        '''snes.input.port2.multitap 1
+        '''snes_faust.input.sport1.multitap 1
+        '''snes_faust.input.sport2.multitap 1
+        '''ss.input.sport1.multitap 1
+        '''ss.input.sport2.multitap 1.
+        '''</summary>
+        Friend ReadOnly Property Multitap_both() As String
+            Get
+                Return ResourceManager.GetString("Multitap_both", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to md.input.multitap none
+        '''pcfx.input.port1.multitap 0
+        '''pcfx.input.port2.multitap 0
+        '''psx.input.pport1.multitap 0
+        '''psx.input.pport2.multitap 0
+        '''snes.input.port1.multitap 0
+        '''snes.input.port2.multitap 0
+        '''snes_faust.input.sport1.multitap 0
+        '''snes_faust.input.sport2.multitap 0
+        '''ss.input.sport1.multitap 0
+        '''ss.input.sport2.multitap 0.
+        '''</summary>
+        Friend ReadOnly Property Multitap_None() As String
+            Get
+                Return ResourceManager.GetString("Multitap_None", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         '''</summary>
         Friend ReadOnly Property NewChallanger() As System.IO.UnmanagedMemoryStream

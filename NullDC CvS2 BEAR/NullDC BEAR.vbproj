@@ -363,6 +363,10 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Multitap_1.txt" />
+    <Content Include="Resources\Multitap_2.txt" />
+    <Content Include="Resources\Multitap_both.txt" />
+    <Content Include="Resources\Multitap_None.txt" />
     <None Include="Resources\Morigan.png" />
     <None Include="Resources\Infinate.gif" />
     <None Include="Resources\System Icons\icon_PSX.png" />

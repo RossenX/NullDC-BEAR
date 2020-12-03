@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.80d" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.80e" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -1536,6 +1536,11 @@ Public Class frmMain
     Private Sub btnOffline_Click(sender As Object, e As EventArgs) Handles btnOffline.Click
         If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
             NotificationForm.ShowMessage("You're already playing...")
+            Exit Sub
+        End If
+
+        If Not Challenger Is Nothing Then
+            NotificationForm.ShowMessage("You're already challenging someone...")
             Exit Sub
         End If
 

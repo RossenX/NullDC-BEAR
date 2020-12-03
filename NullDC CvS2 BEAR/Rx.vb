@@ -10,6 +10,7 @@ Module Rx
     Public VMU As String ' the p1 VMU
     Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
     Public platform As String = ""
+    Public MultiTap As Int16 = 0
 
     Public Function GenerateGameKey() As String
         Dim r As New Random
@@ -216,7 +217,7 @@ Module Rx
             End If
         Next
 
-        Return PeripheralList
+        Return PeripheralList & "|" & MultiTap.ToString
     End Function
 
     Public Sub SetCurrentPeripheralsFromString(ByVal _string As String, _game As String)
@@ -254,6 +255,16 @@ Module Rx
 
         File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
         Dim _Lines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
+
+        For i = 0 To _Lines.Count - 1
+            If _Lines(i).StartsWith(cfgEntry & EntryCount & " ") Then
+                _Lines(i) = cfgEntry & EntryCount & " " & _peri(EntryCount - 1)
+                EntryCount += 1
+            End If
+        Next
+
+        Rx.MultiTap = CInt(_peri(_peri.Count - 1))
+
         For Each _line As String In _Lines
             If _line.StartsWith(cfgEntry & EntryCount & " ") Then
                 _Lines(LineCount) = cfgEntry & EntryCount & " " & _peri(EntryCount - 1)

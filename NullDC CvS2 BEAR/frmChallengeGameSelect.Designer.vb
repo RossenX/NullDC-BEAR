@@ -30,6 +30,8 @@ Partial Class frmChallengeGameSelect
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.tb_mednafen = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cb_Multitap = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cb_Serverlist = New System.Windows.Forms.ComboBox()
         Me.GameSelectContainer = New System.Windows.Forms.TableLayoutPanel()
@@ -114,19 +116,46 @@ Partial Class frmChallengeGameSelect
         '
         Me.tb_mednafen.AutoSize = True
         Me.tb_mednafen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.tb_mednafen.ColumnCount = 1
+        Me.tb_mednafen.ColumnCount = 2
+        Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tb_mednafen.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tb_mednafen.Controls.Add(Me.Label1, 0, 1)
+        Me.tb_mednafen.Controls.Add(Me.cb_Multitap, 2, 1)
         Me.tb_mednafen.Controls.Add(Me.Label3, 0, 0)
-        Me.tb_mednafen.Controls.Add(Me.cb_Serverlist, 0, 1)
+        Me.tb_mednafen.Controls.Add(Me.cb_Serverlist, 1, 0)
         Me.tb_mednafen.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tb_mednafen.Location = New System.Drawing.Point(0, 0)
         Me.tb_mednafen.Name = "tb_mednafen"
         Me.tb_mednafen.RowCount = 2
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tb_mednafen.Size = New System.Drawing.Size(373, 56)
         Me.tb_mednafen.TabIndex = 28
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(3, 27)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(68, 29)
+        Me.Label1.TabIndex = 32
+        Me.Label1.Text = "MultiTap"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'cb_Multitap
+        '
+        Me.cb_Multitap.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cb_Multitap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_Multitap.FormattingEnabled = True
+        Me.cb_Multitap.Items.AddRange(New Object() {"None", "Port 1", "Port 2", "Port 1+2"})
+        Me.cb_Multitap.Location = New System.Drawing.Point(77, 30)
+        Me.cb_Multitap.Name = "cb_Multitap"
+        Me.cb_Multitap.Size = New System.Drawing.Size(293, 21)
+        Me.cb_Multitap.TabIndex = 31
         '
         'Label3
         '
@@ -137,19 +166,19 @@ Partial Class frmChallengeGameSelect
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.Label3.Location = New System.Drawing.Point(3, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(367, 16)
+        Me.Label3.Size = New System.Drawing.Size(68, 27)
         Me.Label3.TabIndex = 30
         Me.Label3.Text = "Server"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'cb_Serverlist
         '
         Me.cb_Serverlist.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cb_Serverlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_Serverlist.FormattingEnabled = True
-        Me.cb_Serverlist.Location = New System.Drawing.Point(3, 19)
+        Me.cb_Serverlist.Location = New System.Drawing.Point(77, 3)
         Me.cb_Serverlist.Name = "cb_Serverlist"
-        Me.cb_Serverlist.Size = New System.Drawing.Size(367, 21)
+        Me.cb_Serverlist.Size = New System.Drawing.Size(293, 21)
         Me.cb_Serverlist.TabIndex = 29
         '
         'GameSelectContainer
@@ -178,8 +207,8 @@ Partial Class frmChallengeGameSelect
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.tb_nulldc)
         Me.Panel1.Controls.Add(Me.tb_mednafen)
+        Me.Panel1.Controls.Add(Me.tb_nulldc)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(101, 341)
         Me.Panel1.Name = "Panel1"
@@ -334,4 +363,6 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents cbRegion As ComboBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents DLCToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label1 As Label
+    Friend WithEvents cb_Multitap As ComboBox
 End Class
