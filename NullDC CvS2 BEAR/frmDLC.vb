@@ -115,7 +115,7 @@ Public Class frmDLC
         Try
             GetRomPacks()
             If MainformRef.IsBeta Then ' Just in case i forget to remove this in the release
-                'ArchiveDotOrgParse("https://archive.org/details/famicom-disk-system-museum&output=json")
+                'ArchiveDotOrgParse("https://archive.org/details/SonyPlaystation-EUR-Part2-Redump.org2019-06-05&output=json")
             End If
 
         Catch ex As Exception
@@ -192,6 +192,7 @@ Public Class frmDLC
 
     Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
         If CurrentlySelectedGame Is Nothing Then Exit Sub
+        If CurrentlySelectedGame.Folder.Trim = "" Or CurrentlySelectedGame.URL.Trim = "" Or CurrentlySelectedGame.Name.Trim = "" Then Exit Sub
 
         If DownloadClient.IsBusy Then
             DownloadCanceled = True

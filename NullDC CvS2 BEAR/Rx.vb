@@ -208,13 +208,14 @@ Module Rx
                 MsgBox("Missing emulator type: " & MainformRef.GamesList(MainformRef.ConfigFile.Game)(2))
         End Select
         cfgEntry += ".input.port"
-        Dim EntryCount As Int16 = 1
         For Each _line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
-            If _line.StartsWith(cfgEntry & EntryCount & " ") Then
-                If PeripheralList.Count > 0 Then PeripheralList += "|"
-                PeripheralList += _line.Replace(cfgEntry & EntryCount & " ", "").Trim
-                EntryCount += 1
-            End If
+            For i = 1 To 12
+                If _line.StartsWith(cfgEntry & i & " ") Then
+                    If PeripheralList.Count > 0 Then PeripheralList += "|"
+                    PeripheralList += _line.Replace(cfgEntry & i & " ", "").Trim
+                End If
+            Next
+
         Next
 
         Return PeripheralList & "|" & MultiTap.ToString
@@ -257,21 +258,18 @@ Module Rx
         Dim _Lines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
 
         For i = 0 To _Lines.Count - 1
-            If _Lines(i).StartsWith(cfgEntry & EntryCount & " ") Then
-                _Lines(i) = cfgEntry & EntryCount & " " & _peri(EntryCount - 1)
-                EntryCount += 1
+            If _Lines(i).StartsWith(cfgEntry) Then ' This is the start of a port
+                For l = 1 To 12 ' check thorugh all 12 ports
+                    If _Lines(i).StartsWith(cfgEntry & l & " ") Then
+                        _Lines(i) = cfgEntry & l & " " & _peri(EntryCount - 1)
+                        EntryCount += 1
+                        Exit For
+                    End If
+                Next
             End If
         Next
 
         Rx.MultiTap = CInt(_peri(_peri.Count - 1))
-
-        For Each _line As String In _Lines
-            If _line.StartsWith(cfgEntry & EntryCount & " ") Then
-                _Lines(LineCount) = cfgEntry & EntryCount & " " & _peri(EntryCount - 1)
-                EntryCount += 1
-            End If
-            LineCount += 1
-        Next
 
         File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", _Lines)
 
