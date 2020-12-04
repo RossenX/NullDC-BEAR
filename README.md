@@ -1,5 +1,5 @@
 # NullDC Netplay Launcher "BEAR" (Beat Em All Raw)
-A nullDC ALL-IN-ONE Launcher and optimizer to ensure easy setup for nullDC(Naomi/Atomidwave) and optimized settings for a smooth gameplay experiance.
+A nullDC ALL-IN-ONE Launcher and optimizer to ensure easy setup for nullDC(Naomi/Atomidwave/Dreamcast), Mednafen(NES/SNES/Genesis/MegaDrive/GBA/GBC/Neo-Geo Pocket/PSX/Saturn/Famicom Disk Drive) and optimized settings for a smooth gameplay experiance.
 Easy setup easy connection, minimal effort maximum performance.
 
 ## Setup Guide
