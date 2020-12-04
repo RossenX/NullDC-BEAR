@@ -25,8 +25,6 @@
 
     Public Sub ReloadTheme()
         ' Add any initialization after the InitializeComponent() call.
-        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
-        PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
 
         ApplyThemeToControl(lbWaitingForHost, 2)
         ApplyThemeToControl(btnRetryVMU)
@@ -47,6 +45,9 @@
     Private Sub frmWaitingForHost_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
         ' If this is a CDI (Dreamcast game) ask for the VMU Data
         If Visible Then
+            Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
+            PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
+
             btnRetryVMU.Visible = False
             If MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" Then ' Only if it's a DC game ask for VMU
                 lbWaitingForHost.Text = "Syncing VMU..."

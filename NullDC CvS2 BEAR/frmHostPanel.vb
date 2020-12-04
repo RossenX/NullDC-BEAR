@@ -36,8 +36,6 @@ Public Class frmHostPanel
     End Sub
 
     Public Sub ReloadTheme()
-        PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.HostAnimation)
-        Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostBackground)
 
         ApplyThemeToControl(btnExit)
         ApplyThemeToControl(btnStartHosting)
@@ -71,6 +69,9 @@ Public Class frmHostPanel
 
     Private Sub HostPanel_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If Visible = True Then
+            PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.HostAnimation)
+            Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostBackground)
+
             If cbRegion.Text = "" Then cbRegion.Text = "JPN"
             If Not MainformRef.Challenger Is Nothing Then
                 lbInfo.Text = "Hosting " & MainformRef.Challenger.name
