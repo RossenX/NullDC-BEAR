@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.80g" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.81" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -156,7 +156,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Directory.Exists(NullDCPath & "\zip") Then
-            ZipFile.CreateFromDirectory(NullDCPath & "\zip", "zipped.zip")
+            ZipFile.CreateFromDirectory(NullDCPath & "\zip", "zipped.zip", CompressionLevel.Optimal, False)
         End If
 
         ' Basics
@@ -785,6 +785,17 @@ Public Class frmMain
                 End If
             Next
 
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.m3u", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".m3u", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("PSX-" & RomName) Then
+                    GamesList.Add("PSX-" & RomName, {GameName, RomPath, "psx", ""})
+                End If
+            Next
         End If
 
         If _system = "all" Or _system = "nes" Then
@@ -935,93 +946,8 @@ Public Class frmMain
         End If
 
         ' New Games List Code
-        PopulateGameLists(GameSelectForm.tc_games)
-
-    End Sub
-
-    Private Sub PopulateGameLists(ByRef TabControl As TabControl)
-        TabControl.TabPages.Clear()
-
-        'RomFileName - Game Name, Rom Path, Platform, Hash
-        For i = 0 To GamesList.Count - 1
-
-            Dim TabIndex = -1
-            Dim TabName = ""
-
-            Select Case GamesList(GamesList.Keys(i))(2)
-                Case "na"
-                    TabName = "Naomi"
-                Case "dc"
-                    TabName = "Dreamcast"
-                Case "sg"
-                    TabName = "Genesis"
-                Case "ss"
-                    TabName = "Saturn"
-                Case "psx"
-                    TabName = "PSX"
-                Case "nes"
-                    TabName = "NES"
-                Case "snes"
-                    TabName = "SNES"
-                Case "ngp"
-                    TabName = "Neo-Geo Pocket"
-                Case "gba"
-                    TabName = "GBA"
-                Case "gbc"
-                    TabName = "GBC"
-                Case "fds"
-                    TabName = "Famicom Disk System"
-                Case Else
-                    TabName = "Unknown"
-                    Console.WriteLine("No System?")
-            End Select
-
-            ' Check if Tab Exists
-            For Each _tab As TabPage In TabControl.TabPages
-                If _tab.Text = TabName Then
-                    TabIndex = _tab.TabIndex
-                    Exit For
-                End If
-            Next
-
-            ' Tab not found, create the tab
-            If TabIndex = -1 Then
-                TabControl.TabPages.Add(TabName)
-                TabControl.TabPages.Item(TabControl.TabCount - 1).BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-
-                Dim tmpListView As New ListView
-                ApplyThemeToControl(tmpListView, 2)
-                tmpListView.Dock = DockStyle.Fill
-                tmpListView.MultiSelect = False
-                tmpListView.View = View.Details
-                tmpListView.HeaderStyle = ColumnHeaderStyle.None
-                tmpListView.FullRowSelect = True
-                tmpListView.Parent = TabControl.TabPages.Item(TabControl.TabCount - 1)
-
-                tmpListView.Columns.Add("Game Name")
-                tmpListView.Columns.Add("Rom Name")
-                tmpListView.Columns.Item(0).Width = tmpListView.Width - 25
-                tmpListView.Columns.Item(1).Width = 0
-
-                TabIndex = TabControl.TabPages.Count - 1
-
-                AddHandler tmpListView.SelectedIndexChanged, AddressOf MainformRef.GameSelectForm.SelectedIndexChange
-                AddHandler tmpListView.Click, AddressOf MainformRef.GameSelectForm.SelectedIndexChange
-                AddHandler tmpListView.DoubleClick, AddressOf MainformRef.GameSelectForm.btnLetsGo_Click
-            End If
-
-            Dim tmp2ListView = TabControl.TabPages.Item(TabIndex).Controls.OfType(Of ListView).First
-
-            Dim RomName = ""
-            Dim GameName = ""
-
-            Dim _it As New ListViewItem(GamesList(GamesList.Keys(i))(0).ToString)
-
-            _it.SubItems.Add(GamesList.Keys(i).ToString)
-            tmp2ListView.Items.Add(_it)
-        Next
-
-
+        GameSelectForm.PopulateGameLists()
+        ' PopulateGameLists(GameSelectForm.tc_games)
 
     End Sub
 
