@@ -345,6 +345,8 @@ Module BEARTheme
                 ApplyListViewTheme(_control, _which)
             Case GetType(RichTextBox)
                 ApplyRichTextBoxTheme(_control, _which)
+            Case GetType(TextBox)
+                ApplyTextBoxTheme(_control, _which)
         End Select
 
     End Sub
@@ -357,6 +359,23 @@ Module BEARTheme
         _button.FlatAppearance.MouseOverBackColor = LoadColor(ThemeKeys.ButtonOverColor)
         '_button.Font = New Font(_button.Font.FontFamily, LoadSize(ThemeKeys.ButtonFontSize), _button.Font.Style)
 
+    End Sub
+
+    Private Sub ApplyTextBoxTheme(ByRef _Control As TextBox, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+               ' _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+        End Select
     End Sub
 
     Private Sub ApplyRichTextBoxTheme(ByRef _Control As RichTextBox, ByVal _which As Single)
@@ -542,8 +561,6 @@ Module BEARTheme
                     DirectCast(_form, frmMain).ReloadTheme()
                 Case GetType(frmNotification)
                     DirectCast(_form, frmNotification).ReloadTheme()
-                Case GetType(FrmPaidDLC)
-                    DirectCast(_form, FrmPaidDLC).ReloadTheme()
                 Case GetType(frmReplays)
                     DirectCast(_form, frmReplays).ReloadTheme()
                 Case GetType(frmSetup)

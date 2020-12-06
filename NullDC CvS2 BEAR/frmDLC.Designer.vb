@@ -31,7 +31,8 @@ Partial Class frmDLC
         Me.tc_games = New System.Windows.Forms.TabControl()
         Me.lbDisclaimer = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.PaidDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DLCCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MultidiskPlaylistCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DLCContainer.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -148,18 +149,24 @@ Partial Class frmDLC
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PaidDLCToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DLCCreatorToolStripMenuItem, Me.MultidiskPlaylistCreatorToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(658, 24)
         Me.MenuStrip1.TabIndex = 3
         Me.MenuStrip1.Text = "MenuStrip1"
         '
-        'PaidDLCToolStripMenuItem
+        'DLCCreatorToolStripMenuItem
         '
-        Me.PaidDLCToolStripMenuItem.Name = "PaidDLCToolStripMenuItem"
-        Me.PaidDLCToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
-        Me.PaidDLCToolStripMenuItem.Text = "Paid DLC"
+        Me.DLCCreatorToolStripMenuItem.Name = "DLCCreatorToolStripMenuItem"
+        Me.DLCCreatorToolStripMenuItem.Size = New System.Drawing.Size(83, 20)
+        Me.DLCCreatorToolStripMenuItem.Text = "DLC Creator"
+        '
+        'MultidiskPlaylistCreatorToolStripMenuItem
+        '
+        Me.MultidiskPlaylistCreatorToolStripMenuItem.Name = "MultidiskPlaylistCreatorToolStripMenuItem"
+        Me.MultidiskPlaylistCreatorToolStripMenuItem.Size = New System.Drawing.Size(150, 20)
+        Me.MultidiskPlaylistCreatorToolStripMenuItem.Text = "Multidisk Playlist Creator"
         '
         'frmDLC
         '
@@ -187,6 +194,7 @@ Partial Class frmDLC
     Friend WithEvents tc_games As TabControl
     Friend WithEvents btnClose As Button
     Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents PaidDLCToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lbDisclaimer As Label
+    Friend WithEvents DLCCreatorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MultidiskPlaylistCreatorToolStripMenuItem As ToolStripMenuItem
 End Class

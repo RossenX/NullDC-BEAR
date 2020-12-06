@@ -129,10 +129,10 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="BEARPinger.vb" />
-    <Compile Include="FrmPaidDLC.Designer.vb">
-      <DependentUpon>FrmPaidDLC.vb</DependentUpon>
+    <Compile Include="frmDLCCreator.Designer.vb">
+      <DependentUpon>frmDLCCreator.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmPaidDLC.vb">
+    <Compile Include="frmDLCCreator.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmChallenge.Designer.vb">
@@ -194,6 +194,12 @@
     </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMultiDiskCreator.Designer.vb">
+      <DependentUpon>frmMultiDiskCreator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMultiDiskCreator.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNotification.Designer.vb">
@@ -274,6 +280,9 @@
     <EmbeddedResource Include="frmDLC.resx">
       <DependentUpon>frmDLC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDLCCreator.resx">
+      <DependentUpon>frmDLCCreator.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDM.resx">
       <DependentUpon>frmDM.vb</DependentUpon>
     </EmbeddedResource>
@@ -291,11 +300,11 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMultiDiskCreator.resx">
+      <DependentUpon>frmMultiDiskCreator.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmNotification.resx">
       <DependentUpon>frmNotification.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmPaidDLC.resx">
-      <DependentUpon>FrmPaidDLC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReplays.resx">
       <DependentUpon>frmReplays.vb</DependentUpon>
@@ -367,8 +376,6 @@
     <Content Include="Resources\Multitap_2.txt" />
     <Content Include="Resources\Multitap_both.txt" />
     <Content Include="Resources\Multitap_None.txt" />
-    <None Include="Resources\Morigan.png" />
-    <None Include="Resources\Infinate.gif" />
     <None Include="Resources\System Icons\icon_PSX.png" />
     <None Include="Resources\System Icons\icon_NES.png" />
     <None Include="Resources\System Icons\icon_GBC.png" />

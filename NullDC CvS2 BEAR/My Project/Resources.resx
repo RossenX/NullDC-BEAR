@@ -160,9 +160,6 @@
   <data name="Controls" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controls.bear;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Infinate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Infinate.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Beta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Beta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -285,9 +282,6 @@
   </data>
   <data name="BEARJamma_ArcadeStick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dreamcast-ArcadeStick.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Morigan" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Morigan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Multitap_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Multitap_1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

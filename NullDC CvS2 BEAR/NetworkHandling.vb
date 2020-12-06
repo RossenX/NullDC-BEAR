@@ -42,6 +42,7 @@ Public Class NetworkHandling
 
         Catch ex As Exception
             Console.WriteLine("Failed to send")
+
         End Try
 
     End Sub

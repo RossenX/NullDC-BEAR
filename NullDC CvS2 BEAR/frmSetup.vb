@@ -108,6 +108,7 @@ Public Class frmSetup
     End Sub
 
 #Region "Text Field Limitation"
+
     Private Sub tbPlayerName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tbPlayerName.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890_ "

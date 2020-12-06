@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.81" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.80g" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -371,7 +371,6 @@ Public Class frmMain
         ' Check if updating is turned off
         For Each CommandLine In Environment.GetCommandLineArgs
             If CommandLine = "-noupdate" Then Exit Sub
-
         Next
 
         If IsBeta Then Exit Sub
@@ -1131,179 +1130,179 @@ Public Class frmMain
 
     Public Delegate Sub AddPlayerToList_delegate(ByVal Player As BEARPlayer)
     Public Sub AddPlayerToList(ByVal Player As BEARPlayer)
-        'Check if this IP:Port combo exists
-        Dim FoundEntry As ListViewItem = Nothing
+        Try
+            'Check if this IP:Port combo exists
+            Dim FoundEntry As ListViewItem = Nothing
 
-        Dim ListViewToUse As ListView = PlayerList
-        If Not Player.game = "None" Then ListViewToUse = Matchlist
+            Dim ListViewToUse As ListView = PlayerList
+            If Not Player.game = "None" Then ListViewToUse = Matchlist
 
-        Dim IconIndex = 0
-        If Not Player.game = "None" Then
-            Select Case Player.game.Split("|")(1).Split("-")(0)
-                Case "NA" : IconIndex = 0
-                Case "DC" : IconIndex = 1
-                Case "SS" : IconIndex = 2
-                Case "SG" : IconIndex = 3
-                Case "PSX" : IconIndex = 4
-                Case "NES" : IconIndex = 5
-                Case "SNES" : IconIndex = 6
-                Case "FDS" : IconIndex = 7
-                Case "NGP" : IconIndex = 8
-                Case "GBA" : IconIndex = 9
-                Case "GBC" : IconIndex = 10
-            End Select
-        End If
-
-        ListViewToUse.Invoke(Sub()
-                                 For Each playerentry As ListViewItem In ListViewToUse.Items
-                                     If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
-                                         FoundEntry = playerentry
-                                         Exit For
-                                     End If
-                                 Next
-                             End Sub)
-
-
-        If FoundEntry Is Nothing Then
-
-            Dim ItemNumber As Int16 = ListViewToUse.Items.Count
-            Dim PlayerInfo As ListViewItem = New ListViewItem(Player.name, Player.name)
-            PlayerInfo.ImageIndex = IconIndex
-            PlayerInfo.SubItems.Add(Player.ip & ":" & Player.port)
-            PlayerInfo.SubItems.Add("T/O")
-            PlayerInfo.SubItems.Add(Player.game)
-            PlayerInfo.SubItems.Add(Player.status)
-
-            If ListViewToUse Is PlayerList Then
-                If Player.status = "Idle" Then
-                    PlayerInfo.Group = ListViewToUse.Groups(0)
-                Else
-                    PlayerInfo.Group = ListViewToUse.Groups(1)
-                End If
-            Else
-                PlayerInfo.Group = Nothing
-            End If
-
-            ListViewToUse.Invoke(Sub()
-                                     ListViewToUse.Items.Add(PlayerInfo)
-                                 End Sub)
-
-            If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
-                Try
-                    Dim pingthread As Thread = New Thread(
-                        Sub()
-                            If My.Computer.Network.Ping(Player.ip) Then
-                                Thread.Sleep(250 + (250 * ItemNumber))
-                                Dim ping As PingReply = New Ping().Send(Player.ip)
-                                ListViewToUse.Invoke(
-                                Sub()
-                                    Try
-                                        PlayerInfo.SubItems(2).Text = ping.RoundtripTime
-                                        ListViewToUse.Sort()
-                                    Catch ex As Exception
-                                    End Try
-                                End Sub)
-                            End If
-                        End Sub)
-
-                    pingthread.IsBackground = True
-                    pingthread.Start()
-
-                Catch ex As Exception
-
-                End Try
-            Else
-                MainformRef.Invoke(Sub()
-                                       ListViewToUse.Items(ItemNumber).SubItems(2).Text = "0"
-                                       ListViewToUse.Sort()
-                                   End Sub)
-            End If
-
-
-
-        Else
-            ListViewToUse.Invoke(
-                Sub()
-                    FoundEntry.SubItems(0).Text = Player.name
-                    FoundEntry.SubItems(1).Text = Player.ip & ":" & Player.port
-
-                End Sub)
-
-            If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
-                Try
-                    Dim pingthread As Thread = New Thread(
-                        Sub()
-                            If My.Computer.Network.Ping(Player.ip) Then
-                                Thread.Sleep(250)
-                                Dim ping As PingReply = New Ping().Send(Player.ip)
-                                ListViewToUse.Invoke(
-                                Sub()
-                                    Try
-                                        FoundEntry.SubItems(2).Text = ping.RoundtripTime
-                                        ListViewToUse.Sort()
-                                    Catch ex As Exception
-
-                                    End Try
-
-                                End Sub)
-                            End If
-                        End Sub)
-
-                    pingthread.IsBackground = True
-                    pingthread.Start()
-
-                Catch ex As Exception
-
-                End Try
-            Else
-                MainformRef.Invoke(Sub() FoundEntry.SubItems(2).Text = "0")
-
+            Dim IconIndex = 0
+            If Not Player.game = "None" Then
+                Select Case Player.game.Split("|")(1).Split("-")(0)
+                    Case "NA" : IconIndex = 0
+                    Case "DC" : IconIndex = 1
+                    Case "SS" : IconIndex = 2
+                    Case "SG" : IconIndex = 3
+                    Case "PSX" : IconIndex = 4
+                    Case "NES" : IconIndex = 5
+                    Case "SNES" : IconIndex = 6
+                    Case "FDS" : IconIndex = 7
+                    Case "NGP" : IconIndex = 8
+                    Case "GBA" : IconIndex = 9
+                    Case "GBC" : IconIndex = 10
+                End Select
             End If
 
             ListViewToUse.Invoke(
                 Sub()
-                    FoundEntry.SubItems(3).Text = Player.game
-                    FoundEntry.SubItems(4).Text = Player.status
-                    FoundEntry.ImageIndex = IconIndex
-
-                    If ListViewToUse Is PlayerList Then
-                        If Player.status = "Idle" Then
-                            FoundEntry.Group = ListViewToUse.Groups(0)
-                        Else
-                            FoundEntry.Group = ListViewToUse.Groups(1)
-
+                    For Each playerentry As ListViewItem In ListViewToUse.Items
+                        If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
+                            FoundEntry = playerentry
+                            Exit For
                         End If
-                    Else
-                        FoundEntry.Group = Nothing
-                    End If
 
-
+                    Next
                 End Sub)
-        End If
 
-        MainformRef.Invoke(Sub()
-                               ' Remove from the other list
-                               If ListViewToUse Is Matchlist Then
 
-                                   For Each playerentry As ListViewItem In PlayerList.Items
-                                       If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
-                                           PlayerList.Items.Remove(playerentry)
-                                           Exit For
-                                       End If
-                                   Next
+            If FoundEntry Is Nothing Then
 
-                               Else
-                                   For Each playerentry As ListViewItem In Matchlist.Items
-                                       If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
-                                           Matchlist.Items.Remove(playerentry)
-                                           Exit For
-                                       End If
-                                   Next
-                               End If
+                Dim ItemNumber As Int16 = ListViewToUse.Items.Count
+                Dim PlayerInfo As ListViewItem = New ListViewItem(Player.name, Player.name)
+                PlayerInfo.ImageIndex = IconIndex
+                PlayerInfo.SubItems.Add(Player.ip & ":" & Player.port)
+                PlayerInfo.SubItems.Add("T/O")
+                PlayerInfo.SubItems.Add(Player.game)
+                PlayerInfo.SubItems.Add(Player.status)
 
-                               ListViewToUse.Sort()
-                           End Sub)
+                If ListViewToUse Is PlayerList Then
+                    If Player.status = "Idle" Then
+                        PlayerInfo.Group = ListViewToUse.Groups(0)
+                    Else
+                        PlayerInfo.Group = ListViewToUse.Groups(1)
+                    End If
+                Else
+                    PlayerInfo.Group = Nothing
+                End If
 
+                ListViewToUse.Invoke(Sub()
+                                         ListViewToUse.Items.Add(PlayerInfo)
+                                     End Sub)
+
+                If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
+                    Try
+                        Dim pingthread As Thread = New Thread(
+                            Sub()
+                                Try
+                                    Thread.Sleep(250 + (250 * ItemNumber)) : Dim ping As PingReply = New Ping().Send(Player.ip, 1000)
+                                    ListViewToUse.Invoke(
+                                    Sub()
+                                        Try
+                                            If Not ping.RoundtripTime = 0 Then PlayerInfo.SubItems(2).Text = ping.RoundtripTime
+                                            ListViewToUse.Sort()
+                                        Catch ex As Exception : End Try
+                                    End Sub)
+
+                                Catch ex As Exception
+
+                                End Try
+
+                            End Sub)
+
+                        pingthread.IsBackground = True
+                        pingthread.Start()
+
+                    Catch ex As Exception
+
+                    End Try
+                Else
+                    MainformRef.Invoke(Sub()
+                                           ListViewToUse.Items(ItemNumber).SubItems(2).Text = "0"
+                                           ListViewToUse.Sort()
+                                       End Sub)
+                End If
+
+
+
+            Else
+                ListViewToUse.Invoke(
+                    Sub()
+                        FoundEntry.SubItems(0).Text = Player.name
+                        FoundEntry.SubItems(1).Text = Player.ip & ":" & Player.port
+
+                    End Sub)
+
+                If Not Player.name.StartsWith(MainformRef.ConfigFile.Name) Then
+                    Try
+                        Dim pingthread As Thread = New Thread(
+                            Sub()
+                                Try
+                                    Thread.Sleep(250) : Dim ping As PingReply = New Ping().Send(Player.ip, 1000)
+                                    ListViewToUse.Invoke(
+                                    Sub()
+                                        Try
+                                            If Not ping.RoundtripTime = 0 Then FoundEntry.SubItems(2).Text = ping.RoundtripTime
+                                            ListViewToUse.Sort()
+                                        Catch ex As Exception : End Try : End Sub)
+                                Catch ex As Exception : End Try : End Sub)
+
+                        pingthread.IsBackground = True
+                        pingthread.Start()
+
+                    Catch ex As Exception : End Try
+                Else
+                    MainformRef.Invoke(Sub() FoundEntry.SubItems(2).Text = "0")
+
+                End If
+
+                ListViewToUse.Invoke(
+                    Sub()
+                        FoundEntry.SubItems(3).Text = Player.game
+                        FoundEntry.SubItems(4).Text = Player.status
+                        FoundEntry.ImageIndex = IconIndex
+
+                        If ListViewToUse Is PlayerList Then
+                            If Player.status = "Idle" Then
+                                FoundEntry.Group = ListViewToUse.Groups(0)
+                            Else
+                                FoundEntry.Group = ListViewToUse.Groups(1)
+
+                            End If
+                        Else
+                            FoundEntry.Group = Nothing
+                        End If
+
+
+                    End Sub)
+            End If
+
+            MainformRef.Invoke(Sub()
+                                   ' Remove from the other list
+                                   If ListViewToUse Is Matchlist Then
+
+                                       For Each playerentry As ListViewItem In PlayerList.Items
+                                           If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
+                                               PlayerList.Items.Remove(playerentry)
+                                               Exit For
+                                           End If
+                                       Next
+
+                                   Else
+                                       For Each playerentry As ListViewItem In Matchlist.Items
+                                           If playerentry.SubItems(1).Text.Split(":")(0).Trim = Player.ip.Trim Then
+                                               Matchlist.Items.Remove(playerentry)
+                                               Exit For
+                                           End If
+                                       Next
+                                   End If
+
+                                   ListViewToUse.Sort()
+                               End Sub)
+
+        Catch ex As Exception
+            'MsgBox("Error Adding Player: " & ex.Message)
+        End Try
 
     End Sub
 

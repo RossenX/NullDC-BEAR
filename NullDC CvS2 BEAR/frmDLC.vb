@@ -17,22 +17,15 @@ Public Class frmDLC
     Dim DownloadCanceled As Boolean = False
     Dim CurrentlySelectedGame As DownloadableGame = Nothing
     Dim CurrentlyDownloadingGame As DownloadableGame = Nothing
-
     Dim ExternalURLs As ArrayList = New ArrayList ' Used for the link to manually download games
     Dim RomFolders As ArrayList = New ArrayList ' Used for the Button to open the folder only
-
     Dim ExportCount = 0
-
     Dim DownloadSize = 0
     Dim Downloaded = 0
 
     Public Sub New()
-
         ' This call is required by the designer.
         InitializeComponent()
-
-
-
     End Sub
 
     Private Sub frmDLC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -46,6 +39,7 @@ Public Class frmDLC
 
         ReloadTheme()
 
+        
     End Sub
 
     Public Sub ReloadTheme()
@@ -104,7 +98,7 @@ Public Class frmDLC
                     ExportString += Exportedlist(i) & vbNewLine
                 Next
 
-                File.WriteAllText(MainformRef.NullDCPath & "\Export" & URL.Split("/")(URL.Split("/").Count - 1) & ".freedlc", ExportString)
+                'File.WriteAllText(MainformRef.NullDCPath & "\Export" & URL.Split("/")(URL.Split("/").Count - 1) & ".freedlc", ExportString)
                 ExportCount += 1
 
             End Sub
@@ -231,132 +225,147 @@ Public Class frmDLC
     End Sub
 
     Private Sub DownloadProgress(ByVal sender As WebClient, e As DownloadProgressChangedEventArgs)
-        ProgressBar1.Maximum = e.TotalBytesToReceive
-        ProgressBar1.Value = e.BytesReceived
-        Downloaded = e.BytesReceived
-        DownloadSize = e.TotalBytesToReceive
+        Try
+            ProgressBar1.Maximum = e.TotalBytesToReceive
+            ProgressBar1.Value = e.BytesReceived
+            Downloaded = e.BytesReceived
+            DownloadSize = e.TotalBytesToReceive
 
-        ProgressBar1.Visible = True
+            ProgressBar1.Visible = True
 
-        Dim _NameLength = 20
-        If CurrentlyDownloadingGame.Name.Length < 20 Then
-            _NameLength = CurrentlyDownloadingGame.Name.Length
+            Dim _NameLength = 20
+            If CurrentlyDownloadingGame.Name.Length < 20 Then
+                _NameLength = CurrentlyDownloadingGame.Name.Length
 
-        End If
-        btnDownload.Text = String.Format("Downloading... {0} (Click again to Cancel)" & vbNewLine & "({1}mb/{2}mb)", CurrentlyDownloadingGame.Name.Substring(0, _NameLength), Math.Round(e.BytesReceived / 1000000, 2), Math.Round(e.TotalBytesToReceive / 1000000, 2))
+            End If
+            btnDownload.Text = String.Format("Downloading... {0} (Click again to Cancel)" & vbNewLine & "({1}mb/{2}mb)", CurrentlyDownloadingGame.Name.Substring(0, _NameLength), Math.Round(e.BytesReceived / 1000000, 2), Math.Round(e.TotalBytesToReceive / 1000000, 2))
+
+        Catch ex As Exception
+            MsgBox("Error Downlaoding Game: " & ex.Message)
+
+        End Try
+
 
     End Sub
 
     Private Sub DownloadComplete()
         Console.WriteLine("Download Done")
+        Try
+            Dim HoneyFilePath = ""
+            Dim RomDirectory = ""
 
-        Dim HoneyFilePath = ""
-        Dim RomDirectory = ""
+            Dim _tmp As String() = CurrentlyDownloadingGame.URL.Split("/")
+            Dim DownloadedHoneyFile = _tmp(_tmp.Count - 1).Replace(".zip", ".honey")
 
-        Dim _tmp As String() = CurrentlyDownloadingGame.URL.Split("/")
-        Dim DownloadedHoneyFile = _tmp(_tmp.Count - 1).Replace(".zip", ".honey")
+            HoneyFilePath = MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder & "\" & DownloadedHoneyFile
+            RomDirectory = MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder
 
-        HoneyFilePath = MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder & "\" & DownloadedHoneyFile
-        RomDirectory = MainformRef.NullDCPath & "\" & CurrentlyDownloadingGame.Folder
+            Dim InstallThread As Thread =
+                New Thread(Sub()
+                               If Not DownloadCanceled Then
+                                   Try
+                                       MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
+                                       Dim RomFileName = RemoveAnnoyingRomNumbersFromString(WebUtility.UrlDecode(CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1)))
 
-        Dim InstallThread As Thread =
-            New Thread(Sub()
-                           If Not DownloadCanceled Then
-                               Try
-                                   MainformRef.Invoke(Sub() btnDownload.Text = "Installing...")
-                                   Dim RomFileName = RemoveAnnoyingRomNumbersFromString(WebUtility.UrlDecode(CurrentlyDownloadingGame.URL.Split("/")(CurrentlyDownloadingGame.URL.Split("/").Count - 1)))
+                                       Select Case CurrentlyDownloadingGame.Extract
+                                           Case "0" ' Do not Unzip
+                                               If File.Exists(RomDirectory & "\" & RomFileName) Then
+                                                   File.Delete(RomDirectory & "\" & RomFileName)
+                                               End If
+                                               File.Copy(HoneyFilePath, RomDirectory & "\" & RomFileName)
+                                           Case "1" ' Unzip
+                                               If File.Exists(HoneyFilePath) Then
+                                                   ZipFile.ExtractToDirectory(HoneyFilePath, RomDirectory)
+                                               End If
 
-                                   Select Case CurrentlyDownloadingGame.Extract
-                                       Case "0" ' Do not Unzip
-                                           If File.Exists(RomDirectory & "\" & RomFileName) Then
-                                               File.Delete(RomDirectory & "\" & RomFileName)
-                                           End If
-                                           File.Copy(HoneyFilePath, RomDirectory & "\" & RomFileName)
-                                       Case "1" ' Unzip
-                                           If File.Exists(HoneyFilePath) Then
-                                               ZipFile.ExtractToDirectory(HoneyFilePath, RomDirectory)
-                                           End If
+                                           Case "2" ' Unzip and place in own folder
+                                               If Not Directory.Exists(RomDirectory & "\" & CurrentlyDownloadingGame.Name) Then
+                                                   Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                               Else
+                                                   Directory.Delete(RomDirectory & "\" & CurrentlyDownloadingGame.Name, True)
+                                                   Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                               End If
 
-                                       Case "2" ' Unzip and place in own folder
-                                           If Not Directory.Exists(RomDirectory & "\" & CurrentlyDownloadingGame.Name) Then
-                                               Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
-                                           Else
-                                               Directory.Delete(RomDirectory & "\" & CurrentlyDownloadingGame.Name, True)
-                                               Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
-                                           End If
+                                               If File.Exists(HoneyFilePath) Then
+                                                   ZipFile.ExtractToDirectory(HoneyFilePath, RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                               End If
+                                           Case "3" ' Do not Unzip, but place in folder
+                                               If Not Directory.Exists(RomDirectory & "\" & CurrentlyDownloadingGame.Name) Then
+                                                   Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                               Else
+                                                   Directory.Delete(RomDirectory & "\" & CurrentlyDownloadingGame.Name, True)
+                                                   Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
+                                               End If
 
-                                           If File.Exists(HoneyFilePath) Then
-                                               ZipFile.ExtractToDirectory(HoneyFilePath, RomDirectory & "\" & CurrentlyDownloadingGame.Name)
-                                           End If
-                                       Case "3" ' Do not Unzip, but place in folder
-                                           If Not Directory.Exists(RomDirectory & "\" & CurrentlyDownloadingGame.Name) Then
-                                               Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
-                                           Else
-                                               Directory.Delete(RomDirectory & "\" & CurrentlyDownloadingGame.Name, True)
-                                               Directory.CreateDirectory(RomDirectory & "\" & CurrentlyDownloadingGame.Name)
-                                           End If
+                                               File.Copy(HoneyFilePath, RomDirectory & "\" & CurrentlyDownloadingGame.Name & "\" & RomFileName)
+                                       End Select
 
-                                           File.Copy(HoneyFilePath, RomDirectory & "\" & CurrentlyDownloadingGame.Name & "\" & RomFileName)
-                                   End Select
+                                       MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & CurrentlyDownloadingGame.Name))
+                                   Catch ex As Exception
+                                       MsgBox("Rom install Error: " & ex.Message)
+                                       CurrentlyDownloadingGame = Nothing
 
-                                   MainformRef.Invoke(Sub() MainformRef.NotificationForm.ShowMessage("Enjoy " & CurrentlyDownloadingGame.Name))
-                               Catch ex As Exception
-                                   MsgBox("Rom install Error: " & ex.Message)
-                                   CurrentlyDownloadingGame = Nothing
+                                   End Try
 
-                               End Try
-
-                           End If
-
-                           If File.Exists(HoneyFilePath) Then
-                               File.SetAttributes(HoneyFilePath, FileAttributes.Normal)
-                               File.Delete(HoneyFilePath)
-
-                           End If
-
-                           MainformRef.Invoke(
-                           Sub()
-                               If Me.Visible Then
-                                   ProgressBar1.Visible = False
-                                   btnDownload.Text = "Download"
-                                   DownloadCanceled = False
-                                   CurrentlyDownloadingGame = Nothing
                                End If
+
+                               If File.Exists(HoneyFilePath) Then
+                                   File.SetAttributes(HoneyFilePath, FileAttributes.Normal)
+                                   File.Delete(HoneyFilePath)
+
+                               End If
+
+                               MainformRef.Invoke(
+                               Sub()
+                                   If Me.Visible Then
+                                       ProgressBar1.Visible = False
+                                       btnDownload.Text = "Download"
+                                       DownloadCanceled = False
+                                       CurrentlyDownloadingGame = Nothing
+                                   End If
+                                   CurrentlyDownloadingGame = Nothing
+                               End Sub)
                                CurrentlyDownloadingGame = Nothing
                            End Sub)
-                           CurrentlyDownloadingGame = Nothing
-                       End Sub)
 
-        If Not Downloaded = DownloadSize And Not DownloadCanceled And Not Downloaded = 0 Then
-            MsgBox("Download closed by the server, try again.")
+            If Not Downloaded = DownloadSize And Not DownloadCanceled And Not Downloaded = 0 Then
+                MsgBox("Download closed by the server, try again.")
 
-            If File.Exists(HoneyFilePath) Then
-                File.SetAttributes(HoneyFilePath, FileAttributes.Normal)
-                File.Delete(HoneyFilePath)
+                If File.Exists(HoneyFilePath) Then
+                    File.SetAttributes(HoneyFilePath, FileAttributes.Normal)
+                    File.Delete(HoneyFilePath)
 
+                End If
+
+                MainformRef.Invoke(
+                               Sub()
+                                   If Me.Visible Then
+                                       ProgressBar1.Visible = False
+                                       btnDownload.Text = "Download"
+                                       DownloadCanceled = False
+                                       CurrentlyDownloadingGame = Nothing
+                                   End If
+                                   CurrentlyDownloadingGame = Nothing
+                               End Sub)
+
+                Exit Sub
+            Else
+                InstallThread.Start()
             End If
 
-            MainformRef.Invoke(
-                           Sub()
-                               If Me.Visible Then
-                                   ProgressBar1.Visible = False
-                                   btnDownload.Text = "Download"
-                                   DownloadCanceled = False
-                                   CurrentlyDownloadingGame = Nothing
-                               End If
-                               CurrentlyDownloadingGame = Nothing
-                           End Sub)
+        Catch ex As Exception
+            MsgBox("Error Installing rom: " & ex.Message)
 
-            Exit Sub
-        Else
-            InstallThread.Start()
-        End If
-
+        End Try
 
     End Sub
 
     Private Sub lnkRoms_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkRoms.LinkClicked
-        Process.Start(ExternalURLs(tc_games.SelectedIndex))
+        If Uri.IsWellFormedUriString(ExternalURLs(tc_games.SelectedIndex), UriKind.Absolute) Then
+            Process.Start(ExternalURLs(tc_games.SelectedIndex))
+        Else
+            MsgBox("No Valid External URL in the DLC Pack")
+        End If
 
     End Sub
 
@@ -400,13 +409,24 @@ Public Class frmDLC
 
     End Sub
 
-    Private Sub PaidDLCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PaidDLCToolStripMenuItem.Click
-        If Not Application.OpenForms().OfType(Of FrmPaidDLC).Any Then
-            FrmPaidDLC.Show(Me)
+    Private Sub DLCCreatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DLCCreatorToolStripMenuItem.Click
+
+        If Not Application.OpenForms().OfType(Of frmDLCCreator).Any Then
+            frmDLCCreator.Show(Me)
         Else
-            FrmPaidDLC.Focus()
+            frmDLCCreator.Focus()
         End If
     End Sub
+
+    Private Sub MultidiskPlaylistCreatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MultidiskPlaylistCreatorToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmMultiDiskCreator).Any Then
+            frmMultiDiskCreator.Show(Me)
+        Else
+            frmMultiDiskCreator.Focus()
+        End If
+
+    End Sub
+
 End Class
 
 Class DownloadableGame
