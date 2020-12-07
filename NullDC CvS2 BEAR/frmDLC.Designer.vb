@@ -170,8 +170,8 @@ Partial Class frmDLC
         '
         'frmDLC
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(658, 581)
         Me.Controls.Add(Me.DLCContainer)
         Me.Controls.Add(Me.MenuStrip1)

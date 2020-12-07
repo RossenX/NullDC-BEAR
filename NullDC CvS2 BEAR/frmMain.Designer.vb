@@ -52,6 +52,9 @@ Partial Class frmMain
         Me.ReplaysToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GeneralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NullDCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MednafenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -358,9 +361,28 @@ Partial Class frmMain
         '
         Me.OptionsToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
         Me.OptionsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.NullDCToolStripMenuItem, Me.MednafenToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 24)
         Me.OptionsToolStripMenuItem.Text = "Options"
+        '
+        'GeneralToolStripMenuItem
+        '
+        Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GeneralToolStripMenuItem.Text = "General"
+        '
+        'NullDCToolStripMenuItem
+        '
+        Me.NullDCToolStripMenuItem.Name = "NullDCToolStripMenuItem"
+        Me.NullDCToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NullDCToolStripMenuItem.Text = "NullDC"
+        '
+        'MednafenToolStripMenuItem
+        '
+        Me.MednafenToolStripMenuItem.Name = "MednafenToolStripMenuItem"
+        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MednafenToolStripMenuItem.Text = "Mednafen"
         '
         'FreeDLCToolStripMenuItem
         '
@@ -396,8 +418,8 @@ Partial Class frmMain
         '
         'frmMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(972, 518)
         Me.Controls.Add(Me.imgBeta)
@@ -447,4 +469,7 @@ Partial Class frmMain
     Friend WithEvents imgBeta As PictureBox
     Friend WithEvents FreeDLCToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label1 As Label
+    Friend WithEvents GeneralToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NullDCToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MednafenToolStripMenuItem As ToolStripMenuItem
 End Class

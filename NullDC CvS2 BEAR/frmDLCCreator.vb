@@ -13,13 +13,11 @@ Public Class frmDLCCreator
 
     Dim ExportCount = 0
     Public Sub New()
-
-        ' This call is required by the designer.
         InitializeComponent()
         Me.Icon = My.Resources.NewNullDCBearIcon
-        ' Add any initialization after the InitializeComponent() call.
 
     End Sub
+
     Private Sub frmDLCCreator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ApplyThemeToControl(TableLayoutPanel1)
         For Each child As Control In TableLayoutPanel1.Controls

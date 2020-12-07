@@ -73,8 +73,8 @@ Partial Class frmNotification
         '
         'frmNotification
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DimGray
         Me.ClientSize = New System.Drawing.Size(500, 250)
         Me.Controls.Add(Me.TableLayoutPanel1)

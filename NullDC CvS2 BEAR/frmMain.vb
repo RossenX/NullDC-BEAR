@@ -295,10 +295,10 @@ Public Class frmMain
         ApplyThemeToControl(Label2, 1)
 
         ApplyThemeToControl(_MainMenuStrip)
-        ApplyThemeToControl(lbVer, 2)
 
-        imgBeta.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
-        'sus_i.BackColor = BEARTheme.LoadColor(ThemeKeys.SecondaryColor)
+        ApplyThemeToControl(lbVer, 2)
+        lbVer.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
+        imgBeta.BackColor = BEARTheme.LoadColor(ThemeKeys.MenuStripColor)
         ApplyThemeToControl(cbStatus)
 
         Matchlist.ListViewItemSorter = New ListViewItemComparer(2, SortOrder.Ascending)
@@ -1768,9 +1768,7 @@ Public Class frmMain
     End Sub
 
     Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
-        If Not Application.OpenForms().OfType(Of frmSetup).Any Then
-            frmSetup.Show(Me)
-        End If
+
     End Sub
 
     Private Sub DiscordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscordToolStripMenuItem.Click
@@ -1781,19 +1779,23 @@ Public Class frmMain
         Process.Start("https://www.patreon.com/NullDCBEAR")
     End Sub
 
-    Private Sub PingToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ChallengeToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub FreeDLCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FreeDLCToolStripMenuItem.Click
         If Not Application.OpenForms().OfType(Of frmDLC).Any Then
             frmDLC.Show(Me)
         Else
             frmDLC.Focus()
+        End If
+    End Sub
+
+    Private Sub GeneralToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles GeneralToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmSetup).Any Then
+            frmSetup.Show(Me)
+        End If
+    End Sub
+
+    Private Sub MednafenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MednafenToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmMednafenOptions).Any Then
+            frmMednafenOptions.Show(Me)
         End If
     End Sub
 

@@ -256,7 +256,8 @@ Public Class frmChallengeGameSelect
         SelectedGame = {"", ""}
 
         ' Add the Recent GamesList
-        If Not File.Exists(MainformRef.NullDCPath & "\recent.glist") Then File.CreateText(MainformRef.NullDCPath & "\recent.glist")
+        If Not File.Exists(MainformRef.NullDCPath & "\recent.glist") Then File.CreateText(MainformRef.NullDCPath & "\recent.glist").Close()
+
         tc_games.TabPages.Add("Recent")
         Dim RecentListVIew As New ListView
         ApplyThemeToControl(RecentListVIew, 2)

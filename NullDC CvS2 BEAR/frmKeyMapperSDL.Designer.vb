@@ -1952,8 +1952,8 @@ Partial Class frmKeyMapperSDL
         '
         'frmKeyMapperSDL
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Pink
         Me.ClientSize = New System.Drawing.Size(907, 547)
         Me.Controls.Add(Me.TableLayoutPanel1)

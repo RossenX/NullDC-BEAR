@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmLoLNerd
+Partial Class frmMednafenOptions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,32 +22,16 @@ Partial Class frmLoLNerd
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLoLNerd))
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RichTextBox1.Location = New System.Drawing.Point(0, 0)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(721, 330)
-        Me.RichTextBox1.TabIndex = 0
-        Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
-        '
-        'frmLoLNerd
+        'frmMednafenOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(721, 330)
-        Me.Controls.Add(Me.RichTextBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmLoLNerd"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "LoL Nerd"
+        Me.ClientSize = New System.Drawing.Size(978, 400)
+        Me.Name = "frmMednafenOptions"
+        Me.Text = "frmMednafenOptions"
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents RichTextBox1 As RichTextBox
 End Class
