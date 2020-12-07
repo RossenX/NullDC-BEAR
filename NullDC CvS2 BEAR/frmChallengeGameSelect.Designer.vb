@@ -44,6 +44,7 @@ Partial Class frmChallengeGameSelect
         Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.DLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MultidiscPlaylistCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tc_games.SuspendLayout()
         Me.tb_mednafen.SuspendLayout()
         Me.GameSelectContainer.SuspendLayout()
@@ -305,7 +306,7 @@ Partial Class frmChallengeGameSelect
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DLCToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DLCToolStripMenuItem, Me.MultidiscPlaylistCreatorToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(654, 24)
@@ -317,6 +318,12 @@ Partial Class frmChallengeGameSelect
         Me.DLCToolStripMenuItem.Name = "DLCToolStripMenuItem"
         Me.DLCToolStripMenuItem.Size = New System.Drawing.Size(66, 20)
         Me.DLCToolStripMenuItem.Text = "Free DLC"
+        '
+        'MultidiscPlaylistCreatorToolStripMenuItem
+        '
+        Me.MultidiscPlaylistCreatorToolStripMenuItem.Name = "MultidiscPlaylistCreatorToolStripMenuItem"
+        Me.MultidiscPlaylistCreatorToolStripMenuItem.Size = New System.Drawing.Size(150, 20)
+        Me.MultidiscPlaylistCreatorToolStripMenuItem.Text = "Multidisc Playlist Creator"
         '
         'frmChallengeGameSelect
         '
@@ -365,4 +372,5 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents DLCToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label1 As Label
     Friend WithEvents cb_Multitap As ComboBox
+    Friend WithEvents MultidiscPlaylistCreatorToolStripMenuItem As ToolStripMenuItem
 End Class

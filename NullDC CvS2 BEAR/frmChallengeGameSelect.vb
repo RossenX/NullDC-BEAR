@@ -367,4 +367,13 @@ Public Class frmChallengeGameSelect
 
     End Sub
 
+    Private Sub MultidiscPlaylistCreatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MultidiscPlaylistCreatorToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmMultiDiskCreator).Any Then
+            frmMultiDiskCreator.Show(Me)
+        Else
+            frmMultiDiskCreator.Focus()
+        End If
+
+    End Sub
+
 End Class
