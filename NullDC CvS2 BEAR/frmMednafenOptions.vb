@@ -1,51 +1,30 @@
-﻿Public Class frmMednafenOptions
+﻿Imports System.IO
 
-    Dim MednafenSettings As New MednafenSettings
+Public Class frmMednafenOptions
 
-    Private Sub frmMednafenOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub New()
+        Rx.MednafenConfigCache = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
+        InitializeComponent()
 
     End Sub
 
-End Class
+    Private Sub frmMednafenOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.CenterToParent()
 
-Public Class MednafenSettings
-    Dim Setting As New Dictionary(Of String, String)
+        For i = 0 To tc_options.TabCount - 1
+            For Each _child As Control In tc_options.TabPages(i).Controls
+                ApplyThemeToControl(_child, 1)
+                For Each _child2 As Control In _child.Controls
+                    ApplyThemeToControl(_child2, 1)
+                    For Each _child3 As Control In _child2.Controls
+                        ApplyThemeToControl(_child3, 2)
 
-    Public Sub New()
-        For Each _line In IO.File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
-            If _line.Trim.Length > 0 And Not _line.StartsWith(";") Then
-                If Not _line.StartsWith("apple2") And
-                    Not _line.StartsWith("demo.") And
-                    Not _line.StartsWith("gg.") And
-                    Not _line.StartsWith("lynx.") And
-                    Not _line.StartsWith("pce.") And
-                    Not _line.StartsWith("pcfx.") And
-                    Not _line.StartsWith("player.") And
-                    Not _line.StartsWith("sms.") And
-                    Not _line.StartsWith("ssfplay.") And
-                    Not _line.StartsWith("vb.") And
-                    Not _line.StartsWith("pce_fast.") And
-                    Not _line.StartsWith("cdplay.") And
-                    Not _line.StartsWith("wswan.") Then
+                    Next : Next : Next : Next
 
-                    Dim a = _line.Split(".")
-                    If a.Count > 2 Then
-                        If Not a(1) = "input" Then
-                            Console.WriteLine(_line)
-                        End If
-                    Else
-                        Console.WriteLine(_line)
-                    End If
-
-
-
-                End If
-
-
-
-            End If
-        Next
-
+        ApplyThemeToControl(Me, 1)
+        ApplyThemeToControl(Panel1, 1)
+        ApplyThemeToControl(TableLayoutPanel1, 1)
     End Sub
 
 End Class

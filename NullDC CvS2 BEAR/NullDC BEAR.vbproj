@@ -101,6 +101,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
@@ -245,6 +246,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MednafenLauncher.vb" />
+    <Compile Include="MednafenSetting.Designer.vb">
+      <DependentUpon>MednafenSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MednafenSetting.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -263,12 +270,6 @@
     <Compile Include="NetworkHandling.vb" />
     <Compile Include="NullDCLauncher.vb" />
     <Compile Include="Rx.vb" />
-    <Compile Include="SimpleProgressBar.Designer.vb">
-      <DependentUpon>SimpleProgressBar.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SimpleProgressBar.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmChallenge.resx">
@@ -330,14 +331,14 @@
     <EmbeddedResource Include="keybindButton.resx">
       <DependentUpon>keybindButton.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MednafenSetting.resx">
+      <DependentUpon>MednafenSetting.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SimpleProgressBar.resx">
-      <DependentUpon>SimpleProgressBar.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

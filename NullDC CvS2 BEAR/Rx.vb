@@ -5,12 +5,15 @@ Imports System.Text
 Imports System.Threading
 
 Module Rx
+
     Public MainformRef As frmMain ' Mainly here to have a constatn reference to the main form even after minimzing to tray
     Public EEPROM As String ' the EEPROM we're using saved here for people that wanna join as spectator
     Public VMU As String ' the p1 VMU
     Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
     Public platform As String = ""
     Public MultiTap As Int16 = 0
+
+    Public MednafenConfigCache As String()
 
     Public Function GenerateGameKey() As String
         Dim r As New Random
@@ -358,8 +361,70 @@ Module BEARTheme
                 ApplyRichTextBoxTheme(_control, _which)
             Case GetType(TextBox)
                 ApplyTextBoxTheme(_control, _which)
+            Case GetType(Form)
+                ApplyFormTheme(_control, _which)
+            Case GetType(MednafenSetting)
+                ApplyMDFTheme(_control, _which)
+            Case GetType(Panel)
+                ApplyPanelTheme(_control, _which)
         End Select
 
+    End Sub
+
+    Private Sub ApplyPanelTheme(ByRef _Control As Panel, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+            Case 4
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PlayerListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PlayerListFontColor)
+            Case 5
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.MatchListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.MatchListFontColor)
+        End Select
+
+    End Sub
+
+    Private Sub ApplyMDFTheme(ByRef _Control As MednafenSetting, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+            Case 4
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PlayerListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PlayerListFontColor)
+            Case 5
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.MatchListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.MatchListFontColor)
+        End Select
+
+    End Sub
+
+    Private Sub ApplyFormTheme(ByRef _Control As TextBox, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+        End Select
     End Sub
 
     Private Sub ApplyButtonTheme(ByRef _button As Button)
@@ -368,7 +433,7 @@ Module BEARTheme
         _button.ForeColor = LoadColor(ThemeKeys.ButtonFontColor)
         _button.FlatAppearance.BorderColor = LoadColor(ThemeKeys.ButtonBorderColor)
         _button.FlatAppearance.MouseOverBackColor = LoadColor(ThemeKeys.ButtonOverColor)
-        _button.Font = New Font(_button.Font.FontFamily, LoadSize(ThemeKeys.ButtonFontSize), _button.Font.Style)
+        '_button.Font = New Font(_button.Font.FontFamily, LoadSize(ThemeKeys.ButtonFontSize), _button.Font.Style)
 
     End Sub
 
@@ -377,15 +442,15 @@ Module BEARTheme
             Case 1
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
             Case 2
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
             Case 3
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
         End Select
     End Sub
 
@@ -394,15 +459,15 @@ Module BEARTheme
             Case 1
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
             Case 2
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
             Case 3
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
         End Select
     End Sub
 
@@ -411,23 +476,23 @@ Module BEARTheme
             Case 1
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
             Case 2
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
             Case 3
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
             Case 4
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PlayerListColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.PlayerListFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PlayerListFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PlayerListFontSize), _Control.Font.Style)
             Case 5
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.MatchListColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.MatchListFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.MatchListFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.MatchListFontSize), _Control.Font.Style)
         End Select
     End Sub
 
@@ -446,7 +511,7 @@ Module BEARTheme
     Private Sub ApplyMenuStripTheme(ByRef _Control As MenuStrip)
         _Control.BackColor = LoadColor(ThemeKeys.MenuStripColor)
         _Control.ForeColor = LoadColor(ThemeKeys.MenuStripFontColor)
-        _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.MenuStripFontSize), _Control.Font.Style)
+        '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.MenuStripFontSize), _Control.Font.Style)
         _Control.Renderer = New MenuStripRenderer
 
     End Sub
@@ -456,15 +521,15 @@ Module BEARTheme
             Case 1
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
             Case 2
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
             Case 3
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
         End Select
     End Sub
 
@@ -473,15 +538,15 @@ Module BEARTheme
             Case 1
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _Control.Font.Style)
             Case 2
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _Control.Font.Style)
             Case 3
                 If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
                 _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
-                _Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
+                '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _Control.Font.Style)
         End Select
 
     End Sub
@@ -491,15 +556,15 @@ Module BEARTheme
             Case 1
                 If Not _control.BackColor = Color.Transparent Then _control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
                 _control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
-                _control.Font = New Font(_control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _control.Font.Style)
+                '_control.Font = New Font(_control.Font.FontFamily, LoadSize(ThemeKeys.PrimaryFontSize), _control.Font.Style)
             Case 2
                 If Not _control.BackColor = Color.Transparent Then _control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
                 _control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
-                _control.Font = New Font(_control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _control.Font.Style)
+                '_control.Font = New Font(_control.Font.FontFamily, LoadSize(ThemeKeys.SecondaryFontSize), _control.Font.Style)
             Case 3
                 If Not _control.BackColor = Color.Transparent Then _control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
                 _control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
-                _control.Font = New Font(_control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _control.Font.Style)
+                '_control.Font = New Font(_control.Font.FontFamily, LoadSize(ThemeKeys.TertiaryFontSize), _control.Font.Style)
         End Select
 
     End Sub
@@ -507,7 +572,7 @@ Module BEARTheme
     Private Sub ApplyComboBoxTheme(ByRef _control As ComboBox)
         _control.BackColor = LoadColor(ThemeKeys.DropdownColor)
         _control.ForeColor = LoadColor(ThemeKeys.DropdownFontColor)
-        _control.Font = New Font(_control.Font.FontFamily, LoadSize(ThemeKeys.DropdownFontSize), _control.Font.Style)
+        '_control.Font = New Font(_control.Font.FontFamily, LoadSize(ThemeKeys.DropdownFontSize), _control.Font.Style)
 
     End Sub
 
@@ -609,15 +674,6 @@ Class ListViewItemComparer
 
         Dim returnVal As Integer = -1
         returnVal = [String].Compare(CType(x, ListViewItem).SubItems(col).Text, CType(y, ListViewItem).SubItems(col).Text)
-
-        ' If IsNumeric(CType(x, ListViewItem).SubItems(col).Text) And IsNumeric(CType(y, ListViewItem).SubItems(col).Text) Then
-        ' If CInt(CType(x, ListViewItem).SubItems(col).Text) > CInt(CType(y, ListViewItem).SubItems(col).Text) Then
-        ' returnVal = 1
-        ' End If
-        ' Else
-        ' returnVal = 1
-        ' End If
-
         If order = SortOrder.Descending Then returnVal *= -1
         Return returnVal
 

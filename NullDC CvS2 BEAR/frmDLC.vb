@@ -49,6 +49,9 @@ Public Class frmDLC
         ApplyThemeToControl(btnClose)
         ApplyThemeToControl(MenuStrip1)
         ApplyThemeToControl(lbDisclaimer)
+        ApplyThemeToControl(lbSearch)
+        ApplyThemeToControl(btnSearch)
+
         For Each _tab As TabPage In tc_games.TabPages
             ApplyThemeToControl(_tab.Controls.OfType(Of ListView).First, 2)
         Next
