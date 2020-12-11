@@ -39,6 +39,8 @@ Public Class frmMain
     Dim needsUpdate As Boolean = False
     Public IsClosing As Boolean = False
 
+    Dim SecretCode As String = ""
+
     Public Sub New()
         Console.WriteLine("NullDC BEAR NEW")
         ' This call is required by the designer.
@@ -1175,6 +1177,9 @@ Public Class frmMain
                 PlayerInfo.SubItems.Add("T/O")
                 PlayerInfo.SubItems.Add(Player.game)
                 PlayerInfo.SubItems.Add(Player.status)
+                If Not Player.secretsettings = "" Then
+                    PlayerInfo.ForeColor = ColorTranslator.FromHtml(Player.secretsettings)
+                End If
 
                 If ListViewToUse Is PlayerList Then
                     If Player.status = "Idle" Then
@@ -1261,6 +1266,11 @@ Public Class frmMain
                         FoundEntry.SubItems(3).Text = Player.game
                         FoundEntry.SubItems(4).Text = Player.status
                         FoundEntry.ImageIndex = IconIndex
+                        If Not Player.secretsettings = "" Then
+                            FoundEntry.ForeColor = ColorTranslator.FromHtml(Player.secretsettings)
+                        End If
+
+
 
                         If ListViewToUse Is PlayerList Then
                             If Player.status = "Idle" Then
@@ -1802,6 +1812,21 @@ Public Class frmMain
             frmMednafenOptions.Show(Me)
         End If
     End Sub
+
+    Private Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        SecretCode = StrReverse(e.KeyCode.ToString) + SecretCode
+        If SecretCode.Length > 100 Then
+            SecretCode = SecretCode.Substring(0, 100)
+        End If
+
+        If StrReverse(SecretCode).ToLower.Contains("leftdownleftrightdownrightleftleftrightright") Then
+            SecretCode = ""
+            If Not Application.OpenForms().OfType(Of frmSecret).Any Then frmSecret.Show(Me)
+        End If
+
+        Console.WriteLine(e.KeyCode.ToString)
+
+    End Sub
 End Class
 
 Public Class BEARPlayer
@@ -1811,14 +1836,16 @@ Public Class BEARPlayer
     Public status As String
     Public game As String
     Public peripheral As String
+    Public secretsettings As String
 
-    Public Sub New(ByVal _name As String, ByVal _ip As String, ByVal _port As String, Optional ByVal _game As String = "None", Optional ByVal _status As String = "Idle", Optional ByVal _peripheral As String = "0")
+    Public Sub New(ByVal _name As String, ByVal _ip As String, ByVal _port As String, Optional ByVal _game As String = "None", Optional ByVal _status As String = "Idle", Optional ByVal _peripheral As String = "0", Optional _secretsettings As String = "#FFFFFF")
         name = _name
         ip = _ip
         port = _port
         status = _status
         game = _game
         peripheral = _peripheral
+        SecretSettings = _secretsettings
     End Sub
 
 End Class
@@ -2136,7 +2163,7 @@ Public Class Configs
                     Dim t As Task = New Task(Async Sub()
                                                  ' 2 Second Delay just to avoid crashing some rare PCs that don't like to send data too quickly
                                                  Await Task.Delay(2000)
-                                                 MainformRef.NetworkHandler.SendMessage("<," & NameToSend & ",," & Port & "," & GameNameAndRomName & "," & Status)
+                                                 MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & Rx.SecretSettings & "," & Port & "," & GameNameAndRomName & "," & Status)
                                              End Sub)
                     t.Start()
                 End If

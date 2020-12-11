@@ -411,7 +411,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.65c
+        '''  Looks up a localized string similar to 1.81
         '''CVS2::4B5360E5C101756B04FB20F11D50C8C8::5576B4A34D645C26C0BDE99D55F75FB0
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
@@ -423,7 +423,7 @@ Namespace My.Resources
         '''Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1::A09ED0A81635971E3D62431014D98F7A
         '''Emulation.AlphaSortMode=1
         '''CDDAMute=1
-        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228677B [rest of string was truncated]&quot;;.
+        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228677B2 [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property DreamcastGameOptimizations() As String
             Get
@@ -677,6 +677,16 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("SDL_Stable", resourceCulture)
                 Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Secret_Moblin() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Secret_Moblin", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         

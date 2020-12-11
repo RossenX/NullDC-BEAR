@@ -412,6 +412,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.lbVer)
         Me.Controls.Add(Me._MainMenuStrip)
         Me.DoubleBuffered = True
+        Me.KeyPreview = True
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NullDC BEAR"

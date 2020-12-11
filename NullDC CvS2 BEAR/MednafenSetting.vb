@@ -83,9 +83,16 @@ Public Class MednafenSetting
                                                                UpdateCFG(Controller.Value / 10)
 
                                                            End Sub
+
                 AddHandler Controller.ValueChanged, Sub()
                                                         Setting_Label.Text = GetLabelName() & " " & Controller.Value / 10
                                                     End Sub
+
+
+
+                AddHandler Controller.MouseHover, Sub()
+                                                      Controller.Focus()
+                                                  End Sub
 
                 Setting_Label.Text = GetLabelName() & " " & Controller.Value / 10
 

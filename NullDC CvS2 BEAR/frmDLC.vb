@@ -37,6 +37,15 @@ Public Class frmDLC
         AddHandler DownloadClient.DownloadFileCompleted, AddressOf DownloadComplete
         AddHandler DownloadClient.DownloadProgressChanged, AddressOf DownloadProgress
 
+        ' Search Panel
+        Search_ListView.Columns.Item(0).Width = Search_ListView.Width * 0.85
+        Search_ListView.Columns.Item(1).Width = 0
+        Search_ListView.Columns.Item(2).Width = Search_ListView.Width * 0.15 - 25
+        Search_ListView.Columns.Item(3).Width = 0
+        Search_ListView.Columns.Item(4).Width = 0
+
+        AddHandler Search_ListView.SelectedIndexChanged, AddressOf SelectedNewGameFromList
+
         ReloadTheme()
 
         
@@ -146,6 +155,7 @@ Public Class frmDLC
             tmpListView.View = View.Details
             tmpListView.HeaderStyle = ColumnHeaderStyle.None
             tmpListView.FullRowSelect = True
+            tmpListView.HideSelection = False
             tmpListView.Parent = tc_games.TabPages.Item(tc_games.TabCount - 1)
 
             tmpListView.Columns.Add("Name")
@@ -426,6 +436,61 @@ Public Class frmDLC
             frmMultiDiskCreator.Show(Me)
         Else
             frmMultiDiskCreator.Focus()
+        End If
+
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Search()
+    End Sub
+
+    Private Sub Search()
+        Search_ListView.Items.Clear()
+        If TextBox1.Text.Trim = "" Then Exit Sub
+
+        For Each _file As String In Directory.GetFiles(MainformRef.NullDCPath & "\DLC", "*.freedlc", SearchOption.TopDirectoryOnly)
+            Console.WriteLine(_file)
+
+            Dim _DLCFile = File.ReadAllLines(_file)
+            For i = 7 To _DLCFile.Count - 1
+
+                Dim url = _DLCFile(i)
+                Dim tmpSplit = _DLCFile(i).Split("/")
+                Dim tmpExtention = tmpSplit(tmpSplit.Count - 1).Split(".")
+                Dim GameFormatedName = tmpSplit(tmpSplit.Count - 1).Replace("." & tmpExtention(tmpExtention.Count - 1), "")
+                Dim name = WebUtility.UrlDecode(GameFormatedName.Replace("+", "%2B")).Replace("_", " ").Replace("# NES", "")
+                name = RemoveAnnoyingRomNumbersFromString(name)
+
+                Dim Match As Boolean = True
+                For Each _searchwords In TextBox1.Text.Split(" ")
+                    If Not name.ToLower.Replace(" ", "").Contains(_searchwords.ToLower) Then
+                        Match = False
+                        Exit For
+                    End If
+                Next
+
+                If Match Then
+                    Dim _it As New ListViewItem(name)
+                    _it.SubItems.Add(url)
+                    _it.SubItems.Add(_DLCFile(1).Split("=")(1)) ' Platform
+                    _it.SubItems.Add(_DLCFile(4).Split("=")(1)) ' Folder
+                    _it.SubItems.Add(_DLCFile(5).Split("=")(1)) ' Extract
+                    Search_ListView.Items.Add(_it)
+                End If
+
+            Next
+        Next
+
+        Search_ListView.Sorting = SortOrder.Ascending
+        Search_ListView.Sort()
+
+    End Sub
+
+    Private Sub TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox1.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            Search()
         End If
 
     End Sub

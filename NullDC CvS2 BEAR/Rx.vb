@@ -1,6 +1,5 @@
 ﻿Imports System.Drawing.Drawing2D
 Imports System.IO
-Imports System.Net.NetworkInformation
 Imports System.Text
 Imports System.Threading
 
@@ -14,6 +13,8 @@ Module Rx
     Public MultiTap As Int16 = 0
 
     Public MednafenConfigCache As String()
+
+    Public SecretSettings As String = ""
 
     Public Function GenerateGameKey() As String
         Dim r As New Random

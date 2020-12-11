@@ -16,9 +16,9 @@ Public Class frmMednafenOptions
             For Each _child As Control In tc_options.TabPages(i).Controls
                 ApplyThemeToControl(_child, 1)
                 For Each _child2 As Control In _child.Controls
-                    ApplyThemeToControl(_child2, 1)
+                    ApplyThemeToControl(_child2, 2)
                     For Each _child3 As Control In _child2.Controls
-                        ApplyThemeToControl(_child3, 2)
+                        ApplyThemeToControl(_child3, 4)
 
                     Next : Next : Next : Next
 

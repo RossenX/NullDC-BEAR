@@ -130,10 +130,10 @@ Public Class NetworkHandling
                 Dim GameNameAndRomName = "None"
 
                 If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
-                SendMessage("<," & NameToSend & ",," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & Status, senderip)
+                SendMessage("<," & NameToSend & "," & SecretSettings & "," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & Status, senderip)
 
             Case "<"
-                MainformRef.AddPlayerToList(New BEARPlayer(Split(1), senderip, Split(3), Split(4), Split(5)))
+                MainformRef.AddPlayerToList(New BEARPlayer(Split(1), senderip, Split(3), Split(4), Split(5),, Split(2)))
 
             Case "!"
 

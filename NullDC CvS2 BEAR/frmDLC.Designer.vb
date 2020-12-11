@@ -29,6 +29,13 @@ Partial Class frmDLC
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.lnkRoms = New System.Windows.Forms.LinkLabel()
         Me.tc_games = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Search_ListView = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lbDisclaimer = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -38,6 +45,8 @@ Partial Class frmDLC
         Me.DLCCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultidiskPlaylistCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DLCContainer.SuspendLayout()
+        Me.tc_games.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -135,6 +144,7 @@ Partial Class frmDLC
         'tc_games
         '
         Me.DLCContainer.SetColumnSpan(Me.tc_games, 2)
+        Me.tc_games.Controls.Add(Me.TabPage1)
         Me.tc_games.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tc_games.Location = New System.Drawing.Point(10, 45)
         Me.tc_games.Margin = New System.Windows.Forms.Padding(0)
@@ -143,6 +153,53 @@ Partial Class frmDLC
         Me.tc_games.SelectedIndex = 0
         Me.tc_games.Size = New System.Drawing.Size(641, 371)
         Me.tc_games.TabIndex = 7
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.Search_ListView)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Size = New System.Drawing.Size(633, 345)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Search"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Search_ListView
+        '
+        Me.Search_ListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.Search_ListView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Search_ListView.FullRowSelect = True
+        Me.Search_ListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.Search_ListView.HideSelection = False
+        Me.Search_ListView.Location = New System.Drawing.Point(0, 0)
+        Me.Search_ListView.Margin = New System.Windows.Forms.Padding(0)
+        Me.Search_ListView.MultiSelect = False
+        Me.Search_ListView.Name = "Search_ListView"
+        Me.Search_ListView.Size = New System.Drawing.Size(633, 345)
+        Me.Search_ListView.TabIndex = 0
+        Me.Search_ListView.UseCompatibleStateImageBehavior = False
+        Me.Search_ListView.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Name"
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "URL"
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Platform"
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "folder"
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "extract"
         '
         'lbDisclaimer
         '
@@ -235,6 +292,8 @@ Partial Class frmDLC
         Me.Text = "Downloadable Content"
         Me.DLCContainer.ResumeLayout(False)
         Me.DLCContainer.PerformLayout()
+        Me.tc_games.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
@@ -258,4 +317,11 @@ Partial Class frmDLC
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents btnSearch As Button
     Friend WithEvents lbSearch As Label
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents Search_ListView As ListView
+    Friend WithEvents ColumnHeader1 As ColumnHeader
+    Friend WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ColumnHeader4 As ColumnHeader
+    Friend WithEvents ColumnHeader5 As ColumnHeader
 End Class

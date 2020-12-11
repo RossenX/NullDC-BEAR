@@ -227,6 +227,12 @@
     <Compile Include="frmSDLMappingTool.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSecret.Designer.vb">
+      <DependentUpon>frmSecret.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSecret.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSetup.Designer.vb">
       <DependentUpon>frmSetup.vb</DependentUpon>
     </Compile>
@@ -322,6 +328,9 @@
     <EmbeddedResource Include="frmSDLMappingTool.resx">
       <DependentUpon>frmSDLMappingTool.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSecret.resx">
+      <DependentUpon>frmSecret.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSetup.resx">
       <DependentUpon>frmSetup.vb</DependentUpon>
     </EmbeddedResource>
@@ -386,6 +395,7 @@
     <Content Include="Resources\Multitap_2.txt" />
     <Content Include="Resources\Multitap_both.txt" />
     <Content Include="Resources\Multitap_None.txt" />
+    <None Include="Resources\Secret_Moblin.png" />
     <None Include="Resources\System Icons\icon_PSX.png" />
     <None Include="Resources\System Icons\icon_NES.png" />
     <None Include="Resources\System Icons\icon_GBC.png" />
