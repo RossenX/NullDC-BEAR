@@ -33,7 +33,7 @@ Public Class MednafenSetting
 
         If Not Rx.MednafenConfigCache Is Nothing Then
             For i = 0 To Rx.MednafenConfigCache.Count - 1
-                If Rx.MednafenConfigCache(i).StartsWith(ConfigString & " ") Then
+                If Rx.MednafenConfigCache(i).StartsWith(ConfigString.Trim & " ") Then
                     _loadedValue = Rx.MednafenConfigCache(i).Split(" ")(1)
                 End If
             Next
@@ -67,8 +67,8 @@ Public Class MednafenSetting
                 SettingContainer.Controls.Add(Controller)
             Case 2 And IsNumeric(_configs(0)) And IsNumeric(_configs(1)) ' Min/Max Value
                 Dim Controller As New TrackBar
-                Controller.Minimum = CDec(_configs(0)) * ChangeRate
-                Controller.Maximum = CDec(_configs(1)) * ChangeRate
+                Controller.Minimum = CInt(_configs(0)) * ChangeRate
+                Controller.Maximum = CInt(_configs(1)) * ChangeRate
                 Controller.TickFrequency = CDec(_configs(1)) * ChangeRate
                 Controller.SmallChange = ChangeRate
                 Controller.LargeChange = ChangeRate
@@ -76,7 +76,15 @@ Public Class MednafenSetting
                 Controller.Dock = DockStyle.Fill
 
                 If Not _loadedValue = "" Then
-                    Controller.Value = CInt(_loadedValue * ChangeRate)
+
+                    If CInt(_loadedValue.Trim * ChangeRate) > Controller.Maximum Then
+                        Controller.Value = Controller.Maximum
+                    ElseIf CInt(_loadedValue.Trim * ChangeRate) < Controller.Minimum Then
+                        Controller.Value = Controller.Minimum
+                    Else
+                        Controller.Value = CInt(_loadedValue * ChangeRate)
+                    End If
+
                 End If
 
                 AddHandler Controller.MouseCaptureChanged, Sub()

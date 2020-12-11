@@ -353,7 +353,6 @@ Public Class frmKeyMapperSDL
 
     Public Sub UpdateControllersList()
         RemoveHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
-
         SDL_GameControllerAddMappingsFromFile(MainformRef.NullDCPath & "\gamecontrollerdb.txt")
         SDL_GameControllerAddMappingsFromFile(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
 
@@ -683,6 +682,19 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
+    Private Sub btnResetAll_Click(sender As Object, e As EventArgs) Handles btnResetAll.Click
+        Dim result1 As DialogResult = MessageBox.Show("This will Reset ALL the controls, k?", "Reset All?", MessageBoxButtons.YesNo)
+
+        If result1 = DialogResult.Yes Then
+            GenerateDefaults()
+            LoadSettings()
+            If File.Exists(MainformRef.NullDCPath & "\bearcontrollerdb.txt") Then File.Delete(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
+            UpdateControllersList()
+            Me.Close()
+
+        End If
+
+    End Sub
 End Class
 
 Public Class KeyBind

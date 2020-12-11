@@ -147,6 +147,7 @@ Partial Class frmKeyMapperSDL
         Me.btn_Close = New System.Windows.Forms.Button()
         Me.PeriWarning = New System.Windows.Forms.Label()
         Me.btnSDL = New System.Windows.Forms.Button()
+        Me.btnResetAll = New System.Windows.Forms.Button()
         Me.PlayerTab = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
@@ -1759,7 +1760,7 @@ Partial Class frmKeyMapperSDL
         Me.DeadzoneTB.Location = New System.Drawing.Point(3, 85)
         Me.DeadzoneTB.Maximum = 100
         Me.DeadzoneTB.Name = "DeadzoneTB"
-        Me.DeadzoneTB.Size = New System.Drawing.Size(199, 45)
+        Me.DeadzoneTB.Size = New System.Drawing.Size(194, 45)
         Me.DeadzoneTB.TabIndex = 58
         Me.DeadzoneTB.TickFrequency = 10
         Me.DeadzoneTB.TickStyle = System.Windows.Forms.TickStyle.TopLeft
@@ -1820,13 +1821,14 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel4.Controls.Add(Me.ControllerCB, 0, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.Deadzonetext, 0, 3)
         Me.TableLayoutPanel4.Controls.Add(Me.DeadzoneTB, 0, 4)
-        Me.TableLayoutPanel4.Controls.Add(Me.btn_Close, 0, 11)
-        Me.TableLayoutPanel4.Controls.Add(Me.PeriWarning, 0, 10)
+        Me.TableLayoutPanel4.Controls.Add(Me.btn_Close, 0, 13)
+        Me.TableLayoutPanel4.Controls.Add(Me.PeriWarning, 0, 12)
         Me.TableLayoutPanel4.Controls.Add(Me.btnSDL, 0, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.btnResetAll, 0, 10)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 24)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 11
+        Me.TableLayoutPanel4.RowCount = 14
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -1836,7 +1838,9 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(206, 520)
@@ -1849,7 +1853,7 @@ Partial Class frmKeyMapperSDL
         Me.cbSDL.Items.AddRange(New Object() {"Stable", "Dev"})
         Me.cbSDL.Location = New System.Drawing.Point(3, 189)
         Me.cbSDL.Name = "cbSDL"
-        Me.cbSDL.Size = New System.Drawing.Size(197, 21)
+        Me.cbSDL.Size = New System.Drawing.Size(194, 21)
         Me.cbSDL.TabIndex = 68
         '
         'Label37
@@ -1869,7 +1873,7 @@ Partial Class frmKeyMapperSDL
         Me.PeripheralCB.Items.AddRange(New Object() {"Controller", "Arcade Stick"})
         Me.PeripheralCB.Location = New System.Drawing.Point(3, 149)
         Me.PeripheralCB.Name = "PeripheralCB"
-        Me.PeripheralCB.Size = New System.Drawing.Size(197, 21)
+        Me.PeripheralCB.Size = New System.Drawing.Size(194, 21)
         Me.PeripheralCB.TabIndex = 63
         '
         'Label9
@@ -1888,9 +1892,9 @@ Partial Class frmKeyMapperSDL
         Me.btn_Close.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_Close.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Close.Location = New System.Drawing.Point(3, 454)
+        Me.btn_Close.Location = New System.Drawing.Point(3, 457)
         Me.btn_Close.Name = "btn_Close"
-        Me.btn_Close.Size = New System.Drawing.Size(200, 63)
+        Me.btn_Close.Size = New System.Drawing.Size(200, 60)
         Me.btn_Close.TabIndex = 65
         Me.btn_Close.Text = "Done"
         Me.btn_Close.UseVisualStyleBackColor = False
@@ -1901,7 +1905,7 @@ Partial Class frmKeyMapperSDL
         Me.PeriWarning.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PeriWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PeriWarning.ForeColor = System.Drawing.Color.Red
-        Me.PeriWarning.Location = New System.Drawing.Point(3, 411)
+        Me.PeriWarning.Location = New System.Drawing.Point(3, 414)
         Me.PeriWarning.Name = "PeriWarning"
         Me.PeriWarning.Size = New System.Drawing.Size(200, 40)
         Me.PeriWarning.TabIndex = 66
@@ -1913,10 +1917,21 @@ Partial Class frmKeyMapperSDL
         Me.btnSDL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSDL.Location = New System.Drawing.Point(3, 43)
         Me.btnSDL.Name = "btnSDL"
-        Me.btnSDL.Size = New System.Drawing.Size(200, 23)
+        Me.btnSDL.Size = New System.Drawing.Size(194, 23)
         Me.btnSDL.TabIndex = 67
         Me.btnSDL.Text = "Remap Controller"
         Me.btnSDL.UseVisualStyleBackColor = False
+        '
+        'btnResetAll
+        '
+        Me.btnResetAll.BackColor = System.Drawing.Color.White
+        Me.btnResetAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnResetAll.Location = New System.Drawing.Point(3, 302)
+        Me.btnResetAll.Name = "btnResetAll"
+        Me.btnResetAll.Size = New System.Drawing.Size(80, 23)
+        Me.btnResetAll.TabIndex = 70
+        Me.btnResetAll.Text = "Reset All"
+        Me.btnResetAll.UseVisualStyleBackColor = False
         '
         'PlayerTab
         '
@@ -2015,7 +2030,6 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents PlayerTab As TabControl
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents TabPage5 As TabPage
-    Friend WithEvents btn_Close As Button
     Friend WithEvents Label24 As Label
     Friend WithEvents Label25 As Label
     Friend WithEvents Label26 As Label
@@ -2113,4 +2127,6 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents Mednafen_Text As Label
     Friend WithEvents Label38 As Label
+    Friend WithEvents btn_Close As Button
+    Friend WithEvents btnResetAll As Button
 End Class
