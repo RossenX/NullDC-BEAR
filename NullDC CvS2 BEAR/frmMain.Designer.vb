@@ -141,7 +141,7 @@ Partial Class frmMain
         Me.btnSearch.Location = New System.Drawing.Point(261, 448)
         Me.btnSearch.Margin = New System.Windows.Forms.Padding(2, 0, 0, 0)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(137, 36)
+        Me.btnSearch.Size = New System.Drawing.Size(163, 36)
         Me.btnSearch.TabIndex = 4
         Me.btnSearch.TabStop = False
         Me.btnSearch.Text = "Refresh ↺"
@@ -155,10 +155,10 @@ Partial Class frmMain
         Me.BtnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnJoin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnJoin.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.BtnJoin.Location = New System.Drawing.Point(398, 448)
+        Me.BtnJoin.Location = New System.Drawing.Point(424, 448)
         Me.BtnJoin.Margin = New System.Windows.Forms.Padding(0)
         Me.BtnJoin.Name = "BtnJoin"
-        Me.BtnJoin.Size = New System.Drawing.Size(187, 36)
+        Me.BtnJoin.Size = New System.Drawing.Size(161, 36)
         Me.BtnJoin.TabIndex = 5
         Me.BtnJoin.TabStop = False
         Me.BtnJoin.Text = "Challenge"
@@ -262,8 +262,8 @@ Partial Class frmMain
         Me.MainMenuContainer.ColumnCount = 6
         Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
         Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.84036!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.84949!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.81414!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.35804!))
         Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
         Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
         Me.MainMenuContainer.Controls.Add(Me.btnOffline, 5, 2)

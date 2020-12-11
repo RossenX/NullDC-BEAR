@@ -35,7 +35,7 @@ Partial Class frmSecret
         '
         Me.btnColor.BackColor = System.Drawing.Color.Red
         Me.btnColor.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Rupee
-        Me.btnColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnColor.Location = New System.Drawing.Point(194, 255)
         Me.btnColor.Name = "btnColor"

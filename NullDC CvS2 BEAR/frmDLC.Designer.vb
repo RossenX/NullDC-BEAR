@@ -68,8 +68,8 @@ Partial Class frmDLC
         'DLCContainer
         '
         Me.DLCContainer.ColumnCount = 2
-        Me.DLCContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.47962!))
-        Me.DLCContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.52038!))
+        Me.DLCContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.74103!))
+        Me.DLCContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.25897!))
         Me.DLCContainer.Controls.Add(Me.btnClose, 0, 5)
         Me.DLCContainer.Controls.Add(Me.btnRomsFolder, 1, 5)
         Me.DLCContainer.Controls.Add(Me.btnDownload, 0, 3)
@@ -101,7 +101,7 @@ Partial Class frmDLC
         Me.btnClose.Location = New System.Drawing.Point(10, 493)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(0)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(86, 41)
+        Me.btnClose.Size = New System.Drawing.Size(165, 41)
         Me.btnClose.TabIndex = 8
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = False
@@ -111,10 +111,10 @@ Partial Class frmDLC
         Me.btnRomsFolder.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnRomsFolder.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnRomsFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnRomsFolder.Location = New System.Drawing.Point(96, 493)
+        Me.btnRomsFolder.Location = New System.Drawing.Point(175, 493)
         Me.btnRomsFolder.Margin = New System.Windows.Forms.Padding(0)
         Me.btnRomsFolder.Name = "btnRomsFolder"
-        Me.btnRomsFolder.Size = New System.Drawing.Size(555, 41)
+        Me.btnRomsFolder.Size = New System.Drawing.Size(476, 41)
         Me.btnRomsFolder.TabIndex = 6
         Me.btnRomsFolder.Text = "Open Naomi/Atomiswave Roms Folder"
         Me.btnRomsFolder.UseVisualStyleBackColor = False

@@ -91,8 +91,6 @@ Public Class MednafenSetting
 
                                                     End Sub
 
-
-
                 AddHandler Controller.MouseHover, Sub()
                                                       Controller.Focus()
 

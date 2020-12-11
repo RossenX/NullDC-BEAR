@@ -446,6 +446,7 @@ Public Class frmDLC
 
     Private Sub Search()
         Search_ListView.Items.Clear()
+        tc_games.SelectedIndex = 0
         If TextBox1.Text.Trim = "" Then Exit Sub
 
         For Each _file As String In Directory.GetFiles(MainformRef.NullDCPath & "\DLC", "*.freedlc", SearchOption.TopDirectoryOnly)
