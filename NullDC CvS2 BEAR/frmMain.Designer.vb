@@ -74,12 +74,12 @@ Partial Class frmMain
         Me.Matchlist.FullRowSelect = True
         Me.Matchlist.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.Matchlist.HideSelection = False
-        Me.Matchlist.Location = New System.Drawing.Point(213, 37)
+        Me.Matchlist.Location = New System.Drawing.Point(261, 37)
         Me.Matchlist.Margin = New System.Windows.Forms.Padding(2, 2, 0, 0)
         Me.Matchlist.MultiSelect = False
         Me.Matchlist.Name = "Matchlist"
         Me.Matchlist.ShowItemToolTips = True
-        Me.Matchlist.Size = New System.Drawing.Size(749, 411)
+        Me.Matchlist.Size = New System.Drawing.Size(701, 411)
         Me.Matchlist.SmallImageList = Me.SystemIcons
         Me.Matchlist.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.Matchlist.TabIndex = 3
@@ -138,10 +138,10 @@ Partial Class frmMain
         Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
-        Me.btnSearch.Location = New System.Drawing.Point(213, 448)
+        Me.btnSearch.Location = New System.Drawing.Point(261, 448)
         Me.btnSearch.Margin = New System.Windows.Forms.Padding(2, 0, 0, 0)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(185, 36)
+        Me.btnSearch.Size = New System.Drawing.Size(137, 36)
         Me.btnSearch.TabIndex = 4
         Me.btnSearch.TabStop = False
         Me.btnSearch.Text = "Refresh ↺"
@@ -224,7 +224,7 @@ Partial Class frmMain
         Me.PlayerList.MultiSelect = False
         Me.PlayerList.Name = "PlayerList"
         Me.PlayerList.ShowItemToolTips = True
-        Me.PlayerList.Size = New System.Drawing.Size(199, 411)
+        Me.PlayerList.Size = New System.Drawing.Size(247, 411)
         Me.PlayerList.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.PlayerList.TabIndex = 20
         Me.PlayerList.UseCompatibleStateImageBehavior = False
@@ -261,8 +261,8 @@ Partial Class frmMain
         '
         Me.MainMenuContainer.ColumnCount = 6
         Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.4385!))
-        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.84036!))
+        Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.84949!))
         Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
         Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
         Me.MainMenuContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.39038!))
@@ -294,10 +294,10 @@ Partial Class frmMain
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(211, 0)
+        Me.Label2.Location = New System.Drawing.Point(259, 0)
         Me.Label2.Margin = New System.Windows.Forms.Padding(0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(751, 35)
+        Me.Label2.Size = New System.Drawing.Size(703, 35)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Current Network Games"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -312,7 +312,7 @@ Partial Class frmMain
         Me.Label1.Location = New System.Drawing.Point(10, 0)
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(201, 35)
+        Me.Label1.Size = New System.Drawing.Size(249, 35)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Network Players"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter

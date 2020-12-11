@@ -395,6 +395,7 @@
     <Content Include="Resources\Multitap_2.txt" />
     <Content Include="Resources\Multitap_both.txt" />
     <Content Include="Resources\Multitap_None.txt" />
+    <None Include="Resources\Rupee.png" />
     <None Include="Resources\Secret_Moblin.png" />
     <None Include="Resources\System Icons\icon_PSX.png" />
     <None Include="Resources\System Icons\icon_NES.png" />

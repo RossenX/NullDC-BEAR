@@ -6,6 +6,7 @@ Public Class MednafenSetting
     Public Property ProperName As String = ""
     Public Property ConfigString As String = ""
     <Editor(GetType(Design.MultilineStringEditor), GetType(Drawing.Design.UITypeEditor))> Public Property Limits As String = ""
+    Public Property ChangeRate As Single = 1
 
     Dim Controller As Control
 
@@ -66,35 +67,38 @@ Public Class MednafenSetting
                 SettingContainer.Controls.Add(Controller)
             Case 2 And IsNumeric(_configs(0)) And IsNumeric(_configs(1)) ' Min/Max Value
                 Dim Controller As New TrackBar
-                Controller.Minimum = CDec(_configs(0)) * 10
-                Controller.Maximum = CDec(_configs(1)) * 10
-                Controller.TickFrequency = Math.Ceiling(Controller.Maximum / 5)
-                Controller.SmallChange = 1
-                Controller.LargeChange = 5
+                Controller.Minimum = CDec(_configs(0)) * ChangeRate
+                Controller.Maximum = CDec(_configs(1)) * ChangeRate
+                Controller.TickFrequency = CDec(_configs(1)) * ChangeRate
+                Controller.SmallChange = ChangeRate
+                Controller.LargeChange = ChangeRate
                 Controller.TickStyle = TickStyle.Both
                 Controller.Dock = DockStyle.Fill
 
                 If Not _loadedValue = "" Then
-                    Controller.Value = CInt(_loadedValue) * 10
+                    Controller.Value = CInt(_loadedValue * ChangeRate)
                 End If
 
                 AddHandler Controller.MouseCaptureChanged, Sub()
-                                                               Setting_Label.Text = GetLabelName() & " " & Controller.Value / 10
-                                                               UpdateCFG(Controller.Value / 10)
+                                                               Setting_Label.Text = GetLabelName() & " " & Controller.Value / ChangeRate
+                                                               UpdateCFG(Controller.Value / ChangeRate)
 
                                                            End Sub
 
                 AddHandler Controller.ValueChanged, Sub()
-                                                        Setting_Label.Text = GetLabelName() & " " & Controller.Value / 10
+                                                        Setting_Label.Text = GetLabelName() & " " & Controller.Value / ChangeRate
+                                                        UpdateCFG(Controller.Value / ChangeRate)
+
                                                     End Sub
 
 
 
                 AddHandler Controller.MouseHover, Sub()
                                                       Controller.Focus()
+
                                                   End Sub
 
-                Setting_Label.Text = GetLabelName() & " " & Controller.Value / 10
+                Setting_Label.Text = GetLabelName() & " " & Controller.Value / ChangeRate
 
                 SettingContainer.SetRow(Controller, 0)
                 SettingContainer.SetColumn(Controller, 1)
@@ -143,7 +147,7 @@ Public Class MednafenSetting
 
         If EntryFound Then
             File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", Rx.MednafenConfigCache)
-
+            Console.WriteLine("Changed: " & _newvalue)
         Else
             MsgBox("Could not find Config String: " & ConfigString)
 

@@ -1815,18 +1815,15 @@ Public Class frmMain
 
     Private Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         SecretCode = StrReverse(e.KeyCode.ToString) + SecretCode
-        If SecretCode.Length > 100 Then
-            SecretCode = SecretCode.Substring(0, 100)
-        End If
+        If SecretCode.Length > 100 Then SecretCode = SecretCode.Substring(0, 100)
 
         If StrReverse(SecretCode).ToLower.Contains("leftdownleftrightdownrightleftleftrightright") Then
             SecretCode = ""
             If Not Application.OpenForms().OfType(Of frmSecret).Any Then frmSecret.Show(Me)
         End If
 
-        Console.WriteLine(e.KeyCode.ToString)
-
     End Sub
+
 End Class
 
 Public Class BEARPlayer
