@@ -98,7 +98,7 @@ Public Class NetworkHandling
                 Not message.StartsWith("V") And ' Asking for VMU
                 Not message.StartsWith("G") And ' Successfuly got VMU
                 Not message.StartsWith("$") Then ' Join a Host
-                ' Message is not from challanger 
+                ' Message is not from challanger
                 If Not MainformRef.Challenger.ip = senderip Then
                     ' Check if they are my currently Challanging
                     If MainformRef.ChallengeForm._Challenger Is Nothing Then
@@ -111,7 +111,6 @@ Public Class NetworkHandling
                         Exit Sub
                     End If
                 End If
-
             End If
         End If
 
@@ -199,8 +198,7 @@ Public Class NetworkHandling
                     If Not MainformRef.Challenger.ip = senderip Then Exit Sub
                 ElseIf Not MainformRef.ChallengeForm._Challenger Is Nothing Then
                     If Not MainformRef.ChallengeForm._Challenger.ip = senderip Then Exit Sub
-                Else
-                    Exit Sub
+                Else : Exit Sub
                 End If
 
                 Console.WriteLine("<-End Session->")

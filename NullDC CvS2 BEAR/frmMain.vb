@@ -310,6 +310,7 @@ Public Class frmMain
         PlayerList.Sorting = SortOrder.Ascending
 
         ToolStripLogo.Image = BEARTheme.LoadImage(ThemeKeys.LogoImage)
+
     End Sub
 
     Private Sub CreateRomFolderWatcher()
