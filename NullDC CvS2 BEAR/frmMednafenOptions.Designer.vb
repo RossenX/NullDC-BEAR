@@ -586,7 +586,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting6.Location = New System.Drawing.Point(5, 25)
         Me.MednafenSetting6.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting6.Name = "MednafenSetting6"
-        Me.MednafenSetting6.ProperName = "FF Speed:"
+        Me.MednafenSetting6.ProperName = "Max Speed:"
         Me.MednafenSetting6.Size = New System.Drawing.Size(260, 51)
         Me.MednafenSetting6.TabIndex = 4
         '
@@ -762,7 +762,7 @@ Partial Class frmMednafenOptions
         '
         Me.TableLayoutPanel2.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel2.ColumnCount = 3
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting24, 0, 3)
@@ -809,7 +809,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(813, 534)
         Me.TableLayoutPanel2.TabIndex = 4
         '
@@ -1276,7 +1276,7 @@ Partial Class frmMednafenOptions
         '
         Me.TableLayoutPanel4.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel4.ColumnCount = 3
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting38, 0, 3)
@@ -1321,7 +1321,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(813, 534)
         Me.TableLayoutPanel4.TabIndex = 5
         '
@@ -1772,7 +1772,7 @@ Partial Class frmMednafenOptions
         '
         Me.TableLayoutPanel3.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel3.ColumnCount = 3
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting41, 1, 1)
@@ -1803,9 +1803,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 29)
         Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 12
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowCount = 10
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -2698,7 +2696,7 @@ Partial Class frmMednafenOptions
         '
         Me.TableLayoutPanel7.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel7.ColumnCount = 3
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting100, 1, 1)
@@ -3197,7 +3195,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting133, 0, 5)
         Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting132, 0, 6)
         Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting131, 0, 7)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting128, 1, 11)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting128, 1, 8)
         Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting127, 1, 7)
         Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting126, 1, 6)
         Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting125, 1, 5)
@@ -3208,10 +3206,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel8.Location = New System.Drawing.Point(0, 29)
         Me.TableLayoutPanel8.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
-        Me.TableLayoutPanel8.RowCount = 13
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowCount = 10
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -3642,7 +3637,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting152, 0, 5)
         Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting151, 0, 6)
         Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting150, 0, 7)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting147, 1, 11)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting147, 1, 8)
         Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting146, 1, 7)
         Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting145, 1, 6)
         Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting144, 1, 5)
@@ -3653,10 +3648,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel9.Location = New System.Drawing.Point(0, 29)
         Me.TableLayoutPanel9.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
-        Me.TableLayoutPanel9.RowCount = 13
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowCount = 10
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -4086,7 +4078,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting171, 0, 6)
         Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting172, 0, 5)
         Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting170, 0, 7)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting167, 1, 11)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting167, 1, 8)
         Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting166, 1, 7)
         Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting165, 1, 6)
         Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting164, 1, 5)
@@ -4097,10 +4089,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel10.Location = New System.Drawing.Point(0, 29)
         Me.TableLayoutPanel10.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
-        Me.TableLayoutPanel10.RowCount = 13
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowCount = 10
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -4514,6 +4503,7 @@ Partial Class frmMednafenOptions
         '
         'Panel1
         '
+        Me.Panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.Panel1.BackColor = System.Drawing.Color.Maroon
         Me.Panel1.Controls.Add(Me.tc_options)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -4527,6 +4517,7 @@ Partial Class frmMednafenOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.ClientSize = New System.Drawing.Size(822, 603)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog

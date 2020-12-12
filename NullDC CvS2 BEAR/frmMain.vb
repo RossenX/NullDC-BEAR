@@ -309,6 +309,7 @@ Public Class frmMain
         PlayerList.ListViewItemSorter = New ListViewItemComparer(2, SortOrder.Ascending)
         PlayerList.Sorting = SortOrder.Ascending
 
+        ToolStripLogo.Image = BEARTheme.LoadImage(ThemeKeys.LogoImage)
     End Sub
 
     Private Sub CreateRomFolderWatcher()
@@ -1822,6 +1823,10 @@ Public Class frmMain
             If Not Application.OpenForms().OfType(Of frmSecret).Any Then frmSecret.Show(Me)
         End If
 
+    End Sub
+
+    Private Sub ToolStripLogo_Click(sender As Object, e As EventArgs) Handles ToolStripLogo.Click
+        Process.Start(LoadLink(ThemeKeys.LogoLink))
     End Sub
 
 End Class

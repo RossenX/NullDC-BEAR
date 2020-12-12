@@ -34,13 +34,15 @@ Partial Class MednafenSetting
         Me.SettingContainer.ColumnCount = 2
         Me.SettingContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.SettingContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.SettingContainer.Controls.Add(Me.Setting_Label, 0, 0)
+        Me.SettingContainer.Controls.Add(Me.Setting_Label, 0, 1)
         Me.SettingContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SettingContainer.Location = New System.Drawing.Point(0, 0)
         Me.SettingContainer.Margin = New System.Windows.Forms.Padding(0)
         Me.SettingContainer.Name = "SettingContainer"
-        Me.SettingContainer.RowCount = 1
+        Me.SettingContainer.RowCount = 3
+        Me.SettingContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.SettingContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.SettingContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.SettingContainer.Size = New System.Drawing.Size(106, 16)
         Me.SettingContainer.TabIndex = 0
         '

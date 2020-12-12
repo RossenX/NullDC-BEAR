@@ -44,7 +44,7 @@ Public Class MednafenSetting
         Setting_Label.AutoSize = True
         Setting_Label.TextAlign = ContentAlignment.MiddleLeft
 
-        SettingContainer.SetRow(Setting_Label, 0)
+        SettingContainer.SetRow(Setting_Label, 1)
         SettingContainer.SetColumn(Setting_Label, 0)
         SettingContainer.Controls.Add(Setting_Label)
 
@@ -62,7 +62,7 @@ Public Class MednafenSetting
                                                           UpdateCFG(Controller.CheckState)
                                                       End Sub
 
-                SettingContainer.SetRow(Controller, 0)
+                SettingContainer.SetRow(Controller, 1)
                 SettingContainer.SetColumn(Controller, 1)
                 SettingContainer.Controls.Add(Controller)
             Case 2 And IsNumeric(_configs(0)) And IsNumeric(_configs(1)) ' Min/Max Value
@@ -89,7 +89,7 @@ Public Class MednafenSetting
 
                 AddHandler Controller.MouseCaptureChanged, Sub()
                                                                Setting_Label.Text = GetLabelName() & " " & Controller.Value / ChangeRate
-                                                               UpdateCFG(Controller.Value / ChangeRate)
+                                                               'UpdateCFG(Controller.Value / ChangeRate)
 
                                                            End Sub
 
@@ -99,14 +99,14 @@ Public Class MednafenSetting
 
                                                     End Sub
 
-                AddHandler Controller.MouseHover, Sub()
+                AddHandler Controller.MouseEnter, Sub()
                                                       Controller.Focus()
 
                                                   End Sub
 
                 Setting_Label.Text = GetLabelName() & " " & Controller.Value / ChangeRate
 
-                SettingContainer.SetRow(Controller, 0)
+                SettingContainer.SetRow(Controller, 1)
                 SettingContainer.SetColumn(Controller, 1)
                 SettingContainer.Controls.Add(Controller)
 
@@ -131,7 +131,7 @@ Public Class MednafenSetting
 
                                                             End Sub
 
-                SettingContainer.SetRow(Controller, 0)
+                SettingContainer.SetRow(Controller, 1)
                 SettingContainer.SetColumn(Controller, 1)
                 SettingContainer.Controls.Add(Controller)
 

@@ -314,6 +314,7 @@ Module BEARTheme
         MenuStripFontSize
 
         LogoImage
+        LogoLink
 
         MainMenuBackground
         WaitBackground
@@ -592,6 +593,11 @@ Module BEARTheme
         Else
             Return 8.2
         End If
+
+    End Function
+
+    Public Function LoadLink(ByVal _url As ThemeKeys)
+        Return Theme(_url.ToString().ToLower)
 
     End Function
 

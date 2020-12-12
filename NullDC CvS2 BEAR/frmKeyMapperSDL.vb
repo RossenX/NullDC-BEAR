@@ -689,6 +689,7 @@ Public Class frmKeyMapperSDL
             GenerateDefaults()
             LoadSettings()
             If File.Exists(MainformRef.NullDCPath & "\bearcontrollerdb.txt") Then File.Delete(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
+            If File.Exists(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt") Then File.Delete(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt")
             UpdateControllersList()
             Me.Close()
 

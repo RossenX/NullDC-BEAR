@@ -41,7 +41,7 @@ Public Class frmChallengeGameSelect
 
             RecentGames = ""
 
-            For i = 0 To 19
+            For i = 0 To 49
                 If i < RecentGamesCount.Count - 1 Then
                     RecentGames += RecentGamesCount(i) & vbNewLine
                 End If
