@@ -53,7 +53,8 @@ Partial Class frmMain
         Me.ReplaysToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ControlsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MednafenOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GeneralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MednafenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -191,6 +192,7 @@ Partial Class frmMain
         Me.cbStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.cbStatus.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbStatus.FormattingEnabled = True
         Me.cbStatus.Items.AddRange(New Object() {"Idle", "DND", "Hidden"})
         Me.cbStatus.Location = New System.Drawing.Point(10, 436)
@@ -333,7 +335,7 @@ Partial Class frmMain
         '_MainMenuStrip
         '
         Me._MainMenuStrip.BackColor = System.Drawing.Color.Transparent
-        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.MednafenOptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem})
+        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem})
         Me._MainMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me._MainMenuStrip.Name = "_MainMenuStrip"
         Me._MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
@@ -370,15 +372,22 @@ Partial Class frmMain
         '
         Me.OptionsToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
         Me.OptionsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.MednafenToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 36)
         Me.OptionsToolStripMenuItem.Text = "Options"
         '
-        'MednafenOptionsToolStripMenuItem
+        'GeneralToolStripMenuItem
         '
-        Me.MednafenOptionsToolStripMenuItem.Name = "MednafenOptionsToolStripMenuItem"
-        Me.MednafenOptionsToolStripMenuItem.Size = New System.Drawing.Size(118, 36)
-        Me.MednafenOptionsToolStripMenuItem.Text = "Mednafen Options"
+        Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.GeneralToolStripMenuItem.Text = "General"
+        '
+        'MednafenToolStripMenuItem
+        '
+        Me.MednafenToolStripMenuItem.Name = "MednafenToolStripMenuItem"
+        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.MednafenToolStripMenuItem.Text = "Mednafen"
         '
         'FreeDLCToolStripMenuItem
         '
@@ -466,6 +475,7 @@ Partial Class frmMain
     Friend WithEvents imgBeta As PictureBox
     Friend WithEvents FreeDLCToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label1 As Label
-    Friend WithEvents MednafenOptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripLogo As ToolStripMenuItem
+    Friend WithEvents GeneralToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MednafenToolStripMenuItem As ToolStripMenuItem
 End Class

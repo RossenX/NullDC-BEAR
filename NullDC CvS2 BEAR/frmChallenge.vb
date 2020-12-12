@@ -3,7 +3,7 @@ Imports System.Net.NetworkInformation
 
 Public Class frmChallenge
 
-    Dim _Challenger As BEARPlayer
+    Public _Challenger As BEARPlayer
     Dim wavePlayer As New NAudio.Wave.WaveOut
 
     Public Sub New(ByRef _mf As frmMain)

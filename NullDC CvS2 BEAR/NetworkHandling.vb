@@ -100,10 +100,18 @@ Public Class NetworkHandling
                 Not message.StartsWith("$") Then ' Join a Host
                 ' Message is not from challanger 
                 If Not MainformRef.Challenger.ip = senderip Then
-                    Console.WriteLine("<-DENIED->")
-                    SendMessage(">,BB", senderip)
-                    Exit Sub
+                    ' Check if they are my currently Challanging
+                    If MainformRef.ChallengeForm._Challenger Is Nothing Then
+                        Console.WriteLine("<-DENIED->")
+                        SendMessage(">,BB", senderip)
+                        Exit Sub
+                    ElseIf Not MainformRef.ChallengeForm._Challenger.ip = senderip Then
+                        Console.WriteLine("<-DENIED->")
+                        SendMessage(">,BB", senderip)
+                        Exit Sub
+                    End If
                 End If
+
             End If
         End If
 
@@ -186,8 +194,14 @@ Public Class NetworkHandling
                 MainformRef.Invoke(INVOKATION, New BEARPlayer(Split(1), senderip, Split(3), Split(4),, Split(5)))
 
             Case ">"
-                If MainformRef.Challenger Is Nothing Then Exit Sub ' You didn't challange anyone, who tf accepted it
-                If Not MainformRef.Challenger.ip = senderip Then Exit Sub ' you didn't challange THIS person why he accepting.
+
+                If Not MainformRef.Challenger Is Nothing Then
+                    If Not MainformRef.Challenger.ip = senderip Then Exit Sub
+                ElseIf Not MainformRef.ChallengeForm._Challenger Is Nothing Then
+                    If Not MainformRef.ChallengeForm._Challenger.ip = senderip Then Exit Sub
+                Else
+                    Exit Sub
+                End If
 
                 Console.WriteLine("<-End Session->")
                 Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession

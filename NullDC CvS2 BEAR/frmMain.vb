@@ -1779,9 +1779,7 @@ Public Class frmMain
     End Sub
 
     Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
-        If Not Application.OpenForms().OfType(Of frmSetup).Any Then
-            frmSetup.Show(Me)
-        End If
+
     End Sub
 
     Private Sub DiscordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscordToolStripMenuItem.Click
@@ -1808,7 +1806,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub MednafenOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MednafenOptionsToolStripMenuItem.Click
+    Private Sub MednafenOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
         If Not Application.OpenForms().OfType(Of frmMednafenOptions).Any Then
             frmMednafenOptions.Show(Me)
         End If
@@ -1827,6 +1825,23 @@ Public Class frmMain
 
     Private Sub ToolStripLogo_Click(sender As Object, e As EventArgs) Handles ToolStripLogo.Click
         Process.Start(LoadLink(ThemeKeys.LogoLink))
+    End Sub
+
+    Private Sub MednafenToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles MednafenToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmMednafenOptions).Any Then
+            frmMednafenOptions.Show(Me)
+        End If
+    End Sub
+
+    Private Sub GeneralToolStripMenuItem_Click_2(sender As Object, e As EventArgs) Handles GeneralToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmSetup).Any Then
+            frmSetup.Show(Me)
+        End If
+    End Sub
+
+    Private Sub OptionsToolStripMenuItem_DropDownOpened(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.DropDownOpened
+        OptionsToolStripMenuItem.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
+
     End Sub
 
 End Class

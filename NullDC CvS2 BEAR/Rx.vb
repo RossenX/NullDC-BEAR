@@ -513,6 +513,7 @@ Module BEARTheme
     Private Sub ApplyMenuStripTheme(ByRef _Control As MenuStrip)
         _Control.BackColor = LoadColor(ThemeKeys.MenuStripColor)
         _Control.ForeColor = LoadColor(ThemeKeys.MenuStripFontColor)
+
         '_Control.Font = New Font(_Control.Font.FontFamily, LoadSize(ThemeKeys.MenuStripFontSize), _Control.Font.Style)
         _Control.Renderer = New MenuStripRenderer
 
@@ -690,10 +691,17 @@ End Class
 
 Public Class MenuStripRenderer : Inherits ToolStripProfessionalRenderer
 
+    Protected Overrides Sub OnRenderItemText(e As ToolStripItemTextRenderEventArgs)
+        Dim tclr As Color = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
+        TextRenderer.DrawText(e.Graphics, e.Text, e.TextFont, e.TextRectangle, BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor), TextFormatFlags.VerticalCenter Or TextFormatFlags.Left Or TextFormatFlags.SingleLine)
+
+    End Sub
+
+
     Protected Overrides Sub OnRenderMenuItemBackground(ByVal e As System.Windows.Forms.ToolStripItemRenderEventArgs)
         If e.Item.Selected Then
             Dim rc As New Rectangle(Point.Empty, e.Item.Size)
-            Dim Pen = New Pen(BEARTheme.LoadColor(ThemeKeys.SecondaryColor), 2)
+            Dim Pen = New Pen(BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor), 2)
             Pen.Alignment = PenAlignment.Inset
 
             'Set the highlight color
@@ -701,7 +709,7 @@ Public Class MenuStripRenderer : Inherits ToolStripProfessionalRenderer
             'e.Graphics.DrawRectangle(Pens.Beige, 1, 0, rc.Width - 2, rc.Height - 1)
         Else
             Dim rc As New Rectangle(Point.Empty, e.Item.Size)
-            Dim Pen = New Pen(BEARTheme.LoadColor(ThemeKeys.SecondaryColor), 2)
+            Dim Pen = New Pen(BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor), 2)
             Pen.Alignment = PenAlignment.Inset
 
             'Set the default color
