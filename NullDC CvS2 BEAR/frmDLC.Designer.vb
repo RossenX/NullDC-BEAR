@@ -209,7 +209,7 @@ Partial Class frmDLC
         Me.lbDisclaimer.Name = "lbDisclaimer"
         Me.lbDisclaimer.Size = New System.Drawing.Size(194, 13)
         Me.lbDisclaimer.TabIndex = 9
-        Me.lbDisclaimer.Text = "Disclaimer: Some games might not work" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.lbDisclaimer.Text = "Disclaimer: Some games might not work"
         '
         'TableLayoutPanel1
         '

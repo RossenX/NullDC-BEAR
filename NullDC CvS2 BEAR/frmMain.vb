@@ -1779,10 +1779,6 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
-
-    End Sub
-
     Private Sub DiscordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiscordToolStripMenuItem.Click
         Process.Start("https://discord.gg/u2YzdNB6SN")
     End Sub
@@ -1797,14 +1793,6 @@ Public Class frmMain
         Else
             frmDLC.Focus()
         End If
-    End Sub
-
-    Private Sub GeneralToolStripMenuItem_Click_1(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub MednafenToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub MednafenOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -1842,6 +1830,11 @@ Public Class frmMain
 
     Private Sub OptionsToolStripMenuItem_DropDownOpened(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.DropDownOpened
         OptionsToolStripMenuItem.ForeColor = BEARTheme.LoadColor(ThemeKeys.MenuStripFontColor)
+
+    End Sub
+
+    Private Sub OptionsToolStripMenuItem_MouseEnter(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.MouseMove
+        OptionsToolStripMenuItem.ShowDropDown()
 
     End Sub
 

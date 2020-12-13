@@ -374,6 +374,7 @@ Partial Class frmMain
         Me.OptionsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.MednafenToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+        Me.OptionsToolStripMenuItem.ShowShortcutKeys = False
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 36)
         Me.OptionsToolStripMenuItem.Text = "Options"
         '
