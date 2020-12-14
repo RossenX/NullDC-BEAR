@@ -138,7 +138,7 @@ Public Class frmDLC
         End If
 
         Dim Files = Directory.GetFiles(MainformRef.NullDCPath & "\DLC", "*.freedlc", SearchOption.TopDirectoryOnly)
-
+        ExternalURLs.Add("https://www.google.com/")
         ' Get allt he freedlc files and parse them into their own tabs and lists
         For Each _file In Files
             Dim _lines = File.ReadAllLines(_file)
@@ -374,6 +374,7 @@ Public Class frmDLC
     End Sub
 
     Private Sub lnkRoms_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkRoms.LinkClicked
+
         If Uri.IsWellFormedUriString(ExternalURLs(tc_games.SelectedIndex), UriKind.Absolute) Then
             Process.Start(ExternalURLs(tc_games.SelectedIndex))
         Else
