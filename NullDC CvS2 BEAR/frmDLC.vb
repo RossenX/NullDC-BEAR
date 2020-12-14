@@ -139,6 +139,7 @@ Public Class frmDLC
 
         Dim Files = Directory.GetFiles(MainformRef.NullDCPath & "\DLC", "*.freedlc", SearchOption.TopDirectoryOnly)
         ExternalURLs.Add("https://www.google.com/")
+        RomFolders.Add("")
         ' Get allt he freedlc files and parse them into their own tabs and lists
         For Each _file In Files
             Dim _lines = File.ReadAllLines(_file)
