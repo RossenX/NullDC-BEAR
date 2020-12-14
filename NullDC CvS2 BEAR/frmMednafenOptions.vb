@@ -11,7 +11,11 @@ Public Class frmMednafenOptions
     Private Sub frmMednafenOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToParent()
+        ReloadTheme()
 
+    End Sub
+
+    Public Sub ReloadTheme()
         For i = 0 To tc_options.TabCount - 1
             For Each _child As Control In tc_options.TabPages(i).Controls
                 ApplyThemeToControl(_child, 1)
@@ -25,6 +29,7 @@ Public Class frmMednafenOptions
         ApplyThemeToControl(Me, 1)
         ApplyThemeToControl(Panel1, 1)
         ApplyThemeToControl(TableLayoutPanel1, 1)
+
     End Sub
 
 End Class

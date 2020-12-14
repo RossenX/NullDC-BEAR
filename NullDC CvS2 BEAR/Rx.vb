@@ -655,6 +655,8 @@ Module BEARTheme
                     DirectCast(_form, frmSetup).ReloadTheme()
                 Case GetType(frmWaitingForHost)
                     DirectCast(_form, frmWaitingForHost).ReloadTheme()
+                Case GetType(frmMednafenOptions)
+                    DirectCast(_form, frmMednafenOptions).ReloadTheme()
             End Select
         Next
 
