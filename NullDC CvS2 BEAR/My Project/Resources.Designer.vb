@@ -546,6 +546,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property MessagePop() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("MessagePop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to md.input.multitap tp1
         '''pcfx.input.port1.multitap 1
         '''pcfx.input.port2.multitap 0

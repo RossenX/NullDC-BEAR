@@ -90,7 +90,9 @@ Public Class NetworkHandling
         ' I'm spectating so don't let other people spectate my spectating
         If MainformRef.ConfigFile.Status = "Spectator" And message.StartsWith("!") Then SendMessage(">,NSS", senderip) : Exit Sub
 
+        ' I should really clean this up and make it a little nicer
         If Not MainformRef.Challenger Is Nothing Then ' Only accept who is and challenge messages from none-challangers
+
             If Not message.StartsWith("<") And ' I am Request
                 Not message.StartsWith("?") And ' Who Is Request
                 Not message.StartsWith("!") And ' Being Challanged
@@ -98,6 +100,7 @@ Public Class NetworkHandling
                 Not message.StartsWith("V") And ' Asking for VMU
                 Not message.StartsWith("G") And ' Successfuly got VMU
                 Not message.StartsWith("$") Then ' Join a Host
+
                 ' Message is not from challanger
                 If Not MainformRef.Challenger.ip = senderip Then
                     ' Check if they are my currently Challanging
@@ -111,7 +114,9 @@ Public Class NetworkHandling
                         Exit Sub
                     End If
                 End If
+
             End If
+
         End If
 
         Split = message.Split(",")
@@ -128,6 +133,8 @@ Public Class NetworkHandling
         ' V - Requesting VMU DATA       V(0)
         ' # - VMU DATA                  #(0),<total_pieces>(1),<this_piece>(2),<VMU DATA PIECE>(3)
         ' G - VMU DATA RECIVED          G(0)
+        ' M - DM Message                M(0),<Name>(1),<Message>(2)
+        ' MO - DM Over                  MO(0)
 
         Select Case Split(0)
             Case "?"
@@ -206,6 +213,7 @@ Public Class NetworkHandling
                 MainformRef.Invoke(INVOKATION, {Split(1), senderip})
 
             Case "$"
+
                 If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then ' We were told to join a game but we're already in a game
                     Exit Sub
                 End If
@@ -224,6 +232,7 @@ Public Class NetworkHandling
                 End If
 
             Case "@"
+
                 If MainformRef.Challenger Is Nothing Then Exit Sub ' You didn't challange anyone, who tf accepted it
                 If Not MainformRef.Challenger.ip = senderip Then Exit Sub ' you didn't challange THIS person why he accepting.
 
@@ -281,6 +290,35 @@ Public Class NetworkHandling
             Case "&"
                 Dim INVOKATION As RemovePlayerFromList_delegate = AddressOf MainformRef.RemovePlayerFromList
                 MainformRef.Matchlist.Invoke(INVOKATION, {senderip})
+
+            Case "M"
+                Console.WriteLine("Text Message")
+                For Each _form In Application.OpenForms()
+                    Dim FoundWindow As frmDM = Nothing
+
+                    If _form.GetType = GetType(frmDM) Then
+                        If DirectCast(_form, frmDM).UserIP = senderip Then
+                            FoundWindow = _form
+                            Exit For
+
+                        End If
+
+                    End If
+
+                    If Not FoundWindow Is Nothing Then
+                        Dim _ChatForm As frmDM = New frmDM(senderip, Split(1))
+                        _ChatForm.Show()
+                        _ChatForm.RecieveDM(senderip, WebUtility.UrlDecode(Split(2)))
+
+                    Else
+                        FoundWindow.RecieveDM(senderip, WebUtility.UrlDecode(Split(2)))
+
+                    End If
+
+                Next
+
+            Case "MO"
+                Console.WriteLine("Message Session Over")
 
         End Select
 

@@ -279,6 +279,7 @@ Partial Class frmMednafenOptions
         Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.MednafenSetting130 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.tc_options.SuspendLayout()
         Me.TabPage10.SuspendLayout()
         Me.tlp_general_cont.SuspendLayout()
@@ -370,6 +371,7 @@ Partial Class frmMednafenOptions
         Me.tlp_general.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.tlp_general.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.tlp_general.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.tlp_general.Controls.Add(Me.MednafenSetting130, 1, 7)
         Me.tlp_general.Controls.Add(Me.Label6, 1, 0)
         Me.tlp_general.Controls.Add(Me.Label13, 2, 0)
         Me.tlp_general.Controls.Add(Me.MednafenSetting11, 2, 1)
@@ -4513,6 +4515,22 @@ Partial Class frmMednafenOptions
         Me.Panel1.Size = New System.Drawing.Size(812, 598)
         Me.Panel1.TabIndex = 1
         '
+        'MednafenSetting130
+        '
+        Me.MednafenSetting130.AutoSize = True
+        Me.MednafenSetting130.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting130.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting130.ChangeRate = 1.0!
+        Me.MednafenSetting130.ConfigString = "video.glvsync"
+        Me.MednafenSetting130.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting130.Limits = ""
+        Me.MednafenSetting130.Location = New System.Drawing.Point(275, 295)
+        Me.MednafenSetting130.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting130.Name = "MednafenSetting130"
+        Me.MednafenSetting130.ProperName = "GL Vsync"
+        Me.MednafenSetting130.Size = New System.Drawing.Size(261, 30)
+        Me.MednafenSetting130.TabIndex = 21
+        '
         'frmMednafenOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4832,4 +4850,5 @@ Partial Class frmMednafenOptions
     Friend WithEvents Label51 As Label
     Friend WithEvents Label52 As Label
     Friend WithEvents Label53 As Label
+    Friend WithEvents MednafenSetting130 As MednafenSetting
 End Class

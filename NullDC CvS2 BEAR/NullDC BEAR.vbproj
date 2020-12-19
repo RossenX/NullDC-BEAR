@@ -129,7 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="BEARPinger.vb" />
     <Compile Include="frmDLCCreator.Designer.vb">
       <DependentUpon>frmDLCCreator.vb</DependentUpon>
     </Compile>
@@ -245,17 +244,17 @@
     <Compile Include="frmWaitingForHost.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="keybindButton.Designer.vb">
+    <Compile Include="Custom Components\keybindButton.Designer.vb">
       <DependentUpon>keybindButton.vb</DependentUpon>
     </Compile>
-    <Compile Include="keybindButton.vb">
+    <Compile Include="Custom Components\keybindButton.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MednafenLauncher.vb" />
-    <Compile Include="MednafenSetting.Designer.vb">
+    <Compile Include="Custom Components\MednafenSetting.Designer.vb">
       <DependentUpon>MednafenSetting.vb</DependentUpon>
     </Compile>
-    <Compile Include="MednafenSetting.vb">
+    <Compile Include="Custom Components\MednafenSetting.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -276,6 +275,7 @@
     <Compile Include="NetworkHandling.vb" />
     <Compile Include="NullDCLauncher.vb" />
     <Compile Include="Rx.vb" />
+    <Compile Include="WindowsApi.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmChallenge.resx">
@@ -337,10 +337,10 @@
     <EmbeddedResource Include="frmWaitingForHost.resx">
       <DependentUpon>frmWaitingForHost.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="keybindButton.resx">
+    <EmbeddedResource Include="Custom Components\keybindButton.resx">
       <DependentUpon>keybindButton.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MednafenSetting.resx">
+    <EmbeddedResource Include="Custom Components\MednafenSetting.resx">
       <DependentUpon>MednafenSetting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -391,6 +391,7 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\MessagePop.wav" />
     <Content Include="Resources\Multitap_1.txt" />
     <Content Include="Resources\Multitap_2.txt" />
     <Content Include="Resources\Multitap_both.txt" />
