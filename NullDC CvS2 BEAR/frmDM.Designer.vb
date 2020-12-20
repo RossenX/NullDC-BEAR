@@ -44,7 +44,7 @@ Partial Class frmDM
         Me.tlpContainer.Controls.Add(Me.FlowLayoutPanel1, 0, 0)
         Me.tlpContainer.Controls.Add(Me.tlpInputBottom, 0, 1)
         Me.tlpContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlpContainer.Location = New System.Drawing.Point(0, 24)
+        Me.tlpContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpContainer.Margin = New System.Windows.Forms.Padding(0)
         Me.tlpContainer.Name = "tlpContainer"
         Me.tlpContainer.Padding = New System.Windows.Forms.Padding(10)
@@ -128,10 +128,11 @@ Partial Class frmDM
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GagToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 339)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.MenuStrip1.Size = New System.Drawing.Size(462, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
@@ -147,7 +148,7 @@ Partial Class frmDM
         'GagToolStripMenuItem1
         '
         Me.GagToolStripMenuItem1.Name = "GagToolStripMenuItem1"
-        Me.GagToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.GagToolStripMenuItem1.Size = New System.Drawing.Size(95, 22)
         Me.GagToolStripMenuItem1.Text = "Gag"
         '
         'frmDM

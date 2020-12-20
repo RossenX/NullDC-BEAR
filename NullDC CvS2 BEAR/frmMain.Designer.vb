@@ -24,8 +24,8 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Idle", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DND", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Idle", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DND", System.Windows.Forms.HorizontalAlignment.Center)
         Me.Matchlist = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -185,6 +185,7 @@ Partial Class frmMain
         Me.BtnJoin.AutoSize = True
         Me.BtnJoin.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.BtnJoin.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnJoin.Enabled = False
         Me.BtnJoin.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnJoin.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnJoin.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(1, Byte), Integer))
@@ -245,13 +246,13 @@ Partial Class frmMain
         Me.PlayerList.ForeColor = System.Drawing.Color.Black
         Me.PlayerList.FullRowSelect = True
         Me.PlayerList.GridLines = True
-        ListViewGroup3.Header = "Idle"
-        ListViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup3.Name = "Idle"
-        ListViewGroup4.Header = "DND"
-        ListViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup4.Name = "DND"
-        Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup3, ListViewGroup4})
+        ListViewGroup1.Header = "Idle"
+        ListViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup1.Name = "Idle"
+        ListViewGroup2.Header = "DND"
+        ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup2.Name = "DND"
+        Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2})
         Me.PlayerList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.PlayerList.HideSelection = False
         Me.PlayerList.Location = New System.Drawing.Point(10, 37)
@@ -413,13 +414,13 @@ Partial Class frmMain
         'GeneralToolStripMenuItem
         '
         Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
-        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.GeneralToolStripMenuItem.Text = "General"
         '
         'MednafenToolStripMenuItem
         '
         Me.MednafenToolStripMenuItem.Name = "MednafenToolStripMenuItem"
-        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
         Me.MednafenToolStripMenuItem.Text = "Mednafen"
         '
         'FreeDLCToolStripMenuItem

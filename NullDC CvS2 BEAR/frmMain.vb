@@ -1502,6 +1502,8 @@ Public Class frmMain
                 RefreshTimer.Interval = 5000
                 RefreshTimer.Start()
                 SelectedPlayer = Nothing
+                BtnJoin.Text = "Challenge"
+                BtnJoin.Enabled = False
             End If
             NetworkHandler.SendMessage("?,")
 
@@ -1725,6 +1727,9 @@ Public Class frmMain
     Private Sub Matchlist_MouseClick(sender As Object, e As EventArgs) Handles Matchlist.Click
         If Matchlist.SelectedItems.Count = 0 Then
             SelectedPlayer = Nothing
+            BtnJoin.Text = "Challenge"
+            BtnJoin.Enabled = False
+
         Else
             PlayerList.SelectedItems.Clear()
             SelectedPlayer = New BEARPlayer(Matchlist.SelectedItems(0).SubItems(0).Text,
@@ -1732,6 +1737,14 @@ Public Class frmMain
                                             Matchlist.SelectedItems(0).SubItems(1).Text.Split(":")(1),
                                             Matchlist.SelectedItems(0).SubItems(3).Text,
                                             Matchlist.SelectedItems(0).SubItems(4).Text)
+            If SelectedPlayer.game = "None" Then
+                BtnJoin.Text = "Challenge"
+                BtnJoin.Enabled = True
+            Else
+                BtnJoin.Text = "Join/Spectate"
+                BtnJoin.Enabled = True
+
+            End If
         End If
 
     End Sub
@@ -1739,6 +1752,8 @@ Public Class frmMain
     Private Sub PlayerList_Click(sender As Object, e As EventArgs) Handles PlayerList.Click
         If PlayerList.SelectedItems.Count = 0 Then
             SelectedPlayer = Nothing
+            BtnJoin.Text = "Challenge"
+            BtnJoin.Enabled = False
         Else
             Matchlist.SelectedItems.Clear()
             SelectedPlayer = New BEARPlayer(PlayerList.SelectedItems(0).SubItems(0).Text,
@@ -1746,6 +1761,14 @@ Public Class frmMain
                                             PlayerList.SelectedItems(0).SubItems(1).Text.Split(":")(1),
                                             PlayerList.SelectedItems(0).SubItems(3).Text,
                                             PlayerList.SelectedItems(0).SubItems(4).Text)
+            If SelectedPlayer.game = "None" Then
+                BtnJoin.Text = "Challenge"
+                BtnJoin.Enabled = True
+            Else
+                BtnJoin.Text = "Join/Spectate"
+                BtnJoin.Enabled = True
+
+            End If
         End If
 
     End Sub
@@ -1754,6 +1777,8 @@ Public Class frmMain
         If Matchlist.SelectedItems.Count > 0 Then
             SelectedPlayer = Nothing
             Matchlist.SelectedItems.Clear()
+            BtnJoin.Text = "Challenge"
+            BtnJoin.Enabled = False
         End If
 
     End Sub
@@ -1762,6 +1787,8 @@ Public Class frmMain
         If PlayerList.SelectedItems.Count > 0 Then
             SelectedPlayer = Nothing
             PlayerList.SelectedItems.Clear()
+            BtnJoin.Text = "Challenge"
+            BtnJoin.Enabled = False
         End If
 
     End Sub
@@ -1769,6 +1796,8 @@ Public Class frmMain
     Private Sub Matchlist_ItemSelectionChanged(sender As ListView, e As ListViewItemSelectionChangedEventArgs) Handles Matchlist.ItemSelectionChanged, PlayerList.ItemSelectionChanged
         If Not sender.SelectedItems.Count > 0 Then
             SelectedPlayer = Nothing
+            BtnJoin.Text = "Challenge"
+            BtnJoin.Enabled = False
         End If
 
     End Sub
@@ -1851,6 +1880,13 @@ Public Class frmMain
                 _item.Enabled = True
             Next
 
+            If SelectedPlayer.game = "None" Then
+                sender.Items(0).Text = "Challenge"
+            Else
+                sender.Items(0).Text = "Join/Spectate"
+            End If
+
+
             If IsUserBlocked(SelectedPlayer.ip) Then
                 sender.Items(2).Text = "Ungag"
             Else
@@ -1869,6 +1905,16 @@ Public Class frmMain
     Private Sub DMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DMToolStripMenuItem.Click
         Dim FoundWindow = FindMessangerWindowFromIP(SelectedPlayer.ip)
         If FoundWindow Is Nothing Then
+            If BlockedUsers.Contains(SelectedPlayer.ip) Then
+                NotificationForm.ShowMessage("You can't talked to gagged players.")
+                Exit Sub
+
+                'ElseIf SelectedPlayer.name.StartsWith(ConfigFile.Name) Then
+                '    NotificationForm.ShowMessage("You uh.. you ok there? You shouldn't talk to yourself.")
+                '   Exit Sub
+
+            End If
+
             Dim dm = New frmDM(SelectedPlayer.ip, SelectedPlayer.name)
             dm.Show(Me)
 

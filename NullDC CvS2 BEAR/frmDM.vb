@@ -23,6 +23,7 @@ Public Class frmDM
 
         AddHandler MessageTimer.Tick, Sub()
                                           MessageTimer.Stop()
+                                          btnSend.Enabled = True
                                       End Sub
 
     End Sub
@@ -44,7 +45,6 @@ Public Class frmDM
     Public Sub SendDM()
         If InputBox.Text.Trim.Length > 0 Then
             If MessageTimer.Enabled Then
-                AddMessageToWindow("Yo don't talk their ear off")
                 Exit Sub
             End If
 
@@ -53,6 +53,7 @@ Public Class frmDM
                 MainformRef.NetworkHandler.SendMessage("M," & MainformRef.ConfigFile.Name & "," & WebUtility.UrlEncode(InputBox.Text), UserIP)
             End If
             MessageTimer.Start()
+            btnSend.Enabled = False
             InputBox.Clear()
 
         End If
@@ -137,8 +138,6 @@ Public Class frmDM
             SendDM()
         End If
 
-
-
     End Sub
 
     Private Sub GagToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles GagToolStripMenuItem1.Click
@@ -150,6 +149,8 @@ Public Class frmDM
             Me.Close()
 
         End If
+        MainformRef.NotificationForm.ShowMessage("Player Gagged, they won't be able to message you anymore")
+
     End Sub
 
 End Class

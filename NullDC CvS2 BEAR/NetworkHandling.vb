@@ -329,7 +329,7 @@ Public Class NetworkHandling
                         Sub()
                             Select Case Split(1)
                                 Case "0"
-                                    Foundwindow.AddMessageToWindow("    System: Computer says No")
+                                    Foundwindow.AddMessageToWindow("    System: Player has you gagged.")
 
                                 Case "1"
                                     Foundwindow.AddMessageToWindow("    System: Player is DND")
