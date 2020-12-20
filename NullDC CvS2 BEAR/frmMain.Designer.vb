@@ -24,8 +24,8 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Idle", System.Windows.Forms.HorizontalAlignment.Center)
-        Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DND", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Idle", System.Windows.Forms.HorizontalAlignment.Center)
+        Dim ListViewGroup4 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("DND", System.Windows.Forms.HorizontalAlignment.Center)
         Me.Matchlist = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -35,6 +35,7 @@ Partial Class frmMain
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ChallengeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.BtnJoin = New System.Windows.Forms.Button()
@@ -61,7 +62,6 @@ Partial Class frmMain
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DMTestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.MainMenuContainer.SuspendLayout()
@@ -124,21 +124,28 @@ Partial Class frmMain
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChallengeToolStripMenuItem, Me.DMToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChallengeToolStripMenuItem, Me.DMToolStripMenuItem, Me.BlockToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(128, 48)
+        Me.ContextMenuStrip1.ShowImageMargin = False
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(103, 70)
         '
         'ChallengeToolStripMenuItem
         '
         Me.ChallengeToolStripMenuItem.Name = "ChallengeToolStripMenuItem"
-        Me.ChallengeToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.ChallengeToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
         Me.ChallengeToolStripMenuItem.Text = "Challenge"
         '
         'DMToolStripMenuItem
         '
         Me.DMToolStripMenuItem.Name = "DMToolStripMenuItem"
-        Me.DMToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.DMToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
         Me.DMToolStripMenuItem.Text = "DM"
+        '
+        'BlockToolStripMenuItem
+        '
+        Me.BlockToolStripMenuItem.Name = "BlockToolStripMenuItem"
+        Me.BlockToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
+        Me.BlockToolStripMenuItem.Text = "Block"
         '
         'SystemIcons
         '
@@ -238,13 +245,13 @@ Partial Class frmMain
         Me.PlayerList.ForeColor = System.Drawing.Color.Black
         Me.PlayerList.FullRowSelect = True
         Me.PlayerList.GridLines = True
-        ListViewGroup1.Header = "Idle"
-        ListViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup1.Name = "Idle"
-        ListViewGroup2.Header = "DND"
-        ListViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
-        ListViewGroup2.Name = "DND"
-        Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup1, ListViewGroup2})
+        ListViewGroup3.Header = "Idle"
+        ListViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup3.Name = "Idle"
+        ListViewGroup4.Header = "DND"
+        ListViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center
+        ListViewGroup4.Name = "DND"
+        Me.PlayerList.Groups.AddRange(New System.Windows.Forms.ListViewGroup() {ListViewGroup3, ListViewGroup4})
         Me.PlayerList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.PlayerList.HideSelection = False
         Me.PlayerList.Location = New System.Drawing.Point(10, 37)
@@ -360,7 +367,7 @@ Partial Class frmMain
         '_MainMenuStrip
         '
         Me._MainMenuStrip.BackColor = System.Drawing.Color.Transparent
-        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem, Me.DMTestToolStripMenuItem})
+        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem})
         Me._MainMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me._MainMenuStrip.Name = "_MainMenuStrip"
         Me._MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
@@ -406,13 +413,13 @@ Partial Class frmMain
         'GeneralToolStripMenuItem
         '
         Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
-        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GeneralToolStripMenuItem.Text = "General"
         '
         'MednafenToolStripMenuItem
         '
         Me.MednafenToolStripMenuItem.Name = "MednafenToolStripMenuItem"
-        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MednafenToolStripMenuItem.Text = "Mednafen"
         '
         'FreeDLCToolStripMenuItem
@@ -433,12 +440,6 @@ Partial Class frmMain
         Me.PatreonO3oToolStripMenuItem.Name = "PatreonO3oToolStripMenuItem"
         Me.PatreonO3oToolStripMenuItem.Size = New System.Drawing.Size(83, 36)
         Me.PatreonO3oToolStripMenuItem.Text = "Patreon o3o"
-        '
-        'DMTestToolStripMenuItem
-        '
-        Me.DMTestToolStripMenuItem.Name = "DMTestToolStripMenuItem"
-        Me.DMTestToolStripMenuItem.Size = New System.Drawing.Size(63, 36)
-        Me.DMTestToolStripMenuItem.Text = "DM Test"
         '
         'imgBeta
         '
@@ -511,8 +512,8 @@ Partial Class frmMain
     Friend WithEvents ToolStripLogo As ToolStripMenuItem
     Friend WithEvents GeneralToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MednafenToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DMTestToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents ChallengeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DMToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BlockToolStripMenuItem As ToolStripMenuItem
 End Class

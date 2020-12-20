@@ -28,9 +28,13 @@ Partial Class frmDM
         Me.tlpInputBottom = New System.Windows.Forms.TableLayoutPanel()
         Me.InputBox = New System.Windows.Forms.RichTextBox()
         Me.btnSend = New System.Windows.Forms.Button()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.GagToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GagToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlpContainer.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.tlpInputBottom.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'tlpContainer
@@ -40,7 +44,7 @@ Partial Class frmDM
         Me.tlpContainer.Controls.Add(Me.FlowLayoutPanel1, 0, 0)
         Me.tlpContainer.Controls.Add(Me.tlpInputBottom, 0, 1)
         Me.tlpContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlpContainer.Location = New System.Drawing.Point(0, 0)
+        Me.tlpContainer.Location = New System.Drawing.Point(0, 24)
         Me.tlpContainer.Margin = New System.Windows.Forms.Padding(0)
         Me.tlpContainer.Name = "tlpContainer"
         Me.tlpContainer.Padding = New System.Windows.Forms.Padding(10)
@@ -48,7 +52,7 @@ Partial Class frmDM
         Me.tlpContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tlpContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpContainer.Size = New System.Drawing.Size(462, 363)
+        Me.tlpContainer.Size = New System.Drawing.Size(462, 339)
         Me.tlpContainer.TabIndex = 0
         '
         'FlowLayoutPanel1
@@ -62,7 +66,7 @@ Partial Class frmDM
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(13, 13)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Padding = New System.Windows.Forms.Padding(0, 0, 10, 0)
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(436, 312)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(436, 288)
         Me.FlowLayoutPanel1.TabIndex = 2
         '
         'TLP_Messages
@@ -71,7 +75,7 @@ Partial Class frmDM
         Me.TLP_Messages.BackColor = System.Drawing.Color.Transparent
         Me.TLP_Messages.ColumnCount = 1
         Me.TLP_Messages.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TLP_Messages.Location = New System.Drawing.Point(3, 309)
+        Me.TLP_Messages.Location = New System.Drawing.Point(3, 285)
         Me.TLP_Messages.Name = "TLP_Messages"
         Me.TLP_Messages.RowCount = 1
         Me.TLP_Messages.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -88,7 +92,7 @@ Partial Class frmDM
         Me.tlpInputBottom.Controls.Add(Me.InputBox, 0, 0)
         Me.tlpInputBottom.Controls.Add(Me.btnSend, 1, 0)
         Me.tlpInputBottom.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlpInputBottom.Location = New System.Drawing.Point(10, 328)
+        Me.tlpInputBottom.Location = New System.Drawing.Point(10, 304)
         Me.tlpInputBottom.Margin = New System.Windows.Forms.Padding(0)
         Me.tlpInputBottom.Name = "tlpInputBottom"
         Me.tlpInputBottom.RowCount = 1
@@ -106,7 +110,7 @@ Partial Class frmDM
         Me.InputBox.Name = "InputBox"
         Me.InputBox.Size = New System.Drawing.Size(350, 25)
         Me.InputBox.TabIndex = 0
-        Me.InputBox.Text = "bla lba blalbab"
+        Me.InputBox.Text = ""
         '
         'btnSend
         '
@@ -122,13 +126,39 @@ Partial Class frmDM
         Me.btnSend.Text = "        Send        "
         Me.btnSend.UseVisualStyleBackColor = True
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GagToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.MenuStrip1.Size = New System.Drawing.Size(462, 24)
+        Me.MenuStrip1.TabIndex = 1
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'GagToolStripMenuItem
+        '
+        Me.GagToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GagToolStripMenuItem1})
+        Me.GagToolStripMenuItem.Name = "GagToolStripMenuItem"
+        Me.GagToolStripMenuItem.ShowShortcutKeys = False
+        Me.GagToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.GagToolStripMenuItem.Text = "Options"
+        '
+        'GagToolStripMenuItem1
+        '
+        Me.GagToolStripMenuItem1.Name = "GagToolStripMenuItem1"
+        Me.GagToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.GagToolStripMenuItem1.Text = "Gag"
+        '
         'frmDM
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(462, 363)
         Me.Controls.Add(Me.tlpContainer)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.KeyPreview = True
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmDM"
         Me.Text = " <Name Of Player>"
         Me.tlpContainer.ResumeLayout(False)
@@ -137,7 +167,10 @@ Partial Class frmDM
         Me.FlowLayoutPanel1.PerformLayout()
         Me.tlpInputBottom.ResumeLayout(False)
         Me.tlpInputBottom.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -147,4 +180,7 @@ Partial Class frmDM
     Friend WithEvents btnSend As Button
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents TLP_Messages As TableLayoutPanel
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents GagToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GagToolStripMenuItem1 As ToolStripMenuItem
 End Class

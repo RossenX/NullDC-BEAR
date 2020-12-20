@@ -5,13 +5,25 @@ Imports System.Threading
 Public Class frmDM
 
     Public UserIP As String = ""
+    Public UserName As String = ""
+    Public over As Boolean = False
+
     Dim wavePlayer As New NAudio.Wave.WaveOut
+
+    Private MessageTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
     Public Sub New(ByVal _ip As String, ByVal _name As String)
         UserIP = _ip
+        UserName = _name
         InitializeComponent()
 
-        Me.Text = _name
+        Me.Text = UserName
+
+        MessageTimer.Interval = 2000
+
+        AddHandler MessageTimer.Tick, Sub()
+                                          MessageTimer.Stop()
+                                      End Sub
 
     End Sub
 
@@ -25,13 +37,24 @@ Public Class frmDM
         ApplyThemeToControl(tlpContainer)
         ApplyThemeToControl(btnSend)
         ApplyThemeToControl(FlowLayoutPanel1, 2)
+        ApplyThemeToControl(MenuStrip1)
+
     End Sub
 
     Public Sub SendDM()
         If InputBox.Text.Trim.Length > 0 Then
+            If MessageTimer.Enabled Then
+                AddMessageToWindow("Yo don't talk their ear off")
+                Exit Sub
+            End If
+
             AddMessageToWindow(MainformRef.ConfigFile.Name & ": " & InputBox.Text)
-            MainformRef.NetworkHandler.SendMessage("M," & MainformRef.ConfigFile.Name & "," & WebUtility.UrlEncode(InputBox.Text), UserIP)
+            If Not over Then
+                MainformRef.NetworkHandler.SendMessage("M," & MainformRef.ConfigFile.Name & "," & WebUtility.UrlEncode(InputBox.Text), UserIP)
+            End If
+            MessageTimer.Start()
             InputBox.Clear()
+
         End If
 
     End Sub
@@ -56,10 +79,6 @@ Public Class frmDM
 
                 AddMessageToWindow(_message)
 
-                Console.WriteLine(TLP_Messages.RowCount)
-                FlowLayoutPanel1.VerticalScroll.Value = FlowLayoutPanel1.VerticalScroll.Maximum
-                Console.WriteLine(FlowLayoutPanel1.VerticalScroll.Maximum)
-
             End Sub)
 
     End Sub
@@ -69,17 +88,7 @@ Public Class frmDM
 
     End Sub
 
-    Private Sub InputBox_KeyDown(sender As Object, e As KeyEventArgs) Handles InputBox.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            SendDM()
-            e.Handled = True
-            e.SuppressKeyPress = True
-
-        End If
-
-    End Sub
-
-    Private Sub AddMessageToWindow(ByVal _message As String)
+    Public Sub AddMessageToWindow(ByVal _message As String)
 
         Dim NewMessage As Label = New Label
         NewMessage.Text = _message
@@ -91,7 +100,8 @@ Public Class frmDM
         TLP_Messages.Controls.Add(NewMessage, 0, TLP_Messages.RowCount - 1)
         TLP_Messages.RowStyles.Add(New RowStyle(SizeType.AutoSize, 50.0F))
         TLP_Messages.RowCount += 1
-        FlowLayoutPanel1.VerticalScroll.Visible = True
+
+        FlowLayoutPanel1.VerticalScroll.Value = FlowLayoutPanel1.VerticalScroll.Maximum
 
     End Sub
 
@@ -101,20 +111,45 @@ Public Class frmDM
     End Sub
 
     Private Sub frmDM_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        If Char.IsLetterOrDigit(ChrW(e.KeyCode).ToString) Then
 
-            If Not InputBox.Focused Then
-                InputBox.Focus()
-                If e.Shift Then
-                    InputBox.Text += ChrW(e.KeyValue).ToString.ToUpper
-                Else
-                    InputBox.Text += ChrW(e.KeyValue).ToString.ToLower
-                End If
-
-                InputBox.SelectionStart = InputBox.Text.Length
-            End If
+        If e.KeyCode = Keys.Menu Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            Exit Sub
         End If
 
+        ' If it's a character and the box is not focused, add the text to it then focus the box for additional text, if it's already focused we skip this
+        If Char.IsLetterOrDigit(ChrW(e.KeyCode).ToString) And Not InputBox.Focused Then
+            If e.Shift Then
+                InputBox.Text += ChrW(e.KeyValue).ToString.ToUpper
+            Else
+                InputBox.Text += ChrW(e.KeyValue).ToString.ToLower
+            End If
+            InputBox.SelectionStart = InputBox.Text.Length
+
+        End If
+
+        InputBox.Focus()
+
+        If e.KeyCode = Keys.Enter Then
+            e.Handled = True
+            e.SuppressKeyPress = True
+            SendDM()
+        End If
+
+
+
+    End Sub
+
+    Private Sub GagToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles GagToolStripMenuItem1.Click
+        If BlockedUsers.Contains(UserIP) Then
+            Me.Close()
+
+        Else
+            BlockedUsers.Add(UserIP)
+            Me.Close()
+
+        End If
     End Sub
 
 End Class

@@ -11,10 +11,21 @@ Module Rx
     Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
     Public platform As String = ""
     Public MultiTap As Int16 = 0
+    Public BlockedUsers As New ArrayList
 
     Public MednafenConfigCache As String()
 
     Public SecretSettings As String = ""
+
+    Public Function IsUserBlocked(ByVal _ip As String) As Boolean
+
+        If BlockedUsers.Contains(_ip) Then
+            Return True
+        End If
+
+        Return False
+
+    End Function
 
     Public Function GenerateGameKey() As String
         Dim r As New Random
@@ -695,6 +706,8 @@ Module BEARTheme
                     DirectCast(_form, frmWaitingForHost).ReloadTheme()
                 Case GetType(frmMednafenOptions)
                     DirectCast(_form, frmMednafenOptions).ReloadTheme()
+                Case GetType(frmDM)
+                    DirectCast(_form, frmDM).ReloadTheme()
             End Select
         Next
 

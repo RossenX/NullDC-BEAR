@@ -135,6 +135,7 @@ Public Class NetworkHandling
         ' G - VMU DATA RECIVED          G(0)
         ' M - DM Message                M(0),<Name>(1),<Message>(2)
         ' MR - Message Recieved         MR(0),<Message ID>(1)
+        ' MO - Message Over             MO(0),<Reason>(1)
 
         Select Case Split(0)
             Case "?"
@@ -293,7 +294,18 @@ Public Class NetworkHandling
 
             Case "M"
                 Console.WriteLine("Text Message")
+                If IsUserBlocked(senderip) Then
+                    SendMessage("MO,0", senderip) ' Computer says no
+                    Exit Sub ' Check if User Is Blocked, if they are then just ignore them completely
+                End If
                 Dim Foundwindow = FindMessangerWindowFromIP(senderip)
+
+                If Not MainformRef.ConfigFile.AwayStatus = "Idle" Then ' We are Hidden or in DND
+                    If Foundwindow Is Nothing Then ' If we're in DND or Hidden we can only be messaged if we already engaged in a message with someone
+                        SendMessage("MO,1", senderip) ' Computer says no
+                        Exit Sub
+                    End If
+                End If
 
                 If FoundWindow Is Nothing Then
                     Dim _ChatForm As frmDM = New frmDM(senderip, Split(1))
@@ -307,6 +319,26 @@ Public Class NetworkHandling
 
             Case "MR"
                 Console.WriteLine("Message Confirmation")
+
+            Case "MO"
+                Console.WriteLine("Message Over")
+                Dim Foundwindow = FindMessangerWindowFromIP(senderip)
+
+                If Not Foundwindow Is Nothing Then
+                    Foundwindow.Invoke(
+                        Sub()
+                            Select Case Split(1)
+                                Case "0"
+                                    Foundwindow.AddMessageToWindow("    System: Computer says No")
+
+                                Case "1"
+                                    Foundwindow.AddMessageToWindow("    System: Player is DND")
+
+                            End Select
+                            Foundwindow.over = True
+
+                        End Sub)
+                End If
 
         End Select
 

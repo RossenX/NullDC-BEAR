@@ -1838,19 +1838,25 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub DMTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DMTestToolStripMenuItem.Click
-        Dim a = New frmDM("127.0.0.1", "RossenX")
-        a.Show(Me)
-
-    End Sub
-
     Private Sub ContextMenuStrip1_Opening(sender As ContextMenuStrip, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
         If SelectedPlayer Is Nothing Then
-            sender.Items(0).Enabled = False
-            sender.Items(1).Enabled = False
+            For Each _item As ToolStripItem In sender.Items
+                _item.Enabled = False
+            Next
+
+            SendKeys.Send("{ESC}")
+
         Else
-            sender.Items(0).Enabled = True
-            sender.Items(1).Enabled = True
+            For Each _item As ToolStripItem In sender.Items
+                _item.Enabled = True
+            Next
+
+            If IsUserBlocked(SelectedPlayer.ip) Then
+                sender.Items(2).Text = "Ungag"
+            Else
+                sender.Items(2).Text = "Gag"
+            End If
+
         End If
 
     End Sub
@@ -1873,6 +1879,15 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub BlockToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlockToolStripMenuItem.Click
+
+        If BlockedUsers.Contains(SelectedPlayer.ip) Then
+            BlockedUsers.Remove(SelectedPlayer.ip)
+        Else
+            BlockedUsers.Add(SelectedPlayer.ip)
+        End If
+
+    End Sub
 End Class
 
 Public Class BEARPlayer
