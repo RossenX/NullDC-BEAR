@@ -280,6 +280,21 @@ Module Rx
 
     End Sub
 
+    Public Function FindMessangerWindowFromIP(ByVal _ip As String) As frmDM
+        Dim FoundWindow As frmDM = Nothing
+        For Each _form In Application.OpenForms()
+            If _form.GetType = GetType(frmDM) Then
+                If DirectCast(_form, frmDM).UserIP = _ip Then
+                    FoundWindow = _form
+                    Exit For
+                End If
+            End If
+        Next
+
+        Return FoundWindow
+
+    End Function
+
 End Module
 
 Module BEARTheme
@@ -369,6 +384,29 @@ Module BEARTheme
                 ApplyMDFTheme(_control, _which)
             Case GetType(Panel)
                 ApplyPanelTheme(_control, _which)
+            Case GetType(FlowLayoutPanel)
+                ApplyFlowPanelTheme(_control, _which)
+        End Select
+
+    End Sub
+
+    Private Sub ApplyFlowPanelTheme(ByRef _Control As FlowLayoutPanel, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+            Case 4
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PlayerListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PlayerListFontColor)
+            Case 5
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.MatchListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.MatchListFontColor)
         End Select
 
     End Sub

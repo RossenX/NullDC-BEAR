@@ -134,7 +134,7 @@ Public Class NetworkHandling
         ' # - VMU DATA                  #(0),<total_pieces>(1),<this_piece>(2),<VMU DATA PIECE>(3)
         ' G - VMU DATA RECIVED          G(0)
         ' M - DM Message                M(0),<Name>(1),<Message>(2)
-        ' MO - DM Over                  MO(0)
+        ' MR - Message Recieved         MR(0),<Message ID>(1)
 
         Select Case Split(0)
             Case "?"
@@ -293,32 +293,20 @@ Public Class NetworkHandling
 
             Case "M"
                 Console.WriteLine("Text Message")
-                For Each _form In Application.OpenForms()
-                    Dim FoundWindow As frmDM = Nothing
+                Dim Foundwindow = FindMessangerWindowFromIP(senderip)
 
-                    If _form.GetType = GetType(frmDM) Then
-                        If DirectCast(_form, frmDM).UserIP = senderip Then
-                            FoundWindow = _form
-                            Exit For
+                If FoundWindow Is Nothing Then
+                    Dim _ChatForm As frmDM = New frmDM(senderip, Split(1))
+                    _ChatForm.Show()
+                    _ChatForm.RecieveDM(senderip, WebUtility.UrlDecode(Split(1) & ": " & Split(2)))
 
-                        End If
+                Else
+                    FoundWindow.RecieveDM(senderip, WebUtility.UrlDecode(Split(1) & ": " & Split(2)))
 
-                    End If
+                End If
 
-                    If Not FoundWindow Is Nothing Then
-                        Dim _ChatForm As frmDM = New frmDM(senderip, Split(1))
-                        _ChatForm.Show()
-                        _ChatForm.RecieveDM(senderip, WebUtility.UrlDecode(Split(2)))
-
-                    Else
-                        FoundWindow.RecieveDM(senderip, WebUtility.UrlDecode(Split(2)))
-
-                    End If
-
-                Next
-
-            Case "MO"
-                Console.WriteLine("Message Session Over")
+            Case "MR"
+                Console.WriteLine("Message Confirmation")
 
         End Select
 

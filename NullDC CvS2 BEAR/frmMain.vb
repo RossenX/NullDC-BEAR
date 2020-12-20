@@ -1838,6 +1838,41 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub DMTestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DMTestToolStripMenuItem.Click
+        Dim a = New frmDM("127.0.0.1", "RossenX")
+        a.Show(Me)
+
+    End Sub
+
+    Private Sub ContextMenuStrip1_Opening(sender As ContextMenuStrip, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening
+        If SelectedPlayer Is Nothing Then
+            sender.Items(0).Enabled = False
+            sender.Items(1).Enabled = False
+        Else
+            sender.Items(0).Enabled = True
+            sender.Items(1).Enabled = True
+        End If
+
+    End Sub
+
+    Private Sub ChallengeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChallengeToolStripMenuItem.Click
+        TryToChallenge()
+
+    End Sub
+
+    Private Sub DMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DMToolStripMenuItem.Click
+        Dim FoundWindow = FindMessangerWindowFromIP(SelectedPlayer.ip)
+        If FoundWindow Is Nothing Then
+            Dim dm = New frmDM(SelectedPlayer.ip, SelectedPlayer.name)
+            dm.Show(Me)
+
+        Else
+            FoundWindow.Focus()
+
+        End If
+
+    End Sub
+
 End Class
 
 Public Class BEARPlayer

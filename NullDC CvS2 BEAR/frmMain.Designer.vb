@@ -32,6 +32,9 @@ Partial Class frmMain
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ChallengeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.BtnJoin = New System.Windows.Forms.Button()
@@ -58,7 +61,9 @@ Partial Class frmMain
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DMTestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.MainMenuContainer.SuspendLayout()
         Me._MainMenuStrip.SuspendLayout()
         CType(Me.imgBeta, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,6 +75,7 @@ Partial Class frmMain
         Me.Matchlist.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.Matchlist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.MainMenuContainer.SetColumnSpan(Me.Matchlist, 4)
+        Me.Matchlist.ContextMenuStrip = Me.ContextMenuStrip1
         Me.Matchlist.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Matchlist.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Matchlist.ForeColor = System.Drawing.Color.Red
@@ -115,6 +121,24 @@ Partial Class frmMain
         '
         Me.ColumnHeader5.Text = "Status"
         Me.ColumnHeader5.Width = 70
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChallengeToolStripMenuItem, Me.DMToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(128, 48)
+        '
+        'ChallengeToolStripMenuItem
+        '
+        Me.ChallengeToolStripMenuItem.Name = "ChallengeToolStripMenuItem"
+        Me.ChallengeToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.ChallengeToolStripMenuItem.Text = "Challenge"
+        '
+        'DMToolStripMenuItem
+        '
+        Me.DMToolStripMenuItem.Name = "DMToolStripMenuItem"
+        Me.DMToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.DMToolStripMenuItem.Text = "DM"
         '
         'SystemIcons
         '
@@ -208,6 +232,7 @@ Partial Class frmMain
         Me.PlayerList.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.PlayerList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9, Me.ColumnHeader10})
         Me.MainMenuContainer.SetColumnSpan(Me.PlayerList, 2)
+        Me.PlayerList.ContextMenuStrip = Me.ContextMenuStrip1
         Me.PlayerList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PlayerList.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerList.ForeColor = System.Drawing.Color.Black
@@ -335,7 +360,7 @@ Partial Class frmMain
         '_MainMenuStrip
         '
         Me._MainMenuStrip.BackColor = System.Drawing.Color.Transparent
-        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem})
+        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem, Me.DMTestToolStripMenuItem})
         Me._MainMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me._MainMenuStrip.Name = "_MainMenuStrip"
         Me._MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
@@ -409,6 +434,12 @@ Partial Class frmMain
         Me.PatreonO3oToolStripMenuItem.Size = New System.Drawing.Size(83, 36)
         Me.PatreonO3oToolStripMenuItem.Text = "Patreon o3o"
         '
+        'DMTestToolStripMenuItem
+        '
+        Me.DMTestToolStripMenuItem.Name = "DMTestToolStripMenuItem"
+        Me.DMTestToolStripMenuItem.Size = New System.Drawing.Size(63, 36)
+        Me.DMTestToolStripMenuItem.Text = "DM Test"
+        '
         'imgBeta
         '
         Me.imgBeta.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -437,6 +468,7 @@ Partial Class frmMain
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NullDC BEAR"
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.MainMenuContainer.ResumeLayout(False)
         Me.MainMenuContainer.PerformLayout()
         Me._MainMenuStrip.ResumeLayout(False)
@@ -479,4 +511,8 @@ Partial Class frmMain
     Friend WithEvents ToolStripLogo As ToolStripMenuItem
     Friend WithEvents GeneralToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MednafenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DMTestToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents ChallengeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DMToolStripMenuItem As ToolStripMenuItem
 End Class
