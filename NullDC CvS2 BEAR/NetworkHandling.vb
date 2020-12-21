@@ -310,7 +310,6 @@ Public Class NetworkHandling
                 MainformRef.Invoke(
                         Sub(_senderip)
                             If Foundwindow Is Nothing Then
-
                                 Dim _ChatForm As frmDM = New frmDM(_senderip, Split(1))
                                 _ChatForm.Show(MainformRef)
                                 _ChatForm.RecieveDM(_senderip, WebUtility.UrlDecode(Split(1) & ": " & Split(2)))
@@ -319,6 +318,7 @@ Public Class NetworkHandling
                                 Foundwindow.RecieveDM(_senderip, WebUtility.UrlDecode(Split(1) & ": " & Split(2)))
 
                             End If
+
                         End Sub, senderip)
 
             Case "MR"

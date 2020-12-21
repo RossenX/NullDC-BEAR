@@ -978,6 +978,18 @@ Public Class frmMain
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         IsClosing = True
 
+        Dim _OpenForms As New ArrayList
+
+        For Each _OForm As Form In Application.OpenForms
+            If Not _OForm Is Me Then
+                _OpenForms.Add(_OForm)
+            End If
+        Next
+
+        For Each _opnForm As Form In _OpenForms
+            _opnForm.Close()
+        Next
+
         ConfigFile.Status = ConfigFile.AwayStatus
         ConfigFile.SaveFile(False)
 
