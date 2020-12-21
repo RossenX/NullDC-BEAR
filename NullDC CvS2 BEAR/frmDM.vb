@@ -9,11 +9,15 @@ Public Class frmDM
     Public over As Boolean = False
 
     Dim wavePlayer As New NAudio.Wave.WaveOut
-
     Private MessageTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
-    Public Sub New(ByVal _ip As String, ByVal _name As String)
+    Protected Overrides ReadOnly Property ShowWithoutActivation() As Boolean
+        Get
+            Return True
+        End Get
+    End Property
 
+    Public Sub New(ByVal _ip As String, ByVal _name As String)
         InitializeComponent()
 
         UserIP = _ip

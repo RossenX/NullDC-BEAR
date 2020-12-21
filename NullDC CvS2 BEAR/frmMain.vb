@@ -956,7 +956,7 @@ Public Class frmMain
 
     Private Sub RefreshTimer_tick(sender As Object, e As EventArgs)
         RefreshTimer.Stop()
-
+        btnSearch.Enabled = True
     End Sub
 
     Public Sub GameLauncher(ByVal _romname, ByVal _region)
@@ -1513,6 +1513,7 @@ Public Class frmMain
                 PlayerList.Items.Clear()
                 RefreshTimer.Interval = 5000
                 RefreshTimer.Start()
+                btnSearch.Enabled = False
                 SelectedPlayer = Nothing
                 BtnJoin.Text = "Challenge"
                 BtnJoin.Enabled = False
@@ -1921,15 +1922,15 @@ Public Class frmMain
                 NotificationForm.ShowMessage("You can't talked to gagged players.")
                 Exit Sub
 
-                'ElseIf SelectedPlayer.name.StartsWith(ConfigFile.Name) Then
-                '    NotificationForm.ShowMessage("You uh.. you ok there? You shouldn't talk to yourself.")
-                '   Exit Sub
+            ElseIf SelectedPlayer.name.StartsWith(ConfigFile.Name) Then
+                NotificationForm.ShowMessage("You uh.. you ok there? You shouldn't talk to yourself.")
+                Exit Sub
 
             End If
 
             Dim dm = New frmDM(SelectedPlayer.ip, SelectedPlayer.name)
             dm.Show(Me)
-
+            dm.Focus()
         Else
             FoundWindow.Focus()
 

@@ -302,9 +302,11 @@ Public Class NetworkHandling
 
                 If Not MainformRef.ConfigFile.AwayStatus = "Idle" Then ' We are Hidden or in DND
                     If Foundwindow Is Nothing Then ' If we're in DND or Hidden we can only be messaged if we already engaged in a message with someone
-                        SendMessage("MO,1", senderip) ' Computer says no
+                        If MainformRef.ConfigFile.AwayStatus = "DND" Then SendMessage("MO,1", senderip) ' Computer says no
                         Exit Sub
+
                     End If
+
                 End If
 
                 MainformRef.Invoke(
