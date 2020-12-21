@@ -307,15 +307,19 @@ Public Class NetworkHandling
                     End If
                 End If
 
-                If FoundWindow Is Nothing Then
-                    Dim _ChatForm As frmDM = New frmDM(senderip, Split(1))
-                    _ChatForm.Show()
-                    _ChatForm.RecieveDM(senderip, WebUtility.UrlDecode(Split(1) & ": " & Split(2)))
+                MainformRef.Invoke(
+                        Sub(_senderip)
+                            If Foundwindow Is Nothing Then
 
-                Else
-                    FoundWindow.RecieveDM(senderip, WebUtility.UrlDecode(Split(1) & ": " & Split(2)))
+                                Dim _ChatForm As frmDM = New frmDM(_senderip, Split(1))
+                                _ChatForm.Show(MainformRef)
+                                _ChatForm.RecieveDM(_senderip, WebUtility.UrlDecode(Split(1) & ": " & Split(2)))
 
-                End If
+                            Else
+                                Foundwindow.RecieveDM(_senderip, WebUtility.UrlDecode(Split(1) & ": " & Split(2)))
+
+                            End If
+                        End Sub, senderip)
 
             Case "MR"
                 Console.WriteLine("Message Confirmation")

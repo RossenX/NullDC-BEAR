@@ -13,9 +13,11 @@ Public Class frmDM
     Private MessageTimer As System.Windows.Forms.Timer = New System.Windows.Forms.Timer
 
     Public Sub New(ByVal _ip As String, ByVal _name As String)
+
+        InitializeComponent()
+
         UserIP = _ip
         UserName = _name
-        InitializeComponent()
 
         Me.Text = UserName
 
@@ -61,6 +63,8 @@ Public Class frmDM
     End Sub
 
     Public Sub RecieveDM(ByVal _ip As String, ByVal _message As String)
+        over = False
+
         Me.Invoke(
             Sub()
                 If Not Me.ContainsFocus Then
@@ -107,7 +111,9 @@ Public Class frmDM
     End Sub
 
     Private Sub TLP_Messages_MouseHover(sender As Object, e As EventArgs) Handles TLP_Messages.MouseEnter, FlowLayoutPanel1.MouseEnter, TLP_Messages.MouseMove, FlowLayoutPanel1.MouseMove
-        FlowLayoutPanel1.Focus()
+        If Me.ContainsFocus Then
+            FlowLayoutPanel1.Focus()
+        End If
 
     End Sub
 
