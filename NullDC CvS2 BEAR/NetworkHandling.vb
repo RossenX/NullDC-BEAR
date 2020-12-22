@@ -108,10 +108,12 @@ Public Class NetworkHandling
                         Console.WriteLine("<-DENIED->")
                         SendMessage(">,BB", senderip)
                         Exit Sub
+
                     ElseIf Not MainformRef.ChallengeForm._Challenger.ip = senderip Then
                         Console.WriteLine("<-DENIED->")
                         SendMessage(">,BB", senderip)
                         Exit Sub
+
                     End If
                 End If
 

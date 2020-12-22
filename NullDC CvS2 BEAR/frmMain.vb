@@ -1142,6 +1142,17 @@ Public Class frmMain
             End If
         Next
 
+        For Each _form As Form In Application.OpenForms
+            If _form.GetType() = GetType(frmDM) Then
+                If DirectCast(_form, frmDM).UserIP = IP Then
+                    DirectCast(_form, frmDM).AddMessageToWindow("Player Has Left BEAR.")
+                    Exit For
+                End If
+
+            End If
+
+        Next
+
     End Sub
 
     Public Delegate Sub AddPlayerToList_delegate(ByVal Player As BEARPlayer)
@@ -1997,6 +2008,7 @@ Public Class Configs
     Private _sdlversopm As String = "Dev"
     Private _vsync As Int16 = 0
     Private _theme As String = "Dark"
+    Private _p2Name As String = "Local P2"
 
 #Region "Properties"
 
@@ -2015,6 +2027,15 @@ Public Class Configs
         End Get
         Set(ByVal value As String)
             _name = value
+        End Set
+    End Property
+
+    Public Property P2Name() As String
+        Get
+            Return _p2Name
+        End Get
+        Set(ByVal value As String)
+            _p2Name = value
         End Set
     End Property
 
@@ -2264,7 +2285,8 @@ Public Class Configs
                 "ShowGameNameInTitle=" & ShowGameNameInTitle,
                 "SDLVersion=" & SDLVersion,
                 "Vsync=" & Vsync,
-                "Theme=" & Theme
+                "Theme=" & Theme,
+                "P2Name=" & P2Name
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -2332,12 +2354,14 @@ Public Class Configs
                 If line.StartsWith("SDLVersion=") Then SDLVersion = line.Split("=")(1).Trim
                 If line.StartsWith("Vsync=") Then Vsync = line.Split("=")(1).Trim
                 If line.StartsWith("Theme=") Then Theme = line.Split("=")(1).Trim
+                If line.StartsWith("P2Name=") Then P2Name = line.Split("=")(1).Trim
             Next
 
             Game = "None"
             SaveFile()
             Exit Sub
         End If
+
     End Sub
 
 End Class

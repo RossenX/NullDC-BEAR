@@ -291,7 +291,7 @@ Public Class NullDCLauncher
         If P1Name = "" Or P2Name = "" Then ' Player names were not set beforehand 
             If MainformRef.ConfigFile.Status = "Offline" Or MainformRef.ConfigFile.Status = "Spectator" Then
                 P1Name = MainformRef.ConfigFile.Name
-                P2Name = "Local P2"
+                P2Name = MainformRef.ConfigFile.P2Name
             Else
                 If IsHosting Then
                     P1Name = MainformRef.ConfigFile.Name
@@ -573,7 +573,7 @@ Public Class NullDCLauncher
         If P1Name = "" Or P2Name = "" Then ' Player names were not set beforehand 
             If MainformRef.ConfigFile.Status = "Offline" Or MainformRef.ConfigFile.Status = "Spectator" Then
                 P1Name = MainformRef.ConfigFile.Name
-                P2Name = "Local P2"
+                P2Name = MainformRef.ConfigFile.P2Name
             Else
                 If IsHosting Then
                     P1Name = MainformRef.ConfigFile.Name

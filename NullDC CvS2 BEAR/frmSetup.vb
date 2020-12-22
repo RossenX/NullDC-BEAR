@@ -44,6 +44,7 @@ Public Class frmSetup
 
     Private Sub FillSettings()
         tbPlayerName.Text = MainformRef.ConfigFile.Name
+        tbP2Name.Text = MainformRef.ConfigFile.P2Name
         tb_Volume.Value = MainformRef.ConfigFile.Volume
         tb_eVolume.Value = MainformRef.ConfigFile.EmulatorVolume
 
@@ -85,6 +86,7 @@ Public Class frmSetup
 
     Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
         MainformRef.ConfigFile.Name = tbPlayerName.Text
+        MainformRef.ConfigFile.P2Name = tbP2Name.Text
         MainformRef.ConfigFile.Network = ""
         MainformRef.ConfigFile.Port = tbPort.Text
         MainformRef.ConfigFile.Volume = tb_Volume.Value
@@ -109,7 +111,7 @@ Public Class frmSetup
 
 #Region "Text Field Limitation"
 
-    Private Sub tbPlayerName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tbPlayerName.KeyPress
+    Private Sub tbPlayerName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tbPlayerName.KeyPress, tbP2Name.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890_ "
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Or (Asc(e.KeyChar) = 8) Then
