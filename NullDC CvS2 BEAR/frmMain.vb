@@ -1910,7 +1910,7 @@ Public Class frmMain
                 _item.Enabled = True
             Next
 
-            sender.Items(0).Text = SelectedPlayer.name & ":" & SelectedPlayer.ip
+            sender.Items(0).Text = SelectedPlayer.name & " : " & SelectedPlayer.ip
 
             If SelectedPlayer.game = "None" Then
                 sender.Items(1).Text = "Challenge"
