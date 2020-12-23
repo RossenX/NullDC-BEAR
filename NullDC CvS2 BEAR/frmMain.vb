@@ -157,6 +157,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If Directory.Exists(NullDCPath & "\zip") Then
             ZipFile.CreateFromDirectory(NullDCPath & "\zip", "zipped.zip", CompressionLevel.Optimal, False)
         End If
@@ -166,6 +167,9 @@ Public Class frmMain
         Me.Icon = My.Resources.NewNullDCBearIcon
         niBEAR.Icon = My.Resources.NewNullDCBearIcon
         Me.CenterToScreen()
+
+        LoadGaggedUsers()
+
         imgBeta.Visible = IsBeta
         lbVer.Text = Ver
         DeleteMednafenClientFiles()
@@ -977,6 +981,8 @@ Public Class frmMain
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         IsClosing = True
+
+        SaveGaggedUsers()
 
         Dim _OpenForms As New ArrayList
 
@@ -1904,17 +1910,19 @@ Public Class frmMain
                 _item.Enabled = True
             Next
 
+            sender.Items(0).Text = SelectedPlayer.name & ":" & SelectedPlayer.ip
+
             If SelectedPlayer.game = "None" Then
-                sender.Items(0).Text = "Challenge"
+                sender.Items(1).Text = "Challenge"
             Else
-                sender.Items(0).Text = "Join/Spectate"
+                sender.Items(1).Text = "Join/Spectate"
             End If
 
 
-            If IsUserBlocked(SelectedPlayer.ip) Then
-                sender.Items(2).Text = "Ungag"
+            If IsUserGagged(SelectedPlayer.ip) Then
+                sender.Items(3).Text = "Ungag"
             Else
-                sender.Items(2).Text = "Gag"
+                sender.Items(3).Text = "Gag"
             End If
 
         End If
@@ -1929,7 +1937,7 @@ Public Class frmMain
     Private Sub DMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DMToolStripMenuItem.Click
         Dim FoundWindow = FindMessangerWindowFromIP(SelectedPlayer.ip)
         If FoundWindow Is Nothing Then
-            If BlockedUsers.Contains(SelectedPlayer.ip) Then
+            If IsUserGagged(SelectedPlayer.ip) Then
                 NotificationForm.ShowMessage("You can't talked to gagged players.")
                 Exit Sub
 
@@ -1951,13 +1959,22 @@ Public Class frmMain
 
     Private Sub BlockToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlockToolStripMenuItem.Click
 
-        If BlockedUsers.Contains(SelectedPlayer.ip) Then
-            BlockedUsers.Remove(SelectedPlayer.ip)
+        If GaggedUsers.ContainsKey(SelectedPlayer.ip) Then
+            GaggedUsers.Remove(SelectedPlayer.ip)
         Else
-            BlockedUsers.Add(SelectedPlayer.ip)
+            GagUser(SelectedPlayer.ip, SelectedPlayer.name)
+            RemovePlayerFromList(SelectedPlayer.ip)
         End If
 
     End Sub
+
+    Private Sub GaggedUsersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GaggedUsersToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmSocial).Any Then
+            frmSocial.Show(Me)
+        End If
+
+    End Sub
+
 End Class
 
 Public Class BEARPlayer

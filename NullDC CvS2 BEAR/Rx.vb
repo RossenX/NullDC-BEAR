@@ -11,15 +11,48 @@ Module Rx
     Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
     Public platform As String = ""
     Public MultiTap As Int16 = 0
-    Public BlockedUsers As New ArrayList
+    Public GaggedUsers As New Dictionary(Of String, String)
 
     Public MednafenConfigCache As String()
 
     Public SecretSettings As String = ""
 
-    Public Function IsUserBlocked(ByVal _ip As String) As Boolean
+    Public Sub LoadGaggedUsers()
+        If File.Exists(MainformRef.NullDCPath & "\gagged.users") Then
+            For Each _g As String In File.ReadAllLines(MainformRef.NullDCPath & "\gagged.users")
+                If Not _g.Trim.Length > 0 Then Continue For
 
-        If BlockedUsers.Contains(_ip) Then
+                Dim _ip As String = _g.Split("|")(0)
+                Dim _name As String = _g.Split("|")(1)
+                GaggedUsers.Add(_ip, _name)
+            Next
+
+        End If
+
+    End Sub
+
+    Public Sub SaveGaggedUsers()
+        Dim GaggedUserList As String = ""
+        For Each _key In GaggedUsers.Keys
+            GaggedUserList += _key & "|" & GaggedUsers(_key) & vbNewLine
+        Next
+
+        File.WriteAllText(MainformRef.NullDCPath & "\gagged.users", GaggedUserList)
+    End Sub
+
+    Public Sub GagUser(ByVal _ip As String, ByVal _name As String)
+        GaggedUsers.Add(_ip, _name)
+
+    End Sub
+
+    Public Sub UnGagUser(ByVal _ip As String)
+        GaggedUsers.Remove(_ip)
+
+    End Sub
+
+    Public Function IsUserGagged(ByVal _ip As String) As Boolean
+
+        If GaggedUsers.ContainsKey(_ip) Then
             Return True
         End If
 

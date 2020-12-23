@@ -33,6 +33,7 @@ Partial Class frmMain
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.UserNameRadminIPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChallengeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BlockToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -59,6 +60,7 @@ Partial Class frmMain
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GeneralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MednafenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GaggedUsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -124,28 +126,34 @@ Partial Class frmMain
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChallengeToolStripMenuItem, Me.DMToolStripMenuItem, Me.BlockToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserNameRadminIPToolStripMenuItem, Me.ChallengeToolStripMenuItem, Me.DMToolStripMenuItem, Me.BlockToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(103, 70)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(168, 92)
+        '
+        'UserNameRadminIPToolStripMenuItem
+        '
+        Me.UserNameRadminIPToolStripMenuItem.Name = "UserNameRadminIPToolStripMenuItem"
+        Me.UserNameRadminIPToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.UserNameRadminIPToolStripMenuItem.Text = "UserName | Radmin IP"
         '
         'ChallengeToolStripMenuItem
         '
         Me.ChallengeToolStripMenuItem.Name = "ChallengeToolStripMenuItem"
-        Me.ChallengeToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
+        Me.ChallengeToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
         Me.ChallengeToolStripMenuItem.Text = "Challenge"
         '
         'DMToolStripMenuItem
         '
         Me.DMToolStripMenuItem.Name = "DMToolStripMenuItem"
-        Me.DMToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
+        Me.DMToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
         Me.DMToolStripMenuItem.Text = "DM"
         '
         'BlockToolStripMenuItem
         '
         Me.BlockToolStripMenuItem.Name = "BlockToolStripMenuItem"
-        Me.BlockToolStripMenuItem.Size = New System.Drawing.Size(102, 22)
-        Me.BlockToolStripMenuItem.Text = "Block"
+        Me.BlockToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+        Me.BlockToolStripMenuItem.Text = "Gag"
         '
         'SystemIcons
         '
@@ -405,7 +413,7 @@ Partial Class frmMain
         '
         Me.OptionsToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
         Me.OptionsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.MednafenToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.MednafenToolStripMenuItem, Me.GaggedUsersToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.ShowShortcutKeys = False
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 36)
@@ -414,14 +422,20 @@ Partial Class frmMain
         'GeneralToolStripMenuItem
         '
         Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
-        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.GeneralToolStripMenuItem.Text = "General"
         '
         'MednafenToolStripMenuItem
         '
         Me.MednafenToolStripMenuItem.Name = "MednafenToolStripMenuItem"
-        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(128, 22)
+        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.MednafenToolStripMenuItem.Text = "Mednafen"
+        '
+        'GaggedUsersToolStripMenuItem
+        '
+        Me.GaggedUsersToolStripMenuItem.Name = "GaggedUsersToolStripMenuItem"
+        Me.GaggedUsersToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.GaggedUsersToolStripMenuItem.Text = "Gagged Users"
         '
         'FreeDLCToolStripMenuItem
         '
@@ -517,4 +531,6 @@ Partial Class frmMain
     Friend WithEvents ChallengeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DMToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents BlockToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UserNameRadminIPToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GaggedUsersToolStripMenuItem As ToolStripMenuItem
 End Class

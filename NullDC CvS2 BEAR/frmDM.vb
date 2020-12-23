@@ -151,11 +151,11 @@ Public Class frmDM
     End Sub
 
     Private Sub GagToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles GagToolStripMenuItem1.Click
-        If BlockedUsers.Contains(UserIP) Then
+        If IsUserGagged(UserIP) Then
             Me.Close()
 
         Else
-            BlockedUsers.Add(UserIP)
+            GagUser(UserIP, UserName)
             Me.Close()
 
         End If

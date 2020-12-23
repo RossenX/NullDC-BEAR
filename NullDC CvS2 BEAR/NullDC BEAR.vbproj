@@ -238,6 +238,12 @@
     <Compile Include="frmSetup.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSocial.Designer.vb">
+      <DependentUpon>frmSocial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSocial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmWaitingForHost.Designer.vb">
       <DependentUpon>frmWaitingForHost.vb</DependentUpon>
     </Compile>
@@ -333,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSetup.resx">
       <DependentUpon>frmSetup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSocial.resx">
+      <DependentUpon>frmSocial.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWaitingForHost.resx">
       <DependentUpon>frmWaitingForHost.vb</DependentUpon>

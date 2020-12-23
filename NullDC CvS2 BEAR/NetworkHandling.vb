@@ -77,6 +77,9 @@ Public Class NetworkHandling
             Console.WriteLine("<-Recieved->" & message & " from " & senderip & ":" & port)
         End If
 
+        ' Ignore absolutely everything from a gagged user
+        If IsUserGagged(senderip) Then Exit Sub
+
         'If senderip = MainFormRef.ConfigFile.IP Then Exit Sub ' Ignore Own Messages
 
         Dim Split = message.Split(":")
@@ -296,7 +299,7 @@ Public Class NetworkHandling
 
             Case "M"
                 Console.WriteLine("Text Message")
-                If IsUserBlocked(senderip) Then
+                If IsUserGagged(senderip) Then
                     SendMessage("MO,0", senderip) ' Computer says no
                     Exit Sub ' Check if User Is Blocked, if they are then just ignore them completely
                 End If
