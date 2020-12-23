@@ -129,7 +129,7 @@ Partial Class frmMain
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserNameRadminIPToolStripMenuItem, Me.ChallengeToolStripMenuItem, Me.DMToolStripMenuItem, Me.BlockToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.ShowImageMargin = False
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(168, 92)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(168, 114)
         '
         'UserNameRadminIPToolStripMenuItem
         '
@@ -153,7 +153,7 @@ Partial Class frmMain
         '
         Me.BlockToolStripMenuItem.Name = "BlockToolStripMenuItem"
         Me.BlockToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-        Me.BlockToolStripMenuItem.Text = "Gag"
+        Me.BlockToolStripMenuItem.Text = "Gag(Block)"
         '
         'SystemIcons
         '

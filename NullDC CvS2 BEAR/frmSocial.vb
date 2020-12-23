@@ -31,6 +31,7 @@
             SaveGaggedUsers()
             ReloadUsers()
             MainformRef.NetworkHandler.SendMessage("?,")
+
         End If
 
     End Sub

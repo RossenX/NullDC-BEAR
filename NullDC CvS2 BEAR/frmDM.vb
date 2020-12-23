@@ -159,7 +159,7 @@ Public Class frmDM
             Me.Close()
 
         End If
-        MainformRef.NotificationForm.ShowMessage("Player Gagged, they won't be able to message you anymore")
+        MainformRef.NotificationForm.ShowMessage("Player Gagged, That's the end of that.")
 
     End Sub
 

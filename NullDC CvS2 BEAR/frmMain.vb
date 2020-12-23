@@ -1920,9 +1920,9 @@ Public Class frmMain
 
 
             If IsUserGagged(SelectedPlayer.ip) Then
-                sender.Items(3).Text = "Ungag"
+                sender.Items(3).Text = "Ungag(Unblock)"
             Else
-                sender.Items(3).Text = "Gag"
+                sender.Items(3).Text = "Gag(Block)"
             End If
 
         End If
@@ -1962,8 +1962,13 @@ Public Class frmMain
         If GaggedUsers.ContainsKey(SelectedPlayer.ip) Then
             GaggedUsers.Remove(SelectedPlayer.ip)
         Else
+            If SelectedPlayer.name.StartsWith(ConfigFile.Name) Then
+                NotificationForm.ShowMessage("You can't block yourself... If this is not you. Change name, block and change back")
+                Exit Sub
+            End If
+
             GagUser(SelectedPlayer.ip, SelectedPlayer.name)
-            RemovePlayerFromList(SelectedPlayer.ip)
+
         End If
 
     End Sub

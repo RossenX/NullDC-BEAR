@@ -85,8 +85,14 @@ Public Class frmSetup
     End Sub
 
     Private Sub btnSaveExit_Click(sender As Object, e As EventArgs) Handles btnSaveExit.Click
+        If tbPlayerName.Text.Trim.Length = 0 Or tbP2Name.Text.Trim.Length = 0 Then
+            MsgBox("Player Name Cannot Be Empty")
+            Exit Sub
+        End If
+
         MainformRef.ConfigFile.Name = tbPlayerName.Text
         MainformRef.ConfigFile.P2Name = tbP2Name.Text
+
         MainformRef.ConfigFile.Network = ""
         MainformRef.ConfigFile.Port = tbPort.Text
         MainformRef.ConfigFile.Volume = tb_Volume.Value

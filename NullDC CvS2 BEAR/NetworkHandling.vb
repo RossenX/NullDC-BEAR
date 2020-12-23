@@ -78,7 +78,12 @@ Public Class NetworkHandling
         End If
 
         ' Ignore absolutely everything from a gagged user
-        If IsUserGagged(senderip) Then Exit Sub
+        If IsUserGagged(senderip) Then
+            Console.WriteLine("Blocked")
+            MainformRef.NetworkHandler.SendMessage("&", senderip)
+            Exit Sub
+
+        End If
 
         'If senderip = MainFormRef.ConfigFile.IP Then Exit Sub ' Ignore Own Messages
 

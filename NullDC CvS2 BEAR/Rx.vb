@@ -42,11 +42,14 @@ Module Rx
 
     Public Sub GagUser(ByVal _ip As String, ByVal _name As String)
         GaggedUsers.Add(_ip, _name)
+        MainformRef.RemovePlayerFromList(_ip)
+        MainformRef.NetworkHandler.SendMessage("&", _ip)
 
     End Sub
 
     Public Sub UnGagUser(ByVal _ip As String)
         GaggedUsers.Remove(_ip)
+        MainformRef.ConfigFile.SaveFile()
 
     End Sub
 
