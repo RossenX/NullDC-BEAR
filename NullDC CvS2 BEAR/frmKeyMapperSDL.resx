@@ -117,21 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Label38.Text" xml:space="preserve">
-    <value>Mednafen Mapping stll coming soon.
-
-For now just press:
-Alt + Shift + 1 = When you are in the emulator to set your controls. It's pretty easy.
-T = Open the Chat/Command Window
-F1 = Shows you a bunch of other buttons you might wanna know.
-
-Useful Commands:
-/Swap &lt;Player Number&gt; &lt;Player Number&gt; (/Swap 1 2) This will swap the controllers so whoever was player 1 and 2 will swap places.
-/Take &lt;Player Number&gt; (/Take 1) You take control of that controller. So no matter who was player 1, now you are player 1.
-/Drop &lt;Controller Number&gt; (/Drop 3) Will disconnect the controller, does not kick player that is using the controller.
-/Quit &lt;/Quit&gt; Disconnects from the host, useful if you want to change the input device. (If you want to be a lightgun or something)
-/Connect &lt;/Connect&gt; Connects you back to the previous host, good to use in combo with /Quit
-
-</value>
-  </data>
 </root>

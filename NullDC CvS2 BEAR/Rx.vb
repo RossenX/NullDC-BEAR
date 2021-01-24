@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Text
 Imports System.Threading
+Imports SDL2.SDL
 
 Module Rx
 
@@ -12,10 +13,9 @@ Module Rx
     Public platform As String = ""
     Public MultiTap As Int16 = 0
     Public GaggedUsers As New Dictionary(Of String, String)
-
     Public MednafenConfigCache As String()
-
     Public SecretSettings As String = ""
+    Public KeyCon As New KeysConverter
 
     Public Sub LoadGaggedUsers()
         If File.Exists(MainformRef.NullDCPath & "\gagged.users") Then
@@ -749,6 +749,190 @@ Module BEARTheme
 
     End Sub
 
+    ' List Of KeyCode Names To ScanCode Values
+    Public Enum KCtSC
+        ' Right here we go then MUST BE LOWER CASE BECAUSE FUCK DEALING WITH CASE SENSATIVE STUFF
+        ' CTRL, ALT, SHIFT are not mappable becuase they are used as modifiers
+        ' Basic Alphabet
+        a = SDL_Scancode.SDL_SCANCODE_A
+        b = SDL_Scancode.SDL_SCANCODE_B
+        c = SDL_Scancode.SDL_SCANCODE_C
+        d = SDL_Scancode.SDL_SCANCODE_D
+        e = SDL_Scancode.SDL_SCANCODE_E
+        f = SDL_Scancode.SDL_SCANCODE_F
+        g = SDL_Scancode.SDL_SCANCODE_G
+        h = SDL_Scancode.SDL_SCANCODE_H
+        i = SDL_Scancode.SDL_SCANCODE_I
+        j = SDL_Scancode.SDL_SCANCODE_J
+        k = SDL_Scancode.SDL_SCANCODE_K
+        l = SDL_Scancode.SDL_SCANCODE_L
+        m = SDL_Scancode.SDL_SCANCODE_M
+        n = SDL_Scancode.SDL_SCANCODE_N
+        o = SDL_Scancode.SDL_SCANCODE_O
+        p = SDL_Scancode.SDL_SCANCODE_P
+        q = SDL_Scancode.SDL_SCANCODE_Q
+        r = SDL_Scancode.SDL_SCANCODE_R
+        s = SDL_Scancode.SDL_SCANCODE_S
+        t = SDL_Scancode.SDL_SCANCODE_T
+        u = SDL_Scancode.SDL_SCANCODE_U
+        v = SDL_Scancode.SDL_SCANCODE_V
+        w = SDL_Scancode.SDL_SCANCODE_W
+        x = SDL_Scancode.SDL_SCANCODE_X
+        y = SDL_Scancode.SDL_SCANCODE_Y
+        z = SDL_Scancode.SDL_SCANCODE_Z
+
+        ' Number row from Tilde to Backspace
+        oemtilde = SDL_Scancode.SDL_SCANCODE_GRAVE
+        number0 = SDL_Scancode.SDL_SCANCODE_0
+        number1 = SDL_Scancode.SDL_SCANCODE_1
+        number2 = SDL_Scancode.SDL_SCANCODE_2
+        number3 = SDL_Scancode.SDL_SCANCODE_3
+        number4 = SDL_Scancode.SDL_SCANCODE_4
+        number5 = SDL_Scancode.SDL_SCANCODE_5
+        number6 = SDL_Scancode.SDL_SCANCODE_6
+        number7 = SDL_Scancode.SDL_SCANCODE_7
+        number8 = SDL_Scancode.SDL_SCANCODE_8
+        number9 = SDL_Scancode.SDL_SCANCODE_9
+        oemminus = SDL_Scancode.SDL_SCANCODE_MINUS
+        oemplus = SDL_Scancode.SDL_SCANCODE_EQUALS
+        back = SDL_Scancode.SDL_SCANCODE_BACKSPACE
+
+        ' misc symbols shit on the right of the letters
+        oemopenbrackets = SDL_Scancode.SDL_SCANCODE_LEFTBRACKET
+        oem6 = SDL_Scancode.SDL_SCANCODE_RIGHTBRACKET
+        oem5 = SDL_Scancode.SDL_SCANCODE_BACKSLASH
+        oem1 = SDL_Scancode.SDL_SCANCODE_SEMICOLON
+        oem7 = SDL_Scancode.SDL_SCANCODE_APOSTROPHE
+        oemcomma = SDL_Scancode.SDL_SCANCODE_COMMA
+        oemperiod = SDL_Scancode.SDL_SCANCODE_PERIOD
+        oemquestion = SDL_Scancode.SDL_SCANCODE_SLASH
+        enter = SDL_Scancode.SDL_SCANCODE_RETURN
+
+        ' numpad
+        numpad0 = SDL_Scancode.SDL_SCANCODE_KP_0
+        numpad1 = SDL_Scancode.SDL_SCANCODE_KP_1
+        numpad2 = SDL_Scancode.SDL_SCANCODE_KP_2
+        numpad3 = SDL_Scancode.SDL_SCANCODE_KP_3
+        numpad4 = SDL_Scancode.SDL_SCANCODE_KP_4
+        numpad5 = SDL_Scancode.SDL_SCANCODE_KP_5
+        numpad6 = SDL_Scancode.SDL_SCANCODE_KP_6
+        numpad7 = SDL_Scancode.SDL_SCANCODE_KP_7
+        numpad8 = SDL_Scancode.SDL_SCANCODE_KP_8
+        numpad9 = SDL_Scancode.SDL_SCANCODE_KP_9
+        kpdecimal = SDL_Scancode.SDL_SCANCODE_KP_DECIMAL
+        divide = SDL_Scancode.SDL_SCANCODE_KP_DIVIDE
+        multiply = SDL_Scancode.SDL_SCANCODE_KP_MULTIPLY
+        subtract = SDL_Scancode.SDL_SCANCODE_KP_MINUS
+        add = SDL_Scancode.SDL_SCANCODE_KP_PLUS
+
+        ' Arrow Keys
+        up = SDL_Scancode.SDL_SCANCODE_UP
+        down = SDL_Scancode.SDL_SCANCODE_DOWN
+        left = SDL_Scancode.SDL_SCANCODE_LEFT
+        right = SDL_Scancode.SDL_SCANCODE_RIGHT
+
+        ' Home and Whatnot above the Arrow Keys
+        pgup = SDL_Scancode.SDL_SCANCODE_PAGEUP
+        home = SDL_Scancode.SDL_SCANCODE_HOME
+        ins = SDL_Scancode.SDL_SCANCODE_INSERT
+        del = SDL_Scancode.SDL_SCANCODE_DELETE
+        kend = SDL_Scancode.SDL_SCANCODE_END
+        pgdn = SDL_Scancode.SDL_SCANCODE_PAGEDOWN
+
+        ' Function Keys
+        f1 = SDL_Scancode.SDL_SCANCODE_F1
+        f2 = SDL_Scancode.SDL_SCANCODE_F2
+        f3 = SDL_Scancode.SDL_SCANCODE_F3
+        f4 = SDL_Scancode.SDL_SCANCODE_F4
+        f5 = SDL_Scancode.SDL_SCANCODE_F5
+        f6 = SDL_Scancode.SDL_SCANCODE_F6
+        f7 = SDL_Scancode.SDL_SCANCODE_F7
+        f8 = SDL_Scancode.SDL_SCANCODE_F8
+        f9 = SDL_Scancode.SDL_SCANCODE_F9
+        f10 = SDL_Scancode.SDL_SCANCODE_F10
+        f11 = SDL_Scancode.SDL_SCANCODE_F11
+        f12 = SDL_Scancode.SDL_SCANCODE_F12
+
+        ' Up to 24, cuz why not
+        f13 = SDL_Scancode.SDL_SCANCODE_F13
+        f14 = SDL_Scancode.SDL_SCANCODE_F14
+        f15 = SDL_Scancode.SDL_SCANCODE_F15
+        f16 = SDL_Scancode.SDL_SCANCODE_F16
+        f17 = SDL_Scancode.SDL_SCANCODE_F17
+        f18 = SDL_Scancode.SDL_SCANCODE_F18
+        f19 = SDL_Scancode.SDL_SCANCODE_F19
+        f20 = SDL_Scancode.SDL_SCANCODE_F20
+        f21 = SDL_Scancode.SDL_SCANCODE_F21
+        f22 = SDL_Scancode.SDL_SCANCODE_F22
+        f23 = SDL_Scancode.SDL_SCANCODE_F23
+        f24 = SDL_Scancode.SDL_SCANCODE_F24
+
+    End Enum
+
+
+    Public Function KeyCodeToSDLScanCode(ByVal _keycode As Keys) As String
+
+        Dim a As String = KeyCon.ConvertToString(_keycode)
+        If IsNumeric(a) Then a = "Number" & a
+        If a = "Decimal" Then a = "kpDecimal"
+        If a = "End" Then a = "kEnd"
+
+        If [Enum].IsDefined(GetType(KCtSC), a.ToLower) Then Return DirectCast([Enum].Parse(GetType(KCtSC), a.ToLower, True), KCtSC)
+
+        Console.WriteLine("Undefined KeyName: " & a)
+        Return "0"
+
+    End Function
+
+    Dim ButtonNames As String() = {"b0", "b1", "b2", "b3", "b4",
+        "b5", "b6", "b7", "b8", "b9",
+        "b10", "b11", "b12", "b13", "b14"}
+
+    Dim ButtonMappedName As String() = {"a", "b", "x", "y",
+        "back", "guide", "start", "leftstick", "rightstick",
+        "leftshoulder", "rightshoulder", "dpup", "dpdown", "dpleft", "dpright"}
+
+    ' a0+ = leftx
+    ' a1+ = lefty
+    ' a2+ = rightx
+    ' a3+ = righty
+
+    ' 03000000790000000600000000000000,Generic USB Joystick,a:b2,b:b1,x:b3,y:b0,leftshoulder:b4,rightshoulder:b5,lefttrigger:b6,righttrigger:b7,leftstick:b10,rightstick:b11,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,back:b8,start:b9,leftx:a0~,lefty:a1,rightx:a2~,righty:a4,platform:Windows,
+
+    ' Translate BEAR Button (SDL GameController Mapped Button) to Mednafen (Joystick old style mapping)
+    Public Function BEARButtonToMednafenButton(ByVal _configString As String, ByVal _numAxes As String) As Dictionary(Of String, String)
+        Dim _TranslatedControls As New Dictionary(Of String, String)
+
+        For Each _ConfigButton As String In _configString.Split(",") ' go through the config string
+            ' Check if this is a thing i care about
+            Dim _JoystickButton = ""
+            Dim _buttonSplit = _ConfigButton.Split(":")
+
+            If Not _buttonSplit.Count > 1 Or _buttonSplit(0) = "platform" Then Continue For
+
+            Dim _SearchIndex = 0
+            For Each _mappedButton In ButtonMappedName
+                If _mappedButton = _buttonSplit(0) Then
+                    If _buttonSplit(1).Contains("b") Then
+                        _JoystickButton = _buttonSplit(1).Replace("b", "button_")
+                    ElseIf _buttonSplit(1).Contains("a") Then
+
+                    End If
+
+                End If
+
+                If Not _JoystickButton = "" Then
+                    _TranslatedControls.Add(ButtonNames(_SearchIndex), _JoystickButton)
+                    Exit For
+
+                End If
+                _SearchIndex += 1
+
+            Next
+        Next
+
+        Return _TranslatedControls
+    End Function
 
 End Module
 

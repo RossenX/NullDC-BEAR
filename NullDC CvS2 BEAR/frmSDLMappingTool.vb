@@ -158,6 +158,8 @@ Public Class frmSDLMappingTool
                     End If
                 End Sub)
 
+            SDL_Delay(16)
+
             While SDL_PollEvent(_event)
                 ' Write the capabilities
                 UpdateHelpTest()
@@ -260,7 +262,6 @@ Public Class frmSDLMappingTool
 
         Dim DeviceGUIDasString(40) As Byte
 
-
         Me.Invoke(
             Sub()
                 SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(frmKeyMapperSDL.ControllerCB.SelectedValue), DeviceGUIDasString, 40)
@@ -314,6 +315,7 @@ Public Class frmSDLMappingTool
                   End Sub)
 
         SDL_GameControllerAddMapping(ConfigStringFinal)
+        frmKeyMapperSDL.AutoGenerateButtonConfigs(ConfigStringFinal)
         Console.WriteLine(ConfigStringFinal)
 
         Me.Invoke(Sub() Me.Close())
@@ -333,12 +335,9 @@ Public Class frmSDLMappingTool
                               End Sub)
                 End If
             End If
+        Else
 
         End If
-
-    End Sub
-
-    Private Sub frmSDLMappingTool_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
@@ -368,6 +367,7 @@ Public Class frmSDLMappingTool
         End If
 
     End Sub
+
 End Class
 
 

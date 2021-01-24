@@ -5,6 +5,8 @@ Public Class keybindButton
 
 
     Public KC As String() = {"k0", "k0"}
+    Public _configString As String = ""
+    Public _emulator As String = ""
 
     Public Property KeyCode() As String()
         Get
@@ -15,8 +17,25 @@ Public Class keybindButton
         End Set
     End Property
 
-    Public KeyCon As New KeysConverter
+    Public Property ConfigString() As String
+        Get
+            Return _configString
+        End Get
+        Set(ByVal value As String)
+            _configString = value
+        End Set
 
+    End Property
+
+    Public Property Emu() As String
+        Get
+            Return _emulator
+        End Get
+        Set(ByVal value As String)
+            _emulator = value
+        End Set
+
+    End Property
 
     <DllImport("user32.dll", CharSet:=CharSet.Auto)>
     Public Shared Function MapVirtualKeyEx(ByVal uCode As Integer, ByVal nMapType As Integer, ByVal dwhkl As Integer) As Integer
@@ -28,10 +47,7 @@ Public Class keybindButton
 
     Public Sub New()
         MyBase.New
-        ' This call is required by the designer.
         InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
 
     End Sub
 
@@ -52,23 +68,7 @@ Public Class keybindButton
         KC(_port) = _kc
     End Sub
 
-    Public Sub UpdateKeycodeFromText(ByVal current_port As Int16)
-        Try
-            If (Text.StartsWith("a") And Text.Length > 1) Or (Text.StartsWith("b") And Text.Length > 1) Then
-                KC(current_port) = Text
-            Else
-                KC(current_port) = "k" & StringToKeyCode(Text)
-            End If
-
-        Catch ex As Exception
-            KC(current_port) = "k0"
-        End Try
-
-        'Console.WriteLine(KC(current_port))
-
-    End Sub
-
-    Public Sub UpdateTextFromKeycode(ByVal current_port As Int16)
+    Public Sub UpdateTextFromPortID(ByVal current_port As Int16)
 
         If KC(current_port).StartsWith("k") Then
             If KC(current_port) = "k0" Then
@@ -85,25 +85,12 @@ Public Class keybindButton
 
     End Sub
 
-    Private Function StringToKeyCode(ByVal S As String) As Keys
-        Dim kc As KeysConverter = New KeysConverter()
-        Try
-            Return CType(kc.ConvertFromString(S), Keys)
-        Catch
-            Return Nothing
-        End Try
-
-    End Function
-
     Private Function KeyCodeToKeyboardButton(ByVal _kc As String) As String
         If _kc Is Nothing Or _kc = "" Then Return "None"
 
         Dim _converted = Convert.ToChar(MapVirtualKeyEx(_kc.Substring(1, _kc.Length - 1), 2, GetKeyboardLayout(0))).ToString
 
-        If _converted = vbNullChar Or
-            _converted = vbCr Or
-            _converted = vbTab Or
-            _converted = " " Then
+        If _converted = vbNullChar Or _converted = vbCr Or _converted = vbTab Or _converted = " " Then
             _converted = CType(KeyCon.ConvertFromString(_kc.Substring(1, _kc.Length - 1)), Keys).ToString
         End If
 

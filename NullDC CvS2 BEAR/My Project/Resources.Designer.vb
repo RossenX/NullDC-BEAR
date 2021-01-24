@@ -93,9 +93,29 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property BEARJamma_Dreamcast1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Dreamcast1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property BEARJamma_Naomi() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("BEARJamma_Naomi", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property BEARJammaNaomi() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("BEARJammaNaomi", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -411,7 +431,27 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.81
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Dreamcast_ArcadeStick() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Dreamcast-ArcadeStick", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Dreamcast_ArcadeStick1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Dreamcast-ArcadeStick1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to 1.85
         '''CVS2::4B5360E5C101756B04FB20F11D50C8C8::5576B4A34D645C26C0BDE99D55F75FB0
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
@@ -627,6 +667,26 @@ Namespace My.Resources
         Friend ReadOnly Property Multitap_None() As String
             Get
                 Return ResourceManager.GetString("Multitap_None", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property nes_controller() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("nes-controller", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property nes_zapper() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("nes-zapper", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         

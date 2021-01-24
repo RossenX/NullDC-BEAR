@@ -9,14 +9,14 @@ Public Class frmKeyMapperSDL
     Dim Joystick(2) As Int16
     Dim Deadzone(2) As Int16
     Dim Peripheral(2) As Int16
+    Dim MednafenControllerID(16) As String ' Support up to 16 Controllers at once
 
     Public Joy As IntPtr
-    Dim KeyConv As New KeysConverter
     Dim AvailableControllersList As New DataTable
 
     Dim _InputThread As Threading.Thread
 
-    Dim Currently_Binding As keybindButton
+    Dim Currently_Binding As Button
 
     Dim ButtonsDown As New Dictionary(Of String, Boolean)
 
@@ -24,7 +24,11 @@ Public Class frmKeyMapperSDL
     Private Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Boolean
     End Function
 
-    Private Sub frmKeyMapperSDL_Load(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+    Private Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
+
+    Private Sub frmKeyMapperSDL_VisibilityChange(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+        SDL.SDL_SetHint(SDL_HINT_XINPUT_ENABLED, "1") ' the default is 1, but just in case...
+
         If Me.Visible Then
 
             Me.CenterToParent()
@@ -47,12 +51,13 @@ Public Class frmKeyMapperSDL
             _InputThread.IsBackground = True
             _InputThread.Start()
 
+            AddHandler cbSDL.SelectedIndexChanged, AddressOf SDLVersionChanged
             AddHandler DeadzoneTB.MouseCaptureChanged, AddressOf DeadzoneTB_MouseCaptureChanged
             AddHandler DeadzoneTB.ValueChanged, Sub() Deadzonetext.Text = "Deadzone: " & DeadzoneTB.Value
             AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
             AddHandler PlayerTab.SelectedIndexChanged, AddressOf PlayerTab_SelectedIndexChanged
             AddHandler ControllersTab.SelectedIndexChanged, Sub() ActiveControl = Nothing
-            AddHandler cbSDL.SelectedIndexChanged, AddressOf SDLVersionChanged
+
 
             If MainformRef.IsNullDCRunning Then
                 PeripheralCB.Enabled = False
@@ -70,12 +75,13 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub SDLVersionChanged(sender As ComboBox, e As EventArgs)
-        If Not cbSDL.SelectedItem = MainformRef.ConfigFile.SDLVersion Then
-            MainformRef.ConfigFile.SDLVersion = "+" & sender.SelectedItem
-            MainformRef.ConfigFile.SaveFile(False)
-            If MsgBox("Restart Required") = MsgBoxResult.Ok Then End
-        End If
-
+        Me.Invoke(Sub()
+                      If Not cbSDL.SelectedItem = MainformRef.ConfigFile.SDLVersion Then
+                          MainformRef.ConfigFile.SDLVersion = "+" & sender.SelectedItem
+                          MainformRef.ConfigFile.SaveFile(False)
+                          If MsgBox("Restart Required") = MsgBoxResult.Ok Then End
+                      End If
+                  End Sub)
     End Sub
 
     Private Sub DoInitialSetupShit()
@@ -145,26 +151,36 @@ Public Class frmKeyMapperSDL
         STICK_DPAD_DOWN.KC = {"a1+", "k83"}
         STICK_DPAD_UP.KC = {"a1-", "k87"}
 
+        ' Mednafen
+
+
+
         SaveSettings()
 
     End Sub
 
     Private Sub UpdateButtonLabels()
-        For Each _tab As TabPage In ControllersTab.TabPages
-            For Each _cont As Control In _tab.Controls
-
-                If TypeOf _cont Is keybindButton Then
-                    Dim _btn As keybindButton = _cont
-                    _btn.UpdateTextFromKeycode(PlayerTab.SelectedIndex)
+        For Each _TabPages As TabPage In ControllersTab.TabPages
+            For Each _TabPageControl As Control In _TabPages.Controls
+                If TypeOf _TabPageControl Is TabControl Then
+                    Dim _innerTabControl As TabControl = _TabPageControl
+                    For Each _innerTabPages As TabPage In _innerTabControl.TabPages
+                        For Each _innerTabPageControl As Control In _innerTabPages.Controls
+                            If TypeOf _innerTabPageControl Is keybindButton Then
+                                Dim _innerTabPageControl2 As keybindButton = _innerTabPageControl
+                                _innerTabPageControl2.UpdateTextFromPortID(PlayerTab.SelectedIndex)
+                            End If
+                        Next
+                    Next
 
                 End If
-
             Next
         Next
 
     End Sub
 
     Private Sub SaveSettings()
+
         Dim lines(128) As String
         ' BPortA_I_
         ' BPortA_CONT_
@@ -186,12 +202,23 @@ Public Class frmKeyMapperSDL
         Dim KeyCount = 4
         For Each _tab As TabPage In ControllersTab.TabPages
             For Each _cont As Control In _tab.Controls
-                If TypeOf _cont Is keybindButton Then
-                    Dim _btn As keybindButton = _cont
-                    lines(KeyCount) = _btn.Name & "=" & _btn.KC(0) & "|" & _btn.KC(1)
-                    KeyCount += 1
-                End If
+                If TypeOf _cont Is TabControl Then ' Nested Controls Only used for mednafen right now
+                    Dim _tc As TabControl = _cont
+                    For Each _tab2 As TabPage In _tc.TabPages
+                        For Each _cont2 As Control In _tab2.Controls
+                            If TypeOf _cont2 Is keybindButton Then
+                                Dim _btn As keybindButton = _cont2
+                                If _btn.Emu = "nulldc" Then
+                                    lines(KeyCount) = _btn.Name & "=" & _btn.KC(0) & "|" & _btn.KC(1)
+                                ElseIf _btn.Emu = "mednafen" Then
+                                    lines(KeyCount) = "med_" & _btn.ConfigString & "=" & _btn.KC(0) & "|" & _btn.KC(1)
+                                End If
+                                KeyCount += 1
 
+                            End If
+                        Next
+                    Next
+                End If
             Next
         Next
 
@@ -246,14 +273,21 @@ Public Class frmKeyMapperSDL
 
         For Each _tab As TabPage In ControllersTab.TabPages
             For Each _cont As Control In _tab.Controls
-                If TypeOf _cont Is keybindButton Then
-                    Dim _btn As keybindButton = _cont
+                If TypeOf _cont Is TabControl Then
+                    Dim _InnereTab As TabControl = _cont
+                    For Each _tab2 As TabPage In _InnereTab.TabPages
+                        For Each _cont2 As Control In _tab2.Controls
+                            If TypeOf _cont2 Is keybindButton Then
+                                Dim _btn As keybindButton = _cont2
+                                GetKeyCodeFromFile(_btn, configLines)
+                                AddHandler _btn.Click, AddressOf ClickedBindButton
+                                _btn.UpdateTextFromPortID(PlayerTab.SelectedIndex)
 
-                    GetKeyCodeFromFile(_btn, configLines)
-
-                    AddHandler _btn.Click, AddressOf ClickedBindButton
-                    _btn.UpdateTextFromKeycode(PlayerTab.SelectedIndex)
+                            End If
+                        Next
+                    Next
                 End If
+
             Next
         Next
 
@@ -266,88 +300,125 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub GetKeyCodeFromFile(ByRef _btn As keybindButton, ByRef _configlines As String())
+    Private Sub GetKeyCodeFromFile(ByRef _btn As Button, ByRef _configlines As String())
+
         For Each line As String In _configlines
-            If line.StartsWith(_btn.Name & "=") Then
-                _btn.KC(0) = line.Split("=")(1).Split("|")(0)
-                _btn.KC(1) = line.Split("=")(1).Split("|")(1)
-                If _btn.KC(0) = "" Then _btn.KC(0) = "k0"
-                If _btn.KC(1) = "" Then _btn.KC(1) = "k0"
+
+            If TypeOf _btn Is keybindButton Then
+                Dim _btn2 As keybindButton = _btn
+
+                If line.StartsWith(_btn2.Name & "=") Or line.StartsWith(_btn2.ConfigString & "=") Then
+                    _btn2.KC(0) = line.Split("=")(1).Split("|")(0)
+                    _btn2.KC(1) = line.Split("=")(1).Split("|")(1)
+                    If _btn2.KC(0) = "" Then _btn2.KC(0) = "k0"
+                    If _btn2.KC(1) = "" Then _btn2.KC(1) = "k0"
+
+                End If
 
             End If
         Next
+
     End Sub
 
     Private Sub InputThread()
-        While _InputThread.IsAlive
+        Try
+            While _InputThread.IsAlive
 
-            Try
-                If Application.OpenForms().OfType(Of frmSDLMappingTool).Any Then
-                    SDL_Delay(100)
-                    Continue While
-                End If
+                Try
+                    If Application.OpenForms().OfType(Of frmSDLMappingTool).Any Then
+                        SDL_Delay(250)
+                        Continue While
+                    End If
 
-            Catch ex As Exception
-                Console.WriteLine("yup")
-            End Try
+                Catch ex As Exception
+                    Console.WriteLine("yup")
+                End Try
 
-            Dim _event As SDL_Event
-            While SDL_PollEvent(_event)
-                'Console.WriteLine(_event.type)
-                Select Case _event.type
-                    Case 1616 ' Axis Motion
-                        Console.WriteLine("Axis Motion: " & _event.caxis.axis & "|" & _event.caxis.axisValue)
-                        Me.Invoke(Sub()
+                SDL_Delay(16)
 
-                                      Dim _deadzonetotal As Decimal = 32768 * Decimal.Divide(DeadzoneTB.Value, 100)
-                                      Dim _axisnorm As Int32 = _event.caxis.axisValue
-                                      _axisnorm = Math.Abs(_axisnorm)
+                Dim _event As SDL_Event
+                While SDL_PollEvent(_event)
+                    'Console.WriteLine(_event.type)
+                    Select Case _event.type
+                        Case 1616 ' Axis Motion
+                            Console.WriteLine("Axis Motion: " & _event.caxis.axis & "|" & _event.caxis.axisValue)
+                            Me.Invoke(Sub()
 
-                                      If _axisnorm > 256 And _axisnorm > _deadzonetotal Then
-                                          If _event.caxis.axisValue > 0 Then
-                                              ButtonClicked("a" & _event.caxis.axis & "+", True)
+                                          Dim _deadzonetotal As Decimal = 32768 * Decimal.Divide(DeadzoneTB.Value, 100)
+                                          Dim _axisnorm As Int32 = _event.caxis.axisValue
+                                          _axisnorm = Math.Abs(_axisnorm)
+
+                                          If _axisnorm > 256 And _axisnorm > _deadzonetotal Then
+                                              If _event.caxis.axisValue > 0 Then
+                                                  ButtonClicked("a" & _event.caxis.axis & "+", True)
+                                              Else
+                                                  ButtonClicked("a" & _event.caxis.axis & "-", True)
+                                              End If
+
                                           Else
-                                              ButtonClicked("a" & _event.caxis.axis & "-", True)
+                                              ButtonsDown.Remove("a" & _event.caxis.axis & "+")
+                                              ButtonsDown.Remove("a" & _event.caxis.axis & "-")
+                                              ButtonClicked("a" & _event.caxis.axis & "+", False)
+                                              ButtonClicked("a" & _event.caxis.axis & "-", False)
+
                                           End If
 
-                                      Else
-                                          ButtonsDown.Remove("a" & _event.caxis.axis & "+")
-                                          ButtonsDown.Remove("a" & _event.caxis.axis & "-")
-                                          ButtonClicked("a" & _event.caxis.axis & "+", False)
-                                          ButtonClicked("a" & _event.caxis.axis & "-", False)
-
-                                      End If
-
-                                  End Sub)
+                                      End Sub)
 
 
-                    Case 1617 ' Button Down
-                        'Console.WriteLine("Button Down: " & _event.cbutton.button & " | " & SDL_GameControllerNameForIndex(_event.cdevice.which))
-                        Me.Invoke(Sub()
-                                      ButtonClicked("b" & _event.cbutton.button, True)
-                                  End Sub)
+                        Case 1617 ' Controller Button Down
+                            'Console.WriteLine("Button Down: " & _event.cbutton.button & " | " & SDL_GameControllerNameForIndex(_event.cdevice.which))
+                            Me.Invoke(Sub()
+                                          ButtonClicked("b" & _event.cbutton.button, True)
+                                      End Sub)
 
-                    Case 1618 ' Button Up
-                        'Console.WriteLine("Button UP: " & _event.cbutton.button & " | " & SDL_GameControllerNameForIndex(_event.cdevice.which))
-                        Me.Invoke(Sub()
-                                      ButtonsDown.Remove("b" & _event.cbutton.button)
-                                      ButtonClicked("b" & _event.cbutton.button, False)
-                                  End Sub)
+                        Case 1618 ' Controller Button Up
+                            'Console.WriteLine("Button UP: " & _event.cbutton.button & " | " & SDL_GameControllerNameForIndex(_event.cdevice.which))
+                            Me.Invoke(Sub()
+                                          ButtonsDown.Remove("b" & _event.cbutton.button)
+                                          ButtonClicked("b" & _event.cbutton.button, False)
+                                      End Sub)
 
-                    Case 1541 ' Connected
-                        'Console.WriteLine("Connected: " & SDL_GameControllerNameForIndex(_event.jdevice.which))
-                        Me.Invoke(Sub() UpdateControllersList())
-                    Case 1542 ' Disconnected using Joystick event cuz other seems to only work with opened
-                        'Console.WriteLine("Disconnected: " & SDL_JoystickNameForIndex(_event.jdevice.which))
-                        Me.Invoke(Sub() UpdateControllersList())
-                    Case 1539
-                        'MsgBox(_event.jbutton.button)
-                End Select
+                        Case 1541 ' Connected
+                            'Console.WriteLine("Connected: " & SDL_GameControllerNameForIndex(_event.jdevice.which))
+                            Me.Invoke(Sub() UpdateControllersList())
+                        Case 1542 ' Disconnected using Joystick event cuz other seems to only work with opened
+                            'Console.WriteLine("Disconnected: " & SDL_JoystickNameForIndex(_event.jdevice.which))
+                            Me.Invoke(Sub() UpdateControllersList())
+                        Case 1538 ' Joystick HAT LEFT-(abs+1)/RIGHT+(abs+1) UP-(abs+2)/Down+(abs+2)
+                            ' Actually what i think i'll do is let it show the controller mapping button in BEAR and then translate those 
+                            ' to joystick buttons, not to confuse people why nulldc and mednafen have show different button numbers for the same button
+                            ' This will also save me having to rewrite some shit
+                        Case 1539 ' Joystick Button Down
 
+                        Case 1540 ' Joystick Button Up
+
+                        Case 1536 ' Joystick Axis
+
+                        Case Else
+                            Console.WriteLine("Unhandled SDL Event: " & _event.type)
+                    End Select
+
+                End While
+
+                _event = Nothing
             End While
+        Catch ex As Exception
 
-            _event = Nothing
-        End While
+        End Try
+
+
+    End Sub
+
+    ' Update Button Configs Based on the Config String for the Game Controller
+    Public Sub AutoGenerateButtonConfigs(ByVal _configString As String)
+
+        ' Check if we have Analog Controls Set
+        If _configString.Contains("leftx") And _configString.Contains("lefty") Then
+
+        Else ' We do not, so use DPAD Instead
+
+        End If
 
     End Sub
 
@@ -389,7 +460,9 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub frmKeyMapperSDL_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        _InputThread.Abort() ' Aight not accepting inputs anymore
         SaveSettings()
+
         ' Disable SDL completly we dun need that shit in the background no more
         For i = 0 To SDL_NumJoysticks() - 1
             If SDL_GameControllerGetAttached(SDL_GameControllerFromInstanceID(i)) = SDL_bool.SDL_TRUE Then
@@ -399,141 +472,192 @@ Public Class frmKeyMapperSDL
             End If
         Next
 
-        _InputThread.Abort()
-        SDL_Quit()
+        ' Update Control Configs for all the shit and hot-load if possible
+        Dim ControlsConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+        Dim NaomiConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
+        Dim DreamcastConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
+        Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
 
-        ' Update the configs for hotloading new configs
+        ' Naomi Controls
+
+        Dim linenumber = 0
+        For Each line As String In NaomiConfigs
+            If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
+                Dim player = 0 ' Default player 1 is index 0
+                If line.StartsWith("BPortB") Then player = 1 ' This is port B so it's player 2 index 1
+
+                Dim KeyFound = False
+                For Each control_line As String In ControlsConfigs
+                    If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                        NaomiConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                        KeyFound = True
+                        Exit For
+                    End If
+                Next
+
+                If Not KeyFound Then NaomiConfigs(linenumber) = line.Split("=")(0) & "=k0" ' The key was not in the controls so just set it to nothing
+
+            End If
+            linenumber += 1
+        Next
+
+        ' Dreamcast Controls
+
+        ' We need the peripheral beforehand so we know which control settings to actually use
+        Dim tempPeripheral As String() = {"", ""}
+        Dim tempJoystick As String() = {"", ""}
+        Dim TempDeadzone As String() = {"", ""}
+
+        For Each line As String In ControlsConfigs
+            If line.StartsWith("Peripheral=") Then
+                tempPeripheral(0) = line.Split("=")(1).Split("|")(0)
+                tempPeripheral(1) = line.Split("=")(1).Split("|")(1)
+            End If
+            If line.StartsWith("Joystick=") Then
+                tempJoystick(0) = line.Split("=")(1).Split("|")(0)
+                tempJoystick(1) = line.Split("=")(1).Split("|")(1)
+            End If
+            If line.StartsWith("Deadzone=") Then
+                TempDeadzone(0) = line.Split("=")(1).Split("|")(0)
+                TempDeadzone(1) = line.Split("=")(1).Split("|")(1)
+            End If
+        Next
+
+        linenumber = 0
+        For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
+            If line.StartsWith("BPort") Then
+                Dim player = 0
+                If line.StartsWith("BPortB") Then player = 1
+
+                Dim KeyFound = False
+                For Each control_line As String In ControlsConfigs
+
+                    If tempPeripheral(player) = "1" Then ' Joystick Peripheral so get the STICK_ instead of the CONT_ setting
+                        If control_line.StartsWith("STICK_") Then
+                            If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
+                                DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                                KeyFound = True
+                                Exit For
+                            End If
+                        End If
+
+                    Else
+
+                        If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                            DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                            KeyFound = True
+                            Exit For
+                        End If
+
+                    End If
+
+
+                Next
+
+                If Not KeyFound Then DreamcastConfigs(linenumber) = line.Split("=")(0) & "=k0"
+
+                If line.StartsWith("BPortA_Joystick=") Then DreamcastConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
+                If line.StartsWith("BPortB_Joystick=") Then DreamcastConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
+
+                If line.StartsWith("BPortA_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
+                If line.StartsWith("BPortB_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
+
+            End If
+            linenumber += 1
+
+        Next
+
+        ' Mednafen Controls
+
+        GetMednafenControllerIDs()
+
+        Dim _TranslatedControls(2) As Dictionary(Of String, String)
+        For i = 0 To 1 ' Loop Through Controls to get translation and get number of axes since we'll need that to translate the dpad
+
+            If Not Joystick(i) = -1 Then
+                Dim _tmpJoy = SDL_JoystickOpen(i)
+                Dim _numaxes = SDL_JoystickNumAxes(_tmpJoy)
+                _TranslatedControls(i) = BEARButtonToMednafenButton(SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(Joystick(i))), _numaxes)
+                SDL_JoystickClose(_tmpJoy)
+
+            End If
+
+        Next
+
+        linenumber = 0
+        For Each line As String In MednafenConfigs
+
+            For Each control_line In ControlsConfigs
+
+                If control_line.StartsWith("med_") Then ' Pretty much the only really consistent thing among all the mednafen controls
+                    'joystick 0x00060079000000000000504944564944 button_1
+                    'joystick 0x00060079000000000000504944564944 abs_1+
+                    'keyboard 0x0 18
+                    control_line = control_line.Substring(4)
+                    Dim tmpControlString = ""
+
+                    If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1")) Or line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then
+                        Dim _player = 1
+                        If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then _player = 2
+
+                        tmpControlString += control_line.Split("=")(0).Replace("<port>", _player.ToString) ' Initial String
+                        Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
+
+                        If _KeyCode.StartsWith("k") Then ' Keyboard
+
+                            If Not _KeyCode = "k0" Then
+                                tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
+                            End If
+
+                        Else ' Joystick
+
+                            tmpControlString += " Joystick " & MednafenControllerID(Joystick(_player - 1))
+                            If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) Then
+                                tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                            Else
+                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                            End If
+
+                        End If
+
+                    End If
+
+                    If Not tmpControlString = "" Then MednafenConfigs(linenumber) = tmpControlString
+
+                End If
+            Next
+
+            linenumber += 1
+        Next
+
+        ' Save all the changes
+
+        File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
+
+        File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
+
+        File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
+        File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
+
+
+        ' Check if nullDC is running to hotload the settings
         If MainformRef.IsNullDCRunning Then
-            Select Case Rx.platform
-                Case "na"
-
-                    Dim ControlsFile() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
-                    Dim linenumber = 0
-                    For Each line In ControlsFile
-                        If line.StartsWith("CONT_") Or line.StartsWith("STICK_") Then
-                            ControlsFile(linenumber) = ""
-                        End If
-                        linenumber += 1
-                    Next
-
-
-                    Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
-                    linenumber = 0
-                    For Each line As String In lines
-                        If Not ControlsFile Is Nothing Then
-                            If line.StartsWith("BPort") Then
-                                Dim player = 0
-                                If line.StartsWith("BPortB") Then player = 1
-
-                                Dim KeyCount = False
-                                For Each control_line As String In ControlsFile
-                                    If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
-                                        lines(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                                        KeyCount = True
-                                        Exit For
-                                    End If
-                                Next
-
-                                If Not KeyCount Then lines(linenumber) = line.Split("=")(0) & "=k0"
-
-                            End If
-                        End If
-                        linenumber += 1
-                    Next
-
-                    File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
-                    File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", lines)
-
-                    PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
-
-                Case "dc"
-
-                    ' Controls File
-                    Dim ControlsFile() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
-                    ' Get Rid of the settings we don't want
-
-                    Dim tempPeripheral As String() = {"", ""}
-                    Dim tempJoystick As String() = {"", ""}
-                    Dim TempDeadzone As String() = {"", ""}
-
-                    For Each line As String In ControlsFile
-                        If line.StartsWith("Peripheral=") Then
-                            tempPeripheral(0) = line.Split("=")(1).Split("|")(0)
-                            tempPeripheral(1) = line.Split("=")(1).Split("|")(1)
-                        End If
-                        If line.StartsWith("Joystick=") Then
-                            tempJoystick(0) = line.Split("=")(1).Split("|")(0)
-                            tempJoystick(1) = line.Split("=")(1).Split("|")(1)
-                        End If
-                        If line.StartsWith("Deadzone=") Then
-                            TempDeadzone(0) = line.Split("=")(1).Split("|")(0)
-                            TempDeadzone(1) = line.Split("=")(1).Split("|")(1)
-                        End If
-                    Next
-
-                    ' General Settings
-                    Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
-                    Dim linenumber = 0
-                    For Each line As String In lines
-                        ' Controls DREAMCAST
-
-                        If Not ControlsFile Is Nothing Then
-                            If line.StartsWith("BPort") Then
-                                Dim player = 0
-                                If line.StartsWith("BPortB") Then player = 1
-
-                                Dim KeyFound = False
-                                For Each control_line As String In ControlsFile
-                                    If tempPeripheral(player) = "1" Then
-                                        If control_line.StartsWith("STICK_") Then
-                                            If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
-                                                lines(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                                                KeyFound = True
-                                                Exit For
-                                            End If
-                                        End If
-
-                                    Else
-
-                                        If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
-                                            lines(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                                            KeyFound = True
-                                            Exit For
-                                        End If
-
-                                    End If
-
-
-                                Next
-
-                                If Not KeyFound Then lines(linenumber) = line.Split("=")(0) & "=k0"
-
-                            End If
-                        End If
-
-                        If line.StartsWith("BPortA_Joystick=") Then lines(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
-                        If line.StartsWith("BPortB_Joystick=") Then lines(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
-
-                        If line.StartsWith("BPortA_Deadzone=") Then lines(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
-                        If line.StartsWith("BPortB_Deadzone=") Then lines(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
-
-                        ' Arcadestick sync here
-                        linenumber += 1
-                    Next
-
-                    File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
-                    File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", lines)
-
-                    PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
-
-            End Select
+            If platform = "na" Then PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
+            If platform = "dc" Then PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
 
         End If
+
+
+        ' Finally Turn Off SDL
+        SDL_Quit() ' Turn off SDL make sure nothing changes before we write the controls to the configs.
 
     End Sub
 
     Private Sub frmKeyMapperSDL_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         ButtonClicked("k" & e.KeyCode, True)
+
     End Sub
 
     Private Sub frmKeyMapperSDL_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp
@@ -627,28 +751,42 @@ Public Class frmKeyMapperSDL
     Private Sub ButtonClicked(ByVal _keycode As String, ByVal _down As Boolean)
         If Not ButtonsDown.ContainsKey(_keycode) Then
             If Not Currently_Binding Is Nothing And (_down Or _keycode = "k13") Then
-                Currently_Binding.ChangeKeyCode(_keycode, PlayerTab.SelectedIndex)
-                Currently_Binding.BackColor = Color.White
+                If TypeOf Currently_Binding Is keybindButton Then
+                    Dim _tmp As keybindButton = Currently_Binding
+                    _tmp.ChangeKeyCode(_keycode, PlayerTab.SelectedIndex)
+                    _tmp.BackColor = Color.White
+                End If
+
                 Currently_Binding = Nothing
                 ActiveControl = Nothing
                 SaveSettings()
+
             End If
 
             ' rn all this does is highlight
             For Each _btns As Control In ControllersTab.SelectedTab.Controls
-                If TypeOf _btns Is keybindButton Then
-                    Dim _btn As keybindButton = _btns
-                    'Console.WriteLine("Pressed: " & _keycode & " | " & _btn.KC(PlayerTab.SelectedIndex))
-                    If _btn.KC(PlayerTab.SelectedIndex) = _keycode Then
-                        If _down Then
-                            _btn.BackColor = Color.Green
+                If TypeOf _btns Is TabControl Then
+                    Dim _innerTabControl As TabControl = _btns
+                    For Each _innercontrols In _innerTabControl.SelectedTab.Controls
 
-                        Else
-                            _btn.BackColor = Color.White
+                        If TypeOf _innercontrols Is keybindButton Then
+                            Dim _btn As keybindButton = _innercontrols
+                            If _btn.KC(PlayerTab.SelectedIndex) = _keycode Then
+                                If _down Then
+                                    _btn.BackColor = Color.Green
 
+                                Else
+                                    _btn.BackColor = Color.White
+
+                                End If
+                            End If
                         End If
-                    End If
+
+                    Next
+
                 End If
+
+
             Next
 
             If _down Then
@@ -677,8 +815,33 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub frmKeyMapperSDL_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmKeyMapperSDL_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
+
+    End Sub
+
+    Private Sub GetMednafenControllerIDs()
+        Dim MedProc As Process = New Process()
+        MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
+        MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
+        MedProc.StartInfo.CreateNoWindow = True
+        MedProc.StartInfo.UseShellExecute = False
+        MedProc.StartInfo.Arguments = "Hi"
+        MedProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+
+        MedProc.Start()
+        MedProc.WaitForExit()
+
+        Dim ControllerIndex = 0
+        For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
+            If line.StartsWith("  ID: ") Then
+                MednafenControllerID(ControllerIndex) = line.Trim.Split(" ")(1)
+                Console.WriteLine("Found Medanfen Controller ID: " & line.Trim.Split(" ")(1))
+                ControllerIndex += 1
+            End If
+        Next
+
+        Console.WriteLine("Ran Mednafen once to get the controls output")
 
     End Sub
 
@@ -703,8 +866,6 @@ Public Class KeyBind
     Public Name As String
     Public Button As Button
     Public Platform As String
-
-    Dim KeyConv As New KeysConverter
 
     Public Sub New(ByVal _kc As String, ByVal _name As String, ByRef _frm As frmKeyMapperSDL, ByVal _plat As String)
         KC = _kc

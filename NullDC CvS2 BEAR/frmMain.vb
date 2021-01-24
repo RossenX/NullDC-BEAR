@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.82" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.85" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -114,6 +114,7 @@ Public Class frmMain
                 If result2 = DialogResult.Yes Then
                     Try
                         UnzipResToDir(My.Resources.NullNaomiClean, "bear_tmp_nulldc.zip", NullDCPath)
+                        needsUpdate = True
                     Catch ex As Exception
                         MsgBox(ex.StackTrace)
                     End Try
@@ -125,6 +126,7 @@ Public Class frmMain
                 MsgBox("I need to be in the NullDC folder where nullDC_Win32_Release-NoTrace.exe")
                 End
             End If
+
         End If
 
         'unpack Dreamcast
