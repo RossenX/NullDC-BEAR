@@ -307,7 +307,7 @@ Public Class frmKeyMapperSDL
             If TypeOf _btn Is keybindButton Then
                 Dim _btn2 As keybindButton = _btn
 
-                If line.StartsWith(_btn2.Name & "=") Or line.StartsWith(_btn2.ConfigString & "=") Then
+                If line.StartsWith(_btn2.Name & "=") Or line.StartsWith("med_" & _btn2.ConfigString & "=") Then
                     _btn2.KC(0) = line.Split("=")(1).Split("|")(0)
                     _btn2.KC(1) = line.Split("=")(1).Split("|")(1)
                     If _btn2.KC(0) = "" Then _btn2.KC(0) = "k0"
@@ -412,14 +412,125 @@ Public Class frmKeyMapperSDL
 
     ' Update Button Configs Based on the Config String for the Game Controller
     Public Sub AutoGenerateButtonConfigs(ByVal _configString As String)
+        Dim ControllerType = "gamepad"
 
         ' Check if we have Analog Controls Set
-        If _configString.Contains("leftx") And _configString.Contains("lefty") Then
-
-        Else ' We do not, so use DPAD Instead
-
+        If Not _configString.Contains("leftx:") And Not _configString.Contains("lefty:") Then
+            ControllerType = "fightstick"
         End If
 
+        Select Case ControllerType ' Directional Shit
+            Case "gamepad"
+                ' Naomi
+                I_UP_KEY.KeyCode(PlayerTab.SelectedIndex) = "a1-"
+                I_DOWN_KEY.KeyCode(PlayerTab.SelectedIndex) = "a1+"
+                I_LEFT_KEY.KeyCode(PlayerTab.SelectedIndex) = "a0-"
+                I_RIGHT_KEY.KeyCode(PlayerTab.SelectedIndex) = "a0+"
+
+                'Dreamcast Controller
+                CONT_ANALOG_UP.KeyCode(PlayerTab.SelectedIndex) = "a1-"
+                CONT_ANALOG_DOWN.KeyCode(PlayerTab.SelectedIndex) = "a1+"
+                CONT_ANALOG_LEFT.KeyCode(PlayerTab.SelectedIndex) = "a0-"
+                CONT_ANALOG_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "a0+"
+
+                CONT_DPAD_UP.KeyCode(PlayerTab.SelectedIndex) = "b11"
+                CONT_DPAD_DOWN.KeyCode(PlayerTab.SelectedIndex) = "b12"
+                CONT_DPAD_LEFT.KeyCode(PlayerTab.SelectedIndex) = "b13"
+                CONT_DPAD_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "b14"
+
+                'Dreamcast Arcade Stick
+                STICK_DPAD_UP.KeyCode(PlayerTab.SelectedIndex) = "a1-"
+                STICK_DPAD_DOWN.KeyCode(PlayerTab.SelectedIndex) = "a1+"
+                STICK_DPAD_LEFT.KeyCode(PlayerTab.SelectedIndex) = "a0-"
+                STICK_DPAD_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "a0+"
+
+                ' NES gamepad
+                nes_gamepad_up.KeyCode(PlayerTab.SelectedIndex) = "a1-"
+                nes_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "a1+"
+                nes_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "a0-"
+                nes_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "a0+"
+
+
+                PeripheralCB.SelectedIndex = 0
+            Case "fightstick"
+                ' Naomi
+                I_UP_KEY.KeyCode(PlayerTab.SelectedIndex) = "b11"
+                I_DOWN_KEY.KeyCode(PlayerTab.SelectedIndex) = "b12"
+                I_LEFT_KEY.KeyCode(PlayerTab.SelectedIndex) = "b13"
+                I_RIGHT_KEY.KeyCode(PlayerTab.SelectedIndex) = "b14"
+
+                'Dreamcast Controller
+                CONT_ANALOG_UP.KeyCode(PlayerTab.SelectedIndex) = "None"
+                CONT_ANALOG_DOWN.KeyCode(PlayerTab.SelectedIndex) = "None"
+                CONT_ANALOG_LEFT.KeyCode(PlayerTab.SelectedIndex) = "None"
+                CONT_ANALOG_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "None"
+
+                CONT_DPAD_UP.KeyCode(PlayerTab.SelectedIndex) = "b11"
+                CONT_DPAD_DOWN.KeyCode(PlayerTab.SelectedIndex) = "b12"
+                CONT_DPAD_LEFT.KeyCode(PlayerTab.SelectedIndex) = "b13"
+                CONT_DPAD_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "b14"
+
+                'Dreamcast Arcade Stick
+                STICK_DPAD_UP.KeyCode(PlayerTab.SelectedIndex) = "b11"
+                STICK_DPAD_DOWN.KeyCode(PlayerTab.SelectedIndex) = "b12"
+                STICK_DPAD_LEFT.KeyCode(PlayerTab.SelectedIndex) = "b13"
+                STICK_DPAD_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "b14"
+
+                'NES Gamepad
+                nes_gamepad_up.KeyCode(PlayerTab.SelectedIndex) = "b11"
+                nes_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
+                nes_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
+                nes_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
+
+                PeripheralCB.SelectedIndex = 1
+        End Select
+
+        ' Buttons
+        ' Naomi
+        I_START_KEY.KeyCode(PlayerTab.SelectedIndex) = "b6"
+        I_COIN_KEY.KeyCode(PlayerTab.SelectedIndex) = "b4"
+        I_SERVICE_KEY_1.KeyCode(PlayerTab.SelectedIndex) = "k115"
+        I_TEST_KEY_1.KeyCode(PlayerTab.SelectedIndex) = "k116"
+
+        I_BTN0_KEY.KeyCode(PlayerTab.SelectedIndex) = "b2"
+        I_BTN1_KEY.KeyCode(PlayerTab.SelectedIndex) = "b3"
+        I_BTN2_KEY.KeyCode(PlayerTab.SelectedIndex) = "a4+"
+        I_BTN3_KEY.KeyCode(PlayerTab.SelectedIndex) = "b0"
+        I_BTN4_KEY.KeyCode(PlayerTab.SelectedIndex) = "b1"
+        I_BTN5_KEY.KeyCode(PlayerTab.SelectedIndex) = "a5+"
+
+        ' Dreamcast Controller
+        CONT_START.KeyCode(PlayerTab.SelectedIndex) = "b6"
+
+        CONT_A.KeyCode(PlayerTab.SelectedIndex) = "b0"
+        CONT_B.KeyCode(PlayerTab.SelectedIndex) = "b1"
+        CONT_X.KeyCode(PlayerTab.SelectedIndex) = "b2"
+        CONT_Y.KeyCode(PlayerTab.SelectedIndex) = "b3"
+        CONT_LSLIDER.KeyCode(PlayerTab.SelectedIndex) = "a4+"
+        CONT_RSLIDER.KeyCode(PlayerTab.SelectedIndex) = "a5+"
+
+        ' Dreamcast Arcade Stick
+
+        STICK_START.KeyCode(PlayerTab.SelectedIndex) = "b6"
+
+        STICK_A.KeyCode(PlayerTab.SelectedIndex) = "b0"
+        STICK_B.KeyCode(PlayerTab.SelectedIndex) = "b1"
+        STICK_X.KeyCode(PlayerTab.SelectedIndex) = "b2"
+        STICK_Y.KeyCode(PlayerTab.SelectedIndex) = "b3"
+        STICK_Z.KeyCode(PlayerTab.SelectedIndex) = "a4+"
+        STICK_C.KeyCode(PlayerTab.SelectedIndex) = "a5+"
+
+        ' NES Gamepad
+
+        nes_gamepad_select.KeyCode(PlayerTab.SelectedIndex) = "b4"
+        nes_gamepad_start.KeyCode(PlayerTab.SelectedIndex) = "b6"
+        nes_gamepad_b.KeyCode(PlayerTab.SelectedIndex) = "b2"
+        nes_gamepad_a.KeyCode(PlayerTab.SelectedIndex) = "b0"
+
+        nes_gamepad_rapid_b.KeyCode(PlayerTab.SelectedIndex) = "None"
+        nes_gamepad_rapid_a.KeyCode(PlayerTab.SelectedIndex) = "None"
+
+        UpdateButtonLabels()
     End Sub
 
     Public Sub UpdateControllersList()
@@ -439,8 +550,6 @@ Public Class frmKeyMapperSDL
             If i = OldConnectedIndex Then
                 FoundController = True
             End If
-
-            'Console.WriteLine("Added: " & i & " | " & SDL_GameControllerNameForIndex(i))
         Next
 
         ControllerCB.DataSource = New DataView(AvailableControllersList)
@@ -859,6 +968,15 @@ Public Class frmKeyMapperSDL
         End If
 
     End Sub
+
+    Private Sub ControllersTab_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ControllersTab.SelectedIndexChanged
+        If ControllersTab.SelectedIndex = 1 Then
+            TabControl1.SelectedIndex = PeripheralCB.SelectedIndex
+
+        End If
+
+    End Sub
+
 End Class
 
 Public Class KeyBind

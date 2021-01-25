@@ -312,10 +312,11 @@ Public Class frmSDLMappingTool
                       frmKeyMapperSDL.UpdateControllersList()
                       Label1.Text = "Aight, you're all set"
 
+                      SDL_GameControllerAddMapping(ConfigStringFinal)
+                      frmKeyMapperSDL.AutoGenerateButtonConfigs(ConfigStringFinal)
+
                   End Sub)
 
-        SDL_GameControllerAddMapping(ConfigStringFinal)
-        frmKeyMapperSDL.AutoGenerateButtonConfigs(ConfigStringFinal)
         Console.WriteLine(ConfigStringFinal)
 
         Me.Invoke(Sub() Me.Close())

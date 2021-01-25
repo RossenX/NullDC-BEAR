@@ -886,11 +886,17 @@ Module BEARTheme
 
     Dim ButtonNames As String() = {"b0", "b1", "b2", "b3", "b4",
         "b5", "b6", "b7", "b8", "b9",
-        "b10", "b11", "b12", "b13", "b14"}
+        "b10", "b11", "b12", "b13", "b14",
+        "a0+", "a0-", "a1+", "a1-",
+        "a2+", "a2-", "a3+", "a3-",
+        "a4+", "a5+"}
 
     Dim ButtonMappedName As String() = {"a", "b", "x", "y",
         "back", "guide", "start", "leftstick", "rightstick",
-        "leftshoulder", "rightshoulder", "dpup", "dpdown", "dpleft", "dpright"}
+        "leftshoulder", "rightshoulder", "dpup", "dpdown", "dpleft", "dpright",
+        "leftx", "leftx", "lefty", "lefty",
+        "rightx", "rightx", "righty", "righty",
+        "lefttrigger", "righttrigger"}
 
     ' a0+ = leftx
     ' a1+ = lefty
@@ -913,15 +919,34 @@ Module BEARTheme
             Dim _SearchIndex = 0
             For Each _mappedButton In ButtonMappedName
                 If _mappedButton = _buttonSplit(0) Then
-                    If _buttonSplit(1).Contains("b") Then
+                    If _buttonSplit(1).Contains("b") Then ' Button EZ PZ REPLACE b WITH BUTTON BAM DONE
                         _JoystickButton = _buttonSplit(1).Replace("b", "button_")
-                    ElseIf _buttonSplit(1).Contains("a") Then
+
+                    ElseIf _buttonSplit(1).Contains("a") Then ' Axis most annoying part to convert, since mapping of axis is completly different between nulldc and mednafen and BEAR
+
+                        Console.WriteLine("Axis implemenated Yet: " & ButtonNames(_SearchIndex))
+
+
+                    ElseIf _buttonSplit(1).Contains("h") Then ' Hat Mednagen sees hats as two aditional analog inputs
+                        Dim _hatNumber As Int16 = CInt(_buttonSplit(1).Chars(1).ToString)
+
+                        Select Case _buttonSplit(1).Split(".")(1)
+                            Case "1" ' UP
+                                _JoystickButton = "abs_" & _numAxes + _hatNumber & "-"
+                            Case "4" ' DOWN
+                                _JoystickButton = "abs_" & _numAxes + _hatNumber & "+"
+                            Case "8" ' LEFT
+                                _JoystickButton = "abs_" & _numAxes + _hatNumber - 1 & "-"
+                            Case "2" ' RIGHT
+                                _JoystickButton = "abs_" & _numAxes + _hatNumber - 1 & "+"
+                        End Select
 
                     End If
 
                 End If
 
                 If Not _JoystickButton = "" Then
+                    Console.WriteLine("Translated: " & ButtonNames(_SearchIndex) & "=" & _JoystickButton)
                     _TranslatedControls.Add(ButtonNames(_SearchIndex), _JoystickButton)
                     Exit For
 

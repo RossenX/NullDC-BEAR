@@ -406,6 +406,15 @@
     <None Include="Resources\Controller Types\Dreamcast-ArcadeStick.png" />
     <None Include="Resources\Controller Types\BEARJammaNaomi.png" />
     <None Include="Resources\Controller Types\nes-zapper.png" />
+    <None Include="Resources\Controller Types\psx-controller.png" />
+    <None Include="Resources\Controller Types\psx-dualanalogcontroller.png" />
+    <None Include="Resources\Controller Types\ss-controller.png" />
+    <None Include="Resources\Controller Types\snes-controller.png" />
+    <None Include="Resources\Controller Types\md-controller-3button.png" />
+    <None Include="Resources\Controller Types\md-controller-6button.png" />
+    <None Include="Resources\Controller Types\gba-controller.png" />
+    <None Include="Resources\Controller Types\gb_controller.png" />
+    <None Include="Resources\Controller Types\ngp-controller.png" />
     <Content Include="Resources\Multitap_1.txt" />
     <Content Include="Resources\Multitap_2.txt" />
     <Content Include="Resources\Multitap_both.txt" />
