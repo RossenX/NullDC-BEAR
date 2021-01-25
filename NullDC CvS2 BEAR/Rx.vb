@@ -909,51 +909,75 @@ Module BEARTheme
     Public Function BEARButtonToMednafenButton(ByVal _configString As String, ByVal _numAxes As String) As Dictionary(Of String, String)
         Dim _TranslatedControls As New Dictionary(Of String, String)
 
-        For Each _ConfigButton As String In _configString.Split(",") ' go through the config string
-            ' Check if this is a thing i care about
-            Dim _JoystickButton = ""
-            Dim _buttonSplit = _ConfigButton.Split(":")
-
-            If Not _buttonSplit.Count > 1 Or _buttonSplit(0) = "platform" Then Continue For
-
-            Dim _SearchIndex = 0
-            For Each _mappedButton In ButtonMappedName
-                If _mappedButton = _buttonSplit(0) Then
-                    If _buttonSplit(1).Contains("b") Then ' button_(0| ... |1023) Button EZ PZ REPLACE b WITH BUTTON BAM DONE
-                        _JoystickButton = _buttonSplit(1).Replace("b", "button_")
-
-                    ElseIf _buttonSplit(1).Contains("a") Then ' abs_(0| ... |1023)(-|+|-+|+-)[g] Axis most annoying part to convert, since mapping of axis is completly different between nulldc and mednafen and BEAR
-
-                        Console.WriteLine("Axis not implemenated Yet: " & ButtonNames(_SearchIndex))
 
 
-                    ElseIf _buttonSplit(1).Contains("h") Then ' Hat Mednagen sees hats as two aditional analog inputs
-                        Dim _hatNumber As Int16 = CInt(_buttonSplit(1).Chars(1).ToString)
+        ' New method
+        Dim _buttonIndex = 0
+        For Each _buttonToMap In ButtonNames
+            Dim MednafenControlLine = ""
+            Dim SplitConfigLine = _configString.Split(",")
 
-                        Select Case _buttonSplit(1).Split(".")(1)
+            For Each _ButtonConfig In SplitConfigLine
+                If _ButtonConfig.Split(":")(0) = ButtonMappedName(_buttonIndex) Then
+                    Dim _ButtonButton = _ButtonConfig.Split(":")(1)
+
+                    If _ButtonButton.Contains("b") Then
+                        MednafenControlLine = _ButtonButton.Replace("b", "button_")
+
+                    ElseIf _ButtonButton.Contains("a") Then
+
+                        Dim Negative As Boolean = _ButtonButton.Contains("-")
+                        Dim Reverse As Boolean = _ButtonButton.Contains("~")
+                        Dim Axis As String = _ButtonButton.Replace("+", "").Replace("-", "").Replace("a", "").Replace("~", "")
+
+                        MednafenControlLine = "abs_" & Axis
+
+                        If ButtonNames(_buttonIndex).Contains("+") Then ' This is an axis that wants to be possitive
+                            If Negative Then ' Possitive axis map to negative joy direction
+                                MednafenControlLine += "-"
+                            Else
+                                MednafenControlLine += "+" ' Possive axis to possitive joy direction
+                            End If
+                        Else ' This is his bother, he's pretty negative
+                            If Negative Then ' negative axis map to negative joy direction
+                                MednafenControlLine += "+"
+                            Else
+                                MednafenControlLine += "-" ' negative axis to possitive joy direction
+                            End If
+                        End If
+
+                        If Reverse Then
+                            If MednafenControlLine.EndsWith("+") Then
+                                MednafenControlLine += "-"
+                            Else
+                                MednafenControlLine += "+"
+                            End If
+                        End If
+
+                    ElseIf _ButtonButton.Contains("h") Then
+                        Dim _hatNumber As Int16 = CInt(_ButtonButton.Chars(1).ToString)
+
+                        Select Case _ButtonButton.Split(".")(1)
                             Case "1" ' UP
-                                _JoystickButton = "abs_" & _numAxes + _hatNumber & "-"
+                                MednafenControlLine = "abs_" & _numAxes + _hatNumber & "-"
                             Case "4" ' DOWN
-                                _JoystickButton = "abs_" & _numAxes + _hatNumber & "+"
+                                MednafenControlLine = "abs_" & _numAxes + _hatNumber & "+"
                             Case "8" ' LEFT
-                                _JoystickButton = "abs_" & _numAxes + _hatNumber - 1 & "-"
+                                MednafenControlLine = "abs_" & _numAxes + _hatNumber - 1 & "-"
                             Case "2" ' RIGHT
-                                _JoystickButton = "abs_" & _numAxes + _hatNumber - 1 & "+"
+                                MednafenControlLine = "abs_" & _numAxes + _hatNumber - 1 & "+"
                         End Select
 
                     End If
-
                 End If
-
-                If Not _JoystickButton = "" Then
-                    Console.WriteLine("Translated: " & ButtonNames(_SearchIndex) & "=" & _JoystickButton)
-                    _TranslatedControls.Add(ButtonNames(_SearchIndex), _JoystickButton)
-                    Exit For
-
-                End If
-                _SearchIndex += 1
-
             Next
+
+            If Not MednafenControlLine = "" Then
+                Console.WriteLine("Translated: " & ButtonNames(_buttonIndex) & "=" & MednafenControlLine)
+                _TranslatedControls.Add(ButtonNames(_buttonIndex), MednafenControlLine)
+            End If
+
+            _buttonIndex += 1
         Next
 
         Return _TranslatedControls

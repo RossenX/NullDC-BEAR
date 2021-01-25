@@ -45,6 +45,7 @@ Public Class frmMain
         Console.WriteLine("NullDC BEAR NEW")
         ' This call is required by the designer.
         InitializeComponent()
+        needsUpdate = IsBeta
 
     End Sub
 

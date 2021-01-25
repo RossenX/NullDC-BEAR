@@ -27,7 +27,6 @@ Public Class frmKeyMapperSDL
     Private Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
 
     Private Sub frmKeyMapperSDL_VisibilityChange(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
-        SDL.SDL_SetHint(SDL_HINT_XINPUT_ENABLED, "1") ' the default is 1, but just in case...
 
         If Me.Visible Then
 
@@ -569,6 +568,7 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub frmKeyMapperSDL_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        btn_Close.Text = "Saving..."
         _InputThread.Abort() ' Aight not accepting inputs anymore
         SaveSettings()
 
@@ -696,8 +696,14 @@ Public Class frmKeyMapperSDL
         linenumber = 0
         For Each line As String In MednafenConfigs
 
-            For Each control_line In ControlsConfigs
+            ' Deadzone
+            If line.StartsWith("input.joystick.axis_threshold ") Then
+                MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & DeadzoneTB.Value
+                linenumber += 1
+                Continue For
+            End If
 
+            For Each control_line In ControlsConfigs
                 If control_line.StartsWith("med_") Then ' Pretty much the only really consistent thing among all the mednafen controls
                     'joystick 0x00060079000000000000504944564944 button_1
                     'joystick 0x00060079000000000000504944564944 abs_1+
@@ -719,10 +725,15 @@ Public Class frmKeyMapperSDL
                             End If
 
                         Else ' Joystick
-
-                            tmpControlString += " Joystick " & MednafenControllerID(Joystick(_player - 1))
-                            If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) Then
-                                tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                            Dim _tmpID = ""
+                            If Not Joystick(_player - 1) = -1 Then
+                                _tmpID = MednafenControllerID(Joystick(_player - 1))
+                                tmpControlString += " Joystick " & _tmpID
+                                If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
+                                    tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                                Else
+                                    tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                End If
                             Else
                                 tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
                             End If
