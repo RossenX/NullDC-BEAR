@@ -919,12 +919,12 @@ Module BEARTheme
             Dim _SearchIndex = 0
             For Each _mappedButton In ButtonMappedName
                 If _mappedButton = _buttonSplit(0) Then
-                    If _buttonSplit(1).Contains("b") Then ' Button EZ PZ REPLACE b WITH BUTTON BAM DONE
+                    If _buttonSplit(1).Contains("b") Then ' button_(0| ... |1023) Button EZ PZ REPLACE b WITH BUTTON BAM DONE
                         _JoystickButton = _buttonSplit(1).Replace("b", "button_")
 
-                    ElseIf _buttonSplit(1).Contains("a") Then ' Axis most annoying part to convert, since mapping of axis is completly different between nulldc and mednafen and BEAR
+                    ElseIf _buttonSplit(1).Contains("a") Then ' abs_(0| ... |1023)(-|+|-+|+-)[g] Axis most annoying part to convert, since mapping of axis is completly different between nulldc and mednafen and BEAR
 
-                        Console.WriteLine("Axis implemenated Yet: " & ButtonNames(_SearchIndex))
+                        Console.WriteLine("Axis not implemenated Yet: " & ButtonNames(_SearchIndex))
 
 
                     ElseIf _buttonSplit(1).Contains("h") Then ' Hat Mednagen sees hats as two aditional analog inputs
