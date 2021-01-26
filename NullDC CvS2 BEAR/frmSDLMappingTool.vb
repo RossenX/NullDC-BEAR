@@ -168,7 +168,7 @@ Public Class frmSDLMappingTool
                     Case SDL_EventType.SDL_JOYAXISMOTION ' Axis Motion Down
                         'Console.WriteLine("Axis: " & _event.jaxis.axisValue)
                         'Console.WriteLine("Device: " & _event.jdevice.which)
-
+                        Console.WriteLine("Axis: " & _event.jaxis.axis)
                         Dim _axisnorm As Int32 = _event.jaxis.axisValue
                         _axisnorm = Math.Abs(_axisnorm)
 

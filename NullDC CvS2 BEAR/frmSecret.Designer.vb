@@ -106,7 +106,7 @@ Partial Class frmSecret
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Secret_Moblin
+        Me.BackgroundImage = Nothing
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ClientSize = New System.Drawing.Size(708, 465)
         Me.Controls.Add(Me.TableLayoutPanel2)

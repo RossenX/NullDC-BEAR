@@ -371,6 +371,7 @@ Public Class frmMain
             End Using
 
         Catch Ex As Exception
+
             Return True
         End Try
 
@@ -490,6 +491,12 @@ Public Class frmMain
                     If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
                         File.SetAttributes(_dir & "\" & entry.FullName.Replace("/", "\"), FileAttribute.Normal)
                         File.Delete(_dir & "\" & entry.FullName.Replace("/", "\"))
+                    End If
+
+                    If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
+                        While IsFileInUse(_dir & "\" & entry.FullName.Replace("/", "\"))
+                            Thread.Sleep(50)
+                        End While
                     End If
 
                     entry.ExtractToFile(_dir & "\" & entry.FullName.Replace("/", "\"), True)
@@ -663,12 +670,15 @@ Public Class frmMain
             Dim InsertAtIndex = 0
             If Files.Count > 0 Then InsertAtIndex = Files.Count
 
-            Array.Resize(Files, Files.Count + GDIFiles.Count + 1)
+            Array.Resize(Files, Files.Count + GDIFiles.Count)
             GDIFiles.CopyTo(Files, InsertAtIndex)
 
 
             For Each _file In Files
+                If _file Is Nothing Then Continue For
+
                 If IsFileInUse(_file) Then
+                    Thread.Sleep(50)
                     Continue For
                 End If
 

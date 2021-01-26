@@ -973,7 +973,7 @@ Module BEARTheme
             Next
 
             If Not MednafenControlLine = "" Then
-                Console.WriteLine("Translated: " & ButtonNames(_buttonIndex) & "=" & MednafenControlLine)
+                'Console.WriteLine("Translated: " & ButtonNames(_buttonIndex) & "=" & MednafenControlLine)
                 _TranslatedControls.Add(ButtonNames(_buttonIndex), MednafenControlLine)
             End If
 

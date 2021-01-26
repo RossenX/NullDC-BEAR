@@ -22,6 +22,7 @@ Partial Class frmKeyMapperSDL
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmKeyMapperSDL))
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ControllerCB = New System.Windows.Forms.ComboBox()
         Me.Deadzonetext = New System.Windows.Forms.Label()
@@ -139,7 +140,65 @@ Partial Class frmKeyMapperSDL
         Me.TabPage9 = New System.Windows.Forms.TabPage()
         Me.TabControl3 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.psx_gamepad_r2 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_l2 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_r1 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_l1 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.psx_gamepad_circle = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_triangle = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_square = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_cross = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_start = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_select = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_gamepad_up = New NullDC_CvS2_BEAR.keybindButton()
         Me.TabPage16 = New System.Windows.Forms.TabPage()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.psx_dualshock_r3 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.psx_dualshock_l3 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_analog = New NullDC_CvS2_BEAR.keybindButton()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.psx_dualshock_rstick_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_rstick_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_rstick_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_rstick_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_lstick_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_lstick_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_lstick_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_lstick_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_start = New NullDC_CvS2_BEAR.keybindButton()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.Label51 = New System.Windows.Forms.Label()
+        Me.Label52 = New System.Windows.Forms.Label()
+        Me.psx_dualshock_r2 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_l2 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_r1 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_l1 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.Label53 = New System.Windows.Forms.Label()
+        Me.Label54 = New System.Windows.Forms.Label()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.psx_dualshock_circle = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_triangle = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_square = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_cross = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_select = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.psx_dualshock_up = New NullDC_CvS2_BEAR.keybindButton()
         Me.TabPage12 = New System.Windows.Forms.TabPage()
         Me.TabControl4 = New System.Windows.Forms.TabControl()
         Me.TabPage17 = New System.Windows.Forms.TabPage()
@@ -203,6 +262,8 @@ Partial Class frmKeyMapperSDL
         Me.TabPage14.SuspendLayout()
         Me.TabPage9.SuspendLayout()
         Me.TabControl3.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.TabPage16.SuspendLayout()
         Me.TabPage12.SuspendLayout()
         Me.TabControl4.SuspendLayout()
         Me.TabPage11.SuspendLayout()
@@ -330,7 +391,7 @@ Partial Class frmKeyMapperSDL
         'TabPage15
         '
         Me.TabPage15.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage15.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.BEARJammaNaomi
+        Me.TabPage15.BackgroundImage = CType(resources.GetObject("TabPage15.BackgroundImage"), System.Drawing.Image)
         Me.TabPage15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage15.Controls.Add(Me.I_BC_345)
         Me.TabPage15.Controls.Add(Me.I_BC_012)
@@ -883,7 +944,7 @@ Partial Class frmKeyMapperSDL
         'TabPage13
         '
         Me.TabPage13.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage13.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.BEARJamma_Dreamcast1
+        Me.TabPage13.BackgroundImage = CType(resources.GetObject("TabPage13.BackgroundImage"), System.Drawing.Image)
         Me.TabPage13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage13.Controls.Add(Me.CONT_LSLIDER)
         Me.TabPage13.Controls.Add(Me.CONT_BC_ABC)
@@ -1511,7 +1572,7 @@ Partial Class frmKeyMapperSDL
         'TabPage14
         '
         Me.TabPage14.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage14.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.Dreamcast_ArcadeStick1
+        Me.TabPage14.BackgroundImage = CType(resources.GetObject("TabPage14.BackgroundImage"), System.Drawing.Image)
         Me.TabPage14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage14.Controls.Add(Me.STICK_BC_ABC)
         Me.TabPage14.Controls.Add(Me.STICK_BC_XYZ)
@@ -2010,8 +2071,30 @@ Partial Class frmKeyMapperSDL
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage3.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.psx_controller
+        Me.TabPage3.BackgroundImage = CType(resources.GetObject("TabPage3.BackgroundImage"), System.Drawing.Image)
         Me.TabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.TabPage3.Controls.Add(Me.Label48)
+        Me.TabPage3.Controls.Add(Me.Label49)
+        Me.TabPage3.Controls.Add(Me.Label47)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_r2)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_l2)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_r1)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_l1)
+        Me.TabPage3.Controls.Add(Me.Label46)
+        Me.TabPage3.Controls.Add(Me.Label45)
+        Me.TabPage3.Controls.Add(Me.Label44)
+        Me.TabPage3.Controls.Add(Me.Label43)
+        Me.TabPage3.Controls.Add(Me.Label42)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_circle)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_triangle)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_square)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_cross)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_start)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_select)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_left)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_right)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_down)
+        Me.TabPage3.Controls.Add(Me.psx_gamepad_up)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
@@ -2019,17 +2102,847 @@ Partial Class frmKeyMapperSDL
         Me.TabPage3.TabIndex = 0
         Me.TabPage3.Text = "Gamepad"
         '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.BackColor = System.Drawing.Color.Transparent
+        Me.Label48.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label48.Location = New System.Drawing.Point(534, 74)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(95, 24)
+        Me.Label48.TabIndex = 96
+        Me.Label48.Text = "Shoulder"
+        '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.BackColor = System.Drawing.Color.Transparent
+        Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label49.Location = New System.Drawing.Point(534, 22)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(78, 24)
+        Me.Label49.TabIndex = 95
+        Me.Label49.Text = "Trigger"
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.BackColor = System.Drawing.Color.Transparent
+        Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label47.Location = New System.Drawing.Point(61, 74)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(95, 24)
+        Me.Label47.TabIndex = 94
+        Me.Label47.Text = "Shoulder"
+        '
+        'psx_gamepad_r2
+        '
+        Me.psx_gamepad_r2.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_r2.ConfigString = "psx.input.port<port>.gamepad.r2"
+        Me.psx_gamepad_r2.Emu = "mednafen"
+        Me.psx_gamepad_r2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_r2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_r2.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_r2.Location = New System.Drawing.Point(478, 6)
+        Me.psx_gamepad_r2.Name = "psx_gamepad_r2"
+        Me.psx_gamepad_r2.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_r2.TabIndex = 93
+        Me.psx_gamepad_r2.Text = "W"
+        Me.psx_gamepad_r2.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_l2
+        '
+        Me.psx_gamepad_l2.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_l2.ConfigString = "psx.input.port<port>.gamepad.l2"
+        Me.psx_gamepad_l2.Emu = "mednafen"
+        Me.psx_gamepad_l2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_l2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_l2.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_l2.Location = New System.Drawing.Point(162, 12)
+        Me.psx_gamepad_l2.Name = "psx_gamepad_l2"
+        Me.psx_gamepad_l2.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_l2.TabIndex = 92
+        Me.psx_gamepad_l2.Text = "W"
+        Me.psx_gamepad_l2.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_r1
+        '
+        Me.psx_gamepad_r1.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_r1.ConfigString = "psx.input.port<port>.gamepad.r1"
+        Me.psx_gamepad_r1.Emu = "mednafen"
+        Me.psx_gamepad_r1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_r1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_r1.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_r1.Location = New System.Drawing.Point(477, 62)
+        Me.psx_gamepad_r1.Name = "psx_gamepad_r1"
+        Me.psx_gamepad_r1.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_r1.TabIndex = 91
+        Me.psx_gamepad_r1.Text = "W"
+        Me.psx_gamepad_r1.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_l1
+        '
+        Me.psx_gamepad_l1.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_l1.ConfigString = "psx.input.port<port>.gamepad.l1"
+        Me.psx_gamepad_l1.Emu = "mednafen"
+        Me.psx_gamepad_l1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_l1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_l1.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_l1.Location = New System.Drawing.Point(162, 66)
+        Me.psx_gamepad_l1.Name = "psx_gamepad_l1"
+        Me.psx_gamepad_l1.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_l1.TabIndex = 90
+        Me.psx_gamepad_l1.Text = "W"
+        Me.psx_gamepad_l1.UseVisualStyleBackColor = False
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.BackColor = System.Drawing.Color.Transparent
+        Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label46.Location = New System.Drawing.Point(394, 178)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(77, 24)
+        Me.Label46.TabIndex = 89
+        Me.Label46.Text = "Square"
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.BackColor = System.Drawing.Color.Transparent
+        Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label45.Location = New System.Drawing.Point(78, 24)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(78, 24)
+        Me.Label45.TabIndex = 88
+        Me.Label45.Text = "Trigger"
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.BackColor = System.Drawing.Color.Transparent
+        Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label44.Location = New System.Drawing.Point(578, 218)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(26, 24)
+        Me.Label44.TabIndex = 87
+        Me.Label44.Text = "O"
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.BackColor = System.Drawing.Color.Transparent
+        Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label43.Location = New System.Drawing.Point(455, 129)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(87, 24)
+        Me.Label43.TabIndex = 86
+        Me.Label43.Text = "Triangle"
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.BackColor = System.Drawing.Color.Transparent
+        Me.Label42.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label42.Location = New System.Drawing.Point(490, 309)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(25, 24)
+        Me.Label42.TabIndex = 85
+        Me.Label42.Text = "X"
+        '
+        'psx_gamepad_circle
+        '
+        Me.psx_gamepad_circle.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_circle.ConfigString = "psx.input.port<port>.gamepad.circle"
+        Me.psx_gamepad_circle.Emu = "mednafen"
+        Me.psx_gamepad_circle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_circle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_circle.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_circle.Location = New System.Drawing.Point(527, 206)
+        Me.psx_gamepad_circle.Name = "psx_gamepad_circle"
+        Me.psx_gamepad_circle.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_circle.TabIndex = 11
+        Me.psx_gamepad_circle.Text = "W"
+        Me.psx_gamepad_circle.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_triangle
+        '
+        Me.psx_gamepad_triangle.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_triangle.ConfigString = "psx.input.port<port>.gamepad.triangle"
+        Me.psx_gamepad_triangle.Emu = "mednafen"
+        Me.psx_gamepad_triangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_triangle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_triangle.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_triangle.Location = New System.Drawing.Point(477, 156)
+        Me.psx_gamepad_triangle.Name = "psx_gamepad_triangle"
+        Me.psx_gamepad_triangle.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_triangle.TabIndex = 10
+        Me.psx_gamepad_triangle.Text = "W"
+        Me.psx_gamepad_triangle.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_square
+        '
+        Me.psx_gamepad_square.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_square.ConfigString = "psx.input.port<port>.gamepad.square"
+        Me.psx_gamepad_square.Emu = "mednafen"
+        Me.psx_gamepad_square.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_square.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_square.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_square.Location = New System.Drawing.Point(429, 206)
+        Me.psx_gamepad_square.Name = "psx_gamepad_square"
+        Me.psx_gamepad_square.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_square.TabIndex = 9
+        Me.psx_gamepad_square.Text = "W"
+        Me.psx_gamepad_square.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_cross
+        '
+        Me.psx_gamepad_cross.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_cross.ConfigString = "psx.input.port<port>.gamepad.cross"
+        Me.psx_gamepad_cross.Emu = "mednafen"
+        Me.psx_gamepad_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_cross.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_cross.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_cross.Location = New System.Drawing.Point(478, 256)
+        Me.psx_gamepad_cross.Name = "psx_gamepad_cross"
+        Me.psx_gamepad_cross.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_cross.TabIndex = 8
+        Me.psx_gamepad_cross.Text = "W"
+        Me.psx_gamepad_cross.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_start
+        '
+        Me.psx_gamepad_start.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_start.ConfigString = "psx.input.port<port>.gamepad.start"
+        Me.psx_gamepad_start.Emu = "mednafen"
+        Me.psx_gamepad_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_start.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_start.Location = New System.Drawing.Point(349, 227)
+        Me.psx_gamepad_start.Name = "psx_gamepad_start"
+        Me.psx_gamepad_start.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_start.TabIndex = 7
+        Me.psx_gamepad_start.Text = "W"
+        Me.psx_gamepad_start.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_select
+        '
+        Me.psx_gamepad_select.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_select.ConfigString = "psx.input.port<port>.gamepad.select"
+        Me.psx_gamepad_select.Emu = "mednafen"
+        Me.psx_gamepad_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_select.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_select.Location = New System.Drawing.Point(275, 227)
+        Me.psx_gamepad_select.Name = "psx_gamepad_select"
+        Me.psx_gamepad_select.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_select.TabIndex = 6
+        Me.psx_gamepad_select.Text = "W"
+        Me.psx_gamepad_select.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_left
+        '
+        Me.psx_gamepad_left.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_left.ConfigString = "psx.input.port<port>.gamepad.left"
+        Me.psx_gamepad_left.Emu = "mednafen"
+        Me.psx_gamepad_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_left.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_left.Location = New System.Drawing.Point(99, 206)
+        Me.psx_gamepad_left.Name = "psx_gamepad_left"
+        Me.psx_gamepad_left.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_left.TabIndex = 5
+        Me.psx_gamepad_left.Text = "W"
+        Me.psx_gamepad_left.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_right
+        '
+        Me.psx_gamepad_right.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_right.ConfigString = "psx.input.port<port>.gamepad.right"
+        Me.psx_gamepad_right.Emu = "mednafen"
+        Me.psx_gamepad_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_right.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_right.Location = New System.Drawing.Point(197, 206)
+        Me.psx_gamepad_right.Name = "psx_gamepad_right"
+        Me.psx_gamepad_right.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_right.TabIndex = 4
+        Me.psx_gamepad_right.Text = "W"
+        Me.psx_gamepad_right.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_down
+        '
+        Me.psx_gamepad_down.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_down.ConfigString = "psx.input.port<port>.gamepad.down"
+        Me.psx_gamepad_down.Emu = "mednafen"
+        Me.psx_gamepad_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_down.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_down.Location = New System.Drawing.Point(148, 255)
+        Me.psx_gamepad_down.Name = "psx_gamepad_down"
+        Me.psx_gamepad_down.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_down.TabIndex = 3
+        Me.psx_gamepad_down.Text = "W"
+        Me.psx_gamepad_down.UseVisualStyleBackColor = False
+        '
+        'psx_gamepad_up
+        '
+        Me.psx_gamepad_up.BackColor = System.Drawing.Color.White
+        Me.psx_gamepad_up.ConfigString = "psx.input.port<port>.gamepad.up"
+        Me.psx_gamepad_up.Emu = "mednafen"
+        Me.psx_gamepad_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_gamepad_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_up.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_up.Location = New System.Drawing.Point(148, 157)
+        Me.psx_gamepad_up.Name = "psx_gamepad_up"
+        Me.psx_gamepad_up.Size = New System.Drawing.Size(50, 50)
+        Me.psx_gamepad_up.TabIndex = 2
+        Me.psx_gamepad_up.Text = "W"
+        Me.psx_gamepad_up.UseVisualStyleBackColor = False
+        '
         'TabPage16
         '
         Me.TabPage16.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage16.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.psx_dualanalogcontroller
+        Me.TabPage16.BackgroundImage = CType(resources.GetObject("TabPage16.BackgroundImage"), System.Drawing.Image)
         Me.TabPage16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.TabPage16.Controls.Add(Me.Label60)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_r3)
+        Me.TabPage16.Controls.Add(Me.Label59)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_l3)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_analog)
+        Me.TabPage16.Controls.Add(Me.Label58)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_left)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_right)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_down)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_up)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_left)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_right)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_down)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_up)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_start)
+        Me.TabPage16.Controls.Add(Me.Label50)
+        Me.TabPage16.Controls.Add(Me.Label51)
+        Me.TabPage16.Controls.Add(Me.Label52)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_r2)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_l2)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_r1)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_l1)
+        Me.TabPage16.Controls.Add(Me.Label53)
+        Me.TabPage16.Controls.Add(Me.Label54)
+        Me.TabPage16.Controls.Add(Me.Label55)
+        Me.TabPage16.Controls.Add(Me.Label56)
+        Me.TabPage16.Controls.Add(Me.Label57)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_circle)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_triangle)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_square)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_cross)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_select)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_left)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_right)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_down)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_up)
         Me.TabPage16.Location = New System.Drawing.Point(4, 22)
         Me.TabPage16.Name = "TabPage16"
         Me.TabPage16.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage16.Size = New System.Drawing.Size(679, 495)
         Me.TabPage16.TabIndex = 1
         Me.TabPage16.Text = "Dualshock"
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.BackColor = System.Drawing.Color.Transparent
+        Me.Label60.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label60.Location = New System.Drawing.Point(442, 440)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(35, 24)
+        Me.Label60.TabIndex = 132
+        Me.Label60.Text = "R3"
+        '
+        'psx_dualshock_r3
+        '
+        Me.psx_dualshock_r3.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_r3.ConfigString = "psx.input.port<port>.dualshock.r3"
+        Me.psx_dualshock_r3.Emu = "mednafen"
+        Me.psx_dualshock_r3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_r3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_r3.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_r3.Location = New System.Drawing.Point(439, 397)
+        Me.psx_dualshock_r3.Name = "psx_dualshock_r3"
+        Me.psx_dualshock_r3.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_r3.TabIndex = 131
+        Me.psx_dualshock_r3.Text = "W"
+        Me.psx_dualshock_r3.UseVisualStyleBackColor = False
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.BackColor = System.Drawing.Color.Transparent
+        Me.Label59.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label59.Location = New System.Drawing.Point(203, 440)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(32, 24)
+        Me.Label59.TabIndex = 130
+        Me.Label59.Text = "L3"
+        '
+        'psx_dualshock_l3
+        '
+        Me.psx_dualshock_l3.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_l3.ConfigString = "psx.input.port<port>.dualshock.l3"
+        Me.psx_dualshock_l3.Emu = "mednafen"
+        Me.psx_dualshock_l3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_l3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_l3.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_l3.Location = New System.Drawing.Point(200, 397)
+        Me.psx_dualshock_l3.Name = "psx_dualshock_l3"
+        Me.psx_dualshock_l3.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_l3.TabIndex = 129
+        Me.psx_dualshock_l3.Text = "W"
+        Me.psx_dualshock_l3.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_analog
+        '
+        Me.psx_dualshock_analog.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_analog.ConfigString = "psx.input.port<port>.dualshock.analog"
+        Me.psx_dualshock_analog.Emu = "mednafen"
+        Me.psx_dualshock_analog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_analog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_analog.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_analog.Location = New System.Drawing.Point(319, 425)
+        Me.psx_dualshock_analog.Name = "psx_dualshock_analog"
+        Me.psx_dualshock_analog.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_analog.TabIndex = 127
+        Me.psx_dualshock_analog.Text = "W"
+        Me.psx_dualshock_analog.UseVisualStyleBackColor = False
+        '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.BackColor = System.Drawing.Color.Transparent
+        Me.Label58.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label58.Location = New System.Drawing.Point(270, 463)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(148, 24)
+        Me.Label58.TabIndex = 128
+        Me.Label58.Text = "Analog Toggle"
+        '
+        'psx_dualshock_rstick_left
+        '
+        Me.psx_dualshock_rstick_left.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_rstick_left.ConfigString = "psx.input.port<port>.dualshock.rstick_left"
+        Me.psx_dualshock_rstick_left.Emu = "mednafen"
+        Me.psx_dualshock_rstick_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_rstick_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_rstick_left.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_rstick_left.Location = New System.Drawing.Point(354, 350)
+        Me.psx_dualshock_rstick_left.Name = "psx_dualshock_rstick_left"
+        Me.psx_dualshock_rstick_left.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_rstick_left.TabIndex = 126
+        Me.psx_dualshock_rstick_left.Text = "W"
+        Me.psx_dualshock_rstick_left.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_rstick_right
+        '
+        Me.psx_dualshock_rstick_right.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_rstick_right.ConfigString = "psx.input.port<port>.dualshock.rstick_right"
+        Me.psx_dualshock_rstick_right.Emu = "mednafen"
+        Me.psx_dualshock_rstick_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_rstick_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_rstick_right.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_rstick_right.Location = New System.Drawing.Point(432, 350)
+        Me.psx_dualshock_rstick_right.Name = "psx_dualshock_rstick_right"
+        Me.psx_dualshock_rstick_right.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_rstick_right.TabIndex = 125
+        Me.psx_dualshock_rstick_right.Text = "W"
+        Me.psx_dualshock_rstick_right.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_rstick_down
+        '
+        Me.psx_dualshock_rstick_down.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_rstick_down.ConfigString = "psx.input.port<port>.dualshock.rstick_down"
+        Me.psx_dualshock_rstick_down.Emu = "mednafen"
+        Me.psx_dualshock_rstick_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_rstick_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_rstick_down.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_rstick_down.Location = New System.Drawing.Point(393, 389)
+        Me.psx_dualshock_rstick_down.Name = "psx_dualshock_rstick_down"
+        Me.psx_dualshock_rstick_down.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_rstick_down.TabIndex = 124
+        Me.psx_dualshock_rstick_down.Text = "W"
+        Me.psx_dualshock_rstick_down.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_rstick_up
+        '
+        Me.psx_dualshock_rstick_up.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_rstick_up.ConfigString = "psx.input.port<port>.dualshock.rstick_up"
+        Me.psx_dualshock_rstick_up.Emu = "mednafen"
+        Me.psx_dualshock_rstick_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_rstick_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_rstick_up.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_rstick_up.Location = New System.Drawing.Point(393, 311)
+        Me.psx_dualshock_rstick_up.Name = "psx_dualshock_rstick_up"
+        Me.psx_dualshock_rstick_up.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_rstick_up.TabIndex = 123
+        Me.psx_dualshock_rstick_up.Text = "W"
+        Me.psx_dualshock_rstick_up.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_lstick_left
+        '
+        Me.psx_dualshock_lstick_left.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_lstick_left.ConfigString = "psx.input.port<port>.dualshock.lstick_left"
+        Me.psx_dualshock_lstick_left.Emu = "mednafen"
+        Me.psx_dualshock_lstick_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_lstick_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_lstick_left.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_lstick_left.Location = New System.Drawing.Point(207, 351)
+        Me.psx_dualshock_lstick_left.Name = "psx_dualshock_lstick_left"
+        Me.psx_dualshock_lstick_left.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_lstick_left.TabIndex = 122
+        Me.psx_dualshock_lstick_left.Text = "W"
+        Me.psx_dualshock_lstick_left.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_lstick_right
+        '
+        Me.psx_dualshock_lstick_right.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_lstick_right.ConfigString = "psx.input.port<port>.dualshock.lstick_right"
+        Me.psx_dualshock_lstick_right.Emu = "mednafen"
+        Me.psx_dualshock_lstick_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_lstick_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_lstick_right.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_lstick_right.Location = New System.Drawing.Point(285, 351)
+        Me.psx_dualshock_lstick_right.Name = "psx_dualshock_lstick_right"
+        Me.psx_dualshock_lstick_right.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_lstick_right.TabIndex = 121
+        Me.psx_dualshock_lstick_right.Text = "W"
+        Me.psx_dualshock_lstick_right.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_lstick_down
+        '
+        Me.psx_dualshock_lstick_down.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_lstick_down.ConfigString = "psx.input.port<port>.dualshock.lstick_down"
+        Me.psx_dualshock_lstick_down.Emu = "mednafen"
+        Me.psx_dualshock_lstick_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_lstick_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_lstick_down.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_lstick_down.Location = New System.Drawing.Point(246, 390)
+        Me.psx_dualshock_lstick_down.Name = "psx_dualshock_lstick_down"
+        Me.psx_dualshock_lstick_down.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_lstick_down.TabIndex = 120
+        Me.psx_dualshock_lstick_down.Text = "W"
+        Me.psx_dualshock_lstick_down.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_lstick_up
+        '
+        Me.psx_dualshock_lstick_up.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_lstick_up.ConfigString = "psx.input.port<port>.dualshock.lstick_up"
+        Me.psx_dualshock_lstick_up.Emu = "mednafen"
+        Me.psx_dualshock_lstick_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_lstick_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_lstick_up.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_lstick_up.Location = New System.Drawing.Point(246, 311)
+        Me.psx_dualshock_lstick_up.Name = "psx_dualshock_lstick_up"
+        Me.psx_dualshock_lstick_up.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_lstick_up.TabIndex = 119
+        Me.psx_dualshock_lstick_up.Text = "W"
+        Me.psx_dualshock_lstick_up.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_start
+        '
+        Me.psx_dualshock_start.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_start.ConfigString = "psx.input.port<port>.dualshock.start"
+        Me.psx_dualshock_start.Emu = "mednafen"
+        Me.psx_dualshock_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_start.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_start.Location = New System.Drawing.Point(366, 249)
+        Me.psx_dualshock_start.Name = "psx_dualshock_start"
+        Me.psx_dualshock_start.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_start.TabIndex = 102
+        Me.psx_dualshock_start.Text = "W"
+        Me.psx_dualshock_start.UseVisualStyleBackColor = False
+        '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.BackColor = System.Drawing.Color.Transparent
+        Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label50.Location = New System.Drawing.Point(521, 119)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(95, 24)
+        Me.Label50.TabIndex = 118
+        Me.Label50.Text = "Shoulder"
+        '
+        'Label51
+        '
+        Me.Label51.AutoSize = True
+        Me.Label51.BackColor = System.Drawing.Color.Transparent
+        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label51.Location = New System.Drawing.Point(521, 67)
+        Me.Label51.Name = "Label51"
+        Me.Label51.Size = New System.Drawing.Size(78, 24)
+        Me.Label51.TabIndex = 117
+        Me.Label51.Text = "Trigger"
+        '
+        'Label52
+        '
+        Me.Label52.AutoSize = True
+        Me.Label52.BackColor = System.Drawing.Color.Transparent
+        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label52.Location = New System.Drawing.Point(66, 119)
+        Me.Label52.Name = "Label52"
+        Me.Label52.Size = New System.Drawing.Size(95, 24)
+        Me.Label52.TabIndex = 116
+        Me.Label52.Text = "Shoulder"
+        '
+        'psx_dualshock_r2
+        '
+        Me.psx_dualshock_r2.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_r2.ConfigString = "psx.input.port<port>.dualshock.r2"
+        Me.psx_dualshock_r2.Emu = "mednafen"
+        Me.psx_dualshock_r2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_r2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_r2.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_r2.Location = New System.Drawing.Point(465, 51)
+        Me.psx_dualshock_r2.Name = "psx_dualshock_r2"
+        Me.psx_dualshock_r2.Size = New System.Drawing.Size(50, 50)
+        Me.psx_dualshock_r2.TabIndex = 115
+        Me.psx_dualshock_r2.Text = "W"
+        Me.psx_dualshock_r2.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_l2
+        '
+        Me.psx_dualshock_l2.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_l2.ConfigString = "psx.input.port<port>.dualshock.l2"
+        Me.psx_dualshock_l2.Emu = "mednafen"
+        Me.psx_dualshock_l2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_l2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_l2.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_l2.Location = New System.Drawing.Point(167, 57)
+        Me.psx_dualshock_l2.Name = "psx_dualshock_l2"
+        Me.psx_dualshock_l2.Size = New System.Drawing.Size(50, 50)
+        Me.psx_dualshock_l2.TabIndex = 114
+        Me.psx_dualshock_l2.Text = "W"
+        Me.psx_dualshock_l2.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_r1
+        '
+        Me.psx_dualshock_r1.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_r1.ConfigString = "psx.input.port<port>.dualshock.r1"
+        Me.psx_dualshock_r1.Emu = "mednafen"
+        Me.psx_dualshock_r1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_r1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_r1.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_r1.Location = New System.Drawing.Point(464, 107)
+        Me.psx_dualshock_r1.Name = "psx_dualshock_r1"
+        Me.psx_dualshock_r1.Size = New System.Drawing.Size(50, 50)
+        Me.psx_dualshock_r1.TabIndex = 113
+        Me.psx_dualshock_r1.Text = "W"
+        Me.psx_dualshock_r1.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_l1
+        '
+        Me.psx_dualshock_l1.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_l1.ConfigString = "psx.input.port<port>.dualshock.l1"
+        Me.psx_dualshock_l1.Emu = "mednafen"
+        Me.psx_dualshock_l1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_l1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_l1.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_l1.Location = New System.Drawing.Point(167, 111)
+        Me.psx_dualshock_l1.Name = "psx_dualshock_l1"
+        Me.psx_dualshock_l1.Size = New System.Drawing.Size(50, 50)
+        Me.psx_dualshock_l1.TabIndex = 112
+        Me.psx_dualshock_l1.Text = "W"
+        Me.psx_dualshock_l1.UseVisualStyleBackColor = False
+        '
+        'Label53
+        '
+        Me.Label53.AutoSize = True
+        Me.Label53.BackColor = System.Drawing.Color.Transparent
+        Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label53.Location = New System.Drawing.Point(386, 223)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(77, 24)
+        Me.Label53.TabIndex = 111
+        Me.Label53.Text = "Square"
+        '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.BackColor = System.Drawing.Color.Transparent
+        Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label54.Location = New System.Drawing.Point(83, 69)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(78, 24)
+        Me.Label54.TabIndex = 110
+        Me.Label54.Text = "Trigger"
+        '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.BackColor = System.Drawing.Color.Transparent
+        Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label55.Location = New System.Drawing.Point(570, 263)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(26, 24)
+        Me.Label55.TabIndex = 109
+        Me.Label55.Text = "O"
+        '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.BackColor = System.Drawing.Color.Transparent
+        Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label56.Location = New System.Drawing.Point(447, 174)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(87, 24)
+        Me.Label56.TabIndex = 108
+        Me.Label56.Text = "Triangle"
+        '
+        'Label57
+        '
+        Me.Label57.AutoSize = True
+        Me.Label57.BackColor = System.Drawing.Color.Transparent
+        Me.Label57.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label57.Location = New System.Drawing.Point(482, 354)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(25, 24)
+        Me.Label57.TabIndex = 107
+        Me.Label57.Text = "X"
+        '
+        'psx_dualshock_circle
+        '
+        Me.psx_dualshock_circle.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_circle.ConfigString = "psx.input.port<port>.dualshock.circle"
+        Me.psx_dualshock_circle.Emu = "mednafen"
+        Me.psx_dualshock_circle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_circle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_circle.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_circle.Location = New System.Drawing.Point(519, 251)
+        Me.psx_dualshock_circle.Name = "psx_dualshock_circle"
+        Me.psx_dualshock_circle.Size = New System.Drawing.Size(50, 50)
+        Me.psx_dualshock_circle.TabIndex = 106
+        Me.psx_dualshock_circle.Text = "W"
+        Me.psx_dualshock_circle.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_triangle
+        '
+        Me.psx_dualshock_triangle.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_triangle.ConfigString = "psx.input.port<port>.dualshock.triangle"
+        Me.psx_dualshock_triangle.Emu = "mednafen"
+        Me.psx_dualshock_triangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_triangle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_triangle.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_triangle.Location = New System.Drawing.Point(469, 201)
+        Me.psx_dualshock_triangle.Name = "psx_dualshock_triangle"
+        Me.psx_dualshock_triangle.Size = New System.Drawing.Size(50, 50)
+        Me.psx_dualshock_triangle.TabIndex = 105
+        Me.psx_dualshock_triangle.Text = "W"
+        Me.psx_dualshock_triangle.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_square
+        '
+        Me.psx_dualshock_square.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_square.ConfigString = "psx.input.port<port>.dualshock.square"
+        Me.psx_dualshock_square.Emu = "mednafen"
+        Me.psx_dualshock_square.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_square.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_square.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_square.Location = New System.Drawing.Point(421, 251)
+        Me.psx_dualshock_square.Name = "psx_dualshock_square"
+        Me.psx_dualshock_square.Size = New System.Drawing.Size(50, 50)
+        Me.psx_dualshock_square.TabIndex = 104
+        Me.psx_dualshock_square.Text = "W"
+        Me.psx_dualshock_square.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_cross
+        '
+        Me.psx_dualshock_cross.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_cross.ConfigString = "psx.input.port<port>.dualshock.cross"
+        Me.psx_dualshock_cross.Emu = "mednafen"
+        Me.psx_dualshock_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_cross.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_cross.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_cross.Location = New System.Drawing.Point(470, 301)
+        Me.psx_dualshock_cross.Name = "psx_dualshock_cross"
+        Me.psx_dualshock_cross.Size = New System.Drawing.Size(50, 50)
+        Me.psx_dualshock_cross.TabIndex = 103
+        Me.psx_dualshock_cross.Text = "W"
+        Me.psx_dualshock_cross.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_select
+        '
+        Me.psx_dualshock_select.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_select.ConfigString = "psx.input.port<port>.dualshock.select"
+        Me.psx_dualshock_select.Emu = "mednafen"
+        Me.psx_dualshock_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_select.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_select.Location = New System.Drawing.Point(276, 249)
+        Me.psx_dualshock_select.Name = "psx_dualshock_select"
+        Me.psx_dualshock_select.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_select.TabIndex = 101
+        Me.psx_dualshock_select.Text = "W"
+        Me.psx_dualshock_select.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_left
+        '
+        Me.psx_dualshock_left.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_left.ConfigString = "psx.input.port<port>.dualshock.left"
+        Me.psx_dualshock_left.Emu = "mednafen"
+        Me.psx_dualshock_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_left.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_left.Location = New System.Drawing.Point(132, 259)
+        Me.psx_dualshock_left.Name = "psx_dualshock_left"
+        Me.psx_dualshock_left.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_left.TabIndex = 100
+        Me.psx_dualshock_left.Text = "W"
+        Me.psx_dualshock_left.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_right
+        '
+        Me.psx_dualshock_right.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_right.ConfigString = "psx.input.port<port>.dualshock.right"
+        Me.psx_dualshock_right.Emu = "mednafen"
+        Me.psx_dualshock_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_right.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_right.Location = New System.Drawing.Point(210, 259)
+        Me.psx_dualshock_right.Name = "psx_dualshock_right"
+        Me.psx_dualshock_right.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_right.TabIndex = 99
+        Me.psx_dualshock_right.Text = "W"
+        Me.psx_dualshock_right.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_down
+        '
+        Me.psx_dualshock_down.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_down.ConfigString = "psx.input.port<port>.dualshock.down"
+        Me.psx_dualshock_down.Emu = "mednafen"
+        Me.psx_dualshock_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_down.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_down.Location = New System.Drawing.Point(171, 298)
+        Me.psx_dualshock_down.Name = "psx_dualshock_down"
+        Me.psx_dualshock_down.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_down.TabIndex = 98
+        Me.psx_dualshock_down.Text = "W"
+        Me.psx_dualshock_down.UseVisualStyleBackColor = False
+        '
+        'psx_dualshock_up
+        '
+        Me.psx_dualshock_up.BackColor = System.Drawing.Color.White
+        Me.psx_dualshock_up.ConfigString = "psx.input.port<port>.dualshock.up"
+        Me.psx_dualshock_up.Emu = "mednafen"
+        Me.psx_dualshock_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.psx_dualshock_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_up.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_up.Location = New System.Drawing.Point(171, 220)
+        Me.psx_dualshock_up.Name = "psx_dualshock_up"
+        Me.psx_dualshock_up.Size = New System.Drawing.Size(40, 40)
+        Me.psx_dualshock_up.TabIndex = 97
+        Me.psx_dualshock_up.Text = "W"
+        Me.psx_dualshock_up.UseVisualStyleBackColor = False
         '
         'TabPage12
         '
@@ -2054,7 +2967,7 @@ Partial Class frmKeyMapperSDL
         'TabPage17
         '
         Me.TabPage17.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage17.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.ss_controller
+        Me.TabPage17.BackgroundImage = CType(resources.GetObject("TabPage17.BackgroundImage"), System.Drawing.Image)
         Me.TabPage17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage17.Location = New System.Drawing.Point(4, 22)
         Me.TabPage17.Name = "TabPage17"
@@ -2086,7 +2999,7 @@ Partial Class frmKeyMapperSDL
         'TabPage18
         '
         Me.TabPage18.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage18.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.snes_controller
+        Me.TabPage18.BackgroundImage = CType(resources.GetObject("TabPage18.BackgroundImage"), System.Drawing.Image)
         Me.TabPage18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage18.Location = New System.Drawing.Point(4, 22)
         Me.TabPage18.Name = "TabPage18"
@@ -2119,7 +3032,7 @@ Partial Class frmKeyMapperSDL
         'TabPage19
         '
         Me.TabPage19.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage19.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.md_controller_3button
+        Me.TabPage19.BackgroundImage = CType(resources.GetObject("TabPage19.BackgroundImage"), System.Drawing.Image)
         Me.TabPage19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage19.Location = New System.Drawing.Point(4, 22)
         Me.TabPage19.Name = "TabPage19"
@@ -2131,7 +3044,7 @@ Partial Class frmKeyMapperSDL
         'TabPage20
         '
         Me.TabPage20.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage20.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.md_controller_6button
+        Me.TabPage20.BackgroundImage = CType(resources.GetObject("TabPage20.BackgroundImage"), System.Drawing.Image)
         Me.TabPage20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage20.Location = New System.Drawing.Point(4, 22)
         Me.TabPage20.Name = "TabPage20"
@@ -2167,7 +3080,7 @@ Partial Class frmKeyMapperSDL
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage2.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.nes_controller
+        Me.TabPage2.BackgroundImage = CType(resources.GetObject("TabPage2.BackgroundImage"), System.Drawing.Image)
         Me.TabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage2.Controls.Add(Me.nes_gamepad_rapid_a)
         Me.TabPage2.Controls.Add(Me.nes_gamepad_rapid_b)
@@ -2352,7 +3265,7 @@ Partial Class frmKeyMapperSDL
         'Zapper
         '
         Me.Zapper.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Zapper.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.nes_zapper
+        Me.Zapper.BackgroundImage = CType(resources.GetObject("Zapper.BackgroundImage"), System.Drawing.Image)
         Me.Zapper.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Zapper.Controls.Add(Me.Label40)
         Me.Zapper.Controls.Add(Me.Label38)
@@ -2423,7 +3336,7 @@ Partial Class frmKeyMapperSDL
         'TabPage21
         '
         Me.TabPage21.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage21.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.gba_controller
+        Me.TabPage21.BackgroundImage = CType(resources.GetObject("TabPage21.BackgroundImage"), System.Drawing.Image)
         Me.TabPage21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage21.Location = New System.Drawing.Point(4, 22)
         Me.TabPage21.Name = "TabPage21"
@@ -2455,7 +3368,7 @@ Partial Class frmKeyMapperSDL
         'TabPage22
         '
         Me.TabPage22.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage22.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.gb_controller
+        Me.TabPage22.BackgroundImage = CType(resources.GetObject("TabPage22.BackgroundImage"), System.Drawing.Image)
         Me.TabPage22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage22.Location = New System.Drawing.Point(4, 22)
         Me.TabPage22.Name = "TabPage22"
@@ -2487,7 +3400,7 @@ Partial Class frmKeyMapperSDL
         'TabPage23
         '
         Me.TabPage23.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage23.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.ngp_controller
+        Me.TabPage23.BackgroundImage = CType(resources.GetObject("TabPage23.BackgroundImage"), System.Drawing.Image)
         Me.TabPage23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.TabPage23.Location = New System.Drawing.Point(4, 22)
         Me.TabPage23.Name = "TabPage23"
@@ -2609,7 +3522,7 @@ Partial Class frmKeyMapperSDL
         Me.btn_Close.Name = "btn_Close"
         Me.btn_Close.Size = New System.Drawing.Size(200, 60)
         Me.btn_Close.TabIndex = 65
-        Me.btn_Close.Text = "Done"
+        Me.btn_Close.Text = "Save"
         Me.btn_Close.UseVisualStyleBackColor = False
         '
         'PeriWarning
@@ -2708,6 +3621,10 @@ Partial Class frmKeyMapperSDL
         Me.TabPage14.PerformLayout()
         Me.TabPage9.ResumeLayout(False)
         Me.TabControl3.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
+        Me.TabPage16.ResumeLayout(False)
+        Me.TabPage16.PerformLayout()
         Me.TabPage12.ResumeLayout(False)
         Me.TabControl4.ResumeLayout(False)
         Me.TabPage11.ResumeLayout(False)
@@ -2903,4 +3820,62 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents TabPage22 As TabPage
     Friend WithEvents TabControl9 As TabControl
     Friend WithEvents TabPage23 As TabPage
+    Friend WithEvents psx_gamepad_r1 As keybindButton
+    Friend WithEvents psx_gamepad_l1 As keybindButton
+    Friend WithEvents Label46 As Label
+    Friend WithEvents Label45 As Label
+    Friend WithEvents Label44 As Label
+    Friend WithEvents Label43 As Label
+    Friend WithEvents Label42 As Label
+    Friend WithEvents psx_gamepad_circle As keybindButton
+    Friend WithEvents psx_gamepad_triangle As keybindButton
+    Friend WithEvents psx_gamepad_square As keybindButton
+    Friend WithEvents psx_gamepad_cross As keybindButton
+    Friend WithEvents psx_gamepad_start As keybindButton
+    Friend WithEvents psx_gamepad_select As keybindButton
+    Friend WithEvents psx_gamepad_left As keybindButton
+    Friend WithEvents psx_gamepad_right As keybindButton
+    Friend WithEvents psx_gamepad_down As keybindButton
+    Friend WithEvents psx_gamepad_up As keybindButton
+    Friend WithEvents Label48 As Label
+    Friend WithEvents Label49 As Label
+    Friend WithEvents Label47 As Label
+    Friend WithEvents psx_gamepad_r2 As keybindButton
+    Friend WithEvents psx_gamepad_l2 As keybindButton
+    Friend WithEvents Label60 As Label
+    Friend WithEvents psx_dualshock_r3 As keybindButton
+    Friend WithEvents Label59 As Label
+    Friend WithEvents psx_dualshock_l3 As keybindButton
+    Friend WithEvents psx_dualshock_analog As keybindButton
+    Friend WithEvents Label58 As Label
+    Friend WithEvents psx_dualshock_rstick_left As keybindButton
+    Friend WithEvents psx_dualshock_rstick_right As keybindButton
+    Friend WithEvents psx_dualshock_rstick_down As keybindButton
+    Friend WithEvents psx_dualshock_rstick_up As keybindButton
+    Friend WithEvents psx_dualshock_lstick_left As keybindButton
+    Friend WithEvents psx_dualshock_lstick_right As keybindButton
+    Friend WithEvents psx_dualshock_lstick_down As keybindButton
+    Friend WithEvents psx_dualshock_lstick_up As keybindButton
+    Friend WithEvents psx_dualshock_start As keybindButton
+    Friend WithEvents Label50 As Label
+    Friend WithEvents Label51 As Label
+    Friend WithEvents Label52 As Label
+    Friend WithEvents psx_dualshock_r2 As keybindButton
+    Friend WithEvents psx_dualshock_l2 As keybindButton
+    Friend WithEvents psx_dualshock_r1 As keybindButton
+    Friend WithEvents psx_dualshock_l1 As keybindButton
+    Friend WithEvents Label53 As Label
+    Friend WithEvents Label54 As Label
+    Friend WithEvents Label55 As Label
+    Friend WithEvents Label56 As Label
+    Friend WithEvents Label57 As Label
+    Friend WithEvents psx_dualshock_circle As keybindButton
+    Friend WithEvents psx_dualshock_triangle As keybindButton
+    Friend WithEvents psx_dualshock_square As keybindButton
+    Friend WithEvents psx_dualshock_cross As keybindButton
+    Friend WithEvents psx_dualshock_select As keybindButton
+    Friend WithEvents psx_dualshock_left As keybindButton
+    Friend WithEvents psx_dualshock_right As keybindButton
+    Friend WithEvents psx_dualshock_down As keybindButton
+    Friend WithEvents psx_dualshock_up As keybindButton
 End Class

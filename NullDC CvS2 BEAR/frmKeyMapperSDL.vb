@@ -20,6 +20,11 @@ Public Class frmKeyMapperSDL
 
     Dim ButtonsDown As New Dictionary(Of String, Boolean)
 
+    ' Little things to know which systems were changed, so we don't have to always save settings that were not changed
+    Dim NaomiChanged As Boolean = False
+    Dim DreamcastChanged As Boolean = False
+    Dim MednafenChanged As Boolean = False
+
     <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
     Private Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Boolean
     End Function
@@ -150,12 +155,6 @@ Public Class frmKeyMapperSDL
         STICK_DPAD_DOWN.KC = {"a1+", "k83"}
         STICK_DPAD_UP.KC = {"a1-", "k87"}
 
-        ' Mednafen
-
-
-
-        SaveSettings()
-
     End Sub
 
     Private Sub UpdateButtonLabels()
@@ -220,6 +219,42 @@ Public Class frmKeyMapperSDL
                 End If
             Next
         Next
+
+        If Not File.Exists(MainformRef.NullDCPath & "\Controls.bear") Then
+            NaomiChanged = True
+            DreamcastChanged = True
+            MednafenChanged = True
+        Else
+            Dim _tmpConfigFile As String() = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+
+            For Each _line In lines
+                If Not _tmpConfigFile.Contains(_line) And Not _line Is Nothing Then
+                    ' All Systems Use these
+                    If _line.StartsWith("Joystick=") Or _line.StartsWith("Deadzone=") Then
+                        NaomiChanged = True
+                        DreamcastChanged = True
+                        MednafenChanged = True
+                    End If
+
+                    ' Naomi Only
+                    If _line.StartsWith("I_") Then
+                        NaomiChanged = True
+                    End If
+
+                    ' Dreamcast Only
+                    If _line.StartsWith("CONT_") Or _line.StartsWith("STICK_") Then
+                        DreamcastChanged = True
+                    End If
+
+                    ' Mednafen
+                    If _line.StartsWith("med_") Then
+                        MednafenChanged = True
+                    End If
+
+                End If
+            Next
+
+        End If
 
         File.WriteAllLines(MainformRef.NullDCPath & "\Controls.bear", lines)
 
@@ -449,6 +484,28 @@ Public Class frmKeyMapperSDL
                 nes_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "a0-"
                 nes_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "a0+"
 
+                ' PSX gamepad
+                psx_gamepad_up.KeyCode(PlayerTab.SelectedIndex) = "a1-"
+                psx_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "a1+"
+                psx_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "a0-"
+                psx_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "a0+"
+
+                ' PSX DualShock
+                'D-PAD
+                psx_dualshock_up.KeyCode(PlayerTab.SelectedIndex) = "b11"
+                psx_dualshock_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
+                psx_dualshock_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
+                psx_dualshock_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
+                ' Left Stick
+                psx_dualshock_lstick_up.KeyCode(PlayerTab.SelectedIndex) = "a1-"
+                psx_dualshock_lstick_down.KeyCode(PlayerTab.SelectedIndex) = "a1+"
+                psx_dualshock_lstick_left.KeyCode(PlayerTab.SelectedIndex) = "a0-"
+                psx_dualshock_lstick_right.KeyCode(PlayerTab.SelectedIndex) = "a0+"
+                ' Right Stick
+                psx_dualshock_rstick_up.KeyCode(PlayerTab.SelectedIndex) = "a3-"
+                psx_dualshock_rstick_down.KeyCode(PlayerTab.SelectedIndex) = "a3+"
+                psx_dualshock_rstick_left.KeyCode(PlayerTab.SelectedIndex) = "a2-"
+                psx_dualshock_rstick_right.KeyCode(PlayerTab.SelectedIndex) = "a2+"
 
                 PeripheralCB.SelectedIndex = 0
             Case "fightstick"
@@ -480,6 +537,30 @@ Public Class frmKeyMapperSDL
                 nes_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
                 nes_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
                 nes_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
+
+                ' PSX gamepad
+                psx_gamepad_up.KeyCode(PlayerTab.SelectedIndex) = "b11"
+                psx_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
+                psx_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
+                psx_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
+
+                ' PSX DualShock
+                'D-PAD
+                psx_dualshock_up.KeyCode(PlayerTab.SelectedIndex) = "b11"
+                psx_dualshock_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
+                psx_dualshock_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
+                psx_dualshock_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
+                ' Left Stick
+                psx_dualshock_lstick_up.KeyCode(PlayerTab.SelectedIndex) = "None"
+                psx_dualshock_lstick_down.KeyCode(PlayerTab.SelectedIndex) = "None"
+                psx_dualshock_lstick_left.KeyCode(PlayerTab.SelectedIndex) = "None"
+                psx_dualshock_lstick_right.KeyCode(PlayerTab.SelectedIndex) = "None"
+                ' Right Stick
+                psx_dualshock_rstick_up.KeyCode(PlayerTab.SelectedIndex) = "None"
+                psx_dualshock_rstick_down.KeyCode(PlayerTab.SelectedIndex) = "None"
+                psx_dualshock_rstick_left.KeyCode(PlayerTab.SelectedIndex) = "None"
+                psx_dualshock_rstick_right.KeyCode(PlayerTab.SelectedIndex) = "None"
+
 
                 PeripheralCB.SelectedIndex = 1
         End Select
@@ -529,6 +610,44 @@ Public Class frmKeyMapperSDL
         nes_gamepad_rapid_b.KeyCode(PlayerTab.SelectedIndex) = "None"
         nes_gamepad_rapid_a.KeyCode(PlayerTab.SelectedIndex) = "None"
 
+        ' PSX Gamepad
+        psx_gamepad_select.KeyCode(PlayerTab.SelectedIndex) = "b4"
+        psx_gamepad_start.KeyCode(PlayerTab.SelectedIndex) = "b6"
+
+        psx_gamepad_cross.KeyCode(PlayerTab.SelectedIndex) = "b0"
+        psx_gamepad_circle.KeyCode(PlayerTab.SelectedIndex) = "b1"
+        psx_gamepad_square.KeyCode(PlayerTab.SelectedIndex) = "b2"
+        psx_gamepad_triangle.KeyCode(PlayerTab.SelectedIndex) = "b3"
+        psx_gamepad_l1.KeyCode(PlayerTab.SelectedIndex) = "b9"
+        psx_gamepad_r1.KeyCode(PlayerTab.SelectedIndex) = "b10"
+        psx_gamepad_l2.KeyCode(PlayerTab.SelectedIndex) = "a4+"
+        psx_gamepad_r2.KeyCode(PlayerTab.SelectedIndex) = "a5+"
+
+        ' PSX DualShock
+        psx_dualshock_select.KeyCode(PlayerTab.SelectedIndex) = "b4"
+        psx_dualshock_start.KeyCode(PlayerTab.SelectedIndex) = "b6"
+
+        psx_dualshock_cross.KeyCode(PlayerTab.SelectedIndex) = "b0"
+        psx_dualshock_circle.KeyCode(PlayerTab.SelectedIndex) = "b1"
+        psx_dualshock_square.KeyCode(PlayerTab.SelectedIndex) = "b2"
+        psx_dualshock_triangle.KeyCode(PlayerTab.SelectedIndex) = "b3"
+
+        psx_dualshock_l1.KeyCode(PlayerTab.SelectedIndex) = "b9"
+        psx_dualshock_l2.KeyCode(PlayerTab.SelectedIndex) = "a4+"
+        psx_dualshock_l3.KeyCode(PlayerTab.SelectedIndex) = "b7"
+
+        psx_dualshock_r1.KeyCode(PlayerTab.SelectedIndex) = "b10"
+        psx_dualshock_r2.KeyCode(PlayerTab.SelectedIndex) = "a5+"
+        psx_dualshock_r3.KeyCode(PlayerTab.SelectedIndex) = "b8"
+
+
+
+
+
+
+
+
+
         UpdateButtonLabels()
     End Sub
 
@@ -567,9 +686,10 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub frmKeyMapperSDL_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub SaveEverything()
+        '_InputThread.Abort() ' Aight not accepting inputs anymore
+
         btn_Close.Text = "Saving..."
-        _InputThread.Abort() ' Aight not accepting inputs anymore
         SaveSettings()
 
         ' Disable SDL completly we dun need that shit in the background no more
@@ -586,31 +706,6 @@ Public Class frmKeyMapperSDL
         Dim NaomiConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
         Dim DreamcastConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
         Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
-
-        ' Naomi Controls
-
-        Dim linenumber = 0
-        For Each line As String In NaomiConfigs
-            If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
-                Dim player = 0 ' Default player 1 is index 0
-                If line.StartsWith("BPortB") Then player = 1 ' This is port B so it's player 2 index 1
-
-                Dim KeyFound = False
-                For Each control_line As String In ControlsConfigs
-                    If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
-                        NaomiConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                        KeyFound = True
-                        Exit For
-                    End If
-                Next
-
-                If Not KeyFound Then NaomiConfigs(linenumber) = line.Split("=")(0) & "=k0" ' The key was not in the controls so just set it to nothing
-
-            End If
-            linenumber += 1
-        Next
-
-        ' Dreamcast Controls
 
         ' We need the peripheral beforehand so we know which control settings to actually use
         Dim tempPeripheral As String() = {"", ""}
@@ -632,135 +727,197 @@ Public Class frmKeyMapperSDL
             End If
         Next
 
+        ' Naomi Controls
+
+        Dim linenumber = 0
+        If NaomiChanged Then
+            For Each line As String In NaomiConfigs
+                btn_Close.Text = "Saving Naomi..."
+                If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
+                    Dim player = 0 ' Default player 1 is index 0
+                    If line.StartsWith("BPortB") Then player = 1 ' This is port B so it's player 2 index 1
+
+                    Dim KeyFound = False
+                    For Each control_line As String In ControlsConfigs
+                        If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                            NaomiConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                            KeyFound = True
+                            Exit For
+                        End If
+                    Next
+
+                    If Not KeyFound Then NaomiConfigs(linenumber) = line.Split("=")(0) & "=k0" ' The key was not in the controls so just set it to nothing
+
+                    If line.StartsWith("BPortA_Joystick=") Then NaomiConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
+                    If line.StartsWith("BPortB_Joystick=") Then NaomiConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
+
+                    If line.StartsWith("BPortA_Deadzone=") Then NaomiConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
+                    If line.StartsWith("BPortB_Deadzone=") Then NaomiConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
+
+                End If
+                linenumber += 1
+            Next
+        End If
+
+
+        ' Dreamcast Controls
+
         linenumber = 0
-        For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
-            If line.StartsWith("BPort") Then
-                Dim player = 0
-                If line.StartsWith("BPortB") Then player = 1
+        If DreamcastChanged Then
+            For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
+                btn_Close.Text = "Saving Dreamcast..."
+                If line.StartsWith("BPort") Then
+                    Dim player = 0
+                    If line.StartsWith("BPortB") Then player = 1
 
-                Dim KeyFound = False
-                For Each control_line As String In ControlsConfigs
+                    Dim KeyFound = False
+                    For Each control_line As String In ControlsConfigs
 
-                    If tempPeripheral(player) = "1" Then ' Joystick Peripheral so get the STICK_ instead of the CONT_ setting
-                        If control_line.StartsWith("STICK_") Then
-                            If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
+                        If tempPeripheral(player) = "1" Then ' Joystick Peripheral so get the STICK_ instead of the CONT_ setting
+                            If control_line.StartsWith("STICK_") Then
+                                If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
+                                    DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                                    KeyFound = True
+                                    Exit For
+                                End If
+                            End If
+
+                        Else
+
+                            If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
                                 DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
                                 KeyFound = True
                                 Exit For
                             End If
-                        End If
-
-                    Else
-
-                        If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
-                            DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                            KeyFound = True
-                            Exit For
-                        End If
-
-                    End If
-
-
-                Next
-
-                If Not KeyFound Then DreamcastConfigs(linenumber) = line.Split("=")(0) & "=k0"
-
-                If line.StartsWith("BPortA_Joystick=") Then DreamcastConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
-                If line.StartsWith("BPortB_Joystick=") Then DreamcastConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
-
-                If line.StartsWith("BPortA_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
-                If line.StartsWith("BPortB_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
-
-            End If
-            linenumber += 1
-
-        Next
-
-        ' Mednafen Controls
-
-        GetMednafenControllerIDs()
-
-        Dim _TranslatedControls(2) As Dictionary(Of String, String)
-        For i = 0 To 1 ' Loop Through Controls to get translation and get number of axes since we'll need that to translate the dpad
-
-            If Not Joystick(i) = -1 Then
-                Dim _tmpJoy = SDL_JoystickOpen(i)
-                Dim _numaxes = SDL_JoystickNumAxes(_tmpJoy)
-                _TranslatedControls(i) = BEARButtonToMednafenButton(SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(Joystick(i))), _numaxes)
-                SDL_JoystickClose(_tmpJoy)
-
-            End If
-
-        Next
-
-        linenumber = 0
-        For Each line As String In MednafenConfigs
-
-            ' Deadzone
-            If line.StartsWith("input.joystick.axis_threshold ") Then
-                MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & DeadzoneTB.Value
-                linenumber += 1
-                Continue For
-            End If
-
-            For Each control_line In ControlsConfigs
-                If control_line.StartsWith("med_") Then ' Pretty much the only really consistent thing among all the mednafen controls
-                    'joystick 0x00060079000000000000504944564944 button_1
-                    'joystick 0x00060079000000000000504944564944 abs_1+
-                    'keyboard 0x0 18
-                    control_line = control_line.Substring(4)
-                    Dim tmpControlString = ""
-
-                    If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1")) Or line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then
-                        Dim _player = 1
-                        If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then _player = 2
-
-                        tmpControlString += control_line.Split("=")(0).Replace("<port>", _player.ToString) ' Initial String
-                        Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
-
-                        If _KeyCode.StartsWith("k") Then ' Keyboard
-
-                            If Not _KeyCode = "k0" Then
-                                tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
-                            End If
-
-                        Else ' Joystick
-                            Dim _tmpID = ""
-                            If Not Joystick(_player - 1) = -1 Then
-                                _tmpID = MednafenControllerID(Joystick(_player - 1))
-                                tmpControlString += " Joystick " & _tmpID
-                                If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
-                                    tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
-                                Else
-                                    tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                End If
-                            Else
-                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                            End If
 
                         End If
 
-                    End If
 
-                    If Not tmpControlString = "" Then MednafenConfigs(linenumber) = tmpControlString
+                    Next
+
+                    If Not KeyFound Then DreamcastConfigs(linenumber) = line.Split("=")(0) & "=k0"
+
+                    If line.StartsWith("BPortA_Joystick=") Then DreamcastConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
+                    If line.StartsWith("BPortB_Joystick=") Then DreamcastConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
+
+                    If line.StartsWith("BPortA_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
+                    If line.StartsWith("BPortB_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
 
                 End If
+                linenumber += 1
+
             Next
 
-            linenumber += 1
-        Next
+        End If
+
+
+        ' Mednafen Controls
+        btn_Close.Text = "Saving..."
+
+        If MednafenChanged Then
+            Try
+                GetMednafenControllerIDs()
+            Catch ex As Exception
+
+            End Try
+
+            Dim _TranslatedControls(2) As Dictionary(Of String, String)
+            For i = 0 To 1 ' Loop Through Controls to get translation and get number of axes since we'll need that to translate the dpad
+                btn_Close.Text = "Translating..."
+                If Not Joystick(i) = -1 Then
+                    Dim _tmpJoy = SDL_JoystickOpen(Joystick(i))
+                    Dim _numaxes = SDL_JoystickNumAxes(_tmpJoy)
+                    _TranslatedControls(i) = BEARButtonToMednafenButton(SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(Joystick(i))), _numaxes)
+                    SDL_JoystickClose(_tmpJoy)
+
+                End If
+
+            Next
+
+
+            linenumber = 0
+            For Each line As String In MednafenConfigs
+                btn_Close.Text = "Saving Mednafen..."
+                ' Deadzone
+                If line.StartsWith("input.joystick.axis_threshold ") Then
+                    MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & DeadzoneTB.Value
+                    linenumber += 1
+                    Continue For
+                End If
+
+                For Each control_line In ControlsConfigs
+                    If control_line.StartsWith("med_") Then ' Pretty much the only really consistent thing among all the mednafen controls
+                        'joystick 0x00060079000000000000504944564944 button_1
+                        'joystick 0x00060079000000000000504944564944 abs_1+
+                        'keyboard 0x0 18
+                        control_line = control_line.Substring(4)
+                        Dim tmpControlString = ""
+
+                        If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1")) Or line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then
+                            Dim _player = 1
+                            If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then _player = 2
+
+                            tmpControlString += control_line.Split("=")(0).Replace("<port>", _player.ToString) ' Initial String
+                            Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
+
+                            If _KeyCode.StartsWith("k") Then ' Keyboard
+
+                                If Not _KeyCode = "k0" Then
+                                    tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
+                                End If
+
+                            Else ' Joystick
+                                Dim _tmpID = ""
+                                If Not Joystick(_player - 1) = -1 Then
+                                    _tmpID = MednafenControllerID(Joystick(_player - 1))
+                                    tmpControlString += " Joystick " & _tmpID
+
+                                    If _tmpID Is Nothing Then
+                                        tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                        Continue For
+                                    End If
+
+                                    If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
+                                        tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                                    Else
+                                        tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                    End If
+
+                                Else
+                                    tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+
+                                End If
+
+                            End If
+
+                        End If
+
+                        If Not tmpControlString = "" Then MednafenConfigs(linenumber) = tmpControlString
+
+                    End If
+                Next
+
+                linenumber += 1
+            Next
+
+        End If
+
 
         ' Save all the changes
+        If NaomiChanged Then
+            File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
+            File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
+        End If
 
-        File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
-        File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
+        If DreamcastChanged Then
+            File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
+            File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
+        End If
 
-        File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
-        File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
-
-        File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
-        File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
-
+        If MednafenChanged Then
+            File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
+            File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
+        End If
 
         ' Check if nullDC is running to hotload the settings
         If MainformRef.IsNullDCRunning Then
@@ -772,7 +929,6 @@ Public Class frmKeyMapperSDL
 
         ' Finally Turn Off SDL
         SDL_Quit() ' Turn off SDL make sure nothing changes before we write the controls to the configs.
-
     End Sub
 
     Private Sub frmKeyMapperSDL_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
@@ -787,7 +943,6 @@ Public Class frmKeyMapperSDL
 
     Private Sub DeadzoneTB_MouseCaptureChanged(sender As Object, e As EventArgs)
         Deadzone(PlayerTab.SelectedIndex) = DeadzoneTB.Value
-        SaveSettings()
 
     End Sub
 
@@ -840,6 +995,7 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub btn_Close_Click(sender As Object, e As EventArgs) Handles btn_Close.Click
+        SaveEverything()
         Me.Close()
 
     End Sub
@@ -865,7 +1021,6 @@ Public Class frmKeyMapperSDL
         'Console.WriteLine("joystick: " & ControllerCB.SelectedValue)
         Joystick(PlayerTab.SelectedIndex) = ControllerCB.SelectedValue
 
-        SaveSettings()
     End Sub
 
     Private Sub ButtonClicked(ByVal _keycode As String, ByVal _down As Boolean)
@@ -879,7 +1034,6 @@ Public Class frmKeyMapperSDL
 
                 Currently_Binding = Nothing
                 ActiveControl = Nothing
-                SaveSettings()
 
             End If
 
@@ -923,7 +1077,6 @@ Public Class frmKeyMapperSDL
             MainformRef.ConfigFile.SaveFile(False)
         End If
 
-        SaveSettings()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSDL.Click

@@ -73,39 +73,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property BEARJamma_ArcadeStick() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("BEARJamma_ArcadeStick", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property BEARJamma_Dreamcast() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("BEARJamma_Dreamcast", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property BEARJamma_Dreamcast1() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Dreamcast1", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property BEARJamma_Naomi() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("BEARJamma_Naomi", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -435,17 +405,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property Dreamcast_ArcadeStick() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Dreamcast-ArcadeStick", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property Dreamcast_ArcadeStick1() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Dreamcast-ArcadeStick1", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Dreamcast_ArcadeStick", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -486,7 +446,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property gba_controller() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("gba-controller", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("gba_controller", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -556,7 +516,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property md_controller_3button() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("md-controller-3button", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("md_controller_3button", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -566,7 +526,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property md_controller_6button() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("md-controller-6button", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("md_controller_6button", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -715,17 +675,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property nes_controller() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("nes-controller", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized resource of type System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property nes_controller1() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("nes-controller1", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("nes_controller", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -735,7 +685,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property nes_zapper() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("nes-zapper", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("nes_zapper", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -764,7 +714,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property ngp_controller() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("ngp-controller", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("ngp_controller", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -804,7 +754,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property psx_controller() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("psx-controller", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("psx_controller", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -814,7 +764,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property psx_dualanalogcontroller() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("psx-dualanalogcontroller", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("psx_dualanalogcontroller", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -842,9 +792,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Secret_Moblin() As System.Drawing.Bitmap
+        Friend ReadOnly Property snes_controller() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Secret_Moblin", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("snes_controller", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -852,9 +802,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property snes_controller() As System.Drawing.Bitmap
+        Friend ReadOnly Property snes_superscope() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("snes-controller", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("snes_superscope", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -864,7 +814,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property ss_controller() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("ss-controller", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("ss_controller", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
