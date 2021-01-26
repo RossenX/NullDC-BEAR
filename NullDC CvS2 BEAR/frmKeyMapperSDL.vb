@@ -9,7 +9,7 @@ Public Class frmKeyMapperSDL
     Dim Joystick(2) As Int16
     Dim Deadzone(2) As Int16
     Dim Peripheral(2) As Int16
-    Dim MednafenControllerID(16) As String ' Support up to 16 Controllers at once
+    Dim MednafenControllerID(128) As String ' Support up to 16 Controllers at once
 
     Public Joy As IntPtr
     Dim AvailableControllersList As New DataTable
@@ -1097,6 +1097,7 @@ Public Class frmKeyMapperSDL
         Dim MedProc As Process = New Process()
         MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
         MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
+        MedProc.StartInfo.EnvironmentVariables.Add("HAVE_SDL", "1")
         MedProc.StartInfo.CreateNoWindow = True
         MedProc.StartInfo.UseShellExecute = False
         MedProc.StartInfo.Arguments = "Hi"
@@ -1105,13 +1106,48 @@ Public Class frmKeyMapperSDL
         MedProc.Start()
         MedProc.WaitForExit()
 
-        Dim ControllerIndex = 0
+        For i = 0 To SDL_NumJoysticks() - 1
+            Dim joy = SDL_JoystickOpen(i)
+            Console.WriteLine("0x0|" & SDL_JoystickGetDeviceVendor(i) & "|" & SDL_JoystickGetProduct(joy))
+            SDL_JoystickClose(joy)
+        Next
+
+        Dim _tmpIDs As New ArrayList
         For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
             If line.StartsWith("  ID: ") Then
-                MednafenControllerID(ControllerIndex) = line.Trim.Split(" ")(1)
-                Console.WriteLine("Found Medanfen Controller ID: " & line.Trim.Split(" ")(1))
-                ControllerIndex += 1
+                _tmpIDs.Add(line.Trim.Split(" ")(1))
+                'MednafenControllerID(ControllerIndex) = line.Trim.Split(" ")(1)
+                Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
+
             End If
+        Next
+
+        Dim _xinput As New ArrayList
+        Dim _dinput As New ArrayList
+        For Each _id As String In _tmpIDs
+            If _id.StartsWith("0x000000000000000000") Then
+                _xinput.Add(_id)
+            Else
+                _dinput.Add(_id)
+            End If
+        Next
+
+        Dim ReOrderedIDS As New ArrayList
+
+        For Each _id In _xinput
+            ReOrderedIDS.Add(_id)
+        Next
+
+        _dinput.Reverse()
+
+        For Each _id In _dinput
+            ReOrderedIDS.Add(_id)
+        Next
+
+        Dim ControllerIndex = 0
+        For Each _id In ReOrderedIDS
+            MednafenControllerID(ControllerIndex) = _id
+            ControllerIndex += 1
         Next
 
         Console.WriteLine("Ran Mednafen once to get the controls output")

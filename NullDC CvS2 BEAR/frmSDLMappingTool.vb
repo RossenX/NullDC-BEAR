@@ -159,16 +159,18 @@ Public Class frmSDLMappingTool
                 End Sub)
 
             SDL_Delay(16)
-
+            SDL_PumpEvents()
             While SDL_PollEvent(_event)
                 ' Write the capabilities
                 UpdateHelpTest()
 
                 Select Case _event.type
                     Case SDL_EventType.SDL_JOYAXISMOTION ' Axis Motion Down
-                        'Console.WriteLine("Axis: " & _event.jaxis.axisValue)
-                        'Console.WriteLine("Device: " & _event.jdevice.which)
-                        Console.WriteLine("Axis: " & _event.jaxis.axis)
+                        Dim a = 0
+                        SDL_JoystickGetAxisInitialState(Joy, _event.jaxis.axis, a)
+                        Console.WriteLine("Axis: " & _event.jaxis.axis & " Initial State: " & a)
+
+
                         Dim _axisnorm As Int32 = _event.jaxis.axisValue
                         _axisnorm = Math.Abs(_axisnorm)
 
