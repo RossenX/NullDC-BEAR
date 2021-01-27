@@ -38,16 +38,17 @@ Public Class frmKeyMapperSDL
             Me.CenterToParent()
             Me.Icon = My.Resources.NewNullDCBearIcon
 
-            If SDL_WasInit(SDL_INIT_JOYSTICK) = 0 Then
-                SDL_Init(SDL_INIT_JOYSTICK)
-                Console.WriteLine("SDL_INIT JOYSTICK")
-            End If
-
             If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
                 SDL_Init(SDL_INIT_GAMECONTROLLER)
                 Console.WriteLine("SDL_INIT GAME CONTROLLER")
             End If
 
+            If SDL_WasInit(SDL_INIT_JOYSTICK) = 0 Then
+                SDL_Init(SDL_INIT_JOYSTICK)
+                Console.WriteLine("SDL_INIT JOYSTICK")
+            End If
+
+            SDL_Delay(100)
             DoInitialSetupShit()
             LoadSettings()
 
@@ -640,14 +641,6 @@ Public Class frmKeyMapperSDL
         psx_dualshock_r2.KeyCode(PlayerTab.SelectedIndex) = "a5+"
         psx_dualshock_r3.KeyCode(PlayerTab.SelectedIndex) = "b8"
 
-
-
-
-
-
-
-
-
         UpdateButtonLabels()
     End Sub
 
@@ -681,14 +674,8 @@ Public Class frmKeyMapperSDL
         AddHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
     End Sub
 
-    Private Sub Button34_Click(sender As Object, e As EventArgs)
-        Me.Close()
-
-    End Sub
-
     Private Sub SaveEverything()
         '_InputThread.Abort() ' Aight not accepting inputs anymore
-
         btn_Close.Text = "Saving..."
         SaveSettings()
 
@@ -757,6 +744,9 @@ Public Class frmKeyMapperSDL
                 End If
                 linenumber += 1
             Next
+
+            File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
+            File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
         End If
 
 
@@ -808,115 +798,123 @@ Public Class frmKeyMapperSDL
 
             Next
 
+            File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
+            File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
         End If
 
 
         ' Mednafen Controls
         btn_Close.Text = "Saving..."
 
-        If MednafenChanged Then
-            Try
-                GetMednafenControllerIDs()
-            Catch ex As Exception
-
-            End Try
+        If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
 
             Dim _TranslatedControls(2) As Dictionary(Of String, String)
-            For i = 0 To 1 ' Loop Through Controls to get translation and get number of axes since we'll need that to translate the dpad
-                btn_Close.Text = "Translating..."
-                If Not Joystick(i) = -1 Then
-                    Dim _tmpJoy = SDL_JoystickOpen(Joystick(i))
-                    Dim _numaxes = SDL_JoystickNumAxes(_tmpJoy)
-                    _TranslatedControls(i) = BEARButtonToMednafenButton(SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(Joystick(i))), _numaxes)
-                    SDL_JoystickClose(_tmpJoy)
+            Dim MappingFile = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
 
-                End If
+            For i = 0 To MappingFile.Count - 1
+                For ii = 0 To 1
+                    If Not Joystick(ii) = -1 Then
 
+                        Dim DeviceGUIDasString(40) As Byte
+
+                        Me.Invoke(Sub(ByVal _ii)
+                                      SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(_ii)), DeviceGUIDasString, 40)
+                                  End Sub, ii)
+
+                        Dim GUIDSTRING As String = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
+
+                        If MappingFile(i).StartsWith(GUIDSTRING) Then
+                            Dim SplitMappingFile = MappingFile(i).Split(",")
+                            For Each _split In SplitMappingFile
+                                Dim _splitsplit = _split.Split(":")
+                                If _TranslatedControls(ii) Is Nothing Then
+                                    _TranslatedControls(ii) = New Dictionary(Of String, String)
+                                End If
+                                _TranslatedControls(ii).Add(_splitsplit(0), _splitsplit(1))
+                            Next
+                        End If
+                    End If
+                Next
             Next
 
 
-            linenumber = 0
-            For Each line As String In MednafenConfigs
-                btn_Close.Text = "Saving Mednafen..."
-                ' Deadzone
-                If line.StartsWith("input.joystick.axis_threshold ") Then
-                    MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & DeadzoneTB.Value
-                    linenumber += 1
-                    Continue For
-                End If
+            If MednafenChanged Then
 
-                For Each control_line In ControlsConfigs
-                    If control_line.StartsWith("med_") Then ' Pretty much the only really consistent thing among all the mednafen controls
-                        'joystick 0x00060079000000000000504944564944 button_1
-                        'joystick 0x00060079000000000000504944564944 abs_1+
-                        'keyboard 0x0 18
-                        control_line = control_line.Substring(4)
-                        Dim tmpControlString = ""
+                linenumber = 0
+                For Each line As String In MednafenConfigs
+                    btn_Close.Text = "Saving Mednafen..."
+                    ' Deadzone
+                    If line.StartsWith("input.joystick.axis_threshold ") Then
+                        MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & DeadzoneTB.Value
+                        linenumber += 1
+                        Continue For
+                    End If
 
-                        If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1")) Or line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then
-                            Dim _player = 1
-                            If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then _player = 2
+                    For Each control_line In ControlsConfigs
+                        If control_line.StartsWith("med_") Then ' Pretty much the only really consistent thing among all the mednafen controls
+                            'joystick 0x00060079000000000000504944564944 button_1
+                            'joystick 0x00060079000000000000504944564944 abs_1+
+                            'keyboard 0x0 18
+                            control_line = control_line.Substring(4)
+                            Dim tmpControlString = ""
 
-                            tmpControlString += control_line.Split("=")(0).Replace("<port>", _player.ToString) ' Initial String
-                            Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
+                            If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1")) Or line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then
+                                Dim _player = 1
+                                If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then _player = 2
 
-                            If _KeyCode.StartsWith("k") Then ' Keyboard
+                                tmpControlString += control_line.Split("=")(0).Replace("<port>", _player.ToString) ' Initial String
+                                Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
 
-                                If Not _KeyCode = "k0" Then
-                                    tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
-                                End If
+                                If _KeyCode.StartsWith("k") Then ' Keyboard
 
-                            Else ' Joystick
-                                Dim _tmpID = ""
-                                If Not Joystick(_player - 1) = -1 Then
-                                    _tmpID = MednafenControllerID(Joystick(_player - 1))
-                                    tmpControlString += " Joystick " & _tmpID
-
-                                    If _tmpID Is Nothing Then
-                                        tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                        Continue For
+                                    If Not _KeyCode = "k0" Then
+                                        tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
                                     End If
 
-                                    If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
-                                        tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                                Else ' Joystick
+                                    Dim _tmpID = ""
+                                    If Not Joystick(_player - 1) = -1 And Not _TranslatedControls(_player - 1) Is Nothing Then
+                                        _tmpID = _TranslatedControls(_player - 1).Values(0)
+
+                                        tmpControlString += " Joystick " & _tmpID
+
+                                        If _tmpID Is Nothing Then
+                                            tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                            Continue For
+                                        End If
+
+                                        If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
+                                            tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                                        Else
+                                            tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                        End If
+
                                     Else
                                         tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                    End If
 
-                                Else
-                                    tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                    End If
 
                                 End If
 
                             End If
 
+                            If Not tmpControlString = "" Then MednafenConfigs(linenumber) = tmpControlString
+
                         End If
+                    Next
 
-                        If Not tmpControlString = "" Then MednafenConfigs(linenumber) = tmpControlString
-
-                    End If
+                    linenumber += 1
                 Next
 
-                linenumber += 1
-            Next
+                File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
+                File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
+            End If
 
-        End If
+        Else
+            If MednafenChanged Then
+                MsgBox("No Mednafen Mapping Found. Please click: 'Remap Controller'" & vbNewLine & "Mednafen Controls not changed")
+            End If
 
-
-        ' Save all the changes
-        If NaomiChanged Then
-            File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
-            File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
-        End If
-
-        If DreamcastChanged Then
-            File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
-            File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
-        End If
-
-        If MednafenChanged Then
-            File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
-            File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
         End If
 
         ' Check if nullDC is running to hotload the settings
@@ -925,7 +923,6 @@ Public Class frmKeyMapperSDL
             If platform = "dc" Then PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
 
         End If
-
 
         ' Finally Turn Off SDL
         SDL_Quit() ' Turn off SDL make sure nothing changes before we write the controls to the configs.
@@ -1090,67 +1087,6 @@ Public Class frmKeyMapperSDL
 
     Private Sub frmKeyMapperSDL_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
-
-    End Sub
-
-    Private Sub GetMednafenControllerIDs()
-        Dim MedProc As Process = New Process()
-        MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
-        MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
-        MedProc.StartInfo.EnvironmentVariables.Add("HAVE_SDL", "1")
-        MedProc.StartInfo.CreateNoWindow = True
-        MedProc.StartInfo.UseShellExecute = False
-        MedProc.StartInfo.Arguments = "Hi"
-        MedProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-
-        MedProc.Start()
-        MedProc.WaitForExit()
-
-        For i = 0 To SDL_NumJoysticks() - 1
-            Dim joy = SDL_JoystickOpen(i)
-            Console.WriteLine("0x0|" & SDL_JoystickGetDeviceVendor(i) & "|" & SDL_JoystickGetProduct(joy))
-            SDL_JoystickClose(joy)
-        Next
-
-        Dim _tmpIDs As New ArrayList
-        For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
-            If line.StartsWith("  ID: ") Then
-                _tmpIDs.Add(line.Trim.Split(" ")(1))
-                'MednafenControllerID(ControllerIndex) = line.Trim.Split(" ")(1)
-                Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
-
-            End If
-        Next
-
-        Dim _xinput As New ArrayList
-        Dim _dinput As New ArrayList
-        For Each _id As String In _tmpIDs
-            If _id.StartsWith("0x000000000000000000") Then
-                _xinput.Add(_id)
-            Else
-                _dinput.Add(_id)
-            End If
-        Next
-
-        Dim ReOrderedIDS As New ArrayList
-
-        For Each _id In _xinput
-            ReOrderedIDS.Add(_id)
-        Next
-
-        _dinput.Reverse()
-
-        For Each _id In _dinput
-            ReOrderedIDS.Add(_id)
-        Next
-
-        Dim ControllerIndex = 0
-        For Each _id In ReOrderedIDS
-            MednafenControllerID(ControllerIndex) = _id
-            ControllerIndex += 1
-        Next
-
-        Console.WriteLine("Ran Mednafen once to get the controls output")
 
     End Sub
 
