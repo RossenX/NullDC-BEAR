@@ -409,8 +409,6 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\psx_controller.png" />
-    <Content Include="Resources\psx_dualanalogcontroller.png" />
     <None Include="Resources\MessagePop.wav" />
     <None Include="Resources\Controller Types\BEARJamma_Dreamcast.png" />
     <None Include="Resources\Controller Types\BEARJammaNaomi.png" />

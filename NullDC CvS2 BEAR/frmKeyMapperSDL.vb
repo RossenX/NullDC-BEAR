@@ -850,25 +850,30 @@ Public Class frmKeyMapperSDL
                         Continue For
                     End If
 
+                    Dim tmpControlString = ""
                     For Each control_line In ControlsConfigs
                         If control_line.StartsWith("med_") Then ' Pretty much the only really consistent thing among all the mednafen controls
                             'joystick 0x00060079000000000000504944564944 button_1
                             'joystick 0x00060079000000000000504944564944 abs_1+
                             'keyboard 0x0 18
                             control_line = control_line.Substring(4)
-                            Dim tmpControlString = ""
+
+                            If line.Contains("rapid_") Then
+                                tmpControlString = line.Split(" ")(0) ' Disable Rapid Control unless they are found in our configs
+                            End If
 
                             If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1")) Or line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then
                                 Dim _player = 1
                                 If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then _player = 2
 
-                                tmpControlString += control_line.Split("=")(0).Replace("<port>", _player.ToString) ' Initial String
+                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString) ' Initial String
                                 Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
 
                                 If _KeyCode.StartsWith("k") Then ' Keyboard
 
                                     If Not _KeyCode = "k0" Then
                                         tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
+                                        Exit For
                                     End If
 
                                 Else ' Joystick
@@ -880,29 +885,29 @@ Public Class frmKeyMapperSDL
 
                                         If _tmpID Is Nothing Then
                                             tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                            Continue For
+                                            Exit For
                                         End If
 
                                         If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
                                             tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                                            Exit For
                                         Else
                                             tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                            Exit For
                                         End If
 
                                     Else
                                         tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-
+                                        Exit For
                                     End If
 
                                 End If
 
                             End If
-
-                            If Not tmpControlString = "" Then MednafenConfigs(linenumber) = tmpControlString
-
                         End If
                     Next
 
+                    If Not tmpControlString = "" Then MednafenConfigs(linenumber) = tmpControlString
                     linenumber += 1
                 Next
 
