@@ -319,11 +319,9 @@ Public Class frmSDLMappingTool
                           MednafenControllerConfigLines = {""}
                       End If
 
-                      Dim MednafenControllerID = GetMednafenControllerIDs()
-
                       Dim MednafenTranslated = BEARButtonToMednafenButton(ConfigStringFinal, SDL_JoystickNumAxes(Joy))
                       ' Mednafen Mapping String is:
-                      Dim MednafenConfigString = GUIDSTRING & ":" & MednafenControllerID(frmKeyMapperSDL.ControllerCB.SelectedValue)
+                      Dim MednafenConfigString = GUIDSTRING
 
                       For i = 0 To MednafenTranslated.Count - 1
                           MednafenConfigString += "," & MednafenTranslated.Keys(i) & ":" & MednafenTranslated.Values(i)

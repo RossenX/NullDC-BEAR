@@ -31,12 +31,40 @@ Public Class frmKeyMapperSDL
 
     Private Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
 
+    Private Sub ReloadTheme()
+        ApplyThemeToControl(MenuStrip1)
+        ApplyThemeToControl(TableLayoutPanel1, 1)
+        For Each _control In TableLayoutPanel1.Controls
+            ApplyThemeToControl(_control, 1)
+        Next
+        ApplyThemeToControl(TableLayoutPanel2, 1)
+        For Each _control In TableLayoutPanel2.Controls
+            ApplyThemeToControl(_control, 1)
+        Next
+        ApplyThemeToControl(TableLayoutPanel4, 1)
+        For Each _control In TableLayoutPanel4.Controls
+            ApplyThemeToControl(_control, 1)
+        Next
+
+        For Each _tab As TabPage In ControllersTab.TabPages
+            ApplyThemeToControl(_tab, 1)
+            For Each _tabtab As TabControl In _tab.Controls
+                ApplyThemeToControl(_tabtab, 1)
+                For Each _tabtabtab As TabPage In _tabtab.TabPages
+                    ApplyThemeToControl(_tabtabtab, 2)
+                Next
+            Next
+        Next
+
+    End Sub
+
     Private Sub frmKeyMapperSDL_VisibilityChange(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
 
         If Me.Visible Then
 
             Me.CenterToParent()
             Me.Icon = My.Resources.NewNullDCBearIcon
+            ReloadTheme()
 
             If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
                 SDL_Init(SDL_INIT_GAMECONTROLLER)
@@ -180,25 +208,36 @@ Public Class frmKeyMapperSDL
 
     Private Sub SaveSettings()
 
-        Dim lines(128) As String
-        ' BPortA_I_
-        ' BPortA_CONT_
-        ' get GUIDs
-        Dim DeviceGUIDasString1(40) As Byte
-        Dim DeviceGUIDasString2(40) As Byte
+        Dim lines(256) As String
 
-        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(0)), DeviceGUIDasString1, 40)
-        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(1)), DeviceGUIDasString2, 40)
-
-        Dim Joy1GUID = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString1).ToString.Replace(vbNullChar, "").Trim
-        Dim Joy2GUID = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString2).ToString.Replace(vbNullChar, "").Trim
+        Dim MednafenControllerID = GetMednafenControllerIDs()
 
         lines(0) = MainformRef.Ver
         lines(1) = "Joystick=" & Joystick(0) & "|" & Joystick(1)
         lines(2) = "Deadzone=" & Deadzone(0) & "|" & Deadzone(1)
         lines(3) = "Peripheral=" & Peripheral(0) & "|" & Peripheral(1)
+        Dim Med_string = "MednafenControllerID="
 
-        Dim KeyCount = 4
+        If Joystick(0) = -1 Then
+            Med_string += "0x0"
+        ElseIf MednafenControllerID(Joystick(0)) Is Nothing Then
+            Med_string += "0x0"
+        Else
+            Med_string += MednafenControllerID(Joystick(0))
+        End If
+
+        Med_string += "|"
+        If Joystick(1) = -1 Then
+            Med_string += "0x0"
+        ElseIf MednafenControllerID(Joystick(1)) Is Nothing Then
+            Med_string += "0x0"
+        Else
+            Med_string += MednafenControllerID(Joystick(1))
+        End If
+
+        lines(4) = Med_string
+
+        Dim KeyCount = 5
         For Each _tab As TabPage In ControllersTab.TabPages
             For Each _cont As Control In _tab.Controls
                 If TypeOf _cont Is TabControl Then ' Nested Controls Only used for mednafen right now
@@ -248,7 +287,7 @@ Public Class frmKeyMapperSDL
                     End If
 
                     ' Mednafen
-                    If _line.StartsWith("med_") Then
+                    If _line.StartsWith("med_") Or _line.StartsWith("MednafenControllerID=") Then
                         MednafenChanged = True
                     End If
 
@@ -698,6 +737,7 @@ Public Class frmKeyMapperSDL
         Dim tempPeripheral As String() = {"", ""}
         Dim tempJoystick As String() = {"", ""}
         Dim TempDeadzone As String() = {"", ""}
+        Dim MednafenControllerID As String() = {"", ""}
 
         For Each line As String In ControlsConfigs
             If line.StartsWith("Peripheral=") Then
@@ -711,6 +751,10 @@ Public Class frmKeyMapperSDL
             If line.StartsWith("Deadzone=") Then
                 TempDeadzone(0) = line.Split("=")(1).Split("|")(0)
                 TempDeadzone(1) = line.Split("=")(1).Split("|")(1)
+            End If
+            If line.StartsWith("MednafenControllerID=") Then
+                MednafenControllerID(0) = line.Split("=")(1).Split("|")(0)
+                MednafenControllerID(1) = line.Split("=")(1).Split("|")(1)
             End If
         Next
 
@@ -802,12 +846,13 @@ Public Class frmKeyMapperSDL
             File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
         End If
 
-
         ' Mednafen Controls
         btn_Close.Text = "Saving..."
 
-        If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
+        If Not File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
+            MsgBox("No Mednafen Mapping File Found, please Remap Controller at least once" & vbNewLine & "Mednafen Configs not changed")
 
+        Else
             Dim _TranslatedControls(2) As Dictionary(Of String, String)
             Dim MappingFile = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
 
@@ -816,11 +861,7 @@ Public Class frmKeyMapperSDL
                     If Not Joystick(ii) = -1 Then
 
                         Dim DeviceGUIDasString(40) As Byte
-
-                        Me.Invoke(Sub(ByVal _ii)
-                                      SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(_ii)), DeviceGUIDasString, 40)
-                                  End Sub, ii)
-
+                        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(ii)), DeviceGUIDasString, 40)
                         Dim GUIDSTRING As String = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
 
                         If MappingFile(i).StartsWith(GUIDSTRING) Then
@@ -830,13 +871,17 @@ Public Class frmKeyMapperSDL
                                 If _TranslatedControls(ii) Is Nothing Then
                                     _TranslatedControls(ii) = New Dictionary(Of String, String)
                                 End If
-                                _TranslatedControls(ii).Add(_splitsplit(0), _splitsplit(1))
+                                If _splitsplit.Count = 1 Then
+                                    _TranslatedControls(ii).Add(_splitsplit(0), _splitsplit(0))
+                                Else
+                                    _TranslatedControls(ii).Add(_splitsplit(0), _splitsplit(1))
+                                End If
+
                             Next
                         End If
                     End If
                 Next
             Next
-
 
             If MednafenChanged Then
 
@@ -852,10 +897,7 @@ Public Class frmKeyMapperSDL
 
                     Dim tmpControlString = ""
                     For Each control_line In ControlsConfigs
-                        If control_line.StartsWith("med_") Then ' Pretty much the only really consistent thing among all the mednafen controls
-                            'joystick 0x00060079000000000000504944564944 button_1
-                            'joystick 0x00060079000000000000504944564944 abs_1+
-                            'keyboard 0x0 18
+                        If control_line.StartsWith("med_") Then
                             control_line = control_line.Substring(4)
 
                             If line.Contains("rapid_") Then
@@ -878,8 +920,8 @@ Public Class frmKeyMapperSDL
 
                                 Else ' Joystick
                                     Dim _tmpID = ""
-                                    If Not Joystick(_player - 1) = -1 And Not _TranslatedControls(_player - 1) Is Nothing Then
-                                        _tmpID = _TranslatedControls(_player - 1).Values(0)
+                                    If Not MednafenControllerID(_player - 1) = "0x0" Then
+                                        _tmpID = MednafenControllerID(_player - 1)
 
                                         tmpControlString += " Joystick " & _tmpID
 
@@ -888,7 +930,10 @@ Public Class frmKeyMapperSDL
                                             Exit For
                                         End If
 
-                                        If _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
+                                        If _TranslatedControls(_player - 1) Is Nothing Then
+                                            tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                            Exit For
+                                        ElseIf _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
                                             tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
                                             Exit For
                                         Else
@@ -914,12 +959,6 @@ Public Class frmKeyMapperSDL
                 File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
                 File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
             End If
-
-        Else
-            If MednafenChanged Then
-                MsgBox("No Mednafen Mapping Found. Please click: 'Remap Controller'" & vbNewLine & "Mednafen Controls not changed")
-            End If
-
         End If
 
         ' Check if nullDC is running to hotload the settings
@@ -1095,7 +1134,7 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub btnResetAll_Click(sender As Object, e As EventArgs) Handles btnResetAll.Click
+    Private Sub btnResetAll_Click(sender As Object, e As EventArgs) Handles ResetAllToolStripMenuItem.Click
         Dim result1 As DialogResult = MessageBox.Show("This will Reset ALL the controls, k?", "Reset All?", MessageBoxButtons.YesNo)
 
         If result1 = DialogResult.Yes Then
@@ -1103,6 +1142,7 @@ Public Class frmKeyMapperSDL
             LoadSettings()
             If File.Exists(MainformRef.NullDCPath & "\bearcontrollerdb.txt") Then File.Delete(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
             If File.Exists(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt") Then File.Delete(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt")
+            If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then File.Delete(MainformRef.NullDCPath & "\mednafenmapping.txt")
             UpdateControllersList()
             Me.Close()
 
@@ -1114,6 +1154,57 @@ Public Class frmKeyMapperSDL
         If ControllersTab.SelectedIndex = 1 Then
             TabControl1.SelectedIndex = PeripheralCB.SelectedIndex
 
+        End If
+
+    End Sub
+
+    Private Sub ImportMappingStringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportMappingStringToolStripMenuItem.Click
+        If ControllerCB.SelectedValue = -1 Then
+            MsgBox("Select a Controller then try to copy it's mapping kthx")
+
+        Else
+            If Not File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Or Not File.Exists(MainformRef.NullDCPath & "\bearcontrollerdb.txt") Then
+                MsgBox("No BEAR Mappign found for this controller, click 'remap controller'")
+                Exit Sub
+            End If
+
+            Dim DeviceGUIDasString(40) As Byte
+            SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(ControllerCB.SelectedValue), DeviceGUIDasString, 40)
+            Dim GUIDSTRING As String = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
+
+            Dim CompleteMappingString = ""
+            Dim FoundController As Boolean = False
+            For Each _line In File.ReadAllLines(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
+                If _line.StartsWith(GUIDSTRING) Then
+                    FoundController = True
+                    CompleteMappingString += _line
+                    Exit For
+                End If
+            Next
+
+            If Not FoundController Then
+                MsgBox("No BEAR Mappign found for this controller, click 'remap controller'")
+                Exit Sub
+            End If
+
+            CompleteMappingString += "|"
+
+            FoundController = False
+            For Each _line In File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
+                If _line.StartsWith(GUIDSTRING) Then
+                    FoundController = True
+                    CompleteMappingString += _line
+                    Exit For
+                End If
+            Next
+
+            If Not FoundController Then
+                MsgBox("No BEAR Mappign found, click 'remap controller'")
+                Exit Sub
+            End If
+
+            MsgBox("Mapping text copied")
+            My.Computer.Clipboard.SetText(CompleteMappingString)
         End If
 
     End Sub

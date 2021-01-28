@@ -130,7 +130,6 @@ Partial Class frmKeyMapperSDL
         Me.btn_Close = New System.Windows.Forms.Button()
         Me.PeriWarning = New System.Windows.Forms.Label()
         Me.btnSDL = New System.Windows.Forms.Button()
-        Me.btnResetAll = New System.Windows.Forms.Button()
         Me.PlayerTab = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
@@ -138,8 +137,6 @@ Partial Class frmKeyMapperSDL
         Me.ImportMappingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportMappingStringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportMappingStringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportMednafenMappingStringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportMednafenMappingStringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ResetAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.I_BC_345 = New NullDC_CvS2_BEAR.keybindButton()
         Me.I_BC_012 = New NullDC_CvS2_BEAR.keybindButton()
@@ -639,7 +636,7 @@ Partial Class frmKeyMapperSDL
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label1.Location = New System.Drawing.Point(598, 420)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(66, 20)
@@ -651,7 +648,7 @@ Partial Class frmKeyMapperSDL
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label2.Location = New System.Drawing.Point(507, 420)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(63, 20)
@@ -663,7 +660,7 @@ Partial Class frmKeyMapperSDL
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.Black
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label3.Location = New System.Drawing.Point(631, 370)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 20)
@@ -675,7 +672,7 @@ Partial Class frmKeyMapperSDL
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.Black
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label4.Location = New System.Drawing.Point(586, 370)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(43, 20)
@@ -687,7 +684,7 @@ Partial Class frmKeyMapperSDL
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label5.Location = New System.Drawing.Point(539, 370)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(41, 20)
@@ -699,7 +696,7 @@ Partial Class frmKeyMapperSDL
         Me.Label10.AutoSize = True
         Me.Label10.BackColor = System.Drawing.Color.Transparent
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label10.Location = New System.Drawing.Point(494, 370)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(43, 20)
@@ -711,7 +708,7 @@ Partial Class frmKeyMapperSDL
         Me.Label15.AutoSize = True
         Me.Label15.BackColor = System.Drawing.Color.Transparent
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.ForeColor = System.Drawing.Color.Black
+        Me.Label15.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label15.Location = New System.Drawing.Point(586, 325)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(42, 20)
@@ -723,7 +720,7 @@ Partial Class frmKeyMapperSDL
         Me.Label16.AutoSize = True
         Me.Label16.BackColor = System.Drawing.Color.Transparent
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.ForeColor = System.Drawing.Color.Black
+        Me.Label16.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label16.Location = New System.Drawing.Point(541, 325)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(43, 20)
@@ -735,6 +732,7 @@ Partial Class frmKeyMapperSDL
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.Color.Transparent
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Black
         Me.Label6.Location = New System.Drawing.Point(308, 279)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(51, 24)
@@ -746,7 +744,7 @@ Partial Class frmKeyMapperSDL
         Me.Label23.AutoSize = True
         Me.Label23.BackColor = System.Drawing.Color.Transparent
         Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.ForeColor = System.Drawing.Color.Black
+        Me.Label23.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label23.Location = New System.Drawing.Point(494, 325)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(43, 20)
@@ -768,6 +766,7 @@ Partial Class frmKeyMapperSDL
         Me.Label33.AutoSize = True
         Me.Label33.BackColor = System.Drawing.Color.Transparent
         Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.Black
         Me.Label33.Location = New System.Drawing.Point(453, 249)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(24, 24)
@@ -779,6 +778,7 @@ Partial Class frmKeyMapperSDL
         Me.Label34.AutoSize = True
         Me.Label34.BackColor = System.Drawing.Color.Transparent
         Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.Black
         Me.Label34.Location = New System.Drawing.Point(521, 180)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(23, 24)
@@ -790,6 +790,7 @@ Partial Class frmKeyMapperSDL
         Me.Label35.AutoSize = True
         Me.Label35.BackColor = System.Drawing.Color.Transparent
         Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label35.ForeColor = System.Drawing.Color.Black
         Me.Label35.Location = New System.Drawing.Point(386, 178)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(25, 24)
@@ -801,6 +802,7 @@ Partial Class frmKeyMapperSDL
         Me.Label36.AutoSize = True
         Me.Label36.BackColor = System.Drawing.Color.Transparent
         Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.ForeColor = System.Drawing.Color.Black
         Me.Label36.Location = New System.Drawing.Point(453, 113)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(23, 24)
@@ -854,7 +856,7 @@ Partial Class frmKeyMapperSDL
         Me.Label24.BackColor = System.Drawing.Color.Transparent
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label24.ForeColor = System.Drawing.Color.DimGray
-        Me.Label24.Location = New System.Drawing.Point(598, 415)
+        Me.Label24.Location = New System.Drawing.Point(598, 403)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(65, 20)
         Me.Label24.TabIndex = 124
@@ -866,7 +868,7 @@ Partial Class frmKeyMapperSDL
         Me.Label25.BackColor = System.Drawing.Color.Transparent
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.ForeColor = System.Drawing.Color.DimGray
-        Me.Label25.Location = New System.Drawing.Point(507, 415)
+        Me.Label25.Location = New System.Drawing.Point(507, 403)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(64, 20)
         Me.Label25.TabIndex = 122
@@ -878,7 +880,7 @@ Partial Class frmKeyMapperSDL
         Me.Label26.BackColor = System.Drawing.Color.Transparent
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.ForeColor = System.Drawing.Color.DimGray
-        Me.Label26.Location = New System.Drawing.Point(631, 365)
+        Me.Label26.Location = New System.Drawing.Point(631, 353)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(43, 20)
         Me.Label26.TabIndex = 120
@@ -890,7 +892,7 @@ Partial Class frmKeyMapperSDL
         Me.Label27.BackColor = System.Drawing.Color.Transparent
         Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label27.ForeColor = System.Drawing.Color.White
-        Me.Label27.Location = New System.Drawing.Point(586, 365)
+        Me.Label27.Location = New System.Drawing.Point(586, 353)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(43, 20)
         Me.Label27.TabIndex = 118
@@ -902,7 +904,7 @@ Partial Class frmKeyMapperSDL
         Me.Label28.BackColor = System.Drawing.Color.Transparent
         Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label28.ForeColor = System.Drawing.Color.White
-        Me.Label28.Location = New System.Drawing.Point(539, 365)
+        Me.Label28.Location = New System.Drawing.Point(539, 353)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(42, 20)
         Me.Label28.TabIndex = 116
@@ -914,7 +916,7 @@ Partial Class frmKeyMapperSDL
         Me.Label29.BackColor = System.Drawing.Color.Transparent
         Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label29.ForeColor = System.Drawing.Color.White
-        Me.Label29.Location = New System.Drawing.Point(494, 365)
+        Me.Label29.Location = New System.Drawing.Point(494, 353)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(43, 20)
         Me.Label29.TabIndex = 114
@@ -926,7 +928,7 @@ Partial Class frmKeyMapperSDL
         Me.Label30.BackColor = System.Drawing.Color.Transparent
         Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label30.ForeColor = System.Drawing.Color.White
-        Me.Label30.Location = New System.Drawing.Point(586, 320)
+        Me.Label30.Location = New System.Drawing.Point(586, 308)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(42, 20)
         Me.Label30.TabIndex = 112
@@ -938,7 +940,7 @@ Partial Class frmKeyMapperSDL
         Me.Label32.BackColor = System.Drawing.Color.Transparent
         Me.Label32.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label32.ForeColor = System.Drawing.Color.White
-        Me.Label32.Location = New System.Drawing.Point(494, 320)
+        Me.Label32.Location = New System.Drawing.Point(494, 308)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(43, 20)
         Me.Label32.TabIndex = 108
@@ -950,7 +952,7 @@ Partial Class frmKeyMapperSDL
         Me.Label31.BackColor = System.Drawing.Color.Transparent
         Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label31.ForeColor = System.Drawing.Color.White
-        Me.Label31.Location = New System.Drawing.Point(541, 320)
+        Me.Label31.Location = New System.Drawing.Point(541, 308)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(43, 20)
         Me.Label31.TabIndex = 110
@@ -1049,6 +1051,7 @@ Partial Class frmKeyMapperSDL
         Me.Label46.AutoSize = True
         Me.Label46.BackColor = System.Drawing.Color.Transparent
         Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label46.ForeColor = System.Drawing.Color.Black
         Me.Label46.Location = New System.Drawing.Point(394, 163)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(77, 24)
@@ -1071,6 +1074,7 @@ Partial Class frmKeyMapperSDL
         Me.Label44.AutoSize = True
         Me.Label44.BackColor = System.Drawing.Color.Transparent
         Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label44.ForeColor = System.Drawing.Color.Black
         Me.Label44.Location = New System.Drawing.Point(578, 203)
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(26, 24)
@@ -1082,6 +1086,7 @@ Partial Class frmKeyMapperSDL
         Me.Label43.AutoSize = True
         Me.Label43.BackColor = System.Drawing.Color.Transparent
         Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label43.ForeColor = System.Drawing.Color.Black
         Me.Label43.Location = New System.Drawing.Point(461, 120)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(87, 24)
@@ -1093,6 +1098,7 @@ Partial Class frmKeyMapperSDL
         Me.Label42.AutoSize = True
         Me.Label42.BackColor = System.Drawing.Color.Transparent
         Me.Label42.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label42.ForeColor = System.Drawing.Color.Black
         Me.Label42.Location = New System.Drawing.Point(490, 294)
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(25, 24)
@@ -1109,11 +1115,19 @@ Partial Class frmKeyMapperSDL
         Me.TabPage16.Controls.Add(Me.psx_dualshock_square)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_cross)
         Me.TabPage16.Controls.Add(Me.Label60)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_r3)
         Me.TabPage16.Controls.Add(Me.Label59)
+        Me.TabPage16.Controls.Add(Me.Label58)
+        Me.TabPage16.Controls.Add(Me.Label50)
+        Me.TabPage16.Controls.Add(Me.Label51)
+        Me.TabPage16.Controls.Add(Me.Label52)
+        Me.TabPage16.Controls.Add(Me.Label53)
+        Me.TabPage16.Controls.Add(Me.Label54)
+        Me.TabPage16.Controls.Add(Me.Label55)
+        Me.TabPage16.Controls.Add(Me.Label56)
+        Me.TabPage16.Controls.Add(Me.Label57)
+        Me.TabPage16.Controls.Add(Me.psx_dualshock_r3)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_l3)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_analog)
-        Me.TabPage16.Controls.Add(Me.Label58)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_left)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_right)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_down)
@@ -1123,18 +1137,10 @@ Partial Class frmKeyMapperSDL
         Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_down)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_up)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_start)
-        Me.TabPage16.Controls.Add(Me.Label50)
-        Me.TabPage16.Controls.Add(Me.Label51)
-        Me.TabPage16.Controls.Add(Me.Label52)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_r2)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_l2)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_r1)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_l1)
-        Me.TabPage16.Controls.Add(Me.Label53)
-        Me.TabPage16.Controls.Add(Me.Label54)
-        Me.TabPage16.Controls.Add(Me.Label55)
-        Me.TabPage16.Controls.Add(Me.Label56)
-        Me.TabPage16.Controls.Add(Me.Label57)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_select)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_left)
         Me.TabPage16.Controls.Add(Me.psx_dualshock_right)
@@ -1218,6 +1224,7 @@ Partial Class frmKeyMapperSDL
         Me.Label53.AutoSize = True
         Me.Label53.BackColor = System.Drawing.Color.Transparent
         Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label53.ForeColor = System.Drawing.Color.Black
         Me.Label53.Location = New System.Drawing.Point(376, 211)
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(77, 24)
@@ -1251,6 +1258,7 @@ Partial Class frmKeyMapperSDL
         Me.Label56.AutoSize = True
         Me.Label56.BackColor = System.Drawing.Color.Transparent
         Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label56.ForeColor = System.Drawing.Color.Black
         Me.Label56.Location = New System.Drawing.Point(437, 162)
         Me.Label56.Name = "Label56"
         Me.Label56.Size = New System.Drawing.Size(87, 24)
@@ -1262,6 +1270,7 @@ Partial Class frmKeyMapperSDL
         Me.Label57.AutoSize = True
         Me.Label57.BackColor = System.Drawing.Color.Transparent
         Me.Label57.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label57.ForeColor = System.Drawing.Color.Black
         Me.Label57.Location = New System.Drawing.Point(472, 342)
         Me.Label57.Name = "Label57"
         Me.Label57.Size = New System.Drawing.Size(25, 24)
@@ -1624,7 +1633,6 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel4.Controls.Add(Me.btn_Close, 0, 13)
         Me.TableLayoutPanel4.Controls.Add(Me.PeriWarning, 0, 12)
         Me.TableLayoutPanel4.Controls.Add(Me.btnSDL, 0, 2)
-        Me.TableLayoutPanel4.Controls.Add(Me.btnResetAll, 0, 10)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 24)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
@@ -1692,9 +1700,9 @@ Partial Class frmKeyMapperSDL
         Me.btn_Close.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_Close.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Close.Location = New System.Drawing.Point(3, 433)
+        Me.btn_Close.Location = New System.Drawing.Point(3, 432)
         Me.btn_Close.Name = "btn_Close"
-        Me.btn_Close.Size = New System.Drawing.Size(200, 60)
+        Me.btn_Close.Size = New System.Drawing.Size(200, 61)
         Me.btn_Close.TabIndex = 65
         Me.btn_Close.Text = "Save"
         Me.btn_Close.UseVisualStyleBackColor = False
@@ -1705,7 +1713,7 @@ Partial Class frmKeyMapperSDL
         Me.PeriWarning.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PeriWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PeriWarning.ForeColor = System.Drawing.Color.Red
-        Me.PeriWarning.Location = New System.Drawing.Point(3, 390)
+        Me.PeriWarning.Location = New System.Drawing.Point(3, 389)
         Me.PeriWarning.Name = "PeriWarning"
         Me.PeriWarning.Size = New System.Drawing.Size(200, 40)
         Me.PeriWarning.TabIndex = 66
@@ -1721,17 +1729,6 @@ Partial Class frmKeyMapperSDL
         Me.btnSDL.TabIndex = 67
         Me.btnSDL.Text = "Remap Controller"
         Me.btnSDL.UseVisualStyleBackColor = False
-        '
-        'btnResetAll
-        '
-        Me.btnResetAll.BackColor = System.Drawing.Color.White
-        Me.btnResetAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnResetAll.Location = New System.Drawing.Point(3, 290)
-        Me.btnResetAll.Name = "btnResetAll"
-        Me.btnResetAll.Size = New System.Drawing.Size(80, 23)
-        Me.btnResetAll.TabIndex = 70
-        Me.btnResetAll.Text = "Reset All"
-        Me.btnResetAll.UseVisualStyleBackColor = False
         '
         'PlayerTab
         '
@@ -1776,7 +1773,7 @@ Partial Class frmKeyMapperSDL
         '
         'ImportMappingToolStripMenuItem
         '
-        Me.ImportMappingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportMappingStringToolStripMenuItem, Me.ExportMappingStringToolStripMenuItem, Me.ImportMednafenMappingStringToolStripMenuItem, Me.ExportMednafenMappingStringToolStripMenuItem, Me.ResetAllToolStripMenuItem})
+        Me.ImportMappingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportMappingStringToolStripMenuItem, Me.ExportMappingStringToolStripMenuItem, Me.ResetAllToolStripMenuItem})
         Me.ImportMappingToolStripMenuItem.Name = "ImportMappingToolStripMenuItem"
         Me.ImportMappingToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.ImportMappingToolStripMenuItem.Size = New System.Drawing.Size(72, 20)
@@ -1785,31 +1782,19 @@ Partial Class frmKeyMapperSDL
         'ImportMappingStringToolStripMenuItem
         '
         Me.ImportMappingStringToolStripMenuItem.Name = "ImportMappingStringToolStripMenuItem"
-        Me.ImportMappingStringToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
-        Me.ImportMappingStringToolStripMenuItem.Text = "Import Mapping String"
+        Me.ImportMappingStringToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.ImportMappingStringToolStripMenuItem.Text = "Copy Mapping String"
         '
         'ExportMappingStringToolStripMenuItem
         '
         Me.ExportMappingStringToolStripMenuItem.Name = "ExportMappingStringToolStripMenuItem"
-        Me.ExportMappingStringToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
-        Me.ExportMappingStringToolStripMenuItem.Text = "Export Mapping String"
-        '
-        'ImportMednafenMappingStringToolStripMenuItem
-        '
-        Me.ImportMednafenMappingStringToolStripMenuItem.Name = "ImportMednafenMappingStringToolStripMenuItem"
-        Me.ImportMednafenMappingStringToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
-        Me.ImportMednafenMappingStringToolStripMenuItem.Text = "Import Mednafen Mapping String"
-        '
-        'ExportMednafenMappingStringToolStripMenuItem
-        '
-        Me.ExportMednafenMappingStringToolStripMenuItem.Name = "ExportMednafenMappingStringToolStripMenuItem"
-        Me.ExportMednafenMappingStringToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
-        Me.ExportMednafenMappingStringToolStripMenuItem.Text = "Export Mednafen Mapping String"
+        Me.ExportMappingStringToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+        Me.ExportMappingStringToolStripMenuItem.Text = "Paste Mapping String"
         '
         'ResetAllToolStripMenuItem
         '
         Me.ResetAllToolStripMenuItem.Name = "ResetAllToolStripMenuItem"
-        Me.ResetAllToolStripMenuItem.Size = New System.Drawing.Size(252, 22)
+        Me.ResetAllToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
         Me.ResetAllToolStripMenuItem.Text = "Reset All"
         '
         'I_BC_345
@@ -1972,6 +1957,7 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN5_KEY.Emu = "nulldc"
         Me.I_BTN5_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_BTN5_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_BTN5_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN5_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_BTN5_KEY.Location = New System.Drawing.Point(472, 238)
         Me.I_BTN5_KEY.Name = "I_BTN5_KEY"
@@ -1988,6 +1974,7 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN4_KEY.Emu = "nulldc"
         Me.I_BTN4_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_BTN4_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_BTN4_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN4_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_BTN4_KEY.Location = New System.Drawing.Point(399, 250)
         Me.I_BTN4_KEY.Name = "I_BTN4_KEY"
@@ -2004,6 +1991,7 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN3_KEY.Emu = "nulldc"
         Me.I_BTN3_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_BTN3_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_BTN3_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN3_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_BTN3_KEY.Location = New System.Drawing.Point(328, 274)
         Me.I_BTN3_KEY.Name = "I_BTN3_KEY"
@@ -2020,6 +2008,7 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN2_KEY.Emu = "nulldc"
         Me.I_BTN2_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_BTN2_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_BTN2_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN2_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_BTN2_KEY.Location = New System.Drawing.Point(473, 159)
         Me.I_BTN2_KEY.Name = "I_BTN2_KEY"
@@ -2036,6 +2025,7 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN1_KEY.Emu = "nulldc"
         Me.I_BTN1_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_BTN1_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_BTN1_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN1_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_BTN1_KEY.Location = New System.Drawing.Point(399, 169)
         Me.I_BTN1_KEY.Name = "I_BTN1_KEY"
@@ -2052,6 +2042,7 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN0_KEY.Emu = "nulldc"
         Me.I_BTN0_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_BTN0_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_BTN0_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN0_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_BTN0_KEY.Location = New System.Drawing.Point(329, 196)
         Me.I_BTN0_KEY.Name = "I_BTN0_KEY"
@@ -2068,6 +2059,7 @@ Partial Class frmKeyMapperSDL
         Me.I_TEST_KEY_1.Emu = "nulldc"
         Me.I_TEST_KEY_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_TEST_KEY_1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_TEST_KEY_1.ForeColor = System.Drawing.Color.Black
         Me.I_TEST_KEY_1.KeyCode = New String() {"k0", "k0"}
         Me.I_TEST_KEY_1.Location = New System.Drawing.Point(508, 91)
         Me.I_TEST_KEY_1.Name = "I_TEST_KEY_1"
@@ -2084,6 +2076,7 @@ Partial Class frmKeyMapperSDL
         Me.I_SERVICE_KEY_1.Emu = "nulldc"
         Me.I_SERVICE_KEY_1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_SERVICE_KEY_1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_SERVICE_KEY_1.ForeColor = System.Drawing.Color.Black
         Me.I_SERVICE_KEY_1.KeyCode = New String() {"k0", "k0"}
         Me.I_SERVICE_KEY_1.Location = New System.Drawing.Point(446, 91)
         Me.I_SERVICE_KEY_1.Name = "I_SERVICE_KEY_1"
@@ -2100,6 +2093,7 @@ Partial Class frmKeyMapperSDL
         Me.I_COIN_KEY.Emu = "nulldc"
         Me.I_COIN_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_COIN_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_COIN_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_COIN_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_COIN_KEY.Location = New System.Drawing.Point(390, 92)
         Me.I_COIN_KEY.Name = "I_COIN_KEY"
@@ -2116,6 +2110,7 @@ Partial Class frmKeyMapperSDL
         Me.I_START_KEY.Emu = "nulldc"
         Me.I_START_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_START_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_START_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_START_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_START_KEY.Location = New System.Drawing.Point(329, 92)
         Me.I_START_KEY.Name = "I_START_KEY"
@@ -2132,6 +2127,7 @@ Partial Class frmKeyMapperSDL
         Me.I_RIGHT_KEY.Emu = "nulldc"
         Me.I_RIGHT_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_RIGHT_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_RIGHT_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_RIGHT_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_RIGHT_KEY.Location = New System.Drawing.Point(214, 243)
         Me.I_RIGHT_KEY.Name = "I_RIGHT_KEY"
@@ -2148,6 +2144,7 @@ Partial Class frmKeyMapperSDL
         Me.I_LEFT_KEY.Emu = "nulldc"
         Me.I_LEFT_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_LEFT_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_LEFT_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_LEFT_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_LEFT_KEY.Location = New System.Drawing.Point(83, 243)
         Me.I_LEFT_KEY.Name = "I_LEFT_KEY"
@@ -2164,6 +2161,7 @@ Partial Class frmKeyMapperSDL
         Me.I_DOWN_KEY.Emu = "nulldc"
         Me.I_DOWN_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_DOWN_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_DOWN_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_DOWN_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_DOWN_KEY.Location = New System.Drawing.Point(147, 313)
         Me.I_DOWN_KEY.Name = "I_DOWN_KEY"
@@ -2180,6 +2178,7 @@ Partial Class frmKeyMapperSDL
         Me.I_UP_KEY.Emu = "nulldc"
         Me.I_UP_KEY.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.I_UP_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.I_UP_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_UP_KEY.KeyCode = New String() {"k0", "k0"}
         Me.I_UP_KEY.Location = New System.Drawing.Point(147, 180)
         Me.I_UP_KEY.Name = "I_UP_KEY"
@@ -2196,6 +2195,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_LSLIDER.Emu = "nulldc"
         Me.CONT_LSLIDER.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_LSLIDER.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_LSLIDER.ForeColor = System.Drawing.Color.Black
         Me.CONT_LSLIDER.KeyCode = New String() {"k0", "k0"}
         Me.CONT_LSLIDER.Location = New System.Drawing.Point(153, 32)
         Me.CONT_LSLIDER.Name = "CONT_LSLIDER"
@@ -2246,6 +2246,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_A.Emu = "nulldc"
         Me.CONT_A.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_A.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_A.ForeColor = System.Drawing.Color.Black
         Me.CONT_A.KeyCode = New String() {"k0", "k0"}
         Me.CONT_A.Location = New System.Drawing.Point(445, 211)
         Me.CONT_A.Name = "CONT_A"
@@ -2279,6 +2280,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_DPAD_LEFT.Emu = "nulldc"
         Me.CONT_DPAD_LEFT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_DPAD_LEFT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_DPAD_LEFT.ForeColor = System.Drawing.Color.Black
         Me.CONT_DPAD_LEFT.KeyCode = New String() {"k0", "k0"}
         Me.CONT_DPAD_LEFT.Location = New System.Drawing.Point(153, 227)
         Me.CONT_DPAD_LEFT.Name = "CONT_DPAD_LEFT"
@@ -2312,6 +2314,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_B.Emu = "nulldc"
         Me.CONT_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_B.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_B.ForeColor = System.Drawing.Color.Black
         Me.CONT_B.KeyCode = New String() {"k0", "k0"}
         Me.CONT_B.Location = New System.Drawing.Point(484, 172)
         Me.CONT_B.Name = "CONT_B"
@@ -2345,6 +2348,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_DPAD_UP.Emu = "nulldc"
         Me.CONT_DPAD_UP.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_DPAD_UP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_DPAD_UP.ForeColor = System.Drawing.Color.Black
         Me.CONT_DPAD_UP.KeyCode = New String() {"k0", "k0"}
         Me.CONT_DPAD_UP.Location = New System.Drawing.Point(191, 190)
         Me.CONT_DPAD_UP.Name = "CONT_DPAD_UP"
@@ -2378,6 +2382,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_Y.Emu = "nulldc"
         Me.CONT_Y.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_Y.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_Y.ForeColor = System.Drawing.Color.Black
         Me.CONT_Y.KeyCode = New String() {"k0", "k0"}
         Me.CONT_Y.Location = New System.Drawing.Point(445, 133)
         Me.CONT_Y.Name = "CONT_Y"
@@ -2411,6 +2416,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_RSLIDER.Emu = "nulldc"
         Me.CONT_RSLIDER.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_RSLIDER.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_RSLIDER.ForeColor = System.Drawing.Color.Black
         Me.CONT_RSLIDER.KeyCode = New String() {"k0", "k0"}
         Me.CONT_RSLIDER.Location = New System.Drawing.Point(449, 32)
         Me.CONT_RSLIDER.Name = "CONT_RSLIDER"
@@ -2461,6 +2467,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_DPAD_RIGHT.Emu = "nulldc"
         Me.CONT_DPAD_RIGHT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_DPAD_RIGHT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_DPAD_RIGHT.ForeColor = System.Drawing.Color.Black
         Me.CONT_DPAD_RIGHT.KeyCode = New String() {"k0", "k0"}
         Me.CONT_DPAD_RIGHT.Location = New System.Drawing.Point(229, 227)
         Me.CONT_DPAD_RIGHT.Name = "CONT_DPAD_RIGHT"
@@ -2477,6 +2484,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_X.Emu = "nulldc"
         Me.CONT_X.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_X.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_X.ForeColor = System.Drawing.Color.Black
         Me.CONT_X.KeyCode = New String() {"k0", "k0"}
         Me.CONT_X.Location = New System.Drawing.Point(406, 172)
         Me.CONT_X.Name = "CONT_X"
@@ -2493,6 +2501,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_DPAD_DOWN.Emu = "nulldc"
         Me.CONT_DPAD_DOWN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_DPAD_DOWN.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_DPAD_DOWN.ForeColor = System.Drawing.Color.Black
         Me.CONT_DPAD_DOWN.KeyCode = New String() {"k0", "k0"}
         Me.CONT_DPAD_DOWN.Location = New System.Drawing.Point(191, 264)
         Me.CONT_DPAD_DOWN.Name = "CONT_DPAD_DOWN"
@@ -2509,6 +2518,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_ANALOG_LEFT.Emu = "nulldc"
         Me.CONT_ANALOG_LEFT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_ANALOG_LEFT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_ANALOG_LEFT.ForeColor = System.Drawing.Color.Black
         Me.CONT_ANALOG_LEFT.KeyCode = New String() {"k0", "k0"}
         Me.CONT_ANALOG_LEFT.Location = New System.Drawing.Point(125, 139)
         Me.CONT_ANALOG_LEFT.Name = "CONT_ANALOG_LEFT"
@@ -2525,6 +2535,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_ANALOG_UP.Emu = "nulldc"
         Me.CONT_ANALOG_UP.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_ANALOG_UP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_ANALOG_UP.ForeColor = System.Drawing.Color.Black
         Me.CONT_ANALOG_UP.KeyCode = New String() {"k0", "k0"}
         Me.CONT_ANALOG_UP.Location = New System.Drawing.Point(162, 102)
         Me.CONT_ANALOG_UP.Name = "CONT_ANALOG_UP"
@@ -2541,6 +2552,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_ANALOG_RIGHT.Emu = "nulldc"
         Me.CONT_ANALOG_RIGHT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_ANALOG_RIGHT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_ANALOG_RIGHT.ForeColor = System.Drawing.Color.Black
         Me.CONT_ANALOG_RIGHT.KeyCode = New String() {"k0", "k0"}
         Me.CONT_ANALOG_RIGHT.Location = New System.Drawing.Point(199, 139)
         Me.CONT_ANALOG_RIGHT.Name = "CONT_ANALOG_RIGHT"
@@ -2557,6 +2569,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_ANALOG_DOWN.Emu = "nulldc"
         Me.CONT_ANALOG_DOWN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_ANALOG_DOWN.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_ANALOG_DOWN.ForeColor = System.Drawing.Color.Black
         Me.CONT_ANALOG_DOWN.KeyCode = New String() {"k0", "k0"}
         Me.CONT_ANALOG_DOWN.Location = New System.Drawing.Point(162, 175)
         Me.CONT_ANALOG_DOWN.Name = "CONT_ANALOG_DOWN"
@@ -2573,6 +2586,7 @@ Partial Class frmKeyMapperSDL
         Me.CONT_START.Emu = "nulldc"
         Me.CONT_START.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CONT_START.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_START.ForeColor = System.Drawing.Color.Black
         Me.CONT_START.KeyCode = New String() {"k0", "k0"}
         Me.CONT_START.Location = New System.Drawing.Point(312, 300)
         Me.CONT_START.Name = "CONT_START"
@@ -2591,7 +2605,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_ABC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_ABC.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_ABC.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_ABC.Location = New System.Drawing.Point(608, 432)
+        Me.STICK_BC_ABC.Location = New System.Drawing.Point(608, 420)
         Me.STICK_BC_ABC.Name = "STICK_BC_ABC"
         Me.STICK_BC_ABC.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_ABC.TabIndex = 123
@@ -2608,7 +2622,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_XYZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_XYZ.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_XYZ.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_XYZ.Location = New System.Drawing.Point(517, 432)
+        Me.STICK_BC_XYZ.Location = New System.Drawing.Point(517, 420)
         Me.STICK_BC_XYZ.Name = "STICK_BC_XYZ"
         Me.STICK_BC_XYZ.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_XYZ.TabIndex = 121
@@ -2625,7 +2639,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_BC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_BC.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_BC.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_BC.Location = New System.Drawing.Point(631, 382)
+        Me.STICK_BC_BC.Location = New System.Drawing.Point(631, 370)
         Me.STICK_BC_BC.Name = "STICK_BC_BC"
         Me.STICK_BC_BC.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_BC.TabIndex = 119
@@ -2642,7 +2656,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_AB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_AB.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_AB.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_AB.Location = New System.Drawing.Point(586, 382)
+        Me.STICK_BC_AB.Location = New System.Drawing.Point(586, 370)
         Me.STICK_BC_AB.Name = "STICK_BC_AB"
         Me.STICK_BC_AB.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_AB.TabIndex = 117
@@ -2659,7 +2673,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_YZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_YZ.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_YZ.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_YZ.Location = New System.Drawing.Point(539, 382)
+        Me.STICK_BC_YZ.Location = New System.Drawing.Point(539, 370)
         Me.STICK_BC_YZ.Name = "STICK_BC_YZ"
         Me.STICK_BC_YZ.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_YZ.TabIndex = 115
@@ -2676,7 +2690,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_XY.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_XY.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_XY.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_XY.Location = New System.Drawing.Point(494, 382)
+        Me.STICK_BC_XY.Location = New System.Drawing.Point(494, 370)
         Me.STICK_BC_XY.Name = "STICK_BC_XY"
         Me.STICK_BC_XY.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_XY.TabIndex = 113
@@ -2693,7 +2707,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_CZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_CZ.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_CZ.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_CZ.Location = New System.Drawing.Point(586, 337)
+        Me.STICK_BC_CZ.Location = New System.Drawing.Point(586, 325)
         Me.STICK_BC_CZ.Name = "STICK_BC_CZ"
         Me.STICK_BC_CZ.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_CZ.TabIndex = 111
@@ -2710,7 +2724,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_YB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_YB.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_YB.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_YB.Location = New System.Drawing.Point(541, 337)
+        Me.STICK_BC_YB.Location = New System.Drawing.Point(541, 325)
         Me.STICK_BC_YB.Name = "STICK_BC_YB"
         Me.STICK_BC_YB.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_YB.TabIndex = 109
@@ -2727,7 +2741,7 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_XA.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_XA.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_XA.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_BC_XA.Location = New System.Drawing.Point(494, 337)
+        Me.STICK_BC_XA.Location = New System.Drawing.Point(494, 325)
         Me.STICK_BC_XA.Name = "STICK_BC_XA"
         Me.STICK_BC_XA.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_XA.TabIndex = 107
@@ -2742,8 +2756,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_C.Emu = "nulldc"
         Me.STICK_C.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_C.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_C.ForeColor = System.Drawing.Color.Black
         Me.STICK_C.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_C.Location = New System.Drawing.Point(522, 150)
+        Me.STICK_C.Location = New System.Drawing.Point(522, 138)
         Me.STICK_C.Name = "STICK_C"
         Me.STICK_C.Size = New System.Drawing.Size(60, 60)
         Me.STICK_C.TabIndex = 101
@@ -2758,8 +2773,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_B.Emu = "nulldc"
         Me.STICK_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_B.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_B.ForeColor = System.Drawing.Color.Black
         Me.STICK_B.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_B.Location = New System.Drawing.Point(444, 149)
+        Me.STICK_B.Location = New System.Drawing.Point(444, 137)
         Me.STICK_B.Name = "STICK_B"
         Me.STICK_B.Size = New System.Drawing.Size(60, 60)
         Me.STICK_B.TabIndex = 100
@@ -2774,8 +2790,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_A.Emu = "nulldc"
         Me.STICK_A.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_A.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_A.ForeColor = System.Drawing.Color.Black
         Me.STICK_A.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_A.Location = New System.Drawing.Point(378, 193)
+        Me.STICK_A.Location = New System.Drawing.Point(378, 181)
         Me.STICK_A.Name = "STICK_A"
         Me.STICK_A.Size = New System.Drawing.Size(60, 60)
         Me.STICK_A.TabIndex = 99
@@ -2790,8 +2807,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_Z.Emu = "nulldc"
         Me.STICK_Z.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_Z.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_Z.ForeColor = System.Drawing.Color.Black
         Me.STICK_Z.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_Z.Location = New System.Drawing.Point(521, 71)
+        Me.STICK_Z.Location = New System.Drawing.Point(521, 59)
         Me.STICK_Z.Name = "STICK_Z"
         Me.STICK_Z.Size = New System.Drawing.Size(60, 60)
         Me.STICK_Z.TabIndex = 98
@@ -2806,8 +2824,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_Y.Emu = "nulldc"
         Me.STICK_Y.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_Y.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_Y.ForeColor = System.Drawing.Color.Black
         Me.STICK_Y.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_Y.Location = New System.Drawing.Point(444, 71)
+        Me.STICK_Y.Location = New System.Drawing.Point(444, 59)
         Me.STICK_Y.Name = "STICK_Y"
         Me.STICK_Y.Size = New System.Drawing.Size(60, 60)
         Me.STICK_Y.TabIndex = 97
@@ -2822,8 +2841,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_X.Emu = "nulldc"
         Me.STICK_X.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_X.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_X.ForeColor = System.Drawing.Color.Black
         Me.STICK_X.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_X.Location = New System.Drawing.Point(378, 113)
+        Me.STICK_X.Location = New System.Drawing.Point(378, 101)
         Me.STICK_X.Name = "STICK_X"
         Me.STICK_X.Size = New System.Drawing.Size(60, 60)
         Me.STICK_X.TabIndex = 96
@@ -2838,8 +2858,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_START.Emu = "nulldc"
         Me.STICK_START.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_START.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_START.ForeColor = System.Drawing.Color.Black
         Me.STICK_START.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_START.Location = New System.Drawing.Point(433, 21)
+        Me.STICK_START.Location = New System.Drawing.Point(433, 14)
         Me.STICK_START.Name = "STICK_START"
         Me.STICK_START.Size = New System.Drawing.Size(35, 30)
         Me.STICK_START.TabIndex = 106
@@ -2854,8 +2875,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_DPAD_RIGHT.Emu = "nulldc"
         Me.STICK_DPAD_RIGHT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_DPAD_RIGHT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_DPAD_RIGHT.ForeColor = System.Drawing.Color.Black
         Me.STICK_DPAD_RIGHT.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_DPAD_RIGHT.Location = New System.Drawing.Point(203, 143)
+        Me.STICK_DPAD_RIGHT.Location = New System.Drawing.Point(203, 131)
         Me.STICK_DPAD_RIGHT.Name = "STICK_DPAD_RIGHT"
         Me.STICK_DPAD_RIGHT.Size = New System.Drawing.Size(50, 50)
         Me.STICK_DPAD_RIGHT.TabIndex = 105
@@ -2870,8 +2892,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_DPAD_LEFT.Emu = "nulldc"
         Me.STICK_DPAD_LEFT.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_DPAD_LEFT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_DPAD_LEFT.ForeColor = System.Drawing.Color.Black
         Me.STICK_DPAD_LEFT.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_DPAD_LEFT.Location = New System.Drawing.Point(84, 143)
+        Me.STICK_DPAD_LEFT.Location = New System.Drawing.Point(84, 131)
         Me.STICK_DPAD_LEFT.Name = "STICK_DPAD_LEFT"
         Me.STICK_DPAD_LEFT.Size = New System.Drawing.Size(50, 50)
         Me.STICK_DPAD_LEFT.TabIndex = 104
@@ -2886,8 +2909,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_DPAD_DOWN.Emu = "nulldc"
         Me.STICK_DPAD_DOWN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_DPAD_DOWN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_DPAD_DOWN.ForeColor = System.Drawing.Color.Black
         Me.STICK_DPAD_DOWN.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_DPAD_DOWN.Location = New System.Drawing.Point(144, 207)
+        Me.STICK_DPAD_DOWN.Location = New System.Drawing.Point(144, 195)
         Me.STICK_DPAD_DOWN.Name = "STICK_DPAD_DOWN"
         Me.STICK_DPAD_DOWN.Size = New System.Drawing.Size(50, 50)
         Me.STICK_DPAD_DOWN.TabIndex = 103
@@ -2902,8 +2926,9 @@ Partial Class frmKeyMapperSDL
         Me.STICK_DPAD_UP.Emu = "nulldc"
         Me.STICK_DPAD_UP.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.STICK_DPAD_UP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.STICK_DPAD_UP.ForeColor = System.Drawing.Color.Black
         Me.STICK_DPAD_UP.KeyCode = New String() {"k0", "k0"}
-        Me.STICK_DPAD_UP.Location = New System.Drawing.Point(144, 86)
+        Me.STICK_DPAD_UP.Location = New System.Drawing.Point(144, 74)
         Me.STICK_DPAD_UP.Name = "STICK_DPAD_UP"
         Me.STICK_DPAD_UP.Size = New System.Drawing.Size(50, 50)
         Me.STICK_DPAD_UP.TabIndex = 102
@@ -2918,6 +2943,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_triangle.Emu = "mednafen"
         Me.psx_gamepad_triangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_triangle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_triangle.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_triangle.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_triangle.Location = New System.Drawing.Point(477, 141)
         Me.psx_gamepad_triangle.Name = "psx_gamepad_triangle"
@@ -2933,6 +2959,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_r2.Emu = "mednafen"
         Me.psx_gamepad_r2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_r2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_r2.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_r2.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_r2.Location = New System.Drawing.Point(478, 1)
         Me.psx_gamepad_r2.Name = "psx_gamepad_r2"
@@ -2948,6 +2975,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_l2.Emu = "mednafen"
         Me.psx_gamepad_l2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_l2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_l2.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_l2.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_l2.Location = New System.Drawing.Point(162, 7)
         Me.psx_gamepad_l2.Name = "psx_gamepad_l2"
@@ -2963,6 +2991,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_r1.Emu = "mednafen"
         Me.psx_gamepad_r1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_r1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_r1.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_r1.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_r1.Location = New System.Drawing.Point(478, 52)
         Me.psx_gamepad_r1.Name = "psx_gamepad_r1"
@@ -2978,6 +3007,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_l1.Emu = "mednafen"
         Me.psx_gamepad_l1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_l1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_l1.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_l1.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_l1.Location = New System.Drawing.Point(162, 58)
         Me.psx_gamepad_l1.Name = "psx_gamepad_l1"
@@ -2993,6 +3023,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_circle.Emu = "mednafen"
         Me.psx_gamepad_circle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_circle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_circle.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_circle.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_circle.Location = New System.Drawing.Point(527, 191)
         Me.psx_gamepad_circle.Name = "psx_gamepad_circle"
@@ -3008,6 +3039,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_square.Emu = "mednafen"
         Me.psx_gamepad_square.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_square.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_square.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_square.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_square.Location = New System.Drawing.Point(429, 191)
         Me.psx_gamepad_square.Name = "psx_gamepad_square"
@@ -3023,6 +3055,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_cross.Emu = "mednafen"
         Me.psx_gamepad_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_cross.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_cross.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_cross.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_cross.Location = New System.Drawing.Point(478, 241)
         Me.psx_gamepad_cross.Name = "psx_gamepad_cross"
@@ -3038,6 +3071,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_start.Emu = "mednafen"
         Me.psx_gamepad_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_start.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_start.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_start.Location = New System.Drawing.Point(349, 227)
         Me.psx_gamepad_start.Name = "psx_gamepad_start"
@@ -3053,6 +3087,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_select.Emu = "mednafen"
         Me.psx_gamepad_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_select.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_select.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_select.Location = New System.Drawing.Point(275, 227)
         Me.psx_gamepad_select.Name = "psx_gamepad_select"
@@ -3068,6 +3103,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_left.Emu = "mednafen"
         Me.psx_gamepad_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_left.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_left.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_left.Location = New System.Drawing.Point(94, 190)
         Me.psx_gamepad_left.Name = "psx_gamepad_left"
@@ -3083,6 +3119,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_right.Emu = "mednafen"
         Me.psx_gamepad_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_right.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_right.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_right.Location = New System.Drawing.Point(192, 190)
         Me.psx_gamepad_right.Name = "psx_gamepad_right"
@@ -3098,6 +3135,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_down.Emu = "mednafen"
         Me.psx_gamepad_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_down.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_down.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_down.Location = New System.Drawing.Point(143, 239)
         Me.psx_gamepad_down.Name = "psx_gamepad_down"
@@ -3113,6 +3151,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_up.Emu = "mednafen"
         Me.psx_gamepad_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_gamepad_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_gamepad_up.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_up.KeyCode = New String() {"k0", "k0"}
         Me.psx_gamepad_up.Location = New System.Drawing.Point(143, 141)
         Me.psx_gamepad_up.Name = "psx_gamepad_up"
@@ -3128,6 +3167,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_circle.Emu = "mednafen"
         Me.psx_dualshock_circle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_circle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_circle.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_circle.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_circle.Location = New System.Drawing.Point(509, 239)
         Me.psx_dualshock_circle.Name = "psx_dualshock_circle"
@@ -3143,6 +3183,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_triangle.Emu = "mednafen"
         Me.psx_dualshock_triangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_triangle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_triangle.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_triangle.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_triangle.Location = New System.Drawing.Point(459, 189)
         Me.psx_dualshock_triangle.Name = "psx_dualshock_triangle"
@@ -3158,6 +3199,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_square.Emu = "mednafen"
         Me.psx_dualshock_square.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_square.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_square.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_square.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_square.Location = New System.Drawing.Point(411, 239)
         Me.psx_dualshock_square.Name = "psx_dualshock_square"
@@ -3173,6 +3215,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_cross.Emu = "mednafen"
         Me.psx_dualshock_cross.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_cross.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_cross.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_cross.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_cross.Location = New System.Drawing.Point(460, 289)
         Me.psx_dualshock_cross.Name = "psx_dualshock_cross"
@@ -3188,6 +3231,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_r3.Emu = "mednafen"
         Me.psx_dualshock_r3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_r3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_r3.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_r3.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_r3.Location = New System.Drawing.Point(438, 368)
         Me.psx_dualshock_r3.Name = "psx_dualshock_r3"
@@ -3203,6 +3247,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_l3.Emu = "mednafen"
         Me.psx_dualshock_l3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_l3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_l3.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_l3.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_l3.Location = New System.Drawing.Point(205, 370)
         Me.psx_dualshock_l3.Name = "psx_dualshock_l3"
@@ -3218,6 +3263,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_analog.Emu = "mednafen"
         Me.psx_dualshock_analog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_analog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_analog.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_analog.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_analog.Location = New System.Drawing.Point(319, 388)
         Me.psx_dualshock_analog.Name = "psx_dualshock_analog"
@@ -3233,6 +3279,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_rstick_left.Emu = "mednafen"
         Me.psx_dualshock_rstick_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_rstick_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_rstick_left.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_rstick_left.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_rstick_left.Location = New System.Drawing.Point(353, 321)
         Me.psx_dualshock_rstick_left.Name = "psx_dualshock_rstick_left"
@@ -3248,6 +3295,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_rstick_right.Emu = "mednafen"
         Me.psx_dualshock_rstick_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_rstick_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_rstick_right.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_rstick_right.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_rstick_right.Location = New System.Drawing.Point(431, 321)
         Me.psx_dualshock_rstick_right.Name = "psx_dualshock_rstick_right"
@@ -3263,6 +3311,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_rstick_down.Emu = "mednafen"
         Me.psx_dualshock_rstick_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_rstick_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_rstick_down.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_rstick_down.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_rstick_down.Location = New System.Drawing.Point(392, 360)
         Me.psx_dualshock_rstick_down.Name = "psx_dualshock_rstick_down"
@@ -3278,6 +3327,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_rstick_up.Emu = "mednafen"
         Me.psx_dualshock_rstick_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_rstick_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_rstick_up.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_rstick_up.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_rstick_up.Location = New System.Drawing.Point(392, 282)
         Me.psx_dualshock_rstick_up.Name = "psx_dualshock_rstick_up"
@@ -3293,6 +3343,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_lstick_left.Emu = "mednafen"
         Me.psx_dualshock_lstick_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_lstick_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_lstick_left.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_lstick_left.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_lstick_left.Location = New System.Drawing.Point(212, 322)
         Me.psx_dualshock_lstick_left.Name = "psx_dualshock_lstick_left"
@@ -3308,6 +3359,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_lstick_right.Emu = "mednafen"
         Me.psx_dualshock_lstick_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_lstick_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_lstick_right.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_lstick_right.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_lstick_right.Location = New System.Drawing.Point(290, 322)
         Me.psx_dualshock_lstick_right.Name = "psx_dualshock_lstick_right"
@@ -3323,6 +3375,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_lstick_down.Emu = "mednafen"
         Me.psx_dualshock_lstick_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_lstick_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_lstick_down.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_lstick_down.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_lstick_down.Location = New System.Drawing.Point(251, 361)
         Me.psx_dualshock_lstick_down.Name = "psx_dualshock_lstick_down"
@@ -3338,6 +3391,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_lstick_up.Emu = "mednafen"
         Me.psx_dualshock_lstick_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_lstick_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_lstick_up.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_lstick_up.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_lstick_up.Location = New System.Drawing.Point(251, 282)
         Me.psx_dualshock_lstick_up.Name = "psx_dualshock_lstick_up"
@@ -3353,6 +3407,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_start.Emu = "mednafen"
         Me.psx_dualshock_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_start.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_start.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_start.Location = New System.Drawing.Point(362, 235)
         Me.psx_dualshock_start.Name = "psx_dualshock_start"
@@ -3368,6 +3423,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_r2.Emu = "mednafen"
         Me.psx_dualshock_r2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_r2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_r2.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_r2.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_r2.Location = New System.Drawing.Point(465, 51)
         Me.psx_dualshock_r2.Name = "psx_dualshock_r2"
@@ -3383,6 +3439,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_l2.Emu = "mednafen"
         Me.psx_dualshock_l2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_l2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_l2.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_l2.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_l2.Location = New System.Drawing.Point(167, 57)
         Me.psx_dualshock_l2.Name = "psx_dualshock_l2"
@@ -3398,6 +3455,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_r1.Emu = "mednafen"
         Me.psx_dualshock_r1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_r1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_r1.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_r1.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_r1.Location = New System.Drawing.Point(464, 107)
         Me.psx_dualshock_r1.Name = "psx_dualshock_r1"
@@ -3413,6 +3471,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_l1.Emu = "mednafen"
         Me.psx_dualshock_l1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_l1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_l1.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_l1.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_l1.Location = New System.Drawing.Point(167, 111)
         Me.psx_dualshock_l1.Name = "psx_dualshock_l1"
@@ -3428,6 +3487,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_select.Emu = "mednafen"
         Me.psx_dualshock_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_select.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_select.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_select.Location = New System.Drawing.Point(276, 234)
         Me.psx_dualshock_select.Name = "psx_dualshock_select"
@@ -3443,6 +3503,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_left.Emu = "mednafen"
         Me.psx_dualshock_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_left.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_left.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_left.Location = New System.Drawing.Point(140, 245)
         Me.psx_dualshock_left.Name = "psx_dualshock_left"
@@ -3458,6 +3519,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_right.Emu = "mednafen"
         Me.psx_dualshock_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_right.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_right.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_right.Location = New System.Drawing.Point(218, 245)
         Me.psx_dualshock_right.Name = "psx_dualshock_right"
@@ -3473,6 +3535,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_down.Emu = "mednafen"
         Me.psx_dualshock_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_down.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_down.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_down.Location = New System.Drawing.Point(179, 284)
         Me.psx_dualshock_down.Name = "psx_dualshock_down"
@@ -3488,6 +3551,7 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_up.Emu = "mednafen"
         Me.psx_dualshock_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.psx_dualshock_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.psx_dualshock_up.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_up.KeyCode = New String() {"k0", "k0"}
         Me.psx_dualshock_up.Location = New System.Drawing.Point(179, 206)
         Me.psx_dualshock_up.Name = "psx_dualshock_up"
@@ -3503,6 +3567,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_rapid_a.Emu = "mednafen"
         Me.nes_gamepad_rapid_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_rapid_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_rapid_a.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_rapid_a.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_rapid_a.Location = New System.Drawing.Point(548, 224)
         Me.nes_gamepad_rapid_a.Name = "nes_gamepad_rapid_a"
@@ -3518,6 +3583,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_rapid_b.Emu = "mednafen"
         Me.nes_gamepad_rapid_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_rapid_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_rapid_b.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_rapid_b.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_rapid_b.Location = New System.Drawing.Point(458, 224)
         Me.nes_gamepad_rapid_b.Name = "nes_gamepad_rapid_b"
@@ -3533,6 +3599,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_a.Emu = "mednafen"
         Me.nes_gamepad_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_a.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_a.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_a.Location = New System.Drawing.Point(543, 270)
         Me.nes_gamepad_a.Name = "nes_gamepad_a"
@@ -3548,6 +3615,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_b.Emu = "mednafen"
         Me.nes_gamepad_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_b.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_b.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_b.Location = New System.Drawing.Point(453, 270)
         Me.nes_gamepad_b.Name = "nes_gamepad_b"
@@ -3563,6 +3631,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_start.Emu = "mednafen"
         Me.nes_gamepad_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_start.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_start.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_start.Location = New System.Drawing.Point(328, 272)
         Me.nes_gamepad_start.Name = "nes_gamepad_start"
@@ -3578,6 +3647,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_select.Emu = "mednafen"
         Me.nes_gamepad_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_select.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_select.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_select.Location = New System.Drawing.Point(235, 272)
         Me.nes_gamepad_select.Name = "nes_gamepad_select"
@@ -3593,6 +3663,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_left.Emu = "mednafen"
         Me.nes_gamepad_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_left.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_left.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_left.Location = New System.Drawing.Point(46, 235)
         Me.nes_gamepad_left.Name = "nes_gamepad_left"
@@ -3608,6 +3679,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_down.Emu = "mednafen"
         Me.nes_gamepad_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_down.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_down.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_down.Location = New System.Drawing.Point(95, 284)
         Me.nes_gamepad_down.Name = "nes_gamepad_down"
@@ -3623,6 +3695,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_right.Emu = "mednafen"
         Me.nes_gamepad_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_right.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_right.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_right.Location = New System.Drawing.Point(144, 235)
         Me.nes_gamepad_right.Name = "nes_gamepad_right"
@@ -3638,6 +3711,7 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_up.Emu = "mednafen"
         Me.nes_gamepad_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nes_gamepad_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nes_gamepad_up.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_up.KeyCode = New String() {"k0", "k0"}
         Me.nes_gamepad_up.Location = New System.Drawing.Point(95, 187)
         Me.nes_gamepad_up.Name = "nes_gamepad_up"
@@ -3729,7 +3803,6 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents Label37 As Label
     Friend WithEvents PeriWarning As Label
     Friend WithEvents btn_Close As Button
-    Friend WithEvents btnResetAll As Button
     Friend WithEvents ControllersTab As TabControl
     Friend WithEvents Naomi_Tab As TabPage
     Friend WithEvents Dreamcast_Tab As TabPage
@@ -3942,7 +4015,5 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents ImportMappingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ImportMappingStringToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportMappingStringToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ImportMednafenMappingStringToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ExportMednafenMappingStringToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ResetAllToolStripMenuItem As ToolStripMenuItem
 End Class

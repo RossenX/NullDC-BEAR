@@ -433,6 +433,31 @@ Module BEARTheme
                 ApplyPanelTheme(_control, _which)
             Case GetType(FlowLayoutPanel)
                 ApplyFlowPanelTheme(_control, _which)
+            Case GetType(keybindButton)
+                ApplyKeybindButtonTheme(_control)
+            Case GetType(TabPage)
+                ApplyTabPageTheme(_control, _which)
+        End Select
+
+    End Sub
+
+    Private Sub ApplyTabPageTheme(ByRef _Control As TabPage, ByVal _which As Single)
+        Select Case _which
+            Case 1
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PrimaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PrimaryFontColor)
+            Case 2
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.SecondaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.SecondaryFontColor)
+            Case 3
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.TertiaryColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.TertiaryFontColor)
+            Case 4
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.PlayerListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.PlayerListFontColor)
+            Case 5
+                If Not _Control.BackColor = Color.Transparent Then _Control.BackColor = LoadColor(ThemeKeys.MatchListColor)
+                _Control.ForeColor = LoadColor(ThemeKeys.MatchListFontColor)
         End Select
 
     End Sub
@@ -520,6 +545,16 @@ Module BEARTheme
         _button.ForeColor = LoadColor(ThemeKeys.ButtonFontColor)
         _button.FlatAppearance.BorderColor = LoadColor(ThemeKeys.ButtonBorderColor)
         _button.FlatAppearance.MouseOverBackColor = LoadColor(ThemeKeys.ButtonOverColor)
+        '_button.Font = New Font(_button.Font.FontFamily, LoadSize(ThemeKeys.ButtonFontSize), _button.Font.Style)
+
+    End Sub
+
+    Private Sub ApplyKeybindButtonTheme(ByRef _button As keybindButton)
+        _button.FlatStyle = FlatStyle.Flat
+        _button.BackColor = Color.White
+        _button.ForeColor = Color.Black
+        _button.FlatAppearance.BorderColor = Color.Black
+        _button.FlatAppearance.MouseOverBackColor = Color.LightYellow
         '_button.Font = New Font(_button.Font.FontFamily, LoadSize(ThemeKeys.ButtonFontSize), _button.Font.Style)
 
     End Sub
@@ -985,7 +1020,6 @@ Module BEARTheme
         Dim MedProc As Process = New Process()
         MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
         MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
-        MedProc.StartInfo.EnvironmentVariables.Add("HAVE_SDL", "1")
         MedProc.StartInfo.CreateNoWindow = True
         MedProc.StartInfo.UseShellExecute = False
         MedProc.StartInfo.Arguments = "Hi"
@@ -995,12 +1029,6 @@ Module BEARTheme
         MedProc.WaitForExit()
 
         Dim MednafenControllerID(128) As String
-
-        For i = 0 To SDL_NumJoysticks() - 1
-            Dim joy = SDL_JoystickOpen(i)
-            Console.WriteLine("0x0|" & SDL_JoystickGetDeviceVendor(i) & "|" & SDL_JoystickGetProduct(joy))
-            SDL_JoystickClose(joy)
-        Next
 
         Dim _tmpIDs As New ArrayList
         For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
