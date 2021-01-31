@@ -20,7 +20,7 @@ Public Class MednafenLauncher
         Dim t As Task = New Task(
             Async Sub()
 
-                Dim _mednafenConfigs = IO.File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
+                Dim _mednafenConfigs = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
                 Dim SpecialSettings = My.Resources.MednafenOptimizations.Split(vbNewLine)
                 Dim MultiTapSettings
                 Select Case Rx.MultiTap
@@ -40,18 +40,14 @@ Public Class MednafenLauncher
                 For Each _line In _mednafenConfigs
                     If _line.Length > 1 Then
                         For Each _optimization As String In SpecialSettings
-                            If _line.Split(" ")(0).Trim = _optimization.Split(" ")(0).Trim Then
-                                If Not _line.Split(" ")(1).Trim = _optimization.Split(" ")(1).Trim Then
-                                    _mednafenConfigs(LineCount) = _optimization.Replace(vbNewLine, "")
-                                End If
+                            If _line.StartsWith(_optimization.Split(" ")(0).Trim) Then
+                                _mednafenConfigs(LineCount) = _optimization.Replace(vbNewLine, "")
                             End If
                         Next
 
                         For Each _multitapsetting As String In MultiTapSettings
-                            If _line.Split(" ")(0).Trim = _multitapsetting.Split(" ")(0).Trim Then
-                                If Not _line.Split(" ")(1).Trim = _multitapsetting.Split(" ")(1).Trim Then
-                                    _mednafenConfigs(LineCount) = _multitapsetting.Replace(vbNewLine, "")
-                                End If
+                            If _line.StartsWith(_multitapsetting.Split(" ")(0).Trim) Then
+                                _mednafenConfigs(LineCount) = _multitapsetting.Replace(vbNewLine, "")
                             End If
                         Next
 

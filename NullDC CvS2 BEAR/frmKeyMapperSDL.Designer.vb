@@ -31,7 +31,7 @@ Partial Class frmKeyMapperSDL
         Me.ControllersTab = New System.Windows.Forms.TabControl()
         Me.Naomi_Tab = New System.Windows.Forms.TabPage()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
-        Me.TabPage15 = New System.Windows.Forms.TabPage()
+        Me.Page_Naomi_ArcadeStick = New System.Windows.Forms.TabPage()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -43,7 +43,7 @@ Partial Class frmKeyMapperSDL
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Dreamcast_Tab = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage13 = New System.Windows.Forms.TabPage()
+        Me.Page_dc_Controller = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -60,7 +60,7 @@ Partial Class frmKeyMapperSDL
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
-        Me.TabPage14 = New System.Windows.Forms.TabPage()
+        Me.Page_dc_ArcadeStick = New System.Windows.Forms.TabPage()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -72,7 +72,7 @@ Partial Class frmKeyMapperSDL
         Me.Label31 = New System.Windows.Forms.Label()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
         Me.TabControl3 = New System.Windows.Forms.TabControl()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Page_PSX_Gamepad = New System.Windows.Forms.TabPage()
         Me.Label48 = New System.Windows.Forms.Label()
         Me.Label49 = New System.Windows.Forms.Label()
         Me.Label47 = New System.Windows.Forms.Label()
@@ -81,7 +81,7 @@ Partial Class frmKeyMapperSDL
         Me.Label44 = New System.Windows.Forms.Label()
         Me.Label43 = New System.Windows.Forms.Label()
         Me.Label42 = New System.Windows.Forms.Label()
-        Me.TabPage16 = New System.Windows.Forms.TabPage()
+        Me.Page_PSX_Dualshock = New System.Windows.Forms.TabPage()
         Me.Label60 = New System.Windows.Forms.Label()
         Me.Label59 = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
@@ -95,31 +95,37 @@ Partial Class frmKeyMapperSDL
         Me.Label57 = New System.Windows.Forms.Label()
         Me.TabPage12 = New System.Windows.Forms.TabPage()
         Me.TabControl4 = New System.Windows.Forms.TabControl()
-        Me.TabPage17 = New System.Windows.Forms.TabPage()
+        Me.Page_Saturn_Gamepad = New System.Windows.Forms.TabPage()
         Me.TabPage11 = New System.Windows.Forms.TabPage()
         Me.TabControl5 = New System.Windows.Forms.TabControl()
-        Me.TabPage18 = New System.Windows.Forms.TabPage()
+        Me.Page_SNES_Gamepad = New System.Windows.Forms.TabPage()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.TabControl6 = New System.Windows.Forms.TabControl()
-        Me.TabPage19 = New System.Windows.Forms.TabPage()
-        Me.TabPage20 = New System.Windows.Forms.TabPage()
+        Me.Page_Genesis_Gamepad3 = New System.Windows.Forms.TabPage()
+        Me.Page_Genesis_Gamepad6 = New System.Windows.Forms.TabPage()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.nes_tc = New System.Windows.Forms.TabControl()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Page_NES_Gamepad = New System.Windows.Forms.TabPage()
         Me.Label41 = New System.Windows.Forms.Label()
-        Me.Zapper = New System.Windows.Forms.TabPage()
+        Me.Page_NES_Zapper = New System.Windows.Forms.TabPage()
         Me.Label40 = New System.Windows.Forms.Label()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TabControl7 = New System.Windows.Forms.TabControl()
-        Me.TabPage21 = New System.Windows.Forms.TabPage()
+        Me.Page_GBA_GBA = New System.Windows.Forms.TabPage()
+        Me.Label61 = New System.Windows.Forms.Label()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.TabControl8 = New System.Windows.Forms.TabControl()
-        Me.TabPage22 = New System.Windows.Forms.TabPage()
+        Me.Page_GBC_GBC = New System.Windows.Forms.TabPage()
+        Me.Label62 = New System.Windows.Forms.Label()
         Me.TabPage8 = New System.Windows.Forms.TabPage()
         Me.TabControl9 = New System.Windows.Forms.TabControl()
-        Me.TabPage23 = New System.Windows.Forms.TabPage()
+        Me.Page_NGP_NGP = New System.Windows.Forms.TabPage()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.TabPage24 = New System.Windows.Forms.TabPage()
+        Me.TabControl10 = New System.Windows.Forms.TabControl()
+        Me.TabPage25 = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
@@ -244,6 +250,50 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_right = New NullDC_CvS2_BEAR.keybindButton()
         Me.psx_dualshock_down = New NullDC_CvS2_BEAR.keybindButton()
         Me.psx_dualshock_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_rs = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_ls = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_z = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_y = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_x = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_c = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_start = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ss_gamepad_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_x = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_r = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_l = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_y = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_start = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_select = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.snes_gamepad_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad_c = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad_start = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_z = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_y = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_x = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_c = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_start = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.sg_gamepad6_up = New NullDC_CvS2_BEAR.keybindButton()
         Me.nes_gamepad_rapid_a = New NullDC_CvS2_BEAR.keybindButton()
         Me.nes_gamepad_rapid_b = New NullDC_CvS2_BEAR.keybindButton()
         Me.nes_gamepad_a = New NullDC_CvS2_BEAR.keybindButton()
@@ -254,36 +304,78 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_down = New NullDC_CvS2_BEAR.keybindButton()
         Me.nes_gamepad_right = New NullDC_CvS2_BEAR.keybindButton()
         Me.nes_gamepad_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton2 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton1 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_r = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_l = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_rapid_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_rapid_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_start = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_select = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gba_builtin_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_rapid_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_rapid_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_start = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_select = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.gb_builtin_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_rapid_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_rapid_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_b = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_a = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_option = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_left = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_down = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_right = New NullDC_CvS2_BEAR.keybindButton()
+        Me.ngp_builtin_up = New NullDC_CvS2_BEAR.keybindButton()
         CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.ControllersTab.SuspendLayout()
         Me.Naomi_Tab.SuspendLayout()
         Me.TabControl2.SuspendLayout()
-        Me.TabPage15.SuspendLayout()
+        Me.Page_Naomi_ArcadeStick.SuspendLayout()
         Me.Dreamcast_Tab.SuspendLayout()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage13.SuspendLayout()
-        Me.TabPage14.SuspendLayout()
+        Me.Page_dc_Controller.SuspendLayout()
+        Me.Page_dc_ArcadeStick.SuspendLayout()
         Me.TabPage9.SuspendLayout()
         Me.TabControl3.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
-        Me.TabPage16.SuspendLayout()
+        Me.Page_PSX_Gamepad.SuspendLayout()
+        Me.Page_PSX_Dualshock.SuspendLayout()
         Me.TabPage12.SuspendLayout()
         Me.TabControl4.SuspendLayout()
+        Me.Page_Saturn_Gamepad.SuspendLayout()
         Me.TabPage11.SuspendLayout()
         Me.TabControl5.SuspendLayout()
+        Me.Page_SNES_Gamepad.SuspendLayout()
         Me.TabPage10.SuspendLayout()
         Me.TabControl6.SuspendLayout()
+        Me.Page_Genesis_Gamepad3.SuspendLayout()
+        Me.Page_Genesis_Gamepad6.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.nes_tc.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
-        Me.Zapper.SuspendLayout()
+        Me.Page_NES_Gamepad.SuspendLayout()
+        Me.Page_NES_Zapper.SuspendLayout()
         Me.TabPage6.SuspendLayout()
         Me.TabControl7.SuspendLayout()
+        Me.Page_GBA_GBA.SuspendLayout()
         Me.TabPage7.SuspendLayout()
         Me.TabControl8.SuspendLayout()
+        Me.Page_GBC_GBC.SuspendLayout()
         Me.TabPage8.SuspendLayout()
         Me.TabControl9.SuspendLayout()
+        Me.Page_NGP_NGP.SuspendLayout()
+        Me.TabPage24.SuspendLayout()
+        Me.TabControl10.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
@@ -346,7 +438,7 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(907, 523)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(909, 523)
         Me.TableLayoutPanel1.TabIndex = 3
         '
         'ControllersTab
@@ -361,13 +453,14 @@ Partial Class frmKeyMapperSDL
         Me.ControllersTab.Controls.Add(Me.TabPage6)
         Me.ControllersTab.Controls.Add(Me.TabPage7)
         Me.ControllersTab.Controls.Add(Me.TabPage8)
+        Me.ControllersTab.Controls.Add(Me.TabPage24)
         Me.ControllersTab.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ControllersTab.Location = New System.Drawing.Point(212, 0)
         Me.ControllersTab.Margin = New System.Windows.Forms.Padding(0)
         Me.ControllersTab.Multiline = True
         Me.ControllersTab.Name = "ControllersTab"
         Me.ControllersTab.SelectedIndex = 0
-        Me.ControllersTab.Size = New System.Drawing.Size(695, 523)
+        Me.ControllersTab.Size = New System.Drawing.Size(697, 523)
         Me.ControllersTab.TabIndex = 2
         '
         'Naomi_Tab
@@ -378,64 +471,64 @@ Partial Class frmKeyMapperSDL
         Me.Naomi_Tab.Location = New System.Drawing.Point(4, 22)
         Me.Naomi_Tab.Margin = New System.Windows.Forms.Padding(0)
         Me.Naomi_Tab.Name = "Naomi_Tab"
-        Me.Naomi_Tab.Size = New System.Drawing.Size(687, 497)
+        Me.Naomi_Tab.Size = New System.Drawing.Size(689, 497)
         Me.Naomi_Tab.TabIndex = 0
         Me.Naomi_Tab.Text = "Naomi"
         '
         'TabControl2
         '
-        Me.TabControl2.Controls.Add(Me.TabPage15)
+        Me.TabControl2.Controls.Add(Me.Page_Naomi_ArcadeStick)
         Me.TabControl2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl2.Location = New System.Drawing.Point(0, 0)
         Me.TabControl2.Margin = New System.Windows.Forms.Padding(0)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
-        Me.TabControl2.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl2.Size = New System.Drawing.Size(689, 497)
         Me.TabControl2.TabIndex = 96
         '
-        'TabPage15
+        'Page_Naomi_ArcadeStick
         '
-        Me.TabPage15.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage15.BackgroundImage = CType(resources.GetObject("TabPage15.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage15.Controls.Add(Me.I_BC_345)
-        Me.TabPage15.Controls.Add(Me.I_BC_012)
-        Me.TabPage15.Controls.Add(Me.I_BC_45)
-        Me.TabPage15.Controls.Add(Me.I_BC_34)
-        Me.TabPage15.Controls.Add(Me.I_BC_12)
-        Me.TabPage15.Controls.Add(Me.I_BC_01)
-        Me.TabPage15.Controls.Add(Me.I_BC_25)
-        Me.TabPage15.Controls.Add(Me.I_BC_14)
-        Me.TabPage15.Controls.Add(Me.I_BC_03)
-        Me.TabPage15.Controls.Add(Me.Label22)
-        Me.TabPage15.Controls.Add(Me.I_BTN5_KEY)
-        Me.TabPage15.Controls.Add(Me.I_BTN4_KEY)
-        Me.TabPage15.Controls.Add(Me.Label21)
-        Me.TabPage15.Controls.Add(Me.I_BTN3_KEY)
-        Me.TabPage15.Controls.Add(Me.I_BTN2_KEY)
-        Me.TabPage15.Controls.Add(Me.Label20)
-        Me.TabPage15.Controls.Add(Me.I_BTN1_KEY)
-        Me.TabPage15.Controls.Add(Me.I_BTN0_KEY)
-        Me.TabPage15.Controls.Add(Me.Label19)
-        Me.TabPage15.Controls.Add(Me.I_TEST_KEY_1)
-        Me.TabPage15.Controls.Add(Me.I_SERVICE_KEY_1)
-        Me.TabPage15.Controls.Add(Me.Label18)
-        Me.TabPage15.Controls.Add(Me.I_COIN_KEY)
-        Me.TabPage15.Controls.Add(Me.I_START_KEY)
-        Me.TabPage15.Controls.Add(Me.Label17)
-        Me.TabPage15.Controls.Add(Me.I_RIGHT_KEY)
-        Me.TabPage15.Controls.Add(Me.Label14)
-        Me.TabPage15.Controls.Add(Me.I_LEFT_KEY)
-        Me.TabPage15.Controls.Add(Me.I_DOWN_KEY)
-        Me.TabPage15.Controls.Add(Me.Label13)
-        Me.TabPage15.Controls.Add(Me.I_UP_KEY)
-        Me.TabPage15.Controls.Add(Me.Label11)
-        Me.TabPage15.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage15.Name = "TabPage15"
-        Me.TabPage15.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage15.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage15.TabIndex = 0
-        Me.TabPage15.Text = "Arcade Stick"
+        Me.Page_Naomi_ArcadeStick.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_Naomi_ArcadeStick.BackgroundImage = CType(resources.GetObject("Page_Naomi_ArcadeStick.BackgroundImage"), System.Drawing.Image)
+        Me.Page_Naomi_ArcadeStick.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_345)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_012)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_45)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_34)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_12)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_01)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_25)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_14)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BC_03)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label22)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BTN5_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BTN4_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label21)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BTN3_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BTN2_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label20)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BTN1_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_BTN0_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label19)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_TEST_KEY_1)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_SERVICE_KEY_1)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label18)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_COIN_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_START_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label17)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_RIGHT_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label14)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_LEFT_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_DOWN_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label13)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.I_UP_KEY)
+        Me.Page_Naomi_ArcadeStick.Controls.Add(Me.Label11)
+        Me.Page_Naomi_ArcadeStick.Location = New System.Drawing.Point(4, 22)
+        Me.Page_Naomi_ArcadeStick.Name = "Page_Naomi_ArcadeStick"
+        Me.Page_Naomi_ArcadeStick.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_Naomi_ArcadeStick.Size = New System.Drawing.Size(681, 471)
+        Me.Page_Naomi_ArcadeStick.TabIndex = 0
+        Me.Page_Naomi_ArcadeStick.Text = "Arcade Stick"
         '
         'Label22
         '
@@ -553,73 +646,73 @@ Partial Class frmKeyMapperSDL
         Me.Dreamcast_Tab.Location = New System.Drawing.Point(4, 22)
         Me.Dreamcast_Tab.Margin = New System.Windows.Forms.Padding(0)
         Me.Dreamcast_Tab.Name = "Dreamcast_Tab"
-        Me.Dreamcast_Tab.Size = New System.Drawing.Size(687, 497)
+        Me.Dreamcast_Tab.Size = New System.Drawing.Size(689, 497)
         Me.Dreamcast_Tab.TabIndex = 1
         Me.Dreamcast_Tab.Text = "Dreamcast"
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage13)
-        Me.TabControl1.Controls.Add(Me.TabPage14)
+        Me.TabControl1.Controls.Add(Me.Page_dc_Controller)
+        Me.TabControl1.Controls.Add(Me.Page_dc_ArcadeStick)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl1.Size = New System.Drawing.Size(689, 497)
         Me.TabControl1.TabIndex = 96
         '
-        'TabPage13
+        'Page_dc_Controller
         '
-        Me.TabPage13.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage13.BackgroundImage = CType(resources.GetObject("TabPage13.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage13.Controls.Add(Me.CONT_LSLIDER)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_ABC)
-        Me.TabPage13.Controls.Add(Me.Label7)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_XYZ)
-        Me.TabPage13.Controls.Add(Me.CONT_A)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_BC)
-        Me.TabPage13.Controls.Add(Me.CONT_DPAD_LEFT)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_AB)
-        Me.TabPage13.Controls.Add(Me.CONT_B)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_YZ)
-        Me.TabPage13.Controls.Add(Me.CONT_DPAD_UP)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_XY)
-        Me.TabPage13.Controls.Add(Me.CONT_Y)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_CZ)
-        Me.TabPage13.Controls.Add(Me.CONT_RSLIDER)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_YB)
-        Me.TabPage13.Controls.Add(Me.CONT_BC_XA)
-        Me.TabPage13.Controls.Add(Me.CONT_DPAD_RIGHT)
-        Me.TabPage13.Controls.Add(Me.Label1)
-        Me.TabPage13.Controls.Add(Me.CONT_X)
-        Me.TabPage13.Controls.Add(Me.Label2)
-        Me.TabPage13.Controls.Add(Me.CONT_DPAD_DOWN)
-        Me.TabPage13.Controls.Add(Me.Label3)
-        Me.TabPage13.Controls.Add(Me.CONT_ANALOG_LEFT)
-        Me.TabPage13.Controls.Add(Me.Label4)
-        Me.TabPage13.Controls.Add(Me.CONT_ANALOG_UP)
-        Me.TabPage13.Controls.Add(Me.Label5)
-        Me.TabPage13.Controls.Add(Me.CONT_ANALOG_RIGHT)
-        Me.TabPage13.Controls.Add(Me.Label10)
-        Me.TabPage13.Controls.Add(Me.CONT_ANALOG_DOWN)
-        Me.TabPage13.Controls.Add(Me.Label15)
-        Me.TabPage13.Controls.Add(Me.CONT_START)
-        Me.TabPage13.Controls.Add(Me.Label16)
-        Me.TabPage13.Controls.Add(Me.Label6)
-        Me.TabPage13.Controls.Add(Me.Label23)
-        Me.TabPage13.Controls.Add(Me.Label8)
-        Me.TabPage13.Controls.Add(Me.Label33)
-        Me.TabPage13.Controls.Add(Me.Label34)
-        Me.TabPage13.Controls.Add(Me.Label35)
-        Me.TabPage13.Controls.Add(Me.Label36)
-        Me.TabPage13.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage13.Name = "TabPage13"
-        Me.TabPage13.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage13.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage13.TabIndex = 0
-        Me.TabPage13.Text = "Controller"
+        Me.Page_dc_Controller.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_dc_Controller.BackgroundImage = CType(resources.GetObject("Page_dc_Controller.BackgroundImage"), System.Drawing.Image)
+        Me.Page_dc_Controller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_LSLIDER)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_ABC)
+        Me.Page_dc_Controller.Controls.Add(Me.Label7)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_XYZ)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_A)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_BC)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_DPAD_LEFT)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_AB)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_B)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_YZ)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_DPAD_UP)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_XY)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_Y)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_CZ)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_RSLIDER)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_YB)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_BC_XA)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_DPAD_RIGHT)
+        Me.Page_dc_Controller.Controls.Add(Me.Label1)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_X)
+        Me.Page_dc_Controller.Controls.Add(Me.Label2)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_DPAD_DOWN)
+        Me.Page_dc_Controller.Controls.Add(Me.Label3)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_ANALOG_LEFT)
+        Me.Page_dc_Controller.Controls.Add(Me.Label4)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_ANALOG_UP)
+        Me.Page_dc_Controller.Controls.Add(Me.Label5)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_ANALOG_RIGHT)
+        Me.Page_dc_Controller.Controls.Add(Me.Label10)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_ANALOG_DOWN)
+        Me.Page_dc_Controller.Controls.Add(Me.Label15)
+        Me.Page_dc_Controller.Controls.Add(Me.CONT_START)
+        Me.Page_dc_Controller.Controls.Add(Me.Label16)
+        Me.Page_dc_Controller.Controls.Add(Me.Label6)
+        Me.Page_dc_Controller.Controls.Add(Me.Label23)
+        Me.Page_dc_Controller.Controls.Add(Me.Label8)
+        Me.Page_dc_Controller.Controls.Add(Me.Label33)
+        Me.Page_dc_Controller.Controls.Add(Me.Label34)
+        Me.Page_dc_Controller.Controls.Add(Me.Label35)
+        Me.Page_dc_Controller.Controls.Add(Me.Label36)
+        Me.Page_dc_Controller.Location = New System.Drawing.Point(4, 22)
+        Me.Page_dc_Controller.Name = "Page_dc_Controller"
+        Me.Page_dc_Controller.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_dc_Controller.Size = New System.Drawing.Size(681, 471)
+        Me.Page_dc_Controller.TabIndex = 0
+        Me.Page_dc_Controller.Text = "Controller"
         '
         'Label7
         '
@@ -809,46 +902,46 @@ Partial Class frmKeyMapperSDL
         Me.Label36.TabIndex = 84
         Me.Label36.Text = "Y"
         '
-        'TabPage14
+        'Page_dc_ArcadeStick
         '
-        Me.TabPage14.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage14.BackgroundImage = CType(resources.GetObject("TabPage14.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage14.Controls.Add(Me.STICK_BC_ABC)
-        Me.TabPage14.Controls.Add(Me.STICK_BC_XYZ)
-        Me.TabPage14.Controls.Add(Me.STICK_BC_BC)
-        Me.TabPage14.Controls.Add(Me.STICK_BC_AB)
-        Me.TabPage14.Controls.Add(Me.STICK_BC_YZ)
-        Me.TabPage14.Controls.Add(Me.STICK_BC_XY)
-        Me.TabPage14.Controls.Add(Me.STICK_BC_CZ)
-        Me.TabPage14.Controls.Add(Me.STICK_BC_YB)
-        Me.TabPage14.Controls.Add(Me.STICK_BC_XA)
-        Me.TabPage14.Controls.Add(Me.Label24)
-        Me.TabPage14.Controls.Add(Me.Label25)
-        Me.TabPage14.Controls.Add(Me.Label26)
-        Me.TabPage14.Controls.Add(Me.Label27)
-        Me.TabPage14.Controls.Add(Me.Label28)
-        Me.TabPage14.Controls.Add(Me.Label29)
-        Me.TabPage14.Controls.Add(Me.Label30)
-        Me.TabPage14.Controls.Add(Me.Label32)
-        Me.TabPage14.Controls.Add(Me.Label31)
-        Me.TabPage14.Controls.Add(Me.STICK_C)
-        Me.TabPage14.Controls.Add(Me.STICK_B)
-        Me.TabPage14.Controls.Add(Me.STICK_A)
-        Me.TabPage14.Controls.Add(Me.STICK_Z)
-        Me.TabPage14.Controls.Add(Me.STICK_Y)
-        Me.TabPage14.Controls.Add(Me.STICK_X)
-        Me.TabPage14.Controls.Add(Me.STICK_START)
-        Me.TabPage14.Controls.Add(Me.STICK_DPAD_RIGHT)
-        Me.TabPage14.Controls.Add(Me.STICK_DPAD_LEFT)
-        Me.TabPage14.Controls.Add(Me.STICK_DPAD_DOWN)
-        Me.TabPage14.Controls.Add(Me.STICK_DPAD_UP)
-        Me.TabPage14.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage14.Name = "TabPage14"
-        Me.TabPage14.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage14.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage14.TabIndex = 1
-        Me.TabPage14.Text = "Arcade Stick"
+        Me.Page_dc_ArcadeStick.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_dc_ArcadeStick.BackgroundImage = CType(resources.GetObject("Page_dc_ArcadeStick.BackgroundImage"), System.Drawing.Image)
+        Me.Page_dc_ArcadeStick.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_ABC)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_XYZ)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_BC)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_AB)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_YZ)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_XY)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_CZ)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_YB)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_XA)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label24)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label25)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label26)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label27)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label28)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label29)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label30)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label32)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label31)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_C)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_B)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_A)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_Z)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_Y)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_X)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_START)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_DPAD_RIGHT)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_DPAD_LEFT)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_DPAD_DOWN)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_DPAD_UP)
+        Me.Page_dc_ArcadeStick.Location = New System.Drawing.Point(4, 22)
+        Me.Page_dc_ArcadeStick.Name = "Page_dc_ArcadeStick"
+        Me.Page_dc_ArcadeStick.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_dc_ArcadeStick.Size = New System.Drawing.Size(681, 471)
+        Me.Page_dc_ArcadeStick.TabIndex = 1
+        Me.Page_dc_ArcadeStick.Text = "Arcade Stick"
         '
         'Label24
         '
@@ -964,54 +1057,54 @@ Partial Class frmKeyMapperSDL
         Me.TabPage9.Controls.Add(Me.TabControl3)
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.Size = New System.Drawing.Size(687, 497)
+        Me.TabPage9.Size = New System.Drawing.Size(689, 497)
         Me.TabPage9.TabIndex = 9
         Me.TabPage9.Text = "PSX"
         '
         'TabControl3
         '
-        Me.TabControl3.Controls.Add(Me.TabPage3)
-        Me.TabControl3.Controls.Add(Me.TabPage16)
+        Me.TabControl3.Controls.Add(Me.Page_PSX_Gamepad)
+        Me.TabControl3.Controls.Add(Me.Page_PSX_Dualshock)
         Me.TabControl3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl3.Location = New System.Drawing.Point(0, 0)
         Me.TabControl3.Name = "TabControl3"
         Me.TabControl3.SelectedIndex = 0
-        Me.TabControl3.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl3.Size = New System.Drawing.Size(689, 497)
         Me.TabControl3.TabIndex = 0
         '
-        'TabPage3
+        'Page_PSX_Gamepad
         '
-        Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage3.BackgroundImage = CType(resources.GetObject("TabPage3.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_triangle)
-        Me.TabPage3.Controls.Add(Me.Label48)
-        Me.TabPage3.Controls.Add(Me.Label49)
-        Me.TabPage3.Controls.Add(Me.Label47)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_r2)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_l2)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_r1)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_l1)
-        Me.TabPage3.Controls.Add(Me.Label46)
-        Me.TabPage3.Controls.Add(Me.Label45)
-        Me.TabPage3.Controls.Add(Me.Label44)
-        Me.TabPage3.Controls.Add(Me.Label43)
-        Me.TabPage3.Controls.Add(Me.Label42)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_circle)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_square)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_cross)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_start)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_select)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_left)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_right)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_down)
-        Me.TabPage3.Controls.Add(Me.psx_gamepad_up)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage3.TabIndex = 0
-        Me.TabPage3.Text = "Gamepad"
+        Me.Page_PSX_Gamepad.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_PSX_Gamepad.BackgroundImage = CType(resources.GetObject("Page_PSX_Gamepad.BackgroundImage"), System.Drawing.Image)
+        Me.Page_PSX_Gamepad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_triangle)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.Label48)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.Label49)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.Label47)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_r2)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_l2)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_r1)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_l1)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.Label46)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.Label45)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.Label44)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.Label43)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.Label42)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_circle)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_square)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_cross)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_start)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_select)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_left)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_right)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_down)
+        Me.Page_PSX_Gamepad.Controls.Add(Me.psx_gamepad_up)
+        Me.Page_PSX_Gamepad.Location = New System.Drawing.Point(4, 22)
+        Me.Page_PSX_Gamepad.Name = "Page_PSX_Gamepad"
+        Me.Page_PSX_Gamepad.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_PSX_Gamepad.Size = New System.Drawing.Size(681, 471)
+        Me.Page_PSX_Gamepad.TabIndex = 0
+        Me.Page_PSX_Gamepad.Text = "Gamepad"
         '
         'Label48
         '
@@ -1105,53 +1198,53 @@ Partial Class frmKeyMapperSDL
         Me.Label42.TabIndex = 85
         Me.Label42.Text = "X"
         '
-        'TabPage16
+        'Page_PSX_Dualshock
         '
-        Me.TabPage16.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage16.BackgroundImage = CType(resources.GetObject("TabPage16.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_circle)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_triangle)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_square)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_cross)
-        Me.TabPage16.Controls.Add(Me.Label60)
-        Me.TabPage16.Controls.Add(Me.Label59)
-        Me.TabPage16.Controls.Add(Me.Label58)
-        Me.TabPage16.Controls.Add(Me.Label50)
-        Me.TabPage16.Controls.Add(Me.Label51)
-        Me.TabPage16.Controls.Add(Me.Label52)
-        Me.TabPage16.Controls.Add(Me.Label53)
-        Me.TabPage16.Controls.Add(Me.Label54)
-        Me.TabPage16.Controls.Add(Me.Label55)
-        Me.TabPage16.Controls.Add(Me.Label56)
-        Me.TabPage16.Controls.Add(Me.Label57)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_r3)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_l3)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_analog)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_left)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_right)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_down)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_rstick_up)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_left)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_right)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_down)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_lstick_up)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_start)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_r2)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_l2)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_r1)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_l1)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_select)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_left)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_right)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_down)
-        Me.TabPage16.Controls.Add(Me.psx_dualshock_up)
-        Me.TabPage16.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage16.Name = "TabPage16"
-        Me.TabPage16.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage16.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage16.TabIndex = 1
-        Me.TabPage16.Text = "Dualshock"
+        Me.Page_PSX_Dualshock.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_PSX_Dualshock.BackgroundImage = CType(resources.GetObject("Page_PSX_Dualshock.BackgroundImage"), System.Drawing.Image)
+        Me.Page_PSX_Dualshock.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_circle)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_triangle)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_square)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_cross)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label60)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label59)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label58)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label50)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label51)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label52)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label53)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label54)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label55)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label56)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.Label57)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_r3)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_l3)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_analog)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_rstick_left)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_rstick_right)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_rstick_down)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_rstick_up)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_lstick_left)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_lstick_right)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_lstick_down)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_lstick_up)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_start)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_r2)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_l2)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_r1)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_l1)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_select)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_left)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_right)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_down)
+        Me.Page_PSX_Dualshock.Controls.Add(Me.psx_dualshock_up)
+        Me.Page_PSX_Dualshock.Location = New System.Drawing.Point(4, 22)
+        Me.Page_PSX_Dualshock.Name = "Page_PSX_Dualshock"
+        Me.Page_PSX_Dualshock.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_PSX_Dualshock.Size = New System.Drawing.Size(681, 471)
+        Me.Page_PSX_Dualshock.TabIndex = 1
+        Me.Page_PSX_Dualshock.Text = "Dualshock"
         '
         'Label60
         '
@@ -1283,31 +1376,44 @@ Partial Class frmKeyMapperSDL
         Me.TabPage12.Controls.Add(Me.TabControl4)
         Me.TabPage12.Location = New System.Drawing.Point(4, 22)
         Me.TabPage12.Name = "TabPage12"
-        Me.TabPage12.Size = New System.Drawing.Size(687, 497)
+        Me.TabPage12.Size = New System.Drawing.Size(689, 497)
         Me.TabPage12.TabIndex = 12
         Me.TabPage12.Text = "Saturn"
         '
         'TabControl4
         '
-        Me.TabControl4.Controls.Add(Me.TabPage17)
+        Me.TabControl4.Controls.Add(Me.Page_Saturn_Gamepad)
         Me.TabControl4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl4.Location = New System.Drawing.Point(0, 0)
         Me.TabControl4.Name = "TabControl4"
         Me.TabControl4.SelectedIndex = 0
-        Me.TabControl4.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl4.Size = New System.Drawing.Size(689, 497)
         Me.TabControl4.TabIndex = 0
         '
-        'TabPage17
+        'Page_Saturn_Gamepad
         '
-        Me.TabPage17.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage17.BackgroundImage = CType(resources.GetObject("TabPage17.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage17.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage17.Name = "TabPage17"
-        Me.TabPage17.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage17.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage17.TabIndex = 0
-        Me.TabPage17.Text = "Gamepad"
+        Me.Page_Saturn_Gamepad.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_Saturn_Gamepad.BackgroundImage = CType(resources.GetObject("Page_Saturn_Gamepad.BackgroundImage"), System.Drawing.Image)
+        Me.Page_Saturn_Gamepad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_rs)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_ls)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_z)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_y)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_x)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_c)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_b)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_a)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_start)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_left)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_down)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_right)
+        Me.Page_Saturn_Gamepad.Controls.Add(Me.ss_gamepad_up)
+        Me.Page_Saturn_Gamepad.Location = New System.Drawing.Point(4, 22)
+        Me.Page_Saturn_Gamepad.Name = "Page_Saturn_Gamepad"
+        Me.Page_Saturn_Gamepad.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_Saturn_Gamepad.Size = New System.Drawing.Size(681, 471)
+        Me.Page_Saturn_Gamepad.TabIndex = 0
+        Me.Page_Saturn_Gamepad.Text = "Gamepad"
         '
         'TabPage11
         '
@@ -1315,31 +1421,43 @@ Partial Class frmKeyMapperSDL
         Me.TabPage11.Controls.Add(Me.TabControl5)
         Me.TabPage11.Location = New System.Drawing.Point(4, 22)
         Me.TabPage11.Name = "TabPage11"
-        Me.TabPage11.Size = New System.Drawing.Size(687, 497)
+        Me.TabPage11.Size = New System.Drawing.Size(689, 497)
         Me.TabPage11.TabIndex = 11
         Me.TabPage11.Text = "SNES"
         '
         'TabControl5
         '
-        Me.TabControl5.Controls.Add(Me.TabPage18)
+        Me.TabControl5.Controls.Add(Me.Page_SNES_Gamepad)
         Me.TabControl5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl5.Location = New System.Drawing.Point(0, 0)
         Me.TabControl5.Name = "TabControl5"
         Me.TabControl5.SelectedIndex = 0
-        Me.TabControl5.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl5.Size = New System.Drawing.Size(689, 497)
         Me.TabControl5.TabIndex = 0
         '
-        'TabPage18
+        'Page_SNES_Gamepad
         '
-        Me.TabPage18.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage18.BackgroundImage = CType(resources.GetObject("TabPage18.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage18.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage18.Name = "TabPage18"
-        Me.TabPage18.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage18.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage18.TabIndex = 0
-        Me.TabPage18.Text = "Gamepad"
+        Me.Page_SNES_Gamepad.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_SNES_Gamepad.BackgroundImage = CType(resources.GetObject("Page_SNES_Gamepad.BackgroundImage"), System.Drawing.Image)
+        Me.Page_SNES_Gamepad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_x)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_r)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_l)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_a)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_y)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_b)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_start)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_select)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_left)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_right)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_down)
+        Me.Page_SNES_Gamepad.Controls.Add(Me.snes_gamepad_up)
+        Me.Page_SNES_Gamepad.Location = New System.Drawing.Point(4, 22)
+        Me.Page_SNES_Gamepad.Name = "Page_SNES_Gamepad"
+        Me.Page_SNES_Gamepad.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_SNES_Gamepad.Size = New System.Drawing.Size(681, 471)
+        Me.Page_SNES_Gamepad.TabIndex = 0
+        Me.Page_SNES_Gamepad.Text = "Gamepad"
         '
         'TabPage10
         '
@@ -1347,44 +1465,63 @@ Partial Class frmKeyMapperSDL
         Me.TabPage10.Controls.Add(Me.TabControl6)
         Me.TabPage10.Location = New System.Drawing.Point(4, 22)
         Me.TabPage10.Name = "TabPage10"
-        Me.TabPage10.Size = New System.Drawing.Size(687, 497)
+        Me.TabPage10.Size = New System.Drawing.Size(689, 497)
         Me.TabPage10.TabIndex = 10
         Me.TabPage10.Text = "Genesis"
         '
         'TabControl6
         '
-        Me.TabControl6.Controls.Add(Me.TabPage19)
-        Me.TabControl6.Controls.Add(Me.TabPage20)
+        Me.TabControl6.Controls.Add(Me.Page_Genesis_Gamepad3)
+        Me.TabControl6.Controls.Add(Me.Page_Genesis_Gamepad6)
         Me.TabControl6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl6.Location = New System.Drawing.Point(0, 0)
         Me.TabControl6.Name = "TabControl6"
         Me.TabControl6.SelectedIndex = 0
-        Me.TabControl6.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl6.Size = New System.Drawing.Size(689, 497)
         Me.TabControl6.TabIndex = 0
         '
-        'TabPage19
+        'Page_Genesis_Gamepad3
         '
-        Me.TabPage19.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage19.BackgroundImage = CType(resources.GetObject("TabPage19.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage19.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage19.Name = "TabPage19"
-        Me.TabPage19.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage19.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage19.TabIndex = 0
-        Me.TabPage19.Text = "Gamepad 3-Button"
+        Me.Page_Genesis_Gamepad3.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_Genesis_Gamepad3.BackgroundImage = CType(resources.GetObject("Page_Genesis_Gamepad3.BackgroundImage"), System.Drawing.Image)
+        Me.Page_Genesis_Gamepad3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_Genesis_Gamepad3.Controls.Add(Me.sg_gamepad_c)
+        Me.Page_Genesis_Gamepad3.Controls.Add(Me.sg_gamepad_b)
+        Me.Page_Genesis_Gamepad3.Controls.Add(Me.sg_gamepad_a)
+        Me.Page_Genesis_Gamepad3.Controls.Add(Me.sg_gamepad_start)
+        Me.Page_Genesis_Gamepad3.Controls.Add(Me.sg_gamepad_left)
+        Me.Page_Genesis_Gamepad3.Controls.Add(Me.sg_gamepad_down)
+        Me.Page_Genesis_Gamepad3.Controls.Add(Me.sg_gamepad_right)
+        Me.Page_Genesis_Gamepad3.Controls.Add(Me.sg_gamepad_up)
+        Me.Page_Genesis_Gamepad3.Location = New System.Drawing.Point(4, 22)
+        Me.Page_Genesis_Gamepad3.Name = "Page_Genesis_Gamepad3"
+        Me.Page_Genesis_Gamepad3.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_Genesis_Gamepad3.Size = New System.Drawing.Size(681, 471)
+        Me.Page_Genesis_Gamepad3.TabIndex = 0
+        Me.Page_Genesis_Gamepad3.Text = "Gamepad 3-Button"
         '
-        'TabPage20
+        'Page_Genesis_Gamepad6
         '
-        Me.TabPage20.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage20.BackgroundImage = CType(resources.GetObject("TabPage20.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage20.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage20.Name = "TabPage20"
-        Me.TabPage20.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage20.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage20.TabIndex = 1
-        Me.TabPage20.Text = "Gamepad 6-Button"
+        Me.Page_Genesis_Gamepad6.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_Genesis_Gamepad6.BackgroundImage = CType(resources.GetObject("Page_Genesis_Gamepad6.BackgroundImage"), System.Drawing.Image)
+        Me.Page_Genesis_Gamepad6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_z)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_y)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_x)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_c)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_b)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_a)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_start)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_left)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_down)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_right)
+        Me.Page_Genesis_Gamepad6.Controls.Add(Me.sg_gamepad6_up)
+        Me.Page_Genesis_Gamepad6.Location = New System.Drawing.Point(4, 22)
+        Me.Page_Genesis_Gamepad6.Name = "Page_Genesis_Gamepad6"
+        Me.Page_Genesis_Gamepad6.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_Genesis_Gamepad6.Size = New System.Drawing.Size(681, 471)
+        Me.Page_Genesis_Gamepad6.TabIndex = 1
+        Me.Page_Genesis_Gamepad6.Text = "Gamepad 6-Button"
         '
         'TabPage1
         '
@@ -1393,45 +1530,45 @@ Partial Class frmKeyMapperSDL
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(687, 497)
+        Me.TabPage1.Size = New System.Drawing.Size(689, 497)
         Me.TabPage1.TabIndex = 4
         Me.TabPage1.Text = "NES/FDS"
         '
         'nes_tc
         '
-        Me.nes_tc.Controls.Add(Me.TabPage2)
-        Me.nes_tc.Controls.Add(Me.Zapper)
+        Me.nes_tc.Controls.Add(Me.Page_NES_Gamepad)
+        Me.nes_tc.Controls.Add(Me.Page_NES_Zapper)
         Me.nes_tc.Dock = System.Windows.Forms.DockStyle.Fill
         Me.nes_tc.Location = New System.Drawing.Point(0, 0)
         Me.nes_tc.Margin = New System.Windows.Forms.Padding(0)
         Me.nes_tc.Name = "nes_tc"
         Me.nes_tc.Padding = New System.Drawing.Point(0, 0)
         Me.nes_tc.SelectedIndex = 0
-        Me.nes_tc.Size = New System.Drawing.Size(687, 497)
+        Me.nes_tc.Size = New System.Drawing.Size(689, 497)
         Me.nes_tc.TabIndex = 0
         '
-        'TabPage2
+        'Page_NES_Gamepad
         '
-        Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage2.BackgroundImage = CType(resources.GetObject("TabPage2.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_rapid_a)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_rapid_b)
-        Me.TabPage2.Controls.Add(Me.Label41)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_a)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_b)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_start)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_select)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_left)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_down)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_right)
-        Me.TabPage2.Controls.Add(Me.nes_gamepad_up)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage2.TabIndex = 0
-        Me.TabPage2.Text = "Gamepad"
+        Me.Page_NES_Gamepad.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_NES_Gamepad.BackgroundImage = CType(resources.GetObject("Page_NES_Gamepad.BackgroundImage"), System.Drawing.Image)
+        Me.Page_NES_Gamepad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_rapid_a)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_rapid_b)
+        Me.Page_NES_Gamepad.Controls.Add(Me.Label41)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_a)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_b)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_start)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_select)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_left)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_down)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_right)
+        Me.Page_NES_Gamepad.Controls.Add(Me.nes_gamepad_up)
+        Me.Page_NES_Gamepad.Location = New System.Drawing.Point(4, 22)
+        Me.Page_NES_Gamepad.Name = "Page_NES_Gamepad"
+        Me.Page_NES_Gamepad.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_NES_Gamepad.Size = New System.Drawing.Size(681, 471)
+        Me.Page_NES_Gamepad.TabIndex = 0
+        Me.Page_NES_Gamepad.Text = "Gamepad"
         '
         'Label41
         '
@@ -1445,20 +1582,22 @@ Partial Class frmKeyMapperSDL
         Me.Label41.TabIndex = 82
         Me.Label41.Text = "Turbo"
         '
-        'Zapper
+        'Page_NES_Zapper
         '
-        Me.Zapper.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Zapper.BackgroundImage = CType(resources.GetObject("Zapper.BackgroundImage"), System.Drawing.Image)
-        Me.Zapper.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Zapper.Controls.Add(Me.Label40)
-        Me.Zapper.Controls.Add(Me.Label38)
-        Me.Zapper.Controls.Add(Me.Label39)
-        Me.Zapper.Location = New System.Drawing.Point(4, 22)
-        Me.Zapper.Name = "Zapper"
-        Me.Zapper.Padding = New System.Windows.Forms.Padding(3)
-        Me.Zapper.Size = New System.Drawing.Size(679, 471)
-        Me.Zapper.TabIndex = 1
-        Me.Zapper.Text = "Zapper"
+        Me.Page_NES_Zapper.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_NES_Zapper.BackgroundImage = CType(resources.GetObject("Page_NES_Zapper.BackgroundImage"), System.Drawing.Image)
+        Me.Page_NES_Zapper.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_NES_Zapper.Controls.Add(Me.KeybindButton2)
+        Me.Page_NES_Zapper.Controls.Add(Me.KeybindButton1)
+        Me.Page_NES_Zapper.Controls.Add(Me.Label40)
+        Me.Page_NES_Zapper.Controls.Add(Me.Label38)
+        Me.Page_NES_Zapper.Controls.Add(Me.Label39)
+        Me.Page_NES_Zapper.Location = New System.Drawing.Point(4, 22)
+        Me.Page_NES_Zapper.Name = "Page_NES_Zapper"
+        Me.Page_NES_Zapper.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_NES_Zapper.Size = New System.Drawing.Size(681, 471)
+        Me.Page_NES_Zapper.TabIndex = 1
+        Me.Page_NES_Zapper.Text = "Zapper"
         '
         'Label40
         '
@@ -1478,7 +1617,7 @@ Partial Class frmKeyMapperSDL
         Me.Label38.BackColor = System.Drawing.Color.Transparent
         Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label38.ForeColor = System.Drawing.Color.Black
-        Me.Label38.Location = New System.Drawing.Point(260, 208)
+        Me.Label38.Location = New System.Drawing.Point(290, 244)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(158, 20)
         Me.Label38.TabIndex = 81
@@ -1502,31 +1641,56 @@ Partial Class frmKeyMapperSDL
         Me.TabPage6.Controls.Add(Me.TabControl7)
         Me.TabPage6.Location = New System.Drawing.Point(4, 22)
         Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(687, 497)
+        Me.TabPage6.Size = New System.Drawing.Size(689, 497)
         Me.TabPage6.TabIndex = 6
         Me.TabPage6.Text = "GBA"
         '
         'TabControl7
         '
-        Me.TabControl7.Controls.Add(Me.TabPage21)
+        Me.TabControl7.Controls.Add(Me.Page_GBA_GBA)
         Me.TabControl7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl7.Location = New System.Drawing.Point(0, 0)
         Me.TabControl7.Name = "TabControl7"
         Me.TabControl7.SelectedIndex = 0
-        Me.TabControl7.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl7.Size = New System.Drawing.Size(689, 497)
         Me.TabControl7.TabIndex = 0
         '
-        'TabPage21
+        'Page_GBA_GBA
         '
-        Me.TabPage21.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage21.BackgroundImage = CType(resources.GetObject("TabPage21.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage21.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage21.Name = "TabPage21"
-        Me.TabPage21.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage21.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage21.TabIndex = 0
-        Me.TabPage21.Text = "GBA"
+        Me.Page_GBA_GBA.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_GBA_GBA.BackgroundImage = CType(resources.GetObject("Page_GBA_GBA.BackgroundImage"), System.Drawing.Image)
+        Me.Page_GBA_GBA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_r)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_l)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_rapid_a)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_rapid_b)
+        Me.Page_GBA_GBA.Controls.Add(Me.Label61)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_a)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_b)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_start)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_select)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_left)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_down)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_right)
+        Me.Page_GBA_GBA.Controls.Add(Me.gba_builtin_up)
+        Me.Page_GBA_GBA.Location = New System.Drawing.Point(4, 22)
+        Me.Page_GBA_GBA.Name = "Page_GBA_GBA"
+        Me.Page_GBA_GBA.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_GBA_GBA.Size = New System.Drawing.Size(681, 471)
+        Me.Page_GBA_GBA.TabIndex = 0
+        Me.Page_GBA_GBA.Text = "GBA"
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.BackColor = System.Drawing.Color.Transparent
+        Me.Label61.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label61.ForeColor = System.Drawing.Color.Red
+        Me.Label61.Location = New System.Drawing.Point(539, 100)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(55, 20)
+        Me.Label61.TabIndex = 93
+        Me.Label61.Text = "Turbo"
         '
         'TabPage7
         '
@@ -1534,31 +1698,54 @@ Partial Class frmKeyMapperSDL
         Me.TabPage7.Controls.Add(Me.TabControl8)
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(687, 497)
+        Me.TabPage7.Size = New System.Drawing.Size(689, 497)
         Me.TabPage7.TabIndex = 7
         Me.TabPage7.Text = "GBC"
         '
         'TabControl8
         '
-        Me.TabControl8.Controls.Add(Me.TabPage22)
+        Me.TabControl8.Controls.Add(Me.Page_GBC_GBC)
         Me.TabControl8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl8.Location = New System.Drawing.Point(0, 0)
         Me.TabControl8.Name = "TabControl8"
         Me.TabControl8.SelectedIndex = 0
-        Me.TabControl8.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl8.Size = New System.Drawing.Size(689, 497)
         Me.TabControl8.TabIndex = 0
         '
-        'TabPage22
+        'Page_GBC_GBC
         '
-        Me.TabPage22.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage22.BackgroundImage = CType(resources.GetObject("TabPage22.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage22.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage22.Name = "TabPage22"
-        Me.TabPage22.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage22.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage22.TabIndex = 0
-        Me.TabPage22.Text = "GBC"
+        Me.Page_GBC_GBC.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_GBC_GBC.BackgroundImage = CType(resources.GetObject("Page_GBC_GBC.BackgroundImage"), System.Drawing.Image)
+        Me.Page_GBC_GBC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_rapid_a)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_rapid_b)
+        Me.Page_GBC_GBC.Controls.Add(Me.Label62)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_a)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_b)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_start)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_select)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_left)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_down)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_right)
+        Me.Page_GBC_GBC.Controls.Add(Me.gb_builtin_up)
+        Me.Page_GBC_GBC.Location = New System.Drawing.Point(4, 22)
+        Me.Page_GBC_GBC.Name = "Page_GBC_GBC"
+        Me.Page_GBC_GBC.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_GBC_GBC.Size = New System.Drawing.Size(681, 471)
+        Me.Page_GBC_GBC.TabIndex = 0
+        Me.Page_GBC_GBC.Text = "GBC"
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.BackColor = System.Drawing.Color.Transparent
+        Me.Label62.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label62.ForeColor = System.Drawing.Color.Red
+        Me.Label62.Location = New System.Drawing.Point(396, 220)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(55, 20)
+        Me.Label62.TabIndex = 104
+        Me.Label62.Text = "Turbo"
         '
         'TabPage8
         '
@@ -1566,31 +1753,83 @@ Partial Class frmKeyMapperSDL
         Me.TabPage8.Controls.Add(Me.TabControl9)
         Me.TabPage8.Location = New System.Drawing.Point(4, 22)
         Me.TabPage8.Name = "TabPage8"
-        Me.TabPage8.Size = New System.Drawing.Size(687, 497)
+        Me.TabPage8.Size = New System.Drawing.Size(689, 497)
         Me.TabPage8.TabIndex = 8
         Me.TabPage8.Text = "NGP"
         '
         'TabControl9
         '
-        Me.TabControl9.Controls.Add(Me.TabPage23)
+        Me.TabControl9.Controls.Add(Me.Page_NGP_NGP)
         Me.TabControl9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl9.Location = New System.Drawing.Point(0, 0)
         Me.TabControl9.Name = "TabControl9"
         Me.TabControl9.SelectedIndex = 0
-        Me.TabControl9.Size = New System.Drawing.Size(687, 497)
+        Me.TabControl9.Size = New System.Drawing.Size(689, 497)
         Me.TabControl9.TabIndex = 0
         '
-        'TabPage23
+        'Page_NGP_NGP
         '
-        Me.TabPage23.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.TabPage23.BackgroundImage = CType(resources.GetObject("TabPage23.BackgroundImage"), System.Drawing.Image)
-        Me.TabPage23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.TabPage23.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage23.Name = "TabPage23"
-        Me.TabPage23.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage23.Size = New System.Drawing.Size(679, 471)
-        Me.TabPage23.TabIndex = 0
-        Me.TabPage23.Text = "NGP"
+        Me.Page_NGP_NGP.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_NGP_NGP.BackgroundImage = CType(resources.GetObject("Page_NGP_NGP.BackgroundImage"), System.Drawing.Image)
+        Me.Page_NGP_NGP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_rapid_b)
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_rapid_a)
+        Me.Page_NGP_NGP.Controls.Add(Me.Label63)
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_b)
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_a)
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_option)
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_left)
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_down)
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_right)
+        Me.Page_NGP_NGP.Controls.Add(Me.ngp_builtin_up)
+        Me.Page_NGP_NGP.Location = New System.Drawing.Point(4, 22)
+        Me.Page_NGP_NGP.Name = "Page_NGP_NGP"
+        Me.Page_NGP_NGP.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_NGP_NGP.Size = New System.Drawing.Size(681, 471)
+        Me.Page_NGP_NGP.TabIndex = 0
+        Me.Page_NGP_NGP.Text = "NGP"
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.BackColor = System.Drawing.Color.Transparent
+        Me.Label63.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label63.ForeColor = System.Drawing.Color.Red
+        Me.Label63.Location = New System.Drawing.Point(579, 253)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(55, 20)
+        Me.Label63.TabIndex = 115
+        Me.Label63.Text = "Turbo"
+        '
+        'TabPage24
+        '
+        Me.TabPage24.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.TabPage24.Controls.Add(Me.TabControl10)
+        Me.TabPage24.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage24.Name = "TabPage24"
+        Me.TabPage24.Size = New System.Drawing.Size(689, 497)
+        Me.TabPage24.TabIndex = 13
+        Me.TabPage24.Text = "Mednafen"
+        '
+        'TabControl10
+        '
+        Me.TabControl10.Controls.Add(Me.TabPage25)
+        Me.TabControl10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl10.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl10.Name = "TabControl10"
+        Me.TabControl10.SelectedIndex = 0
+        Me.TabControl10.Size = New System.Drawing.Size(689, 497)
+        Me.TabControl10.TabIndex = 0
+        '
+        'TabPage25
+        '
+        Me.TabPage25.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.TabPage25.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage25.Name = "TabPage25"
+        Me.TabPage25.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage25.Size = New System.Drawing.Size(681, 471)
+        Me.TabPage25.TabIndex = 0
+        Me.TabPage25.Text = "General"
         '
         'Panel1
         '
@@ -1767,7 +2006,7 @@ Partial Class frmKeyMapperSDL
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportMappingToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(907, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(909, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -1806,12 +2045,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_345.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_345.ForeColor = System.Drawing.Color.Black
         Me.I_BC_345.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_345.KeyDefaults = New String() {"", ""}
+        Me.I_BC_345.KeyLocked = False
         Me.I_BC_345.Location = New System.Drawing.Point(606, 432)
         Me.I_BC_345.Name = "I_BC_345"
         Me.I_BC_345.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_345.TabIndex = 126
         Me.I_BC_345.TabStop = False
-        Me.I_BC_345.Text = "None"
+        Me.I_BC_345.Text = "X"
         Me.I_BC_345.UseVisualStyleBackColor = False
         '
         'I_BC_012
@@ -1823,12 +2064,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_012.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_012.ForeColor = System.Drawing.Color.Black
         Me.I_BC_012.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_012.KeyDefaults = New String() {"", ""}
+        Me.I_BC_012.KeyLocked = False
         Me.I_BC_012.Location = New System.Drawing.Point(515, 432)
         Me.I_BC_012.Name = "I_BC_012"
         Me.I_BC_012.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_012.TabIndex = 124
         Me.I_BC_012.TabStop = False
-        Me.I_BC_012.Text = "None"
+        Me.I_BC_012.Text = "X"
         Me.I_BC_012.UseVisualStyleBackColor = False
         '
         'I_BC_45
@@ -1840,12 +2083,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_45.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_45.ForeColor = System.Drawing.Color.Black
         Me.I_BC_45.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_45.KeyDefaults = New String() {"", ""}
+        Me.I_BC_45.KeyLocked = False
         Me.I_BC_45.Location = New System.Drawing.Point(629, 382)
         Me.I_BC_45.Name = "I_BC_45"
         Me.I_BC_45.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_45.TabIndex = 122
         Me.I_BC_45.TabStop = False
-        Me.I_BC_45.Text = "None"
+        Me.I_BC_45.Text = "X"
         Me.I_BC_45.UseVisualStyleBackColor = False
         '
         'I_BC_34
@@ -1857,12 +2102,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_34.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_34.ForeColor = System.Drawing.Color.Black
         Me.I_BC_34.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_34.KeyDefaults = New String() {"", ""}
+        Me.I_BC_34.KeyLocked = False
         Me.I_BC_34.Location = New System.Drawing.Point(584, 382)
         Me.I_BC_34.Name = "I_BC_34"
         Me.I_BC_34.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_34.TabIndex = 120
         Me.I_BC_34.TabStop = False
-        Me.I_BC_34.Text = "None"
+        Me.I_BC_34.Text = "X"
         Me.I_BC_34.UseVisualStyleBackColor = False
         '
         'I_BC_12
@@ -1874,12 +2121,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_12.ForeColor = System.Drawing.Color.Black
         Me.I_BC_12.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_12.KeyDefaults = New String() {"", ""}
+        Me.I_BC_12.KeyLocked = False
         Me.I_BC_12.Location = New System.Drawing.Point(537, 382)
         Me.I_BC_12.Name = "I_BC_12"
         Me.I_BC_12.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_12.TabIndex = 118
         Me.I_BC_12.TabStop = False
-        Me.I_BC_12.Text = "None"
+        Me.I_BC_12.Text = "X"
         Me.I_BC_12.UseVisualStyleBackColor = False
         '
         'I_BC_01
@@ -1891,12 +2140,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_01.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_01.ForeColor = System.Drawing.Color.Black
         Me.I_BC_01.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_01.KeyDefaults = New String() {"", ""}
+        Me.I_BC_01.KeyLocked = False
         Me.I_BC_01.Location = New System.Drawing.Point(492, 382)
         Me.I_BC_01.Name = "I_BC_01"
         Me.I_BC_01.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_01.TabIndex = 116
         Me.I_BC_01.TabStop = False
-        Me.I_BC_01.Text = "None"
+        Me.I_BC_01.Text = "X"
         Me.I_BC_01.UseVisualStyleBackColor = False
         '
         'I_BC_25
@@ -1908,12 +2159,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_25.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_25.ForeColor = System.Drawing.Color.Black
         Me.I_BC_25.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_25.KeyDefaults = New String() {"", ""}
+        Me.I_BC_25.KeyLocked = False
         Me.I_BC_25.Location = New System.Drawing.Point(584, 337)
         Me.I_BC_25.Name = "I_BC_25"
         Me.I_BC_25.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_25.TabIndex = 114
         Me.I_BC_25.TabStop = False
-        Me.I_BC_25.Text = "None"
+        Me.I_BC_25.Text = "X"
         Me.I_BC_25.UseVisualStyleBackColor = False
         '
         'I_BC_14
@@ -1925,12 +2178,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_14.ForeColor = System.Drawing.Color.Black
         Me.I_BC_14.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_14.KeyDefaults = New String() {"", ""}
+        Me.I_BC_14.KeyLocked = False
         Me.I_BC_14.Location = New System.Drawing.Point(539, 337)
         Me.I_BC_14.Name = "I_BC_14"
         Me.I_BC_14.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_14.TabIndex = 112
         Me.I_BC_14.TabStop = False
-        Me.I_BC_14.Text = "None"
+        Me.I_BC_14.Text = "X"
         Me.I_BC_14.UseVisualStyleBackColor = False
         '
         'I_BC_03
@@ -1942,12 +2197,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BC_03.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BC_03.ForeColor = System.Drawing.Color.Black
         Me.I_BC_03.KeyCode = New String() {"k0", "k0"}
+        Me.I_BC_03.KeyDefaults = New String() {"", ""}
+        Me.I_BC_03.KeyLocked = False
         Me.I_BC_03.Location = New System.Drawing.Point(492, 337)
         Me.I_BC_03.Name = "I_BC_03"
         Me.I_BC_03.Size = New System.Drawing.Size(41, 28)
         Me.I_BC_03.TabIndex = 110
         Me.I_BC_03.TabStop = False
-        Me.I_BC_03.Text = "None"
+        Me.I_BC_03.Text = "X"
         Me.I_BC_03.UseVisualStyleBackColor = False
         '
         'I_BTN5_KEY
@@ -1959,12 +2216,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN5_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BTN5_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN5_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_BTN5_KEY.KeyDefaults = New String() {"a5+,b10,k79", "a5+,b10,k99"}
+        Me.I_BTN5_KEY.KeyLocked = False
         Me.I_BTN5_KEY.Location = New System.Drawing.Point(472, 238)
         Me.I_BTN5_KEY.Name = "I_BTN5_KEY"
         Me.I_BTN5_KEY.Size = New System.Drawing.Size(60, 60)
         Me.I_BTN5_KEY.TabIndex = 101
         Me.I_BTN5_KEY.TabStop = False
-        Me.I_BTN5_KEY.Text = "O"
+        Me.I_BTN5_KEY.Text = "X"
         Me.I_BTN5_KEY.UseVisualStyleBackColor = False
         '
         'I_BTN4_KEY
@@ -1976,12 +2235,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN4_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BTN4_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN4_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_BTN4_KEY.KeyDefaults = New String() {"b1,b1,k73", "b1,b1,k98"}
+        Me.I_BTN4_KEY.KeyLocked = False
         Me.I_BTN4_KEY.Location = New System.Drawing.Point(399, 250)
         Me.I_BTN4_KEY.Name = "I_BTN4_KEY"
         Me.I_BTN4_KEY.Size = New System.Drawing.Size(60, 60)
         Me.I_BTN4_KEY.TabIndex = 100
         Me.I_BTN4_KEY.TabStop = False
-        Me.I_BTN4_KEY.Text = "I"
+        Me.I_BTN4_KEY.Text = "X"
         Me.I_BTN4_KEY.UseVisualStyleBackColor = False
         '
         'I_BTN3_KEY
@@ -1993,12 +2254,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN3_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BTN3_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN3_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_BTN3_KEY.KeyDefaults = New String() {"b0,b0,k85", "b0,b0,k97"}
+        Me.I_BTN3_KEY.KeyLocked = False
         Me.I_BTN3_KEY.Location = New System.Drawing.Point(328, 274)
         Me.I_BTN3_KEY.Name = "I_BTN3_KEY"
         Me.I_BTN3_KEY.Size = New System.Drawing.Size(60, 60)
         Me.I_BTN3_KEY.TabIndex = 99
         Me.I_BTN3_KEY.TabStop = False
-        Me.I_BTN3_KEY.Text = "U"
+        Me.I_BTN3_KEY.Text = "X"
         Me.I_BTN3_KEY.UseVisualStyleBackColor = False
         '
         'I_BTN2_KEY
@@ -2010,12 +2273,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN2_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BTN2_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN2_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_BTN2_KEY.KeyDefaults = New String() {"a4+,b9,k48", "a4+,b9,k102"}
+        Me.I_BTN2_KEY.KeyLocked = False
         Me.I_BTN2_KEY.Location = New System.Drawing.Point(473, 159)
         Me.I_BTN2_KEY.Name = "I_BTN2_KEY"
         Me.I_BTN2_KEY.Size = New System.Drawing.Size(60, 60)
         Me.I_BTN2_KEY.TabIndex = 98
         Me.I_BTN2_KEY.TabStop = False
-        Me.I_BTN2_KEY.Text = "0"
+        Me.I_BTN2_KEY.Text = "X"
         Me.I_BTN2_KEY.UseVisualStyleBackColor = False
         '
         'I_BTN1_KEY
@@ -2027,12 +2292,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN1_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BTN1_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN1_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_BTN1_KEY.KeyDefaults = New String() {"b3,b3,k57", "b3,b3,k101"}
+        Me.I_BTN1_KEY.KeyLocked = False
         Me.I_BTN1_KEY.Location = New System.Drawing.Point(399, 169)
         Me.I_BTN1_KEY.Name = "I_BTN1_KEY"
         Me.I_BTN1_KEY.Size = New System.Drawing.Size(60, 60)
         Me.I_BTN1_KEY.TabIndex = 97
         Me.I_BTN1_KEY.TabStop = False
-        Me.I_BTN1_KEY.Text = "9"
+        Me.I_BTN1_KEY.Text = "X"
         Me.I_BTN1_KEY.UseVisualStyleBackColor = False
         '
         'I_BTN0_KEY
@@ -2044,12 +2311,14 @@ Partial Class frmKeyMapperSDL
         Me.I_BTN0_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_BTN0_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_BTN0_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_BTN0_KEY.KeyDefaults = New String() {"b2,b2,k56", "b2,b2,k100"}
+        Me.I_BTN0_KEY.KeyLocked = False
         Me.I_BTN0_KEY.Location = New System.Drawing.Point(329, 196)
         Me.I_BTN0_KEY.Name = "I_BTN0_KEY"
         Me.I_BTN0_KEY.Size = New System.Drawing.Size(60, 60)
         Me.I_BTN0_KEY.TabIndex = 96
         Me.I_BTN0_KEY.TabStop = False
-        Me.I_BTN0_KEY.Text = "8"
+        Me.I_BTN0_KEY.Text = "X"
         Me.I_BTN0_KEY.UseVisualStyleBackColor = False
         '
         'I_TEST_KEY_1
@@ -2061,12 +2330,14 @@ Partial Class frmKeyMapperSDL
         Me.I_TEST_KEY_1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_TEST_KEY_1.ForeColor = System.Drawing.Color.Black
         Me.I_TEST_KEY_1.KeyCode = New String() {"k0", "k0"}
+        Me.I_TEST_KEY_1.KeyDefaults = New String() {"k115,k115,k115", "k115,k115,k115"}
+        Me.I_TEST_KEY_1.KeyLocked = False
         Me.I_TEST_KEY_1.Location = New System.Drawing.Point(508, 91)
         Me.I_TEST_KEY_1.Name = "I_TEST_KEY_1"
         Me.I_TEST_KEY_1.Size = New System.Drawing.Size(40, 40)
         Me.I_TEST_KEY_1.TabIndex = 109
         Me.I_TEST_KEY_1.TabStop = False
-        Me.I_TEST_KEY_1.Text = "F5"
+        Me.I_TEST_KEY_1.Text = "X"
         Me.I_TEST_KEY_1.UseVisualStyleBackColor = False
         '
         'I_SERVICE_KEY_1
@@ -2078,12 +2349,14 @@ Partial Class frmKeyMapperSDL
         Me.I_SERVICE_KEY_1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_SERVICE_KEY_1.ForeColor = System.Drawing.Color.Black
         Me.I_SERVICE_KEY_1.KeyCode = New String() {"k0", "k0"}
+        Me.I_SERVICE_KEY_1.KeyDefaults = New String() {"k116,k116,k116", "k116,k116,k116"}
+        Me.I_SERVICE_KEY_1.KeyLocked = False
         Me.I_SERVICE_KEY_1.Location = New System.Drawing.Point(446, 91)
         Me.I_SERVICE_KEY_1.Name = "I_SERVICE_KEY_1"
         Me.I_SERVICE_KEY_1.Size = New System.Drawing.Size(40, 40)
         Me.I_SERVICE_KEY_1.TabIndex = 108
         Me.I_SERVICE_KEY_1.TabStop = False
-        Me.I_SERVICE_KEY_1.Text = "F4"
+        Me.I_SERVICE_KEY_1.Text = "X"
         Me.I_SERVICE_KEY_1.UseVisualStyleBackColor = False
         '
         'I_COIN_KEY
@@ -2095,12 +2368,14 @@ Partial Class frmKeyMapperSDL
         Me.I_COIN_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_COIN_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_COIN_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_COIN_KEY.KeyDefaults = New String() {"b4,b4,k49", "b4,b4,k107"}
+        Me.I_COIN_KEY.KeyLocked = False
         Me.I_COIN_KEY.Location = New System.Drawing.Point(390, 92)
         Me.I_COIN_KEY.Name = "I_COIN_KEY"
         Me.I_COIN_KEY.Size = New System.Drawing.Size(40, 40)
         Me.I_COIN_KEY.TabIndex = 107
         Me.I_COIN_KEY.TabStop = False
-        Me.I_COIN_KEY.Text = "1"
+        Me.I_COIN_KEY.Text = "X"
         Me.I_COIN_KEY.UseVisualStyleBackColor = False
         '
         'I_START_KEY
@@ -2112,12 +2387,14 @@ Partial Class frmKeyMapperSDL
         Me.I_START_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_START_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_START_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_START_KEY.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.I_START_KEY.KeyLocked = False
         Me.I_START_KEY.Location = New System.Drawing.Point(329, 92)
         Me.I_START_KEY.Name = "I_START_KEY"
         Me.I_START_KEY.Size = New System.Drawing.Size(40, 40)
         Me.I_START_KEY.TabIndex = 106
         Me.I_START_KEY.TabStop = False
-        Me.I_START_KEY.Text = "5"
+        Me.I_START_KEY.Text = "X"
         Me.I_START_KEY.UseVisualStyleBackColor = False
         '
         'I_RIGHT_KEY
@@ -2129,12 +2406,14 @@ Partial Class frmKeyMapperSDL
         Me.I_RIGHT_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_RIGHT_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_RIGHT_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_RIGHT_KEY.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.I_RIGHT_KEY.KeyLocked = False
         Me.I_RIGHT_KEY.Location = New System.Drawing.Point(214, 243)
         Me.I_RIGHT_KEY.Name = "I_RIGHT_KEY"
         Me.I_RIGHT_KEY.Size = New System.Drawing.Size(50, 50)
         Me.I_RIGHT_KEY.TabIndex = 105
         Me.I_RIGHT_KEY.TabStop = False
-        Me.I_RIGHT_KEY.Text = "D"
+        Me.I_RIGHT_KEY.Text = "X"
         Me.I_RIGHT_KEY.UseVisualStyleBackColor = False
         '
         'I_LEFT_KEY
@@ -2146,12 +2425,14 @@ Partial Class frmKeyMapperSDL
         Me.I_LEFT_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_LEFT_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_LEFT_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_LEFT_KEY.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.I_LEFT_KEY.KeyLocked = False
         Me.I_LEFT_KEY.Location = New System.Drawing.Point(83, 243)
         Me.I_LEFT_KEY.Name = "I_LEFT_KEY"
         Me.I_LEFT_KEY.Size = New System.Drawing.Size(50, 50)
         Me.I_LEFT_KEY.TabIndex = 104
         Me.I_LEFT_KEY.TabStop = False
-        Me.I_LEFT_KEY.Text = "A"
+        Me.I_LEFT_KEY.Text = "X"
         Me.I_LEFT_KEY.UseVisualStyleBackColor = False
         '
         'I_DOWN_KEY
@@ -2163,12 +2444,14 @@ Partial Class frmKeyMapperSDL
         Me.I_DOWN_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_DOWN_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_DOWN_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_DOWN_KEY.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.I_DOWN_KEY.KeyLocked = False
         Me.I_DOWN_KEY.Location = New System.Drawing.Point(147, 313)
         Me.I_DOWN_KEY.Name = "I_DOWN_KEY"
         Me.I_DOWN_KEY.Size = New System.Drawing.Size(50, 50)
         Me.I_DOWN_KEY.TabIndex = 103
         Me.I_DOWN_KEY.TabStop = False
-        Me.I_DOWN_KEY.Text = "S"
+        Me.I_DOWN_KEY.Text = "X"
         Me.I_DOWN_KEY.UseVisualStyleBackColor = False
         '
         'I_UP_KEY
@@ -2180,12 +2463,14 @@ Partial Class frmKeyMapperSDL
         Me.I_UP_KEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.I_UP_KEY.ForeColor = System.Drawing.Color.Black
         Me.I_UP_KEY.KeyCode = New String() {"k0", "k0"}
+        Me.I_UP_KEY.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.I_UP_KEY.KeyLocked = False
         Me.I_UP_KEY.Location = New System.Drawing.Point(147, 180)
         Me.I_UP_KEY.Name = "I_UP_KEY"
         Me.I_UP_KEY.Size = New System.Drawing.Size(50, 50)
         Me.I_UP_KEY.TabIndex = 102
         Me.I_UP_KEY.TabStop = False
-        Me.I_UP_KEY.Text = "W"
+        Me.I_UP_KEY.Text = "X"
         Me.I_UP_KEY.UseVisualStyleBackColor = False
         '
         'CONT_LSLIDER
@@ -2197,12 +2482,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_LSLIDER.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_LSLIDER.ForeColor = System.Drawing.Color.Black
         Me.CONT_LSLIDER.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_LSLIDER.KeyDefaults = New String() {"a4+,b9,k48", "a4+,b9,k102"}
+        Me.CONT_LSLIDER.KeyLocked = False
         Me.CONT_LSLIDER.Location = New System.Drawing.Point(153, 32)
         Me.CONT_LSLIDER.Name = "CONT_LSLIDER"
         Me.CONT_LSLIDER.Size = New System.Drawing.Size(69, 30)
         Me.CONT_LSLIDER.TabIndex = 33
         Me.CONT_LSLIDER.TabStop = False
-        Me.CONT_LSLIDER.Text = "0"
+        Me.CONT_LSLIDER.Text = "X"
         Me.CONT_LSLIDER.UseVisualStyleBackColor = False
         '
         'CONT_BC_ABC
@@ -2214,12 +2501,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_ABC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_ABC.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_ABC.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_ABC.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_ABC.KeyLocked = False
         Me.CONT_BC_ABC.Location = New System.Drawing.Point(608, 437)
         Me.CONT_BC_ABC.Name = "CONT_BC_ABC"
         Me.CONT_BC_ABC.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_ABC.TabIndex = 94
         Me.CONT_BC_ABC.TabStop = False
-        Me.CONT_BC_ABC.Text = "None"
+        Me.CONT_BC_ABC.Text = "X"
         Me.CONT_BC_ABC.UseVisualStyleBackColor = False
         '
         'CONT_BC_XYZ
@@ -2231,12 +2520,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_XYZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_XYZ.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_XYZ.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_XYZ.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_XYZ.KeyLocked = False
         Me.CONT_BC_XYZ.Location = New System.Drawing.Point(517, 437)
         Me.CONT_BC_XYZ.Name = "CONT_BC_XYZ"
         Me.CONT_BC_XYZ.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_XYZ.TabIndex = 92
         Me.CONT_BC_XYZ.TabStop = False
-        Me.CONT_BC_XYZ.Text = "None"
+        Me.CONT_BC_XYZ.Text = "X"
         Me.CONT_BC_XYZ.UseVisualStyleBackColor = False
         '
         'CONT_A
@@ -2248,12 +2539,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_A.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_A.ForeColor = System.Drawing.Color.Black
         Me.CONT_A.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_A.KeyDefaults = New String() {"b0,b0,k85", "b0,b0,k97"}
+        Me.CONT_A.KeyLocked = False
         Me.CONT_A.Location = New System.Drawing.Point(445, 211)
         Me.CONT_A.Name = "CONT_A"
         Me.CONT_A.Size = New System.Drawing.Size(40, 40)
         Me.CONT_A.TabIndex = 23
         Me.CONT_A.TabStop = False
-        Me.CONT_A.Text = "U"
+        Me.CONT_A.Text = "X"
         Me.CONT_A.UseVisualStyleBackColor = False
         '
         'CONT_BC_BC
@@ -2265,12 +2558,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_BC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_BC.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_BC.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_BC.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_BC.KeyLocked = False
         Me.CONT_BC_BC.Location = New System.Drawing.Point(631, 387)
         Me.CONT_BC_BC.Name = "CONT_BC_BC"
         Me.CONT_BC_BC.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_BC.TabIndex = 90
         Me.CONT_BC_BC.TabStop = False
-        Me.CONT_BC_BC.Text = "None"
+        Me.CONT_BC_BC.Text = "X"
         Me.CONT_BC_BC.UseVisualStyleBackColor = False
         '
         'CONT_DPAD_LEFT
@@ -2282,12 +2577,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_DPAD_LEFT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_DPAD_LEFT.ForeColor = System.Drawing.Color.Black
         Me.CONT_DPAD_LEFT.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_DPAD_LEFT.KeyDefaults = New String() {"b13,b13,k65", "b13,b13,k37"}
+        Me.CONT_DPAD_LEFT.KeyLocked = False
         Me.CONT_DPAD_LEFT.Location = New System.Drawing.Point(153, 227)
         Me.CONT_DPAD_LEFT.Name = "CONT_DPAD_LEFT"
         Me.CONT_DPAD_LEFT.Size = New System.Drawing.Size(40, 40)
         Me.CONT_DPAD_LEFT.TabIndex = 24
         Me.CONT_DPAD_LEFT.TabStop = False
-        Me.CONT_DPAD_LEFT.Text = "F"
+        Me.CONT_DPAD_LEFT.Text = "X"
         Me.CONT_DPAD_LEFT.UseVisualStyleBackColor = False
         '
         'CONT_BC_AB
@@ -2299,12 +2596,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_AB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_AB.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_AB.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_AB.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_AB.KeyLocked = False
         Me.CONT_BC_AB.Location = New System.Drawing.Point(586, 387)
         Me.CONT_BC_AB.Name = "CONT_BC_AB"
         Me.CONT_BC_AB.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_AB.TabIndex = 88
         Me.CONT_BC_AB.TabStop = False
-        Me.CONT_BC_AB.Text = "None"
+        Me.CONT_BC_AB.Text = "X"
         Me.CONT_BC_AB.UseVisualStyleBackColor = False
         '
         'CONT_B
@@ -2316,12 +2615,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_B.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_B.ForeColor = System.Drawing.Color.Black
         Me.CONT_B.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_B.KeyDefaults = New String() {"b1,b1,k73", "b1,b1,k98"}
+        Me.CONT_B.KeyLocked = False
         Me.CONT_B.Location = New System.Drawing.Point(484, 172)
         Me.CONT_B.Name = "CONT_B"
         Me.CONT_B.Size = New System.Drawing.Size(40, 40)
         Me.CONT_B.TabIndex = 22
         Me.CONT_B.TabStop = False
-        Me.CONT_B.Text = "I"
+        Me.CONT_B.Text = "X"
         Me.CONT_B.UseVisualStyleBackColor = False
         '
         'CONT_BC_YZ
@@ -2333,12 +2634,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_YZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_YZ.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_YZ.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_YZ.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_YZ.KeyLocked = False
         Me.CONT_BC_YZ.Location = New System.Drawing.Point(539, 387)
         Me.CONT_BC_YZ.Name = "CONT_BC_YZ"
         Me.CONT_BC_YZ.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_YZ.TabIndex = 86
         Me.CONT_BC_YZ.TabStop = False
-        Me.CONT_BC_YZ.Text = "None"
+        Me.CONT_BC_YZ.Text = "X"
         Me.CONT_BC_YZ.UseVisualStyleBackColor = False
         '
         'CONT_DPAD_UP
@@ -2350,12 +2653,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_DPAD_UP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_DPAD_UP.ForeColor = System.Drawing.Color.Black
         Me.CONT_DPAD_UP.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_DPAD_UP.KeyDefaults = New String() {"b11,b11,k87", "b11,b11,k38"}
+        Me.CONT_DPAD_UP.KeyLocked = False
         Me.CONT_DPAD_UP.Location = New System.Drawing.Point(191, 190)
         Me.CONT_DPAD_UP.Name = "CONT_DPAD_UP"
         Me.CONT_DPAD_UP.Size = New System.Drawing.Size(40, 40)
         Me.CONT_DPAD_UP.TabIndex = 25
         Me.CONT_DPAD_UP.TabStop = False
-        Me.CONT_DPAD_UP.Text = "T"
+        Me.CONT_DPAD_UP.Text = "X"
         Me.CONT_DPAD_UP.UseVisualStyleBackColor = False
         '
         'CONT_BC_XY
@@ -2367,12 +2672,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_XY.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_XY.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_XY.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_XY.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_XY.KeyLocked = False
         Me.CONT_BC_XY.Location = New System.Drawing.Point(494, 387)
         Me.CONT_BC_XY.Name = "CONT_BC_XY"
         Me.CONT_BC_XY.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_XY.TabIndex = 84
         Me.CONT_BC_XY.TabStop = False
-        Me.CONT_BC_XY.Text = "None"
+        Me.CONT_BC_XY.Text = "X"
         Me.CONT_BC_XY.UseVisualStyleBackColor = False
         '
         'CONT_Y
@@ -2384,12 +2691,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_Y.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_Y.ForeColor = System.Drawing.Color.Black
         Me.CONT_Y.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_Y.KeyDefaults = New String() {"b3,b3,k57", "b3,b3,k101"}
+        Me.CONT_Y.KeyLocked = False
         Me.CONT_Y.Location = New System.Drawing.Point(445, 133)
         Me.CONT_Y.Name = "CONT_Y"
         Me.CONT_Y.Size = New System.Drawing.Size(40, 40)
         Me.CONT_Y.TabIndex = 21
         Me.CONT_Y.TabStop = False
-        Me.CONT_Y.Text = "9"
+        Me.CONT_Y.Text = "X"
         Me.CONT_Y.UseVisualStyleBackColor = False
         '
         'CONT_BC_CZ
@@ -2401,12 +2710,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_CZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_CZ.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_CZ.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_CZ.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_CZ.KeyLocked = False
         Me.CONT_BC_CZ.Location = New System.Drawing.Point(586, 342)
         Me.CONT_BC_CZ.Name = "CONT_BC_CZ"
         Me.CONT_BC_CZ.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_CZ.TabIndex = 82
         Me.CONT_BC_CZ.TabStop = False
-        Me.CONT_BC_CZ.Text = "None"
+        Me.CONT_BC_CZ.Text = "X"
         Me.CONT_BC_CZ.UseVisualStyleBackColor = False
         '
         'CONT_RSLIDER
@@ -2418,12 +2729,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_RSLIDER.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_RSLIDER.ForeColor = System.Drawing.Color.Black
         Me.CONT_RSLIDER.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_RSLIDER.KeyDefaults = New String() {"a5+,b10,k79", "a5+,b10,k99"}
+        Me.CONT_RSLIDER.KeyLocked = False
         Me.CONT_RSLIDER.Location = New System.Drawing.Point(449, 32)
         Me.CONT_RSLIDER.Name = "CONT_RSLIDER"
         Me.CONT_RSLIDER.Size = New System.Drawing.Size(69, 30)
         Me.CONT_RSLIDER.TabIndex = 34
         Me.CONT_RSLIDER.TabStop = False
-        Me.CONT_RSLIDER.Text = "O"
+        Me.CONT_RSLIDER.Text = "X"
         Me.CONT_RSLIDER.UseVisualStyleBackColor = False
         '
         'CONT_BC_YB
@@ -2435,12 +2748,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_YB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_YB.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_YB.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_YB.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_YB.KeyLocked = False
         Me.CONT_BC_YB.Location = New System.Drawing.Point(541, 342)
         Me.CONT_BC_YB.Name = "CONT_BC_YB"
         Me.CONT_BC_YB.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_YB.TabIndex = 80
         Me.CONT_BC_YB.TabStop = False
-        Me.CONT_BC_YB.Text = "None"
+        Me.CONT_BC_YB.Text = "X"
         Me.CONT_BC_YB.UseVisualStyleBackColor = False
         '
         'CONT_BC_XA
@@ -2452,12 +2767,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_BC_XA.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_BC_XA.ForeColor = System.Drawing.Color.Black
         Me.CONT_BC_XA.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_BC_XA.KeyDefaults = New String() {"", ""}
+        Me.CONT_BC_XA.KeyLocked = False
         Me.CONT_BC_XA.Location = New System.Drawing.Point(494, 342)
         Me.CONT_BC_XA.Name = "CONT_BC_XA"
         Me.CONT_BC_XA.Size = New System.Drawing.Size(41, 28)
         Me.CONT_BC_XA.TabIndex = 69
         Me.CONT_BC_XA.TabStop = False
-        Me.CONT_BC_XA.Text = "None"
+        Me.CONT_BC_XA.Text = "X"
         Me.CONT_BC_XA.UseVisualStyleBackColor = False
         '
         'CONT_DPAD_RIGHT
@@ -2469,12 +2786,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_DPAD_RIGHT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_DPAD_RIGHT.ForeColor = System.Drawing.Color.Black
         Me.CONT_DPAD_RIGHT.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_DPAD_RIGHT.KeyDefaults = New String() {"b14,b14,k68", "b14,b14,k39"}
+        Me.CONT_DPAD_RIGHT.KeyLocked = False
         Me.CONT_DPAD_RIGHT.Location = New System.Drawing.Point(229, 227)
         Me.CONT_DPAD_RIGHT.Name = "CONT_DPAD_RIGHT"
         Me.CONT_DPAD_RIGHT.Size = New System.Drawing.Size(40, 40)
         Me.CONT_DPAD_RIGHT.TabIndex = 26
         Me.CONT_DPAD_RIGHT.TabStop = False
-        Me.CONT_DPAD_RIGHT.Text = "H"
+        Me.CONT_DPAD_RIGHT.Text = "X"
         Me.CONT_DPAD_RIGHT.UseVisualStyleBackColor = False
         '
         'CONT_X
@@ -2486,12 +2805,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_X.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_X.ForeColor = System.Drawing.Color.Black
         Me.CONT_X.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_X.KeyDefaults = New String() {"b2,b2,k56", "b2,b2,k100"}
+        Me.CONT_X.KeyLocked = False
         Me.CONT_X.Location = New System.Drawing.Point(406, 172)
         Me.CONT_X.Name = "CONT_X"
         Me.CONT_X.Size = New System.Drawing.Size(40, 40)
         Me.CONT_X.TabIndex = 20
         Me.CONT_X.TabStop = False
-        Me.CONT_X.Text = "8"
+        Me.CONT_X.Text = "X"
         Me.CONT_X.UseVisualStyleBackColor = False
         '
         'CONT_DPAD_DOWN
@@ -2503,12 +2824,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_DPAD_DOWN.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_DPAD_DOWN.ForeColor = System.Drawing.Color.Black
         Me.CONT_DPAD_DOWN.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_DPAD_DOWN.KeyDefaults = New String() {"b12,b12,k83", "b12,b12,k40"}
+        Me.CONT_DPAD_DOWN.KeyLocked = False
         Me.CONT_DPAD_DOWN.Location = New System.Drawing.Point(191, 264)
         Me.CONT_DPAD_DOWN.Name = "CONT_DPAD_DOWN"
         Me.CONT_DPAD_DOWN.Size = New System.Drawing.Size(40, 40)
         Me.CONT_DPAD_DOWN.TabIndex = 27
         Me.CONT_DPAD_DOWN.TabStop = False
-        Me.CONT_DPAD_DOWN.Text = "G"
+        Me.CONT_DPAD_DOWN.Text = "X"
         Me.CONT_DPAD_DOWN.UseVisualStyleBackColor = False
         '
         'CONT_ANALOG_LEFT
@@ -2520,12 +2843,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_ANALOG_LEFT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_ANALOG_LEFT.ForeColor = System.Drawing.Color.Black
         Me.CONT_ANALOG_LEFT.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_ANALOG_LEFT.KeyDefaults = New String() {"a0-,k0,k0", "a0-,k0,k0"}
+        Me.CONT_ANALOG_LEFT.KeyLocked = False
         Me.CONT_ANALOG_LEFT.Location = New System.Drawing.Point(125, 139)
         Me.CONT_ANALOG_LEFT.Name = "CONT_ANALOG_LEFT"
         Me.CONT_ANALOG_LEFT.Size = New System.Drawing.Size(40, 40)
         Me.CONT_ANALOG_LEFT.TabIndex = 28
         Me.CONT_ANALOG_LEFT.TabStop = False
-        Me.CONT_ANALOG_LEFT.Text = "A"
+        Me.CONT_ANALOG_LEFT.Text = "X"
         Me.CONT_ANALOG_LEFT.UseVisualStyleBackColor = False
         '
         'CONT_ANALOG_UP
@@ -2537,12 +2862,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_ANALOG_UP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_ANALOG_UP.ForeColor = System.Drawing.Color.Black
         Me.CONT_ANALOG_UP.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_ANALOG_UP.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.CONT_ANALOG_UP.KeyLocked = False
         Me.CONT_ANALOG_UP.Location = New System.Drawing.Point(162, 102)
         Me.CONT_ANALOG_UP.Name = "CONT_ANALOG_UP"
         Me.CONT_ANALOG_UP.Size = New System.Drawing.Size(40, 40)
         Me.CONT_ANALOG_UP.TabIndex = 29
         Me.CONT_ANALOG_UP.TabStop = False
-        Me.CONT_ANALOG_UP.Text = "W"
+        Me.CONT_ANALOG_UP.Text = "X"
         Me.CONT_ANALOG_UP.UseVisualStyleBackColor = False
         '
         'CONT_ANALOG_RIGHT
@@ -2554,12 +2881,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_ANALOG_RIGHT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_ANALOG_RIGHT.ForeColor = System.Drawing.Color.Black
         Me.CONT_ANALOG_RIGHT.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_ANALOG_RIGHT.KeyDefaults = New String() {"a0+,k0,k0", "a0+,k0,k0"}
+        Me.CONT_ANALOG_RIGHT.KeyLocked = False
         Me.CONT_ANALOG_RIGHT.Location = New System.Drawing.Point(199, 139)
         Me.CONT_ANALOG_RIGHT.Name = "CONT_ANALOG_RIGHT"
         Me.CONT_ANALOG_RIGHT.Size = New System.Drawing.Size(40, 40)
         Me.CONT_ANALOG_RIGHT.TabIndex = 30
         Me.CONT_ANALOG_RIGHT.TabStop = False
-        Me.CONT_ANALOG_RIGHT.Text = "D"
+        Me.CONT_ANALOG_RIGHT.Text = "X"
         Me.CONT_ANALOG_RIGHT.UseVisualStyleBackColor = False
         '
         'CONT_ANALOG_DOWN
@@ -2571,12 +2900,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_ANALOG_DOWN.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_ANALOG_DOWN.ForeColor = System.Drawing.Color.Black
         Me.CONT_ANALOG_DOWN.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_ANALOG_DOWN.KeyDefaults = New String() {"a1+,k0,k0", "a1+,k0,k0"}
+        Me.CONT_ANALOG_DOWN.KeyLocked = False
         Me.CONT_ANALOG_DOWN.Location = New System.Drawing.Point(162, 175)
         Me.CONT_ANALOG_DOWN.Name = "CONT_ANALOG_DOWN"
         Me.CONT_ANALOG_DOWN.Size = New System.Drawing.Size(40, 40)
         Me.CONT_ANALOG_DOWN.TabIndex = 31
         Me.CONT_ANALOG_DOWN.TabStop = False
-        Me.CONT_ANALOG_DOWN.Text = "S"
+        Me.CONT_ANALOG_DOWN.Text = "X"
         Me.CONT_ANALOG_DOWN.UseVisualStyleBackColor = False
         '
         'CONT_START
@@ -2588,12 +2919,14 @@ Partial Class frmKeyMapperSDL
         Me.CONT_START.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CONT_START.ForeColor = System.Drawing.Color.Black
         Me.CONT_START.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_START.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.CONT_START.KeyLocked = False
         Me.CONT_START.Location = New System.Drawing.Point(312, 300)
         Me.CONT_START.Name = "CONT_START"
         Me.CONT_START.Size = New System.Drawing.Size(40, 40)
         Me.CONT_START.TabIndex = 32
         Me.CONT_START.TabStop = False
-        Me.CONT_START.Text = "5"
+        Me.CONT_START.Text = "X"
         Me.CONT_START.UseVisualStyleBackColor = False
         '
         'STICK_BC_ABC
@@ -2605,12 +2938,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_ABC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_ABC.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_ABC.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_ABC.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_ABC.KeyLocked = False
         Me.STICK_BC_ABC.Location = New System.Drawing.Point(608, 420)
         Me.STICK_BC_ABC.Name = "STICK_BC_ABC"
         Me.STICK_BC_ABC.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_ABC.TabIndex = 123
         Me.STICK_BC_ABC.TabStop = False
-        Me.STICK_BC_ABC.Text = "None"
+        Me.STICK_BC_ABC.Text = "X"
         Me.STICK_BC_ABC.UseVisualStyleBackColor = False
         '
         'STICK_BC_XYZ
@@ -2622,12 +2957,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_XYZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_XYZ.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_XYZ.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_XYZ.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_XYZ.KeyLocked = False
         Me.STICK_BC_XYZ.Location = New System.Drawing.Point(517, 420)
         Me.STICK_BC_XYZ.Name = "STICK_BC_XYZ"
         Me.STICK_BC_XYZ.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_XYZ.TabIndex = 121
         Me.STICK_BC_XYZ.TabStop = False
-        Me.STICK_BC_XYZ.Text = "None"
+        Me.STICK_BC_XYZ.Text = "X"
         Me.STICK_BC_XYZ.UseVisualStyleBackColor = False
         '
         'STICK_BC_BC
@@ -2639,12 +2976,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_BC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_BC.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_BC.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_BC.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_BC.KeyLocked = False
         Me.STICK_BC_BC.Location = New System.Drawing.Point(631, 370)
         Me.STICK_BC_BC.Name = "STICK_BC_BC"
         Me.STICK_BC_BC.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_BC.TabIndex = 119
         Me.STICK_BC_BC.TabStop = False
-        Me.STICK_BC_BC.Text = "None"
+        Me.STICK_BC_BC.Text = "X"
         Me.STICK_BC_BC.UseVisualStyleBackColor = False
         '
         'STICK_BC_AB
@@ -2656,12 +2995,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_AB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_AB.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_AB.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_AB.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_AB.KeyLocked = False
         Me.STICK_BC_AB.Location = New System.Drawing.Point(586, 370)
         Me.STICK_BC_AB.Name = "STICK_BC_AB"
         Me.STICK_BC_AB.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_AB.TabIndex = 117
         Me.STICK_BC_AB.TabStop = False
-        Me.STICK_BC_AB.Text = "None"
+        Me.STICK_BC_AB.Text = "X"
         Me.STICK_BC_AB.UseVisualStyleBackColor = False
         '
         'STICK_BC_YZ
@@ -2673,12 +3014,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_YZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_YZ.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_YZ.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_YZ.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_YZ.KeyLocked = False
         Me.STICK_BC_YZ.Location = New System.Drawing.Point(539, 370)
         Me.STICK_BC_YZ.Name = "STICK_BC_YZ"
         Me.STICK_BC_YZ.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_YZ.TabIndex = 115
         Me.STICK_BC_YZ.TabStop = False
-        Me.STICK_BC_YZ.Text = "None"
+        Me.STICK_BC_YZ.Text = "X"
         Me.STICK_BC_YZ.UseVisualStyleBackColor = False
         '
         'STICK_BC_XY
@@ -2690,12 +3033,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_XY.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_XY.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_XY.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_XY.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_XY.KeyLocked = False
         Me.STICK_BC_XY.Location = New System.Drawing.Point(494, 370)
         Me.STICK_BC_XY.Name = "STICK_BC_XY"
         Me.STICK_BC_XY.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_XY.TabIndex = 113
         Me.STICK_BC_XY.TabStop = False
-        Me.STICK_BC_XY.Text = "None"
+        Me.STICK_BC_XY.Text = "X"
         Me.STICK_BC_XY.UseVisualStyleBackColor = False
         '
         'STICK_BC_CZ
@@ -2707,12 +3052,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_CZ.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_CZ.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_CZ.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_CZ.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_CZ.KeyLocked = False
         Me.STICK_BC_CZ.Location = New System.Drawing.Point(586, 325)
         Me.STICK_BC_CZ.Name = "STICK_BC_CZ"
         Me.STICK_BC_CZ.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_CZ.TabIndex = 111
         Me.STICK_BC_CZ.TabStop = False
-        Me.STICK_BC_CZ.Text = "None"
+        Me.STICK_BC_CZ.Text = "X"
         Me.STICK_BC_CZ.UseVisualStyleBackColor = False
         '
         'STICK_BC_YB
@@ -2724,12 +3071,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_YB.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_YB.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_YB.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_YB.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_YB.KeyLocked = False
         Me.STICK_BC_YB.Location = New System.Drawing.Point(541, 325)
         Me.STICK_BC_YB.Name = "STICK_BC_YB"
         Me.STICK_BC_YB.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_YB.TabIndex = 109
         Me.STICK_BC_YB.TabStop = False
-        Me.STICK_BC_YB.Text = "None"
+        Me.STICK_BC_YB.Text = "X"
         Me.STICK_BC_YB.UseVisualStyleBackColor = False
         '
         'STICK_BC_XA
@@ -2741,12 +3090,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_BC_XA.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_BC_XA.ForeColor = System.Drawing.Color.Black
         Me.STICK_BC_XA.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_BC_XA.KeyDefaults = New String() {"", ""}
+        Me.STICK_BC_XA.KeyLocked = False
         Me.STICK_BC_XA.Location = New System.Drawing.Point(494, 325)
         Me.STICK_BC_XA.Name = "STICK_BC_XA"
         Me.STICK_BC_XA.Size = New System.Drawing.Size(41, 28)
         Me.STICK_BC_XA.TabIndex = 107
         Me.STICK_BC_XA.TabStop = False
-        Me.STICK_BC_XA.Text = "None"
+        Me.STICK_BC_XA.Text = "X"
         Me.STICK_BC_XA.UseVisualStyleBackColor = False
         '
         'STICK_C
@@ -2758,12 +3109,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_C.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_C.ForeColor = System.Drawing.Color.Black
         Me.STICK_C.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_C.KeyDefaults = New String() {"a5+,b10,k79", "a5+,b10,k99"}
+        Me.STICK_C.KeyLocked = False
         Me.STICK_C.Location = New System.Drawing.Point(522, 138)
         Me.STICK_C.Name = "STICK_C"
         Me.STICK_C.Size = New System.Drawing.Size(60, 60)
         Me.STICK_C.TabIndex = 101
         Me.STICK_C.TabStop = False
-        Me.STICK_C.Text = "O"
+        Me.STICK_C.Text = "X"
         Me.STICK_C.UseVisualStyleBackColor = False
         '
         'STICK_B
@@ -2775,12 +3128,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_B.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_B.ForeColor = System.Drawing.Color.Black
         Me.STICK_B.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_B.KeyDefaults = New String() {"b1,b1,k73", "b1,b1,k98"}
+        Me.STICK_B.KeyLocked = False
         Me.STICK_B.Location = New System.Drawing.Point(444, 137)
         Me.STICK_B.Name = "STICK_B"
         Me.STICK_B.Size = New System.Drawing.Size(60, 60)
         Me.STICK_B.TabIndex = 100
         Me.STICK_B.TabStop = False
-        Me.STICK_B.Text = "I"
+        Me.STICK_B.Text = "X"
         Me.STICK_B.UseVisualStyleBackColor = False
         '
         'STICK_A
@@ -2792,12 +3147,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_A.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_A.ForeColor = System.Drawing.Color.Black
         Me.STICK_A.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_A.KeyDefaults = New String() {"b0,b0,k85", "b0,b0,k97"}
+        Me.STICK_A.KeyLocked = False
         Me.STICK_A.Location = New System.Drawing.Point(378, 181)
         Me.STICK_A.Name = "STICK_A"
         Me.STICK_A.Size = New System.Drawing.Size(60, 60)
         Me.STICK_A.TabIndex = 99
         Me.STICK_A.TabStop = False
-        Me.STICK_A.Text = "U"
+        Me.STICK_A.Text = "X"
         Me.STICK_A.UseVisualStyleBackColor = False
         '
         'STICK_Z
@@ -2809,12 +3166,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_Z.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_Z.ForeColor = System.Drawing.Color.Black
         Me.STICK_Z.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_Z.KeyDefaults = New String() {"a4+,b9,k48", "a4+,b9,k102"}
+        Me.STICK_Z.KeyLocked = False
         Me.STICK_Z.Location = New System.Drawing.Point(521, 59)
         Me.STICK_Z.Name = "STICK_Z"
         Me.STICK_Z.Size = New System.Drawing.Size(60, 60)
         Me.STICK_Z.TabIndex = 98
         Me.STICK_Z.TabStop = False
-        Me.STICK_Z.Text = "0"
+        Me.STICK_Z.Text = "X"
         Me.STICK_Z.UseVisualStyleBackColor = False
         '
         'STICK_Y
@@ -2826,12 +3185,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_Y.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_Y.ForeColor = System.Drawing.Color.Black
         Me.STICK_Y.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_Y.KeyDefaults = New String() {"b3,b3,k57", "b3,b3,k101"}
+        Me.STICK_Y.KeyLocked = False
         Me.STICK_Y.Location = New System.Drawing.Point(444, 59)
         Me.STICK_Y.Name = "STICK_Y"
         Me.STICK_Y.Size = New System.Drawing.Size(60, 60)
         Me.STICK_Y.TabIndex = 97
         Me.STICK_Y.TabStop = False
-        Me.STICK_Y.Text = "9"
+        Me.STICK_Y.Text = "X"
         Me.STICK_Y.UseVisualStyleBackColor = False
         '
         'STICK_X
@@ -2843,12 +3204,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_X.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_X.ForeColor = System.Drawing.Color.Black
         Me.STICK_X.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_X.KeyDefaults = New String() {"b2,b2,k56", "b2,b2,k100"}
+        Me.STICK_X.KeyLocked = False
         Me.STICK_X.Location = New System.Drawing.Point(378, 101)
         Me.STICK_X.Name = "STICK_X"
         Me.STICK_X.Size = New System.Drawing.Size(60, 60)
         Me.STICK_X.TabIndex = 96
         Me.STICK_X.TabStop = False
-        Me.STICK_X.Text = "8"
+        Me.STICK_X.Text = "X"
         Me.STICK_X.UseVisualStyleBackColor = False
         '
         'STICK_START
@@ -2860,12 +3223,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_START.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_START.ForeColor = System.Drawing.Color.Black
         Me.STICK_START.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_START.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.STICK_START.KeyLocked = False
         Me.STICK_START.Location = New System.Drawing.Point(433, 14)
         Me.STICK_START.Name = "STICK_START"
         Me.STICK_START.Size = New System.Drawing.Size(35, 30)
         Me.STICK_START.TabIndex = 106
         Me.STICK_START.TabStop = False
-        Me.STICK_START.Text = "5"
+        Me.STICK_START.Text = "X"
         Me.STICK_START.UseVisualStyleBackColor = False
         '
         'STICK_DPAD_RIGHT
@@ -2877,12 +3242,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_DPAD_RIGHT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_DPAD_RIGHT.ForeColor = System.Drawing.Color.Black
         Me.STICK_DPAD_RIGHT.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_DPAD_RIGHT.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.STICK_DPAD_RIGHT.KeyLocked = False
         Me.STICK_DPAD_RIGHT.Location = New System.Drawing.Point(203, 131)
         Me.STICK_DPAD_RIGHT.Name = "STICK_DPAD_RIGHT"
         Me.STICK_DPAD_RIGHT.Size = New System.Drawing.Size(50, 50)
         Me.STICK_DPAD_RIGHT.TabIndex = 105
         Me.STICK_DPAD_RIGHT.TabStop = False
-        Me.STICK_DPAD_RIGHT.Text = "D"
+        Me.STICK_DPAD_RIGHT.Text = "X"
         Me.STICK_DPAD_RIGHT.UseVisualStyleBackColor = False
         '
         'STICK_DPAD_LEFT
@@ -2894,12 +3261,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_DPAD_LEFT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_DPAD_LEFT.ForeColor = System.Drawing.Color.Black
         Me.STICK_DPAD_LEFT.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_DPAD_LEFT.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.STICK_DPAD_LEFT.KeyLocked = False
         Me.STICK_DPAD_LEFT.Location = New System.Drawing.Point(84, 131)
         Me.STICK_DPAD_LEFT.Name = "STICK_DPAD_LEFT"
         Me.STICK_DPAD_LEFT.Size = New System.Drawing.Size(50, 50)
         Me.STICK_DPAD_LEFT.TabIndex = 104
         Me.STICK_DPAD_LEFT.TabStop = False
-        Me.STICK_DPAD_LEFT.Text = "A"
+        Me.STICK_DPAD_LEFT.Text = "X"
         Me.STICK_DPAD_LEFT.UseVisualStyleBackColor = False
         '
         'STICK_DPAD_DOWN
@@ -2911,12 +3280,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_DPAD_DOWN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_DPAD_DOWN.ForeColor = System.Drawing.Color.Black
         Me.STICK_DPAD_DOWN.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_DPAD_DOWN.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.STICK_DPAD_DOWN.KeyLocked = False
         Me.STICK_DPAD_DOWN.Location = New System.Drawing.Point(144, 195)
         Me.STICK_DPAD_DOWN.Name = "STICK_DPAD_DOWN"
         Me.STICK_DPAD_DOWN.Size = New System.Drawing.Size(50, 50)
         Me.STICK_DPAD_DOWN.TabIndex = 103
         Me.STICK_DPAD_DOWN.TabStop = False
-        Me.STICK_DPAD_DOWN.Text = "S"
+        Me.STICK_DPAD_DOWN.Text = "X"
         Me.STICK_DPAD_DOWN.UseVisualStyleBackColor = False
         '
         'STICK_DPAD_UP
@@ -2928,12 +3299,14 @@ Partial Class frmKeyMapperSDL
         Me.STICK_DPAD_UP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.STICK_DPAD_UP.ForeColor = System.Drawing.Color.Black
         Me.STICK_DPAD_UP.KeyCode = New String() {"k0", "k0"}
+        Me.STICK_DPAD_UP.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.STICK_DPAD_UP.KeyLocked = False
         Me.STICK_DPAD_UP.Location = New System.Drawing.Point(144, 74)
         Me.STICK_DPAD_UP.Name = "STICK_DPAD_UP"
         Me.STICK_DPAD_UP.Size = New System.Drawing.Size(50, 50)
         Me.STICK_DPAD_UP.TabIndex = 102
         Me.STICK_DPAD_UP.TabStop = False
-        Me.STICK_DPAD_UP.Text = "W"
+        Me.STICK_DPAD_UP.Text = "X"
         Me.STICK_DPAD_UP.UseVisualStyleBackColor = False
         '
         'psx_gamepad_triangle
@@ -2945,11 +3318,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_triangle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_triangle.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_triangle.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_triangle.KeyDefaults = New String() {"b3,b3,k57", "b3,b3,k101"}
+        Me.psx_gamepad_triangle.KeyLocked = False
         Me.psx_gamepad_triangle.Location = New System.Drawing.Point(477, 141)
         Me.psx_gamepad_triangle.Name = "psx_gamepad_triangle"
         Me.psx_gamepad_triangle.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_triangle.TabIndex = 10
-        Me.psx_gamepad_triangle.Text = "W"
+        Me.psx_gamepad_triangle.Text = "X"
         Me.psx_gamepad_triangle.UseVisualStyleBackColor = False
         '
         'psx_gamepad_r2
@@ -2961,11 +3336,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_r2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_r2.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_r2.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_r2.KeyDefaults = New String() {"a5+,b10,k79", "a5+,b10,k99"}
+        Me.psx_gamepad_r2.KeyLocked = False
         Me.psx_gamepad_r2.Location = New System.Drawing.Point(478, 1)
         Me.psx_gamepad_r2.Name = "psx_gamepad_r2"
         Me.psx_gamepad_r2.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_r2.TabIndex = 93
-        Me.psx_gamepad_r2.Text = "W"
+        Me.psx_gamepad_r2.Text = "X"
         Me.psx_gamepad_r2.UseVisualStyleBackColor = False
         '
         'psx_gamepad_l2
@@ -2977,11 +3354,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_l2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_l2.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_l2.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_l2.KeyDefaults = New String() {"a4+,a5+,k80", "a4+,a5+,k110"}
+        Me.psx_gamepad_l2.KeyLocked = False
         Me.psx_gamepad_l2.Location = New System.Drawing.Point(162, 7)
         Me.psx_gamepad_l2.Name = "psx_gamepad_l2"
         Me.psx_gamepad_l2.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_l2.TabIndex = 92
-        Me.psx_gamepad_l2.Text = "W"
+        Me.psx_gamepad_l2.Text = "X"
         Me.psx_gamepad_l2.UseVisualStyleBackColor = False
         '
         'psx_gamepad_r1
@@ -2993,11 +3372,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_r1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_r1.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_r1.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_r1.KeyDefaults = New String() {"b10,b9,k48", "b10,b9,k102"}
+        Me.psx_gamepad_r1.KeyLocked = False
         Me.psx_gamepad_r1.Location = New System.Drawing.Point(478, 52)
         Me.psx_gamepad_r1.Name = "psx_gamepad_r1"
         Me.psx_gamepad_r1.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_r1.TabIndex = 91
-        Me.psx_gamepad_r1.Text = "W"
+        Me.psx_gamepad_r1.Text = "X"
         Me.psx_gamepad_r1.UseVisualStyleBackColor = False
         '
         'psx_gamepad_l1
@@ -3009,11 +3390,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_l1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_l1.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_l1.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_l1.KeyDefaults = New String() {"b9,a4+,k189", "b9,a4+,k96"}
+        Me.psx_gamepad_l1.KeyLocked = False
         Me.psx_gamepad_l1.Location = New System.Drawing.Point(162, 58)
         Me.psx_gamepad_l1.Name = "psx_gamepad_l1"
         Me.psx_gamepad_l1.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_l1.TabIndex = 90
-        Me.psx_gamepad_l1.Text = "W"
+        Me.psx_gamepad_l1.Text = "X"
         Me.psx_gamepad_l1.UseVisualStyleBackColor = False
         '
         'psx_gamepad_circle
@@ -3025,11 +3408,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_circle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_circle.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_circle.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_circle.KeyDefaults = New String() {"b1,b1,k73", "b1,b1,k98"}
+        Me.psx_gamepad_circle.KeyLocked = False
         Me.psx_gamepad_circle.Location = New System.Drawing.Point(527, 191)
         Me.psx_gamepad_circle.Name = "psx_gamepad_circle"
         Me.psx_gamepad_circle.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_circle.TabIndex = 11
-        Me.psx_gamepad_circle.Text = "W"
+        Me.psx_gamepad_circle.Text = "X"
         Me.psx_gamepad_circle.UseVisualStyleBackColor = False
         '
         'psx_gamepad_square
@@ -3041,11 +3426,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_square.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_square.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_square.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_square.KeyDefaults = New String() {"b2,b2,k56", "b2,b2,k100"}
+        Me.psx_gamepad_square.KeyLocked = False
         Me.psx_gamepad_square.Location = New System.Drawing.Point(429, 191)
         Me.psx_gamepad_square.Name = "psx_gamepad_square"
         Me.psx_gamepad_square.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_square.TabIndex = 9
-        Me.psx_gamepad_square.Text = "W"
+        Me.psx_gamepad_square.Text = "X"
         Me.psx_gamepad_square.UseVisualStyleBackColor = False
         '
         'psx_gamepad_cross
@@ -3057,11 +3444,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_cross.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_cross.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_cross.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_cross.KeyDefaults = New String() {"b0,b0,k85", "b0,b0,k97"}
+        Me.psx_gamepad_cross.KeyLocked = False
         Me.psx_gamepad_cross.Location = New System.Drawing.Point(478, 241)
         Me.psx_gamepad_cross.Name = "psx_gamepad_cross"
         Me.psx_gamepad_cross.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_cross.TabIndex = 8
-        Me.psx_gamepad_cross.Text = "W"
+        Me.psx_gamepad_cross.Text = "X"
         Me.psx_gamepad_cross.UseVisualStyleBackColor = False
         '
         'psx_gamepad_start
@@ -3073,11 +3462,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_start.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_start.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.psx_gamepad_start.KeyLocked = False
         Me.psx_gamepad_start.Location = New System.Drawing.Point(349, 227)
         Me.psx_gamepad_start.Name = "psx_gamepad_start"
         Me.psx_gamepad_start.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_start.TabIndex = 7
-        Me.psx_gamepad_start.Text = "W"
+        Me.psx_gamepad_start.Text = "X"
         Me.psx_gamepad_start.UseVisualStyleBackColor = False
         '
         'psx_gamepad_select
@@ -3089,11 +3480,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_select.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_select.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_select.KeyDefaults = New String() {"b4,b4,k49", "b4,b4,k107"}
+        Me.psx_gamepad_select.KeyLocked = False
         Me.psx_gamepad_select.Location = New System.Drawing.Point(275, 227)
         Me.psx_gamepad_select.Name = "psx_gamepad_select"
         Me.psx_gamepad_select.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_select.TabIndex = 6
-        Me.psx_gamepad_select.Text = "W"
+        Me.psx_gamepad_select.Text = "X"
         Me.psx_gamepad_select.UseVisualStyleBackColor = False
         '
         'psx_gamepad_left
@@ -3105,11 +3498,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_left.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_left.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.psx_gamepad_left.KeyLocked = False
         Me.psx_gamepad_left.Location = New System.Drawing.Point(94, 190)
         Me.psx_gamepad_left.Name = "psx_gamepad_left"
         Me.psx_gamepad_left.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_left.TabIndex = 5
-        Me.psx_gamepad_left.Text = "W"
+        Me.psx_gamepad_left.Text = "X"
         Me.psx_gamepad_left.UseVisualStyleBackColor = False
         '
         'psx_gamepad_right
@@ -3121,11 +3516,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_right.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_right.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.psx_gamepad_right.KeyLocked = False
         Me.psx_gamepad_right.Location = New System.Drawing.Point(192, 190)
         Me.psx_gamepad_right.Name = "psx_gamepad_right"
         Me.psx_gamepad_right.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_right.TabIndex = 4
-        Me.psx_gamepad_right.Text = "W"
+        Me.psx_gamepad_right.Text = "X"
         Me.psx_gamepad_right.UseVisualStyleBackColor = False
         '
         'psx_gamepad_down
@@ -3137,11 +3534,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_down.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_down.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.psx_gamepad_down.KeyLocked = False
         Me.psx_gamepad_down.Location = New System.Drawing.Point(143, 239)
         Me.psx_gamepad_down.Name = "psx_gamepad_down"
         Me.psx_gamepad_down.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_down.TabIndex = 3
-        Me.psx_gamepad_down.Text = "W"
+        Me.psx_gamepad_down.Text = "X"
         Me.psx_gamepad_down.UseVisualStyleBackColor = False
         '
         'psx_gamepad_up
@@ -3153,11 +3552,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_gamepad_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_gamepad_up.ForeColor = System.Drawing.Color.Black
         Me.psx_gamepad_up.KeyCode = New String() {"k0", "k0"}
+        Me.psx_gamepad_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.psx_gamepad_up.KeyLocked = False
         Me.psx_gamepad_up.Location = New System.Drawing.Point(143, 141)
         Me.psx_gamepad_up.Name = "psx_gamepad_up"
         Me.psx_gamepad_up.Size = New System.Drawing.Size(50, 50)
         Me.psx_gamepad_up.TabIndex = 2
-        Me.psx_gamepad_up.Text = "W"
+        Me.psx_gamepad_up.Text = "X"
         Me.psx_gamepad_up.UseVisualStyleBackColor = False
         '
         'psx_dualshock_circle
@@ -3169,11 +3570,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_circle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_circle.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_circle.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_circle.KeyDefaults = New String() {"b1,b1,k73", "b1,b1,k98"}
+        Me.psx_dualshock_circle.KeyLocked = False
         Me.psx_dualshock_circle.Location = New System.Drawing.Point(509, 239)
         Me.psx_dualshock_circle.Name = "psx_dualshock_circle"
         Me.psx_dualshock_circle.Size = New System.Drawing.Size(50, 50)
         Me.psx_dualshock_circle.TabIndex = 106
-        Me.psx_dualshock_circle.Text = "W"
+        Me.psx_dualshock_circle.Text = "X"
         Me.psx_dualshock_circle.UseVisualStyleBackColor = False
         '
         'psx_dualshock_triangle
@@ -3185,11 +3588,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_triangle.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_triangle.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_triangle.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_triangle.KeyDefaults = New String() {"b3,b3,k57", "b3,b3,k101"}
+        Me.psx_dualshock_triangle.KeyLocked = False
         Me.psx_dualshock_triangle.Location = New System.Drawing.Point(459, 189)
         Me.psx_dualshock_triangle.Name = "psx_dualshock_triangle"
         Me.psx_dualshock_triangle.Size = New System.Drawing.Size(50, 50)
         Me.psx_dualshock_triangle.TabIndex = 105
-        Me.psx_dualshock_triangle.Text = "W"
+        Me.psx_dualshock_triangle.Text = "X"
         Me.psx_dualshock_triangle.UseVisualStyleBackColor = False
         '
         'psx_dualshock_square
@@ -3201,11 +3606,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_square.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_square.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_square.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_square.KeyDefaults = New String() {"b2,b2,k56", "b2,b2,k100"}
+        Me.psx_dualshock_square.KeyLocked = False
         Me.psx_dualshock_square.Location = New System.Drawing.Point(411, 239)
         Me.psx_dualshock_square.Name = "psx_dualshock_square"
         Me.psx_dualshock_square.Size = New System.Drawing.Size(50, 50)
         Me.psx_dualshock_square.TabIndex = 104
-        Me.psx_dualshock_square.Text = "W"
+        Me.psx_dualshock_square.Text = "X"
         Me.psx_dualshock_square.UseVisualStyleBackColor = False
         '
         'psx_dualshock_cross
@@ -3217,11 +3624,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_cross.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_cross.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_cross.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_cross.KeyDefaults = New String() {"b0,b0,k85", "b0,b0,k97"}
+        Me.psx_dualshock_cross.KeyLocked = False
         Me.psx_dualshock_cross.Location = New System.Drawing.Point(460, 289)
         Me.psx_dualshock_cross.Name = "psx_dualshock_cross"
         Me.psx_dualshock_cross.Size = New System.Drawing.Size(50, 50)
         Me.psx_dualshock_cross.TabIndex = 103
-        Me.psx_dualshock_cross.Text = "W"
+        Me.psx_dualshock_cross.Text = "X"
         Me.psx_dualshock_cross.UseVisualStyleBackColor = False
         '
         'psx_dualshock_r3
@@ -3233,11 +3642,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_r3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_r3.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_r3.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_r3.KeyDefaults = New String() {"b8,b8,k0", "b8,b8,k0"}
+        Me.psx_dualshock_r3.KeyLocked = False
         Me.psx_dualshock_r3.Location = New System.Drawing.Point(438, 368)
         Me.psx_dualshock_r3.Name = "psx_dualshock_r3"
         Me.psx_dualshock_r3.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_r3.TabIndex = 131
-        Me.psx_dualshock_r3.Text = "W"
+        Me.psx_dualshock_r3.Text = "X"
         Me.psx_dualshock_r3.UseVisualStyleBackColor = False
         '
         'psx_dualshock_l3
@@ -3249,11 +3660,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_l3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_l3.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_l3.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_l3.KeyDefaults = New String() {"b7,b7,k0", "b7,b7,k0"}
+        Me.psx_dualshock_l3.KeyLocked = False
         Me.psx_dualshock_l3.Location = New System.Drawing.Point(205, 370)
         Me.psx_dualshock_l3.Name = "psx_dualshock_l3"
         Me.psx_dualshock_l3.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_l3.TabIndex = 129
-        Me.psx_dualshock_l3.Text = "W"
+        Me.psx_dualshock_l3.Text = "X"
         Me.psx_dualshock_l3.UseVisualStyleBackColor = False
         '
         'psx_dualshock_analog
@@ -3265,11 +3678,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_analog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_analog.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_analog.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_analog.KeyDefaults = New String() {"b5,b5,k81", "b5,b5,k107"}
+        Me.psx_dualshock_analog.KeyLocked = False
         Me.psx_dualshock_analog.Location = New System.Drawing.Point(319, 388)
         Me.psx_dualshock_analog.Name = "psx_dualshock_analog"
         Me.psx_dualshock_analog.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_analog.TabIndex = 127
-        Me.psx_dualshock_analog.Text = "W"
+        Me.psx_dualshock_analog.Text = "X"
         Me.psx_dualshock_analog.UseVisualStyleBackColor = False
         '
         'psx_dualshock_rstick_left
@@ -3281,11 +3696,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_rstick_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_rstick_left.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_rstick_left.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_rstick_left.KeyDefaults = New String() {"", ""}
+        Me.psx_dualshock_rstick_left.KeyLocked = False
         Me.psx_dualshock_rstick_left.Location = New System.Drawing.Point(353, 321)
         Me.psx_dualshock_rstick_left.Name = "psx_dualshock_rstick_left"
         Me.psx_dualshock_rstick_left.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_rstick_left.TabIndex = 126
-        Me.psx_dualshock_rstick_left.Text = "W"
+        Me.psx_dualshock_rstick_left.Text = "X"
         Me.psx_dualshock_rstick_left.UseVisualStyleBackColor = False
         '
         'psx_dualshock_rstick_right
@@ -3297,11 +3714,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_rstick_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_rstick_right.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_rstick_right.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_rstick_right.KeyDefaults = New String() {"", ""}
+        Me.psx_dualshock_rstick_right.KeyLocked = False
         Me.psx_dualshock_rstick_right.Location = New System.Drawing.Point(431, 321)
         Me.psx_dualshock_rstick_right.Name = "psx_dualshock_rstick_right"
         Me.psx_dualshock_rstick_right.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_rstick_right.TabIndex = 125
-        Me.psx_dualshock_rstick_right.Text = "W"
+        Me.psx_dualshock_rstick_right.Text = "X"
         Me.psx_dualshock_rstick_right.UseVisualStyleBackColor = False
         '
         'psx_dualshock_rstick_down
@@ -3313,11 +3732,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_rstick_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_rstick_down.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_rstick_down.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_rstick_down.KeyDefaults = New String() {"", ""}
+        Me.psx_dualshock_rstick_down.KeyLocked = False
         Me.psx_dualshock_rstick_down.Location = New System.Drawing.Point(392, 360)
         Me.psx_dualshock_rstick_down.Name = "psx_dualshock_rstick_down"
         Me.psx_dualshock_rstick_down.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_rstick_down.TabIndex = 124
-        Me.psx_dualshock_rstick_down.Text = "W"
+        Me.psx_dualshock_rstick_down.Text = "X"
         Me.psx_dualshock_rstick_down.UseVisualStyleBackColor = False
         '
         'psx_dualshock_rstick_up
@@ -3329,11 +3750,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_rstick_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_rstick_up.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_rstick_up.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_rstick_up.KeyDefaults = New String() {"", ""}
+        Me.psx_dualshock_rstick_up.KeyLocked = False
         Me.psx_dualshock_rstick_up.Location = New System.Drawing.Point(392, 282)
         Me.psx_dualshock_rstick_up.Name = "psx_dualshock_rstick_up"
         Me.psx_dualshock_rstick_up.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_rstick_up.TabIndex = 123
-        Me.psx_dualshock_rstick_up.Text = "W"
+        Me.psx_dualshock_rstick_up.Text = "X"
         Me.psx_dualshock_rstick_up.UseVisualStyleBackColor = False
         '
         'psx_dualshock_lstick_left
@@ -3345,11 +3768,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_lstick_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_lstick_left.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_lstick_left.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_lstick_left.KeyDefaults = New String() {"a0-,k0,k0", "a0-,k0,k0"}
+        Me.psx_dualshock_lstick_left.KeyLocked = False
         Me.psx_dualshock_lstick_left.Location = New System.Drawing.Point(212, 322)
         Me.psx_dualshock_lstick_left.Name = "psx_dualshock_lstick_left"
         Me.psx_dualshock_lstick_left.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_lstick_left.TabIndex = 122
-        Me.psx_dualshock_lstick_left.Text = "W"
+        Me.psx_dualshock_lstick_left.Text = "X"
         Me.psx_dualshock_lstick_left.UseVisualStyleBackColor = False
         '
         'psx_dualshock_lstick_right
@@ -3361,11 +3786,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_lstick_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_lstick_right.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_lstick_right.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_lstick_right.KeyDefaults = New String() {"a0+,k0,k0", "a0+,k0,k0"}
+        Me.psx_dualshock_lstick_right.KeyLocked = False
         Me.psx_dualshock_lstick_right.Location = New System.Drawing.Point(290, 322)
         Me.psx_dualshock_lstick_right.Name = "psx_dualshock_lstick_right"
         Me.psx_dualshock_lstick_right.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_lstick_right.TabIndex = 121
-        Me.psx_dualshock_lstick_right.Text = "W"
+        Me.psx_dualshock_lstick_right.Text = "X"
         Me.psx_dualshock_lstick_right.UseVisualStyleBackColor = False
         '
         'psx_dualshock_lstick_down
@@ -3377,11 +3804,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_lstick_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_lstick_down.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_lstick_down.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_lstick_down.KeyDefaults = New String() {"a1+,k0,k0", "a1+,k0,k0"}
+        Me.psx_dualshock_lstick_down.KeyLocked = False
         Me.psx_dualshock_lstick_down.Location = New System.Drawing.Point(251, 361)
         Me.psx_dualshock_lstick_down.Name = "psx_dualshock_lstick_down"
         Me.psx_dualshock_lstick_down.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_lstick_down.TabIndex = 120
-        Me.psx_dualshock_lstick_down.Text = "W"
+        Me.psx_dualshock_lstick_down.Text = "X"
         Me.psx_dualshock_lstick_down.UseVisualStyleBackColor = False
         '
         'psx_dualshock_lstick_up
@@ -3393,11 +3822,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_lstick_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_lstick_up.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_lstick_up.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_lstick_up.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.psx_dualshock_lstick_up.KeyLocked = False
         Me.psx_dualshock_lstick_up.Location = New System.Drawing.Point(251, 282)
         Me.psx_dualshock_lstick_up.Name = "psx_dualshock_lstick_up"
         Me.psx_dualshock_lstick_up.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_lstick_up.TabIndex = 119
-        Me.psx_dualshock_lstick_up.Text = "W"
+        Me.psx_dualshock_lstick_up.Text = "X"
         Me.psx_dualshock_lstick_up.UseVisualStyleBackColor = False
         '
         'psx_dualshock_start
@@ -3409,11 +3840,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_start.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_start.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.psx_dualshock_start.KeyLocked = False
         Me.psx_dualshock_start.Location = New System.Drawing.Point(362, 235)
         Me.psx_dualshock_start.Name = "psx_dualshock_start"
         Me.psx_dualshock_start.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_start.TabIndex = 102
-        Me.psx_dualshock_start.Text = "W"
+        Me.psx_dualshock_start.Text = "X"
         Me.psx_dualshock_start.UseVisualStyleBackColor = False
         '
         'psx_dualshock_r2
@@ -3425,11 +3858,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_r2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_r2.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_r2.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_r2.KeyDefaults = New String() {"a5+,b10,k79", "a5+,b10,k99"}
+        Me.psx_dualshock_r2.KeyLocked = False
         Me.psx_dualshock_r2.Location = New System.Drawing.Point(465, 51)
         Me.psx_dualshock_r2.Name = "psx_dualshock_r2"
         Me.psx_dualshock_r2.Size = New System.Drawing.Size(50, 50)
         Me.psx_dualshock_r2.TabIndex = 115
-        Me.psx_dualshock_r2.Text = "W"
+        Me.psx_dualshock_r2.Text = "X"
         Me.psx_dualshock_r2.UseVisualStyleBackColor = False
         '
         'psx_dualshock_l2
@@ -3441,11 +3876,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_l2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_l2.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_l2.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_l2.KeyDefaults = New String() {"a4+,a5+,k80", "a4+,a5+,k110"}
+        Me.psx_dualshock_l2.KeyLocked = False
         Me.psx_dualshock_l2.Location = New System.Drawing.Point(167, 57)
         Me.psx_dualshock_l2.Name = "psx_dualshock_l2"
         Me.psx_dualshock_l2.Size = New System.Drawing.Size(50, 50)
         Me.psx_dualshock_l2.TabIndex = 114
-        Me.psx_dualshock_l2.Text = "W"
+        Me.psx_dualshock_l2.Text = "X"
         Me.psx_dualshock_l2.UseVisualStyleBackColor = False
         '
         'psx_dualshock_r1
@@ -3457,11 +3894,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_r1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_r1.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_r1.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_r1.KeyDefaults = New String() {"b10,b9,k48", "b10,b9,k102"}
+        Me.psx_dualshock_r1.KeyLocked = False
         Me.psx_dualshock_r1.Location = New System.Drawing.Point(464, 107)
         Me.psx_dualshock_r1.Name = "psx_dualshock_r1"
         Me.psx_dualshock_r1.Size = New System.Drawing.Size(50, 50)
         Me.psx_dualshock_r1.TabIndex = 113
-        Me.psx_dualshock_r1.Text = "W"
+        Me.psx_dualshock_r1.Text = "X"
         Me.psx_dualshock_r1.UseVisualStyleBackColor = False
         '
         'psx_dualshock_l1
@@ -3473,11 +3912,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_l1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_l1.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_l1.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_l1.KeyDefaults = New String() {"b9,a4+,k189", "b9,a4+,k96"}
+        Me.psx_dualshock_l1.KeyLocked = False
         Me.psx_dualshock_l1.Location = New System.Drawing.Point(167, 111)
         Me.psx_dualshock_l1.Name = "psx_dualshock_l1"
         Me.psx_dualshock_l1.Size = New System.Drawing.Size(50, 50)
         Me.psx_dualshock_l1.TabIndex = 112
-        Me.psx_dualshock_l1.Text = "W"
+        Me.psx_dualshock_l1.Text = "X"
         Me.psx_dualshock_l1.UseVisualStyleBackColor = False
         '
         'psx_dualshock_select
@@ -3489,11 +3930,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_select.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_select.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_select.KeyDefaults = New String() {"b4,b4,k49", "b4,b4,k107"}
+        Me.psx_dualshock_select.KeyLocked = False
         Me.psx_dualshock_select.Location = New System.Drawing.Point(276, 234)
         Me.psx_dualshock_select.Name = "psx_dualshock_select"
         Me.psx_dualshock_select.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_select.TabIndex = 101
-        Me.psx_dualshock_select.Text = "W"
+        Me.psx_dualshock_select.Text = "X"
         Me.psx_dualshock_select.UseVisualStyleBackColor = False
         '
         'psx_dualshock_left
@@ -3505,11 +3948,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_left.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_left.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_left.KeyDefaults = New String() {"b13,b13,k65", "b13,b13,k37"}
+        Me.psx_dualshock_left.KeyLocked = False
         Me.psx_dualshock_left.Location = New System.Drawing.Point(140, 245)
         Me.psx_dualshock_left.Name = "psx_dualshock_left"
         Me.psx_dualshock_left.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_left.TabIndex = 100
-        Me.psx_dualshock_left.Text = "W"
+        Me.psx_dualshock_left.Text = "X"
         Me.psx_dualshock_left.UseVisualStyleBackColor = False
         '
         'psx_dualshock_right
@@ -3521,11 +3966,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_right.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_right.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_right.KeyDefaults = New String() {"b14,b14,k68", "b14,b14,k39"}
+        Me.psx_dualshock_right.KeyLocked = False
         Me.psx_dualshock_right.Location = New System.Drawing.Point(218, 245)
         Me.psx_dualshock_right.Name = "psx_dualshock_right"
         Me.psx_dualshock_right.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_right.TabIndex = 99
-        Me.psx_dualshock_right.Text = "W"
+        Me.psx_dualshock_right.Text = "X"
         Me.psx_dualshock_right.UseVisualStyleBackColor = False
         '
         'psx_dualshock_down
@@ -3537,11 +3984,13 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_down.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_down.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_down.KeyDefaults = New String() {"b12,b12,k83", "b12,b12,k40"}
+        Me.psx_dualshock_down.KeyLocked = False
         Me.psx_dualshock_down.Location = New System.Drawing.Point(179, 284)
         Me.psx_dualshock_down.Name = "psx_dualshock_down"
         Me.psx_dualshock_down.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_down.TabIndex = 98
-        Me.psx_dualshock_down.Text = "W"
+        Me.psx_dualshock_down.Text = "X"
         Me.psx_dualshock_down.UseVisualStyleBackColor = False
         '
         'psx_dualshock_up
@@ -3553,12 +4002,806 @@ Partial Class frmKeyMapperSDL
         Me.psx_dualshock_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psx_dualshock_up.ForeColor = System.Drawing.Color.Black
         Me.psx_dualshock_up.KeyCode = New String() {"k0", "k0"}
+        Me.psx_dualshock_up.KeyDefaults = New String() {"b11,b11,k87", "b11,b11,k38"}
+        Me.psx_dualshock_up.KeyLocked = False
         Me.psx_dualshock_up.Location = New System.Drawing.Point(179, 206)
         Me.psx_dualshock_up.Name = "psx_dualshock_up"
         Me.psx_dualshock_up.Size = New System.Drawing.Size(40, 40)
         Me.psx_dualshock_up.TabIndex = 97
-        Me.psx_dualshock_up.Text = "W"
+        Me.psx_dualshock_up.Text = "X"
         Me.psx_dualshock_up.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_rs
+        '
+        Me.ss_gamepad_rs.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_rs.ConfigString = "ss.input.port<port>.gamepad.rs"
+        Me.ss_gamepad_rs.Emu = "mednafen"
+        Me.ss_gamepad_rs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_rs.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_rs.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_rs.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_rs.KeyDefaults = New String() {"a4+,a5+,k80", "a4+,a5+,k110"}
+        Me.ss_gamepad_rs.KeyLocked = False
+        Me.ss_gamepad_rs.Location = New System.Drawing.Point(513, 49)
+        Me.ss_gamepad_rs.Name = "ss_gamepad_rs"
+        Me.ss_gamepad_rs.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_rs.TabIndex = 127
+        Me.ss_gamepad_rs.Text = "X"
+        Me.ss_gamepad_rs.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_ls
+        '
+        Me.ss_gamepad_ls.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_ls.ConfigString = "ss.input.port<port>.gamepad.ls"
+        Me.ss_gamepad_ls.Emu = "mednafen"
+        Me.ss_gamepad_ls.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_ls.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_ls.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_ls.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_ls.KeyDefaults = New String() {"b9,a4+,k189", "b9,a4+,k96"}
+        Me.ss_gamepad_ls.KeyLocked = False
+        Me.ss_gamepad_ls.Location = New System.Drawing.Point(111, 49)
+        Me.ss_gamepad_ls.Name = "ss_gamepad_ls"
+        Me.ss_gamepad_ls.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_ls.TabIndex = 126
+        Me.ss_gamepad_ls.Text = "X"
+        Me.ss_gamepad_ls.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_z
+        '
+        Me.ss_gamepad_z.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_z.ConfigString = "ss.input.port<port>.gamepad.z"
+        Me.ss_gamepad_z.Emu = "mednafen"
+        Me.ss_gamepad_z.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_z.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_z.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_z.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_z.KeyDefaults = New String() {"b10,b9,k48", "b10,b9,k102"}
+        Me.ss_gamepad_z.KeyLocked = False
+        Me.ss_gamepad_z.Location = New System.Drawing.Point(542, 133)
+        Me.ss_gamepad_z.Name = "ss_gamepad_z"
+        Me.ss_gamepad_z.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_z.TabIndex = 125
+        Me.ss_gamepad_z.Text = "X"
+        Me.ss_gamepad_z.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_y
+        '
+        Me.ss_gamepad_y.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_y.ConfigString = "ss.input.port<port>.gamepad.y"
+        Me.ss_gamepad_y.Emu = "mednafen"
+        Me.ss_gamepad_y.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_y.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_y.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_y.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_y.KeyDefaults = New String() {"b3,b3,k57", "b3,b3,k101"}
+        Me.ss_gamepad_y.KeyLocked = False
+        Me.ss_gamepad_y.Location = New System.Drawing.Point(486, 153)
+        Me.ss_gamepad_y.Name = "ss_gamepad_y"
+        Me.ss_gamepad_y.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_y.TabIndex = 124
+        Me.ss_gamepad_y.Text = "X"
+        Me.ss_gamepad_y.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_x
+        '
+        Me.ss_gamepad_x.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_x.ConfigString = "ss.input.port<port>.gamepad.x"
+        Me.ss_gamepad_x.Emu = "mednafen"
+        Me.ss_gamepad_x.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_x.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_x.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_x.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_x.KeyDefaults = New String() {"b2,b2,k56", "b2,b2,k100"}
+        Me.ss_gamepad_x.KeyLocked = False
+        Me.ss_gamepad_x.Location = New System.Drawing.Point(430, 196)
+        Me.ss_gamepad_x.Name = "ss_gamepad_x"
+        Me.ss_gamepad_x.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_x.TabIndex = 123
+        Me.ss_gamepad_x.Text = "X"
+        Me.ss_gamepad_x.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_c
+        '
+        Me.ss_gamepad_c.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_c.ConfigString = "ss.input.port<port>.gamepad.c"
+        Me.ss_gamepad_c.Emu = "mednafen"
+        Me.ss_gamepad_c.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_c.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_c.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_c.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_c.KeyDefaults = New String() {"a5+,b10,k79", "a5+,b10,k99"}
+        Me.ss_gamepad_c.KeyLocked = False
+        Me.ss_gamepad_c.Location = New System.Drawing.Point(588, 196)
+        Me.ss_gamepad_c.Name = "ss_gamepad_c"
+        Me.ss_gamepad_c.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_c.TabIndex = 122
+        Me.ss_gamepad_c.Text = "X"
+        Me.ss_gamepad_c.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_b
+        '
+        Me.ss_gamepad_b.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_b.ConfigString = "ss.input.port<port>.gamepad.b"
+        Me.ss_gamepad_b.Emu = "mednafen"
+        Me.ss_gamepad_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_b.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_b.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_b.KeyDefaults = New String() {"b1,b1,k73", "b1,b1,k98"}
+        Me.ss_gamepad_b.KeyLocked = False
+        Me.ss_gamepad_b.Location = New System.Drawing.Point(513, 227)
+        Me.ss_gamepad_b.Name = "ss_gamepad_b"
+        Me.ss_gamepad_b.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_b.TabIndex = 121
+        Me.ss_gamepad_b.Text = "X"
+        Me.ss_gamepad_b.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_a
+        '
+        Me.ss_gamepad_a.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_a.ConfigString = "ss.input.port<port>.gamepad.a"
+        Me.ss_gamepad_a.Emu = "mednafen"
+        Me.ss_gamepad_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_a.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_a.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_a.KeyDefaults = New String() {"b0,b0,k85", "b0,b0,k97"}
+        Me.ss_gamepad_a.KeyLocked = False
+        Me.ss_gamepad_a.Location = New System.Drawing.Point(454, 272)
+        Me.ss_gamepad_a.Name = "ss_gamepad_a"
+        Me.ss_gamepad_a.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_a.TabIndex = 120
+        Me.ss_gamepad_a.Text = "X"
+        Me.ss_gamepad_a.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_start
+        '
+        Me.ss_gamepad_start.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_start.ConfigString = "ss.input.port<port>.gamepad.start"
+        Me.ss_gamepad_start.Emu = "mednafen"
+        Me.ss_gamepad_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_start.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_start.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.ss_gamepad_start.KeyLocked = False
+        Me.ss_gamepad_start.Location = New System.Drawing.Point(327, 272)
+        Me.ss_gamepad_start.Name = "ss_gamepad_start"
+        Me.ss_gamepad_start.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_start.TabIndex = 119
+        Me.ss_gamepad_start.Text = "X"
+        Me.ss_gamepad_start.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_left
+        '
+        Me.ss_gamepad_left.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_left.ConfigString = "ss.input.port<port>.gamepad.left"
+        Me.ss_gamepad_left.Emu = "mednafen"
+        Me.ss_gamepad_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_left.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_left.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.ss_gamepad_left.KeyLocked = False
+        Me.ss_gamepad_left.Location = New System.Drawing.Point(86, 205)
+        Me.ss_gamepad_left.Name = "ss_gamepad_left"
+        Me.ss_gamepad_left.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_left.TabIndex = 118
+        Me.ss_gamepad_left.Text = "X"
+        Me.ss_gamepad_left.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_down
+        '
+        Me.ss_gamepad_down.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_down.ConfigString = "ss.input.port<port>.gamepad.down"
+        Me.ss_gamepad_down.Emu = "mednafen"
+        Me.ss_gamepad_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_down.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_down.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.ss_gamepad_down.KeyLocked = False
+        Me.ss_gamepad_down.Location = New System.Drawing.Point(142, 261)
+        Me.ss_gamepad_down.Name = "ss_gamepad_down"
+        Me.ss_gamepad_down.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_down.TabIndex = 117
+        Me.ss_gamepad_down.Text = "X"
+        Me.ss_gamepad_down.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_right
+        '
+        Me.ss_gamepad_right.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_right.ConfigString = "ss.input.port<port>.gamepad.right"
+        Me.ss_gamepad_right.Emu = "mednafen"
+        Me.ss_gamepad_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_right.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_right.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.ss_gamepad_right.KeyLocked = False
+        Me.ss_gamepad_right.Location = New System.Drawing.Point(200, 205)
+        Me.ss_gamepad_right.Name = "ss_gamepad_right"
+        Me.ss_gamepad_right.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_right.TabIndex = 116
+        Me.ss_gamepad_right.Text = "X"
+        Me.ss_gamepad_right.UseVisualStyleBackColor = False
+        '
+        'ss_gamepad_up
+        '
+        Me.ss_gamepad_up.BackColor = System.Drawing.Color.White
+        Me.ss_gamepad_up.ConfigString = "ss.input.port<port>.gamepad.up"
+        Me.ss_gamepad_up.Emu = "mednafen"
+        Me.ss_gamepad_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ss_gamepad_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ss_gamepad_up.ForeColor = System.Drawing.Color.Black
+        Me.ss_gamepad_up.KeyCode = New String() {"k0", "k0"}
+        Me.ss_gamepad_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.ss_gamepad_up.KeyLocked = False
+        Me.ss_gamepad_up.Location = New System.Drawing.Point(142, 152)
+        Me.ss_gamepad_up.Name = "ss_gamepad_up"
+        Me.ss_gamepad_up.Size = New System.Drawing.Size(50, 50)
+        Me.ss_gamepad_up.TabIndex = 115
+        Me.ss_gamepad_up.Text = "X"
+        Me.ss_gamepad_up.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_x
+        '
+        Me.snes_gamepad_x.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_x.ConfigString = "snes.input.port<port>.gamepad.x"
+        Me.snes_gamepad_x.Emu = "mednafen"
+        Me.snes_gamepad_x.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_x.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_x.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_x.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_x.KeyDefaults = New String() {"b3,b3,k57", "b3,b3,k101"}
+        Me.snes_gamepad_x.KeyLocked = False
+        Me.snes_gamepad_x.Location = New System.Drawing.Point(501, 165)
+        Me.snes_gamepad_x.Name = "snes_gamepad_x"
+        Me.snes_gamepad_x.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_x.TabIndex = 102
+        Me.snes_gamepad_x.Text = "X"
+        Me.snes_gamepad_x.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_r
+        '
+        Me.snes_gamepad_r.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_r.ConfigString = "snes.input.port<port>.gamepad.r"
+        Me.snes_gamepad_r.Emu = "mednafen"
+        Me.snes_gamepad_r.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_r.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_r.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_r.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_r.KeyDefaults = New String() {"b10,b10,k79", "b10,b10,k99"}
+        Me.snes_gamepad_r.KeyLocked = False
+        Me.snes_gamepad_r.Location = New System.Drawing.Point(460, 39)
+        Me.snes_gamepad_r.Name = "snes_gamepad_r"
+        Me.snes_gamepad_r.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_r.TabIndex = 105
+        Me.snes_gamepad_r.Text = "X"
+        Me.snes_gamepad_r.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_l
+        '
+        Me.snes_gamepad_l.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_l.ConfigString = "snes.input.port<port>.gamepad.l"
+        Me.snes_gamepad_l.Emu = "mednafen"
+        Me.snes_gamepad_l.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_l.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_l.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_l.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_l.KeyDefaults = New String() {"b9,b9,k48", "b9,b9,k102"}
+        Me.snes_gamepad_l.KeyLocked = False
+        Me.snes_gamepad_l.Location = New System.Drawing.Point(144, 37)
+        Me.snes_gamepad_l.Name = "snes_gamepad_l"
+        Me.snes_gamepad_l.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_l.TabIndex = 104
+        Me.snes_gamepad_l.Text = "X"
+        Me.snes_gamepad_l.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_a
+        '
+        Me.snes_gamepad_a.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_a.ConfigString = "snes.input.port<port>.gamepad.a"
+        Me.snes_gamepad_a.Emu = "mednafen"
+        Me.snes_gamepad_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_a.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_a.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_a.KeyDefaults = New String() {"b1,b1,k73", "b1,b1,k98"}
+        Me.snes_gamepad_a.KeyLocked = False
+        Me.snes_gamepad_a.Location = New System.Drawing.Point(565, 215)
+        Me.snes_gamepad_a.Name = "snes_gamepad_a"
+        Me.snes_gamepad_a.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_a.TabIndex = 103
+        Me.snes_gamepad_a.Text = "X"
+        Me.snes_gamepad_a.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_y
+        '
+        Me.snes_gamepad_y.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_y.ConfigString = "snes.input.port<port>.gamepad.y"
+        Me.snes_gamepad_y.Emu = "mednafen"
+        Me.snes_gamepad_y.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_y.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_y.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_y.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_y.KeyDefaults = New String() {"b2,b2,k56", "b2,b2,k100"}
+        Me.snes_gamepad_y.KeyLocked = False
+        Me.snes_gamepad_y.Location = New System.Drawing.Point(439, 215)
+        Me.snes_gamepad_y.Name = "snes_gamepad_y"
+        Me.snes_gamepad_y.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_y.TabIndex = 101
+        Me.snes_gamepad_y.Text = "X"
+        Me.snes_gamepad_y.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_b
+        '
+        Me.snes_gamepad_b.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_b.ConfigString = "snes.input.port<port>.gamepad.b"
+        Me.snes_gamepad_b.Emu = "mednafen"
+        Me.snes_gamepad_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_b.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_b.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_b.KeyDefaults = New String() {"b0,b0,k85", "b0,b0,k97"}
+        Me.snes_gamepad_b.KeyLocked = False
+        Me.snes_gamepad_b.Location = New System.Drawing.Point(502, 265)
+        Me.snes_gamepad_b.Name = "snes_gamepad_b"
+        Me.snes_gamepad_b.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_b.TabIndex = 100
+        Me.snes_gamepad_b.Text = "X"
+        Me.snes_gamepad_b.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_start
+        '
+        Me.snes_gamepad_start.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_start.ConfigString = "snes.input.port<port>.gamepad.start"
+        Me.snes_gamepad_start.Emu = "mednafen"
+        Me.snes_gamepad_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_start.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_start.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.snes_gamepad_start.KeyLocked = False
+        Me.snes_gamepad_start.Location = New System.Drawing.Point(323, 235)
+        Me.snes_gamepad_start.Name = "snes_gamepad_start"
+        Me.snes_gamepad_start.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_start.TabIndex = 99
+        Me.snes_gamepad_start.Text = "X"
+        Me.snes_gamepad_start.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_select
+        '
+        Me.snes_gamepad_select.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_select.ConfigString = "snes.input.port<port>.gamepad.select"
+        Me.snes_gamepad_select.Emu = "mednafen"
+        Me.snes_gamepad_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_select.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_select.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_select.KeyDefaults = New String() {"b4,b4,k49", "b4,b4,k107"}
+        Me.snes_gamepad_select.KeyLocked = False
+        Me.snes_gamepad_select.Location = New System.Drawing.Point(252, 235)
+        Me.snes_gamepad_select.Name = "snes_gamepad_select"
+        Me.snes_gamepad_select.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_select.TabIndex = 98
+        Me.snes_gamepad_select.Text = "X"
+        Me.snes_gamepad_select.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_left
+        '
+        Me.snes_gamepad_left.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_left.ConfigString = "snes.input.port<port>.gamepad.left"
+        Me.snes_gamepad_left.Emu = "mednafen"
+        Me.snes_gamepad_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_left.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_left.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.snes_gamepad_left.KeyLocked = False
+        Me.snes_gamepad_left.Location = New System.Drawing.Point(73, 218)
+        Me.snes_gamepad_left.Name = "snes_gamepad_left"
+        Me.snes_gamepad_left.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_left.TabIndex = 97
+        Me.snes_gamepad_left.Text = "X"
+        Me.snes_gamepad_left.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_right
+        '
+        Me.snes_gamepad_right.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_right.ConfigString = "snes.input.port<port>.gamepad.right"
+        Me.snes_gamepad_right.Emu = "mednafen"
+        Me.snes_gamepad_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_right.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_right.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.snes_gamepad_right.KeyLocked = False
+        Me.snes_gamepad_right.Location = New System.Drawing.Point(171, 218)
+        Me.snes_gamepad_right.Name = "snes_gamepad_right"
+        Me.snes_gamepad_right.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_right.TabIndex = 96
+        Me.snes_gamepad_right.Text = "X"
+        Me.snes_gamepad_right.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_down
+        '
+        Me.snes_gamepad_down.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_down.ConfigString = "snes.input.port<port>.gamepad.down"
+        Me.snes_gamepad_down.Emu = "mednafen"
+        Me.snes_gamepad_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_down.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_down.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.snes_gamepad_down.KeyLocked = False
+        Me.snes_gamepad_down.Location = New System.Drawing.Point(122, 267)
+        Me.snes_gamepad_down.Name = "snes_gamepad_down"
+        Me.snes_gamepad_down.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_down.TabIndex = 95
+        Me.snes_gamepad_down.Text = "X"
+        Me.snes_gamepad_down.UseVisualStyleBackColor = False
+        '
+        'snes_gamepad_up
+        '
+        Me.snes_gamepad_up.BackColor = System.Drawing.Color.White
+        Me.snes_gamepad_up.ConfigString = "snes.input.port<port>.gamepad.up"
+        Me.snes_gamepad_up.Emu = "mednafen"
+        Me.snes_gamepad_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.snes_gamepad_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.snes_gamepad_up.ForeColor = System.Drawing.Color.Black
+        Me.snes_gamepad_up.KeyCode = New String() {"k0", "k0"}
+        Me.snes_gamepad_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.snes_gamepad_up.KeyLocked = False
+        Me.snes_gamepad_up.Location = New System.Drawing.Point(122, 169)
+        Me.snes_gamepad_up.Name = "snes_gamepad_up"
+        Me.snes_gamepad_up.Size = New System.Drawing.Size(50, 50)
+        Me.snes_gamepad_up.TabIndex = 94
+        Me.snes_gamepad_up.Text = "X"
+        Me.snes_gamepad_up.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad_c
+        '
+        Me.sg_gamepad_c.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad_c.ConfigString = "md.input.port<port>.gamepad.c"
+        Me.sg_gamepad_c.Emu = "mednafen"
+        Me.sg_gamepad_c.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad_c.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad_c.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad_c.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad_c.KeyDefaults = New String() {"b1,b9,k79", "b1,b9,k99"}
+        Me.sg_gamepad_c.KeyLocked = False
+        Me.sg_gamepad_c.Location = New System.Drawing.Point(582, 184)
+        Me.sg_gamepad_c.Name = "sg_gamepad_c"
+        Me.sg_gamepad_c.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad_c.TabIndex = 144
+        Me.sg_gamepad_c.Text = "X"
+        Me.sg_gamepad_c.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad_b
+        '
+        Me.sg_gamepad_b.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad_b.ConfigString = "md.input.port<port>.gamepad.b"
+        Me.sg_gamepad_b.Emu = "mednafen"
+        Me.sg_gamepad_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad_b.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad_b.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad_b.KeyDefaults = New String() {"b0,b3,k73", "b0,b3,k98"}
+        Me.sg_gamepad_b.KeyLocked = False
+        Me.sg_gamepad_b.Location = New System.Drawing.Point(515, 214)
+        Me.sg_gamepad_b.Name = "sg_gamepad_b"
+        Me.sg_gamepad_b.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad_b.TabIndex = 143
+        Me.sg_gamepad_b.Text = "X"
+        Me.sg_gamepad_b.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad_a
+        '
+        Me.sg_gamepad_a.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad_a.ConfigString = "md.input.port<port>.gamepad.a"
+        Me.sg_gamepad_a.Emu = "mednafen"
+        Me.sg_gamepad_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad_a.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad_a.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad_a.KeyDefaults = New String() {"b2,b2,k85", "b2,b2,k97"}
+        Me.sg_gamepad_a.KeyLocked = False
+        Me.sg_gamepad_a.Location = New System.Drawing.Point(443, 256)
+        Me.sg_gamepad_a.Name = "sg_gamepad_a"
+        Me.sg_gamepad_a.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad_a.TabIndex = 142
+        Me.sg_gamepad_a.Text = "X"
+        Me.sg_gamepad_a.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad_start
+        '
+        Me.sg_gamepad_start.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad_start.ConfigString = "md.input.port<port>.gamepad.start"
+        Me.sg_gamepad_start.Emu = "mednafen"
+        Me.sg_gamepad_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad_start.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad_start.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.sg_gamepad_start.KeyLocked = False
+        Me.sg_gamepad_start.Location = New System.Drawing.Point(461, 129)
+        Me.sg_gamepad_start.Name = "sg_gamepad_start"
+        Me.sg_gamepad_start.Size = New System.Drawing.Size(72, 38)
+        Me.sg_gamepad_start.TabIndex = 141
+        Me.sg_gamepad_start.Text = "X"
+        Me.sg_gamepad_start.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad_left
+        '
+        Me.sg_gamepad_left.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad_left.ConfigString = "md.input.port<port>.gamepad.left"
+        Me.sg_gamepad_left.Emu = "mednafen"
+        Me.sg_gamepad_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad_left.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad_left.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.sg_gamepad_left.KeyLocked = False
+        Me.sg_gamepad_left.Location = New System.Drawing.Point(73, 214)
+        Me.sg_gamepad_left.Name = "sg_gamepad_left"
+        Me.sg_gamepad_left.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad_left.TabIndex = 140
+        Me.sg_gamepad_left.Text = "X"
+        Me.sg_gamepad_left.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad_down
+        '
+        Me.sg_gamepad_down.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad_down.ConfigString = "md.input.port<port>.gamepad.down"
+        Me.sg_gamepad_down.Emu = "mednafen"
+        Me.sg_gamepad_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad_down.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad_down.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.sg_gamepad_down.KeyLocked = False
+        Me.sg_gamepad_down.Location = New System.Drawing.Point(129, 270)
+        Me.sg_gamepad_down.Name = "sg_gamepad_down"
+        Me.sg_gamepad_down.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad_down.TabIndex = 139
+        Me.sg_gamepad_down.Text = "X"
+        Me.sg_gamepad_down.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad_right
+        '
+        Me.sg_gamepad_right.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad_right.ConfigString = "md.input.port<port>.gamepad.right"
+        Me.sg_gamepad_right.Emu = "mednafen"
+        Me.sg_gamepad_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad_right.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad_right.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.sg_gamepad_right.KeyLocked = False
+        Me.sg_gamepad_right.Location = New System.Drawing.Point(187, 214)
+        Me.sg_gamepad_right.Name = "sg_gamepad_right"
+        Me.sg_gamepad_right.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad_right.TabIndex = 138
+        Me.sg_gamepad_right.Text = "X"
+        Me.sg_gamepad_right.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad_up
+        '
+        Me.sg_gamepad_up.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad_up.ConfigString = "md.input.port<port>.gamepad.up"
+        Me.sg_gamepad_up.Emu = "mednafen"
+        Me.sg_gamepad_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad_up.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad_up.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.sg_gamepad_up.KeyLocked = False
+        Me.sg_gamepad_up.Location = New System.Drawing.Point(129, 161)
+        Me.sg_gamepad_up.Name = "sg_gamepad_up"
+        Me.sg_gamepad_up.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad_up.TabIndex = 137
+        Me.sg_gamepad_up.Text = "X"
+        Me.sg_gamepad_up.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_z
+        '
+        Me.sg_gamepad6_z.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_z.ConfigString = "md.input.port<port>.gamepad6.z"
+        Me.sg_gamepad6_z.Emu = "mednafen"
+        Me.sg_gamepad6_z.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_z.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_z.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_z.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_z.KeyDefaults = New String() {"a5+,b9,k48", "a5+,b9,k102"}
+        Me.sg_gamepad6_z.KeyLocked = False
+        Me.sg_gamepad6_z.Location = New System.Drawing.Point(528, 140)
+        Me.sg_gamepad6_z.Name = "sg_gamepad6_z"
+        Me.sg_gamepad6_z.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_z.TabIndex = 136
+        Me.sg_gamepad6_z.Text = "X"
+        Me.sg_gamepad6_z.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_y
+        '
+        Me.sg_gamepad6_y.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_y.ConfigString = "md.input.port<port>.gamepad6.y"
+        Me.sg_gamepad6_y.Emu = "mednafen"
+        Me.sg_gamepad6_y.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_y.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_y.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_y.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_y.KeyDefaults = New String() {"b10,b3,k57", "b10,b3,k101"}
+        Me.sg_gamepad6_y.KeyLocked = False
+        Me.sg_gamepad6_y.Location = New System.Drawing.Point(469, 159)
+        Me.sg_gamepad6_y.Name = "sg_gamepad6_y"
+        Me.sg_gamepad6_y.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_y.TabIndex = 135
+        Me.sg_gamepad6_y.Text = "X"
+        Me.sg_gamepad6_y.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_x
+        '
+        Me.sg_gamepad6_x.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_x.ConfigString = "md.input.port<port>.gamepad6.x"
+        Me.sg_gamepad6_x.Emu = "mednafen"
+        Me.sg_gamepad6_x.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_x.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_x.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_x.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_x.KeyDefaults = New String() {"b3,b2,k56", "b3,b2,k100"}
+        Me.sg_gamepad6_x.KeyLocked = False
+        Me.sg_gamepad6_x.Location = New System.Drawing.Point(402, 186)
+        Me.sg_gamepad6_x.Name = "sg_gamepad6_x"
+        Me.sg_gamepad6_x.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_x.TabIndex = 134
+        Me.sg_gamepad6_x.Text = "X"
+        Me.sg_gamepad6_x.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_c
+        '
+        Me.sg_gamepad6_c.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_c.ConfigString = "md.input.port<port>.gamepad6.c"
+        Me.sg_gamepad6_c.Emu = "mednafen"
+        Me.sg_gamepad6_c.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_c.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_c.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_c.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_c.KeyDefaults = New String() {"b1,b10,k79", "b1,b10,k99"}
+        Me.sg_gamepad6_c.KeyLocked = False
+        Me.sg_gamepad6_c.Location = New System.Drawing.Point(582, 207)
+        Me.sg_gamepad6_c.Name = "sg_gamepad6_c"
+        Me.sg_gamepad6_c.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_c.TabIndex = 133
+        Me.sg_gamepad6_c.Text = "X"
+        Me.sg_gamepad6_c.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_b
+        '
+        Me.sg_gamepad6_b.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_b.ConfigString = "md.input.port<port>.gamepad6.b"
+        Me.sg_gamepad6_b.Emu = "mednafen"
+        Me.sg_gamepad6_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_b.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_b.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_b.KeyDefaults = New String() {"b0,b1,k73", "b0,b1,k98"}
+        Me.sg_gamepad6_b.KeyLocked = False
+        Me.sg_gamepad6_b.Location = New System.Drawing.Point(502, 234)
+        Me.sg_gamepad6_b.Name = "sg_gamepad6_b"
+        Me.sg_gamepad6_b.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_b.TabIndex = 132
+        Me.sg_gamepad6_b.Text = "X"
+        Me.sg_gamepad6_b.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_a
+        '
+        Me.sg_gamepad6_a.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_a.ConfigString = "md.input.port<port>.gamepad6.a"
+        Me.sg_gamepad6_a.Emu = "mednafen"
+        Me.sg_gamepad6_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_a.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_a.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_a.KeyDefaults = New String() {"b2,b0,k85", "b2,b0,k97"}
+        Me.sg_gamepad6_a.KeyLocked = False
+        Me.sg_gamepad6_a.Location = New System.Drawing.Point(430, 276)
+        Me.sg_gamepad6_a.Name = "sg_gamepad6_a"
+        Me.sg_gamepad6_a.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_a.TabIndex = 131
+        Me.sg_gamepad6_a.Text = "X"
+        Me.sg_gamepad6_a.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_start
+        '
+        Me.sg_gamepad6_start.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_start.ConfigString = "md.input.port<port>.gamepad6.start"
+        Me.sg_gamepad6_start.Emu = "mednafen"
+        Me.sg_gamepad6_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_start.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_start.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.sg_gamepad6_start.KeyLocked = False
+        Me.sg_gamepad6_start.Location = New System.Drawing.Point(276, 207)
+        Me.sg_gamepad6_start.Name = "sg_gamepad6_start"
+        Me.sg_gamepad6_start.Size = New System.Drawing.Size(72, 38)
+        Me.sg_gamepad6_start.TabIndex = 130
+        Me.sg_gamepad6_start.Text = "X"
+        Me.sg_gamepad6_start.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_left
+        '
+        Me.sg_gamepad6_left.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_left.ConfigString = "md.input.port<port>.gamepad6.left"
+        Me.sg_gamepad6_left.Emu = "mednafen"
+        Me.sg_gamepad6_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_left.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_left.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.sg_gamepad6_left.KeyLocked = False
+        Me.sg_gamepad6_left.Location = New System.Drawing.Point(52, 212)
+        Me.sg_gamepad6_left.Name = "sg_gamepad6_left"
+        Me.sg_gamepad6_left.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_left.TabIndex = 129
+        Me.sg_gamepad6_left.Text = "X"
+        Me.sg_gamepad6_left.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_down
+        '
+        Me.sg_gamepad6_down.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_down.ConfigString = "md.input.port<port>.gamepad6.down"
+        Me.sg_gamepad6_down.Emu = "mednafen"
+        Me.sg_gamepad6_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_down.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_down.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.sg_gamepad6_down.KeyLocked = False
+        Me.sg_gamepad6_down.Location = New System.Drawing.Point(108, 268)
+        Me.sg_gamepad6_down.Name = "sg_gamepad6_down"
+        Me.sg_gamepad6_down.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_down.TabIndex = 128
+        Me.sg_gamepad6_down.Text = "X"
+        Me.sg_gamepad6_down.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_right
+        '
+        Me.sg_gamepad6_right.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_right.ConfigString = "md.input.port<port>.gamepad6.right"
+        Me.sg_gamepad6_right.Emu = "mednafen"
+        Me.sg_gamepad6_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_right.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_right.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.sg_gamepad6_right.KeyLocked = False
+        Me.sg_gamepad6_right.Location = New System.Drawing.Point(166, 212)
+        Me.sg_gamepad6_right.Name = "sg_gamepad6_right"
+        Me.sg_gamepad6_right.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_right.TabIndex = 127
+        Me.sg_gamepad6_right.Text = "X"
+        Me.sg_gamepad6_right.UseVisualStyleBackColor = False
+        '
+        'sg_gamepad6_up
+        '
+        Me.sg_gamepad6_up.BackColor = System.Drawing.Color.White
+        Me.sg_gamepad6_up.ConfigString = "md.input.port<port>.gamepad6.up"
+        Me.sg_gamepad6_up.Emu = "mednafen"
+        Me.sg_gamepad6_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.sg_gamepad6_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_gamepad6_up.ForeColor = System.Drawing.Color.Black
+        Me.sg_gamepad6_up.KeyCode = New String() {"k0", "k0"}
+        Me.sg_gamepad6_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.sg_gamepad6_up.KeyLocked = False
+        Me.sg_gamepad6_up.Location = New System.Drawing.Point(108, 159)
+        Me.sg_gamepad6_up.Name = "sg_gamepad6_up"
+        Me.sg_gamepad6_up.Size = New System.Drawing.Size(50, 50)
+        Me.sg_gamepad6_up.TabIndex = 126
+        Me.sg_gamepad6_up.Text = "X"
+        Me.sg_gamepad6_up.UseVisualStyleBackColor = False
         '
         'nes_gamepad_rapid_a
         '
@@ -3569,11 +4812,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_rapid_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_rapid_a.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_rapid_a.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_rapid_a.KeyDefaults = New String() {"k0.k0.k0", "k0.k0.k0"}
+        Me.nes_gamepad_rapid_a.KeyLocked = False
         Me.nes_gamepad_rapid_a.Location = New System.Drawing.Point(548, 224)
         Me.nes_gamepad_rapid_a.Name = "nes_gamepad_rapid_a"
         Me.nes_gamepad_rapid_a.Size = New System.Drawing.Size(40, 40)
         Me.nes_gamepad_rapid_a.TabIndex = 10
-        Me.nes_gamepad_rapid_a.Text = "8"
+        Me.nes_gamepad_rapid_a.Text = "X"
         Me.nes_gamepad_rapid_a.UseVisualStyleBackColor = False
         '
         'nes_gamepad_rapid_b
@@ -3585,11 +4830,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_rapid_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_rapid_b.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_rapid_b.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_rapid_b.KeyDefaults = New String() {"k0.k0.k0", "k0.k0.k0"}
+        Me.nes_gamepad_rapid_b.KeyLocked = False
         Me.nes_gamepad_rapid_b.Location = New System.Drawing.Point(458, 224)
         Me.nes_gamepad_rapid_b.Name = "nes_gamepad_rapid_b"
         Me.nes_gamepad_rapid_b.Size = New System.Drawing.Size(40, 40)
         Me.nes_gamepad_rapid_b.TabIndex = 9
-        Me.nes_gamepad_rapid_b.Text = "8"
+        Me.nes_gamepad_rapid_b.Text = "X"
         Me.nes_gamepad_rapid_b.UseVisualStyleBackColor = False
         '
         'nes_gamepad_a
@@ -3601,11 +4848,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_a.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_a.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_a.KeyDefaults = New String() {"b0,b3,k73", "b0,b3,k98"}
+        Me.nes_gamepad_a.KeyLocked = False
         Me.nes_gamepad_a.Location = New System.Drawing.Point(543, 270)
         Me.nes_gamepad_a.Name = "nes_gamepad_a"
         Me.nes_gamepad_a.Size = New System.Drawing.Size(50, 50)
         Me.nes_gamepad_a.TabIndex = 8
-        Me.nes_gamepad_a.Text = "9"
+        Me.nes_gamepad_a.Text = "X"
         Me.nes_gamepad_a.UseVisualStyleBackColor = False
         '
         'nes_gamepad_b
@@ -3617,11 +4866,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_b.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_b.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_b.KeyDefaults = New String() {"b2,b2,k85", "b2,b2,k97"}
+        Me.nes_gamepad_b.KeyLocked = False
         Me.nes_gamepad_b.Location = New System.Drawing.Point(453, 270)
         Me.nes_gamepad_b.Name = "nes_gamepad_b"
         Me.nes_gamepad_b.Size = New System.Drawing.Size(50, 50)
         Me.nes_gamepad_b.TabIndex = 7
-        Me.nes_gamepad_b.Text = "8"
+        Me.nes_gamepad_b.Text = "X"
         Me.nes_gamepad_b.UseVisualStyleBackColor = False
         '
         'nes_gamepad_start
@@ -3633,11 +4884,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_start.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_start.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.nes_gamepad_start.KeyLocked = False
         Me.nes_gamepad_start.Location = New System.Drawing.Point(328, 272)
         Me.nes_gamepad_start.Name = "nes_gamepad_start"
         Me.nes_gamepad_start.Size = New System.Drawing.Size(73, 50)
         Me.nes_gamepad_start.TabIndex = 6
-        Me.nes_gamepad_start.Text = "5"
+        Me.nes_gamepad_start.Text = "X"
         Me.nes_gamepad_start.UseVisualStyleBackColor = False
         '
         'nes_gamepad_select
@@ -3649,11 +4902,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_select.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_select.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_select.KeyDefaults = New String() {"b4,b4,k49", "b4,b4,k107"}
+        Me.nes_gamepad_select.KeyLocked = False
         Me.nes_gamepad_select.Location = New System.Drawing.Point(235, 272)
         Me.nes_gamepad_select.Name = "nes_gamepad_select"
         Me.nes_gamepad_select.Size = New System.Drawing.Size(73, 50)
         Me.nes_gamepad_select.TabIndex = 5
-        Me.nes_gamepad_select.Text = "1"
+        Me.nes_gamepad_select.Text = "X"
         Me.nes_gamepad_select.UseVisualStyleBackColor = False
         '
         'nes_gamepad_left
@@ -3665,11 +4920,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_left.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_left.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.nes_gamepad_left.KeyLocked = False
         Me.nes_gamepad_left.Location = New System.Drawing.Point(46, 235)
         Me.nes_gamepad_left.Name = "nes_gamepad_left"
         Me.nes_gamepad_left.Size = New System.Drawing.Size(50, 50)
         Me.nes_gamepad_left.TabIndex = 4
-        Me.nes_gamepad_left.Text = "A"
+        Me.nes_gamepad_left.Text = "X"
         Me.nes_gamepad_left.UseVisualStyleBackColor = False
         '
         'nes_gamepad_down
@@ -3681,11 +4938,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_down.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_down.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.nes_gamepad_down.KeyLocked = False
         Me.nes_gamepad_down.Location = New System.Drawing.Point(95, 284)
         Me.nes_gamepad_down.Name = "nes_gamepad_down"
         Me.nes_gamepad_down.Size = New System.Drawing.Size(50, 50)
         Me.nes_gamepad_down.TabIndex = 3
-        Me.nes_gamepad_down.Text = "S"
+        Me.nes_gamepad_down.Text = "X"
         Me.nes_gamepad_down.UseVisualStyleBackColor = False
         '
         'nes_gamepad_right
@@ -3697,11 +4956,13 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_right.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_right.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.nes_gamepad_right.KeyLocked = False
         Me.nes_gamepad_right.Location = New System.Drawing.Point(144, 235)
         Me.nes_gamepad_right.Name = "nes_gamepad_right"
         Me.nes_gamepad_right.Size = New System.Drawing.Size(50, 50)
         Me.nes_gamepad_right.TabIndex = 2
-        Me.nes_gamepad_right.Text = "D"
+        Me.nes_gamepad_right.Text = "X"
         Me.nes_gamepad_right.UseVisualStyleBackColor = False
         '
         'nes_gamepad_up
@@ -3713,19 +4974,615 @@ Partial Class frmKeyMapperSDL
         Me.nes_gamepad_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nes_gamepad_up.ForeColor = System.Drawing.Color.Black
         Me.nes_gamepad_up.KeyCode = New String() {"k0", "k0"}
+        Me.nes_gamepad_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.nes_gamepad_up.KeyLocked = False
         Me.nes_gamepad_up.Location = New System.Drawing.Point(95, 187)
         Me.nes_gamepad_up.Name = "nes_gamepad_up"
         Me.nes_gamepad_up.Size = New System.Drawing.Size(50, 50)
         Me.nes_gamepad_up.TabIndex = 1
-        Me.nes_gamepad_up.Text = "W"
+        Me.nes_gamepad_up.Text = "X"
         Me.nes_gamepad_up.UseVisualStyleBackColor = False
+        '
+        'KeybindButton2
+        '
+        Me.KeybindButton2.BackColor = System.Drawing.Color.White
+        Me.KeybindButton2.ConfigString = "nes.input.port<port>.zapper.away_trigger"
+        Me.KeybindButton2.Emu = "mednafen"
+        Me.KeybindButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton2.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton2.KeyCode = New String() {"m2", "m2"}
+        Me.KeybindButton2.KeyDefaults = New String() {"m1,m1,m1", "m1,m1,m1"}
+        Me.KeybindButton2.KeyLocked = True
+        Me.KeybindButton2.Location = New System.Drawing.Point(65, 375)
+        Me.KeybindButton2.Name = "KeybindButton2"
+        Me.KeybindButton2.Size = New System.Drawing.Size(50, 50)
+        Me.KeybindButton2.TabIndex = 84
+        Me.KeybindButton2.Text = "X"
+        Me.KeybindButton2.UseVisualStyleBackColor = False
+        '
+        'KeybindButton1
+        '
+        Me.KeybindButton1.BackColor = System.Drawing.Color.White
+        Me.KeybindButton1.ConfigString = "nes.input.port<port>.zapper.trigger"
+        Me.KeybindButton1.Emu = "mednafen"
+        Me.KeybindButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton1.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton1.KeyCode = New String() {"m1", "m1"}
+        Me.KeybindButton1.KeyDefaults = New String() {"m1,m1,m1", "m1,m1,m1"}
+        Me.KeybindButton1.KeyLocked = True
+        Me.KeybindButton1.Location = New System.Drawing.Point(344, 191)
+        Me.KeybindButton1.Name = "KeybindButton1"
+        Me.KeybindButton1.Size = New System.Drawing.Size(50, 50)
+        Me.KeybindButton1.TabIndex = 83
+        Me.KeybindButton1.Text = "X"
+        Me.KeybindButton1.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_r
+        '
+        Me.gba_builtin_r.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_r.ConfigString = "gba.input.builtin.gamepad.shoulder_r"
+        Me.gba_builtin_r.Emu = "mednafen"
+        Me.gba_builtin_r.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_r.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_r.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_r.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_r.KeyDefaults = New String() {"b10,b1,k57", "b10,b1,k101"}
+        Me.gba_builtin_r.KeyLocked = False
+        Me.gba_builtin_r.Location = New System.Drawing.Point(534, 12)
+        Me.gba_builtin_r.Name = "gba_builtin_r"
+        Me.gba_builtin_r.Size = New System.Drawing.Size(50, 50)
+        Me.gba_builtin_r.TabIndex = 107
+        Me.gba_builtin_r.Text = "X"
+        Me.gba_builtin_r.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_l
+        '
+        Me.gba_builtin_l.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_l.ConfigString = "gba.input.builtin.gamepad.shoulder_l"
+        Me.gba_builtin_l.Emu = "mednafen"
+        Me.gba_builtin_l.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_l.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_l.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_l.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_l.KeyDefaults = New String() {"b9,b0,k56", "b9,b0,k100"}
+        Me.gba_builtin_l.KeyLocked = False
+        Me.gba_builtin_l.Location = New System.Drawing.Point(86, 12)
+        Me.gba_builtin_l.Name = "gba_builtin_l"
+        Me.gba_builtin_l.Size = New System.Drawing.Size(50, 50)
+        Me.gba_builtin_l.TabIndex = 106
+        Me.gba_builtin_l.Text = "X"
+        Me.gba_builtin_l.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_rapid_a
+        '
+        Me.gba_builtin_rapid_a.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_rapid_a.ConfigString = "gba.input.builtin.gamepad.rapid_a"
+        Me.gba_builtin_rapid_a.Emu = "mednafen"
+        Me.gba_builtin_rapid_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_rapid_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_rapid_a.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_rapid_a.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_rapid_a.KeyDefaults = New String() {"k0.k0.k0", "k0.k0.k0"}
+        Me.gba_builtin_rapid_a.KeyLocked = False
+        Me.gba_builtin_rapid_a.Location = New System.Drawing.Point(600, 106)
+        Me.gba_builtin_rapid_a.Name = "gba_builtin_rapid_a"
+        Me.gba_builtin_rapid_a.Size = New System.Drawing.Size(40, 40)
+        Me.gba_builtin_rapid_a.TabIndex = 92
+        Me.gba_builtin_rapid_a.Text = "X"
+        Me.gba_builtin_rapid_a.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_rapid_b
+        '
+        Me.gba_builtin_rapid_b.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_rapid_b.ConfigString = "gba.input.builtin.gamepad.rapid_b"
+        Me.gba_builtin_rapid_b.Emu = "mednafen"
+        Me.gba_builtin_rapid_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_rapid_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_rapid_b.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_rapid_b.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_rapid_b.KeyDefaults = New String() {"k0.k0.k0", "k0.k0.k0"}
+        Me.gba_builtin_rapid_b.KeyLocked = False
+        Me.gba_builtin_rapid_b.Location = New System.Drawing.Point(524, 123)
+        Me.gba_builtin_rapid_b.Name = "gba_builtin_rapid_b"
+        Me.gba_builtin_rapid_b.Size = New System.Drawing.Size(40, 40)
+        Me.gba_builtin_rapid_b.TabIndex = 91
+        Me.gba_builtin_rapid_b.Text = "X"
+        Me.gba_builtin_rapid_b.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_a
+        '
+        Me.gba_builtin_a.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_a.ConfigString = "gba.input.builtin.gamepad.a"
+        Me.gba_builtin_a.Emu = "mednafen"
+        Me.gba_builtin_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_a.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_a.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_a.KeyDefaults = New String() {"b0,b3,k73", "b0,b3,k98"}
+        Me.gba_builtin_a.KeyLocked = False
+        Me.gba_builtin_a.Location = New System.Drawing.Point(595, 152)
+        Me.gba_builtin_a.Name = "gba_builtin_a"
+        Me.gba_builtin_a.Size = New System.Drawing.Size(50, 50)
+        Me.gba_builtin_a.TabIndex = 90
+        Me.gba_builtin_a.Text = "X"
+        Me.gba_builtin_a.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_b
+        '
+        Me.gba_builtin_b.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_b.ConfigString = "gba.input.builtin.gamepad.b"
+        Me.gba_builtin_b.Emu = "mednafen"
+        Me.gba_builtin_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_b.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_b.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_b.KeyDefaults = New String() {"b2,b2,k85", "b2,b2,k97"}
+        Me.gba_builtin_b.KeyLocked = False
+        Me.gba_builtin_b.Location = New System.Drawing.Point(519, 169)
+        Me.gba_builtin_b.Name = "gba_builtin_b"
+        Me.gba_builtin_b.Size = New System.Drawing.Size(50, 50)
+        Me.gba_builtin_b.TabIndex = 89
+        Me.gba_builtin_b.Text = "X"
+        Me.gba_builtin_b.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_start
+        '
+        Me.gba_builtin_start.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_start.ConfigString = "gba.input.builtin.gamepad.start"
+        Me.gba_builtin_start.Emu = "mednafen"
+        Me.gba_builtin_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_start.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_start.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.gba_builtin_start.KeyLocked = False
+        Me.gba_builtin_start.Location = New System.Drawing.Point(145, 249)
+        Me.gba_builtin_start.Name = "gba_builtin_start"
+        Me.gba_builtin_start.Size = New System.Drawing.Size(73, 39)
+        Me.gba_builtin_start.TabIndex = 88
+        Me.gba_builtin_start.Text = "X"
+        Me.gba_builtin_start.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_select
+        '
+        Me.gba_builtin_select.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_select.ConfigString = "gba.input.builtin.gamepad.select"
+        Me.gba_builtin_select.Emu = "mednafen"
+        Me.gba_builtin_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_select.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_select.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_select.KeyDefaults = New String() {"b4,b4,k49", "b4,b4,k107"}
+        Me.gba_builtin_select.KeyLocked = False
+        Me.gba_builtin_select.Location = New System.Drawing.Point(145, 294)
+        Me.gba_builtin_select.Name = "gba_builtin_select"
+        Me.gba_builtin_select.Size = New System.Drawing.Size(73, 39)
+        Me.gba_builtin_select.TabIndex = 87
+        Me.gba_builtin_select.Text = "X"
+        Me.gba_builtin_select.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_left
+        '
+        Me.gba_builtin_left.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_left.ConfigString = "gba.input.builtin.gamepad.left"
+        Me.gba_builtin_left.Emu = "mednafen"
+        Me.gba_builtin_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_left.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_left.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.gba_builtin_left.KeyLocked = False
+        Me.gba_builtin_left.Location = New System.Drawing.Point(23, 155)
+        Me.gba_builtin_left.Name = "gba_builtin_left"
+        Me.gba_builtin_left.Size = New System.Drawing.Size(50, 50)
+        Me.gba_builtin_left.TabIndex = 86
+        Me.gba_builtin_left.Text = "X"
+        Me.gba_builtin_left.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_down
+        '
+        Me.gba_builtin_down.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_down.ConfigString = "gba.input.builtin.gamepad.down"
+        Me.gba_builtin_down.Emu = "mednafen"
+        Me.gba_builtin_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_down.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_down.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.gba_builtin_down.KeyLocked = False
+        Me.gba_builtin_down.Location = New System.Drawing.Point(72, 204)
+        Me.gba_builtin_down.Name = "gba_builtin_down"
+        Me.gba_builtin_down.Size = New System.Drawing.Size(50, 50)
+        Me.gba_builtin_down.TabIndex = 85
+        Me.gba_builtin_down.Text = "X"
+        Me.gba_builtin_down.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_right
+        '
+        Me.gba_builtin_right.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_right.ConfigString = "gba.input.builtin.gamepad.right"
+        Me.gba_builtin_right.Emu = "mednafen"
+        Me.gba_builtin_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_right.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_right.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.gba_builtin_right.KeyLocked = False
+        Me.gba_builtin_right.Location = New System.Drawing.Point(121, 155)
+        Me.gba_builtin_right.Name = "gba_builtin_right"
+        Me.gba_builtin_right.Size = New System.Drawing.Size(50, 50)
+        Me.gba_builtin_right.TabIndex = 84
+        Me.gba_builtin_right.Text = "X"
+        Me.gba_builtin_right.UseVisualStyleBackColor = False
+        '
+        'gba_builtin_up
+        '
+        Me.gba_builtin_up.BackColor = System.Drawing.Color.White
+        Me.gba_builtin_up.ConfigString = "gba.input.builtin.gamepad.up"
+        Me.gba_builtin_up.Emu = "mednafen"
+        Me.gba_builtin_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gba_builtin_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gba_builtin_up.ForeColor = System.Drawing.Color.Black
+        Me.gba_builtin_up.KeyCode = New String() {"k0", "k0"}
+        Me.gba_builtin_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.gba_builtin_up.KeyLocked = False
+        Me.gba_builtin_up.Location = New System.Drawing.Point(72, 107)
+        Me.gba_builtin_up.Name = "gba_builtin_up"
+        Me.gba_builtin_up.Size = New System.Drawing.Size(50, 50)
+        Me.gba_builtin_up.TabIndex = 83
+        Me.gba_builtin_up.Text = "X"
+        Me.gba_builtin_up.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_rapid_a
+        '
+        Me.gb_builtin_rapid_a.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_rapid_a.ConfigString = "gb.input.builtin.gamepad.rapid_a"
+        Me.gb_builtin_rapid_a.Emu = "mednafen"
+        Me.gb_builtin_rapid_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_rapid_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_rapid_a.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_rapid_a.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_rapid_a.KeyDefaults = New String() {"k0.k0.k0", "k0.k0.k0"}
+        Me.gb_builtin_rapid_a.KeyLocked = False
+        Me.gb_builtin_rapid_a.Location = New System.Drawing.Point(434, 238)
+        Me.gb_builtin_rapid_a.Name = "gb_builtin_rapid_a"
+        Me.gb_builtin_rapid_a.Size = New System.Drawing.Size(40, 40)
+        Me.gb_builtin_rapid_a.TabIndex = 103
+        Me.gb_builtin_rapid_a.Text = "X"
+        Me.gb_builtin_rapid_a.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_rapid_b
+        '
+        Me.gb_builtin_rapid_b.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_rapid_b.ConfigString = "gb.input.builtin.gamepad.rapid_b"
+        Me.gb_builtin_rapid_b.Emu = "mednafen"
+        Me.gb_builtin_rapid_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_rapid_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_rapid_b.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_rapid_b.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_rapid_b.KeyDefaults = New String() {"k0.k0.k0", "k0.k0.k0"}
+        Me.gb_builtin_rapid_b.KeyLocked = False
+        Me.gb_builtin_rapid_b.Location = New System.Drawing.Point(379, 252)
+        Me.gb_builtin_rapid_b.Name = "gb_builtin_rapid_b"
+        Me.gb_builtin_rapid_b.Size = New System.Drawing.Size(40, 40)
+        Me.gb_builtin_rapid_b.TabIndex = 102
+        Me.gb_builtin_rapid_b.Text = "X"
+        Me.gb_builtin_rapid_b.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_a
+        '
+        Me.gb_builtin_a.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_a.ConfigString = "gb.input.builtin.gamepad.a"
+        Me.gb_builtin_a.Emu = "mednafen"
+        Me.gb_builtin_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_a.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_a.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_a.KeyDefaults = New String() {"b0,b3,k73", "b0,b3,k98"}
+        Me.gb_builtin_a.KeyLocked = False
+        Me.gb_builtin_a.Location = New System.Drawing.Point(430, 284)
+        Me.gb_builtin_a.Name = "gb_builtin_a"
+        Me.gb_builtin_a.Size = New System.Drawing.Size(50, 50)
+        Me.gb_builtin_a.TabIndex = 101
+        Me.gb_builtin_a.Text = "X"
+        Me.gb_builtin_a.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_b
+        '
+        Me.gb_builtin_b.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_b.ConfigString = "gb.input.builtin.gamepad.b"
+        Me.gb_builtin_b.Emu = "mednafen"
+        Me.gb_builtin_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_b.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_b.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_b.KeyDefaults = New String() {"b2,b2,k85", "b2,b2,k97"}
+        Me.gb_builtin_b.KeyLocked = False
+        Me.gb_builtin_b.Location = New System.Drawing.Point(374, 298)
+        Me.gb_builtin_b.Name = "gb_builtin_b"
+        Me.gb_builtin_b.Size = New System.Drawing.Size(50, 50)
+        Me.gb_builtin_b.TabIndex = 100
+        Me.gb_builtin_b.Text = "X"
+        Me.gb_builtin_b.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_start
+        '
+        Me.gb_builtin_start.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_start.ConfigString = "gb.input.builtin.gamepad.start"
+        Me.gb_builtin_start.Emu = "mednafen"
+        Me.gb_builtin_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_start.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_start.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_start.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_start.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.gb_builtin_start.KeyLocked = False
+        Me.gb_builtin_start.Location = New System.Drawing.Point(335, 423)
+        Me.gb_builtin_start.Name = "gb_builtin_start"
+        Me.gb_builtin_start.Size = New System.Drawing.Size(73, 39)
+        Me.gb_builtin_start.TabIndex = 99
+        Me.gb_builtin_start.Text = "X"
+        Me.gb_builtin_start.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_select
+        '
+        Me.gb_builtin_select.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_select.ConfigString = "gb.input.builtin.gamepad.select"
+        Me.gb_builtin_select.Emu = "mednafen"
+        Me.gb_builtin_select.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_select.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_select.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_select.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_select.KeyDefaults = New String() {"b4,b4,k49", "b4,b4,k107"}
+        Me.gb_builtin_select.KeyLocked = False
+        Me.gb_builtin_select.Location = New System.Drawing.Point(256, 423)
+        Me.gb_builtin_select.Name = "gb_builtin_select"
+        Me.gb_builtin_select.Size = New System.Drawing.Size(73, 39)
+        Me.gb_builtin_select.TabIndex = 98
+        Me.gb_builtin_select.Text = "X"
+        Me.gb_builtin_select.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_left
+        '
+        Me.gb_builtin_left.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_left.ConfigString = "gb.input.builtin.gamepad.left"
+        Me.gb_builtin_left.Emu = "mednafen"
+        Me.gb_builtin_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_left.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_left.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.gb_builtin_left.KeyLocked = False
+        Me.gb_builtin_left.Location = New System.Drawing.Point(184, 297)
+        Me.gb_builtin_left.Name = "gb_builtin_left"
+        Me.gb_builtin_left.Size = New System.Drawing.Size(50, 50)
+        Me.gb_builtin_left.TabIndex = 97
+        Me.gb_builtin_left.Text = "X"
+        Me.gb_builtin_left.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_down
+        '
+        Me.gb_builtin_down.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_down.ConfigString = "gb.input.builtin.gamepad.down"
+        Me.gb_builtin_down.Emu = "mednafen"
+        Me.gb_builtin_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_down.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_down.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.gb_builtin_down.KeyLocked = False
+        Me.gb_builtin_down.Location = New System.Drawing.Point(233, 346)
+        Me.gb_builtin_down.Name = "gb_builtin_down"
+        Me.gb_builtin_down.Size = New System.Drawing.Size(50, 50)
+        Me.gb_builtin_down.TabIndex = 96
+        Me.gb_builtin_down.Text = "X"
+        Me.gb_builtin_down.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_right
+        '
+        Me.gb_builtin_right.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_right.ConfigString = "gb.input.builtin.gamepad.right"
+        Me.gb_builtin_right.Emu = "mednafen"
+        Me.gb_builtin_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_right.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_right.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.gb_builtin_right.KeyLocked = False
+        Me.gb_builtin_right.Location = New System.Drawing.Point(282, 297)
+        Me.gb_builtin_right.Name = "gb_builtin_right"
+        Me.gb_builtin_right.Size = New System.Drawing.Size(50, 50)
+        Me.gb_builtin_right.TabIndex = 95
+        Me.gb_builtin_right.Text = "X"
+        Me.gb_builtin_right.UseVisualStyleBackColor = False
+        '
+        'gb_builtin_up
+        '
+        Me.gb_builtin_up.BackColor = System.Drawing.Color.White
+        Me.gb_builtin_up.ConfigString = "gb.input.builtin.gamepad.up"
+        Me.gb_builtin_up.Emu = "mednafen"
+        Me.gb_builtin_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.gb_builtin_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gb_builtin_up.ForeColor = System.Drawing.Color.Black
+        Me.gb_builtin_up.KeyCode = New String() {"k0", "k0"}
+        Me.gb_builtin_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.gb_builtin_up.KeyLocked = False
+        Me.gb_builtin_up.Location = New System.Drawing.Point(233, 249)
+        Me.gb_builtin_up.Name = "gb_builtin_up"
+        Me.gb_builtin_up.Size = New System.Drawing.Size(50, 50)
+        Me.gb_builtin_up.TabIndex = 94
+        Me.gb_builtin_up.Text = "X"
+        Me.gb_builtin_up.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_rapid_b
+        '
+        Me.ngp_builtin_rapid_b.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_rapid_b.ConfigString = "ngp.input.builtin.gamepad.rapid_b"
+        Me.ngp_builtin_rapid_b.Emu = "mednafen"
+        Me.ngp_builtin_rapid_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_rapid_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_rapid_b.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_rapid_b.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_rapid_b.KeyDefaults = New String() {"k0.k0.k0", "k0.k0.k0"}
+        Me.ngp_builtin_rapid_b.KeyLocked = False
+        Me.ngp_builtin_rapid_b.Location = New System.Drawing.Point(595, 202)
+        Me.ngp_builtin_rapid_b.Name = "ngp_builtin_rapid_b"
+        Me.ngp_builtin_rapid_b.Size = New System.Drawing.Size(40, 40)
+        Me.ngp_builtin_rapid_b.TabIndex = 114
+        Me.ngp_builtin_rapid_b.Text = "X"
+        Me.ngp_builtin_rapid_b.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_rapid_a
+        '
+        Me.ngp_builtin_rapid_a.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_rapid_a.ConfigString = "ngp.input.builtin.gamepad.rapid_a"
+        Me.ngp_builtin_rapid_a.Emu = "mednafen"
+        Me.ngp_builtin_rapid_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_rapid_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_rapid_a.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_rapid_a.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_rapid_a.KeyDefaults = New String() {"k0.k0.k0", "k0.k0.k0"}
+        Me.ngp_builtin_rapid_a.KeyLocked = False
+        Me.ngp_builtin_rapid_a.Location = New System.Drawing.Point(533, 244)
+        Me.ngp_builtin_rapid_a.Name = "ngp_builtin_rapid_a"
+        Me.ngp_builtin_rapid_a.Size = New System.Drawing.Size(40, 40)
+        Me.ngp_builtin_rapid_a.TabIndex = 113
+        Me.ngp_builtin_rapid_a.Text = "X"
+        Me.ngp_builtin_rapid_a.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_b
+        '
+        Me.ngp_builtin_b.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_b.ConfigString = "ngp.input.builtin.gamepad.b"
+        Me.ngp_builtin_b.Emu = "mednafen"
+        Me.ngp_builtin_b.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_b.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_b.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_b.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_b.KeyDefaults = New String() {"b0,b3,k73", "b0,b3,k98"}
+        Me.ngp_builtin_b.KeyLocked = False
+        Me.ngp_builtin_b.Location = New System.Drawing.Point(591, 146)
+        Me.ngp_builtin_b.Name = "ngp_builtin_b"
+        Me.ngp_builtin_b.Size = New System.Drawing.Size(50, 50)
+        Me.ngp_builtin_b.TabIndex = 112
+        Me.ngp_builtin_b.Text = "X"
+        Me.ngp_builtin_b.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_a
+        '
+        Me.ngp_builtin_a.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_a.ConfigString = "ngp.input.builtin.gamepad.a"
+        Me.ngp_builtin_a.Emu = "mednafen"
+        Me.ngp_builtin_a.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_a.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_a.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_a.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_a.KeyDefaults = New String() {"b2,b2,k85", "b2,b2,k97"}
+        Me.ngp_builtin_a.KeyLocked = False
+        Me.ngp_builtin_a.Location = New System.Drawing.Point(526, 188)
+        Me.ngp_builtin_a.Name = "ngp_builtin_a"
+        Me.ngp_builtin_a.Size = New System.Drawing.Size(50, 50)
+        Me.ngp_builtin_a.TabIndex = 111
+        Me.ngp_builtin_a.Text = "X"
+        Me.ngp_builtin_a.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_option
+        '
+        Me.ngp_builtin_option.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_option.ConfigString = "ngp.input.builtin.gamepad.option"
+        Me.ngp_builtin_option.Emu = "mednafen"
+        Me.ngp_builtin_option.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_option.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_option.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_option.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_option.KeyDefaults = New String() {"b6,b6,k53", "b6,b6,k13"}
+        Me.ngp_builtin_option.KeyLocked = False
+        Me.ngp_builtin_option.Location = New System.Drawing.Point(595, 70)
+        Me.ngp_builtin_option.Name = "ngp_builtin_option"
+        Me.ngp_builtin_option.Size = New System.Drawing.Size(73, 39)
+        Me.ngp_builtin_option.TabIndex = 110
+        Me.ngp_builtin_option.Text = "X"
+        Me.ngp_builtin_option.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_left
+        '
+        Me.ngp_builtin_left.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_left.ConfigString = "ngp.input.builtin.gamepad.left"
+        Me.ngp_builtin_left.Emu = "mednafen"
+        Me.ngp_builtin_left.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_left.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_left.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_left.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_left.KeyDefaults = New String() {"a0-,b13,k65", "a0-,b13,k37"}
+        Me.ngp_builtin_left.KeyLocked = False
+        Me.ngp_builtin_left.Location = New System.Drawing.Point(19, 169)
+        Me.ngp_builtin_left.Name = "ngp_builtin_left"
+        Me.ngp_builtin_left.Size = New System.Drawing.Size(50, 50)
+        Me.ngp_builtin_left.TabIndex = 108
+        Me.ngp_builtin_left.Text = "X"
+        Me.ngp_builtin_left.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_down
+        '
+        Me.ngp_builtin_down.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_down.ConfigString = "ngp.input.builtin.gamepad.down"
+        Me.ngp_builtin_down.Emu = "mednafen"
+        Me.ngp_builtin_down.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_down.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_down.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_down.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_down.KeyDefaults = New String() {"a1+,b12,k83", "a1+,b12,k40"}
+        Me.ngp_builtin_down.KeyLocked = False
+        Me.ngp_builtin_down.Location = New System.Drawing.Point(68, 218)
+        Me.ngp_builtin_down.Name = "ngp_builtin_down"
+        Me.ngp_builtin_down.Size = New System.Drawing.Size(50, 50)
+        Me.ngp_builtin_down.TabIndex = 107
+        Me.ngp_builtin_down.Text = "X"
+        Me.ngp_builtin_down.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_right
+        '
+        Me.ngp_builtin_right.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_right.ConfigString = "ngp.input.builtin.gamepad.right"
+        Me.ngp_builtin_right.Emu = "mednafen"
+        Me.ngp_builtin_right.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_right.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_right.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_right.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_right.KeyDefaults = New String() {"a0+,b14,k68", "a0+,b14,k39"}
+        Me.ngp_builtin_right.KeyLocked = False
+        Me.ngp_builtin_right.Location = New System.Drawing.Point(117, 169)
+        Me.ngp_builtin_right.Name = "ngp_builtin_right"
+        Me.ngp_builtin_right.Size = New System.Drawing.Size(50, 50)
+        Me.ngp_builtin_right.TabIndex = 106
+        Me.ngp_builtin_right.Text = "X"
+        Me.ngp_builtin_right.UseVisualStyleBackColor = False
+        '
+        'ngp_builtin_up
+        '
+        Me.ngp_builtin_up.BackColor = System.Drawing.Color.White
+        Me.ngp_builtin_up.ConfigString = "ngp.input.builtin.gamepad.up"
+        Me.ngp_builtin_up.Emu = "mednafen"
+        Me.ngp_builtin_up.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ngp_builtin_up.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ngp_builtin_up.ForeColor = System.Drawing.Color.Black
+        Me.ngp_builtin_up.KeyCode = New String() {"k0", "k0"}
+        Me.ngp_builtin_up.KeyDefaults = New String() {"a1-,b11,k87", "a1-,b11,k38"}
+        Me.ngp_builtin_up.KeyLocked = False
+        Me.ngp_builtin_up.Location = New System.Drawing.Point(68, 121)
+        Me.ngp_builtin_up.Name = "ngp_builtin_up"
+        Me.ngp_builtin_up.Size = New System.Drawing.Size(50, 50)
+        Me.ngp_builtin_up.TabIndex = 105
+        Me.ngp_builtin_up.Text = "X"
+        Me.ngp_builtin_up.UseVisualStyleBackColor = False
         '
         'frmKeyMapperSDL
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Pink
-        Me.ClientSize = New System.Drawing.Size(907, 547)
+        Me.ClientSize = New System.Drawing.Size(909, 547)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -3742,38 +5599,50 @@ Partial Class frmKeyMapperSDL
         Me.ControllersTab.ResumeLayout(False)
         Me.Naomi_Tab.ResumeLayout(False)
         Me.TabControl2.ResumeLayout(False)
-        Me.TabPage15.ResumeLayout(False)
-        Me.TabPage15.PerformLayout()
+        Me.Page_Naomi_ArcadeStick.ResumeLayout(False)
+        Me.Page_Naomi_ArcadeStick.PerformLayout()
         Me.Dreamcast_Tab.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage13.ResumeLayout(False)
-        Me.TabPage13.PerformLayout()
-        Me.TabPage14.ResumeLayout(False)
-        Me.TabPage14.PerformLayout()
+        Me.Page_dc_Controller.ResumeLayout(False)
+        Me.Page_dc_Controller.PerformLayout()
+        Me.Page_dc_ArcadeStick.ResumeLayout(False)
+        Me.Page_dc_ArcadeStick.PerformLayout()
         Me.TabPage9.ResumeLayout(False)
         Me.TabControl3.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
-        Me.TabPage3.PerformLayout()
-        Me.TabPage16.ResumeLayout(False)
-        Me.TabPage16.PerformLayout()
+        Me.Page_PSX_Gamepad.ResumeLayout(False)
+        Me.Page_PSX_Gamepad.PerformLayout()
+        Me.Page_PSX_Dualshock.ResumeLayout(False)
+        Me.Page_PSX_Dualshock.PerformLayout()
         Me.TabPage12.ResumeLayout(False)
         Me.TabControl4.ResumeLayout(False)
+        Me.Page_Saturn_Gamepad.ResumeLayout(False)
         Me.TabPage11.ResumeLayout(False)
         Me.TabControl5.ResumeLayout(False)
+        Me.Page_SNES_Gamepad.ResumeLayout(False)
         Me.TabPage10.ResumeLayout(False)
         Me.TabControl6.ResumeLayout(False)
+        Me.Page_Genesis_Gamepad3.ResumeLayout(False)
+        Me.Page_Genesis_Gamepad6.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.nes_tc.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
-        Me.Zapper.ResumeLayout(False)
-        Me.Zapper.PerformLayout()
+        Me.Page_NES_Gamepad.ResumeLayout(False)
+        Me.Page_NES_Gamepad.PerformLayout()
+        Me.Page_NES_Zapper.ResumeLayout(False)
+        Me.Page_NES_Zapper.PerformLayout()
         Me.TabPage6.ResumeLayout(False)
         Me.TabControl7.ResumeLayout(False)
+        Me.Page_GBA_GBA.ResumeLayout(False)
+        Me.Page_GBA_GBA.PerformLayout()
         Me.TabPage7.ResumeLayout(False)
         Me.TabControl8.ResumeLayout(False)
+        Me.Page_GBC_GBC.ResumeLayout(False)
+        Me.Page_GBC_GBC.PerformLayout()
         Me.TabPage8.ResumeLayout(False)
         Me.TabControl9.ResumeLayout(False)
+        Me.Page_NGP_NGP.ResumeLayout(False)
+        Me.Page_NGP_NGP.PerformLayout()
+        Me.TabPage24.ResumeLayout(False)
+        Me.TabControl10.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
@@ -3848,7 +5717,7 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents Label23 As Label
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents nes_tc As TabControl
-    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents Page_NES_Gamepad As TabPage
     Friend WithEvents nes_gamepad_a As keybindButton
     Friend WithEvents nes_gamepad_b As keybindButton
     Friend WithEvents nes_gamepad_start As keybindButton
@@ -3857,7 +5726,7 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents nes_gamepad_down As keybindButton
     Friend WithEvents nes_gamepad_right As keybindButton
     Friend WithEvents nes_gamepad_up As keybindButton
-    Friend WithEvents Zapper As TabPage
+    Friend WithEvents Page_NES_Zapper As TabPage
     Friend WithEvents Label39 As Label
     Friend WithEvents TabPage6 As TabPage
     Friend WithEvents TabPage7 As TabPage
@@ -3867,10 +5736,10 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents TabPage11 As TabPage
     Friend WithEvents TabPage12 As TabPage
     Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage13 As TabPage
-    Friend WithEvents TabPage14 As TabPage
+    Friend WithEvents Page_dc_Controller As TabPage
+    Friend WithEvents Page_dc_ArcadeStick As TabPage
     Friend WithEvents TabControl2 As TabControl
-    Friend WithEvents TabPage15 As TabPage
+    Friend WithEvents Page_Naomi_ArcadeStick As TabPage
     Friend WithEvents I_BC_345 As keybindButton
     Friend WithEvents I_BC_012 As keybindButton
     Friend WithEvents I_BC_45 As keybindButton
@@ -3938,21 +5807,21 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents nes_gamepad_rapid_b As keybindButton
     Friend WithEvents Label41 As Label
     Friend WithEvents TabControl3 As TabControl
-    Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents TabPage16 As TabPage
+    Friend WithEvents Page_PSX_Gamepad As TabPage
+    Friend WithEvents Page_PSX_Dualshock As TabPage
     Friend WithEvents TabControl4 As TabControl
-    Friend WithEvents TabPage17 As TabPage
+    Friend WithEvents Page_Saturn_Gamepad As TabPage
     Friend WithEvents TabControl5 As TabControl
-    Friend WithEvents TabPage18 As TabPage
+    Friend WithEvents Page_SNES_Gamepad As TabPage
     Friend WithEvents TabControl6 As TabControl
-    Friend WithEvents TabPage19 As TabPage
-    Friend WithEvents TabPage20 As TabPage
+    Friend WithEvents Page_Genesis_Gamepad3 As TabPage
+    Friend WithEvents Page_Genesis_Gamepad6 As TabPage
     Friend WithEvents TabControl7 As TabControl
-    Friend WithEvents TabPage21 As TabPage
+    Friend WithEvents Page_GBA_GBA As TabPage
     Friend WithEvents TabControl8 As TabControl
-    Friend WithEvents TabPage22 As TabPage
+    Friend WithEvents Page_GBC_GBC As TabPage
     Friend WithEvents TabControl9 As TabControl
-    Friend WithEvents TabPage23 As TabPage
+    Friend WithEvents Page_NGP_NGP As TabPage
     Friend WithEvents psx_gamepad_r1 As keybindButton
     Friend WithEvents psx_gamepad_l1 As keybindButton
     Friend WithEvents Label46 As Label
@@ -4016,4 +5885,87 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents ImportMappingStringToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportMappingStringToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ResetAllToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents KeybindButton2 As keybindButton
+    Friend WithEvents KeybindButton1 As keybindButton
+    Friend WithEvents ss_gamepad_rs As keybindButton
+    Friend WithEvents ss_gamepad_ls As keybindButton
+    Friend WithEvents ss_gamepad_z As keybindButton
+    Friend WithEvents ss_gamepad_y As keybindButton
+    Friend WithEvents ss_gamepad_x As keybindButton
+    Friend WithEvents ss_gamepad_c As keybindButton
+    Friend WithEvents ss_gamepad_b As keybindButton
+    Friend WithEvents ss_gamepad_a As keybindButton
+    Friend WithEvents ss_gamepad_start As keybindButton
+    Friend WithEvents ss_gamepad_left As keybindButton
+    Friend WithEvents ss_gamepad_down As keybindButton
+    Friend WithEvents ss_gamepad_right As keybindButton
+    Friend WithEvents ss_gamepad_up As keybindButton
+    Friend WithEvents snes_gamepad_x As keybindButton
+    Friend WithEvents snes_gamepad_r As keybindButton
+    Friend WithEvents snes_gamepad_l As keybindButton
+    Friend WithEvents snes_gamepad_a As keybindButton
+    Friend WithEvents snes_gamepad_y As keybindButton
+    Friend WithEvents snes_gamepad_b As keybindButton
+    Friend WithEvents snes_gamepad_start As keybindButton
+    Friend WithEvents snes_gamepad_select As keybindButton
+    Friend WithEvents snes_gamepad_left As keybindButton
+    Friend WithEvents snes_gamepad_right As keybindButton
+    Friend WithEvents snes_gamepad_down As keybindButton
+    Friend WithEvents snes_gamepad_up As keybindButton
+    Friend WithEvents sg_gamepad6_z As keybindButton
+    Friend WithEvents sg_gamepad6_y As keybindButton
+    Friend WithEvents sg_gamepad6_x As keybindButton
+    Friend WithEvents sg_gamepad6_c As keybindButton
+    Friend WithEvents sg_gamepad6_b As keybindButton
+    Friend WithEvents sg_gamepad6_a As keybindButton
+    Friend WithEvents sg_gamepad6_start As keybindButton
+    Friend WithEvents sg_gamepad6_left As keybindButton
+    Friend WithEvents sg_gamepad6_down As keybindButton
+    Friend WithEvents sg_gamepad6_right As keybindButton
+    Friend WithEvents sg_gamepad6_up As keybindButton
+    Friend WithEvents sg_gamepad_c As keybindButton
+    Friend WithEvents sg_gamepad_b As keybindButton
+    Friend WithEvents sg_gamepad_a As keybindButton
+    Friend WithEvents sg_gamepad_start As keybindButton
+    Friend WithEvents sg_gamepad_left As keybindButton
+    Friend WithEvents sg_gamepad_down As keybindButton
+    Friend WithEvents sg_gamepad_right As keybindButton
+    Friend WithEvents sg_gamepad_up As keybindButton
+    Friend WithEvents gba_builtin_rapid_a As keybindButton
+    Friend WithEvents gba_builtin_rapid_b As keybindButton
+    Friend WithEvents Label61 As Label
+    Friend WithEvents gba_builtin_a As keybindButton
+    Friend WithEvents gba_builtin_b As keybindButton
+    Friend WithEvents gba_builtin_start As keybindButton
+    Friend WithEvents gba_builtin_select As keybindButton
+    Friend WithEvents gba_builtin_left As keybindButton
+    Friend WithEvents gba_builtin_down As keybindButton
+    Friend WithEvents gba_builtin_right As keybindButton
+    Friend WithEvents gba_builtin_up As keybindButton
+    Friend WithEvents gba_builtin_r As keybindButton
+    Friend WithEvents gba_builtin_l As keybindButton
+    Friend WithEvents TabPage24 As TabPage
+    Friend WithEvents TabControl10 As TabControl
+    Friend WithEvents TabPage25 As TabPage
+    Friend WithEvents gb_builtin_rapid_a As keybindButton
+    Friend WithEvents gb_builtin_rapid_b As keybindButton
+    Friend WithEvents Label62 As Label
+    Friend WithEvents gb_builtin_a As keybindButton
+    Friend WithEvents gb_builtin_b As keybindButton
+    Friend WithEvents gb_builtin_start As keybindButton
+    Friend WithEvents gb_builtin_select As keybindButton
+    Friend WithEvents gb_builtin_left As keybindButton
+    Friend WithEvents gb_builtin_down As keybindButton
+    Friend WithEvents gb_builtin_right As keybindButton
+    Friend WithEvents gb_builtin_up As keybindButton
+    Friend WithEvents ngp_builtin_rapid_b As keybindButton
+    Friend WithEvents ngp_builtin_rapid_a As keybindButton
+    Friend WithEvents Label63 As Label
+    Friend WithEvents ngp_builtin_b As keybindButton
+    Friend WithEvents ngp_builtin_a As keybindButton
+    Friend WithEvents ngp_builtin_option As keybindButton
+    Friend WithEvents ngp_builtin_left As keybindButton
+    Friend WithEvents ngp_builtin_down As keybindButton
+    Friend WithEvents ngp_builtin_right As keybindButton
+    Friend WithEvents ngp_builtin_up As keybindButton
 End Class

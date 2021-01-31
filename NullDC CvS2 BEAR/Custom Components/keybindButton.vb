@@ -7,6 +7,29 @@ Public Class keybindButton
     Public KC As String() = {"k0", "k0"}
     Public _configString As String = ""
     Public _emulator As String = ""
+    Public _locked As Boolean = False
+    Public _KeyDefaults As String() = {"k0,k0,k0", "k0,k0,k0"}
+
+    Public Property KeyDefaults() As String()
+        Get
+            Return _KeyDefaults
+        End Get
+
+        Set(ByVal value As String())
+            _KeyDefaults = value
+
+        End Set
+
+    End Property
+
+    Public Property KeyLocked() As Boolean
+        Get
+            Return _locked
+        End Get
+        Set(ByVal value As Boolean)
+            _locked = value
+        End Set
+    End Property
 
     Public Property KeyCode() As String()
         Get
@@ -48,8 +71,53 @@ Public Class keybindButton
     Public Sub New()
         MyBase.New
         InitializeComponent()
+        ResetToDefault()
+    End Sub
+
+    Public Sub ResetToDefault(Optional ByVal _type As String = "", Optional ByVal _player As Int16 = -1)
+        Dim p1Keycode = ""
+        Dim p2Keycode = ""
+
+        If KeyDefaults(0).Split(",").Count < 3 Or KeyDefaults(1).Split(",").Count < 3 Then
+            p1Keycode = "k0"
+            p2Keycode = "k0"
+        Else
+            Select Case _type
+                Case "gamepad"
+                    p1Keycode = KeyDefaults(0).Split(",")(0)
+                    p2Keycode = KeyDefaults(1).Split(",")(0)
+
+                Case "fightstick"
+                    p1Keycode = KeyDefaults(0).Split(",")(1)
+                    p2Keycode = KeyDefaults(1).Split(",")(1)
+
+                Case "keyboard"
+                    p1Keycode = KeyDefaults(0).Split(",")(2)
+                    p2Keycode = KeyDefaults(1).Split(",")(2)
+                Case ""
+                    p1Keycode = KeyDefaults(0).Split(",")(0)
+                    p2Keycode = KeyDefaults(1).Split(",")(2)
+                Case Else
+                    MsgBox("Reset to <" & _type & "> not handled")
+            End Select
+        End If
+
+        Select Case _player
+            Case -1
+                KC(0) = p1Keycode
+                KC(1) = p2Keycode
+
+            Case 1
+                KC(0) = p1Keycode
+
+            Case 2
+                KC(0) = p1Keycode
+
+        End Select
+
 
     End Sub
+
 
     Public Sub ChangeKeyCode(ByVal _kc As String, ByVal _port As Int16)
 
@@ -65,7 +133,14 @@ Public Class keybindButton
             Text = _kc
         End If
 
-        KC(_port) = _kc
+        If Not ConfigString = "" And Emu = "mednafen" Then
+            KC(0) = _kc
+            KC(1) = _kc
+        Else
+            KC(_port) = _kc
+        End If
+
+
     End Sub
 
     Public Sub UpdateTextFromPortID(ByVal current_port As Int16)

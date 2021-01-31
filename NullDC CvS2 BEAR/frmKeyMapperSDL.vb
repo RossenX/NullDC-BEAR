@@ -135,58 +135,22 @@ Public Class frmKeyMapperSDL
 
     Private Sub GenerateDefaults()
 
+        AutoGenerateButtonConfigs("keyboard")
+
         Joystick(0) = 0
         Joystick(1) = -1
-        Deadzone(0) = 15
-        Deadzone(1) = 15
-        DeadzoneTB.Value = 15
+        Deadzone(0) = 25
+        Deadzone(1) = 25
+        DeadzoneTB.Value = 25
         Peripheral(0) = 0
         Peripheral(1) = 0
 
-        I_BTN5_KEY.KC = {"a4+", "k79"}
-        I_BTN4_KEY.KC = {"b1", "k73"}
-        I_BTN3_KEY.KC = {"b0", "k85"}
-        I_BTN2_KEY.KC = {"a5+", "k48"}
-        I_BTN1_KEY.KC = {"b3", "k57"}
-        I_BTN0_KEY.KC = {"b2", "k56"}
-        I_TEST_KEY_1.KC = {"k116", "k116"}
-        I_SERVICE_KEY_1.KC = {"k115", "k115"}
-        I_COIN_KEY.KC = {"b4", "k49"}
-        I_START_KEY.KC = {"b6", "k53"}
-        I_RIGHT_KEY.KC = {"a0+", "k68"}
-        I_LEFT_KEY.KC = {"a0-", "k65"}
-        I_DOWN_KEY.KC = {"a1+", "k83"}
-        I_UP_KEY.KC = {"a1-", "k87"}
-        CONT_A.KC = {"b0", "k85"}
-        CONT_B.KC = {"b1", "k73"}
-        CONT_Y.KC = {"b3", "k57"}
-        CONT_X.KC = {"b2", "k56"}
-        CONT_START.KC = {"b6", "k53"}
-        CONT_RSLIDER.KC = {"a5+", "k79"}
-        CONT_LSLIDER.KC = {"a4+", "k48"}
-        CONT_ANALOG_DOWN.KC = {"a1+", "k83"}
-        CONT_ANALOG_RIGHT.KC = {"a0+", "k68"}
-        CONT_ANALOG_UP.KC = {"a1-", "k87"}
-        CONT_ANALOG_LEFT.KC = {"a0-", "k65"}
-        CONT_DPAD_DOWN.KC = {"b12", "k71"}
-        CONT_DPAD_RIGHT.KC = {"b14", "k72"}
-        CONT_DPAD_UP.KC = {"b11", "k84"}
-        CONT_DPAD_LEFT.KC = {"b13", "k70"}
-        STICK_C.KC = {"a5+", "k79"}
-        STICK_B.KC = {"b1", "k73"}
-        STICK_A.KC = {"b0", "k85"}
-        STICK_Z.KC = {"a4+", "k48"}
-        STICK_Y.KC = {"b3", "k57"}
-        STICK_X.KC = {"b2", "k56"}
-        STICK_START.KC = {"b6", "k53"}
-        STICK_DPAD_RIGHT.KC = {"a0+", "k68"}
-        STICK_DPAD_LEFT.KC = {"a0-", "k65"}
-        STICK_DPAD_DOWN.KC = {"a1+", "k83"}
-        STICK_DPAD_UP.KC = {"a1-", "k87"}
+        SaveSettings()
+        UpdateButtonLabels()
 
     End Sub
 
-    Private Sub UpdateButtonLabels()
+    Public Sub UpdateButtonLabels()
         For Each _TabPages As TabPage In ControllersTab.TabPages
             For Each _TabPageControl As Control In _TabPages.Controls
                 If TypeOf _TabPageControl Is TabControl Then
@@ -237,25 +201,35 @@ Public Class frmKeyMapperSDL
 
         lines(4) = Med_string
 
-        Dim KeyCount = 5
-        For Each _tab As TabPage In ControllersTab.TabPages
-            For Each _cont As Control In _tab.Controls
-                If TypeOf _cont Is TabControl Then ' Nested Controls Only used for mednafen right now
-                    Dim _tc As TabControl = _cont
-                    For Each _tab2 As TabPage In _tc.TabPages
-                        For Each _cont2 As Control In _tab2.Controls
-                            If TypeOf _cont2 Is keybindButton Then
-                                Dim _btn As keybindButton = _cont2
-                                If _btn.Emu = "nulldc" Then
-                                    lines(KeyCount) = _btn.Name & "=" & _btn.KC(0) & "|" & _btn.KC(1)
-                                ElseIf _btn.Emu = "mednafen" Then
-                                    lines(KeyCount) = "med_" & _btn.ConfigString & "=" & _btn.KC(0) & "|" & _btn.KC(1)
-                                End If
-                                KeyCount += 1
+        Dim TabsToSave As New ArrayList
+        TabsToSave.Add(Page_Naomi_ArcadeStick)
+        TabsToSave.Add(Page_dc_Controller)
+        TabsToSave.Add(Page_dc_ArcadeStick)
+        TabsToSave.Add(Page_PSX_Gamepad)
+        TabsToSave.Add(Page_PSX_Dualshock)
+        TabsToSave.Add(Page_Saturn_Gamepad)
+        TabsToSave.Add(Page_SNES_Gamepad)
+        TabsToSave.Add(Page_Genesis_Gamepad3)
+        TabsToSave.Add(Page_Genesis_Gamepad6)
+        TabsToSave.Add(Page_NES_Gamepad)
+        TabsToSave.Add(Page_NES_Zapper)
+        TabsToSave.Add(Page_GBA_GBA)
+        TabsToSave.Add(Page_GBC_GBC)
+        TabsToSave.Add(Page_NGP_NGP)
 
-                            End If
-                        Next
-                    Next
+        Dim KeyCount = 5
+
+        For Each _tab As TabPage In TabsToSave
+            For Each _cont As Control In _tab.Controls
+                If TypeOf _cont Is keybindButton Then
+                    Dim _btn As keybindButton = _cont
+                    If _btn.Emu = "nulldc" Then
+                        lines(KeyCount) = _btn.Name & "=" & _btn.KC(0) & "|" & _btn.KC(1)
+                    ElseIf _btn.Emu = "mednafen" Then
+                        lines(KeyCount) = "med_" & _btn.ConfigString & "=" & _btn.KC(0) & "|" & _btn.KC(1)
+                    End If
+                    KeyCount += 1
+
                 End If
             Next
         Next
@@ -306,6 +280,7 @@ Public Class frmKeyMapperSDL
 
         If Not File.Exists(MainformRef.NullDCPath & "\Controls.bear") Then
             GenerateDefaults()
+            SaveSettings()
         End If
 
         configLines = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
@@ -349,6 +324,10 @@ Public Class frmKeyMapperSDL
             For Each _cont As Control In _tab.Controls
                 If TypeOf _cont Is TabControl Then
                     Dim _InnereTab As TabControl = _cont
+                    AddHandler _InnereTab.KeyDown, Sub(senter As TabControl, e As KeyEventArgs)
+                                                       e.Handled = True
+                                                   End Sub
+
                     For Each _tab2 As TabPage In _InnereTab.TabPages
                         For Each _cont2 As Control In _tab2.Controls
                             If TypeOf _cont2 Is keybindButton Then
@@ -485,202 +464,40 @@ Public Class frmKeyMapperSDL
     End Sub
 
     ' Update Button Configs Based on the Config String for the Game Controller
-    Public Sub AutoGenerateButtonConfigs(ByVal _configString As String)
+    Public Sub AutoGenerateButtonConfigs(ByVal _configString As String, Optional ByVal _player As Int16 = -1)
         Dim ControllerType = "gamepad"
 
-        ' Check if we have Analog Controls Set
-        If Not _configString.Contains("leftx:") And Not _configString.Contains("lefty:") Then
-            ControllerType = "fightstick"
-        End If
+        If Not _configString.Contains("leftx:") And Not _configString.Contains("lefty:") Then ControllerType = "fightstick"
+        If _configString = "keyboard" Then ControllerType = "keyboard"
+
+        For Each _tab As TabPage In ControllersTab.TabPages
+            For Each _tabControl As TabControl In _tab.Controls
+                For Each _tabtab As TabPage In _tabControl.TabPages
+                    For Each _tabtabControl As Control In _tabtab.Controls
+                        If TypeOf _tabtabControl Is keybindButton Then
+                            Dim _kbb As keybindButton = _tabtabControl
+                            If _player = -1 Then
+                                _kbb.ResetToDefault(ControllerType)
+                            Else
+                                _kbb.ResetToDefault(ControllerType, _player)
+                            End If
+
+                        End If
+                    Next
+                Next
+            Next
+        Next
 
         Select Case ControllerType ' Directional Shit
             Case "gamepad"
-                ' Naomi
-                I_UP_KEY.KeyCode(PlayerTab.SelectedIndex) = "a1-"
-                I_DOWN_KEY.KeyCode(PlayerTab.SelectedIndex) = "a1+"
-                I_LEFT_KEY.KeyCode(PlayerTab.SelectedIndex) = "a0-"
-                I_RIGHT_KEY.KeyCode(PlayerTab.SelectedIndex) = "a0+"
-
-                'Dreamcast Controller
-                CONT_ANALOG_UP.KeyCode(PlayerTab.SelectedIndex) = "a1-"
-                CONT_ANALOG_DOWN.KeyCode(PlayerTab.SelectedIndex) = "a1+"
-                CONT_ANALOG_LEFT.KeyCode(PlayerTab.SelectedIndex) = "a0-"
-                CONT_ANALOG_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "a0+"
-
-                CONT_DPAD_UP.KeyCode(PlayerTab.SelectedIndex) = "b11"
-                CONT_DPAD_DOWN.KeyCode(PlayerTab.SelectedIndex) = "b12"
-                CONT_DPAD_LEFT.KeyCode(PlayerTab.SelectedIndex) = "b13"
-                CONT_DPAD_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "b14"
-
-                'Dreamcast Arcade Stick
-                STICK_DPAD_UP.KeyCode(PlayerTab.SelectedIndex) = "a1-"
-                STICK_DPAD_DOWN.KeyCode(PlayerTab.SelectedIndex) = "a1+"
-                STICK_DPAD_LEFT.KeyCode(PlayerTab.SelectedIndex) = "a0-"
-                STICK_DPAD_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "a0+"
-
-                ' NES gamepad
-                nes_gamepad_up.KeyCode(PlayerTab.SelectedIndex) = "a1-"
-                nes_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "a1+"
-                nes_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "a0-"
-                nes_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "a0+"
-
-                ' PSX gamepad
-                psx_gamepad_up.KeyCode(PlayerTab.SelectedIndex) = "a1-"
-                psx_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "a1+"
-                psx_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "a0-"
-                psx_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "a0+"
-
-                ' PSX DualShock
-                'D-PAD
-                psx_dualshock_up.KeyCode(PlayerTab.SelectedIndex) = "b11"
-                psx_dualshock_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
-                psx_dualshock_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
-                psx_dualshock_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
-                ' Left Stick
-                psx_dualshock_lstick_up.KeyCode(PlayerTab.SelectedIndex) = "a1-"
-                psx_dualshock_lstick_down.KeyCode(PlayerTab.SelectedIndex) = "a1+"
-                psx_dualshock_lstick_left.KeyCode(PlayerTab.SelectedIndex) = "a0-"
-                psx_dualshock_lstick_right.KeyCode(PlayerTab.SelectedIndex) = "a0+"
-                ' Right Stick
-                psx_dualshock_rstick_up.KeyCode(PlayerTab.SelectedIndex) = "a3-"
-                psx_dualshock_rstick_down.KeyCode(PlayerTab.SelectedIndex) = "a3+"
-                psx_dualshock_rstick_left.KeyCode(PlayerTab.SelectedIndex) = "a2-"
-                psx_dualshock_rstick_right.KeyCode(PlayerTab.SelectedIndex) = "a2+"
-
                 PeripheralCB.SelectedIndex = 0
-            Case "fightstick"
-                ' Naomi
-                I_UP_KEY.KeyCode(PlayerTab.SelectedIndex) = "b11"
-                I_DOWN_KEY.KeyCode(PlayerTab.SelectedIndex) = "b12"
-                I_LEFT_KEY.KeyCode(PlayerTab.SelectedIndex) = "b13"
-                I_RIGHT_KEY.KeyCode(PlayerTab.SelectedIndex) = "b14"
 
-                'Dreamcast Controller
-                CONT_ANALOG_UP.KeyCode(PlayerTab.SelectedIndex) = "None"
-                CONT_ANALOG_DOWN.KeyCode(PlayerTab.SelectedIndex) = "None"
-                CONT_ANALOG_LEFT.KeyCode(PlayerTab.SelectedIndex) = "None"
-                CONT_ANALOG_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "None"
-
-                CONT_DPAD_UP.KeyCode(PlayerTab.SelectedIndex) = "b11"
-                CONT_DPAD_DOWN.KeyCode(PlayerTab.SelectedIndex) = "b12"
-                CONT_DPAD_LEFT.KeyCode(PlayerTab.SelectedIndex) = "b13"
-                CONT_DPAD_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "b14"
-
-                'Dreamcast Arcade Stick
-                STICK_DPAD_UP.KeyCode(PlayerTab.SelectedIndex) = "b11"
-                STICK_DPAD_DOWN.KeyCode(PlayerTab.SelectedIndex) = "b12"
-                STICK_DPAD_LEFT.KeyCode(PlayerTab.SelectedIndex) = "b13"
-                STICK_DPAD_RIGHT.KeyCode(PlayerTab.SelectedIndex) = "b14"
-
-                'NES Gamepad
-                nes_gamepad_up.KeyCode(PlayerTab.SelectedIndex) = "b11"
-                nes_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
-                nes_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
-                nes_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
-
-                ' PSX gamepad
-                psx_gamepad_up.KeyCode(PlayerTab.SelectedIndex) = "b11"
-                psx_gamepad_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
-                psx_gamepad_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
-                psx_gamepad_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
-
-                ' PSX DualShock
-                'D-PAD
-                psx_dualshock_up.KeyCode(PlayerTab.SelectedIndex) = "b11"
-                psx_dualshock_down.KeyCode(PlayerTab.SelectedIndex) = "b12"
-                psx_dualshock_left.KeyCode(PlayerTab.SelectedIndex) = "b13"
-                psx_dualshock_right.KeyCode(PlayerTab.SelectedIndex) = "b14"
-                ' Left Stick
-                psx_dualshock_lstick_up.KeyCode(PlayerTab.SelectedIndex) = "None"
-                psx_dualshock_lstick_down.KeyCode(PlayerTab.SelectedIndex) = "None"
-                psx_dualshock_lstick_left.KeyCode(PlayerTab.SelectedIndex) = "None"
-                psx_dualshock_lstick_right.KeyCode(PlayerTab.SelectedIndex) = "None"
-                ' Right Stick
-                psx_dualshock_rstick_up.KeyCode(PlayerTab.SelectedIndex) = "None"
-                psx_dualshock_rstick_down.KeyCode(PlayerTab.SelectedIndex) = "None"
-                psx_dualshock_rstick_left.KeyCode(PlayerTab.SelectedIndex) = "None"
-                psx_dualshock_rstick_right.KeyCode(PlayerTab.SelectedIndex) = "None"
-
-
+            Case "fightstick", "keyboard"
                 PeripheralCB.SelectedIndex = 1
+
         End Select
 
-        ' Buttons
-        ' Naomi
-        I_START_KEY.KeyCode(PlayerTab.SelectedIndex) = "b6"
-        I_COIN_KEY.KeyCode(PlayerTab.SelectedIndex) = "b4"
-        I_SERVICE_KEY_1.KeyCode(PlayerTab.SelectedIndex) = "k115"
-        I_TEST_KEY_1.KeyCode(PlayerTab.SelectedIndex) = "k116"
-
-        I_BTN0_KEY.KeyCode(PlayerTab.SelectedIndex) = "b2"
-        I_BTN1_KEY.KeyCode(PlayerTab.SelectedIndex) = "b3"
-        I_BTN2_KEY.KeyCode(PlayerTab.SelectedIndex) = "a4+"
-        I_BTN3_KEY.KeyCode(PlayerTab.SelectedIndex) = "b0"
-        I_BTN4_KEY.KeyCode(PlayerTab.SelectedIndex) = "b1"
-        I_BTN5_KEY.KeyCode(PlayerTab.SelectedIndex) = "a5+"
-
-        ' Dreamcast Controller
-        CONT_START.KeyCode(PlayerTab.SelectedIndex) = "b6"
-
-        CONT_A.KeyCode(PlayerTab.SelectedIndex) = "b0"
-        CONT_B.KeyCode(PlayerTab.SelectedIndex) = "b1"
-        CONT_X.KeyCode(PlayerTab.SelectedIndex) = "b2"
-        CONT_Y.KeyCode(PlayerTab.SelectedIndex) = "b3"
-        CONT_LSLIDER.KeyCode(PlayerTab.SelectedIndex) = "a4+"
-        CONT_RSLIDER.KeyCode(PlayerTab.SelectedIndex) = "a5+"
-
-        ' Dreamcast Arcade Stick
-
-        STICK_START.KeyCode(PlayerTab.SelectedIndex) = "b6"
-
-        STICK_A.KeyCode(PlayerTab.SelectedIndex) = "b0"
-        STICK_B.KeyCode(PlayerTab.SelectedIndex) = "b1"
-        STICK_X.KeyCode(PlayerTab.SelectedIndex) = "b2"
-        STICK_Y.KeyCode(PlayerTab.SelectedIndex) = "b3"
-        STICK_Z.KeyCode(PlayerTab.SelectedIndex) = "a4+"
-        STICK_C.KeyCode(PlayerTab.SelectedIndex) = "a5+"
-
-        ' NES Gamepad
-
-        nes_gamepad_select.KeyCode(PlayerTab.SelectedIndex) = "b4"
-        nes_gamepad_start.KeyCode(PlayerTab.SelectedIndex) = "b6"
-        nes_gamepad_b.KeyCode(PlayerTab.SelectedIndex) = "b2"
-        nes_gamepad_a.KeyCode(PlayerTab.SelectedIndex) = "b0"
-
-        nes_gamepad_rapid_b.KeyCode(PlayerTab.SelectedIndex) = "None"
-        nes_gamepad_rapid_a.KeyCode(PlayerTab.SelectedIndex) = "None"
-
-        ' PSX Gamepad
-        psx_gamepad_select.KeyCode(PlayerTab.SelectedIndex) = "b4"
-        psx_gamepad_start.KeyCode(PlayerTab.SelectedIndex) = "b6"
-
-        psx_gamepad_cross.KeyCode(PlayerTab.SelectedIndex) = "b0"
-        psx_gamepad_circle.KeyCode(PlayerTab.SelectedIndex) = "b1"
-        psx_gamepad_square.KeyCode(PlayerTab.SelectedIndex) = "b2"
-        psx_gamepad_triangle.KeyCode(PlayerTab.SelectedIndex) = "b3"
-        psx_gamepad_l1.KeyCode(PlayerTab.SelectedIndex) = "b9"
-        psx_gamepad_r1.KeyCode(PlayerTab.SelectedIndex) = "b10"
-        psx_gamepad_l2.KeyCode(PlayerTab.SelectedIndex) = "a4+"
-        psx_gamepad_r2.KeyCode(PlayerTab.SelectedIndex) = "a5+"
-
-        ' PSX DualShock
-        psx_dualshock_select.KeyCode(PlayerTab.SelectedIndex) = "b4"
-        psx_dualshock_start.KeyCode(PlayerTab.SelectedIndex) = "b6"
-
-        psx_dualshock_cross.KeyCode(PlayerTab.SelectedIndex) = "b0"
-        psx_dualshock_circle.KeyCode(PlayerTab.SelectedIndex) = "b1"
-        psx_dualshock_square.KeyCode(PlayerTab.SelectedIndex) = "b2"
-        psx_dualshock_triangle.KeyCode(PlayerTab.SelectedIndex) = "b3"
-
-        psx_dualshock_l1.KeyCode(PlayerTab.SelectedIndex) = "b9"
-        psx_dualshock_l2.KeyCode(PlayerTab.SelectedIndex) = "a4+"
-        psx_dualshock_l3.KeyCode(PlayerTab.SelectedIndex) = "b7"
-
-        psx_dualshock_r1.KeyCode(PlayerTab.SelectedIndex) = "b10"
-        psx_dualshock_r2.KeyCode(PlayerTab.SelectedIndex) = "a5+"
-        psx_dualshock_r3.KeyCode(PlayerTab.SelectedIndex) = "b8"
-
-        UpdateButtonLabels()
+        'UpdateButtonLabels()
     End Sub
 
     Public Sub UpdateControllersList()
@@ -850,7 +667,7 @@ Public Class frmKeyMapperSDL
         btn_Close.Text = "Saving..."
 
         If Not File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
-            MsgBox("No Mednafen Mapping File Found, please Remap Controller at least once" & vbNewLine & "Mednafen Configs not changed")
+
 
         Else
             Dim _TranslatedControls(2) As Dictionary(Of String, String)
@@ -896,19 +713,32 @@ Public Class frmKeyMapperSDL
                     End If
 
                     Dim tmpControlString = ""
+
+                    ' Stuff i wanna make sure are unbound unless specified in my configs
+                    If line.Contains("rapid_") Or
+                                line.StartsWith("command.0 ") Or
+                                line.StartsWith("command.1 ") Or
+                                line.StartsWith("command.2 ") Or
+                                line.StartsWith("command.3 ") Or
+                                line.StartsWith("command.4 ") Or
+                                line.StartsWith("command.5 ") Or
+                                line.StartsWith("command.6 ") Or
+                                line.StartsWith("command.7 ") Or
+                                line.StartsWith("command.8 ") Or
+                                line.StartsWith("command.9 ") Or
+                                line.StartsWith("command.state_slot_dec ") Then
+                        tmpControlString = line.Split(" ")(0) & " " & "keyboard 0x0 0" ' Disable Rapid Control unless they are found in our configs
+                    End If
+
                     For Each control_line In ControlsConfigs
                         If control_line.StartsWith("med_") Then
                             control_line = control_line.Substring(4)
 
-                            If line.Contains("rapid_") Then
-                                tmpControlString = line.Split(" ")(0) ' Disable Rapid Control unless they are found in our configs
-                            End If
-
-                            If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1")) Or line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then
+                            If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1") & " ") Or line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2") & " ") Then
                                 Dim _player = 1
-                                If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2")) Then _player = 2
+                                If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2") & " ") Then _player = 2
 
-                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString) ' Initial String
+                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString) & " " ' Initial String
                                 Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
 
                                 If _KeyCode.StartsWith("k") Then ' Keyboard
@@ -916,6 +746,13 @@ Public Class frmKeyMapperSDL
                                     If Not _KeyCode = "k0" Then
                                         tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
                                         Exit For
+                                    End If
+
+                                ElseIf _KeyCode.StartsWith("m") Then
+                                    If _KeyCode = "m1" Then
+                                        tmpControlString += " mouse 0x0 button_left"
+                                    ElseIf _KeyCode = "m2" Then
+                                        tmpControlString += " mouse 0x0 button_right"
                                     End If
 
                                 Else ' Joystick
@@ -952,7 +789,12 @@ Public Class frmKeyMapperSDL
                         End If
                     Next
 
-                    If Not tmpControlString = "" Then MednafenConfigs(linenumber) = tmpControlString
+                    If Not tmpControlString = "" Then
+                        MednafenConfigs(linenumber) = tmpControlString
+                        Console.WriteLine("Set Control: " & tmpControlString)
+                    End If
+
+
                     linenumber += 1
                 Next
 
@@ -987,8 +829,13 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub ClickedBindButton(sender As Button, e As EventArgs)
+    Private Sub ClickedBindButton(sender As keybindButton, e As EventArgs)
         'Console.WriteLine("Bind clicked: " & sender.Name)
+        If sender.KeyLocked Then
+            MsgBox("this bind is locked for now")
+            Exit Sub
+        End If
+
         If Not Currently_Binding Is Nothing Then
             Currently_Binding.BackColor = Color.White
             Currently_Binding = Nothing
@@ -1065,7 +912,9 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub ButtonClicked(ByVal _keycode As String, ByVal _down As Boolean)
+
         If Not ButtonsDown.ContainsKey(_keycode) Then
+
             If Not Currently_Binding Is Nothing And (_down Or _keycode = "k13") Then
                 If TypeOf Currently_Binding Is keybindButton Then
                     Dim _tmp As keybindButton = Currently_Binding
@@ -1140,11 +989,29 @@ Public Class frmKeyMapperSDL
         If result1 = DialogResult.Yes Then
             GenerateDefaults()
             LoadSettings()
+            'If File.Exists(MainformRef.NullDCPath & "\Controls.bear") Then File.Delete(MainformRef.NullDCPath & "\Controls.bear")
             If File.Exists(MainformRef.NullDCPath & "\bearcontrollerdb.txt") Then File.Delete(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
             If File.Exists(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt") Then File.Delete(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt")
             If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then File.Delete(MainformRef.NullDCPath & "\mednafenmapping.txt")
             UpdateControllersList()
             Me.Close()
+
+        End If
+
+        If File.Exists(MainformRef.NullDCPath & "\mednafen\mednafen.cfg") Then
+            Dim _cfg = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
+            Dim LineCount = 0
+            For Each _line As String In _cfg
+                For i = 1 To 12
+                    If _line.Contains(".port" & i & ".") Then
+                        _cfg(LineCount) = _line.Split(" ")(0)
+                    End If
+                Next
+
+                LineCount += 1
+            Next
+
+            File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", _cfg)
 
         End If
 
@@ -1206,6 +1073,25 @@ Public Class frmKeyMapperSDL
             MsgBox("Mapping text copied")
             My.Computer.Clipboard.SetText(CompleteMappingString)
         End If
+
+    End Sub
+
+    Private Sub ExportMappingStringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportMappingStringToolStripMenuItem.Click
+        If Not My.Computer.Clipboard.ContainsText Then
+            MsgBox("Copy mapping text then try again.")
+            Exit Sub
+        End If
+
+        Dim _KeyBindString = My.Computer.Clipboard.GetText
+
+
+
+
+
+
+
+
+
 
     End Sub
 

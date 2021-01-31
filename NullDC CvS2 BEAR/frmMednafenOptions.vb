@@ -23,8 +23,9 @@ Public Class frmMednafenOptions
                     ApplyThemeToControl(_child2, 2)
                     For Each _child3 As Control In _child2.Controls
                         ApplyThemeToControl(_child3, 4)
-
-                    Next : Next : Next : Next
+                        For Each _child4 As Control In _child3.Controls
+                            ApplyThemeToControl(_child4, 4)
+                        Next : Next : Next : Next : Next
 
         ApplyThemeToControl(Me, 1)
         ApplyThemeToControl(Panel1, 1)

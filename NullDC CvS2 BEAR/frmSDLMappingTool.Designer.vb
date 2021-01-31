@@ -42,7 +42,7 @@ Partial Class frmSDLMappingTool
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(3, 518)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(503, 20)
+        Me.Label1.Size = New System.Drawing.Size(997, 20)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Select your Device from the List"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -65,7 +65,7 @@ Partial Class frmSDLMappingTool
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(509, 691)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1003, 691)
         Me.TableLayoutPanel1.TabIndex = 3
         '
         'Button1
@@ -75,7 +75,7 @@ Partial Class frmSDLMappingTool
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Location = New System.Drawing.Point(3, 541)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(503, 24)
+        Me.Button1.Size = New System.Drawing.Size(997, 24)
         Me.Button1.TabIndex = 3
         Me.Button1.Text = "Cancel"
         Me.Button1.UseVisualStyleBackColor = False
@@ -89,7 +89,7 @@ Partial Class frmSDLMappingTool
         Me.Panel1.Location = New System.Drawing.Point(0, 568)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(509, 123)
+        Me.Panel1.Size = New System.Drawing.Size(1003, 123)
         Me.Panel1.TabIndex = 4
         '
         'lbl_hats
@@ -127,7 +127,7 @@ Partial Class frmSDLMappingTool
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(0)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(509, 418)
+        Me.PictureBox1.Size = New System.Drawing.Size(1003, 418)
         Me.PictureBox1.TabIndex = 5
         Me.PictureBox1.TabStop = False
         '
@@ -135,7 +135,7 @@ Partial Class frmSDLMappingTool
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(509, 691)
+        Me.ClientSize = New System.Drawing.Size(1003, 691)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.KeyPreview = True

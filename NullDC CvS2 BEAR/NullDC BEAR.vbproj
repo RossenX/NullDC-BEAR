@@ -196,12 +196,6 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMappingString.Designer.vb">
-      <DependentUpon>frmMappingString.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmMappingString.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmMednafenOptions.Designer.vb">
       <DependentUpon>frmMednafenOptions.vb</DependentUpon>
     </Compile>
@@ -324,9 +318,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMappingString.resx">
-      <DependentUpon>frmMappingString.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMednafenOptions.resx">
       <DependentUpon>frmMednafenOptions.vb</DependentUpon>

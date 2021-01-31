@@ -351,7 +351,7 @@ Public Class frmSDLMappingTool
 
                       SDL_GameControllerAddMapping(ConfigStringFinal)
                       frmKeyMapperSDL.AutoGenerateButtonConfigs(ConfigStringFinal)
-
+                      frmKeyMapperSDL.UpdateButtonLabels()
                   End Sub)
 
         Console.WriteLine(ConfigStringFinal)
@@ -406,6 +406,9 @@ Public Class frmSDLMappingTool
 
     End Sub
 
+    Private Sub frmSDLMappingTool_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
 
 
