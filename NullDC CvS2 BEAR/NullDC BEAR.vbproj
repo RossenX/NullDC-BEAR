@@ -196,6 +196,12 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMappingString.Designer.vb">
+      <DependentUpon>frmMappingString.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMappingString.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMednafenOptions.Designer.vb">
       <DependentUpon>frmMednafenOptions.vb</DependentUpon>
     </Compile>
@@ -319,6 +325,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMappingString.resx">
+      <DependentUpon>frmMappingString.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMednafenOptions.resx">
       <DependentUpon>frmMednafenOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -400,6 +409,7 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\System Icons\NullDCBEAR-Title.png" />
     <None Include="Resources\MessagePop.wav" />
     <None Include="Resources\Controller Types\BEARJamma_Dreamcast.png" />
     <None Include="Resources\Controller Types\BEARJammaNaomi.png" />

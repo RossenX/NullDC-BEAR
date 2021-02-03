@@ -854,7 +854,7 @@ Module BEARTheme
         numpad7 = SDL_Scancode.SDL_SCANCODE_KP_7
         numpad8 = SDL_Scancode.SDL_SCANCODE_KP_8
         numpad9 = SDL_Scancode.SDL_SCANCODE_KP_9
-        kpdecimal = SDL_Scancode.SDL_SCANCODE_KP_DECIMAL
+        kpdecimal = SDL_Scancode.SDL_SCANCODE_KP_PERIOD
         divide = SDL_Scancode.SDL_SCANCODE_KP_DIVIDE
         multiply = SDL_Scancode.SDL_SCANCODE_KP_MULTIPLY
         subtract = SDL_Scancode.SDL_SCANCODE_KP_MINUS
@@ -920,15 +920,17 @@ Module BEARTheme
     End Function
 
     Dim ButtonNames As String() = {"b0", "b1", "b2", "b3", "b4",
-        "b5", "b6", "b7", "b8", "b9",
-        "b10", "b11", "b12", "b13", "b14",
+        "b5", "b6", "b7", "b8",
+        "b9", "b10",
+        "b11", "b12", "b13", "b14",
         "a0+", "a0-", "a1+", "a1-",
         "a2+", "a2-", "a3+", "a3-",
         "a4+", "a5+"}
 
-    Dim ButtonMappedName As String() = {"a", "b", "x", "y",
-        "back", "guide", "start", "leftstick", "rightstick",
-        "leftshoulder", "rightshoulder", "dpup", "dpdown", "dpleft", "dpright",
+    Dim ButtonMappedName As String() = {"a", "b", "x", "y", "back",
+        "guide", "start", "leftstick", "rightstick",
+        "leftshoulder", "rightshoulder",
+        "dpup", "dpdown", "dpleft", "dpright",
         "leftx", "leftx", "lefty", "lefty",
         "rightx", "rightx", "righty", "righty",
         "lefttrigger", "righttrigger"}
@@ -965,7 +967,7 @@ Module BEARTheme
 
                         MednafenControlLine = "abs_" & Axis
 
-                        If ButtonNames(_buttonIndex).Contains("+") Then ' This is an axis that wants to be possitive
+                        If Not ButtonNames(_buttonIndex).Contains("-") Then ' This is an axis that wants to be possitive
                             If Negative Then ' Possitive axis map to negative joy direction
                                 MednafenControlLine += "-"
                             Else
@@ -1030,23 +1032,19 @@ Module BEARTheme
 
         Dim MednafenControllerID(128) As String
 
-        Dim _tmpIDs As New ArrayList
-        For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
-            If line.StartsWith("  ID: ") Then
-                _tmpIDs.Add(line.Trim.Split(" ")(1))
-                'MednafenControllerID(ControllerIndex) = line.Trim.Split(" ")(1)
-                Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
-
-            End If
-        Next
-
         Dim _xinput As New ArrayList
         Dim _dinput As New ArrayList
-        For Each _id As String In _tmpIDs
-            If _id.StartsWith("0x000000000000000000") Then
-                _xinput.Add(_id)
-            Else
-                _dinput.Add(_id)
+
+        For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
+            If line.StartsWith("  ID: ") Then
+
+                If line.ToLower.Contains("xinput") Then
+                    _xinput.Add("xinput_" & line.Trim.Split(" ")(1))
+                Else
+                    _dinput.Add(line.Trim.Split(" ")(1))
+                End If
+
+                Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
             End If
         Next
 
@@ -1074,26 +1072,139 @@ Module BEARTheme
 
     End Function
 
-    Public Sub GenerateMednafenMappingForJoystickID(ByVal _id)
+    Public Function GetFullMappingStringforIndex(ByVal _index) As String
 
+        'Get MednafenID
+        Dim MednafenControllerID(2) As String
+        For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\controls.bear")
+            If line.StartsWith("MednafenControllerID=") Then
+                MednafenControllerID(0) = line.Split("=")(1).Split("|")(0)
+                MednafenControllerID(1) = line.Split("=")(1).Split("|")(1)
+                Exit For
+            End If
+        Next
 
+        Dim Fullstring = ""
 
+        Dim DeviceGUIDasString(40) As Byte
+        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(_index), DeviceGUIDasString, 40)
+        Dim GUIDSTRING As String = Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
 
+        Dim _SDLMapping = SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(_index))
+        Dim _MednafenMapping As String = ""
 
+        Dim MednafenControllerConfigLines As String()
 
+        If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
+            MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
+        Else
+            MednafenControllerConfigLines = {""}
+        End If
 
+        Dim MednafenMappingFound = False
+        For Each _line In MednafenControllerConfigLines
+            If _line.StartsWith(GUIDSTRING) Then
+                MednafenMappingFound = True
+                _MednafenMapping = _line.Trim
+                Exit For
+            End If
+        Next
 
+        If Not MednafenMappingFound Then
+            Dim Joy = SDL_JoystickOpen(_index)
+            Dim _numAxis = SDL_JoystickNumAxes(Joy)
+            Dim MednafenTranslated = BEARButtonToMednafenButton(_SDLMapping, _numAxis)
+            If _MednafenMapping = "" Then
+                _MednafenMapping = GUIDSTRING
+                For i = 0 To MednafenTranslated.Count - 1
+                    _MednafenMapping += "," & MednafenTranslated.Keys(i) & ":" & MednafenTranslated.Values(i)
+                Next
+            End If
+            SDL_JoystickClose(Joy)
 
+        End If
 
+        Return _SDLMapping & "|" & _MednafenMapping
 
+    End Function
 
+    Public Function MednafenXinputButtonToSDLxInputButton(ByVal _medbutton As String) As String
+        Dim Converted As String = _medbutton
 
+        Dim Reverse As Boolean = False
+        Select Case Converted
+            Case "button_0" ' A
+                Converted = "button_12"
+            Case "button_1" ' B
+                Converted = "button_13"
+            Case "button_2" ' X
+                Converted = "button_14"
+            Case "button_3" ' Y
+                Converted = "button_15"
+            Case "button_4" ' LT
+                Converted = "button_8"
+            Case "button_5" ' RT
+                Converted = "button_9"
+            Case "button_6" ' Select
+                Converted = "button_5"
+            Case "button_7" ' Start
+                Converted = "button_4"
+            Case "button_8" ' L3
+                Converted = "button_6"
+            Case "button_9" ' R3
+                Converted = "button_7"
+            Case "button_10"
+        End Select
 
+        ' Convert Axis
+        If Converted.Contains("abs_0") Then
+            ' All good here
+        ElseIf Converted.Contains("abs_1") Then
+            Reverse = True
 
+        ElseIf Converted.Contains("abs_2") Then
+            Converted = Converted.Replace("abs_2", "abs_4")
 
+        ElseIf Converted.Contains("abs_3") Then
+            Converted = Converted.Replace("abs_3", "abs_2")
 
+        ElseIf Converted.Contains("abs_4") Then
+            Converted = Converted.Replace("abs_4", "abs_3")
+            Reverse = True
 
-    End Sub
+        ElseIf Converted.Contains("abs_5") Then
+            ' All good here
+        ElseIf Converted.Contains("abs_6") Then
+            If Converted.Contains("-") Then
+                Converted = "button_2"
+            Else
+                Converted = "button_3"
+            End If
+
+        ElseIf Converted.Contains("abs_7") Then
+            If Converted.Contains("-") Then
+                Converted = "button_0"
+            Else
+                Converted = "button_1"
+            End If
+
+        End If
+
+        If Reverse Then
+            If Converted.Contains("-+") Then
+                Converted = Converted.Replace("-+", "+-")
+            ElseIf Converted.Contains("+-") Then
+                Converted = Converted.Replace("+-", "-+")
+            ElseIf Converted.Contains("+") Then
+                Converted = Converted.Replace("+", "-")
+            ElseIf Converted.Contains("-") Then
+                Converted = Converted.Replace("-", "+")
+            End If
+        End If
+
+        Console.WriteLine("Xinput SDL to Mednafen Button: " & _medbutton & "|" & Converted)
+        Return Converted
+    End Function
 
 End Module
 

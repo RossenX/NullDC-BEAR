@@ -6,21 +6,21 @@ Public Class frmSDLMappingTool
     Dim ListOfGamepadKeys As String() = {"a", "b", "x", "y", "leftshoulder", "rightshoulder",
         "lefttrigger", "righttrigger", "leftstick", "rightstick",
         "dpup", "dpdown", "dpleft", "dpright",
-        "back", "start", "guide",
+        "back", "start",
         "leftx", "lefty", "rightx", "righty"}
     Dim ListOfGamepadKeysProper As String() = {"A (Bottom Button)", "B (Right Button)", "X (Left Button)", "Y (Top Button)", "Left Shoulder(L1)", "Right Shoulder(R1)",
         "Left Trigger(L2)", "Right Trigger(R2)", "Left Stick(L3)", "Right Stick(R3)",
         "Digital Up (D-Pad or Digital Stick)", "Digital Down (D-Pad or Digital Stick)", "Digital Left (D-Pad or Digital Stick)", "Digital Right (D-Pad or Digital Stick)",
-        "Back", "Start", "Guide/Logo Button",
+        "Back", "Start",
         "Left Analog Stick Left or Right", "Left Analog Stick Up or Down", "Right Analog Stick Left or Right", "Right Analog Stick Up or Down"}
 
     Dim ControllerImages As Image() = {My.Resources.Controller_A, My.Resources.Controller_B, My.Resources.Controller_X, My.Resources.Controller_Y, My.Resources.Controller_LB, My.Resources.Controller_RB,
         My.Resources.Controller_LT, My.Resources.Controller_RT, My.Resources.Controller_LeftStick, My.Resources.Controller_RightStick,
         My.Resources.Controller_Dpad_Up, My.Resources.Controller_Dpad_Down, My.Resources.Controller_Dpad_Left, My.Resources.Controller_Dpad_Right,
-        My.Resources.Controller_Back, My.Resources.Controller_Start, My.Resources.Controller_Guide,
+        My.Resources.Controller_Back, My.Resources.Controller_Start,
         My.Resources.Controller_LeftX, My.Resources.Controller_LeftY, My.Resources.Controller_RightX, My.Resources.Controller_RightY}
 
-    Dim ListOfBinds(20) As String
+    Dim ListOfBinds(19) As String
     Dim _InputThread As Threading.Thread
     Dim _currentBindIndex = 0
     Dim Joy
@@ -63,7 +63,6 @@ Public Class frmSDLMappingTool
 
             UpdateHelpTest()
 
-            AxisDown.Clear()
             AxisDown = New Dictionary(Of String, Integer)
             StartBinding()
 
@@ -105,7 +104,7 @@ Public Class frmSDLMappingTool
         End If
 
         _currentBindIndex = 0
-        ListOfBinds = New String(20) {}
+        ListOfBinds = New String(19) {}
 
         _InputThread = New Threading.Thread(AddressOf InputThread)
         _InputThread.IsBackground = True
@@ -158,19 +157,13 @@ Public Class frmSDLMappingTool
                     End If
                 End Sub)
 
-            SDL_Delay(16)
-            SDL_PumpEvents()
-            While SDL_PollEvent(_event)
+            SDL_FlushEvents(0, 65535)
+            While SDL_WaitEvent(_event)
                 ' Write the capabilities
                 UpdateHelpTest()
 
                 Select Case _event.type
                     Case SDL_EventType.SDL_JOYAXISMOTION ' Axis Motion Down
-                        Dim a = 0
-                        SDL_JoystickGetAxisInitialState(Joy, _event.jaxis.axis, a)
-                        Console.WriteLine("Axis: " & _event.jaxis.axis & " Initial State: " & a)
-
-
                         Dim _axisnorm As Int32 = _event.jaxis.axisValue
                         _axisnorm = Math.Abs(_axisnorm)
 
@@ -212,10 +205,9 @@ Public Class frmSDLMappingTool
                             Else
                                 ' Is is a thumbstick so just use full range -1 to 1
                                 If Not AxisDown.ContainsKey("a" & _event.jaxis.axis) Then
-                                    If _event.jaxis.axisValue < 0 Then
+                                    If _event.jaxis.axisValue < -_deadzonetotal Then
                                         KeyPressed = "a" & _event.jaxis.axis & "~"
-                                        AxisDown.Add("a" & _event.jaxis.axis, _event.jaxis.axisValue)
-                                    Else
+                                    ElseIf _event.jaxis.axisValue > _deadzonetotal Then
                                         KeyPressed = "a" & _event.jaxis.axis
                                     End If
                                 End If
@@ -230,22 +222,28 @@ Public Class frmSDLMappingTool
 
                         End If
 
-                        SDL_FlushEvents(1536, 1536)
-                        Exit While
+                        If Not KeyPressed = "" Then
+                            SDL_FlushEvents(0, 65535)
+                            Exit While
+                        End If
 
                     Case SDL_EventType.SDL_JOYHATMOTION  ' Hat Motion
                         If Not _event.jhat.hatValue = 0 Then
                             KeyPressed = "h" & CDec(_event.jhat.hatValue / 10).ToString.Replace(",", ".")
+                            Exit While
+
                         End If
 
                     Case SDL_EventType.SDL_JOYBUTTONDOWN  ' Button Down
                         KeyPressed = "b" & _event.jbutton.button
+                        Exit While
 
                 End Select
 
             End While
 
             If KeyPressed.Length > 0 Then
+                Console.WriteLine("Added bind: " & ListOfGamepadKeys(_currentBindIndex) & "|" & KeyPressed)
                 ListOfBinds(_currentBindIndex) = ListOfGamepadKeys(_currentBindIndex) & ":" & KeyPressed
                 _currentBindIndex += 1
                 If _currentBindIndex < ControllerImages.Count Then
@@ -345,13 +343,15 @@ Public Class frmSDLMappingTool
                       End If
 
                       ' Done Mednafen shit
-
-                      frmKeyMapperSDL.UpdateControllersList()
-                      Label1.Text = "Aight, you're all set"
-
                       SDL_GameControllerAddMapping(ConfigStringFinal)
+                      frmKeyMapperSDL.UpdateControllersList()
                       frmKeyMapperSDL.AutoGenerateButtonConfigs(ConfigStringFinal)
                       frmKeyMapperSDL.UpdateButtonLabels()
+
+                      frmKeyMapperSDL.NaomiChanged = True
+                      frmKeyMapperSDL.DreamcastChanged = True
+                      frmKeyMapperSDL.MednafenChanged = True
+                      frmKeyMapperSDL.MednafenControlChanged = True
                   End Sub)
 
         Console.WriteLine(ConfigStringFinal)
