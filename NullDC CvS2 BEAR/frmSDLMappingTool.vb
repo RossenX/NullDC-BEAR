@@ -158,7 +158,7 @@ Public Class frmSDLMappingTool
                 End Sub)
 
             SDL_FlushEvents(0, 65535)
-            While SDL_WaitEvent(_event)
+            While SDL_WaitEventTimeout(_event, 50)
                 ' Write the capabilities
                 UpdateHelpTest()
 
@@ -229,15 +229,28 @@ Public Class frmSDLMappingTool
 
                     Case SDL_EventType.SDL_JOYHATMOTION  ' Hat Motion
                         If Not _event.jhat.hatValue = 0 Then
-                            KeyPressed = "h" & CDec(_event.jhat.hatValue / 10).ToString.Replace(",", ".")
-                            Exit While
 
+                            If Not ListOfGamepadKeys(_currentBindIndex) = "leftx" And
+                                Not ListOfGamepadKeys(_currentBindIndex) = "lefty" And
+                                Not ListOfGamepadKeys(_currentBindIndex) = "rightx" And
+                                Not ListOfGamepadKeys(_currentBindIndex) = "righty" Then
+                                KeyPressed = "h" & CDec(_event.jhat.hatValue / 10).ToString.Replace(",", ".")
+                            End If
+
+
+
+                            Exit While
                         End If
 
                     Case SDL_EventType.SDL_JOYBUTTONDOWN  ' Button Down
-                        KeyPressed = "b" & _event.jbutton.button
-                        Exit While
 
+                        If Not ListOfGamepadKeys(_currentBindIndex) = "leftx" And
+                                Not ListOfGamepadKeys(_currentBindIndex) = "lefty" And
+                                Not ListOfGamepadKeys(_currentBindIndex) = "rightx" And
+                                Not ListOfGamepadKeys(_currentBindIndex) = "righty" Then
+                            KeyPressed = "b" & _event.jbutton.button
+                        End If
+                        Exit While
                 End Select
 
             End While

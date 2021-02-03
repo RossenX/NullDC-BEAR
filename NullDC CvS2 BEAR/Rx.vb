@@ -1202,7 +1202,7 @@ Module BEARTheme
             End If
         End If
 
-        Console.WriteLine("Xinput SDL to Mednafen Button: " & _medbutton & "|" & Converted)
+        'Console.WriteLine("Xinput SDL to Mednafen Button: " & _medbutton & "|" & Converted)
         Return Converted
     End Function
 
