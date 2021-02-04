@@ -72,7 +72,7 @@ Public Class keybindButton
         Dim p1Keycode = ""
         Dim p2Keycode = ""
 
-        If Not KeyDefaults.Count >= 2 Then
+        If Not KeyDefaults.Count = 2 Then
             p1Keycode = "k0"
             p2Keycode = "k0"
         Else
@@ -111,11 +111,11 @@ Public Class keybindButton
 
             Case 1
                 KC(0) = p1Keycode
-                UpdateTextFromPortID(_player)
+                UpdateTextFromPortID(_player - 1)
 
             Case 2
                 KC(1) = p2Keycode
-                UpdateTextFromPortID(_player)
+                UpdateTextFromPortID(_player - 1)
 
         End Select
 

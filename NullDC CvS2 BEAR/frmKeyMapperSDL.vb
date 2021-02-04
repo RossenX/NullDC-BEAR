@@ -504,8 +504,13 @@ Public Class frmKeyMapperSDL
     Public Sub AutoGenerateButtonConfigs(Optional ByVal _configString As String = "", Optional ByVal _player As Int16 = -1)
         Dim ControllerType = "gamepad"
 
-        If Not _configString.Contains("leftx:") Or Not _configString.Contains("lefty:") Then ControllerType = "fightstick"
+        If Not _configString.Contains("leftx:") Or Not _configString.Contains("lefty:") Then
+            ControllerType = "fightstick"
+        End If
+
+        If _configString = "gamepad" Then ControllerType = "gamepad"
         If _configString = "keyboard" Then ControllerType = "keyboard"
+        If _configString = "fightstick" Then ControllerType = "fightstick"
 
         Dim TabsToReset As New ArrayList
         TabsToReset.Add(Page_Naomi_ArcadeStick)
@@ -1089,7 +1094,7 @@ Public Class frmKeyMapperSDL
     Private Sub ImportMappingStringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportMappingStringToolStripMenuItem.Click
 
         If ControllerCB.SelectedIndex = 0 Then
-            MsgBox("Select a CONTROLLER from first.")
+            MsgBox("Mapping Strings are for Controllers only, select one from the list below.")
         Else
             frmMappingString.ShowDialog(Me)
         End If
@@ -1113,6 +1118,21 @@ Public Class frmKeyMapperSDL
 
 
 
+    End Sub
+
+    Private Sub ControllerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ControllerToolStripMenuItem.Click
+        AutoGenerateButtonConfigs("gamepad", PlayerTab.SelectedIndex + 1)
+        UpdateButtonLabels()
+    End Sub
+
+    Private Sub ArcadeStickToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ArcadeStickToolStripMenuItem.Click
+        AutoGenerateButtonConfigs("fightstick", PlayerTab.SelectedIndex + 1)
+        UpdateButtonLabels()
+    End Sub
+
+    Private Sub KeyboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KeyboardToolStripMenuItem.Click
+        AutoGenerateButtonConfigs("keyboard", PlayerTab.SelectedIndex + 1)
+        UpdateButtonLabels()
     End Sub
 
 End Class
