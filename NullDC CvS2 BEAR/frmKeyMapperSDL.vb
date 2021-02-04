@@ -212,8 +212,10 @@ Public Class frmKeyMapperSDL
         TabsToSave.Add(Page_dc_ArcadeStick)
         TabsToSave.Add(Page_PSX_Gamepad)
         TabsToSave.Add(Page_PSX_Dualshock)
+        TabsToSave.Add(Page_PSX_GunCon)
         TabsToSave.Add(Page_Saturn_Gamepad)
         TabsToSave.Add(Page_SNES_Gamepad)
+        TabsToSave.Add(Page_SNES_SuperScope)
         TabsToSave.Add(Page_Genesis_Gamepad3)
         TabsToSave.Add(Page_Genesis_Gamepad6)
         TabsToSave.Add(Page_NES_Gamepad)
@@ -518,8 +520,10 @@ Public Class frmKeyMapperSDL
         TabsToReset.Add(Page_dc_ArcadeStick)
         TabsToReset.Add(Page_PSX_Gamepad)
         TabsToReset.Add(Page_PSX_Dualshock)
+        TabsToReset.Add(Page_PSX_GunCon)
         TabsToReset.Add(Page_Saturn_Gamepad)
         TabsToReset.Add(Page_SNES_Gamepad)
+        TabsToReset.Add(Page_SNES_SuperScope)
         TabsToReset.Add(Page_Genesis_Gamepad3)
         TabsToReset.Add(Page_Genesis_Gamepad6)
         TabsToReset.Add(Page_NES_Gamepad)
@@ -751,7 +755,12 @@ Public Class frmKeyMapperSDL
             linenumber = 0
             For Each line As String In MednafenConfigs
                 btn_Close.Text = "Saving Mednafen..."
-                If line.StartsWith(";") Or line.Trim.Length = 0 Then
+
+                ' Trim down the lines we're looking for to reduce saving time
+                If line.StartsWith(";") Or
+                    line.Trim.Length = 0 Or
+                    (Not line.Contains("input") And
+                    Not line.Contains("command.")) Then
                     linenumber += 1
                     Continue For
                 End If
@@ -810,6 +819,8 @@ Public Class frmKeyMapperSDL
                                         tmpControlString += "mouse 0x0 button_left"
                                     ElseIf _KeyCode = "m2" Then
                                         tmpControlString += "mouse 0x0 button_right"
+                                    ElseIf _KeyCode = "m3" Then
+                                        tmpControlString += "mouse 0x0 button_middle"
                                     End If
 
                                 Else ' Joystick
