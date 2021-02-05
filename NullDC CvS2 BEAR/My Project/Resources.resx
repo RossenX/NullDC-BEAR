@@ -121,9 +121,6 @@
   <data name="Controller_LeftX" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-LeftX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NewNullDCBearIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NewNullDCBearIcon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="default_nullDC_dreamcast" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\default_nullDC_dreamcast.cfg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -150,6 +147,9 @@
   </data>
   <data name="Controller_Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-Y.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Multitap_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Multitap_None.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
@@ -184,8 +184,8 @@
   <data name="bj" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bj.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Controller_Dpad_Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller Images\Controller-Dpad-Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mednafen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mednafen.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Controller_Dpad_Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-Dpad-Down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,17 +193,14 @@
   <data name="default_nullDC_naomi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\default_nullDC_naomi.cfg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="snes_superscope" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller Types\snes_superscope.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Controller_LB" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-LB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_GBC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\System Icons\icon_GBC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Controller_RightX" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller Images\Controller-RightX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Controller_RightStick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-RightStick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Vs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Vs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,8 +208,8 @@
   <data name="Controller_Back" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-Back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Controller_RightStick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller Images\Controller-RightStick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Controller_RightX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-RightX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NullDCBEAR_Title" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\System Icons\NullDCBEAR-Title.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,8 +223,8 @@
   <data name="Controller_RT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-RT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mednafen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mednafen.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Controller_Dpad_Left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller Images\Controller-Dpad-Left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Deps" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Deps.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -274,16 +271,13 @@
   <data name="Controller_Dpad_Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Controller Images\Controller-Dpad-Up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Controller_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller Images\Controller-B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NewNullDCBearIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NewNullDCBearIcon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DreamcastGameOptimizations" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DreamcastGameOptimizations.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="vmu_data_port01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vmu_data_port01.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="psx_gcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller Types\psx_gcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

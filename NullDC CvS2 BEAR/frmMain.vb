@@ -488,13 +488,35 @@ Public Class frmMain
                 Next
 
                 If Not FolderOnly Then
+
+                    Dim WaitTime = 0
+                    If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
+                        While IsFileInUse(_dir & "\" & entry.FullName.Replace("/", "\"))
+                            If WaitTime > 200 Then
+                                MsgBox("Error Extracting Update: File is Locked " & _dir & "\" & entry.FullName.Replace("/", "\"))
+                                MainformRef.ConfigFile.Version = "0.0"
+                                MainformRef.ConfigFile.SaveFile(False)
+                                End
+                            End If
+                            Thread.Sleep(50)
+
+                        End While
+                    End If
+
                     If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
                         File.SetAttributes(_dir & "\" & entry.FullName.Replace("/", "\"), FileAttribute.Normal)
                         File.Delete(_dir & "\" & entry.FullName.Replace("/", "\"))
                     End If
 
+                    WaitTime = 0
                     If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
                         While IsFileInUse(_dir & "\" & entry.FullName.Replace("/", "\"))
+                            If WaitTime > 200 Then
+                                MsgBox("Error Extracting Update: File is Locked " & _dir & "\" & entry.FullName.Replace("/", "\"))
+                                MainformRef.ConfigFile.Version = "0.0"
+                                MainformRef.ConfigFile.SaveFile(False)
+                                End
+                            End If
                             Thread.Sleep(50)
                         End While
                     End If
