@@ -74,7 +74,7 @@ Partial Class frmChallengeSent
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DimGray
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(714, 228)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.btnNope)

@@ -35,6 +35,7 @@ Public Class frmKeyMapperSDL
     Private Sub ReloadTheme()
         ApplyThemeToControl(MenuStrip1)
         ApplyThemeToControl(TableLayoutPanel1, 1)
+
         For Each _control In TableLayoutPanel1.Controls
             ApplyThemeToControl(_control, 1)
         Next
@@ -52,7 +53,7 @@ Public Class frmKeyMapperSDL
             For Each _tabtab As TabControl In _tab.Controls
                 ApplyThemeToControl(_tabtab, 1)
                 For Each _tabtabtab As TabPage In _tabtab.TabPages
-                    ApplyThemeToControl(_tabtabtab, 2)
+                    ApplyThemeToControl(_tabtabtab, 5)
                 Next
             Next
         Next
@@ -957,7 +958,7 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub btn_Close_Click(sender As Object, e As EventArgs) Handles btn_Close.Click
-        If MainformRef.IsFileInUse(MainformRef.NullDCPath & "\mednafen\stdout.txt") Then
+        If MainformRef.IsFileInUse(MainformRef.NullDCPath & "\mednafen\stdout.txt") And File.Exists(MainformRef.NullDCPath & "\mednafen\stdout.txt") Then
             MsgBox("Cannot Save While Mednafen Is Running")
         Else
             SaveEverything()

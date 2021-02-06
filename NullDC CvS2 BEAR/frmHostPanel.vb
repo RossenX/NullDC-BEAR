@@ -143,11 +143,13 @@ Public Class frmHostPanel
                 If Not AutoSuggest Then MainformRef.NotificationForm.ShowMessage("Coulnd't ping the player. Make sure you and your challanger are not behind a firewall or something.")
                 Exit Sub
             End If
-            Dim DelayFrameRate = 32.66 '32.66
+
+            Dim DelayFrameRate = 32 '32.66
             Dim delay = Math.Ceiling(ping.RoundtripTime / DelayFrameRate)
-            If delay = 0 Then delay = 1
+            If delay < 2 Then delay = 2
             cbDelay.Invoke(Sub() cbDelay.Text = delay)
             lbPing.Invoke(Sub() lbPing.Text = "Ping: " & ping.RoundtripTime & " | Delay rating: " & (ping.RoundtripTime / DelayFrameRate).ToString("0.##"))
+
         Catch ex As Exception
 
         End Try

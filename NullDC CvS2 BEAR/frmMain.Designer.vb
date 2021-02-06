@@ -64,6 +64,8 @@ Partial Class frmMain
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ForceOpenPanelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.MainMenuContainer.SuspendLayout()
@@ -376,7 +378,7 @@ Partial Class frmMain
         '_MainMenuStrip
         '
         Me._MainMenuStrip.BackColor = System.Drawing.Color.Transparent
-        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem})
+        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem, Me.ForceOpenPanelToolStripMenuItem})
         Me._MainMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me._MainMenuStrip.Name = "_MainMenuStrip"
         Me._MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
@@ -456,6 +458,19 @@ Partial Class frmMain
         Me.PatreonO3oToolStripMenuItem.Size = New System.Drawing.Size(83, 29)
         Me.PatreonO3oToolStripMenuItem.Text = "Patreon o3o"
         '
+        'ForceOpenPanelToolStripMenuItem
+        '
+        Me.ForceOpenPanelToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HostToolStripMenuItem})
+        Me.ForceOpenPanelToolStripMenuItem.Name = "ForceOpenPanelToolStripMenuItem"
+        Me.ForceOpenPanelToolStripMenuItem.Size = New System.Drawing.Size(80, 29)
+        Me.ForceOpenPanelToolStripMenuItem.Text = "Open Panel"
+        '
+        'HostToolStripMenuItem
+        '
+        Me.HostToolStripMenuItem.Name = "HostToolStripMenuItem"
+        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HostToolStripMenuItem.Text = "Host"
+        '
         'imgBeta
         '
         Me.imgBeta.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -533,4 +548,6 @@ Partial Class frmMain
     Friend WithEvents BlockToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UserNameRadminIPToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GaggedUsersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ForceOpenPanelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HostToolStripMenuItem As ToolStripMenuItem
 End Class

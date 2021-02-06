@@ -236,6 +236,8 @@ Public Class frmMain
 
         cbStatus.Text = ConfigFile.Status
 
+        ForceOpenPanelToolStripMenuItem.Visible = IsBeta
+
     End Sub
 
     Public Sub LoadThemeSettings()
@@ -2015,6 +2017,13 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub ForceOpenPanelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ForceOpenPanelToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub HostToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HostToolStripMenuItem.Click
+        HostingForm.Show()
+    End Sub
 End Class
 
 Public Class BEARPlayer
