@@ -165,6 +165,17 @@ Public Class NullDCLauncher
         End If
 
         NullDCproc = Process.Start(MainformRef.NullDCPath & "\dc\nullDC_Win32_Release-NoTrace.exe")
+        Select Case MainformRef.ConfigFile.NullDCPriority
+            Case 0
+                NullDCproc.PriorityClass = ProcessPriorityClass.Normal
+            Case 1
+                NullDCproc.PriorityClass = ProcessPriorityClass.AboveNormal
+            Case 2
+                NullDCproc.PriorityClass = ProcessPriorityClass.High
+            Case 3
+                NullDCproc.PriorityClass = ProcessPriorityClass.RealTime
+        End Select
+        NullDCproc.PriorityBoostEnabled = True
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
         LoadGame()
@@ -178,6 +189,17 @@ Public Class NullDCLauncher
         Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
 
         NullDCproc = Process.Start(MainformRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
+        Select Case MainformRef.ConfigFile.NullDCPriority
+            Case 0
+                NullDCproc.PriorityClass = ProcessPriorityClass.Normal
+            Case 1
+                NullDCproc.PriorityClass = ProcessPriorityClass.AboveNormal
+            Case 2
+                NullDCproc.PriorityClass = ProcessPriorityClass.High
+            Case 3
+                NullDCproc.PriorityClass = ProcessPriorityClass.RealTime
+        End Select
+        NullDCproc.PriorityBoostEnabled = True
         NullDCproc.EnableRaisingEvents = True
         AddHandler NullDCproc.Exited, AddressOf EmulatorExited
         LoadGame()

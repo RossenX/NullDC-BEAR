@@ -81,6 +81,7 @@ Public Class frmSetup
 
         cbThemes.DataSource = ThemesFound
         cbThemes.SelectedValue = MainformRef.ConfigFile.Theme
+        cb_nullDCPriority.SelectedIndex = MainformRef.ConfigFile.NullDCPriority
         FormFilled = True
     End Sub
 
@@ -102,6 +103,7 @@ Public Class frmSetup
         MainformRef.ConfigFile.ShowGameNameInTitle = Convert.ToInt32(cb_ShowGameInTitle.Checked)
         MainformRef.ConfigFile.Vsync = cbVsync.SelectedIndex
         MainformRef.ConfigFile.Theme = cbThemes.SelectedValue
+        MainformRef.ConfigFile.NullDCPriority = cb_nullDCPriority.SelectedIndex
 
         If cbAllowSpectators.Text = "Yes" Then
             MainformRef.ConfigFile.AllowSpectators = 1
