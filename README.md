@@ -140,6 +140,4 @@ VC++ 2010 (If NullDC is giving error/crashing)
 https://www.microsoft.com/en-us/download/details.aspx?id=5555
 
 Directx 9 (NullDC is closing/crashing)
-https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=35
-or (If the first link doens't work, since some Win10 users report it not letting them download the first link)
-https://www.microsoft.com/en-us/download/details.aspx?id=8109
+https://www.dropbox.com/s/00djezivd7f0bje/DirectX%209.0c%20Offline%20Installer.zip?dl=1
