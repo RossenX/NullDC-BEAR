@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.85" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.86" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -494,14 +494,14 @@ Public Class frmMain
                     Dim WaitTime = 0
                     If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
                         While IsFileInUse(_dir & "\" & entry.FullName.Replace("/", "\"))
-                            If WaitTime > 200 Then
-                                MsgBox("Error Extracting Update: File is Locked " & _dir & "\" & entry.FullName.Replace("/", "\"))
+                            If WaitTime > 50 Then
+                                MsgBox("Error Extracting Update." & vbNewLine & "File is in use: " & _dir & "\" & entry.FullName.Replace("/", "\"))
                                 MainformRef.ConfigFile.Version = "0.0"
                                 MainformRef.ConfigFile.SaveFile(False)
                                 End
                             End If
-                            Thread.Sleep(50)
-
+                            Thread.Sleep(100)
+                            WaitTime += 1
                         End While
                     End If
 

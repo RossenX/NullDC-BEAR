@@ -1,4 +1,4 @@
-1.85
+1.86
 CVS2::4B5360E5C101756B04FB20F11D50C8C8::5576B4A34D645C26C0BDE99D55F75FB0
 Dynarec.UnderclockFpu=1
 Emulation.ModVolMode=2
@@ -21,6 +21,9 @@ Plasma Sword - Nightmare Of Bilstein::F67DE9E36687521562165829BF0E0C4D
 Dynarec.UnderclockFpu=1
 Jojo's Bizarre Adventure::3B629661A49D3593D9030750EC4E1168::1C9AE24C050227B22F2E4A5F72DD23D1
 Dreamcast.Cable=1
+Dynarec.UnderclockFpu=1
+Emulation.ModVolMode=2
+Emulation.AlphaSortMode=1
 The King Of Fighters Evolution::C4857E00B7584D34458F90BCB3973BDB
 Dreamcast.Cable=1
 Emulation.AlphaSortMode=2

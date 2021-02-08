@@ -217,6 +217,7 @@ Public Class frmKeyMapperSDL
         TabsToSave.Add(Page_Saturn_Gamepad)
         TabsToSave.Add(Page_SNES_Gamepad)
         TabsToSave.Add(Page_SNES_SuperScope)
+        TabsToSave.Add(Page_SNES_Mouse)
         TabsToSave.Add(Page_Genesis_Gamepad3)
         TabsToSave.Add(Page_Genesis_Gamepad6)
         TabsToSave.Add(Page_NES_Gamepad)
@@ -525,6 +526,7 @@ Public Class frmKeyMapperSDL
         TabsToReset.Add(Page_Saturn_Gamepad)
         TabsToReset.Add(Page_SNES_Gamepad)
         TabsToReset.Add(Page_SNES_SuperScope)
+        TabsToReset.Add(Page_SNES_Mouse)
         TabsToReset.Add(Page_Genesis_Gamepad3)
         TabsToReset.Add(Page_Genesis_Gamepad6)
         TabsToReset.Add(Page_NES_Gamepad)
@@ -549,14 +551,17 @@ Public Class frmKeyMapperSDL
 
         Next
 
-        Select Case ControllerType ' Directional Shit
-            Case "gamepad"
-                PeripheralCB.SelectedIndex = 0
+        If Not MainformRef.IsNullDCRunning Then
+            Select Case ControllerType ' Directional Shit
+                Case "gamepad"
+                    PeripheralCB.SelectedIndex = 0
 
-            Case "fightstick", "keyboard"
-                PeripheralCB.SelectedIndex = 1
+                Case "fightstick", "keyboard"
+                    PeripheralCB.SelectedIndex = 1
 
-        End Select
+            End Select
+        End If
+
 
         'UpdateButtonLabels()
     End Sub
@@ -1133,16 +1138,28 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub ControllerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ControllerToolStripMenuItem.Click
+        If MainformRef.IsNullDCRunning Then
+            MsgBox("Can't do that while NullDC is running.")
+            Exit Sub
+        End If
         AutoGenerateButtonConfigs("gamepad", PlayerTab.SelectedIndex + 1)
         UpdateButtonLabels()
     End Sub
 
     Private Sub ArcadeStickToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ArcadeStickToolStripMenuItem.Click
+        If MainformRef.IsNullDCRunning Then
+            MsgBox("Can't do that while NullDC is running.")
+            Exit Sub
+        End If
         AutoGenerateButtonConfigs("fightstick", PlayerTab.SelectedIndex + 1)
         UpdateButtonLabels()
     End Sub
 
     Private Sub KeyboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KeyboardToolStripMenuItem.Click
+        If MainformRef.IsNullDCRunning Then
+            MsgBox("Can't do that while NullDC is running.")
+            Exit Sub
+        End If
         AutoGenerateButtonConfigs("keyboard", PlayerTab.SelectedIndex + 1)
         UpdateButtonLabels()
     End Sub

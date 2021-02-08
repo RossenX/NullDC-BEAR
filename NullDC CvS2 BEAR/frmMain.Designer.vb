@@ -468,7 +468,7 @@ Partial Class frmMain
         'HostToolStripMenuItem
         '
         Me.HostToolStripMenuItem.Name = "HostToolStripMenuItem"
-        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
         Me.HostToolStripMenuItem.Text = "Host"
         '
         'imgBeta

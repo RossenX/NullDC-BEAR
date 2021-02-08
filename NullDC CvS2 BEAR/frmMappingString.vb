@@ -59,11 +59,11 @@ Public Class frmMappingString
             If _FoundExisting Then
                 File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", _File)
             Else
-                File.AppendAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {_SDL})
+                File.AppendAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {_MED})
             End If
 
         Else
-            File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {_SDL})
+            File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {_MED})
 
         End If
 
