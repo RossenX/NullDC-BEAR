@@ -2,6 +2,7 @@
 Imports SDL2
 Imports SDL2.SDL
 Imports System.IO
+Imports System.Text
 
 Public Class frmKeyMapperSDL
 
@@ -295,6 +296,40 @@ Public Class frmKeyMapperSDL
         End If
 
         File.WriteAllLines(MainformRef.NullDCPath & "\Controls.bear", lines)
+
+        ' Check if we have a mednafen mapping or if we should just make one on the fly
+        Dim MednafenControllerConfigLines
+
+        If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
+            MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
+        Else
+            MednafenControllerConfigLines = {""}
+            MednafenChanged = True
+            MednafenControlChanged = True
+        End If
+
+        For i = 0 To 1
+            If MednafenChanged = False And Not Joystick(i) = -1 Then
+
+                Dim DeviceGUIDasString(40) As Byte
+                SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(i)), DeviceGUIDasString, 40)
+                Dim GUIDSTRING As String = Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
+
+                Dim MednafenMappingFound = False
+                For Each _line In MednafenControllerConfigLines
+                    If _line.StartsWith(GUIDSTRING) Then
+                        MednafenMappingFound = True
+                        Exit For
+                    End If
+                Next
+
+                If Not MednafenMappingFound Then
+                    MednafenChanged = True
+                    MednafenControlChanged = True
+                End If
+
+            End If
+        Next
 
     End Sub
 
