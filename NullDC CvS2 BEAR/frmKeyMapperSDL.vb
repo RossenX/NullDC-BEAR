@@ -339,7 +339,6 @@ Public Class frmKeyMapperSDL
 
         If Not File.Exists(MainformRef.NullDCPath & "\Controls.bear") Then
             GenerateDefaults()
-            SaveSettings()
         End If
 
         Dim LoadingControls As Int16 = 0
