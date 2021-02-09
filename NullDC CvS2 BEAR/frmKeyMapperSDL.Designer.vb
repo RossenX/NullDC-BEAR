@@ -260,6 +260,9 @@ Partial Class frmKeyMapperSDL
         Me.Label67 = New System.Windows.Forms.Label()
         Me.KeybindButton4 = New NullDC_CvS2_BEAR.keybindButton()
         Me.KeybindButton3 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.Page_SNES_Mouse = New System.Windows.Forms.TabPage()
+        Me.KeybindButton13 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton16 = New NullDC_CvS2_BEAR.keybindButton()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.TabControl6 = New System.Windows.Forms.TabControl()
         Me.Page_Genesis_Gamepad3 = New System.Windows.Forms.TabPage()
@@ -370,9 +373,6 @@ Partial Class frmKeyMapperSDL
         Me.ControllerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ArcadeStickToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.KeyboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Page_SNES_Mouse = New System.Windows.Forms.TabPage()
-        Me.KeybindButton13 = New NullDC_CvS2_BEAR.keybindButton()
-        Me.KeybindButton16 = New NullDC_CvS2_BEAR.keybindButton()
         CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.ControllersTab.SuspendLayout()
@@ -396,6 +396,7 @@ Partial Class frmKeyMapperSDL
         Me.TabControl5.SuspendLayout()
         Me.Page_SNES_Gamepad.SuspendLayout()
         Me.Page_SNES_SuperScope.SuspendLayout()
+        Me.Page_SNES_Mouse.SuspendLayout()
         Me.TabPage10.SuspendLayout()
         Me.TabControl6.SuspendLayout()
         Me.Page_Genesis_Gamepad3.SuspendLayout()
@@ -418,7 +419,6 @@ Partial Class frmKeyMapperSDL
         Me.TableLayoutPanel4.SuspendLayout()
         Me.PlayerTab.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
-        Me.Page_SNES_Mouse.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label12
@@ -4384,6 +4384,56 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton3.Text = "X"
         Me.KeybindButton3.UseVisualStyleBackColor = False
         '
+        'Page_SNES_Mouse
+        '
+        Me.Page_SNES_Mouse.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Page_SNES_Mouse.BackgroundImage = CType(resources.GetObject("Page_SNES_Mouse.BackgroundImage"), System.Drawing.Image)
+        Me.Page_SNES_Mouse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_SNES_Mouse.Controls.Add(Me.KeybindButton13)
+        Me.Page_SNES_Mouse.Controls.Add(Me.KeybindButton16)
+        Me.Page_SNES_Mouse.Location = New System.Drawing.Point(4, 22)
+        Me.Page_SNES_Mouse.Name = "Page_SNES_Mouse"
+        Me.Page_SNES_Mouse.Padding = New System.Windows.Forms.Padding(3)
+        Me.Page_SNES_Mouse.Size = New System.Drawing.Size(681, 471)
+        Me.Page_SNES_Mouse.TabIndex = 2
+        Me.Page_SNES_Mouse.Text = "Mouse"
+        '
+        'KeybindButton13
+        '
+        Me.KeybindButton13.BackColor = System.Drawing.Color.White
+        Me.KeybindButton13.ConfigString = "snes.input.port<port>.mouse.right"
+        Me.KeybindButton13.Emu = "mednafen"
+        Me.KeybindButton13.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton13.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton13.KeyCode = New String() {"m1", "m1"}
+        Me.KeybindButton13.KeyDefaults = New String() {"m2,m2,m2", "m2,m2,m2"}
+        Me.KeybindButton13.KeyLocked = True
+        Me.KeybindButton13.Location = New System.Drawing.Point(351, 100)
+        Me.KeybindButton13.Name = "KeybindButton13"
+        Me.KeybindButton13.Size = New System.Drawing.Size(50, 50)
+        Me.KeybindButton13.TabIndex = 88
+        Me.KeybindButton13.Text = "X"
+        Me.KeybindButton13.UseVisualStyleBackColor = False
+        '
+        'KeybindButton16
+        '
+        Me.KeybindButton16.BackColor = System.Drawing.Color.White
+        Me.KeybindButton16.ConfigString = "snes.input.port<port>.mouse.left"
+        Me.KeybindButton16.Emu = "mednafen"
+        Me.KeybindButton16.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton16.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton16.KeyCode = New String() {"m1", "m1"}
+        Me.KeybindButton16.KeyDefaults = New String() {"m1,m1,m1", "m1,m1,m1"}
+        Me.KeybindButton16.KeyLocked = True
+        Me.KeybindButton16.Location = New System.Drawing.Point(284, 100)
+        Me.KeybindButton16.Name = "KeybindButton16"
+        Me.KeybindButton16.Size = New System.Drawing.Size(50, 50)
+        Me.KeybindButton16.TabIndex = 87
+        Me.KeybindButton16.Text = "X"
+        Me.KeybindButton16.UseVisualStyleBackColor = False
+        '
         'TabPage10
         '
         Me.TabPage10.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
@@ -6075,76 +6125,26 @@ Partial Class frmKeyMapperSDL
         '
         Me.AutomaticDefaultsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ControllerToolStripMenuItem, Me.ArcadeStickToolStripMenuItem, Me.KeyboardToolStripMenuItem})
         Me.AutomaticDefaultsToolStripMenuItem.Name = "AutomaticDefaultsToolStripMenuItem"
-        Me.AutomaticDefaultsToolStripMenuItem.Size = New System.Drawing.Size(123, 20)
-        Me.AutomaticDefaultsToolStripMenuItem.Text = "Automatic Controls"
+        Me.AutomaticDefaultsToolStripMenuItem.Size = New System.Drawing.Size(71, 20)
+        Me.AutomaticDefaultsToolStripMenuItem.Text = "Defaults..."
         '
         'ControllerToolStripMenuItem
         '
         Me.ControllerToolStripMenuItem.Name = "ControllerToolStripMenuItem"
-        Me.ControllerToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.ControllerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ControllerToolStripMenuItem.Text = "Controller"
         '
         'ArcadeStickToolStripMenuItem
         '
         Me.ArcadeStickToolStripMenuItem.Name = "ArcadeStickToolStripMenuItem"
-        Me.ArcadeStickToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.ArcadeStickToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ArcadeStickToolStripMenuItem.Text = "Arcade Stick"
         '
         'KeyboardToolStripMenuItem
         '
         Me.KeyboardToolStripMenuItem.Name = "KeyboardToolStripMenuItem"
-        Me.KeyboardToolStripMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.KeyboardToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.KeyboardToolStripMenuItem.Text = "Keyboard"
-        '
-        'Page_SNES_Mouse
-        '
-        Me.Page_SNES_Mouse.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Page_SNES_Mouse.BackgroundImage = CType(resources.GetObject("Page_SNES_Mouse.BackgroundImage"), System.Drawing.Image)
-        Me.Page_SNES_Mouse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Page_SNES_Mouse.Controls.Add(Me.KeybindButton13)
-        Me.Page_SNES_Mouse.Controls.Add(Me.KeybindButton16)
-        Me.Page_SNES_Mouse.Location = New System.Drawing.Point(4, 22)
-        Me.Page_SNES_Mouse.Name = "Page_SNES_Mouse"
-        Me.Page_SNES_Mouse.Padding = New System.Windows.Forms.Padding(3)
-        Me.Page_SNES_Mouse.Size = New System.Drawing.Size(681, 471)
-        Me.Page_SNES_Mouse.TabIndex = 2
-        Me.Page_SNES_Mouse.Text = "Mouse"
-        '
-        'KeybindButton13
-        '
-        Me.KeybindButton13.BackColor = System.Drawing.Color.White
-        Me.KeybindButton13.ConfigString = "snes.input.port<port>.mouse.right"
-        Me.KeybindButton13.Emu = "mednafen"
-        Me.KeybindButton13.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.KeybindButton13.ForeColor = System.Drawing.Color.Black
-        Me.KeybindButton13.KeyCode = New String() {"m1", "m1"}
-        Me.KeybindButton13.KeyDefaults = New String() {"m2,m2,m2", "m2,m2,m2"}
-        Me.KeybindButton13.KeyLocked = True
-        Me.KeybindButton13.Location = New System.Drawing.Point(351, 100)
-        Me.KeybindButton13.Name = "KeybindButton13"
-        Me.KeybindButton13.Size = New System.Drawing.Size(50, 50)
-        Me.KeybindButton13.TabIndex = 88
-        Me.KeybindButton13.Text = "X"
-        Me.KeybindButton13.UseVisualStyleBackColor = False
-        '
-        'KeybindButton16
-        '
-        Me.KeybindButton16.BackColor = System.Drawing.Color.White
-        Me.KeybindButton16.ConfigString = "snes.input.port<port>.mouse.left"
-        Me.KeybindButton16.Emu = "mednafen"
-        Me.KeybindButton16.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton16.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.KeybindButton16.ForeColor = System.Drawing.Color.Black
-        Me.KeybindButton16.KeyCode = New String() {"m1", "m1"}
-        Me.KeybindButton16.KeyDefaults = New String() {"m1,m1,m1", "m1,m1,m1"}
-        Me.KeybindButton16.KeyLocked = True
-        Me.KeybindButton16.Location = New System.Drawing.Point(284, 100)
-        Me.KeybindButton16.Name = "KeybindButton16"
-        Me.KeybindButton16.Size = New System.Drawing.Size(50, 50)
-        Me.KeybindButton16.TabIndex = 87
-        Me.KeybindButton16.Text = "X"
-        Me.KeybindButton16.UseVisualStyleBackColor = False
         '
         'frmKeyMapperSDL
         '
@@ -6194,6 +6194,7 @@ Partial Class frmKeyMapperSDL
         Me.Page_SNES_Gamepad.ResumeLayout(False)
         Me.Page_SNES_SuperScope.ResumeLayout(False)
         Me.Page_SNES_SuperScope.PerformLayout()
+        Me.Page_SNES_Mouse.ResumeLayout(False)
         Me.TabPage10.ResumeLayout(False)
         Me.TabControl6.ResumeLayout(False)
         Me.Page_Genesis_Gamepad3.ResumeLayout(False)
@@ -6223,7 +6224,6 @@ Partial Class frmKeyMapperSDL
         Me.PlayerTab.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        Me.Page_SNES_Mouse.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

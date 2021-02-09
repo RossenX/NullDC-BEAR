@@ -32,7 +32,7 @@ Public Class frmKeyMapperSDL
 
     Private Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
 
-    Private Sub ReloadTheme()
+    Public Sub ReloadTheme()
         ApplyThemeToControl(MenuStrip1)
         ApplyThemeToControl(TableLayoutPanel1, 1)
 
@@ -273,13 +273,13 @@ Public Class frmKeyMapperSDL
                         DreamcastChanged = True
                     End If
 
-                    ' Naomi Only
+                    ' Naomi
                     If _line.StartsWith("I_") Then
                         NaomiChanged = True
                     End If
 
-                    ' Dreamcast Only
-                    If _line.StartsWith("CONT_") Or _line.StartsWith("STICK_") Then
+                    ' Dreamcast
+                    If _line.StartsWith("CONT_") Or _line.StartsWith("STICK_") Or _line.StartsWith("Peripheral=") Then
                         DreamcastChanged = True
                     End If
 
@@ -307,8 +307,17 @@ Public Class frmKeyMapperSDL
             SaveSettings()
         End If
 
-        configLines = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+        Dim LoadingControls As Int16 = 0
+        While MainformRef.IsFileInUse(MainformRef.NullDCPath & "\Controls.bear")
+            If LoadingControls > 20 Then
+                MsgBox("Couldn't load Controls.bear, file is locked or used by another process.")
+                Me.Close()
+            End If
+            SDL_Delay(100)
+            LoadingControls += 1
+        End While
 
+        configLines = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
         RemoveHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
 
         For Each line In configLines
@@ -342,8 +351,6 @@ Public Class frmKeyMapperSDL
 
         Next
 
-        AddHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
-
         For Each _tab As TabPage In ControllersTab.TabPages
             For Each _cont As Control In _tab.Controls
                 If TypeOf _cont Is TabControl Then
@@ -374,6 +381,8 @@ Public Class frmKeyMapperSDL
         End If
 
         cbSDL.SelectedItem = MainformRef.ConfigFile.SDLVersion
+
+        AddHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
 
     End Sub
 
@@ -1054,6 +1063,11 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSDL.Click
+        If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+            MsgBox("Cannot remap while emulation is running.")
+            Exit Sub
+        End If
+
         If ControllerCB.SelectedIndex = 0 Then
             MsgBox("Select a CONTROLLER from the list first. For Keyboard just click a button on the right, when it turns red press a key on your keyboard.")
         Else
@@ -1067,6 +1081,11 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub btnResetAll_Click(sender As Object, e As EventArgs) Handles ResetAllToolStripMenuItem.Click
+        If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+            MsgBox("Cannot reset all while emulation is running.")
+            Exit Sub
+        End If
+
         Dim result1 As DialogResult = MessageBox.Show("This will Reset ALL the controls, k?", "Reset All?", MessageBoxButtons.YesNo)
 
         If result1 = DialogResult.Yes Then
@@ -1109,6 +1128,10 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub ImportMappingStringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportMappingStringToolStripMenuItem.Click
+        If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+            MsgBox("Cannot edit mapping string while emulation is running.")
+            Exit Sub
+        End If
 
         If ControllerCB.SelectedIndex = 0 Then
             MsgBox("Mapping Strings are for Controllers only, select one from the list below.")

@@ -779,6 +779,8 @@ Module BEARTheme
                     DirectCast(_form, frmMednafenOptions).ReloadTheme()
                 Case GetType(frmDM)
                     DirectCast(_form, frmDM).ReloadTheme()
+                Case GetType(frmKeyMapperSDL)
+                    DirectCast(_form, frmKeyMapperSDL).ReloadTheme()
             End Select
         Next
 
