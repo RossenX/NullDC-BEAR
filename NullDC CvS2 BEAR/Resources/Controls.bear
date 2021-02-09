@@ -1,7 +1,7 @@
 1.86a
 Joystick=0|-1
 Deadzone=25|25
-Peripheral=0|0
+Peripheral=0|1
 MednafenControllerID=0x0|0x0
 I_BC_345=k0|k0
 I_BC_012=k0|k0
