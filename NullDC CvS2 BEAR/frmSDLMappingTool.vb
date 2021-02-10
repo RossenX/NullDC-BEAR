@@ -158,7 +158,7 @@ Public Class frmSDLMappingTool
                 End Sub)
 
             SDL_FlushEvents(0, 65535)
-            While SDL_WaitEventTimeout(_event, 50)
+            While SDL_WaitEvent(_event)
                 ' Write the capabilities
                 UpdateHelpTest()
 
@@ -216,6 +216,18 @@ Public Class frmSDLMappingTool
 
                             If Not AxisDown.ContainsKey(KeyPressed.Replace("-", "").Replace("+", "")) Then
                                 AxisDown.Add(KeyPressed.Replace("-", "").Replace("+", ""), _event.jaxis.axisValue)
+
+                                For i = 0 To SDL_JoystickNumAxes(Joy)
+                                    Dim DuplicatedAxisValue = SDL_JoystickGetAxis(Joy, i)
+                                    If Not i = _event.jaxis.axis And DuplicatedAxisValue = _event.jaxis.axisValue And
+                                        Not DuplicatedAxisValue = AxisIdle(i) Then
+                                        Console.WriteLine("Found Duplicate Axis: " & i & "|" & _event.jaxis.axis)
+                                        If Not AxisDown.ContainsKey("a" & i) Then
+                                            AxisDown.Add("a" & i, DuplicatedAxisValue)
+                                        End If
+                                    End If
+                                Next
+
                             Else
                                 KeyPressed = ""
                             End If
