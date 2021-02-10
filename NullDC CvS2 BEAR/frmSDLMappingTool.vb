@@ -214,8 +214,8 @@ Public Class frmSDLMappingTool
 
                             End If
 
-                            If Not AxisDown.ContainsKey(KeyPressed) Then
-                                AxisDown.Add(KeyPressed, _event.jaxis.axisValue)
+                            If Not AxisDown.ContainsKey(KeyPressed.Replace("-", "").Replace("+", "")) Then
+                                AxisDown.Add(KeyPressed.Replace("-", "").Replace("+", ""), _event.jaxis.axisValue)
                             Else
                                 KeyPressed = ""
                             End If
