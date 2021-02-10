@@ -6,7 +6,7 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = True
+    Public IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -185,6 +185,8 @@ Public Class frmMain
             CheckSDLVersion()
         Catch ex As Exception
             MsgBox("Unable to unpack emulator/update, error: " & ex.Message)
+            ConfigFile.Version = "0.0"
+            ConfigFile.SaveFile(False)
             End
         End Try
 
@@ -511,6 +513,14 @@ Public Class frmMain
                     End If
 
                     WaitTime = 0
+                    While File.Exists(_dir & "\" & entry.FullName.Replace("/", "\"))
+                        If WaitTime > 200 Then
+                            MsgBox("Error Extracting Update: Could not delete old file " & _dir & "\" & entry.FullName.Replace("/", "\"))
+
+                        End If
+                        Thread.Sleep(50)
+                    End While
+
                     If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
                         While IsFileInUse(_dir & "\" & entry.FullName.Replace("/", "\"))
                             If WaitTime > 200 Then

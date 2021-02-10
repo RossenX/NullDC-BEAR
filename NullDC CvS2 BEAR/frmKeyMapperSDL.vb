@@ -80,6 +80,7 @@ Public Class frmKeyMapperSDL
                     Console.WriteLine("SDL_INIT JOYSTICK")
                 End If
 
+
                 SDL_Delay(100)
                 DoInitialSetupShit()
                 LoadSettings()
@@ -94,7 +95,6 @@ Public Class frmKeyMapperSDL
                 AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
                 AddHandler PlayerTab.SelectedIndexChanged, AddressOf PlayerTab_SelectedIndexChanged
                 AddHandler ControllersTab.SelectedIndexChanged, Sub() ActiveControl = Nothing
-
 
                 If MainformRef.IsNullDCRunning Then
                     PeripheralCB.Enabled = False
@@ -111,9 +111,6 @@ Public Class frmKeyMapperSDL
             Console.WriteLine(ex.InnerException)
 
         End Try
-
-
-
 
     End Sub
 
@@ -261,17 +258,11 @@ Public Class frmKeyMapperSDL
                 If Not _tmpConfigFile.Contains(_line) And Not _line Is Nothing Then
 
                     ' Deadzone change applies to all
-                    If _line.StartsWith("Deadzone=") Then
+                    If _line.StartsWith("Deadzone=") Or _line.StartsWith("Joystick=") Then
                         NaomiChanged = True
                         DreamcastChanged = True
                         MednafenChanged = True
                         MednafenControlChanged = True
-                    End If
-
-                    ' Joystick Change Applies to NullDC Only
-                    If _line.StartsWith("Joystick=") Then
-                        NaomiChanged = True
-                        DreamcastChanged = True
                     End If
 
                     ' Naomi
@@ -796,6 +787,7 @@ Public Class frmKeyMapperSDL
                             Else
                                 _TranslatedControls(i).Add(_splitsplit(0), _splitsplit(1))
                             End If
+
                         Next
                     End If
                 End If
@@ -914,6 +906,9 @@ Public Class frmKeyMapperSDL
                     Next
 
                     If Not tmpControlString = "" Then
+                        If tmpControlString.Contains("nes.") Then
+                            Console.WriteLine(tmpControlString)
+                        End If
                         MednafenConfigs(linenumber) = tmpControlString
                     End If
 
@@ -990,7 +985,11 @@ Public Class frmKeyMapperSDL
         End If
 
         DeadzoneTB.Value = Deadzone(PlayerTab.SelectedIndex)
-        PeripheralCB.SelectedIndex = Peripheral(PlayerTab.SelectedIndex)
+        If Not Peripheral(PlayerTab.SelectedIndex) = "0" And Peripheral(PlayerTab.SelectedIndex) = "1" Then
+            PeripheralCB.SelectedIndex = 0
+        Else
+            PeripheralCB.SelectedIndex = Peripheral(PlayerTab.SelectedIndex)
+        End If
 
         If Not Joystick(PlayerTab.SelectedIndex) = -1 Then
             Joy = SDL_GameControllerOpen(Joystick(PlayerTab.SelectedIndex))

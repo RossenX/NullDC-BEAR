@@ -922,7 +922,7 @@ Module BEARTheme
     End Function
 
     Dim ButtonNames As String() = {"b0", "b1", "b2", "b3", "b4",
-        "b5", "b6", "b7", "b8",
+        "b6", "b7", "b8",
         "b9", "b10",
         "b11", "b12", "b13", "b14",
         "a0+", "a0-", "a1+", "a1-",
@@ -930,7 +930,7 @@ Module BEARTheme
         "a4+", "a5+"}
 
     Dim ButtonMappedName As String() = {"a", "b", "x", "y", "back",
-        "guide", "start", "leftstick", "rightstick",
+        "start", "leftstick", "rightstick",
         "leftshoulder", "rightshoulder",
         "dpup", "dpdown", "dpleft", "dpright",
         "leftx", "leftx", "lefty", "lefty",
@@ -1076,16 +1076,6 @@ Module BEARTheme
 
     Public Function GetFullMappingStringforIndex(ByVal _index) As String
 
-        'Get MednafenID
-        Dim MednafenControllerID(2) As String
-        For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\controls.bear")
-            If line.StartsWith("MednafenControllerID=") Then
-                MednafenControllerID(0) = line.Split("=")(1).Split("|")(0)
-                MednafenControllerID(1) = line.Split("=")(1).Split("|")(1)
-                Exit For
-            End If
-        Next
-
         Dim Fullstring = ""
 
         Dim DeviceGUIDasString(40) As Byte
@@ -1115,6 +1105,14 @@ Module BEARTheme
         If Not MednafenMappingFound Then
             Dim Joy = SDL_JoystickOpen(_index)
             Dim _numAxis = SDL_JoystickNumAxes(Joy)
+
+            ' If for w.e reason it could not get the mapping or one was never created for this device, then take a shot at using the xinput defaults
+            If _SDLMapping Is Nothing Then
+                _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
+            ElseIf _SDLMapping = "" Then
+                _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
+            End If
+
             Dim MednafenTranslated = BEARButtonToMednafenButton(_SDLMapping, _numAxis)
             If _MednafenMapping = "" Then
                 _MednafenMapping = GUIDSTRING
@@ -1122,11 +1120,17 @@ Module BEARTheme
                     _MednafenMapping += "," & MednafenTranslated.Keys(i) & ":" & MednafenTranslated.Values(i)
                 Next
             End If
+
             SDL_JoystickClose(Joy)
+        End If
+
+        If Not _SDLMapping.Trim.EndsWith("platform:Windows,") Then
+            If Not _SDLMapping.Trim.EndsWith(",") Then _SDLMapping += ","
+            _SDLMapping += "platform:Windows,"
 
         End If
 
-        Return _SDLMapping & "|" & _MednafenMapping
+        Return _SDLMapping.Trim & "|" & _MednafenMapping.Trim
 
     End Function
 
@@ -1143,9 +1147,9 @@ Module BEARTheme
                 Converted = "button_14"
             Case "button_3" ' Y
                 Converted = "button_15"
-            Case "button_4" ' LT
+            Case "button_4" ' LS
                 Converted = "button_8"
-            Case "button_5" ' RT
+            Case "button_5" ' RS
                 Converted = "button_9"
             Case "button_6" ' Select
                 Converted = "button_5"
@@ -1155,41 +1159,29 @@ Module BEARTheme
                 Converted = "button_6"
             Case "button_9" ' R3
                 Converted = "button_7"
-            Case "button_10"
         End Select
 
         ' Convert Axis
         If Converted.Contains("abs_0") Then
-            ' All good here
         ElseIf Converted.Contains("abs_1") Then
             Reverse = True
-
         ElseIf Converted.Contains("abs_2") Then
-            Converted = Converted.Replace("abs_2", "abs_4")
-
         ElseIf Converted.Contains("abs_3") Then
-            Converted = Converted.Replace("abs_3", "abs_2")
-
-        ElseIf Converted.Contains("abs_4") Then
-            Converted = Converted.Replace("abs_4", "abs_3")
             Reverse = True
-
+        ElseIf Converted.Contains("abs_4") Then
         ElseIf Converted.Contains("abs_5") Then
-            ' All good here
         ElseIf Converted.Contains("abs_6") Then
             If Converted.Contains("-") Then
-                Converted = "button_2"
+                Converted = "button_2" ' DPAD
             Else
-                Converted = "button_3"
+                Converted = "button_3" ' DPAD
             End If
-
         ElseIf Converted.Contains("abs_7") Then
             If Converted.Contains("-") Then
-                Converted = "button_0"
+                Converted = "button_0" ' DPAD
             Else
-                Converted = "button_1"
+                Converted = "button_1" ' DPAD
             End If
-
         End If
 
         If Reverse Then
