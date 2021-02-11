@@ -158,7 +158,7 @@ Public Class frmSDLMappingTool
                 End Sub)
 
             SDL_FlushEvents(0, 65535)
-            While SDL_WaitEvent(_event)
+            While SDL_WaitEventTimeout(_event, 50)
                 ' Write the capabilities
                 UpdateHelpTest()
 
