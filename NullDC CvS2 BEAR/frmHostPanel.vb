@@ -9,9 +9,6 @@ Public Class frmHostPanel
     Public Sub New(ByRef _mf As frmMain)
         InitializeComponent()
 
-
-
-
     End Sub
 
     Public Sub BeginHost(Optional ByVal _challenger As BEARPlayer = Nothing)

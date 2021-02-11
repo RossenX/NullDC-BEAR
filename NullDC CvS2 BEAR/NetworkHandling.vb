@@ -165,7 +165,9 @@ Public Class NetworkHandling
                 Console.WriteLine("<-Being Challenged->")
                 If MainformRef.IsNullDCRunning And (Not MainformRef.Challenger Is Nothing Or MainformRef.ConfigFile.Status = "Offline") Then
                     If MainformRef.ConfigFile.AllowSpectators = 0 Then SendMessage(">,NS", senderip) : Exit Sub
-                    If Rx.platform = "na" Then SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
+                    If Rx.platform = "na" Then
+                        SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
+                    End If
 
                 ElseIf Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
 

@@ -985,7 +985,7 @@ Public Class frmKeyMapperSDL
         End If
 
         DeadzoneTB.Value = Deadzone(PlayerTab.SelectedIndex)
-        If Not Peripheral(PlayerTab.SelectedIndex) = "0" And Peripheral(PlayerTab.SelectedIndex) = "1" Then
+        If Not Peripheral(PlayerTab.SelectedIndex) = "0" And Not Peripheral(PlayerTab.SelectedIndex) = "1" Then
             PeripheralCB.SelectedIndex = 0
         Else
             PeripheralCB.SelectedIndex = Peripheral(PlayerTab.SelectedIndex)
