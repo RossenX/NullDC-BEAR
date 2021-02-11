@@ -237,6 +237,7 @@ Public Class frmSDLMappingTool
                         If Not KeyPressed = "" Then
                             SDL_FlushEvents(0, 65535)
                             Exit While
+
                         End If
 
                     Case SDL_EventType.SDL_JOYHATMOTION  ' Hat Motion
@@ -248,8 +249,6 @@ Public Class frmSDLMappingTool
                                 Not ListOfGamepadKeys(_currentBindIndex) = "righty" Then
                                 KeyPressed = "h" & CDec(_event.jhat.hatValue / 10).ToString.Replace(",", ".")
                             End If
-
-
 
                             Exit While
                         End If
