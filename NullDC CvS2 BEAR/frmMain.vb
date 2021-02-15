@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.86d" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.88" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -825,6 +825,22 @@ Public Class frmMain
 
         End If
 
+        If _system = "all" Or _system = "sms" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\sms") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\sms")
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\sms", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("SMS-" & RomName) Then
+                    GamesList.Add("SMS-" & RomName, {GameName, RomPath, "sms", ""})
+                End If
+            Next
+
+        End If
+
         If _system = "all" Or _system = "psx" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\psx") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\psx")
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.cue", SearchOption.AllDirectories)
@@ -1018,7 +1034,7 @@ Public Class frmMain
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "na"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
-            Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc", "fds"
+            Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc", "fds", "sms"
                 MednafenLauncher.LaunchEmulator(_romname)
             Case Else
                 MsgBox("Missing emulator type: " & Emulator)

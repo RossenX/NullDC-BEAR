@@ -77,12 +77,12 @@ Public Class MednafenSetting
 
                 If Not _loadedValue = "" Then
 
-                    If CInt(_loadedValue.Trim * ChangeRate) > Controller.Maximum Then
+                    If (CInt(_loadedValue.Trim) * ChangeRate) > Controller.Maximum Then
                         Controller.Value = Controller.Maximum
-                    ElseIf CInt(_loadedValue.Trim * ChangeRate) < Controller.Minimum Then
+                    ElseIf (CInt(_loadedValue.Trim) * ChangeRate) < Controller.Minimum Then
                         Controller.Value = Controller.Minimum
                     Else
-                        Controller.Value = CInt(_loadedValue * ChangeRate)
+                        Controller.Value = (CInt(_loadedValue) * ChangeRate)
                     End If
 
                 End If
@@ -128,7 +128,6 @@ Public Class MednafenSetting
 
                 AddHandler Controller.SelectedIndexChanged, Sub()
                                                                 UpdateCFG(Controller.Text)
-
                                                             End Sub
 
                 SettingContainer.SetRow(Controller, 1)

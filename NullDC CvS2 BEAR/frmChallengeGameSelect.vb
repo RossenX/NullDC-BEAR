@@ -316,6 +316,8 @@ Public Class frmChallengeGameSelect
                     TabName = "GBC"
                 Case "fds"
                     TabName = "Famicom Disk System"
+                Case "sms"
+                    TabName = "Sega Master System"
                 Case Else
                     TabName = "Unknown"
                     Console.WriteLine("No System?")

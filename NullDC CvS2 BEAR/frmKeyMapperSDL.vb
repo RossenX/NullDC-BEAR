@@ -223,6 +223,7 @@ Public Class frmKeyMapperSDL
         TabsToSave.Add(Page_GBA_GBA)
         TabsToSave.Add(Page_GBC_GBC)
         TabsToSave.Add(Page_NGP_NGP)
+        TabsToSave.Add(Page_SMS_Gamepad)
 
         Dim KeyCount = 5
 
@@ -568,6 +569,7 @@ Public Class frmKeyMapperSDL
         TabsToReset.Add(Page_GBA_GBA)
         TabsToReset.Add(Page_GBC_GBC)
         TabsToReset.Add(Page_NGP_NGP)
+        TabsToReset.Add(Page_SMS_Gamepad)
 
         For Each _tab As TabPage In TabsToReset
             For Each _tabCont As Control In _tab.Controls
