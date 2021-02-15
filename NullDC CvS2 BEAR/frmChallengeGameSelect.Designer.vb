@@ -22,8 +22,6 @@ Partial Class frmChallengeGameSelect
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmChallengeGameSelect))
         Me.btnLetsGo = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.tc_games = New System.Windows.Forms.TabControl()
@@ -41,7 +39,6 @@ Partial Class frmChallengeGameSelect
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
-        Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.DLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultidiscPlaylistCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -288,22 +285,6 @@ Partial Class frmChallengeGameSelect
         Me.cbRegion.Size = New System.Drawing.Size(68, 21)
         Me.cbRegion.TabIndex = 23
         '
-        'SystemIcons
-        '
-        Me.SystemIcons.ImageStream = CType(resources.GetObject("SystemIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.SystemIcons.TransparentColor = System.Drawing.Color.Transparent
-        Me.SystemIcons.Images.SetKeyName(0, "icon_Naomi.png")
-        Me.SystemIcons.Images.SetKeyName(1, "icon_dreamcast.png")
-        Me.SystemIcons.Images.SetKeyName(2, "Icon_SegaSaturn.png")
-        Me.SystemIcons.Images.SetKeyName(3, "icon_Genesis.png")
-        Me.SystemIcons.Images.SetKeyName(4, "icon_PSX.png")
-        Me.SystemIcons.Images.SetKeyName(5, "icon_NES.png")
-        Me.SystemIcons.Images.SetKeyName(6, "icon_SNES.png")
-        Me.SystemIcons.Images.SetKeyName(7, "icon_fds.png")
-        Me.SystemIcons.Images.SetKeyName(8, "icon_NGP.png")
-        Me.SystemIcons.Images.SetKeyName(9, "icon_GBA.png")
-        Me.SystemIcons.Images.SetKeyName(10, "icon_GBC.png")
-        '
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DLCToolStripMenuItem, Me.MultidiscPlaylistCreatorToolStripMenuItem})
@@ -362,7 +343,6 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents Label3 As Label
     Friend WithEvents GameSelectContainer As TableLayoutPanel
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents SystemIcons As ImageList
     Friend WithEvents tb_nulldc As TableLayoutPanel
     Friend WithEvents cbDelay As ComboBox
     Friend WithEvents Label2 As Label

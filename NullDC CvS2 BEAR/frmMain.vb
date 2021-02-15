@@ -1247,6 +1247,7 @@ Public Class frmMain
                     Case "NGP" : IconIndex = 8
                     Case "GBA" : IconIndex = 9
                     Case "GBC" : IconIndex = 10
+                    Case "SMS" : IconIndex = 11
                 End Select
             End If
 
