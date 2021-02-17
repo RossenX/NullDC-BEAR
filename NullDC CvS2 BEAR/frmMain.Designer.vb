@@ -86,6 +86,7 @@ Partial Class frmMain
         Me.Matchlist.FullRowSelect = True
         Me.Matchlist.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.Matchlist.HideSelection = False
+        Me.Matchlist.LargeImageList = Me.SystemIcons
         Me.Matchlist.Location = New System.Drawing.Point(261, 37)
         Me.Matchlist.Margin = New System.Windows.Forms.Padding(2, 2, 0, 0)
         Me.Matchlist.MultiSelect = False
@@ -530,7 +531,6 @@ Partial Class frmMain
     Friend WithEvents MainMenuContainer As TableLayoutPanel
     Friend WithEvents lbVer As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents SystemIcons As ImageList
     Friend WithEvents _MainMenuStrip As MenuStrip
     Friend WithEvents OptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReplaysToolStripMenuItem As ToolStripMenuItem
@@ -551,4 +551,5 @@ Partial Class frmMain
     Friend WithEvents GaggedUsersToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ForceOpenPanelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HostToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SystemIcons As ImageList
 End Class

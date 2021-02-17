@@ -93,6 +93,10 @@
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PDFco.Downloader, Version=2.0.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFcoDownloader.2.0.2.1\lib\net35\PDFco.Downloader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SDL2-CS, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SDL2-CS-Updated.1.0.0\lib\Release\SDL2-CS.dll</HintPath>
       <Private>True</Private>
@@ -129,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Custom Components\ccDownload.Designer.vb">
+      <DependentUpon>ccDownload.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Components\ccDownload.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="frmDLCCreator.Designer.vb">
       <DependentUpon>frmDLCCreator.vb</DependentUpon>
     </Compile>
@@ -169,6 +179,12 @@
       <DependentUpon>frmDM.vb</DependentUpon>
     </Compile>
     <Compile Include="frmDM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDownloading.Designer.vb">
+      <DependentUpon>frmDownloading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDownloading.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHostPanel.Designer.vb">
@@ -290,6 +306,9 @@
     <Compile Include="WindowsApi.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Custom Components\ccDownload.resx">
+      <DependentUpon>ccDownload.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChallenge.resx">
       <DependentUpon>frmChallenge.vb</DependentUpon>
     </EmbeddedResource>
@@ -310,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDM.resx">
       <DependentUpon>frmDM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDownloading.resx">
+      <DependentUpon>frmDownloading.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmHostPanel.resx">
       <DependentUpon>frmHostPanel.vb</DependentUpon>
