@@ -563,13 +563,7 @@ Public Class frmMain
 
         ' Remove any honey files that may have been left over if someone quit or it crashed or w.e reason, but if it fails then fuck it let em stay
         Try
-            Dim _honey As String() = Directory.GetFiles(NullDCPath & "\roms", "*.honey")
-            For Each _file In _honey
-                File.SetAttributes(_file, FileAttributes.Normal)
-                File.Delete(_file)
-            Next
-
-            _honey = Directory.GetFiles(NullDCPath & "\dc\roms", "*.honey")
+            Dim _honey As String() = Directory.GetFiles(NullDCPath, "*.honey", SearchOption.AllDirectories)
             For Each _file In _honey
                 File.SetAttributes(_file, FileAttributes.Normal)
                 File.Delete(_file)

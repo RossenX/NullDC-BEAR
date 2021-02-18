@@ -35,8 +35,8 @@ Partial Class frmDownloading
         Me.tlp_downloads.Name = "tlp_downloads"
         Me.tlp_downloads.RowCount = 1
         Me.tlp_downloads.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_downloads.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160.0!))
-        Me.tlp_downloads.Size = New System.Drawing.Size(287, 210)
+        Me.tlp_downloads.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 210.0!))
+        Me.tlp_downloads.Size = New System.Drawing.Size(358, 210)
         Me.tlp_downloads.TabIndex = 0
         '
         'frmDownloading
@@ -44,7 +44,7 @@ Partial Class frmDownloading
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(287, 210)
+        Me.ClientSize = New System.Drawing.Size(358, 210)
         Me.Controls.Add(Me.tlp_downloads)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "frmDownloading"

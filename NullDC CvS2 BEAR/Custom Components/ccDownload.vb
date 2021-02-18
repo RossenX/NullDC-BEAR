@@ -11,6 +11,8 @@ Imports PDFco.Downloader.Utils
 Public Class ccDownload
     Dim finished As Boolean = False
 
+    Public URL_String As String = ""
+
     Dim url As Uri
     Dim FileFormat As String = ""
 
@@ -24,7 +26,7 @@ Public Class ccDownload
     Dim rdlBuilder = New ResumingDownloadBuilder(timeForHeartbear, timeToRetry, maxRetries, httpDlBuilder)
     Dim DownlaodRange = New List(Of Contract.DownloadRange)
     Dim bufferSize = 4096
-    Dim numberOfParts = 4
+    Dim numberOfParts = 1
     Dim maxRetryDownloadparts = 10
 
     Dim download As MultiPartDownload
@@ -39,6 +41,7 @@ Public Class ccDownload
 
     Public Sub New(ByVal _URL As String, ByVal _filename As String, ByVal _extract As String)
         InitializeComponent()
+        URL_String = _URL
         '_URL = WebUtility.UrlDecode(_URL)
 
         Console.WriteLine("Starting Download")
@@ -69,7 +72,8 @@ Public Class ccDownload
         Try
 
             Me.Invoke(Sub()
-                          Label1.Text = fileinf.Name.Split(".")(0)
+                          Label1.Text = "Starting..."
+                          Label2.Text = fileinf.Name.Replace(".honey", "")
                       End Sub)
 
             dlSaver.Attach(download)
@@ -86,11 +90,13 @@ Public Class ccDownload
                 MsgBox("Download Error: Downloading too many files at once, refused by host." & vbNewLine & "Wait for downloads to finish, then try again.")
 
             Else
-
                 MsgBox("Download Error:" & ex.Message)
             End If
-            CleanUp()
 
+            CleanUp(False)
+            Me.Invoke(Sub()
+                          Label1.Text = "Download Error: " & ex.Message
+                      End Sub)
         End Try
 
         While Not finished
@@ -98,9 +104,9 @@ Public Class ccDownload
             Me.Invoke(Sub()
                           ProgressBar1.Value = ProgressMonitor.GetCurrentProgressPercentage(download) * 100
                           If Math.Round(ProgressMonitor.GetCurrentProgressInBytes(download) / 1000000, 2) = 0 Then
-                              Label1.Text = fileinf.Name.Split(".")(0) & " Preallocating..."
+                              Label1.Text = "Preallocating..."
                           Else
-                              Label1.Text = Math.Round(SpeedMonitor.GetCurrentBytesPerSecond / 1000, 2) & "kbp/s (" & Math.Round(ProgressMonitor.GetCurrentProgressInBytes(download) / 1000000, 2) & "mb/" & Math.Round(ProgressMonitor.GetTotalFilesizeInBytes(download) / 1000000, 2) & "mb)" & " " & fileinf.Name.Split(".")(0)
+                              Label1.Text = Math.Round(SpeedMonitor.GetCurrentBytesPerSecond / 1000, 2) & "kbp/s (" & Math.Round(ProgressMonitor.GetCurrentProgressInBytes(download) / 1000000, 2) & "mb/" & Math.Round(ProgressMonitor.GetTotalFilesizeInBytes(download) / 1000000, 2) & "mb)"
                           End If
 
                       End Sub)
@@ -176,28 +182,39 @@ Public Class ccDownload
 
         End Select
 
+        Me.Invoke(Sub()
+                      MainformRef.NotificationForm.ShowMessage("Enjoy " & fileinf.Name.Replace(".honey", ""))
+                  End Sub)
     End Sub
 
-    Private Sub CleanUp()
+    Private Sub CleanUp(Optional _remove As Boolean = True)
         finished = True
         download.DetachAllHandlers()
         dlSaver.DetachAll()
         ProgressMonitor.DetachAll()
         SpeedMonitor.DetachAll()
+        download.Dispose()
 
-
-        While MainformRef.IsFileInUse(fileinf.FullName)
-            Thread.Sleep(500)
-        End While
+        If fileinf.Exists Then
+            While MainformRef.IsFileInUse(fileinf.FullName)
+                If Not fileinf.Exists Then Exit While
+                Thread.Sleep(500)
+            End While
+        End If
 
         Me.Invoke(Sub()
-                      File.Delete(fileinf.FullName)
-                      Me.Parent.Controls.Remove(Me)
+                      If fileinf.Exists Then fileinf.Delete()
+                      If _remove Then
+                          Me.Parent.Controls.Remove(Me)
+                      End If
                   End Sub)
 
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        If finished Then
+            CleanUp()
+        End If
 
         If Math.Round(ProgressMonitor.GetCurrentProgressInBytes(download) / 1000000, 2) > 0 Then
 
@@ -205,6 +222,11 @@ Public Class ccDownload
             download.Stop()
 
         End If
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Process.Start(fileinf.Directory.ToString, "")
 
     End Sub
 
