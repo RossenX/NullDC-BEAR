@@ -180,14 +180,27 @@ Public Class frmMain
         CheckifUpdateRequired()
         ConfigFile = New Configs(NullDCPath)
 
+        Dim UpdateTries = 0
+
+UpdateTry:
         Try
+            UpdateTries += 1
             UnpackUpdate()
             CheckSDLVersion()
         Catch ex As Exception
-            MsgBox("Unable to unpack emulator/update, error: " & ex.Message)
-            ConfigFile.Version = "0.0"
-            ConfigFile.SaveFile(False)
-            End
+            If UpdateTries > 5 Then
+                MsgBox("Unable to unpack emulator/update, error: " & ex.Message)
+                ConfigFile.Version = "0.0"
+                ConfigFile.SaveFile(False)
+                End
+
+            Else
+                Thread.Sleep(100)
+                Console.WriteLine("Failed to update: " & ex.Message)
+                GoTo UpdateTry
+
+            End If
+
         End Try
 
         ' Once we're all done then add the version name so if it fails we try to update again next run

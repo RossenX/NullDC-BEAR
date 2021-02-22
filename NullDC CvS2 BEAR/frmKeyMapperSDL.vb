@@ -662,6 +662,8 @@ Public Class frmKeyMapperSDL
             If line.StartsWith("Peripheral=") Then
                 tempPeripheral(0) = line.Split("=")(1).Split("|")(0)
                 tempPeripheral(1) = line.Split("=")(1).Split("|")(1)
+                MainformRef.ConfigFile.Peripheral = tempPeripheral(0)
+                MainformRef.ConfigFile.SaveFile(False)
             End If
             If line.StartsWith("Joystick=") Then
                 tempJoystick(0) = line.Split("=")(1).Split("|")(0)
