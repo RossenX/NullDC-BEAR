@@ -61,6 +61,9 @@ Public Class ccDownload
         _thread.IsBackground = True
         _thread.Start()
 
+        Label1.Text = "Starting..."
+        Label2.Text = fileinf.Name.Replace(".honey", "")
+
     End Sub
 
     Public Sub New()
@@ -69,13 +72,8 @@ Public Class ccDownload
     End Sub
 
     Private Sub StartDownlaod()
+
         Try
-
-            Me.Invoke(Sub()
-                          Label1.Text = "Starting..."
-                          Label2.Text = fileinf.Name.Replace(".honey", "")
-                      End Sub)
-
             dlSaver.Attach(download)
             ProgressMonitor.Attach(download)
             SpeedMonitor.Attach(download)
