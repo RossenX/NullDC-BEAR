@@ -255,6 +255,8 @@ Module Rx
                 cfgEntry = "gb"
             Case "fds"
                 cfgEntry = "nes"
+            Case "sms"
+                cfgEntry = "sms"
             Case Else
                 MsgBox("Missing emulator type: " & MainformRef.GamesList(MainformRef.ConfigFile.Game)(2))
         End Select
@@ -297,6 +299,8 @@ Module Rx
                 cfgEntry = "gb"
             Case "fds"
                 cfgEntry = "nes"
+            Case "sms"
+                cfgEntry = "sms"
             Case Else
                 MsgBox("Missing emulator type: " & MainformRef.GamesList(MainformRef.ConfigFile.Game)(2))
         End Select
