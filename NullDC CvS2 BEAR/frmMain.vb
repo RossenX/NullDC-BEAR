@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.88c" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.88d" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -19,7 +19,8 @@ Public Class frmMain
     Public NullDCLauncher As New NullDCLauncher
     Public MednafenLauncher As New MednafenLauncher
 
-    Public NullDCPath As String = Application.StartupPath
+    Public NullDCPath As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly.Location())
+
     Public GamesList As New Dictionary(Of String, Array)
     Public ConfigFile As Configs
     Public FirstRun As Boolean = True
@@ -2110,8 +2111,18 @@ Public Class Configs
     Private _theme As String = "Dark"
     Private _p2Name As String = "Local P2"
     Private _nullDCPriorty As Int16 = 0
+    Private _DebugControls As Int16 = 0
 
 #Region "Properties"
+
+    Public Property DebugControls() As Int16
+        Get
+            Return _DebugControls
+        End Get
+        Set(ByVal value As Int16)
+            _DebugControls = value
+        End Set
+    End Property
 
     Public Property NullDCPriority() As Int16
         Get
@@ -2397,7 +2408,8 @@ Public Class Configs
                 "Vsync=" & Vsync,
                 "Theme=" & Theme,
                 "P2Name=" & P2Name,
-                "NullDCPriority=" & NullDCPriority
+                "NullDCPriority=" & NullDCPriority,
+                "DebugControls=" & DebugControls
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -2467,6 +2479,7 @@ Public Class Configs
                 If line.StartsWith("Theme=") Then Theme = line.Split("=")(1).Trim
                 If line.StartsWith("P2Name=") Then P2Name = line.Split("=")(1).Trim
                 If line.StartsWith("NullDCPriority=") Then NullDCPriority = line.Split("=")(1).Trim
+                If line.StartsWith("DebugControls=") Then DebugControls = line.Split("=")(1).Trim
             Next
 
             Game = "None"

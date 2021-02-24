@@ -176,6 +176,9 @@ Public Class frmKeyMapperSDL
 
     Private Sub SaveSettings()
 
+        MainformRef.ConfigFile.DebugControls = DebugControlsCB.SelectedIndex
+        MainformRef.ConfigFile.SaveFile(False)
+
         Dim lines(256) As String
 
         Dim MednafenControllerID = GetMednafenControllerIDs()
@@ -407,6 +410,7 @@ Public Class frmKeyMapperSDL
         End If
 
         cbSDL.SelectedItem = MainformRef.ConfigFile.SDLVersion
+        DebugControlsCB.SelectedIndex = MainformRef.ConfigFile.DebugControls
 
         AddHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
 
@@ -680,250 +684,266 @@ Public Class frmKeyMapperSDL
         Next
 
         ' Naomi Controls
-
         Dim linenumber = 0
-        If NaomiChanged Then
-            For Each line As String In NaomiConfigs
-                btn_Close.Text = "Saving Naomi..."
-                If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
-                    Dim player = 0 ' Default player 1 is index 0
-                    If line.StartsWith("BPortB") Then player = 1 ' This is port B so it's player 2 index 1
+        Try
+            If NaomiChanged Then
+                For Each line As String In NaomiConfigs
+                    btn_Close.Text = "Saving Naomi..."
+                    If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
+                        Dim player = 0 ' Default player 1 is index 0
+                        If line.StartsWith("BPortB") Then player = 1 ' This is port B so it's player 2 index 1
 
-                    Dim KeyFound = False
-                    For Each control_line As String In ControlsConfigs
-                        If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
-                            NaomiConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                            KeyFound = True
-                            Exit For
-                        End If
-                    Next
+                        Dim KeyFound = False
+                        For Each control_line As String In ControlsConfigs
+                            If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                                NaomiConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                                KeyFound = True
+                                Exit For
+                            End If
+                        Next
 
-                    If Not KeyFound Then NaomiConfigs(linenumber) = line.Split("=")(0) & "=k0" ' The key was not in the controls so just set it to nothing
+                        If Not KeyFound Then NaomiConfigs(linenumber) = line.Split("=")(0) & "=k0" ' The key was not in the controls so just set it to nothing
 
-                    If line.StartsWith("BPortA_Joystick=") Then NaomiConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
-                    If line.StartsWith("BPortB_Joystick=") Then NaomiConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
+                        If line.StartsWith("BPortA_Joystick=") Then NaomiConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
+                        If line.StartsWith("BPortB_Joystick=") Then NaomiConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
 
-                    If line.StartsWith("BPortA_Deadzone=") Then NaomiConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
-                    If line.StartsWith("BPortB_Deadzone=") Then NaomiConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
+                        If line.StartsWith("BPortA_Deadzone=") Then NaomiConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
+                        If line.StartsWith("BPortB_Deadzone=") Then NaomiConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
 
-                End If
-                linenumber += 1
-            Next
+                    End If
+                    linenumber += 1
+                Next
 
-            File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
-            File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
-        End If
+                File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
+                File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
+            End If
+
+        Catch ex As Exception
+            MsgBox("Error Saving Naomi Controls: " & ex.InnerException.Message)
+
+        End Try
+
+
 
         ' Dreamcast Controls
+        Try
+            linenumber = 0
+            If DreamcastChanged Then
+                For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
+                    btn_Close.Text = "Saving Dreamcast..."
+                    If line.StartsWith("BPort") Then
+                        Dim player = 0
+                        If line.StartsWith("BPortB") Then player = 1
 
-        linenumber = 0
-        If DreamcastChanged Then
-            For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
-                btn_Close.Text = "Saving Dreamcast..."
-                If line.StartsWith("BPort") Then
-                    Dim player = 0
-                    If line.StartsWith("BPortB") Then player = 1
+                        Dim KeyFound = False
+                        For Each control_line As String In ControlsConfigs
 
-                    Dim KeyFound = False
-                    For Each control_line As String In ControlsConfigs
+                            If tempPeripheral(player) = "1" Then ' Joystick Peripheral so get the STICK_ instead of the CONT_ setting
+                                If control_line.StartsWith("STICK_") Then
+                                    If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
+                                        DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                                        KeyFound = True
+                                        Exit For
+                                    End If
+                                End If
 
-                        If tempPeripheral(player) = "1" Then ' Joystick Peripheral so get the STICK_ instead of the CONT_ setting
-                            If control_line.StartsWith("STICK_") Then
-                                If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
+                            Else
+
+                                If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
                                     DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
                                     KeyFound = True
                                     Exit For
                                 End If
+
                             End If
 
-                        Else
-
-                            If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
-                                DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                                KeyFound = True
-                                Exit For
-                            End If
-
-                        End If
-
-
-                    Next
-
-                    If Not KeyFound Then DreamcastConfigs(linenumber) = line.Split("=")(0) & "=k0"
-
-                    If line.StartsWith("BPortA_Joystick=") Then DreamcastConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
-                    If line.StartsWith("BPortB_Joystick=") Then DreamcastConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
-
-                    If line.StartsWith("BPortA_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
-                    If line.StartsWith("BPortB_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
-
-                End If
-                linenumber += 1
-
-            Next
-
-            File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
-            File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
-        End If
-
-        ' Mednafen Controls
-        btn_Close.Text = "Saving..."
-
-        If MednafenChanged Then
-
-            Dim _TranslatedControls(2) As Dictionary(Of String, String)
-
-            For i = 0 To 1
-                If Not Joystick(i) = -1 Then
-                    If _TranslatedControls(i) Is Nothing Then
-
-                        Dim _MednafenMapping = GetFullMappingStringforIndex(Joystick(i)).Split("|")(1).Split(",")
-
-                        For Each _split In _MednafenMapping
-                            Dim _splitsplit = _split.Split(":")
-
-                            If _TranslatedControls(i) Is Nothing Then
-                                _TranslatedControls(i) = New Dictionary(Of String, String)
-                            End If
-
-                            If _splitsplit.Count = 1 Then
-                                _TranslatedControls(i).Add(_splitsplit(0), _splitsplit(0))
-                            Else
-                                _TranslatedControls(i).Add(_splitsplit(0), _splitsplit(1))
-                            End If
 
                         Next
+
+                        If Not KeyFound Then DreamcastConfigs(linenumber) = line.Split("=")(0) & "=k0"
+
+                        If line.StartsWith("BPortA_Joystick=") Then DreamcastConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
+                        If line.StartsWith("BPortB_Joystick=") Then DreamcastConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
+
+                        If line.StartsWith("BPortA_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
+                        If line.StartsWith("BPortB_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
+
                     End If
-                End If
-            Next
-
-            linenumber = 0
-            For Each line As String In MednafenConfigs
-                btn_Close.Text = "Saving Mednafen..."
-
-                ' Trim down the lines we're looking for to reduce saving time
-                If line.StartsWith(";") Or
-                    line.Trim.Length = 0 Or
-                    (Not line.Contains("input") And
-                    Not line.Contains("command.")) Then
                     linenumber += 1
-                    Continue For
-                End If
 
-                ' Deadzone
-                If line.StartsWith("input.joystick.axis_threshold ") Then
-                    MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & DeadzoneTB.Value
-                    linenumber += 1
-                    Continue For
-                End If
+                Next
 
-                If MednafenControlChanged Then
-                    Dim tmpControlString = ""
+                File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
+                File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
+            End If
 
-                    If line.Contains("rapid_") Or
-                            line.StartsWith("command.0 ") Or
-                            line.StartsWith("command.1 ") Or
-                            line.StartsWith("command.2 ") Or
-                            line.StartsWith("command.3 ") Or
-                            line.StartsWith("command.4 ") Or
-                            line.StartsWith("command.5 ") Or
-                            line.StartsWith("command.6 ") Or
-                            line.StartsWith("command.7 ") Or
-                            line.StartsWith("command.8 ") Or
-                            line.StartsWith("command.9 ") Or
-                            line.StartsWith("command.state_slot_dec ") Then
-                        tmpControlString = line.Split(" ")(0) & " " & "keyboard 0x0 0" ' Disable Rapid Control unless they are found in our configs
-                    End If
+        Catch ex As Exception
+            MsgBox("Error Saving Dreamcast Controls: " & ex.InnerException.Message)
+        End Try
 
-                    For Each control_line In ControlsConfigs
-                        If control_line.StartsWith("med_") Then
-                            control_line = control_line.Substring(4)
+        Try
+            ' Mednafen Controls
+            btn_Close.Text = "Saving..."
 
-                            If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1") & " ") Or
-                               line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2") & " ") Then
+            If MednafenChanged Then
 
-                                Dim _player = 1
+                Dim _TranslatedControls(2) As Dictionary(Of String, String)
 
-                                If control_line.Contains("<port>") And line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2") & " ") Then
-                                    _player = 2
+                For i = 0 To 1
+                    If Not Joystick(i) = -1 Then
+                        If _TranslatedControls(i) Is Nothing Then
+
+                            Dim _MednafenMapping = GetFullMappingStringforIndex(Joystick(i)).Split("|")(1).Split(",")
+
+                            For Each _split In _MednafenMapping
+                                Dim _splitsplit = _split.Split(":")
+
+                                If _TranslatedControls(i) Is Nothing Then
+                                    _TranslatedControls(i) = New Dictionary(Of String, String)
                                 End If
 
-                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString) & " " ' Initial String
+                                If _splitsplit.Count = 1 Then
+                                    _TranslatedControls(i).Add(_splitsplit(0), _splitsplit(0))
+                                Else
+                                    _TranslatedControls(i).Add(_splitsplit(0), _splitsplit(1))
+                                End If
 
-                                Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
+                            Next
+                        End If
+                    End If
+                Next
 
-                                If _KeyCode.StartsWith("k") Then ' Keyboard
+                linenumber = 0
+                For Each line As String In MednafenConfigs
+                    btn_Close.Text = "Saving Mednafen..."
 
-                                    If Not _KeyCode = "k0" Then
-                                        tmpControlString += "keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
-                                        Exit For
+                    ' Trim down the lines we're looking for to reduce saving time
+                    If line.StartsWith(";") Or
+                        line.Trim.Length = 0 Or
+                        (Not line.Contains("input") And
+                        Not line.Contains("command.")) Then
+                        linenumber += 1
+                        Continue For
+                    End If
+
+                    ' Deadzone
+                    If line.StartsWith("input.joystick.axis_threshold ") Then
+                        MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & DeadzoneTB.Value
+                        linenumber += 1
+                        Continue For
+                    End If
+
+                    If MednafenControlChanged Then
+                        Dim tmpControlString = ""
+
+                        If line.Contains("rapid_") Or
+                                line.StartsWith("command.0 ") Or
+                                line.StartsWith("command.1 ") Or
+                                line.StartsWith("command.2 ") Or
+                                line.StartsWith("command.3 ") Or
+                                line.StartsWith("command.4 ") Or
+                                line.StartsWith("command.5 ") Or
+                                line.StartsWith("command.6 ") Or
+                                line.StartsWith("command.7 ") Or
+                                line.StartsWith("command.8 ") Or
+                                line.StartsWith("command.9 ") Or
+                                line.StartsWith("command.state_slot_dec ") Then
+                            tmpControlString = line.Split(" ")(0) & " " & "keyboard 0x0 0" ' Disable Rapid Control unless they are found in our configs
+                        End If
+
+                        For Each control_line In ControlsConfigs
+                            If control_line.StartsWith("med_") Then
+                                control_line = control_line.Substring(4)
+
+                                If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1") & " ") Or
+                                   line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2") & " ") Then
+
+                                    Dim _player = 1
+
+                                    If control_line.Contains("<port>") And line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2") & " ") Then
+                                        _player = 2
                                     End If
 
-                                ElseIf _KeyCode.StartsWith("m") Then
-                                    If _KeyCode = "m1" Then
-                                        tmpControlString += "mouse 0x0 button_left"
-                                    ElseIf _KeyCode = "m2" Then
-                                        tmpControlString += "mouse 0x0 button_right"
-                                    ElseIf _KeyCode = "m3" Then
-                                        tmpControlString += "mouse 0x0 button_middle"
-                                    End If
+                                    tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString) & " " ' Initial String
 
-                                Else ' Joystick
-                                    Dim _tmpID = ""
-                                    If Not MednafenControllerID(_player - 1) = "0x0" Then
-                                        Dim isXinput = False
-                                        If MednafenControllerID(_player - 1).StartsWith("xinput_") Then
-                                            _tmpID = MednafenControllerID(_player - 1).Replace("xinput_", "")
-                                            isXinput = True
-                                        Else
-                                            _tmpID = MednafenControllerID(_player - 1)
+                                    Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
+
+                                    If _KeyCode.StartsWith("k") Then ' Keyboard
+
+                                        If Not _KeyCode = "k0" Then
+                                            tmpControlString += "keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
+                                            Exit For
                                         End If
 
-                                        tmpControlString += "joystick " & _tmpID
-                                        If _tmpID Is Nothing Then
-                                            tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                    ElseIf _KeyCode.StartsWith("m") Then
+                                        If _KeyCode = "m1" Then
+                                            tmpControlString += "mouse 0x0 button_left"
+                                        ElseIf _KeyCode = "m2" Then
+                                            tmpControlString += "mouse 0x0 button_right"
+                                        ElseIf _KeyCode = "m3" Then
+                                            tmpControlString += "mouse 0x0 button_middle"
                                         End If
 
-                                        If _TranslatedControls(_player - 1) Is Nothing Then
-                                            tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                        ElseIf _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
-                                            If isXinput Then
-                                                tmpControlString += " " & MednafenXinputButtonToSDLxInputButton(_TranslatedControls(_player - 1)(_KeyCode))
+                                    Else ' Joystick
+                                        Dim _tmpID = ""
+                                        If Not MednafenControllerID(_player - 1) = "0x0" Then
+                                            Dim isXinput = False
+                                            If MednafenControllerID(_player - 1).StartsWith("xinput_") Then
+                                                _tmpID = MednafenControllerID(_player - 1).Replace("xinput_", "")
+                                                isXinput = True
                                             Else
-                                                tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                                                _tmpID = MednafenControllerID(_player - 1)
                                             End If
 
+                                            tmpControlString += "joystick " & _tmpID
+                                            If _tmpID Is Nothing Then
+                                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                            End If
+
+                                            If _TranslatedControls(_player - 1) Is Nothing Then
+                                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                            ElseIf _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
+                                                If isXinput Then
+                                                    tmpControlString += " " & MednafenXinputButtonToSDLxInputButton(_TranslatedControls(_player - 1)(_KeyCode))
+                                                Else
+                                                    tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+                                                End If
+
+
+                                            Else
+                                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                            End If
+                                            Exit For
 
                                         Else
                                             tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                            Exit For
                                         End If
-                                        Exit For
-
-                                    Else
-                                        tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                        Exit For
                                     End If
+
                                 End If
-
                             End If
-                        End If
-                    Next
+                        Next
 
-                    If Not tmpControlString = "" Then
-                        If tmpControlString.Contains("nes.") Then
-                            Console.WriteLine(tmpControlString)
+                        If Not tmpControlString = "" Then
+                            If tmpControlString.Contains("nes.") Then
+                                Console.WriteLine(tmpControlString)
+                            End If
+                            MednafenConfigs(linenumber) = tmpControlString
                         End If
-                        MednafenConfigs(linenumber) = tmpControlString
+
                     End If
 
-                End If
+                    linenumber += 1
+                Next
 
-                linenumber += 1
-            Next
+                File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
+                File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
+            End If
 
-            File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
-            File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
-        End If
+        Catch ex As Exception
+            MsgBox("Error Saving Mednafen Controls: " & ex.InnerException.Message)
+        End Try
 
         ' Check if nullDC is running to hotload the settings
         If MainformRef.IsNullDCRunning Then

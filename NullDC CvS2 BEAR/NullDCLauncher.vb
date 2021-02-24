@@ -485,6 +485,7 @@ Public Class NullDCLauncher
             If line.StartsWith("GameName=") Then lines(linenumber) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
             If line.StartsWith("GameRom=") Then lines(linenumber) = "GameRom=" & MainformRef.ConfigFile.Game
             If line.StartsWith("Region=") Then lines(linenumber) = "Region=" & Region
+            If line.StartsWith("Debug=") Then lines(linenumber) = "Debug=" & MainformRef.ConfigFile.DebugControls
 
             If line.StartsWith("Emulator.NoConsole=") Then
                 If MainformRef.ConfigFile.ShowConsole = 1 Then
@@ -738,6 +739,7 @@ Public Class NullDCLauncher
             If line.StartsWith("GameName=") Then lines(linenumber) = "GameName=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(0)
             If line.StartsWith("GameRom=") Then lines(linenumber) = "GameRom=" & MainformRef.ConfigFile.Game
             If line.StartsWith("Region=") Then lines(linenumber) = "Region=" & Region
+            If line.StartsWith("Debug=") Then lines(linenumber) = "Debug=" & MainformRef.ConfigFile.DebugControls
 
             If line.StartsWith("Emulator.NoConsole=") Then
                 If MainformRef.ConfigFile.ShowConsole = 1 Then
