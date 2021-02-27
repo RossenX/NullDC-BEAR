@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = True
+    Public IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.88d" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.88f" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -19,7 +19,7 @@ Public Class frmMain
     Public NullDCLauncher As New NullDCLauncher
     Public MednafenLauncher As New MednafenLauncher
 
-    Public NullDCPath As String = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly.Location())
+    Public NullDCPath As String = Application.StartupPath
 
     Public GamesList As New Dictionary(Of String, Array)
     Public ConfigFile As Configs
@@ -132,21 +132,21 @@ Public Class frmMain
         End If
 
         'unpack Dreamcast
-        If Not Directory.Exists(NullDCPath & "\dc") Then
+        If Not File.Exists(NullDCPath & "\dc\nullDC_Win32_Release-NoTrace.exe") Then
             Directory.CreateDirectory(NullDCPath & "\dc")
             UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
             needsUpdate = True
         End If
 
         ' Mednafen unpack
-        If Not Directory.Exists(NullDCPath & "\mednafen") Then
+        If Not File.Exists(NullDCPath & "\mednafen\mednafen.exe") Then
             Directory.CreateDirectory(NullDCPath & "\mednafen")
             UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen")
             needsUpdate = True
         End If
 
         ' Mednafen Server
-        If Not Directory.Exists(NullDCPath & "\mednafen\server") Then
+        If Not File.Exists(NullDCPath & "\mednafen\server\mednafen-server.exe") Then
             Directory.CreateDirectory(NullDCPath & "\mednafen\server")
             UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server")
             needsUpdate = True
@@ -161,6 +161,16 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If NullDCPath.ToLower.Contains("sysem32") Then
+            MsgBox("Do not start me from the search bar in windows 10, kthx." & vbNewLine & "Or any external program, just make a shortcut for BEAR somewhere")
+            End
+        End If
+
+        If NullDCPath.ToLower.Contains("download") Then
+            MsgBox("Please take me out of the download folder, make a new folder for me somewhere.")
+            End
+        End If
 
         If Directory.Exists(NullDCPath & "\zip") Then
             ZipFile.CreateFromDirectory(NullDCPath & "\zip", "zipped.zip", CompressionLevel.Optimal, False)
@@ -485,7 +495,7 @@ UpdateTry:
 
         Using archive As ZipArchive = ZipFile.OpenRead(My.Computer.FileSystem.SpecialDirectories.Temp & "\" & _name)
             For Each entry As ZipArchiveEntry In archive.Entries
-                Console.WriteLine("Extracting: " & entry.FullName)
+                'Console.WriteLine("Extracting: " & entry.FullName)
                 Dim FolderOnly As Boolean = False
                 If entry.FullName.EndsWith("\") Or entry.FullName.EndsWith("/") Then
                     FolderOnly = True
@@ -522,31 +532,35 @@ UpdateTry:
                     End If
 
                     If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
+
+                        ' If the file exists and it's not older than the file in the update, then don't update it.
+                        Dim ExistingFileLastWriteTime = File.GetLastWriteTime(_dir & "\" & entry.FullName.Replace("/", "\"))
+                        Dim Compare = ExistingFileLastWriteTime.CompareTo(entry.LastWriteTime.DateTime)
+                        If Compare >= 0 Then
+                            Console.WriteLine("Skipped: " & entry.FullName)
+                            Continue For
+                        End If
+
+                        ' Delete Older File
                         File.SetAttributes(_dir & "\" & entry.FullName.Replace("/", "\"), FileAttribute.Normal)
                         File.Delete(_dir & "\" & entry.FullName.Replace("/", "\"))
                     End If
 
-                    WaitTime = 0
-                    While File.Exists(_dir & "\" & entry.FullName.Replace("/", "\"))
-                        If WaitTime > 200 Then
-                            MsgBox("Error Extracting Update: Could not delete old file " & _dir & "\" & entry.FullName.Replace("/", "\"))
-
-                        End If
-                        Thread.Sleep(50)
-                    End While
-
+                    Dim WaitingToDelete = 0
                     If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
                         While IsFileInUse(_dir & "\" & entry.FullName.Replace("/", "\"))
-                            If WaitTime > 200 Then
-                                MsgBox("Error Extracting Update: File is Locked " & _dir & "\" & entry.FullName.Replace("/", "\"))
-                                MainformRef.ConfigFile.Version = "0.0"
-                                MainformRef.ConfigFile.SaveFile(False)
+                            If WaitingToDelete > 20 Then
+                                MsgBox("Error Unpacking Update, could not remove old file: " & _dir & "\" & entry.FullName.Replace("/", "\"))
                                 End
                             End If
+
                             Thread.Sleep(50)
+                            WaitingToDelete += 1
+
                         End While
                     End If
 
+                    Console.WriteLine("Extracting: " & entry.FullName)
                     entry.ExtractToFile(_dir & "\" & entry.FullName.Replace("/", "\"), True)
                 End If
 

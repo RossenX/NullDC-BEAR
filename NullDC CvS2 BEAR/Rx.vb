@@ -1025,56 +1025,64 @@ Module BEARTheme
     End Function
 
     Public Function GetMednafenControllerIDs() As String()
-        Dim MedProc As Process = New Process()
-        MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
-        MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
-        MedProc.StartInfo.CreateNoWindow = True
-        MedProc.StartInfo.UseShellExecute = False
-        MedProc.StartInfo.Arguments = "Hi"
-        MedProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+        Try
 
-        MedProc.Start()
-        MedProc.WaitForExit()
+            Dim MedProc As Process = New Process()
+            MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
+            MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
+            MedProc.StartInfo.CreateNoWindow = True
+            MedProc.StartInfo.UseShellExecute = False
+            MedProc.StartInfo.Arguments = "Hi"
+            MedProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
 
-        Dim MednafenControllerID(128) As String
+            MedProc.Start()
+            MedProc.WaitForExit()
 
-        Dim _xinput As New ArrayList
-        Dim _dinput As New ArrayList
+            Dim MednafenControllerID(128) As String
 
-        For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
-            If line.StartsWith("  ID: ") Then
+            Dim _xinput As New ArrayList
+            Dim _dinput As New ArrayList
 
-                If line.ToLower.Contains("xinput") Then
-                    _xinput.Add("xinput_" & line.Trim.Split(" ")(1))
-                Else
-                    _dinput.Add(line.Trim.Split(" ")(1))
+            For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
+                If line.StartsWith("  ID: ") Then
+
+                    If line.ToLower.Contains("xinput") Then
+                        _xinput.Add("xinput_" & line.Trim.Split(" ")(1))
+                    Else
+                        _dinput.Add(line.Trim.Split(" ")(1))
+                    End If
+
+                    Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
                 End If
+            Next
 
-                Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
-            End If
-        Next
+            Dim ReOrderedIDS As New ArrayList
 
-        Dim ReOrderedIDS As New ArrayList
+            For Each _id In _xinput
+                ReOrderedIDS.Add(_id)
+            Next
 
-        For Each _id In _xinput
-            ReOrderedIDS.Add(_id)
-        Next
+            _dinput.Reverse()
 
-        _dinput.Reverse()
+            For Each _id In _dinput
+                ReOrderedIDS.Add(_id)
+            Next
 
-        For Each _id In _dinput
-            ReOrderedIDS.Add(_id)
-        Next
+            Dim ControllerIndex = 0
+            For Each _id In ReOrderedIDS
+                MednafenControllerID(ControllerIndex) = _id
+                ControllerIndex += 1
+            Next
 
-        Dim ControllerIndex = 0
-        For Each _id In ReOrderedIDS
-            MednafenControllerID(ControllerIndex) = _id
-            ControllerIndex += 1
-        Next
+            Console.WriteLine("Ran Mednafen once to get the controls output")
 
-        Console.WriteLine("Ran Mednafen once to get the controls output")
+            Return MednafenControllerID
 
-        Return MednafenControllerID
+        Catch ex As Exception
+            MsgBox("Unable to get Mednafen Controller IDs: " & ex.Message)
+            Return {"0x0", "0x0"}
+
+        End Try
 
     End Function
 
