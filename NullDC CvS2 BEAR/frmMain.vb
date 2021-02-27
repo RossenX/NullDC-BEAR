@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.88f" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.88g" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -162,7 +162,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If NullDCPath.ToLower.Contains("sysem32") Then
+        If NullDCPath.ToLower.Contains("system32") Then
             MsgBox("Do not start me from the search bar in windows 10, kthx." & vbNewLine & "Or any external program, just make a shortcut for BEAR somewhere")
             End
         End If
