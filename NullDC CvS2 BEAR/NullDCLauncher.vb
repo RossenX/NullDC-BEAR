@@ -551,6 +551,7 @@ Public Class NullDCLauncher
             If line.StartsWith("BPortB_Peripheral=") Then lines(linenumber) = "BPortB_Peripheral=" & P2Peripheral
             ' Arcadestick sync here
             linenumber += 1
+
         Next
 
         File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)

@@ -82,7 +82,7 @@ Public Class MednafenSetting
                     ElseIf (CInt(_loadedValue.Trim) * ChangeRate) < Controller.Minimum Then
                         Controller.Value = Controller.Minimum
                     Else
-                        Controller.Value = (CInt(_loadedValue) * ChangeRate)
+                        Controller.Value = (CDec(_loadedValue) * ChangeRate)
                     End If
 
                 End If

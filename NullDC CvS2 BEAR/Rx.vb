@@ -908,6 +908,8 @@ Module BEARTheme
         f23 = SDL_Scancode.SDL_SCANCODE_F23
         f24 = SDL_Scancode.SDL_SCANCODE_F24
 
+        space = SDL_Scancode.SDL_SCANCODE_SPACE
+
     End Enum
 
 
@@ -921,6 +923,7 @@ Module BEARTheme
         If [Enum].IsDefined(GetType(KCtSC), a.ToLower) Then Return DirectCast([Enum].Parse(GetType(KCtSC), a.ToLower, True), KCtSC)
 
         Console.WriteLine("Undefined KeyName: " & a)
+
         Return "0"
 
     End Function

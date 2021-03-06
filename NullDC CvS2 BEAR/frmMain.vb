@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.88g" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.89" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -74,15 +74,15 @@ Public Class frmMain
             ' Check SDL Version Swap
             If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Or needsUpdate Then ' We Need to Change SDL Version
                 If MainformRef.ConfigFile.SDLVersion = "+Stable" Or MainformRef.ConfigFile.SDLVersion = "Stable" Then
-                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath & "\dc")
-                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath)
+                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath & "\dc", True)
+                    UnzipResToDir(My.Resources.SDL_Stable, "bear_tmp_sdl_stable.zip", NullDCPath, True)
                     MainformRef.ConfigFile.SDLVersion = "Stable"
                     MainformRef.ConfigFile.SaveFile(False)
                     Console.WriteLine("SDL Changed to: Stable")
 
                 Else
-                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
-                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
+                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath, True)
+                    UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc", True)
                     MainformRef.ConfigFile.SDLVersion = "Dev"
                     MainformRef.ConfigFile.SaveFile(False)
                     Console.WriteLine("SDL Changed to: Dev")
@@ -115,7 +115,7 @@ Public Class frmMain
                 Dim result2 As DialogResult = MessageBox.Show("This will create a bunch of files in the same folder as NullDC BEAR.exe, OK?", "NullDC Extraction", MessageBoxButtons.YesNo)
                 If result2 = DialogResult.Yes Then
                     Try
-                        UnzipResToDir(My.Resources.NullNaomiClean, "bear_tmp_nulldc.zip", NullDCPath)
+                        UnzipResToDir(My.Resources.NullNaomiClean, "bear_tmp_nulldc.zip", NullDCPath, True)
                         needsUpdate = True
                     Catch ex As Exception
                         MsgBox(ex.StackTrace)
@@ -134,28 +134,28 @@ Public Class frmMain
         'unpack Dreamcast
         If Not File.Exists(NullDCPath & "\dc\nullDC_Win32_Release-NoTrace.exe") Then
             Directory.CreateDirectory(NullDCPath & "\dc")
-            UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc")
+            UnzipResToDir(My.Resources.DcClean, "bear_tmp_dreamcast_clean.zip", NullDCPath & "\dc", True)
             needsUpdate = True
         End If
 
         ' Mednafen unpack
         If Not File.Exists(NullDCPath & "\mednafen\mednafen.exe") Then
             Directory.CreateDirectory(NullDCPath & "\mednafen")
-            UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen")
+            UnzipResToDir(My.Resources.mednafen, "bear_tmp_mednafen.zip", NullDCPath & "\mednafen", True)
             needsUpdate = True
         End If
 
         ' Mednafen Server
         If Not File.Exists(NullDCPath & "\mednafen\server\mednafen-server.exe") Then
             Directory.CreateDirectory(NullDCPath & "\mednafen\server")
-            UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server")
+            UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server", True)
             needsUpdate = True
         End If
 
         If needsUpdate Or IsBeta Then
             UnzipResToDir(My.Resources.Updates, "bear_tmp_updates.zip", NullDCPath)
-            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath)
-            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc")
+            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath, True)
+            UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc", True)
         End If
 
     End Sub
@@ -483,7 +483,7 @@ UpdateTry:
         File.WriteAllBytes(My.Computer.FileSystem.SpecialDirectories.Temp & "\" & _arg(1), _arg(0))
     End Sub
 
-    Public Sub UnzipResToDir(ByVal _res As Byte(), ByVal _name As String, ByVal _dir As String)
+    Public Sub UnzipResToDir(ByVal _res As Byte(), ByVal _name As String, ByVal _dir As String, Optional ByVal _override As Boolean = False)
         Dim FileWriteThread As Thread
         FileWriteThread = New Thread(AddressOf CopyResourceToDirectoryThread)
         FileWriteThread.IsBackground = True
@@ -533,17 +533,21 @@ UpdateTry:
 
                     If File.Exists(_dir & "\" & entry.FullName.Replace("/", "\")) Then
 
-                        ' If the file exists and it's not older than the file in the update, then don't update it.
-                        Dim ExistingFileLastWriteTime = File.GetLastWriteTime(_dir & "\" & entry.FullName.Replace("/", "\"))
-                        Dim Compare = ExistingFileLastWriteTime.CompareTo(entry.LastWriteTime.DateTime)
-                        If Compare >= 0 Then
-                            Console.WriteLine("Skipped: " & entry.FullName)
-                            Continue For
+                        If Not _override Then ' Force override even if the file is older, this is mostly used for SDL
+                            ' If the file exists and it's not older than the file in the update, then don't update it.
+                            Dim ExistingFileLastWriteTime = File.GetLastWriteTime(_dir & "\" & entry.FullName.Replace("/", "\"))
+                            Dim Compare = ExistingFileLastWriteTime.CompareTo(entry.LastWriteTime.DateTime)
+                            If Compare >= 0 Then
+                                Console.WriteLine("Skipped: " & entry.FullName)
+                                Continue For
+                            End If
+
                         End If
 
                         ' Delete Older File
                         File.SetAttributes(_dir & "\" & entry.FullName.Replace("/", "\"), FileAttribute.Normal)
                         File.Delete(_dir & "\" & entry.FullName.Replace("/", "\"))
+
                     End If
 
                     Dim WaitingToDelete = 0

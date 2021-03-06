@@ -157,9 +157,9 @@ Public Class frmSDLMappingTool
                     End If
                 End Sub)
 
-            SDL_FlushEvents(0, 65535)
+            SDL_Delay(100)
+            SDL_PumpEvents()
             While SDL_WaitEventTimeout(_event, 50)
-                ' Write the capabilities
                 UpdateHelpTest()
 
                 Select Case _event.type
@@ -167,76 +167,51 @@ Public Class frmSDLMappingTool
                         Dim _axisnorm As Int32 = _event.jaxis.axisValue
                         _axisnorm = Math.Abs(_axisnorm)
 
-                        ' _axisnorm > _deadzonetotal And 
-                        If Not AxisDown.ContainsKey(_event.jaxis.axis) Then
-                            'Console.WriteLine("Axis Down")
-                            Dim IsThumbStick As Boolean = False
+                        'Console.WriteLine("Axis Down")
+                        Dim IsThumbStick As Boolean = False
 
-                            If ListOfGamepadKeys(_currentBindIndex) = "leftx" Or
-                                ListOfGamepadKeys(_currentBindIndex) = "lefty" Or
-                                ListOfGamepadKeys(_currentBindIndex) = "rightx" Or
-                                ListOfGamepadKeys(_currentBindIndex) = "righty" Then
-                                IsThumbStick = True
-                            End If
-
-                            If Not IsThumbStick Then
-                                ' ok so triggers are tricky so going to need to have all these checks to account for all the types of triggers
-
-                                ' Idle is Between Deadzone (0) and current is above deadzone (1)
-                                If AxisIdle(_event.jaxis.axis) >= -_deadzonetotal And AxisIdle(_event.jaxis.axis) <= _deadzonetotal And _event.jaxis.axisValue >= _deadzonetotal Then ' 0 to 1
-                                    KeyPressed = "+a" & _event.jaxis.axis
-                                    ' Idle is Between Deadzone (0) and current is below deadzone (-1)
-                                ElseIf AxisIdle(_event.jaxis.axis) >= -_deadzonetotal And AxisIdle(_event.jaxis.axis) <= _deadzonetotal And _event.jaxis.axisValue <= -_deadzonetotal Then ' 0 to -1
-                                    KeyPressed = "-a" & _event.jaxis.axis
-                                    ' Idle is above deadzone (1) and current is in deadzone (0)
-                                ElseIf AxisIdle(_event.jaxis.axis) >= _deadzonetotal And _event.jaxis.axisValue <= _deadzonetotal And _event.jaxis.axisValue >= -_deadzonetotal Then ' 1 to 0
-                                    KeyPressed = "+a" & _event.jaxis.axis & "~"
-                                    ' Idle is below deadzone (-1) and current is in deadzone (0)
-                                ElseIf AxisIdle(_event.jaxis.axis) <= -_deadzonetotal And _event.jaxis.axisValue <= _deadzonetotal And _event.jaxis.axisValue >= -_deadzonetotal Then ' -1 to 0
-                                    KeyPressed = "-a" & _event.jaxis.axis & "~"
-                                    ' Idle is below deadzone (-1) and current is above deadzone (1)
-                                ElseIf AxisIdle(_event.jaxis.axis) <= -_deadzonetotal And _event.jaxis.axisValue >= _deadzonetotal Then ' -1 to 1 (Full Range)
-                                    KeyPressed = "a" & _event.jaxis.axis
-                                    ' Idle is above deadzone (1) and current is below deadzone (-1)
-                                ElseIf AxisIdle(_event.jaxis.axis) >= _deadzonetotal And _event.jaxis.axisValue <= -_deadzonetotal Then ' 1 to -1 (Full Range)
-                                    KeyPressed = "a" & _event.jaxis.axis & "~"
-                                End If
-
-                            Else
-                                ' Is is a thumbstick so just use full range -1 to 1
-                                If Not AxisDown.ContainsKey("a" & _event.jaxis.axis) Then
-                                    If _event.jaxis.axisValue < -_deadzonetotal Then
-                                        KeyPressed = "a" & _event.jaxis.axis & "~"
-                                    ElseIf _event.jaxis.axisValue > _deadzonetotal Then
-                                        KeyPressed = "a" & _event.jaxis.axis
-                                    End If
-                                End If
-
-                            End If
-
-                            If Not AxisDown.ContainsKey(KeyPressed.Replace("-", "").Replace("+", "")) Then
-                                AxisDown.Add(KeyPressed.Replace("-", "").Replace("+", ""), _event.jaxis.axisValue)
-
-                                For i = 0 To SDL_JoystickNumAxes(Joy)
-                                    Dim DuplicatedAxisValue = SDL_JoystickGetAxis(Joy, i)
-                                    If Not i = _event.jaxis.axis And DuplicatedAxisValue = _event.jaxis.axisValue And
-                                        Not DuplicatedAxisValue = AxisIdle(i) Then
-                                        Console.WriteLine("Found Duplicate Axis: " & i & "|" & _event.jaxis.axis)
-                                        If Not AxisDown.ContainsKey("a" & i) Then
-                                            AxisDown.Add("a" & i, DuplicatedAxisValue)
-                                        End If
-                                    End If
-                                Next
-
-                            Else
-                                KeyPressed = ""
-                            End If
-
+                        If ListOfGamepadKeys(_currentBindIndex) = "leftx" Or
+                            ListOfGamepadKeys(_currentBindIndex) = "lefty" Or
+                            ListOfGamepadKeys(_currentBindIndex) = "rightx" Or
+                            ListOfGamepadKeys(_currentBindIndex) = "righty" Then
+                            IsThumbStick = True
                         End If
 
-                        If Not KeyPressed = "" Then
-                            SDL_FlushEvents(0, 65535)
-                            Exit While
+                        If Not IsThumbStick Then
+
+                            ' Idle is Between Deadzone (0) and current is above deadzone (1)
+                            If AxisIdle(_event.jaxis.axis) >= -_deadzonetotal And AxisIdle(_event.jaxis.axis) <= _deadzonetotal And _event.jaxis.axisValue >= _deadzonetotal Then ' 0 to 1
+                                KeyPressed = "+a" & _event.jaxis.axis
+                                ' Idle is Between Deadzone (0) and current is below deadzone (-1)
+                            ElseIf AxisIdle(_event.jaxis.axis) >= -_deadzonetotal And AxisIdle(_event.jaxis.axis) <= _deadzonetotal And _event.jaxis.axisValue <= -_deadzonetotal Then ' 0 to -1
+                                KeyPressed = "-a" & _event.jaxis.axis
+                                ' Idle is above deadzone (1) and current is in deadzone (0)
+                            ElseIf AxisIdle(_event.jaxis.axis) >= _deadzonetotal And _event.jaxis.axisValue <= _deadzonetotal And _event.jaxis.axisValue >= -_deadzonetotal Then ' 1 to 0
+                                KeyPressed = "+a" & _event.jaxis.axis & "~"
+                                ' Idle is below deadzone (-1) and current is in deadzone (0)
+                            ElseIf AxisIdle(_event.jaxis.axis) <= -_deadzonetotal And _event.jaxis.axisValue <= _deadzonetotal And _event.jaxis.axisValue >= -_deadzonetotal Then ' -1 to 0
+                                KeyPressed = "-a" & _event.jaxis.axis & "~"
+                                ' Idle is below deadzone (-1) and current is above deadzone (1)
+                            ElseIf AxisIdle(_event.jaxis.axis) <= -_deadzonetotal And _event.jaxis.axisValue >= _deadzonetotal Then ' -1 to 1 (Full Range)
+                                KeyPressed = "a" & _event.jaxis.axis
+                                ' Idle is above deadzone (1) and current is below deadzone (-1)
+                            ElseIf AxisIdle(_event.jaxis.axis) >= _deadzonetotal And _event.jaxis.axisValue <= -_deadzonetotal Then ' 1 to -1 (Full Range)
+                                KeyPressed = "a" & _event.jaxis.axis & "~"
+                            End If
+
+                        Else
+
+                            ' Is is a thumbstick so just use full range -1 to 1
+                            If Not AxisDown.ContainsKey("a" & _event.jaxis.axis) And
+                                Not AxisDown.ContainsKey("a" & _event.jaxis.axis & "~") Then
+
+                                If _event.jaxis.axisValue < -_deadzonetotal Then
+                                    KeyPressed = "a" & _event.jaxis.axis & "~"
+                                ElseIf _event.jaxis.axisValue > _deadzonetotal Then
+                                    KeyPressed = "a" & _event.jaxis.axis
+                                End If
+
+                            End If
 
                         End If
 
@@ -261,10 +236,67 @@ Public Class frmSDLMappingTool
                                 Not ListOfGamepadKeys(_currentBindIndex) = "righty" Then
                             KeyPressed = "b" & _event.jbutton.button
                         End If
+
                         Exit While
                 End Select
 
             End While
+
+            If Not AxisDown.ContainsKey(KeyPressed) Then
+                AxisDown.Add(KeyPressed, _event.jaxis.axisValue)
+
+                'Add the reverse of these also just to prevent it double clicking on the way up
+                If KeyPressed.Contains("~") Then
+                    AxisDown.Add(KeyPressed.Replace("~", ""), _event.jaxis.axisValue)
+                Else
+                    AxisDown.Add(KeyPressed & "~", _event.jaxis.axisValue)
+                End If
+
+                ' this is a fullrange bind, so add the individual ranges to prevent them from being bound
+                If Not KeyPressed.Contains("+") And Not KeyPressed.Contains("-") Then
+
+                    If Not AxisDown.ContainsKey("+" & KeyPressed) Then
+                        AxisDown.Add("+" & KeyPressed, _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey("-" & KeyPressed) Then
+                        AxisDown.Add("-" & KeyPressed, _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey("+" & KeyPressed & "~") Then
+                        AxisDown.Add("+" & KeyPressed & "~", _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey("-" & KeyPressed & "~") Then
+                        AxisDown.Add("-" & KeyPressed & "~", _event.jaxis.axisValue)
+                    End If
+
+                Else
+
+                    If Not AxisDown.ContainsKey(KeyPressed.Replace("+", "").Replace("-", "")) Then
+                        AxisDown.Add(KeyPressed.Replace("+", "").Replace("-", ""), _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey(KeyPressed.Replace("+", "").Replace("-", "") & "~") Then
+                        AxisDown.Add(KeyPressed.Replace("+", "").Replace("-", "") & "~", _event.jaxis.axisValue)
+                    End If
+
+                End If
+
+                For i = 0 To SDL_JoystickNumAxes(Joy)
+                    Dim DuplicatedAxisValue = SDL_JoystickGetAxis(Joy, i)
+                    If Not i = _event.jaxis.axis And DuplicatedAxisValue = _event.jaxis.axisValue And
+                                        Not DuplicatedAxisValue = AxisIdle(i) Then
+                        Console.WriteLine("Found Duplicate Axis: " & i & "|" & _event.jaxis.axis)
+                        If Not AxisDown.ContainsKey(KeyPressed.Replace(_event.jaxis.axis, i)) Then
+                            AxisDown.Add(KeyPressed.Replace(_event.jaxis.axis, i), DuplicatedAxisValue)
+                        End If
+                    End If
+                Next
+
+            Else
+                KeyPressed = ""
+            End If
 
             If KeyPressed.Length > 0 Then
                 Console.WriteLine("Added bind: " & ListOfGamepadKeys(_currentBindIndex) & "|" & KeyPressed)
