@@ -47,6 +47,10 @@
         If Visible Then
             Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.WaitHostBackground)
             PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.WaitHostAnimation)
+            PictureBox1.Width = PictureBox1.Image.Width
+            PictureBox1.Location = New Point(Me.Width / 2 - PictureBox1.Width / 2, 35)
+            PictureBox1.Height = PictureBox1.Image.Height
+            lbWaitingForHost.Location = New Point(Me.Width / 2 - lbWaitingForHost.Width / 2)
 
             btnRetryVMU.Visible = False
             If MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" Then ' Only if it's a DC game ask for VMU

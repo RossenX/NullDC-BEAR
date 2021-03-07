@@ -2077,6 +2077,11 @@ UpdateTry:
     Private Sub HostToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HostToolStripMenuItem.Click
         HostingForm.Show()
     End Sub
+
+    Private Sub WaitingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WaitingToolStripMenuItem.Click
+        frmWaitingForHost.Show()
+
+    End Sub
 End Class
 
 Public Class BEARPlayer

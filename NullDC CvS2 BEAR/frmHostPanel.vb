@@ -67,6 +67,11 @@ Public Class frmHostPanel
     Private Sub HostPanel_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If Visible = True Then
             PictureBox1.Image = BEARTheme.LoadImage(ThemeKeys.HostAnimation)
+            PictureBox1.Width = PictureBox1.Image.Width
+            PictureBox1.Location = New Point(Me.Width / 2 - PictureBox1.Width / 2, 1)
+
+            PictureBox1.Height = PictureBox1.Image.Height
+
             Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostBackground)
 
             If cbRegion.Text = "" Then cbRegion.Text = "JPN"

@@ -66,6 +66,7 @@ Partial Class frmMain
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForceOpenPanelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WaitingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.MainMenuContainer.SuspendLayout()
@@ -462,7 +463,7 @@ Partial Class frmMain
         '
         'ForceOpenPanelToolStripMenuItem
         '
-        Me.ForceOpenPanelToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HostToolStripMenuItem})
+        Me.ForceOpenPanelToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HostToolStripMenuItem, Me.WaitingToolStripMenuItem})
         Me.ForceOpenPanelToolStripMenuItem.Name = "ForceOpenPanelToolStripMenuItem"
         Me.ForceOpenPanelToolStripMenuItem.Size = New System.Drawing.Size(80, 29)
         Me.ForceOpenPanelToolStripMenuItem.Text = "Open Panel"
@@ -470,8 +471,14 @@ Partial Class frmMain
         'HostToolStripMenuItem
         '
         Me.HostToolStripMenuItem.Name = "HostToolStripMenuItem"
-        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
+        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.HostToolStripMenuItem.Text = "Host"
+        '
+        'WaitingToolStripMenuItem
+        '
+        Me.WaitingToolStripMenuItem.Name = "WaitingToolStripMenuItem"
+        Me.WaitingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.WaitingToolStripMenuItem.Text = "Waiting"
         '
         'imgBeta
         '
@@ -552,4 +559,5 @@ Partial Class frmMain
     Friend WithEvents ForceOpenPanelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HostToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SystemIcons As ImageList
+    Friend WithEvents WaitingToolStripMenuItem As ToolStripMenuItem
 End Class

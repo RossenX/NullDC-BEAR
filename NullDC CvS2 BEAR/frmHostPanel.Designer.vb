@@ -85,6 +85,7 @@ Partial Class frmHostPanel
         '
         'PictureBox1
         '
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PictureBox1.Location = New System.Drawing.Point(75, 1)
         Me.PictureBox1.Name = "PictureBox1"
@@ -99,7 +100,7 @@ Partial Class frmHostPanel
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.lbInfo, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lbPing, 0, 1)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(107, 155)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(107, 176)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -138,7 +139,7 @@ Partial Class frmHostPanel
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.btnExit.Location = New System.Drawing.Point(190, 1)
+        Me.btnExit.Location = New System.Drawing.Point(190, 402)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 31)
         Me.btnExit.TabIndex = 8
@@ -198,7 +199,7 @@ Partial Class frmHostPanel
         Me.tb_nulldc.Controls.Add(Me.cbRegion, 3, 0)
         Me.tb_nulldc.Controls.Add(Me.Label1, 0, 0)
         Me.tb_nulldc.Controls.Add(Me.Button1, 2, 0)
-        Me.tb_nulldc.Location = New System.Drawing.Point(82, 232)
+        Me.tb_nulldc.Location = New System.Drawing.Point(82, 244)
         Me.tb_nulldc.Name = "tb_nulldc"
         Me.tb_nulldc.RowCount = 2
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.54237!))
@@ -253,12 +254,12 @@ Partial Class frmHostPanel
         Me.BackColor = System.Drawing.Color.DimGray
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(450, 450)
-        Me.Controls.Add(Me.tb_nulldc)
         Me.Controls.Add(Me.btnExit)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.tb_nulldc)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.btnStartHosting)
         Me.Controls.Add(Me.tb_mednafen)
+        Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximumSize = New System.Drawing.Size(450, 450)
         Me.MinimumSize = New System.Drawing.Size(450, 450)
