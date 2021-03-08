@@ -528,8 +528,11 @@ Public Class frmKeyMapperSDL
 
                         Case 1536 ' Joystick Axis
 
+                        Case 1621 ' Connected
+                            SDL_FlushEvents(0, SDL_EventType.SDL_LASTEVENT)
                         Case Else
                             Console.WriteLine("Unhandled SDL Event: " & _event.type)
+
                     End Select
 
                 End While

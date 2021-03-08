@@ -61,16 +61,13 @@ Public Class frmSDLMappingTool
             Me.Invoke(Sub() _deadzonetotal = 32768 * Decimal.Divide(frmKeyMapperSDL.DeadzoneTB.Value, 100))
             _deadzonetotal += 256
 
-            UpdateHelpTest()
-
             AxisDown = New Dictionary(Of String, Integer)
+            UpdateHelpTest()
+            GetIdles()
             StartBinding()
 
             ' Get the Default state of the axis
-            AxisIdle.Clear()
-            For i = 0 To SDL_JoystickNumAxes(Joy)
-                AxisIdle.Add(SDL_JoystickGetAxis(Joy, i))
-            Next
+
 
         Else
             If Not _InputThread Is Nothing Then
@@ -93,6 +90,17 @@ Public Class frmSDLMappingTool
                                         End If
 
                                     End Sub
+
+    End Sub
+
+    Private Sub GetIdles()
+
+        AxisIdle.Clear()
+        For i = 0 To SDL_JoystickNumAxes(Joy) - 1
+            SDL_JoystickUpdate()
+            AxisIdle.Add(SDL_JoystickGetAxis(Joy, i))
+            Console.WriteLine("Idle: " & i & ":" & SDL_JoystickGetAxis(Joy, i))
+        Next
 
     End Sub
 
@@ -123,10 +131,10 @@ Public Class frmSDLMappingTool
         Dim AxisText = "Axis: "
         AxisText += SDL_JoystickNumAxes(Joy).ToString & " ("
         For i = 0 To SDL_JoystickNumAxes(Joy) - 1
-            AxisText += SDL_JoystickGetAxis(Joy, i).ToString & " "
+            AxisText += SDL_JoystickGetAxis(Joy, i) & " "
 
         Next
-        AxisText += ") Deadzone: " & (32768 * Decimal.Divide(frmKeyMapperSDL.DeadzoneTB.Value, 100)).ToString & vbNewLine & "If Deadzone is lower than your axis, raise the deadzone."
+        AxisText += ") Deadzone: " & _deadzonetotal.ToString & vbNewLine & "If Deadzone is lower than your axis, raise the deadzone."
 
         Dim HatText = "Hats: "
         HatText += SDL_JoystickNumHats(Joy).ToString & " ("
@@ -144,7 +152,8 @@ Public Class frmSDLMappingTool
     End Sub
 
     Private Sub InputThread()
-
+        Dim GotIdles As Boolean = False
+        Dim Waittime = 0
         While _currentBindIndex < ListOfGamepadKeys.Count
             Dim KeyPressed As String = ""
 
@@ -157,15 +166,25 @@ Public Class frmSDLMappingTool
                     End If
                 End Sub)
 
-            SDL_Delay(100)
             SDL_PumpEvents()
+            Waittime = 0
             While SDL_WaitEventTimeout(_event, 50)
                 UpdateHelpTest()
 
+                If _currentBindIndex = 0 Or Not GotIdles Then
+                    GetIdles()
+                    GotIdles = True
+                End If
+
+                If Waittime < 1001 Then
+                    SDL_Delay(50)
+                    Waittime += 50
+                End If
+
                 Select Case _event.type
                     Case SDL_EventType.SDL_JOYAXISMOTION ' Axis Motion Down
+
                         Dim _axisnorm As Int32 = _event.jaxis.axisValue
-                        _axisnorm = Math.Abs(_axisnorm)
 
                         'Console.WriteLine("Axis Down")
                         Dim IsThumbStick As Boolean = False
@@ -185,12 +204,14 @@ Public Class frmSDLMappingTool
                                 ' Idle is Between Deadzone (0) and current is below deadzone (-1)
                             ElseIf AxisIdle(_event.jaxis.axis) >= -_deadzonetotal And AxisIdle(_event.jaxis.axis) <= _deadzonetotal And _event.jaxis.axisValue <= -_deadzonetotal Then ' 0 to -1
                                 KeyPressed = "-a" & _event.jaxis.axis
-                                ' Idle is above deadzone (1) and current is in deadzone (0)
+                                ' Idle is above deadzone (1) and current is in deadzone (0) ' This is redudent, but just in case.
                             ElseIf AxisIdle(_event.jaxis.axis) >= _deadzonetotal And _event.jaxis.axisValue <= _deadzonetotal And _event.jaxis.axisValue >= -_deadzonetotal Then ' 1 to 0
-                                KeyPressed = "+a" & _event.jaxis.axis & "~"
-                                ' Idle is below deadzone (-1) and current is in deadzone (0)
+                                'KeyPressed = "+a" & _event.jaxis.axis & "~" 
+                                KeyPressed = "a" & _event.jaxis.axis & "~"
+                                ' Idle is below deadzone (-1) and current is in deadzone (0) ' This is redudent, but just in case.
                             ElseIf AxisIdle(_event.jaxis.axis) <= -_deadzonetotal And _event.jaxis.axisValue <= _deadzonetotal And _event.jaxis.axisValue >= -_deadzonetotal Then ' -1 to 0
-                                KeyPressed = "-a" & _event.jaxis.axis & "~"
+                                'KeyPressed = "-a" & _event.jaxis.axis & "~"
+                                KeyPressed = "a" & _event.jaxis.axis ' & "~"
                                 ' Idle is below deadzone (-1) and current is above deadzone (1)
                             ElseIf AxisIdle(_event.jaxis.axis) <= -_deadzonetotal And _event.jaxis.axisValue >= _deadzonetotal Then ' -1 to 1 (Full Range)
                                 KeyPressed = "a" & _event.jaxis.axis
@@ -242,14 +263,55 @@ Public Class frmSDLMappingTool
 
             End While
 
-            If Not AxisDown.ContainsKey(KeyPressed) Then
+            ' SDL workaround for their buggy controller code
+            If KeyPressed.Contains("~") Then
+
+                If KeyPressed.Contains("-") And AxisIdle(_event.jaxis.axis) > 0 Then
+                    KeyPressed = KeyPressed.Replace("-", "").Replace("~", "")
+
+                ElseIf KeyPressed.Contains("+") And AxisIdle(_event.jaxis.axis) < 0 Then
+                    KeyPressed = KeyPressed.Replace("+", "").Replace("~", "")
+
+                End If
+
+            End If
+
+            If Not AxisDown.ContainsKey(KeyPressed) And KeyPressed.Length > 0 Then
                 AxisDown.Add(KeyPressed, _event.jaxis.axisValue)
 
                 'Add the reverse of these also just to prevent it double clicking on the way up
                 If KeyPressed.Contains("~") Then
-                    AxisDown.Add(KeyPressed.Replace("~", ""), _event.jaxis.axisValue)
+
+                    If Not AxisDown.ContainsKey(KeyPressed.Replace("~", "").Replace("+", "").Replace("-", "")) Then
+                        AxisDown.Add(KeyPressed.Replace("~", "").Replace("+", "").Replace("-", ""), _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey(KeyPressed.Replace("~", "")) Then
+                        AxisDown.Add(KeyPressed.Replace("~", ""), _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey("+" & KeyPressed.Replace("~", "").Replace("+", "").Replace("-", "")) Then
+                        AxisDown.Add("+" & KeyPressed.Replace("~", "").Replace("+", "").Replace("-", ""), _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey("-" & KeyPressed.Replace("~", "").Replace("+", "").Replace("-", "")) Then
+                        AxisDown.Add("-" & KeyPressed.Replace("~", "").Replace("+", "").Replace("-", ""), _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey("+" & KeyPressed.Replace("+", "").Replace("-", "")) Then
+                        AxisDown.Add("+" & KeyPressed.Replace("+", "").Replace("-", ""), _event.jaxis.axisValue)
+                    End If
+
+                    If Not AxisDown.ContainsKey("-" & KeyPressed.Replace("+", "").Replace("-", "")) Then
+                        AxisDown.Add("-" & KeyPressed.Replace("+", "").Replace("-", ""), _event.jaxis.axisValue)
+                    End If
+
                 Else
-                    AxisDown.Add(KeyPressed & "~", _event.jaxis.axisValue)
+
+                    If Not AxisDown.ContainsKey(KeyPressed & "~") Then
+                        AxisDown.Add(KeyPressed & "~", _event.jaxis.axisValue)
+                    End If
+
                 End If
 
                 ' this is a fullrange bind, so add the individual ranges to prevent them from being bound
@@ -283,7 +345,7 @@ Public Class frmSDLMappingTool
 
                 End If
 
-                For i = 0 To SDL_JoystickNumAxes(Joy)
+                For i = 0 To SDL_JoystickNumAxes(Joy) - 1
                     Dim DuplicatedAxisValue = SDL_JoystickGetAxis(Joy, i)
                     If Not i = _event.jaxis.axis And DuplicatedAxisValue = _event.jaxis.axisValue And
                                         Not DuplicatedAxisValue = AxisIdle(i) Then
