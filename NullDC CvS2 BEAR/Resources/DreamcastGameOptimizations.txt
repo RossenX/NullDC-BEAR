@@ -47,4 +47,7 @@ Dynarec.UnderclockFpu=1
 NBA Showtime - NBA on NBC (USA)::B54F7CAE8B1E910193D0E3109AB43EEF
 Dreamcast.Cable=3
 Slave Zero (USA)::61EAA7C37D8B5596C05248FBE084970A
+Dreamcast.Region=1
 Dreamcast.Cable=2
+San Francisco RUSH 2049 (USA)::65F7B500E53888DD819DF8DC941D7A9A
+Dreamcast.Region=1
