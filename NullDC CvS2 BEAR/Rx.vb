@@ -1120,6 +1120,7 @@ Module BEARTheme
         If Not MednafenMappingFound Then
             Dim Joy = SDL_JoystickOpen(_index)
             Dim _numAxis = SDL_JoystickNumAxes(Joy)
+            ' DO EXTRA CHECK HERE FOR XINPUT AND SET NUM AXIS TO 6 REGARDLESS
 
             ' If for w.e reason it could not get the mapping or one was never created for this device, then take a shot at using the xinput defaults
             If _SDLMapping Is Nothing Then
@@ -1127,6 +1128,7 @@ Module BEARTheme
             ElseIf _SDLMapping = "" Then
                 _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
             End If
+
 
             Dim MednafenTranslated = BEARButtonToMednafenButton(_SDLMapping, _numAxis)
             If _MednafenMapping = "" Then
@@ -1175,6 +1177,8 @@ Module BEARTheme
             Case "button_9" ' R3
                 Converted = "button_7"
         End Select
+
+        'Dim AxisCount = SDL_JoystickNumAxes()
 
         ' Convert Axis
         If Converted.Contains("abs_0") Then

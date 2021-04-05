@@ -234,17 +234,21 @@ Public Class frmKeyMapperSDL
             For Each _cont As Control In _tab.Controls
                 If TypeOf _cont Is keybindButton Then
                     Dim _btn As keybindButton = _cont
-                    If _btn.Emu = "nulldc" Then
-                        lines(KeyCount) = _btn.Name & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
-                    ElseIf _btn.Emu = "mednafen" Then
-                        If _btn.ConfigString.Contains("<port>") Then
-                            lines(KeyCount) = "med_" & _btn.ConfigString & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
-                        Else
-                            lines(KeyCount) = "med_" & _btn.ConfigString & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(0)
-                        End If
 
-                    End If
-                    KeyCount += 1
+                    Dim ButtonConfigString = _btn.ConfigString.Split(",")
+                    For Each _btnstr In ButtonConfigString
+                        If _btn.Emu = "nulldc" Then
+                            lines(KeyCount) = _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
+                        ElseIf _btn.Emu = "mednafen" Then
+                            If _btnstr.Contains("<port>") Then
+                                lines(KeyCount) = "med_" & _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
+                            Else
+                                lines(KeyCount) = "med_" & _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(0)
+                            End If
+
+                        End If
+                        KeyCount += 1
+                    Next
 
                 End If
             Next
@@ -852,6 +856,8 @@ Public Class frmKeyMapperSDL
                                 line.StartsWith("command.9 ") Or
                                 line.StartsWith("command.state_slot_dec ") Then
                             tmpControlString = line.Split(" ")(0) & " " & "keyboard 0x0 0" ' Disable Rapid Control unless they are found in our configs
+                            linenumber += 1
+                            Continue For
                         End If
 
                         For Each control_line In ControlsConfigs
@@ -912,7 +918,6 @@ Public Class frmKeyMapperSDL
                                                     tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
                                                 End If
 
-
                                             Else
                                                 tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
                                             End If
@@ -929,9 +934,6 @@ Public Class frmKeyMapperSDL
                         Next
 
                         If Not tmpControlString = "" Then
-                            If tmpControlString.Contains("nes.") Then
-                                Console.WriteLine(tmpControlString)
-                            End If
                             MednafenConfigs(linenumber) = tmpControlString
                         End If
 
@@ -940,8 +942,18 @@ Public Class frmKeyMapperSDL
                     linenumber += 1
                 Next
 
+                Dim CompressedConfigFile As New List(Of String)
+                For Each _line In MednafenConfigs
+                    If Not _line.Trim.Length = 0 Then
+                        If _line.StartsWith(";") Then
+                            CompressedConfigFile.Add(vbNewLine)
+                        End If
+                        CompressedConfigFile.Add(_line)
+                    End If
+                Next
+
                 File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
-                File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", MednafenConfigs)
+                File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", CompressedConfigFile.ToArray)
             End If
 
         Catch ex As Exception

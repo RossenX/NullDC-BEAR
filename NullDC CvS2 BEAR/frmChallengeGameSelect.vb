@@ -52,6 +52,12 @@ Public Class frmChallengeGameSelect
             File.WriteAllText(MainformRef.NullDCPath & "\recent.glist", SelectedGame(0) & vbNewLine)
         End If
 
+        If tb_gamekey.Text.Trim.Length > 0 Then
+            Rx.EEPROM = tb_gamekey.Text.Trim
+        Else
+            Rx.EEPROM = ""
+        End If
+
         If _Challenger Is Nothing Then
             StartOffline()
         Else
@@ -108,11 +114,6 @@ Public Class frmChallengeGameSelect
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Close()
-        MainformRef.Focus()
-    End Sub
-
     Private Sub frmChallengeGameSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.NewNullDCBearIcon
         tb_mednafen.Visible = False
@@ -126,7 +127,6 @@ Public Class frmChallengeGameSelect
     Public Sub ReloadTheme()
         GameSelectContainer.BackColor = BEARTheme.LoadColor(ThemeKeys.PrimaryColor)
 
-        ApplyThemeToControl(btnCancel)
         ApplyThemeToControl(btnLetsGo)
         ApplyThemeToControl(cbDelay)
         ApplyThemeToControl(Label2)
@@ -137,7 +137,9 @@ Public Class frmChallengeGameSelect
         ApplyThemeToControl(cbRegion)
         ApplyThemeToControl(cb_Serverlist)
         ApplyThemeToControl(Label1)
+        ApplyThemeToControl(Label5)
         ApplyThemeToControl(cb_Multitap)
+        ApplyThemeToControl(tb_gamekey)
 
         For Each _tab As TabPage In tc_games.TabPages
             ApplyThemeToControl(_tab.Controls.OfType(Of ListView).First, 2)
@@ -379,4 +381,17 @@ Public Class frmChallengeGameSelect
 
     End Sub
 
+    Private Sub tb_gamekey_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tb_gamekey.KeyPress
+        If Not (Asc(e.KeyChar) = 8) Then
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890"
+            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Or (Asc(e.KeyChar) = 8) Then
+                e.KeyChar = ChrW(0)
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
+    Private Sub tc_games_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tc_games.SelectedIndexChanged
+
+    End Sub
 End Class

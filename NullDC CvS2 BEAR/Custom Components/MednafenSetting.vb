@@ -30,10 +30,11 @@ Public Class MednafenSetting
         Dim _configs = Limits.Split(vbNewLine)
 
         Dim _loadedValue = ""
+        Dim cfgSplit = ConfigString.Split(",")(0)
 
         If Not Rx.MednafenConfigCache Is Nothing Then
             For i = 0 To Rx.MednafenConfigCache.Count - 1
-                If Rx.MednafenConfigCache(i).StartsWith(ConfigString.Trim & " ") Then
+                If Rx.MednafenConfigCache(i).StartsWith(cfgSplit.Trim & " ") Then
                     _loadedValue = Rx.MednafenConfigCache(i).Split(" ")(1)
                 End If
             Next
@@ -140,14 +141,19 @@ Public Class MednafenSetting
 
     Private Sub UpdateCFG(ByVal _newvalue As String)
         Dim EntryFound As Boolean = False
-
+        Dim cfgSplit = ConfigString.Split(",")
         For i = 0 To Rx.MednafenConfigCache.Count - 1
-            If Rx.MednafenConfigCache(i).StartsWith(ConfigString.Trim & " ") Then
-                Rx.MednafenConfigCache(i) = ConfigString.Trim & " " & _newvalue
-                EntryFound = True
+            For Each _cfg In cfgSplit
 
-                Exit For
-            End If
+                If Rx.MednafenConfigCache(i).StartsWith(_cfg.Trim & " ") Then
+                    Rx.MednafenConfigCache(i) = _cfg.Trim & " " & _newvalue
+                    EntryFound = True
+                    Exit For
+
+                End If
+
+            Next
+
         Next
 
         If EntryFound Then

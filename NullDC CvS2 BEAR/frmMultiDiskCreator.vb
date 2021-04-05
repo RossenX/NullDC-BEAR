@@ -15,26 +15,33 @@ Public Class frmMultiDiskCreator
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim BrowseFileDialog1 As New OpenFileDialog
-        BrowseFileDialog1.Filter = "cue Files (*.cue*)|*.cue"
-        BrowseFileDialog1.RestoreDirectory = True
 
-        Dim SelectedFolder = ""
-        Select Case cb_Platform.Text
-            Case "PSX"
-                SelectedFolder = MainformRef.NullDCPath & "\mednafen\roms\psx\"
-            Case "SS"
-                SelectedFolder = MainformRef.NullDCPath & "\mednafen\roms\ss\"
-        End Select
-        BrowseFileDialog1.InitialDirectory = SelectedFolder
+        Try
+            Dim BrowseFileDialog1 As New OpenFileDialog
+            BrowseFileDialog1.Filter = "cue Files (*.cue*)|*.cue"
+            BrowseFileDialog1.RestoreDirectory = True
 
-        If BrowseFileDialog1.ShowDialog = DialogResult.OK Then
-            If Not BrowseFileDialog1.FileName.StartsWith(SelectedFolder) Then
-                MsgBox("Incorrect file, .cue file must be in the rom folder of the selected platform.")
-            Else
-                RichTextBox1.Text += BrowseFileDialog1.FileName.Replace(SelectedFolder, "") & vbNewLine
+            Dim SelectedFolder = ""
+            Select Case cb_Platform.Text
+                Case "PSX"
+                    SelectedFolder = MainformRef.NullDCPath & "\mednafen\roms\psx\"
+                Case "SS"
+                    SelectedFolder = MainformRef.NullDCPath & "\mednafen\roms\ss\"
+            End Select
+            BrowseFileDialog1.InitialDirectory = SelectedFolder
+
+            If BrowseFileDialog1.ShowDialog = DialogResult.OK Then
+                If Not BrowseFileDialog1.FileName.StartsWith(SelectedFolder) Then
+                    MsgBox("Incorrect file, .cue file must be in the rom folder of the selected platform.")
+                Else
+                    RichTextBox1.Text += BrowseFileDialog1.FileName.Replace(SelectedFolder, "") & vbNewLine
+                End If
             End If
-        End If
+
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Message)
+
+        End Try
 
     End Sub
 

@@ -79,8 +79,39 @@ Public Class MednafenLauncher
                     MednafenInfo.Arguments += " -filesys.path_sav sav_client -filesys.path_state mcs_client "
                 End If
 
-                MednafenInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
+                'MednafenInfo.Arguments += "-force_module "
+                ' GET THE CORE HERE TO FORCE IT TO USE THE CORRECT CORE
+                Console.WriteLine(Rx.platform)
 
+                Dim forcedModule = ""
+                Select Case Rx.platform
+                    Case "ss" : forcedModule = "ss"
+                    Case "sg" : forcedModule = "md"
+                    Case "sms" : forcedModule = "sms"
+                    Case "psx" : forcedModule = "psx"
+                    Case "nes", "fds" : forcedModule = "nes"
+                    Case "snes" : forcedModule = "snes_faust"
+                    Case "ngp" : forcedModule = "ngp"
+                    Case "gba" : forcedModule = "gba"
+                    Case "gbc" : forcedModule = "gb"
+                End Select
+
+                If Rx.platform = "snes" Then
+                    ' we always use Faust for online play, the other core is only kept so people can keep their save games in single player
+                    If Not MainformRef.Challenger Is Nothing Or MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Or MainformRef.ConfigFile.Status = "Client" Then
+                        forcedModule = "snes_faust"
+                    Else
+                        forcedModule = ""
+                    End If
+
+                End If
+
+                If Not forcedModule = "" Then
+                    MednafenInfo.Arguments += "-force_module " & forcedModule & " "
+
+                End If
+
+                MednafenInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
                 Console.WriteLine("Command: " & MednafenInfo.Arguments)
                 MednafenInstance = Process.Start(MednafenInfo)
                 MednafenInstance.EnableRaisingEvents = True
