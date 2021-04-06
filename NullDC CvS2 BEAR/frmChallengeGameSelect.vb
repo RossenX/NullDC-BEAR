@@ -115,7 +115,7 @@ Public Class frmChallengeGameSelect
     End Sub
 
     Private Sub frmChallengeGameSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
         tb_mednafen.Visible = False
         tb_nulldc.Visible = False
         cb_Multitap.SelectedIndex = 0
@@ -161,8 +161,18 @@ Public Class frmChallengeGameSelect
         If Visible Then
             PopulateGameLists()
 
-            If _Challenger Is Nothing Then cbDelay.Text = "0"
-            If cbRegion.Text = "" Then cbRegion.SelectedIndex = 0
+            If _Challenger Is Nothing Then
+                cbDelay.Text = "0"
+                Label3.Visible = True
+                cb_Serverlist.Visible = True
+            Else
+                Label3.Visible = False
+                cb_Serverlist.Visible = False
+            End If
+
+            If cbRegion.Text = "" Then
+                cbRegion.SelectedIndex = 0
+            End If
 
             'ShowExtraSettings()
             Me.CenterToParent()
@@ -204,6 +214,7 @@ Public Class frmChallengeGameSelect
     End Sub
 
     Private Sub ShowExtraSettings(ByRef sender As ListView, ByRef e As EventArgs)
+
         If sender Is Nothing Then
             tb_mednafen.Visible = False
             tb_nulldc.Visible = False

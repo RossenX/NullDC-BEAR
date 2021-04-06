@@ -3,7 +3,7 @@
 Public Class frmMultiDiskCreator
 
     Private Sub frmMultiDiskCreator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
         Me.CenterToParent()
         cb_Platform.SelectedIndex = 0
 

@@ -3,7 +3,7 @@
 
     Private Sub frmSecret_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.CenterToParent()
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
 
         Randomize()
         btnColor.BackColor = RandomQBColor()

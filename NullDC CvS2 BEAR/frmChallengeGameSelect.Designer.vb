@@ -59,9 +59,9 @@ Partial Class frmChallengeGameSelect
         Me.btnLetsGo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnLetsGo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLetsGo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLetsGo.Location = New System.Drawing.Point(480, 415)
+        Me.btnLetsGo.Location = New System.Drawing.Point(479, 415)
         Me.btnLetsGo.Name = "btnLetsGo"
-        Me.btnLetsGo.Size = New System.Drawing.Size(161, 81)
+        Me.btnLetsGo.Size = New System.Drawing.Size(162, 81)
         Me.btnLetsGo.TabIndex = 1
         Me.btnLetsGo.Text = "LETS GO!"
         Me.btnLetsGo.UseVisualStyleBackColor = False
@@ -86,8 +86,8 @@ Partial Class frmChallengeGameSelect
         Me.tb_mednafen.RowCount = 3
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tb_mednafen.Size = New System.Drawing.Size(461, 81)
+        Me.tb_mednafen.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tb_mednafen.Size = New System.Drawing.Size(367, 81)
         Me.tb_mednafen.TabIndex = 28
         '
         'Label5
@@ -128,7 +128,7 @@ Partial Class frmChallengeGameSelect
         Me.cb_Multitap.Items.AddRange(New Object() {"None", "Port 1", "Port 2", "Port 1+2"})
         Me.cb_Multitap.Location = New System.Drawing.Point(77, 30)
         Me.cb_Multitap.Name = "cb_Multitap"
-        Me.cb_Multitap.Size = New System.Drawing.Size(381, 21)
+        Me.cb_Multitap.Size = New System.Drawing.Size(287, 21)
         Me.cb_Multitap.TabIndex = 31
         '
         'Label3
@@ -153,7 +153,7 @@ Partial Class frmChallengeGameSelect
         Me.cb_Serverlist.FormattingEnabled = True
         Me.cb_Serverlist.Location = New System.Drawing.Point(77, 3)
         Me.cb_Serverlist.Name = "cb_Serverlist"
-        Me.cb_Serverlist.Size = New System.Drawing.Size(381, 21)
+        Me.cb_Serverlist.Size = New System.Drawing.Size(287, 21)
         Me.cb_Serverlist.TabIndex = 29
         '
         'tb_gamekey
@@ -161,17 +161,18 @@ Partial Class frmChallengeGameSelect
         Me.tb_gamekey.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tb_gamekey.Location = New System.Drawing.Point(77, 57)
         Me.tb_gamekey.Name = "tb_gamekey"
-        Me.tb_gamekey.Size = New System.Drawing.Size(381, 20)
+        Me.tb_gamekey.Size = New System.Drawing.Size(287, 20)
         Me.tb_gamekey.TabIndex = 34
         '
         'GameSelectContainer
         '
         Me.GameSelectContainer.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.GameSelectContainer.ColumnCount = 2
-        Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.GameSelectContainer.ColumnCount = 3
+        Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 167.0!))
         Me.GameSelectContainer.Controls.Add(Me.Panel1, 0, 1)
-        Me.GameSelectContainer.Controls.Add(Me.btnLetsGo, 1, 1)
+        Me.GameSelectContainer.Controls.Add(Me.btnLetsGo, 2, 1)
         Me.GameSelectContainer.Controls.Add(Me.tc_games, 0, 0)
         Me.GameSelectContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GameSelectContainer.Location = New System.Drawing.Point(0, 24)
@@ -191,7 +192,7 @@ Partial Class frmChallengeGameSelect
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(13, 415)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(461, 81)
+        Me.Panel1.Size = New System.Drawing.Size(367, 81)
         Me.Panel1.TabIndex = 4
         '
         'tb_nulldc
@@ -213,7 +214,7 @@ Partial Class frmChallengeGameSelect
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tb_nulldc.Size = New System.Drawing.Size(461, 81)
+        Me.tb_nulldc.Size = New System.Drawing.Size(367, 81)
         Me.tb_nulldc.TabIndex = 25
         '
         'cbDelay
@@ -270,7 +271,7 @@ Partial Class frmChallengeGameSelect
         '
         'tc_games
         '
-        Me.GameSelectContainer.SetColumnSpan(Me.tc_games, 2)
+        Me.GameSelectContainer.SetColumnSpan(Me.tc_games, 3)
         Me.tc_games.Controls.Add(Me.TabPage1)
         Me.tc_games.Controls.Add(Me.TabPage2)
         Me.tc_games.Dock = System.Windows.Forms.DockStyle.Fill
@@ -296,7 +297,7 @@ Partial Class frmChallengeGameSelect
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(453, 370)
+        Me.TabPage2.Size = New System.Drawing.Size(620, 370)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True

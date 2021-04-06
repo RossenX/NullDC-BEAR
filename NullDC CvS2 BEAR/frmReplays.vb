@@ -15,7 +15,7 @@ Public Class frmReplays
     End Sub
 
     Private Sub frmReplays_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
         Me.CenterToParent()
 
         If Not Directory.Exists(MainformRef.NullDCPath & "\replays") Then Directory.CreateDirectory(MainformRef.NullDCPath & "\replays")

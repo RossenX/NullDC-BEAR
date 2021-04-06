@@ -31,7 +31,7 @@ Public Class frmSDLMappingTool
     Dim ImageTimer As Timer = New Timer
 
     Private Sub frmSDLMappingTool_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
 
         If Me.Visible Then
             Me.CenterToParent()

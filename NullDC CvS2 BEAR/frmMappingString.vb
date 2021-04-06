@@ -3,7 +3,7 @@
 Public Class frmMappingString
 
     Private Sub frmMappingString_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
         CenterToParent()
         Dim _currentJoyStickIndex = frmKeyMapperSDL.ControllerCB.SelectedValue
 

@@ -31,7 +31,7 @@ Public Class frmDLC
     End Sub
 
     Private Sub frmDLC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
         Me.CenterToParent()
 
         GetDownloadableGamesList()

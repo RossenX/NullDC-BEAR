@@ -14,7 +14,7 @@ Public Class frmDLCCreator
     Dim ExportCount = 0
     Public Sub New()
         InitializeComponent()
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
 
     End Sub
 

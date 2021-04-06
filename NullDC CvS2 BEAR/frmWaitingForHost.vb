@@ -15,7 +15,7 @@
     End Sub
 
     Private Sub frmWaitingForHost_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
         AddHandler VMUTimer.Tick, Sub()
                                       btnRetryVMU.Visible = True
                                   End Sub

@@ -178,8 +178,8 @@ Public Class frmMain
 
         ' Basics
         Rx.MainformRef = Me
-        Me.Icon = My.Resources.NewNullDCBearIcon
-        niBEAR.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
+        niBEAR.Icon = My.Resources.fan_icon_text
         Me.CenterToScreen()
 
         LoadGaggedUsers()

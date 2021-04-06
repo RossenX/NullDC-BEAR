@@ -381,7 +381,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.85
+        '''  Looks up a localized string similar to 1.89
         '''CVS2::4B5360E5C101756B04FB20F11D50C8C8::5576B4A34D645C26C0BDE99D55F75FB0
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
@@ -398,6 +398,16 @@ Namespace My.Resources
         Friend ReadOnly Property DreamcastGameOptimizations() As String
             Get
                 Return ResourceManager.GetString("DreamcastGameOptimizations", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend ReadOnly Property fan_icon_text() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("fan_icon_text", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
         

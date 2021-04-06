@@ -35,7 +35,7 @@ Public Class frmDM
     End Sub
 
     Private Sub frmDM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
         Me.CenterToParent()
         ReloadTheme()
     End Sub

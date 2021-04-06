@@ -67,7 +67,7 @@ Public Class frmKeyMapperSDL
             If Me.Visible Then
 
                 Me.CenterToParent()
-                Me.Icon = My.Resources.NewNullDCBearIcon
+                Me.Icon = My.Resources.fan_icon_text
                 ReloadTheme()
 
                 If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
@@ -1149,7 +1149,7 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub frmKeyMapperSDL_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Icon = My.Resources.NewNullDCBearIcon
+        Me.Icon = My.Resources.fan_icon_text
     End Sub
 
     Private Sub btnResetAll_Click(sender As Object, e As EventArgs) Handles ResetAllToolStripMenuItem.Click

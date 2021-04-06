@@ -225,7 +225,7 @@ Partial Class frmMain
         Me.btnOffline.Size = New System.Drawing.Size(190, 36)
         Me.btnOffline.TabIndex = 7
         Me.btnOffline.TabStop = False
-        Me.btnOffline.Text = "Play Offline"
+        Me.btnOffline.Text = "Play Offline / Host"
         Me.btnOffline.UseVisualStyleBackColor = False
         '
         'niBEAR
@@ -471,13 +471,13 @@ Partial Class frmMain
         'HostToolStripMenuItem
         '
         Me.HostToolStripMenuItem.Name = "HostToolStripMenuItem"
-        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.HostToolStripMenuItem.Text = "Host"
         '
         'WaitingToolStripMenuItem
         '
         Me.WaitingToolStripMenuItem.Name = "WaitingToolStripMenuItem"
-        Me.WaitingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.WaitingToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.WaitingToolStripMenuItem.Text = "Waiting"
         '
         'imgBeta
@@ -503,7 +503,6 @@ Partial Class frmMain
         Me.Controls.Add(Me.MainMenuContainer)
         Me.Controls.Add(Me.lbVer)
         Me.Controls.Add(Me._MainMenuStrip)
-        Me.DoubleBuffered = True
         Me.KeyPreview = True
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
