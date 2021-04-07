@@ -162,10 +162,13 @@ Public Class frmChallengeGameSelect
             PopulateGameLists()
 
             If _Challenger Is Nothing Then
-                cbDelay.Text = "0"
+                cbDelay.Text = MainformRef.ConfigFile.SimulatedDelay
+                cbRegion.SelectedIndex = MainformRef.ConfigFile.Region
                 Label3.Visible = True
                 cb_Serverlist.Visible = True
             Else
+                cbDelay.Text = MainformRef.ConfigFile.SimulatedDelay
+                cbRegion.SelectedIndex = MainformRef.ConfigFile.Region
                 Label3.Visible = False
                 cb_Serverlist.Visible = False
             End If
@@ -405,4 +408,17 @@ Public Class frmChallengeGameSelect
     Private Sub tc_games_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tc_games.SelectedIndexChanged
 
     End Sub
+
+    Private Sub cbDelay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDelay.SelectedIndexChanged
+        MainformRef.ConfigFile.SimulatedDelay = cbDelay.Text.Trim
+        MainformRef.ConfigFile.SaveFile(False)
+
+    End Sub
+
+    Private Sub cbRegion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRegion.SelectedIndexChanged
+        MainformRef.ConfigFile.Region = cbRegion.SelectedIndex
+        MainformRef.ConfigFile.SaveFile(False)
+
+    End Sub
+
 End Class

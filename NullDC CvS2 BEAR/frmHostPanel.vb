@@ -74,7 +74,8 @@ Public Class frmHostPanel
 
             Me.BackgroundImage = BEARTheme.LoadImage(ThemeKeys.HostBackground)
 
-            If cbRegion.Text = "" Then cbRegion.Text = "JPN"
+            cbRegion.SelectedIndex = MainformRef.ConfigFile.Region
+
             If Not MainformRef.Challenger Is Nothing Then
                 lbInfo.Text = "Hosting " & MainformRef.Challenger.name
                 cbDelay.Text = "1"
@@ -86,7 +87,6 @@ Public Class frmHostPanel
                     SuggestThread = New Thread(AddressOf SuggestDelay)
                     SuggestThread.IsBackground = True
                     SuggestThread.Start(True)
-                    'SuggestThread.Join()
 
                 Catch ex As Exception
                     MsgBox("Error Pinging Player")
@@ -209,4 +209,9 @@ Public Class frmHostPanel
         End If
     End Sub
 
+    Private Sub cbRegion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRegion.SelectedIndexChanged
+        MainformRef.ConfigFile.Region = cbRegion.SelectedIndex
+        MainformRef.ConfigFile.SaveFile(False)
+
+    End Sub
 End Class

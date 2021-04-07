@@ -2135,8 +2135,28 @@ Public Class Configs
     Private _p2Name As String = "Local P2"
     Private _nullDCPriorty As Int16 = 0
     Private _DebugControls As Int16 = 0
+    Private _simDelay As Int16 = 0
+    Private _region As Int16 = 0
 
 #Region "Properties"
+
+    Public Property SimulatedDelay() As Int16
+        Get
+            Return _simDelay
+        End Get
+        Set(ByVal value As Int16)
+            _simDelay = value
+        End Set
+    End Property
+
+    Public Property Region() As Int16
+        Get
+            Return _region
+        End Get
+        Set(ByVal value As Int16)
+            _region = value
+        End Set
+    End Property
 
     Public Property DebugControls() As Int16
         Get
@@ -2432,7 +2452,9 @@ Public Class Configs
                 "Theme=" & Theme,
                 "P2Name=" & P2Name,
                 "NullDCPriority=" & NullDCPriority,
-                "DebugControls=" & DebugControls
+                "DebugControls=" & DebugControls,
+                "SimulatedDelay=" & SimulatedDelay,
+                "Region=" & Region
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -2503,6 +2525,8 @@ Public Class Configs
                 If line.StartsWith("P2Name=") Then P2Name = line.Split("=")(1).Trim
                 If line.StartsWith("NullDCPriority=") Then NullDCPriority = line.Split("=")(1).Trim
                 If line.StartsWith("DebugControls=") Then DebugControls = line.Split("=")(1).Trim
+                If line.StartsWith("SimulatedDelay=") Then SimulatedDelay = line.Split("=")(1).Trim
+                If line.StartsWith("Region=") Then Region = line.Split("=")(1).Trim
             Next
 
             Game = "None"
