@@ -593,6 +593,10 @@ UpdateTry:
             End If
         End If
 
+        If File.Exists(NullDCPath & "\bearcontrollerdb.txt") Then
+            File.Copy(NullDCPath & "\bearcontrollerdb.txt", NullDCPath & "\dc\bearcontrollerdb.txt", True)
+        End If
+
         ' Remove any honey files that may have been left over if someone quit or it crashed or w.e reason, but if it fails then fuck it let em stay
         Try
             Dim _honey As String() = Directory.GetFiles(NullDCPath, "*.honey", SearchOption.AllDirectories)

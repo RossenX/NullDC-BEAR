@@ -170,7 +170,7 @@ Partial Class frmChallengeGameSelect
         Me.GameSelectContainer.ColumnCount = 3
         Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
         Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 168.0!))
+        Me.GameSelectContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169.0!))
         Me.GameSelectContainer.Controls.Add(Me.Panel1, 0, 1)
         Me.GameSelectContainer.Controls.Add(Me.btnLetsGo, 2, 1)
         Me.GameSelectContainer.Controls.Add(Me.tc_games, 0, 0)

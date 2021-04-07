@@ -19,6 +19,7 @@ Public Class frmMappingString
         Dim _FoundIndex = 0
         Dim _File As String() = {}
 
+        ' Naomi
         If File.Exists(MainformRef.NullDCPath & "\bearcontrollerdb.txt") Then
             _File = File.ReadAllLines(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
             For Each _line In _File
@@ -38,6 +39,29 @@ Public Class frmMappingString
 
         Else
             File.WriteAllLines(MainformRef.NullDCPath & "\bearcontrollerdb.txt", {_SDL})
+
+        End If
+
+        ' Dreamcast
+        If File.Exists(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt") Then
+            _File = File.ReadAllLines(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt")
+            For Each _line In _File
+                If _line.StartsWith(_SDL.Split(",")(0)) Then
+                    _FoundExisting = True
+                    _File(_FoundIndex) = _SDL
+                    Exit For
+                End If
+                _FoundIndex += 1
+            Next
+
+            If _FoundExisting Then
+                File.WriteAllLines(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt", _File)
+            Else
+                File.AppendAllLines(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt", {_SDL})
+            End If
+
+        Else
+            File.WriteAllLines(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt", {_SDL})
 
         End If
 
