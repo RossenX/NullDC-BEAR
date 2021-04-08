@@ -594,7 +594,10 @@ UpdateTry:
         End If
 
         If File.Exists(NullDCPath & "\bearcontrollerdb.txt") Then
-            File.Copy(NullDCPath & "\bearcontrollerdb.txt", NullDCPath & "\dc\bearcontrollerdb.txt", True)
+            If Directory.Exists(NullDCPath & "\dc") Then
+                File.Copy(NullDCPath & "\bearcontrollerdb.txt", NullDCPath & "\dc\bearcontrollerdb.txt", True)
+            End If
+
         End If
 
         ' Remove any honey files that may have been left over if someone quit or it crashed or w.e reason, but if it fails then fuck it let em stay
@@ -1057,9 +1060,10 @@ UpdateTry:
     End Sub
 
     Public Sub GameLauncher(ByVal _romname, ByVal _region)
-        Dim Emulator As String = GamesList(_romname)(2)
 
-        Select Case Emulator
+        Rx.platform = GamesList(_romname)(2)
+
+        Select Case Rx.platform
             Case "dc"
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "na"
@@ -1067,7 +1071,7 @@ UpdateTry:
             Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc", "fds", "sms"
                 MednafenLauncher.LaunchEmulator(_romname)
             Case Else
-                MsgBox("Missing emulator type: " & Emulator)
+                MsgBox("Missing emulator type: " & Rx.platform)
         End Select
 
     End Sub

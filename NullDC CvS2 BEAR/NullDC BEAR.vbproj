@@ -57,7 +57,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>fan icon text.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\fan icon text.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -458,7 +458,6 @@
     <None Include="Resources\Controller Types\ss_dualmission.png" />
     <None Include="Resources\Controller Types\ss_gun.png" />
     <None Include="Resources\Controller Types\ss_mission.png" />
-    <Content Include="fan icon text.ico" />
     <None Include="Resources\fan icon text.ico" />
     <Content Include="Resources\Multitap_1.txt" />
     <Content Include="Resources\Multitap_2.txt" />

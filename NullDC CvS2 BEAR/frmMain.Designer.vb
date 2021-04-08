@@ -225,7 +225,7 @@ Partial Class frmMain
         Me.btnOffline.Size = New System.Drawing.Size(190, 36)
         Me.btnOffline.TabIndex = 7
         Me.btnOffline.TabStop = False
-        Me.btnOffline.Text = "Play Offline / Host"
+        Me.btnOffline.Text = "Play"
         Me.btnOffline.UseVisualStyleBackColor = False
         '
         'niBEAR

@@ -43,6 +43,7 @@ Public Class frmMappingString
         End If
 
         ' Dreamcast
+        _FoundIndex = 0
         If File.Exists(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt") Then
             _File = File.ReadAllLines(MainformRef.NullDCPath & "\dc\bearcontrollerdb.txt")
             For Each _line In _File

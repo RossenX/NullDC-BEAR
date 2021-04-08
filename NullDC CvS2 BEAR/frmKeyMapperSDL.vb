@@ -139,7 +139,7 @@ Public Class frmKeyMapperSDL
         UpdateControllersList()
     End Sub
 
-    Private Sub GenerateDefaults()
+    Private Sub GenerateDefaults(ByVal _filepath As String)
 
         Joystick(0) = 0
         Joystick(1) = -1
@@ -149,7 +149,7 @@ Public Class frmKeyMapperSDL
         Peripheral(0) = 0
         Peripheral(1) = 0
 
-        SaveSettings()
+        SaveSettings(_filepath)
         UpdateButtonLabels()
 
     End Sub
@@ -174,7 +174,7 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub SaveSettings()
+    Private Sub SaveSettings(ByVal _filepath As String)
 
         MainformRef.ConfigFile.DebugControls = DebugControlsCB.SelectedIndex
         MainformRef.ConfigFile.SaveFile(False)
@@ -254,13 +254,13 @@ Public Class frmKeyMapperSDL
             Next
         Next
 
-        If Not File.Exists(MainformRef.NullDCPath & "\Controls.bear") Then
+        If Not File.Exists(_filepath) Then
             NaomiChanged = True
             DreamcastChanged = True
             MednafenChanged = True
             MednafenControlChanged = True
         Else
-            Dim _tmpConfigFile As String() = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+            Dim _tmpConfigFile As String() = File.ReadAllLines(_filepath)
 
             For Each _line In lines
                 If Not _tmpConfigFile.Contains(_line) And Not _line Is Nothing Then
@@ -294,7 +294,7 @@ Public Class frmKeyMapperSDL
 
         End If
 
-        File.WriteAllLines(MainformRef.NullDCPath & "\Controls.bear", lines)
+        File.WriteAllLines(_filepath, lines)
 
         ' Check if we have a mednafen mapping or if we should just make one on the fly
         Dim MednafenControllerConfigLines
@@ -332,16 +332,52 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
+    Private Function GetControlsFilePath() As String
+        Dim KeyProfileFile As String = ""
+        If MainformRef.ConfigFile.KeyMapProfile = "Default" Then
+            KeyProfileFile = MainformRef.NullDCPath & "\Controls.bear"
+        Else
+            KeyProfileFile = MainformRef.NullDCPath & "\Controls_" & MainformRef.ConfigFile.KeyMapProfile & ".bear"
+        End If
+
+        Return KeyProfileFile
+    End Function
+
+
+    Private Sub LoadProfiles()
+        RemoveHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
+        cbProfiles.Items.Clear()
+
+
+        For Each _file In Directory.GetFiles(MainformRef.NullDCPath, "*.bear")
+            Dim FileName As String = _file.Split("\")(_file.Split("\").Length - 1)
+            If Not FileName = "Controls.bear" And FileName.StartsWith("Controls_") Then
+                cbProfiles.Items.Add(FileName.Replace("Controls_", "").Replace(".bear", ""))
+            End If
+
+        Next
+
+    End Sub
+
+    Private Sub cbProfileIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+
     Private Sub LoadSettings()
+
+        LoadProfiles()
 
         Dim configLines As String()
 
-        If Not File.Exists(MainformRef.NullDCPath & "\Controls.bear") Then
-            GenerateDefaults()
+        Dim KeyProfileFile As String = GetControlsFilePath()
+
+        If Not File.Exists(KeyProfileFile) Then
+            GenerateDefaults(KeyProfileFile)
         End If
 
         Dim LoadingControls As Int16 = 0
-        While MainformRef.IsFileInUse(MainformRef.NullDCPath & "\Controls.bear")
+        While MainformRef.IsFileInUse(KeyProfileFile)
             If LoadingControls > 20 Then
                 MsgBox("Couldn't load Controls.bear, file is locked or used by another process.")
                 Me.Close()
@@ -350,7 +386,8 @@ Public Class frmKeyMapperSDL
             LoadingControls += 1
         End While
 
-        configLines = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+
+        configLines = File.ReadAllLines(KeyProfileFile)
         RemoveHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
 
         For Each line In configLines
@@ -646,7 +683,8 @@ Public Class frmKeyMapperSDL
     Private Sub SaveEverything()
         '_InputThread.Abort() ' Aight not accepting inputs anymore
         btn_Close.Text = "Saving..."
-        SaveSettings()
+        Dim ControlFilePath = GetControlsFilePath()
+        SaveSettings(ControlFilePath)
 
         ' Disable SDL completly we dun need that shit in the background no more
         For i = 0 To SDL_NumJoysticks() - 1
@@ -658,7 +696,7 @@ Public Class frmKeyMapperSDL
         Next
 
         ' Update Control Configs for all the shit and hot-load if possible
-        Dim ControlsConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+        Dim ControlsConfigs() As String = File.ReadAllLines(ControlFilePath)
         Dim NaomiConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
         Dim DreamcastConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
         Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
@@ -1047,6 +1085,7 @@ Public Class frmKeyMapperSDL
         If MainformRef.IsFileInUse(MainformRef.NullDCPath & "\mednafen\stdout.txt") And File.Exists(MainformRef.NullDCPath & "\mednafen\stdout.txt") Then
             MsgBox("Cannot Save While Mednafen Is Running")
         Else
+
             SaveEverything()
             Me.Close()
         End If
@@ -1161,7 +1200,7 @@ Public Class frmKeyMapperSDL
         Dim result1 As DialogResult = MessageBox.Show("This will Reset ALL the controls, k?", "Reset All?", MessageBoxButtons.YesNo)
 
         If result1 = DialogResult.Yes Then
-            GenerateDefaults()
+            GenerateDefaults(GetControlsFilePath)
             LoadSettings()
             'If File.Exists(MainformRef.NullDCPath & "\Controls.bear") Then File.Delete(MainformRef.NullDCPath & "\Controls.bear")
             If File.Exists(MainformRef.NullDCPath & "\bearcontrollerdb.txt") Then File.Delete(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
