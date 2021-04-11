@@ -266,7 +266,7 @@ Public Class NullDCLauncher
         Dim linenumber = 0
 
         ' Controls File
-        Dim ControlsFile() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+        Dim ControlsFile() As String = File.ReadAllLines(GetControlsFilePath)
         ' Get Rid of the settings we don't want
 
         Dim tempPeripheral As String() = {"", ""}
@@ -573,7 +573,7 @@ Public Class NullDCLauncher
         DeleteNVMEM()
         lstCheck()
 
-        Dim ControlsFile() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Controls.bear")
+        Dim ControlsFile() As String = File.ReadAllLines(GetControlsFilePath)
 
         For Each line In ControlsFile
             If line.StartsWith("CONT_") Or line.StartsWith("STICK_") Then

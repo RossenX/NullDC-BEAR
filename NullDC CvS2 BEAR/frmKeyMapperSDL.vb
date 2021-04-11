@@ -95,15 +95,22 @@ Public Class frmKeyMapperSDL
                 AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
                 AddHandler PlayerTab.SelectedIndexChanged, AddressOf PlayerTab_SelectedIndexChanged
                 AddHandler ControllersTab.SelectedIndexChanged, Sub() ActiveControl = Nothing
+                AddHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
 
                 If MainformRef.IsNullDCRunning Then
                     PeripheralCB.Enabled = False
                     PeriWarning.Visible = True
                     cbSDL.Enabled = False
+                    cbProfiles.Enabled = False
+                    ProfileToolStripMenuItem.Enabled = False
+
                 Else
                     PeripheralCB.Enabled = True
                     PeriWarning.Visible = False
                     cbSDL.Enabled = True
+                    cbProfiles.Enabled = True
+                    ProfileToolStripMenuItem.Enabled = True
+
                 End If
 
             End If
@@ -332,22 +339,10 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Function GetControlsFilePath() As String
-        Dim KeyProfileFile As String = ""
-        If MainformRef.ConfigFile.KeyMapProfile = "Default" Then
-            KeyProfileFile = MainformRef.NullDCPath & "\Controls.bear"
-        Else
-            KeyProfileFile = MainformRef.NullDCPath & "\Controls_" & MainformRef.ConfigFile.KeyMapProfile & ".bear"
-        End If
+    Private Sub LoadProfiles(Optional ByVal _profile As String = Nothing)
 
-        Return KeyProfileFile
-    End Function
-
-
-    Private Sub LoadProfiles()
-        RemoveHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
         cbProfiles.Items.Clear()
-
+        cbProfiles.Items.Add("Default")
 
         For Each _file In Directory.GetFiles(MainformRef.NullDCPath, "*.bear")
             Dim FileName As String = _file.Split("\")(_file.Split("\").Length - 1)
@@ -357,20 +352,52 @@ Public Class frmKeyMapperSDL
 
         Next
 
+        Dim SelectedProfile = ""
+        If Not _profile Is Nothing Then
+            SelectedProfile = _profile
+        Else
+            SelectedProfile = MainformRef.ConfigFile.KeyMapProfile
+        End If
+
+        Dim ProfileFound As Boolean = False
+        For i = 0 To cbProfiles.Items.Count - 1
+
+            If cbProfiles.Items(i) = SelectedProfile Then
+                cbProfiles.SelectedItem = cbProfiles.Items(i)
+                ProfileFound = True
+                Exit For
+            End If
+
+        Next
+
+        If Not ProfileFound Then
+            cbProfiles.SelectedIndex = 0
+            MainformRef.ConfigFile.KeyMapProfile = "Default"
+            MainformRef.ConfigFile.SaveFile(False)
+
+        End If
+
     End Sub
 
     Private Sub cbProfileIndexChanged(sender As Object, e As EventArgs)
+        RemoveHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
+        NaomiChanged = True
+        DreamcastChanged = True
+        MednafenChanged = True
 
+        LoadSettings(cbProfiles.Text.Trim)
+        AddHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
     End Sub
 
 
-    Private Sub LoadSettings()
+    Public Sub LoadSettings(Optional _profile As String = Nothing)
 
-        LoadProfiles()
+        LoadProfiles(_profile)
 
         Dim configLines As String()
 
-        Dim KeyProfileFile As String = GetControlsFilePath()
+        Dim KeyProfileFile As String = GetControlsFilePath(_profile)
+        Console.WriteLine("Loaded Profile: " & KeyProfileFile)
 
         If Not File.Exists(KeyProfileFile) Then
             GenerateDefaults(KeyProfileFile)
@@ -646,7 +673,6 @@ Public Class frmKeyMapperSDL
             End Select
         End If
 
-
         'UpdateButtonLabels()
     End Sub
 
@@ -685,6 +711,7 @@ Public Class frmKeyMapperSDL
         btn_Close.Text = "Saving..."
         Dim ControlFilePath = GetControlsFilePath()
         SaveSettings(ControlFilePath)
+        Console.WriteLine("Saving profile: " & ControlFilePath)
 
         ' Disable SDL completly we dun need that shit in the background no more
         For i = 0 To SDL_NumJoysticks() - 1
@@ -732,6 +759,7 @@ Public Class frmKeyMapperSDL
         Dim linenumber = 0
         Try
             If NaomiChanged Then
+                Console.WriteLine("Saving Naomi Controls")
                 For Each line As String In NaomiConfigs
                     btn_Close.Text = "Saving Naomi..."
                     If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
@@ -774,6 +802,7 @@ Public Class frmKeyMapperSDL
         Try
             linenumber = 0
             If DreamcastChanged Then
+                Console.WriteLine("Saving Dreamcast Controls")
                 For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
                     btn_Close.Text = "Saving Dreamcast..."
                     If line.StartsWith("BPort") Then
@@ -831,7 +860,7 @@ Public Class frmKeyMapperSDL
             btn_Close.Text = "Saving..."
 
             If MednafenChanged Then
-
+                Console.WriteLine("Saving Mednafen Controls")
                 Dim _TranslatedControls(2) As Dictionary(Of String, String)
 
                 For i = 0 To 1
@@ -1085,9 +1114,11 @@ Public Class frmKeyMapperSDL
         If MainformRef.IsFileInUse(MainformRef.NullDCPath & "\mednafen\stdout.txt") And File.Exists(MainformRef.NullDCPath & "\mednafen\stdout.txt") Then
             MsgBox("Cannot Save While Mednafen Is Running")
         Else
-
+            MainformRef.ConfigFile.KeyMapProfile = cbProfiles.Text.Trim
+            MainformRef.ConfigFile.SaveFile(False)
             SaveEverything()
             Me.Close()
+
         End If
 
     End Sub
@@ -1296,6 +1327,30 @@ Public Class frmKeyMapperSDL
         End If
         AutoGenerateButtonConfigs("keyboard", PlayerTab.SelectedIndex + 1)
         UpdateButtonLabels()
+    End Sub
+
+    Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
+        frmNewProfile.ShowDialog(Me)
+
+    End Sub
+
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+        Try
+            If cbProfiles.Text = "Default" Then
+                MsgBox("Cannot delete Default profile")
+            Else
+                If File.Exists(MainformRef.NullDCPath & "\Controls_" & cbProfiles.Text.Trim & ".bear") Then
+                    File.Delete(MainformRef.NullDCPath & "\Controls_" & cbProfiles.Text.Trim & ".bear")
+                    LoadSettings()
+                End If
+
+            End If
+        Catch ex As Exception
+            MsgBox("Unable to delete profile: " & ex.InnerException.Message)
+
+        End Try
+
+
     End Sub
 
 End Class

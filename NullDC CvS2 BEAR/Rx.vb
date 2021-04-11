@@ -17,6 +17,25 @@ Module Rx
     Public SecretSettings As String = ""
     Public KeyCon As New KeysConverter
 
+    Public Function GetControlsFilePath(Optional ByVal _profile As String = Nothing) As String
+        Dim KeyProfileFile As String = ""
+        Dim ProfileName = ""
+
+        If _profile Is Nothing Then
+            ProfileName = MainformRef.ConfigFile.KeyMapProfile
+        Else
+            ProfileName = _profile
+        End If
+
+        If ProfileName = "Default" Then
+            KeyProfileFile = MainformRef.NullDCPath & "\Controls.bear"
+        Else
+            KeyProfileFile = MainformRef.NullDCPath & "\Controls_" & ProfileName & ".bear"
+        End If
+
+        Return KeyProfileFile
+    End Function
+
     Public Sub LoadGaggedUsers()
         If File.Exists(MainformRef.NullDCPath & "\gagged.users") Then
             For Each _g As String In File.ReadAllLines(MainformRef.NullDCPath & "\gagged.users")

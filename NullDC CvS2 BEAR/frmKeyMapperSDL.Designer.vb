@@ -2466,9 +2466,10 @@ Partial Class frmKeyMapperSDL
         '
         Me.cbProfiles.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.cbProfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbProfiles.DropDownWidth = 150
         Me.cbProfiles.FlatStyle = System.Windows.Forms.FlatStyle.Standard
         Me.cbProfiles.Name = "cbProfiles"
-        Me.cbProfiles.Size = New System.Drawing.Size(121, 23)
+        Me.cbProfiles.Size = New System.Drawing.Size(135, 23)
         '
         'ProfileToolStripMenuItem
         '

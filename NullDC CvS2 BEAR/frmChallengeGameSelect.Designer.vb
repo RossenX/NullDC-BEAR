@@ -187,8 +187,8 @@ Partial Class frmChallengeGameSelect
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.tb_nulldc)
         Me.Panel1.Controls.Add(Me.tb_mednafen)
+        Me.Panel1.Controls.Add(Me.tb_nulldc)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(13, 415)
         Me.Panel1.Name = "Panel1"
