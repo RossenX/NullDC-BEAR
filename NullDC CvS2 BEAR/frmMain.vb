@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.89a" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.90" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -189,6 +189,7 @@ Public Class frmMain
         DeleteMednafenClientFiles()
 
         CheckifUpdateRequired()
+
         ConfigFile = New Configs(NullDCPath)
 
         Dim UpdateTries = 0
