@@ -922,7 +922,8 @@ Public Class frmKeyMapperSDL
                                 line.StartsWith("command.8 ") Or
                                 line.StartsWith("command.9 ") Or
                                 line.StartsWith("command.state_slot_dec ") Then
-                            tmpControlString = line.Split(" ")(0) & " " & "keyboard 0x0 0" ' Disable Rapid Control unless they are found in our configs
+                            tmpControlString = line.Split(" ")(0) & " " ' Disable Rapid Control unless they are found in our configs
+                            MednafenConfigs(linenumber) = tmpControlString
                             linenumber += 1
                             Continue For
                         End If
@@ -1013,9 +1014,11 @@ Public Class frmKeyMapperSDL
                 For Each _line In MednafenConfigs
                     If Not _line.Trim.Length = 0 Then
                         If _line.StartsWith(";") Then
-                            CompressedConfigFile.Add(vbNewLine)
+                            CompressedConfigFile.Add(vbNewLine & _line)
+                        Else
+                            CompressedConfigFile.Add(_line)
                         End If
-                        CompressedConfigFile.Add(_line)
+
                     End If
                 Next
 
