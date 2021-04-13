@@ -384,6 +384,7 @@ Public Class frmKeyMapperSDL
         NaomiChanged = True
         DreamcastChanged = True
         MednafenChanged = True
+        MednafenControlChanged = True
 
         LoadSettings(cbProfiles.Text.Trim)
         AddHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
@@ -896,6 +897,7 @@ Public Class frmKeyMapperSDL
                         line.Trim.Length = 0 Or
                         (Not line.Contains("input") And
                         Not line.Contains("command.")) Then
+                        MednafenConfigs(linenumber) = line
                         linenumber += 1
                         Continue For
                     End If
@@ -1028,6 +1030,7 @@ Public Class frmKeyMapperSDL
 
         Catch ex As Exception
             MsgBox("Error Saving Mednafen Controls: " & ex.InnerException.Message)
+
         End Try
 
         ' Check if nullDC is running to hotload the settings
