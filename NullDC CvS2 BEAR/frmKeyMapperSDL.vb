@@ -488,7 +488,7 @@ Public Class frmKeyMapperSDL
     Private Sub GetKeyCodeFromFile(ByRef _btn As keybindButton, ByRef _configlines As String())
 
         For Each line As String In _configlines
-            If line.StartsWith(_btn.Name & "=") Or line.StartsWith("med_" & _btn.ConfigString & "=") Then
+            If line.StartsWith(_btn.Name & "=") Or line.StartsWith("med_" & _btn.ConfigString.Split(",")(0) & "=") Then
                 _btn.SetKeyCode(line.Split("=")(1).Split("|")(0), 0)
                 _btn.SetKeyCode(line.Split("=")(1).Split("|")(1), 1)
                 Exit Sub
