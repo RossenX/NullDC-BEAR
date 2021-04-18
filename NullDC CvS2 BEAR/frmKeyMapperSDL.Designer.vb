@@ -72,6 +72,8 @@ Partial Class frmKeyMapperSDL
         Me.Dreamcast_Tab = New System.Windows.Forms.TabPage()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.Page_dc_Controller = New System.Windows.Forms.TabPage()
+        Me.CONT_PLAYBACK = New NullDC_CvS2_BEAR.keybindButton()
+        Me.CONT_REC = New NullDC_CvS2_BEAR.keybindButton()
         Me.CONT_LSLIDER = New NullDC_CvS2_BEAR.keybindButton()
         Me.CONT_BC_ABC = New NullDC_CvS2_BEAR.keybindButton()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -113,6 +115,8 @@ Partial Class frmKeyMapperSDL
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Page_dc_ArcadeStick = New System.Windows.Forms.TabPage()
+        Me.KeybindButton22 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton27 = New NullDC_CvS2_BEAR.keybindButton()
         Me.STICK_BC_ABC = New NullDC_CvS2_BEAR.keybindButton()
         Me.STICK_BC_XYZ = New NullDC_CvS2_BEAR.keybindButton()
         Me.STICK_BC_BC = New NullDC_CvS2_BEAR.keybindButton()
@@ -398,10 +402,12 @@ Partial Class frmKeyMapperSDL
         Me.ProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CONT_REC = New NullDC_CvS2_BEAR.keybindButton()
-        Me.CONT_PLAYBACK = New NullDC_CvS2_BEAR.keybindButton()
-        Me.KeybindButton22 = New NullDC_CvS2_BEAR.keybindButton()
-        Me.KeybindButton27 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.Label87 = New System.Windows.Forms.Label()
+        Me.Label88 = New System.Windows.Forms.Label()
+        Me.Label89 = New System.Windows.Forms.Label()
+        Me.Label90 = New System.Windows.Forms.Label()
+        Me.Label91 = New System.Windows.Forms.Label()
+        Me.Label92 = New System.Windows.Forms.Label()
         CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.ControllersTab.SuspendLayout()
@@ -611,11 +617,11 @@ Partial Class frmKeyMapperSDL
         Me.Label86.BackColor = System.Drawing.Color.Transparent
         Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label86.ForeColor = System.Drawing.Color.White
-        Me.Label86.Location = New System.Drawing.Point(94, 371)
+        Me.Label86.Location = New System.Drawing.Point(77, 371)
         Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(114, 20)
+        Me.Label86.Size = New System.Drawing.Size(158, 20)
         Me.Label86.TabIndex = 132
-        Me.Label86.Text = "(Offline Only)"
+        Me.Label86.Text = "(Offline Opponent)"
         '
         'Label85
         '
@@ -1253,6 +1259,9 @@ Partial Class frmKeyMapperSDL
         Me.Page_dc_Controller.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Page_dc_Controller.BackgroundImage = CType(resources.GetObject("Page_dc_Controller.BackgroundImage"), System.Drawing.Image)
         Me.Page_dc_Controller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_dc_Controller.Controls.Add(Me.Label87)
+        Me.Page_dc_Controller.Controls.Add(Me.Label88)
+        Me.Page_dc_Controller.Controls.Add(Me.Label89)
         Me.Page_dc_Controller.Controls.Add(Me.CONT_PLAYBACK)
         Me.Page_dc_Controller.Controls.Add(Me.CONT_REC)
         Me.Page_dc_Controller.Controls.Add(Me.CONT_LSLIDER)
@@ -1301,6 +1310,44 @@ Partial Class frmKeyMapperSDL
         Me.Page_dc_Controller.Size = New System.Drawing.Size(681, 468)
         Me.Page_dc_Controller.TabIndex = 0
         Me.Page_dc_Controller.Text = "Controller"
+        '
+        'CONT_PLAYBACK
+        '
+        Me.CONT_PLAYBACK.BackColor = System.Drawing.Color.White
+        Me.CONT_PLAYBACK.ConfigString = "CONT_PLAYBACK"
+        Me.CONT_PLAYBACK.Emu = "nulldc"
+        Me.CONT_PLAYBACK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CONT_PLAYBACK.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_PLAYBACK.ForeColor = System.Drawing.Color.Black
+        Me.CONT_PLAYBACK.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_PLAYBACK.KeyDefaults = New String(-1) {}
+        Me.CONT_PLAYBACK.KeyLocked = False
+        Me.CONT_PLAYBACK.Location = New System.Drawing.Point(132, 387)
+        Me.CONT_PLAYBACK.Name = "CONT_PLAYBACK"
+        Me.CONT_PLAYBACK.Size = New System.Drawing.Size(41, 28)
+        Me.CONT_PLAYBACK.TabIndex = 97
+        Me.CONT_PLAYBACK.TabStop = False
+        Me.CONT_PLAYBACK.Text = "X"
+        Me.CONT_PLAYBACK.UseVisualStyleBackColor = False
+        '
+        'CONT_REC
+        '
+        Me.CONT_REC.BackColor = System.Drawing.Color.White
+        Me.CONT_REC.ConfigString = "CONT_REC"
+        Me.CONT_REC.Emu = "nulldc"
+        Me.CONT_REC.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.CONT_REC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CONT_REC.ForeColor = System.Drawing.Color.Black
+        Me.CONT_REC.KeyCode = New String() {"k0", "k0"}
+        Me.CONT_REC.KeyDefaults = New String(-1) {}
+        Me.CONT_REC.KeyLocked = False
+        Me.CONT_REC.Location = New System.Drawing.Point(58, 387)
+        Me.CONT_REC.Name = "CONT_REC"
+        Me.CONT_REC.Size = New System.Drawing.Size(41, 28)
+        Me.CONT_REC.TabIndex = 96
+        Me.CONT_REC.TabStop = False
+        Me.CONT_REC.Text = "X"
+        Me.CONT_REC.UseVisualStyleBackColor = False
         '
         'CONT_LSLIDER
         '
@@ -1951,6 +1998,9 @@ Partial Class frmKeyMapperSDL
         Me.Page_dc_ArcadeStick.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.Page_dc_ArcadeStick.BackgroundImage = CType(resources.GetObject("Page_dc_ArcadeStick.BackgroundImage"), System.Drawing.Image)
         Me.Page_dc_ArcadeStick.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label90)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label91)
+        Me.Page_dc_ArcadeStick.Controls.Add(Me.Label92)
         Me.Page_dc_ArcadeStick.Controls.Add(Me.KeybindButton22)
         Me.Page_dc_ArcadeStick.Controls.Add(Me.KeybindButton27)
         Me.Page_dc_ArcadeStick.Controls.Add(Me.STICK_BC_ABC)
@@ -1988,6 +2038,44 @@ Partial Class frmKeyMapperSDL
         Me.Page_dc_ArcadeStick.Size = New System.Drawing.Size(681, 468)
         Me.Page_dc_ArcadeStick.TabIndex = 1
         Me.Page_dc_ArcadeStick.Text = "Arcade Stick"
+        '
+        'KeybindButton22
+        '
+        Me.KeybindButton22.BackColor = System.Drawing.Color.White
+        Me.KeybindButton22.ConfigString = "STICK_PLAYBACK"
+        Me.KeybindButton22.Emu = "nulldc"
+        Me.KeybindButton22.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton22.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton22.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton22.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton22.KeyDefaults = New String(-1) {}
+        Me.KeybindButton22.KeyLocked = False
+        Me.KeybindButton22.Location = New System.Drawing.Point(169, 336)
+        Me.KeybindButton22.Name = "KeybindButton22"
+        Me.KeybindButton22.Size = New System.Drawing.Size(41, 28)
+        Me.KeybindButton22.TabIndex = 126
+        Me.KeybindButton22.TabStop = False
+        Me.KeybindButton22.Text = "X"
+        Me.KeybindButton22.UseVisualStyleBackColor = False
+        '
+        'KeybindButton27
+        '
+        Me.KeybindButton27.BackColor = System.Drawing.Color.White
+        Me.KeybindButton27.ConfigString = "STICK_REC"
+        Me.KeybindButton27.Emu = "nulldc"
+        Me.KeybindButton27.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton27.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton27.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton27.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton27.KeyDefaults = New String(-1) {}
+        Me.KeybindButton27.KeyLocked = False
+        Me.KeybindButton27.Location = New System.Drawing.Point(90, 337)
+        Me.KeybindButton27.Name = "KeybindButton27"
+        Me.KeybindButton27.Size = New System.Drawing.Size(41, 28)
+        Me.KeybindButton27.TabIndex = 125
+        Me.KeybindButton27.TabStop = False
+        Me.KeybindButton27.Text = "X"
+        Me.KeybindButton27.UseVisualStyleBackColor = False
         '
         'STICK_BC_ABC
         '
@@ -6540,81 +6628,77 @@ Partial Class frmKeyMapperSDL
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
         '
-        'CONT_REC
+        'Label87
         '
-        Me.CONT_REC.BackColor = System.Drawing.Color.White
-        Me.CONT_REC.ConfigString = "CONT_REC"
-        Me.CONT_REC.Emu = "nulldc"
-        Me.CONT_REC.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CONT_REC.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CONT_REC.ForeColor = System.Drawing.Color.Black
-        Me.CONT_REC.KeyCode = New String() {"k0", "k0"}
-        Me.CONT_REC.KeyDefaults = New String(-1) {}
-        Me.CONT_REC.KeyLocked = False
-        Me.CONT_REC.Location = New System.Drawing.Point(74, 387)
-        Me.CONT_REC.Name = "CONT_REC"
-        Me.CONT_REC.Size = New System.Drawing.Size(41, 28)
-        Me.CONT_REC.TabIndex = 96
-        Me.CONT_REC.TabStop = False
-        Me.CONT_REC.Text = "X"
-        Me.CONT_REC.UseVisualStyleBackColor = False
+        Me.Label87.AutoSize = True
+        Me.Label87.BackColor = System.Drawing.Color.Transparent
+        Me.Label87.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label87.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label87.Location = New System.Drawing.Point(41, 343)
+        Me.Label87.Name = "Label87"
+        Me.Label87.Size = New System.Drawing.Size(158, 20)
+        Me.Label87.TabIndex = 135
+        Me.Label87.Text = "(Offline Opponent)"
         '
-        'CONT_PLAYBACK
+        'Label88
         '
-        Me.CONT_PLAYBACK.BackColor = System.Drawing.Color.White
-        Me.CONT_PLAYBACK.ConfigString = "CONT_PLAYBACK"
-        Me.CONT_PLAYBACK.Emu = "nulldc"
-        Me.CONT_PLAYBACK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CONT_PLAYBACK.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CONT_PLAYBACK.ForeColor = System.Drawing.Color.Black
-        Me.CONT_PLAYBACK.KeyCode = New String() {"k0", "k0"}
-        Me.CONT_PLAYBACK.KeyDefaults = New String(-1) {}
-        Me.CONT_PLAYBACK.KeyLocked = False
-        Me.CONT_PLAYBACK.Location = New System.Drawing.Point(125, 387)
-        Me.CONT_PLAYBACK.Name = "CONT_PLAYBACK"
-        Me.CONT_PLAYBACK.Size = New System.Drawing.Size(41, 28)
-        Me.CONT_PLAYBACK.TabIndex = 97
-        Me.CONT_PLAYBACK.TabStop = False
-        Me.CONT_PLAYBACK.Text = "X"
-        Me.CONT_PLAYBACK.UseVisualStyleBackColor = False
+        Me.Label88.AutoSize = True
+        Me.Label88.BackColor = System.Drawing.Color.Transparent
+        Me.Label88.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label88.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label88.Location = New System.Drawing.Point(117, 362)
+        Me.Label88.Name = "Label88"
+        Me.Label88.Size = New System.Drawing.Size(80, 20)
+        Me.Label88.TabIndex = 134
+        Me.Label88.Text = "Playback"
         '
-        'KeybindButton22
+        'Label89
         '
-        Me.KeybindButton22.BackColor = System.Drawing.Color.White
-        Me.KeybindButton22.ConfigString = "STICK_PLAYBACK"
-        Me.KeybindButton22.Emu = "nulldc"
-        Me.KeybindButton22.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton22.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.KeybindButton22.ForeColor = System.Drawing.Color.Black
-        Me.KeybindButton22.KeyCode = New String() {"k0", "k0"}
-        Me.KeybindButton22.KeyDefaults = New String(-1) {}
-        Me.KeybindButton22.KeyLocked = False
-        Me.KeybindButton22.Location = New System.Drawing.Point(209, 345)
-        Me.KeybindButton22.Name = "KeybindButton22"
-        Me.KeybindButton22.Size = New System.Drawing.Size(41, 28)
-        Me.KeybindButton22.TabIndex = 126
-        Me.KeybindButton22.TabStop = False
-        Me.KeybindButton22.Text = "X"
-        Me.KeybindButton22.UseVisualStyleBackColor = False
+        Me.Label89.AutoSize = True
+        Me.Label89.BackColor = System.Drawing.Color.Transparent
+        Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label89.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label89.Location = New System.Drawing.Point(44, 362)
+        Me.Label89.Name = "Label89"
+        Me.Label89.Size = New System.Drawing.Size(67, 20)
+        Me.Label89.TabIndex = 133
+        Me.Label89.Text = "Record"
         '
-        'KeybindButton27
+        'Label90
         '
-        Me.KeybindButton27.BackColor = System.Drawing.Color.White
-        Me.KeybindButton27.ConfigString = "STICK_REC"
-        Me.KeybindButton27.Emu = "nulldc"
-        Me.KeybindButton27.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton27.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.KeybindButton27.ForeColor = System.Drawing.Color.Black
-        Me.KeybindButton27.KeyCode = New String() {"k0", "k0"}
-        Me.KeybindButton27.KeyDefaults = New String(-1) {}
-        Me.KeybindButton27.KeyLocked = False
-        Me.KeybindButton27.Location = New System.Drawing.Point(158, 345)
-        Me.KeybindButton27.Name = "KeybindButton27"
-        Me.KeybindButton27.Size = New System.Drawing.Size(41, 28)
-        Me.KeybindButton27.TabIndex = 125
-        Me.KeybindButton27.TabStop = False
-        Me.KeybindButton27.Text = "X"
-        Me.KeybindButton27.UseVisualStyleBackColor = False
+        Me.Label90.AutoSize = True
+        Me.Label90.BackColor = System.Drawing.Color.Transparent
+        Me.Label90.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label90.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label90.Location = New System.Drawing.Point(75, 295)
+        Me.Label90.Name = "Label90"
+        Me.Label90.Size = New System.Drawing.Size(158, 20)
+        Me.Label90.TabIndex = 138
+        Me.Label90.Text = "(Offline Opponent)"
+        '
+        'Label91
+        '
+        Me.Label91.AutoSize = True
+        Me.Label91.BackColor = System.Drawing.Color.Transparent
+        Me.Label91.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label91.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label91.Location = New System.Drawing.Point(151, 314)
+        Me.Label91.Name = "Label91"
+        Me.Label91.Size = New System.Drawing.Size(80, 20)
+        Me.Label91.TabIndex = 137
+        Me.Label91.Text = "Playback"
+        '
+        'Label92
+        '
+        Me.Label92.AutoSize = True
+        Me.Label92.BackColor = System.Drawing.Color.Transparent
+        Me.Label92.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label92.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label92.Location = New System.Drawing.Point(78, 314)
+        Me.Label92.Name = "Label92"
+        Me.Label92.Size = New System.Drawing.Size(67, 20)
+        Me.Label92.TabIndex = 136
+        Me.Label92.Text = "Record"
         '
         'frmKeyMapperSDL
         '
@@ -7081,4 +7165,10 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents CONT_REC As keybindButton
     Friend WithEvents KeybindButton22 As keybindButton
     Friend WithEvents KeybindButton27 As keybindButton
+    Friend WithEvents Label87 As Label
+    Friend WithEvents Label88 As Label
+    Friend WithEvents Label89 As Label
+    Friend WithEvents Label90 As Label
+    Friend WithEvents Label91 As Label
+    Friend WithEvents Label92 As Label
 End Class
