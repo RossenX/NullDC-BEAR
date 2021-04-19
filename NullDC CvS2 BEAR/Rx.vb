@@ -30,10 +30,15 @@ Module Rx
         If ProfileName = "Default" Then
             KeyProfileFile = MainformRef.NullDCPath & "\Controls.bear"
         Else
-            KeyProfileFile = MainformRef.NullDCPath & "\Controls_" & ProfileName & ".bear"
+            If File.Exists(MainformRef.NullDCPath & "\Controls_" & ProfileName & ".bear") Then
+                KeyProfileFile = MainformRef.NullDCPath & "\Controls_" & ProfileName & ".bear"
+            Else
+                KeyProfileFile = MainformRef.NullDCPath & "\Controls.bear"
+            End If
+
         End If
 
-        Return KeyProfileFile
+            Return KeyProfileFile
     End Function
 
     Public Sub LoadGaggedUsers()
