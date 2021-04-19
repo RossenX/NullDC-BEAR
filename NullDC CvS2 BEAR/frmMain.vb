@@ -539,8 +539,11 @@ UpdateTry:
                             Dim ExistingFileLastWriteTime = File.GetLastWriteTime(_dir & "\" & entry.FullName.Replace("/", "\"))
                             Dim Compare = ExistingFileLastWriteTime.CompareTo(entry.LastWriteTime.DateTime)
                             If Compare >= 0 Then
-                                Console.WriteLine("Skipped: " & entry.FullName)
-                                Continue For
+                                ' DLL and EXE always get overwritten to make sure they are up to date.
+                                If Not entry.Name.EndsWith(".dll") And Not entry.Name.EndsWith(".exe") Then
+                                    Console.WriteLine("Skipped: " & entry.FullName)
+                                    Continue For
+                                End If
                             End If
 
                         End If
@@ -1058,6 +1061,7 @@ UpdateTry:
     Private Sub RefreshTimer_tick(sender As Object, e As EventArgs)
         RefreshTimer.Stop()
         btnSearch.Enabled = True
+
     End Sub
 
     Public Sub GameLauncher(ByVal _romname, ByVal _region)
