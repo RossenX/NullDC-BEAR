@@ -33,6 +33,9 @@ Public Class frmKeyMapperSDL
 
     Private Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
 
+    Private Declare Function SendMessage Lib "user32.dll" _
+        Alias "SendMessageA" (ByVal hWnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As IntPtr) As IntPtr
+
     Public Sub ReloadTheme()
         ApplyThemeToControl(MenuStrip1)
         ApplyThemeToControl(TableLayoutPanel1, 1)
@@ -1035,8 +1038,8 @@ Public Class frmKeyMapperSDL
 
         ' Check if nullDC is running to hotload the settings
         If MainformRef.IsNullDCRunning Then
-            If platform = "na" Then PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
-            If platform = "dc" Then PostMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
+            If platform = "na" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
+            If platform = "dc" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
 
         End If
 
@@ -1052,6 +1055,7 @@ Public Class frmKeyMapperSDL
     Private Sub frmKeyMapperSDL_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp
         ButtonsDown.Remove("k" & e.KeyCode)
         ButtonClicked("k" & e.KeyCode, False)
+
     End Sub
 
     Private Sub DeadzoneTB_MouseCaptureChanged(sender As Object, e As EventArgs)
