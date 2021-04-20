@@ -1135,24 +1135,26 @@ Public Class frmKeyMapperSDL
 
     Private Sub ControllerCB_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-        'Console.Write("Changing Controller: ")
-        If Not Joy = Nothing Then
-            If SDL_GameControllerGetAttached(Joy) = SDL_bool.SDL_TRUE Then
-                SDL_GameControllerClose(Joy)
+        Try
+            'Console.Write("Changing Controller: ")
+            If Not Joy = Nothing Then
+                If SDL_GameControllerGetAttached(Joy) = SDL_bool.SDL_TRUE Then
+                    SDL_GameControllerClose(Joy)
+                End If
+                Joy = Nothing
             End If
-            Joy = Nothing
-        End If
 
-        If ControllerCB.SelectedValue >= 0 Then
-            'Console.Write(ControllerCB.SelectedValue & " | ")
-            Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)
-            'Console.WriteLine(SDL_GameControllerName(Joy))
-        Else
-            'Console.WriteLine("Keyboard")
-        End If
+            If ControllerCB.SelectedValue >= 0 Then
+                Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)
+            End If
 
-        'Console.WriteLine("joystick: " & ControllerCB.SelectedValue)
-        Joystick(PlayerTab.SelectedIndex) = ControllerCB.SelectedValue
+            'Console.WriteLine("joystick: " & ControllerCB.SelectedValue)
+            Joystick(PlayerTab.SelectedIndex) = ControllerCB.SelectedValue
+        Catch ex As Exception
+            MsgBox("Error Opening Controller: " & ex.InnerException.Message)
+
+        End Try
+
 
     End Sub
 
