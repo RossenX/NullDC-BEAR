@@ -1082,41 +1082,64 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub PlayerTab_SelectedIndexChanged(sender As Object, e As EventArgs)
-        RemoveHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
-        RemoveHandler DeadzoneTB.MouseCaptureChanged, AddressOf DeadzoneTB_MouseCaptureChanged
-        RemoveHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
+        Try
+            RemoveHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
+            RemoveHandler DeadzoneTB.MouseCaptureChanged, AddressOf DeadzoneTB_MouseCaptureChanged
+            RemoveHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
 
-        If Not Joy = Nothing Then
-            If SDL_GameControllerGetAttached(Joy) = SDL_bool.SDL_TRUE Then
-                SDL_GameControllerClose(Joy)
+            If Not Joy = Nothing Then
+                If SDL_GameControllerGetAttached(Joy) = SDL_bool.SDL_TRUE Then
+                    SDL_GameControllerClose(Joy)
+                End If
+                Joy = Nothing
             End If
-            Joy = Nothing
-        End If
 
-        If Joystick(PlayerTab.SelectedIndex) < ControllerCB.Items.Count - 1 Then
-            ControllerCB.SelectedIndex = Joystick(PlayerTab.SelectedIndex) + 1
-        Else
+            If Joystick(PlayerTab.SelectedIndex) < ControllerCB.Items.Count - 1 Then
+                ControllerCB.SelectedIndex = Joystick(PlayerTab.SelectedIndex) + 1
+            Else
+                ControllerCB.SelectedIndex = 0
+                Joystick(PlayerTab.SelectedIndex) = -1
+            End If
+
+            DeadzoneTB.Value = Deadzone(PlayerTab.SelectedIndex)
+            If Not Peripheral(PlayerTab.SelectedIndex) = "0" And Not Peripheral(PlayerTab.SelectedIndex) = "1" Then
+                PeripheralCB.SelectedIndex = 0
+            Else
+                PeripheralCB.SelectedIndex = Peripheral(PlayerTab.SelectedIndex)
+            End If
+
+            If Not Joystick(PlayerTab.SelectedIndex) = -1 Then
+                Joy = SDL_GameControllerOpen(Joystick(PlayerTab.SelectedIndex))
+            End If
+
+            AddHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
+            AddHandler DeadzoneTB.MouseCaptureChanged, AddressOf DeadzoneTB_MouseCaptureChanged
+            AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
+
+            ActiveControl = Nothing
+            UpdateButtonLabels()
+
+        Catch ex As Exception
+            MsgBox("Error Changing Controller: " & ex.InnerException.Message)
+            DeadzoneTB.Value = Deadzone(PlayerTab.SelectedIndex)
+
             ControllerCB.SelectedIndex = 0
             Joystick(PlayerTab.SelectedIndex) = -1
-        End If
 
-        DeadzoneTB.Value = Deadzone(PlayerTab.SelectedIndex)
-        If Not Peripheral(PlayerTab.SelectedIndex) = "0" And Not Peripheral(PlayerTab.SelectedIndex) = "1" Then
-            PeripheralCB.SelectedIndex = 0
-        Else
-            PeripheralCB.SelectedIndex = Peripheral(PlayerTab.SelectedIndex)
-        End If
+            If Not Peripheral(PlayerTab.SelectedIndex) = "0" And Not Peripheral(PlayerTab.SelectedIndex) = "1" Then
+                PeripheralCB.SelectedIndex = 0
+            Else
+                PeripheralCB.SelectedIndex = Peripheral(PlayerTab.SelectedIndex)
+            End If
 
-        If Not Joystick(PlayerTab.SelectedIndex) = -1 Then
-            Joy = SDL_GameControllerOpen(Joystick(PlayerTab.SelectedIndex))
-        End If
+            AddHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
+            AddHandler DeadzoneTB.MouseCaptureChanged, AddressOf DeadzoneTB_MouseCaptureChanged
+            AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
 
-        AddHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
-        AddHandler DeadzoneTB.MouseCaptureChanged, AddressOf DeadzoneTB_MouseCaptureChanged
-        AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
+            ActiveControl = Nothing
+            UpdateButtonLabels()
 
-        ActiveControl = Nothing
-        UpdateButtonLabels()
+        End Try
 
     End Sub
 

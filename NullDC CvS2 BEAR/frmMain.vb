@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.91b" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.91c" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -68,8 +68,8 @@ Public Class frmMain
         End If
 
     End Sub
-    Private Sub CheckSDLVersion()
 
+    Private Sub CheckSDLVersion()
         Try
             ' Check SDL Version Swap
             If MainformRef.ConfigFile.SDLVersion.StartsWith("+") Or needsUpdate Then ' We Need to Change SDL Version
@@ -94,7 +94,6 @@ Public Class frmMain
             End
         End Try
     End Sub
-
 
     Private Sub DeleteMednafenClientFiles()
         If Directory.Exists(MainformRef.NullDCPath & "\mednafen\sav_client") Then
@@ -1754,8 +1753,13 @@ UpdateTry:
         If NullDCLauncher.NullDCproc Is Nothing Then
             Return False
         End If
-        Return True
 
+        If NullDCLauncher.NullDCproc.HasExited Then
+            NullDCLauncher.NullDCproc = Nothing
+            Return False
+        End If
+
+        Return True
     End Function
 
     Private Sub frmMain_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize

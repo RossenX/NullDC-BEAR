@@ -17,6 +17,10 @@
     Private Sub frmWaitingForHost_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.fan_icon_text
         AddHandler VMUTimer.Tick, Sub()
+                                      VMUTimer.Stop()
+                                      VMUTimer.Interval = 5000
+                                      VMUTimer.Start()
+                                      MainformRef.NetworkHandler.SendMessage("V", MainformRef.Challenger.ip)
                                       btnRetryVMU.Visible = True
                                   End Sub
         ReloadTheme()
