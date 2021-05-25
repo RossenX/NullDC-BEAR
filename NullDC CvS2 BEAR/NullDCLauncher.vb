@@ -425,9 +425,9 @@ Public Class NullDCLauncher
                 IsFullscreen = CInt(line.Split("=")(1))
             End If
             ' [drkpvr]
-            If line.StartsWith("Emulation.AlphaSortMode=") Then lines(linenumber) = "Emulation.AlphaSortMode=2"
+            If line.StartsWith("Emulation.AlphaSortMode=") Then lines(linenumber) = "Emulation.AlphaSortMode=1"
             If line.StartsWith("Emulation.PaletteMode=") Then lines(linenumber) = "Emulation.PaletteMode=2"
-            If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=0"
+            If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=2"
             If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
             If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"
 
@@ -650,7 +650,7 @@ Public Class NullDCLauncher
             ' [drkpvr]
             If line.StartsWith("Emulation.AlphaSortMode=") Then lines(linenumber) = "Emulation.AlphaSortMode=1"
             If line.StartsWith("Emulation.PaletteMode=") Then lines(linenumber) = "Emulation.PaletteMode=2"
-            If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=1"
+            If line.StartsWith("Emulation.ModVolMode=") Then lines(linenumber) = "Emulation.ModVolMode=2"
             If line.StartsWith("Emulation.ZBufferMode=") Then lines(linenumber) = "Emulation.ZBufferMode=0"
             If line.StartsWith("Emulation.TexCacheMode=") Then lines(linenumber) = "Emulation.TexCacheMode=0"
 
