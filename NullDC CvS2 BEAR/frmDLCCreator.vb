@@ -64,7 +64,7 @@ Public Class frmDLCCreator
                 End If
 
                 For Each _sp As String In e.Result.Split("""")
-                    If _sp.Contains(".zip") Then
+                    If _sp.Contains(".zip") Or _sp.Contains(".7z") Then
                         Dim _GameLink = StrippedURL & _sp.Replace("\/", "/").Replace("#", "%23")
                         Exportedlist.Add(_GameLink)
                         GameCount += 1

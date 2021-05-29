@@ -137,6 +137,13 @@ Public Class ccDownload
         CleanUp()
     End Sub
 
+    Private Sub UnZipFile(ByVal FileName, ByVal ExtractTo)
+        Using ext As New SevenZipExtractor.ArchiveFile(fileinf.FullName)
+            ext.Extract(ExtractTo, True)
+        End Using
+
+    End Sub
+
     Private Sub InstallGame()
 
         Dim FolderToPlacein = fileinf.Directory.FullName & "\" & fileinf.Name.Replace(".honey", "")
@@ -153,7 +160,7 @@ Public Class ccDownload
             Case "1" ' Unzip
 
                 If fileinf.Exists Then
-                    ZipFile.ExtractToDirectory(fileinf.FullName, fileinf.Directory.FullName)
+                    UnZipFile(fileinf.FullName, fileinf.Directory.FullName)
                 End If
 
             Case "2" ' Unzip and place in own folder
@@ -165,7 +172,7 @@ Public Class ccDownload
                     Directory.CreateDirectory(FolderToPlacein)
                 End If
 
-                ZipFile.ExtractToDirectory(fileinf.FullName, FolderToPlacein)
+                UnZipFile(fileinf.FullName, FolderToPlacein)
 
             Case "3" ' Do not Unzip, but place in folder
 
