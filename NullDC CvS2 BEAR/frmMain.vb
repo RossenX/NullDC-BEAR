@@ -2154,6 +2154,7 @@ Public Class Configs
     Private _DebugControls As Int16 = 0
     Private _simDelay As Int16 = 0
     Private _region As Int16 = 0
+    Private _nokey As Int16 = 0
 
 #Region "Properties"
 
@@ -2435,6 +2436,16 @@ Public Class Configs
         End Set
     End Property
 
+    Public Property NoKey() As Int16
+        Get
+            Return _nokey
+        End Get
+        Set(ByVal value As Int16)
+            _nokey = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -2471,7 +2482,8 @@ Public Class Configs
                 "NullDCPriority=" & NullDCPriority,
                 "DebugControls=" & DebugControls,
                 "SimulatedDelay=" & SimulatedDelay,
-                "Region=" & Region
+                "Region=" & Region,
+                "NoKey=" & NoKey
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -2544,6 +2556,7 @@ Public Class Configs
                 If line.StartsWith("DebugControls=") Then DebugControls = line.Split("=")(1).Trim
                 If line.StartsWith("SimulatedDelay=") Then SimulatedDelay = line.Split("=")(1).Trim
                 If line.StartsWith("Region=") Then Region = line.Split("=")(1).Trim
+                If line.StartsWith("NoKey=") Then NoKey = line.Split("=")(1).Trim
             Next
 
             Game = "None"

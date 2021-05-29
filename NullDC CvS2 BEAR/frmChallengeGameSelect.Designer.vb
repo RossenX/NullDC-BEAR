@@ -30,6 +30,7 @@ Partial Class frmChallengeGameSelect
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cb_Serverlist = New System.Windows.Forms.ComboBox()
         Me.tb_gamekey = New System.Windows.Forms.TextBox()
+        Me.cb_nokey = New System.Windows.Forms.CheckBox()
         Me.GameSelectContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.tb_nulldc = New System.Windows.Forms.TableLayoutPanel()
@@ -43,7 +44,6 @@ Partial Class frmChallengeGameSelect
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.DLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultidiscPlaylistCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cb_nokey = New System.Windows.Forms.CheckBox()
         Me.tb_mednafen.SuspendLayout()
         Me.GameSelectContainer.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -168,6 +168,16 @@ Partial Class frmChallengeGameSelect
         Me.tb_gamekey.Name = "tb_gamekey"
         Me.tb_gamekey.Size = New System.Drawing.Size(299, 20)
         Me.tb_gamekey.TabIndex = 34
+        '
+        'cb_nokey
+        '
+        Me.cb_nokey.AutoSize = True
+        Me.cb_nokey.Location = New System.Drawing.Point(382, 57)
+        Me.cb_nokey.Name = "cb_nokey"
+        Me.cb_nokey.Size = New System.Drawing.Size(61, 17)
+        Me.cb_nokey.TabIndex = 35
+        Me.cb_nokey.Text = "No Key"
+        Me.cb_nokey.UseVisualStyleBackColor = True
         '
         'GameSelectContainer
         '
@@ -302,7 +312,7 @@ Partial Class frmChallengeGameSelect
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(620, 370)
+        Me.TabPage2.Size = New System.Drawing.Size(720, 370)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -327,16 +337,6 @@ Partial Class frmChallengeGameSelect
         Me.MultidiscPlaylistCreatorToolStripMenuItem.Name = "MultidiscPlaylistCreatorToolStripMenuItem"
         Me.MultidiscPlaylistCreatorToolStripMenuItem.Size = New System.Drawing.Size(150, 20)
         Me.MultidiscPlaylistCreatorToolStripMenuItem.Text = "Multidisc Playlist Creator"
-        '
-        'cb_nokey
-        '
-        Me.cb_nokey.AutoSize = True
-        Me.cb_nokey.Location = New System.Drawing.Point(382, 57)
-        Me.cb_nokey.Name = "cb_nokey"
-        Me.cb_nokey.Size = New System.Drawing.Size(61, 17)
-        Me.cb_nokey.TabIndex = 35
-        Me.cb_nokey.Text = "No Key"
-        Me.cb_nokey.UseVisualStyleBackColor = True
         '
         'frmChallengeGameSelect
         '

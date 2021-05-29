@@ -140,6 +140,7 @@ Public Class frmChallengeGameSelect
         ApplyThemeToControl(Label5)
         ApplyThemeToControl(cb_Multitap)
         ApplyThemeToControl(tb_gamekey)
+        ApplyThemeToControl(cb_nokey)
 
         For Each _tab As TabPage In tc_games.TabPages
             ApplyThemeToControl(_tab.Controls.OfType(Of ListView).First, 2)
@@ -164,11 +165,13 @@ Public Class frmChallengeGameSelect
             If _Challenger Is Nothing Then
                 cbDelay.Text = MainformRef.ConfigFile.SimulatedDelay
                 cbRegion.SelectedIndex = MainformRef.ConfigFile.Region
+                cb_nokey.Checked = MainformRef.ConfigFile.NoKey
                 Label3.Visible = True
                 cb_Serverlist.Visible = True
             Else
                 cbDelay.Text = MainformRef.ConfigFile.SimulatedDelay
                 cbRegion.SelectedIndex = MainformRef.ConfigFile.Region
+                cb_nokey.Checked = MainformRef.ConfigFile.NoKey
                 Label3.Visible = False
                 cb_Serverlist.Visible = False
             End If
@@ -421,4 +424,8 @@ Public Class frmChallengeGameSelect
 
     End Sub
 
+    Private Sub cb_nokey_CheckedChanged(sender As CheckBox, e As EventArgs) Handles cb_nokey.CheckedChanged
+        MainformRef.ConfigFile.NoKey = sender.Checked
+
+    End Sub
 End Class
