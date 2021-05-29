@@ -137,9 +137,11 @@ Public Class ccDownload
         CleanUp()
     End Sub
 
-    Private Sub UnZipFile(ByVal FileName, ByVal ExtractTo)
-        Using ext As New SevenZipExtractor.ArchiveFile(fileinf.FullName)
-            ext.Extract(ExtractTo, True)
+    Private Sub UnZipFile(ByVal FileName As String, ByVal ExtractTo As String)
+
+        Using ext As New SevenZip.SevenZipExtractor(fileinf.FullName)
+            ext.ExtractArchive(ExtractTo)
+            ext.Dispose()
         End Using
 
     End Sub
