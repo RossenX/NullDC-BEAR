@@ -7,6 +7,22 @@
         ' This call is required by the designer.
         InitializeComponent()
 
+        AddHandler VMUTimer.Tick, Sub()
+                                      If MainformRef.Challenger Is Nothing Then
+                                          VMUTimer.Stop()
+                                          btnRetryVMU.Visible = False
+                                          Me.Close()
+                                          Return
+                                      End If
+
+                                      VMUTimer.Stop()
+                                      VMUTimer.Interval = 5000
+                                      VMUTimer.Start()
+
+                                      MainformRef.NetworkHandler.SendMessage("V", MainformRef.Challenger.ip)
+                                      btnRetryVMU.Visible = True
+                                  End Sub
+
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -16,13 +32,6 @@
 
     Private Sub frmWaitingForHost_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.fan_icon_text
-        AddHandler VMUTimer.Tick, Sub()
-                                      VMUTimer.Stop()
-                                      VMUTimer.Interval = 5000
-                                      VMUTimer.Start()
-                                      MainformRef.NetworkHandler.SendMessage("V", MainformRef.Challenger.ip)
-                                      btnRetryVMU.Visible = True
-                                  End Sub
         ReloadTheme()
 
     End Sub
