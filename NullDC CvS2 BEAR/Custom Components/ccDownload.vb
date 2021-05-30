@@ -1,68 +1,27 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Threading
-Imports PDFco.Downloader
-Imports PDFco.Downloader.Contract.Events
-Imports PDFco.Downloader.Download
-Imports PDFco.Downloader.DownloadBuilder
-Imports PDFco.Downloader.Observer
-Imports PDFco.Downloader.Utils
+Imports Downloader
 
 Public Class ccDownload
     Dim finished As Boolean = False
 
     Public URL_String As String = ""
 
-    Dim url As Uri
     Dim FileFormat As String = ""
 
-    Dim requestBuilder = New SimpleWebRequestBuilder
-    Dim dlChecker = New DownloadChecker
-
-    Dim httpDlBuilder = New SimpleDownloadBuilder(requestBuilder, dlChecker)
-    Dim timeForHeartbear = 3000
-    Dim timeToRetry = 5000
-    Dim maxRetries = 10
-    Dim rdlBuilder = New ResumingDownloadBuilder(timeForHeartbear, timeToRetry, maxRetries, httpDlBuilder)
-    Dim DownlaodRange = New List(Of Contract.DownloadRange)
-    Dim bufferSize = 4096
-    Dim numberOfParts = 1
-    Dim maxRetryDownloadparts = 10
-
-    Dim download As MultiPartDownload
-
     Dim fileinf As FileInfo
-    Dim dlSaver As DownloadToFileSaver
-
-    Dim ProgressMonitor As DownloadProgressMonitor = New DownloadProgressMonitor
-    Dim SpeedMonitor As DownloadSpeedMonitor = New DownloadSpeedMonitor(128)
 
     Dim Extract = "0"
+
+    Dim d1 As DownloadConfiguration
+    Dim d2 As DownloadService
 
     Public Sub New(ByVal _URL As String, ByVal _filename As String, ByVal _extract As String)
         InitializeComponent()
         URL_String = _URL
-        '_URL = WebUtility.UrlDecode(_URL)
-
-        Console.WriteLine("Starting Download")
-        Console.WriteLine(_URL)
-
-        Extract = _extract
-
-        url = New Uri(_URL)
-        Console.WriteLine(url.AbsolutePath)
-        FileFormat = "." & url.AbsolutePath.Split(".")(url.AbsolutePath.Split(".").Count - 1)
-
-        download = New MultiPartDownload(url, bufferSize, numberOfParts, rdlBuilder, requestBuilder, dlChecker, DownlaodRange, maxRetryDownloadparts)
         fileinf = New FileInfo(_filename)
-        dlSaver = New DownloadToFileSaver(fileinf)
-
-        Dim _thread As New Thread(Sub() StartDownlaod())
-        _thread.IsBackground = True
-        _thread.Start()
-
-        Label1.Text = "Starting..."
-        Label2.Text = fileinf.Name.Replace(".honey", "")
+        Extract = _extract
 
     End Sub
 
@@ -71,70 +30,73 @@ Public Class ccDownload
 
     End Sub
 
-    Private Sub StartDownlaod()
+    Public Sub Init()
+        Console.WriteLine("Starting Download")
+        Console.WriteLine(URL_String)
+        Label1.Text = "Starting..."
+        Label2.Text = fileinf.Name.Replace(".honey", "")
+
+        StartNewDownload()
+
+    End Sub
+
+    Private Async Sub StartNewDownload()
+
+        'ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+        'Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(URL_String), HttpWebRequest)
+        'Dim response As HttpWebResponse
+        'response = req.GetResponse
+        'URL_String = response.ResponseUri.AbsoluteUri
+
+        d1 = New DownloadConfiguration
+        d1.BufferBlockSize = 10240
+        d1.ChunkCount = 8
+        d1.MaximumBytesPerSecond = 1024 * 1024
+        d1.MaxTryAgainOnFailover = 100
+        d1.OnTheFlyDownload = False
+        d1.ParallelDownload = True
+        d1.TempDirectory = My.Computer.FileSystem.SpecialDirectories.Temp
+        d1.Timeout = 1000
+
+        d1.RequestConfiguration.Accept = "*\*"
+        d1.RequestConfiguration.AutomaticDecompression = DecompressionMethods.None
+        d1.RequestConfiguration.CookieContainer = New CookieContainer()
+        d1.RequestConfiguration.Headers = New WebHeaderCollection()
+        d1.RequestConfiguration.KeepAlive = False
+        d1.RequestConfiguration.ProtocolVersion = HttpVersion.Version11
+        d1.RequestConfiguration.UseDefaultCredentials = False
+        d1.RequestConfiguration.UserAgent = "BEAR"
+
+        d2 = New DownloadService(d1)
+
+        AddHandler d2.DownloadStarted, Sub(ByVal sender As DownloadService, ByVal a As Downloader.DownloadStartedEventArgs)
+                                           Me.Invoke(Sub() Label1.Text = "Preallocating...")
+
+                                       End Sub
+
+        AddHandler d2.DownloadFileCompleted, Sub(ByVal sender As DownloadService, ByVal a As ComponentModel.AsyncCompletedEventArgs)
+
+                                                 ' File was Downlaoded so we're all good
+                                                 If File.Exists(fileinf.FullName) Then
+                                                     InstallGame()
+                                                     CleanUp()
+
+                                                 End If
+
+                                             End Sub
+
+        AddHandler d2.DownloadProgressChanged, Sub(ByVal sender As DownloadService, ByVal a As Downloader.DownloadProgressChangedEventArgs)
+                                                   Me.Invoke(Sub() Label2.Text = a.ProgressPercentage)
+
+                                               End Sub
 
         Try
-            dlSaver.Attach(download)
-            ProgressMonitor.Attach(download)
-            SpeedMonitor.Attach(download)
-            download.Start()
-
-            AddHandler download.DownloadCancelled, AddressOf DownloadCanceled
-            AddHandler download.DownloadCompleted, AddressOf DownloadCompleted
-            AddHandler download.DownloadStopped, AddressOf DownloadStopped
-
+            Await d2.DownloadFileTaskAsync(URL_String, fileinf.FullName)
         Catch ex As Exception
-            If ex.Message.Contains("HTTP status code: 429") Then
-                MsgBox("Download Error: Downloading too many files at once, refused by host." & vbNewLine & "Wait for downloads to finish, then try again.")
+            MsgBox("Error:" & ex.Message)
 
-            Else
-                MsgBox("Download Error:" & ex.Message)
-            End If
-
-            CleanUp(False)
-            Me.Invoke(Sub()
-                          Label1.Text = "Download Error: " & ex.Message
-                      End Sub)
         End Try
 
-        While Not finished
-
-            Me.Invoke(Sub()
-                          ProgressBar1.Value = ProgressMonitor.GetCurrentProgressPercentage(download) * 100
-                          If Math.Round(ProgressMonitor.GetCurrentProgressInBytes(download) / 1000000, 2) = 0 Then
-                              Label1.Text = "Preallocating..."
-                          Else
-                              Label1.Text = Math.Round(SpeedMonitor.GetCurrentBytesPerSecond / 1000, 2) & "kbp/s (" & Math.Round(ProgressMonitor.GetCurrentProgressInBytes(download) / 1000000, 2) & "mb/" & Math.Round(ProgressMonitor.GetTotalFilesizeInBytes(download) / 1000000, 2) & "mb)"
-                          End If
-
-                      End Sub)
-
-            Thread.Sleep(100)
-
-        End While
-
-    End Sub
-
-    Private Sub DownloadStopped(ByVal r As DownloadEventArgs)
-
-        Console.WriteLine("Downlaod Stopped: " & url.AbsolutePath)
-
-        CleanUp()
-    End Sub
-
-    Private Sub DownloadCompleted(ByVal r As DownloadEventArgs)
-        InstallGame()
-
-        Console.WriteLine("Downlaod Complete: " & url.AbsolutePath)
-
-        CleanUp()
-    End Sub
-
-    Private Sub DownloadCanceled(ByVal r As DownloadEventArgs)
-
-        Console.WriteLine("Downlaod Canceled: " & url.AbsolutePath)
-
-        CleanUp()
     End Sub
 
     Private Sub UnZipFile(ByVal FileName As String, ByVal ExtractTo As String)
@@ -196,11 +158,6 @@ Public Class ccDownload
 
     Private Sub CleanUp(Optional _remove As Boolean = True)
         finished = True
-        download.DetachAllHandlers()
-        dlSaver.DetachAll()
-        ProgressMonitor.DetachAll()
-        SpeedMonitor.DetachAll()
-        download.Dispose()
 
         If fileinf.Exists Then
             While MainformRef.IsFileInUse(fileinf.FullName)
@@ -215,20 +172,6 @@ Public Class ccDownload
                           Me.Parent.Controls.Remove(Me)
                       End If
                   End Sub)
-
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        If finished Then
-            CleanUp()
-        End If
-
-        If Math.Round(ProgressMonitor.GetCurrentProgressInBytes(download) / 1000000, 2) > 0 Then
-
-            btnCancel.Text = "Cleaning up"
-            download.Stop()
-
-        End If
 
     End Sub
 

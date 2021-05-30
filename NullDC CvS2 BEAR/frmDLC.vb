@@ -1,11 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Threading
-Imports PDFco.Downloader
-Imports PDFco.Downloader.Download
-Imports PDFco.Downloader.DownloadBuilder
-Imports PDFco.Downloader.Observer
-Imports PDFco.Downloader.Utils
 
 ' freedlc Format
 'DLCv= <Version>
@@ -157,7 +152,10 @@ Public Class frmDLC
             End If
 
         Catch ex As Exception
-            MsgBox("Downlaod Error: " & ex.Message & ex.InnerException.Message)
+            Me.Invoke(Sub()
+                          MsgBox("Downlaod Error: " & ex.Message)
+                      End Sub)
+
             btnDownload.Text = "Download"
             ProgressBar1.Visible = False
 

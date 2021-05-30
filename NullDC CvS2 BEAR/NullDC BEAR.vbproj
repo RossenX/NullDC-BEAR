@@ -89,12 +89,12 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
+    <Reference Include="Downloader, Version=2.2.8.0, Culture=neutral, PublicKeyToken=844973e732f6cdf4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Downloader.2.2.8\lib\net45\Downloader.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PDFco.Downloader, Version=2.0.2.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFcoDownloader.2.0.2.1\lib\net35\PDFco.Downloader.dll</HintPath>
+    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SDL2-CS, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">

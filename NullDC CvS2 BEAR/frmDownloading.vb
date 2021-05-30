@@ -23,6 +23,7 @@ Public Class frmDownloading
             Dim tmp As New ccDownload(_URL, WebUtility.UrlDecode(_filename), _extract)
             tmp.Dock = DockStyle.Top
             tlp_downloads.Controls.Add(tmp)
+            tmp.Init()
 
         End If
 

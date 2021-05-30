@@ -164,7 +164,11 @@ Public Class NullDCLauncher
             Rx.VMU = Rx.ReadVMU()
         End If
 
-        NullDCproc = Process.Start(MainformRef.NullDCPath & "\dc\nullDC_Win32_Release-NoTrace.exe")
+        Dim NullDCInfo As New ProcessStartInfo
+        NullDCInfo.FileName = MainformRef.NullDCPath & "\dc\nullDC_Win32_Release-NoTrace.exe"
+        If MainformRef.ConfigFile.ShowConsole = 0 Then NullDCInfo.Arguments = "-NoConsole"
+        NullDCproc = Process.Start(NullDCInfo)
+
         Select Case MainformRef.ConfigFile.NullDCPriority
             Case 0
                 NullDCproc.PriorityClass = ProcessPriorityClass.Normal
@@ -188,7 +192,11 @@ Public Class NullDCLauncher
         ' If we hosting save the EEPROM for sending to spectators
         Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
 
-        NullDCproc = Process.Start(MainformRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe")
+        Dim NullDCInfo As New ProcessStartInfo
+        NullDCInfo.FileName = MainformRef.NullDCPath & "\nullDC_Win32_Release-NoTrace.exe"
+        If MainformRef.ConfigFile.ShowConsole = 0 Then NullDCInfo.Arguments = "-NoConsole"
+        NullDCproc = Process.Start(NullDCInfo)
+
         Select Case MainformRef.ConfigFile.NullDCPriority
             Case 0
                 NullDCproc.PriorityClass = ProcessPriorityClass.Normal
