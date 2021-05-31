@@ -2140,7 +2140,7 @@ Public Class Configs
     Private _allowSpectators As Int16 = 1
     Private _awaystatus As String = "Idle"
     Private _volume As Int16 = 100
-    Private _showconsole As Int16 = 1
+    Private _showconsole As Int16 = 0
     Private _evolume As Int16 = 100
     Private _peripheral As Int16 = 0
     Private _windowsettings As String = "0|200|200|656|538"

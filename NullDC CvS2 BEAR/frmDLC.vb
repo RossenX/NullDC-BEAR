@@ -144,18 +144,11 @@ Public Class frmDLC
         If CurrentlySelectedGame.Folder.Trim = "" Or CurrentlySelectedGame.URL.Trim = "" Or CurrentlySelectedGame.Name.Trim = "" Then Exit Sub
 
         Try
-            If Not Application.OpenForms().OfType(Of frmDownloading).Any Then
-                frmDownloading.Show()
-                frmDownloading.AddDownload(CurrentlySelectedGame.URL, CurrentlySelectedGame.Folder & "\" & CurrentlySelectedGame.Name & ".honey", CurrentlySelectedGame.Extract)
-            Else
-                frmDownloading.AddDownload(CurrentlySelectedGame.URL, CurrentlySelectedGame.Folder & "\" & CurrentlySelectedGame.Name & ".honey", CurrentlySelectedGame.Extract)
-            End If
+            frmDownloading.Show()
+            frmDownloading.AddDownload(CurrentlySelectedGame.URL, CurrentlySelectedGame.Folder & "\" & CurrentlySelectedGame.Name & ".honey", CurrentlySelectedGame.Extract)
 
         Catch ex As Exception
-            Me.Invoke(Sub()
-                          MsgBox("Downlaod Error: " & ex.Message)
-                      End Sub)
-
+            Me.Invoke(Sub() MsgBox("Downlaod Error: " & ex.Message))
             btnDownload.Text = "Download"
             ProgressBar1.Visible = False
 
@@ -174,7 +167,10 @@ Public Class frmDLC
     End Sub
 
     Private Sub btnRomsFolder_Click(sender As Object, e As EventArgs) Handles btnRomsFolder.Click
-        If Not Directory.Exists(MainformRef.NullDCPath & "\" & RomFolders(tc_games.SelectedIndex)) Then Directory.CreateDirectory(MainformRef.NullDCPath & "\" & RomFolders(tc_games.SelectedIndex))
+
+        If Not Directory.Exists(MainformRef.NullDCPath & "\" & RomFolders(tc_games.SelectedIndex)) Then
+            Directory.CreateDirectory(MainformRef.NullDCPath & "\" & RomFolders(tc_games.SelectedIndex))
+        End If
         Process.Start(MainformRef.NullDCPath & "\" & RomFolders(tc_games.SelectedIndex))
 
     End Sub
@@ -250,6 +246,7 @@ Public Class frmDLC
 
                 Dim Match As Boolean = True
                 For Each _searchwords In TextBox1.Text.Split(" ")
+                    Dim Searching = name.ToLower.Replace(" ", "")
                     If Not name.ToLower.Replace(" ", "").Contains(_searchwords.ToLower) Then
                         Match = False
                         Exit For
@@ -269,6 +266,8 @@ Public Class frmDLC
         Next
 
         Search_ListView.Sorting = SortOrder.Ascending
+        Search_ListView.Sort()
+        Search_ListView.ListViewItemSorter = New ListViewItemComparer(1, SortOrder.Ascending)
         Search_ListView.Sort()
 
     End Sub

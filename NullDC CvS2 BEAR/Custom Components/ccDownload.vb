@@ -14,8 +14,8 @@ Public Class ccDownload
 
     Dim Extract = "0"
 
-    Dim d1 As DownloadConfiguration
-    Dim d2 As DownloadService
+    Dim DownloadConfigs As DownloadConfiguration
+    Dim DownloadServ As DownloadService
 
     Public Sub New(ByVal _URL As String, ByVal _filename As String, ByVal _extract As String)
         InitializeComponent()
@@ -30,71 +30,103 @@ Public Class ccDownload
 
     End Sub
 
-    Public Sub Init()
+    Public Async Sub Init()
         Console.WriteLine("Starting Download")
         Console.WriteLine(URL_String)
         Label1.Text = "Starting..."
         Label2.Text = fileinf.Name.Replace(".honey", "")
 
-        StartNewDownload()
+        Try
+            Await Task.Run(Sub() StartNewDownload())
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " 2")
+
+        End Try
+
 
     End Sub
 
     Private Async Sub StartNewDownload()
 
-        'ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
-        'Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(URL_String), HttpWebRequest)
-        'Dim response As HttpWebResponse
-        'response = req.GetResponse
-        'URL_String = response.ResponseUri.AbsoluteUri
+        DownloadConfigs = New DownloadConfiguration
+        DownloadConfigs.BufferBlockSize = 10240
+        DownloadConfigs.ChunkCount = 8
+        DownloadConfigs.MaximumBytesPerSecond = 1024 * 1024
+        DownloadConfigs.MaxTryAgainOnFailover = 100
+        DownloadConfigs.OnTheFlyDownload = False
+        DownloadConfigs.ParallelDownload = True
+        DownloadConfigs.TempDirectory = My.Computer.FileSystem.SpecialDirectories.Temp
+        DownloadConfigs.Timeout = 1000
 
-        d1 = New DownloadConfiguration
-        d1.BufferBlockSize = 10240
-        d1.ChunkCount = 8
-        d1.MaximumBytesPerSecond = 1024 * 1024
-        d1.MaxTryAgainOnFailover = 100
-        d1.OnTheFlyDownload = False
-        d1.ParallelDownload = True
-        d1.TempDirectory = My.Computer.FileSystem.SpecialDirectories.Temp
-        d1.Timeout = 1000
+        DownloadConfigs.RequestConfiguration.Accept = "*\*"
+        DownloadConfigs.RequestConfiguration.AutomaticDecompression = DecompressionMethods.None
+        DownloadConfigs.RequestConfiguration.CookieContainer = New CookieContainer()
+        DownloadConfigs.RequestConfiguration.Headers = New WebHeaderCollection()
+        DownloadConfigs.RequestConfiguration.KeepAlive = False
+        DownloadConfigs.RequestConfiguration.ProtocolVersion = HttpVersion.Version11
+        DownloadConfigs.RequestConfiguration.UseDefaultCredentials = False
+        DownloadConfigs.RequestConfiguration.UserAgent = "BEAR"
 
-        d1.RequestConfiguration.Accept = "*\*"
-        d1.RequestConfiguration.AutomaticDecompression = DecompressionMethods.None
-        d1.RequestConfiguration.CookieContainer = New CookieContainer()
-        d1.RequestConfiguration.Headers = New WebHeaderCollection()
-        d1.RequestConfiguration.KeepAlive = False
-        d1.RequestConfiguration.ProtocolVersion = HttpVersion.Version11
-        d1.RequestConfiguration.UseDefaultCredentials = False
-        d1.RequestConfiguration.UserAgent = "BEAR"
+        DownloadServ = New DownloadService(DownloadConfigs)
 
-        d2 = New DownloadService(d1)
+        AddHandler DownloadServ.DownloadStarted, Sub(ByVal sender As DownloadService, ByVal a As Downloader.DownloadStartedEventArgs)
+                                                     Me.Invoke(Sub() Label1.Text = "Preallocating...")
 
-        AddHandler d2.DownloadStarted, Sub(ByVal sender As DownloadService, ByVal a As Downloader.DownloadStartedEventArgs)
-                                           Me.Invoke(Sub() Label1.Text = "Preallocating...")
+                                                 End Sub
 
-                                       End Sub
+        AddHandler DownloadServ.DownloadFileCompleted, Sub(ByVal sender As DownloadService, ByVal a As ComponentModel.AsyncCompletedEventArgs)
 
-        AddHandler d2.DownloadFileCompleted, Sub(ByVal sender As DownloadService, ByVal a As ComponentModel.AsyncCompletedEventArgs)
+                                                           ' File was Downlaoded so we're all good
+                                                           If File.Exists(fileinf.FullName) Then
+                                                               InstallGame()
+                                                               CleanUp()
 
-                                                 ' File was Downlaoded so we're all good
-                                                 If File.Exists(fileinf.FullName) Then
-                                                     InstallGame()
-                                                     CleanUp()
+                                                               Me.Invoke(Sub()
+                                                                             Label1.Text = "Finished"
+                                                                             btnCancel.Text = "Ok"
+                                                                         End Sub)
 
-                                                 End If
+                                                           End If
 
-                                             End Sub
+                                                           If DownloadServ.IsCancelled Then
+                                                               Me.Invoke(Sub()
+                                                                             Label1.Text = "Canceled"
+                                                                         End Sub)
 
-        AddHandler d2.DownloadProgressChanged, Sub(ByVal sender As DownloadService, ByVal a As Downloader.DownloadProgressChangedEventArgs)
-                                                   Me.Invoke(Sub() Label2.Text = a.ProgressPercentage)
+                                                           End If
 
-                                               End Sub
+                                                       End Sub
+
+        AddHandler DownloadServ.DownloadProgressChanged, Sub(ByVal sender As DownloadService, ByVal a As Downloader.DownloadProgressChangedEventArgs)
+                                                             Me.Invoke(Sub()
+                                                                           ProgressBar1.Value = a.ProgressPercentage
+                                                                           Label1.Text = "(" & Math.Floor(a.ReceivedBytesSize * 0.000001) & "mb\" & Math.Floor(a.TotalBytesToReceive * 0.000001) & "mb) " & Math.Floor(a.AverageBytesPerSecondSpeed * 0.001) & "/kbps"
+                                                                       End Sub)
+
+                                                             If a.AverageBytesPerSecondSpeed = 0 Then
+                                                                 Me.Invoke(Sub()
+                                                                               Label1.Text = "Canceled"
+                                                                           End Sub)
+                                                             End If
+
+                                                         End Sub
 
         Try
-            Await d2.DownloadFileTaskAsync(URL_String, fileinf.FullName)
-        Catch ex As Exception
-            MsgBox("Error:" & ex.Message)
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+            Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(URL_String), HttpWebRequest)
+            Dim response As HttpWebResponse
+            response = req.GetResponse
+            URL_String = response.ResponseUri.AbsoluteUri
+
+            Await DownloadServ.DownloadFileTaskAsync(URL_String, fileinf.FullName)
+
+        Catch ex As Exception
+            Me.Invoke(Sub()
+                          Label1.Text = "Error: " & ex.Message
+                          btnCancel.Text = "Ok"
+                      End Sub)
         End Try
 
     End Sub
@@ -156,7 +188,7 @@ Public Class ccDownload
                   End Sub)
     End Sub
 
-    Private Sub CleanUp(Optional _remove As Boolean = True)
+    Private Sub CleanUp()
         finished = True
 
         If fileinf.Exists Then
@@ -167,16 +199,38 @@ Public Class ccDownload
         End If
 
         Me.Invoke(Sub()
-                      If fileinf.Exists Then fileinf.Delete()
-                      If _remove Then
-                          Me.Parent.Controls.Remove(Me)
+                      If fileinf.Exists Then
+                          fileinf.Delete()
+                          Label1.Text = "Complete"
+                          btnCancel.Text = "Ok"
                       End If
+
                   End Sub)
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Process.Start(fileinf.Directory.ToString, "")
+
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        If btnCancel.Text = "Ok" Then
+            Me.Invoke(Sub()
+                          If Me.Parent.Controls.Count = 1 Then
+                              frmDownloading.Hide()
+                          End If
+
+                          Me.Parent.Controls.Remove(Me)
+
+                      End Sub)
+        Else
+            DownloadServ.CancelAsync()
+            Label1.Text = "Canceled"
+            btnCancel.Text = "Ok"
+
+        End If
+
 
     End Sub
 
