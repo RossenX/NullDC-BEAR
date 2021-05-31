@@ -5,6 +5,7 @@ Imports Downloader
 
 Public Class ccDownload
     Dim finished As Boolean = False
+    Dim canceled As Boolean = False
 
     Public URL_String As String = ""
 
@@ -65,7 +66,7 @@ Public Class ccDownload
         DownloadConfigs.RequestConfiguration.Headers = New WebHeaderCollection()
         DownloadConfigs.RequestConfiguration.KeepAlive = False
         DownloadConfigs.RequestConfiguration.ProtocolVersion = HttpVersion.Version11
-        DownloadConfigs.RequestConfiguration.UseDefaultCredentials = False
+        DownloadConfigs.RequestConfiguration.UseDefaultCredentials = True
         DownloadConfigs.RequestConfiguration.UserAgent = "BEAR"
 
         DownloadServ = New DownloadService(DownloadConfigs)
@@ -120,7 +121,9 @@ Public Class ccDownload
             response = req.GetResponse
             URL_String = response.ResponseUri.AbsoluteUri
 
-            Await DownloadServ.DownloadFileTaskAsync(URL_String, fileinf.FullName)
+            If Not canceled Then
+                Await DownloadServ.DownloadFileTaskAsync(URL_String, fileinf.FullName)
+            End If
 
         Catch ex As Exception
             Me.Invoke(Sub()
@@ -225,6 +228,7 @@ Public Class ccDownload
 
                       End Sub)
         Else
+            canceled = True
             DownloadServ.CancelAsync()
             Label1.Text = "Canceled"
             btnCancel.Text = "Ok"
