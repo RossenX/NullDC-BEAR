@@ -35,9 +35,10 @@ Public Class frmDownloading
     End Sub
 
     Private Sub frmDownloading_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        For Each _dl As ccDownload In tlp_downloads.Controls
-
-        Next
+        If tlp_downloads.Controls.Count > 0 Then
+            MsgBox("Cannot close while DLC are in the list.")
+            e.Cancel = True
+        End If
 
     End Sub
 

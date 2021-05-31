@@ -6,6 +6,7 @@ Imports Downloader
 Public Class ccDownload
     Dim finished As Boolean = False
     Dim canceled As Boolean = False
+    Dim Started As Boolean = False
 
     Public URL_String As String = ""
 
@@ -23,6 +24,8 @@ Public Class ccDownload
         URL_String = _URL
         fileinf = New FileInfo(_filename)
         Extract = _extract
+        Dim url = New Uri(_URL)
+        FileFormat = "." & url.AbsolutePath.Split(".")(url.AbsolutePath.Split(".").Count - 1)
 
     End Sub
 
@@ -71,11 +74,6 @@ Public Class ccDownload
 
         DownloadServ = New DownloadService(DownloadConfigs)
 
-        AddHandler DownloadServ.DownloadStarted, Sub(ByVal sender As DownloadService, ByVal a As Downloader.DownloadStartedEventArgs)
-                                                     Me.Invoke(Sub() Label1.Text = "Preallocating...")
-
-                                                 End Sub
-
         AddHandler DownloadServ.DownloadFileCompleted, Sub(ByVal sender As DownloadService, ByVal a As ComponentModel.AsyncCompletedEventArgs)
 
                                                            ' File was Downlaoded so we're all good
@@ -93,6 +91,7 @@ Public Class ccDownload
                                                            If DownloadServ.IsCancelled Then
                                                                Me.Invoke(Sub()
                                                                              Label1.Text = "Canceled"
+                                                                             btnCancel.Text = "Ok"
                                                                          End Sub)
 
                                                            End If
@@ -106,9 +105,7 @@ Public Class ccDownload
                                                                        End Sub)
 
                                                              If a.AverageBytesPerSecondSpeed = 0 Then
-                                                                 Me.Invoke(Sub()
-                                                                               Label1.Text = "Canceled"
-                                                                           End Sub)
+                                                                 Me.Invoke(Sub() Label1.Text = "Canceled")
                                                              End If
 
                                                          End Sub
@@ -122,6 +119,7 @@ Public Class ccDownload
             URL_String = response.ResponseUri.AbsoluteUri
 
             If Not canceled Then
+                Started = True
                 Await DownloadServ.DownloadFileTaskAsync(URL_String, fileinf.FullName)
             End If
 
@@ -207,14 +205,11 @@ Public Class ccDownload
                           Label1.Text = "Complete"
                           btnCancel.Text = "Ok"
                       End If
-
                   End Sub)
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Process.Start(fileinf.Directory.ToString, "")
-
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -230,12 +225,15 @@ Public Class ccDownload
         Else
             canceled = True
             DownloadServ.CancelAsync()
-            Label1.Text = "Canceled"
-            btnCancel.Text = "Ok"
+            If Started Then
+                Label1.Text = "Canceling..."
+            Else
+                Label1.Text = "Canceled"
+                btnCancel.Text = "Ok"
+            End If
+
 
         End If
-
-
     End Sub
 
 End Class

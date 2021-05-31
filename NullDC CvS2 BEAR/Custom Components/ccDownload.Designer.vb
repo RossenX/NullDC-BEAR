@@ -33,10 +33,11 @@ Partial Class ccDownload
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.AutoSize = True
         Me.TableLayoutPanel1.ColumnCount = 3
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 51.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.Controls.Add(Me.Label2, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btnCancel, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.ProgressBar1, 0, 1)
@@ -47,9 +48,9 @@ Partial Class ccDownload
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(250, 50)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(319, 50)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Label2
@@ -60,15 +61,16 @@ Partial Class ccDownload
         Me.Label2.Location = New System.Drawing.Point(0, 0)
         Me.Label2.Margin = New System.Windows.Forms.Padding(0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(250, 13)
+        Me.Label2.Size = New System.Drawing.Size(319, 13)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Label2"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btnCancel
         '
+        Me.btnCancel.AutoSize = True
         Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnCancel.Location = New System.Drawing.Point(198, 13)
+        Me.btnCancel.Location = New System.Drawing.Point(267, 13)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCancel.Name = "btnCancel"
         Me.TableLayoutPanel1.SetRowSpan(Me.btnCancel, 2)
@@ -84,7 +86,7 @@ Partial Class ccDownload
         Me.ProgressBar1.Location = New System.Drawing.Point(0, 13)
         Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(0)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(198, 14)
+        Me.ProgressBar1.Size = New System.Drawing.Size(267, 14)
         Me.ProgressBar1.TabIndex = 1
         '
         'Label1
@@ -94,18 +96,19 @@ Partial Class ccDownload
         Me.Label1.Location = New System.Drawing.Point(0, 27)
         Me.Label1.Margin = New System.Windows.Forms.Padding(0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(159, 23)
+        Me.Label1.Size = New System.Drawing.Size(221, 23)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Label1"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Button1
         '
+        Me.Button1.AutoSize = True
         Me.Button1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Button1.Location = New System.Drawing.Point(159, 27)
+        Me.Button1.Location = New System.Drawing.Point(221, 27)
         Me.Button1.Margin = New System.Windows.Forms.Padding(0)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(39, 23)
+        Me.Button1.Size = New System.Drawing.Size(46, 23)
         Me.Button1.TabIndex = 4
         Me.Button1.Text = "Folder"
         Me.Button1.UseVisualStyleBackColor = True
@@ -114,14 +117,16 @@ Partial Class ccDownload
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.MaximumSize = New System.Drawing.Size(0, 50)
         Me.MinimumSize = New System.Drawing.Size(250, 50)
         Me.Name = "ccDownload"
-        Me.Size = New System.Drawing.Size(250, 50)
+        Me.Size = New System.Drawing.Size(319, 50)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
