@@ -57,7 +57,7 @@ Partial Class frmDLC
         Me.DLCContainer.SetColumnSpan(Me.btnDownload, 2)
         Me.btnDownload.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDownload.Location = New System.Drawing.Point(10, 439)
+        Me.btnDownload.Location = New System.Drawing.Point(10, 565)
         Me.btnDownload.Margin = New System.Windows.Forms.Padding(0)
         Me.btnDownload.Name = "btnDownload"
         Me.btnDownload.Size = New System.Drawing.Size(641, 41)
@@ -90,7 +90,7 @@ Partial Class frmDLC
         Me.DLCContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.DLCContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.DLCContainer.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.DLCContainer.Size = New System.Drawing.Size(661, 557)
+        Me.DLCContainer.Size = New System.Drawing.Size(661, 683)
         Me.DLCContainer.TabIndex = 2
         '
         'btnClose
@@ -98,7 +98,7 @@ Partial Class frmDLC
         Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnClose.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnClose.Location = New System.Drawing.Point(10, 493)
+        Me.btnClose.Location = New System.Drawing.Point(10, 619)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(0)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(165, 41)
@@ -111,7 +111,7 @@ Partial Class frmDLC
         Me.btnRomsFolder.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.btnRomsFolder.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnRomsFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnRomsFolder.Location = New System.Drawing.Point(175, 493)
+        Me.btnRomsFolder.Location = New System.Drawing.Point(175, 619)
         Me.btnRomsFolder.Margin = New System.Windows.Forms.Padding(0)
         Me.btnRomsFolder.Name = "btnRomsFolder"
         Me.btnRomsFolder.Size = New System.Drawing.Size(476, 41)
@@ -123,7 +123,7 @@ Partial Class frmDLC
         '
         Me.DLCContainer.SetColumnSpan(Me.ProgressBar1, 2)
         Me.ProgressBar1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ProgressBar1.Location = New System.Drawing.Point(10, 416)
+        Me.ProgressBar1.Location = New System.Drawing.Point(10, 542)
         Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(0)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(641, 23)
@@ -134,7 +134,7 @@ Partial Class frmDLC
         '
         Me.lnkRoms.AutoSize = True
         Me.DLCContainer.SetColumnSpan(Me.lnkRoms, 2)
-        Me.lnkRoms.Location = New System.Drawing.Point(13, 480)
+        Me.lnkRoms.Location = New System.Drawing.Point(13, 606)
         Me.lnkRoms.Name = "lnkRoms"
         Me.lnkRoms.Size = New System.Drawing.Size(244, 13)
         Me.lnkRoms.TabIndex = 4
@@ -151,7 +151,7 @@ Partial Class frmDLC
         Me.tc_games.Multiline = True
         Me.tc_games.Name = "tc_games"
         Me.tc_games.SelectedIndex = 0
-        Me.tc_games.Size = New System.Drawing.Size(641, 371)
+        Me.tc_games.Size = New System.Drawing.Size(641, 497)
         Me.tc_games.TabIndex = 7
         '
         'TabPage1
@@ -160,7 +160,7 @@ Partial Class frmDLC
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(633, 345)
+        Me.TabPage1.Size = New System.Drawing.Size(633, 471)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Search"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -176,7 +176,7 @@ Partial Class frmDLC
         Me.Search_ListView.Margin = New System.Windows.Forms.Padding(0)
         Me.Search_ListView.MultiSelect = False
         Me.Search_ListView.Name = "Search_ListView"
-        Me.Search_ListView.Size = New System.Drawing.Size(633, 345)
+        Me.Search_ListView.Size = New System.Drawing.Size(633, 471)
         Me.Search_ListView.TabIndex = 0
         Me.Search_ListView.UseCompatibleStateImageBehavior = False
         Me.Search_ListView.View = System.Windows.Forms.View.Details
@@ -205,7 +205,7 @@ Partial Class frmDLC
         '
         Me.lbDisclaimer.AutoSize = True
         Me.DLCContainer.SetColumnSpan(Me.lbDisclaimer, 2)
-        Me.lbDisclaimer.Location = New System.Drawing.Point(13, 534)
+        Me.lbDisclaimer.Location = New System.Drawing.Point(13, 660)
         Me.lbDisclaimer.Name = "lbDisclaimer"
         Me.lbDisclaimer.Size = New System.Drawing.Size(194, 13)
         Me.lbDisclaimer.TabIndex = 9
@@ -284,7 +284,7 @@ Partial Class frmDLC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(661, 581)
+        Me.ClientSize = New System.Drawing.Size(661, 707)
         Me.Controls.Add(Me.DLCContainer)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1

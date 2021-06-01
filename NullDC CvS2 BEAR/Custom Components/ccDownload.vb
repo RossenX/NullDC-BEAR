@@ -104,6 +104,10 @@ Public Class ccDownload
                                                                            Label1.Text = "(" & Math.Floor(a.ReceivedBytesSize * 0.000001) & "mb\" & Math.Floor(a.TotalBytesToReceive * 0.000001) & "mb) " & Math.Floor(a.AverageBytesPerSecondSpeed * 0.001) & "/kbps"
                                                                        End Sub)
 
+                                                             If canceled Then
+                                                                 Me.Invoke(Sub() Label1.Text = "Canceling...")
+                                                             End If
+
                                                              If a.AverageBytesPerSecondSpeed = 0 Then
                                                                  Me.Invoke(Sub() Label1.Text = "Canceled")
                                                              End If
