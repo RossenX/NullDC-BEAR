@@ -88,6 +88,10 @@ Module Rx
     End Function
 
     Public Function GenerateGameKey() As String
+        If MainformRef.ConfigFile.NoKey = -1 Then
+            Return "NoKey"
+        End If
+
         Dim r As New Random
         Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         Dim sb As New StringBuilder

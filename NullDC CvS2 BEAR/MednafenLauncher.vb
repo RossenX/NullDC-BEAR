@@ -70,7 +70,11 @@ Public Class MednafenLauncher
 
                 If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Or MainformRef.ConfigFile.Status = "Client" Then
                     Dim GameKey = " -netplay.gamekey " & Rx.EEPROM
-                    If MainformRef.ConfigFile.NoKey = -1 Then GameKey = " -netplay.gamekey """""
+
+                    If Rx.EEPROM = "NoKey" Then
+                        GameKey = " -netplay.gamekey """""
+                    End If
+
                     MednafenInfo.Arguments = " -connect -netplay.host " & MainformRef.ConfigFile.Host & GameKey & " -netplay.nick """ & MainformRef.ConfigFile.Name & """ "
                 End If
                 ' Save Backing up
