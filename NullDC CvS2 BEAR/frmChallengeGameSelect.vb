@@ -52,7 +52,7 @@ Public Class frmChallengeGameSelect
             File.WriteAllText(MainformRef.NullDCPath & "\recent.glist", SelectedGame(0) & vbNewLine)
         End If
 
-        If tb_gamekey.Text.Trim.Length > 0 Then
+        If tb_gamekey.Text.Trim.Length > 0 And MainformRef.ConfigFile.NoKey = 0 Then
             Rx.EEPROM = tb_gamekey.Text.Trim
         Else
             Rx.EEPROM = ""
