@@ -120,7 +120,7 @@ Public Class ccDownload
             Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(URL_String), HttpWebRequest)
             Dim response As HttpWebResponse
             response = req.GetResponse
-            URL_String = response.ResponseUri.AbsoluteUri
+            'URL_String = response.ResponseUri.AbsoluteUri
 
             If Not canceled Then
                 Started = True
