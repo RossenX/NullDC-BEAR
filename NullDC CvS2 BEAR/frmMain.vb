@@ -6,18 +6,19 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.92" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.92a" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
 
     Public NullDCLauncher As New NullDCLauncher
     Public MednafenLauncher As New MednafenLauncher
+    Public MupenLauncher As New Mupen64Launcher
 
     Public NullDCPath As String = Application.StartupPath
 
@@ -148,6 +149,13 @@ Public Class frmMain
         If Not File.Exists(NullDCPath & "\mednafen\server\mednafen-server.exe") Then
             Directory.CreateDirectory(NullDCPath & "\mednafen\server")
             UnzipResToDir(My.Resources.mednafen_server, "bear_tmp_mednafen-server.zip", NullDCPath & "\mednafen\server", True)
+            needsUpdate = True
+        End If
+
+        ' Mednafen unpack
+        If Not File.Exists(NullDCPath & "\Mupen64Plus\mupen64plus-ui-console.exe") Then
+            Directory.CreateDirectory(NullDCPath & "\Mupen64Plus")
+            UnzipResToDir(My.Resources.Mupen64Plus, "bear_tmp_Mupen64Plus.zip", NullDCPath & "\Mupen64Plus", True)
             needsUpdate = True
         End If
 
@@ -353,7 +361,8 @@ UpdateTry:
         Dim RomFolders As String() = {
             NullDCPath & "\roms",
             NullDCPath & "\dc\roms",
-            NullDCPath & "\mednafen\roms"
+            NullDCPath & "\mednafen\roms",
+            NullDCPath & "\Mupen64Plus\roms"
         }
 
         Dim Watchers(RomFolders.Count) As FileSystemWatcher
@@ -500,6 +509,7 @@ UpdateTry:
                 If entry.FullName.EndsWith("\") Or entry.FullName.EndsWith("/") Then
                     FolderOnly = True
                 End If
+
                 Dim _fdir = entry.FullName.Replace("/", "\")
                 Dim _dirbuilt = ""
 
@@ -1051,6 +1061,23 @@ UpdateTry:
 
         End If
 
+        If _system = "all" Or _system = "n64" Then
+            If Not Directory.Exists(NullDCPath & "\Mupen64Plus\roms") Then Directory.CreateDirectory(NullDCPath & "\Mupen64Plus\roms")
+
+            Files = Directory.GetFiles(NullDCPath & "\Mupen64Plus\roms", "*.z64", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".z64", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("N64-" & RomName) Then
+                    GamesList.Add("N64-" & RomName, {GameName, RomPath, "n64", ""})
+                End If
+            Next
+
+        End If
+
         ' New Games List Code
         GameSelectForm.PopulateGameLists()
         ' PopulateGameLists(GameSelectForm.tc_games)
@@ -1074,6 +1101,8 @@ UpdateTry:
                 NullDCLauncher.LaunchNaomi(_romname, _region)
             Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc", "fds", "sms"
                 MednafenLauncher.LaunchEmulator(_romname)
+            Case "n64"
+                MupenLauncher.LaunchEmulator(_romname)
             Case Else
                 MsgBox("Missing emulator type: " & Rx.platform)
         End Select

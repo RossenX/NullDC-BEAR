@@ -72,6 +72,9 @@ Public Class frmChallengeGameSelect
             Case "na", "dc" 'NullDC
                 MainformRef.ConfigFile.Status = "Offline"
                 MainformRef.ConfigFile.Host = ""
+            Case "n64" 'Mupen64Plus
+                MainformRef.ConfigFile.Status = "Offline"
+                MainformRef.ConfigFile.Host = ""
             Case Else ' Mednafen
                 Select Case cb_Serverlist.Text
                     Case "Offline"
@@ -240,6 +243,9 @@ Public Class frmChallengeGameSelect
                         Else
                             tb_nulldc.Visible = False
                         End If
+                    Case "n64"
+                        tb_nulldc.Visible = False
+                        tb_mednafen.Visible = False
 
                     Case Else
                         tb_nulldc.Visible = False
@@ -337,6 +343,8 @@ Public Class frmChallengeGameSelect
                     TabName = "Famicom Disk System"
                 Case "sms"
                     TabName = "Sega Master System"
+                Case "n64"
+                    TabName = "N64"
                 Case Else
                     TabName = "Unknown"
                     Console.WriteLine("No System?")

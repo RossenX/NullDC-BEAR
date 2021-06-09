@@ -36,7 +36,6 @@ Public Class ccDownload
 
     Public Async Sub Init()
         Console.WriteLine("Starting Download")
-        Console.WriteLine(URL_String)
         Label1.Text = "Starting..."
         Label2.Text = fileinf.Name.Replace(".honey", "")
 
@@ -74,11 +73,25 @@ Public Class ccDownload
 
         DownloadServ = New DownloadService(DownloadConfigs)
 
-        AddHandler DownloadServ.DownloadFileCompleted, Sub(ByVal sender As DownloadService, ByVal a As ComponentModel.AsyncCompletedEventArgs)
+        AddHandler DownloadServ.DownloadFileCompleted, Async Sub(ByVal sender As DownloadService, ByVal a As ComponentModel.AsyncCompletedEventArgs)
+
+                                                           ' Wait for the file to be copied to the right place
+                                                           While True
+                                                               If canceled Or DownloadServ.IsCancelled Then Exit While
+
+                                                               If Not File.Exists(fileinf.FullName) Then
+                                                                   Await Task.Delay(1000)
+                                                                   Continue While
+                                                               End If
+                                                               Exit While
+
+                                                           End While
 
                                                            ' File was Downlaoded so we're all good
                                                            If File.Exists(fileinf.FullName) Then
+
                                                                InstallGame()
+
                                                                CleanUp()
 
                                                                Me.Invoke(Sub()
@@ -120,7 +133,14 @@ Public Class ccDownload
             Dim req As HttpWebRequest = DirectCast(HttpWebRequest.Create(URL_String), HttpWebRequest)
             Dim response As HttpWebResponse
             response = req.GetResponse
-            'URL_String = response.ResponseUri.AbsoluteUri
+            Dim response_url = response.ResponseUri.AbsoluteUri
+
+            If Not response_url = URL_String Then
+                URL_String = response_url
+                DownloadConfigs.ChunkCount = 1
+            End If
+
+            Console.WriteLine(URL_String)
 
             If Not canceled Then
                 Started = True
@@ -146,6 +166,8 @@ Public Class ccDownload
     End Sub
 
     Private Sub InstallGame()
+
+        Me.Invoke(Sub() Label1.Text = "Installing...")
 
         Dim FolderToPlacein = fileinf.Directory.FullName & "\" & fileinf.Name.Replace(".honey", "")
 
@@ -195,6 +217,7 @@ Public Class ccDownload
 
     Private Sub CleanUp()
         finished = True
+        Me.Invoke(Sub() Label1.Text = "Cleaning...")
 
         If fileinf.Exists Then
             While MainformRef.IsFileInUse(fileinf.FullName)

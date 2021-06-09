@@ -381,19 +381,12 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 1.89
+        '''  Looks up a localized string similar to 1.92
         '''CVS2::4B5360E5C101756B04FB20F11D50C8C8::5576B4A34D645C26C0BDE99D55F75FB0
         '''Dynarec.UnderclockFpu=1
         '''Emulation.ModVolMode=2
         '''Emulation.PaletteMode=2
-        '''MVC2::9CE0220DCEF005912F3855D8BE98A35A::4A3B3DF3C475E9A0A01E0DE75FC0E87D::155E3EA07330912C61A93C1B4FD95B01
-        '''Dynarec.UnderclockFpu=1
-        '''Emulation.ModVolMode=2
-        '''Emulation.AlphaSortMode=1
-        '''Power Stone 2::F6059501F9DCC894D716125BB0DFF6E1::A09ED0A81635971E3D62431014D98F7A
-        '''Emulation.AlphaSortMode=1
-        '''CDDAMute=1
-        '''Virtua_Tennis_2_Pal_Dc-Alpax::8649AE5A732BC808F228677B2 [rest of string was truncated]&quot;;.
+        '''MVC2(NOT USED ANYMORE)::9CE0220DCEF005912F3855D8BE98A35A::4A3B3DF3C475E9A0A01E0DE75FC0E87D::155E3EA07330912C61A93C1B4FD95B01::E935DAA116B0DAA4529B13FB50A49B3C::6528AB8D65E44F02DE1B3E67BDC2F29C::3BD60F9F9C7406E1780D240DD65A6085::20F2924F85FF063AEE4DA99BCEA020CC::B31A9828BBF8FCF970379E8F9959B121::DD0DF4A26D93679916A7876F05259F88::89DEA5BCD84550B1988B53C14AB2 [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property DreamcastGameOptimizations() As String
             Get
@@ -557,6 +550,16 @@ Namespace My.Resources
         Friend ReadOnly Property Multitap_None() As String
             Get
                 Return ResourceManager.GetString("Multitap_None", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property Mupen64Plus() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Mupen64Plus", resourceCulture)
+                Return CType(obj,Byte())
             End Get
         End Property
         
