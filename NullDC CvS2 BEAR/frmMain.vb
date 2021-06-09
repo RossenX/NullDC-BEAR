@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.92a" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.93" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -1315,6 +1315,7 @@ UpdateTry:
                     Case "GBA" : IconIndex = 9
                     Case "GBC" : IconIndex = 10
                     Case "SMS" : IconIndex = 11
+                    Case "N64" : IconIndex = 12
                 End Select
             End If
 

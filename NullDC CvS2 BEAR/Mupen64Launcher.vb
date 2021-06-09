@@ -11,7 +11,8 @@ Public Class Mupen64Launcher
         Environment.CurrentDirectory = MainformRef.NullDCPath & "\Mupen64Plus"
 
         MupenLaunchInfo.FileName = MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus-ui-console.exe"
-        MupenLaunchInfo.Arguments = """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
+        MupenLaunchInfo.Arguments = "--gfx mupen64plus-video-glide64mk2 "
+        MupenLaunchInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
 
         MupenInstance = Process.Start(MupenLaunchInfo)
 
