@@ -13,12 +13,8 @@ Public Class frmKeyMapperSDL
     Dim MednafenControllerID(128) As String ' Support up to 16 Controllers at once
 
     Public Joy As IntPtr
-    Dim AvailableControllersList As New DataTable
-
     Dim _InputThread As Threading.Thread
-
     Dim Currently_Binding As Button
-
     Dim ButtonsDown As New Dictionary(Of String, Boolean)
 
     ' Little things to know which systems were changed, so we don't have to always save settings that were not changed
@@ -136,9 +132,6 @@ Public Class frmKeyMapperSDL
 
     Private Sub DoInitialSetupShit()
 
-        AvailableControllersList.Columns.Add("ID")
-        AvailableControllersList.Columns.Add("Name")
-
         'AvailableControllersList.Rows.Add({-1, "Keyboard Only"})
 
         ControllerCB.ValueMember = "ID"
@@ -189,7 +182,7 @@ Public Class frmKeyMapperSDL
         MainformRef.ConfigFile.DebugControls = DebugControlsCB.SelectedIndex
         MainformRef.ConfigFile.SaveFile(False)
 
-        Dim lines(256) As String
+        Dim lines(262) As String
 
         Dim MednafenControllerID = GetMednafenControllerIDs()
 
@@ -237,6 +230,7 @@ Public Class frmKeyMapperSDL
         TabsToSave.Add(Page_GBC_GBC)
         TabsToSave.Add(Page_NGP_NGP)
         TabsToSave.Add(Page_SMS_Gamepad)
+        TabsToSave.Add(page_N64_Controller)
 
         Dim KeyCount = 5
 
@@ -247,16 +241,20 @@ Public Class frmKeyMapperSDL
 
                     Dim ButtonConfigString = _btn.ConfigString.Split(",")
                     For Each _btnstr In ButtonConfigString
-                        If _btn.Emu = "nulldc" Then
-                            lines(KeyCount) = _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
-                        ElseIf _btn.Emu = "mednafen" Then
-                            If _btnstr.Contains("<port>") Then
-                                lines(KeyCount) = "med_" & _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
-                            Else
-                                lines(KeyCount) = "med_" & _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(0)
-                            End If
+                        Select Case _btn.Emu
+                            Case "nulldc"
+                                lines(KeyCount) = _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
+                            Case "mednafen"
+                                If _btnstr.Contains("<port>") Then
+                                    lines(KeyCount) = "med_" & _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
+                                Else
+                                    lines(KeyCount) = "med_" & _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(0)
+                                End If
 
-                        End If
+                            Case "mupen"
+                                lines(KeyCount) = "mup_" & _btnstr.Trim & "=" & _btn.GetKeyCode(0) & "|" & _btn.GetKeyCode(1)
+
+                        End Select
                         KeyCount += 1
                     Next
 
@@ -687,7 +685,9 @@ Public Class frmKeyMapperSDL
 
         Dim OldConnectedIndex = ControllerCB.SelectedValue
         Dim FoundController As Boolean = False
-        AvailableControllersList.Rows.Clear()
+        Dim AvailableControllersList As New DataTable
+        AvailableControllersList.Columns.Add("ID")
+        AvailableControllersList.Columns.Add("Name")
         AvailableControllersList.Rows.Add({-1, "Keyboard Only"})
 
         For i = 0 To SDL_NumJoysticks() - 1
@@ -1033,6 +1033,13 @@ Public Class frmKeyMapperSDL
 
         Catch ex As Exception
             MsgBox("Error Saving Mednafen Controls: " & ex.InnerException.Message)
+
+        End Try
+
+        ' Mupen Controls
+        Try
+
+        Catch ex As Exception
 
         End Try
 
