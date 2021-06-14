@@ -4,6 +4,7 @@ Imports NullDC_CvS2_BEAR.frmMain
 Public Class Mupen64Launcher
 
     Public MupenInstance As Process = Nothing
+    Public MupenServer As Process = Nothing
 
     Public Sub LaunchEmulator(ByVal _romname)
         Console.WriteLine("launching Mupen64Plus: " & _romname)
@@ -12,9 +13,14 @@ Public Class Mupen64Launcher
 
         MupenLaunchInfo.FileName = MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus-ui-console.exe"
         MupenLaunchInfo.Arguments = "--gfx mupen64plus-video-glide64mk2 "
+        MupenLaunchInfo.Arguments += "--resolution 1280x720 "
+        MupenLaunchInfo.Arguments += "--windowed "
+        MupenLaunchInfo.Arguments += "--online "
+
         MupenLaunchInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
 
         MupenInstance = Process.Start(MupenLaunchInfo)
+        MupenInstance.EnableRaisingEvents = True
 
         Environment.CurrentDirectory = MainformRef.NullDCPath
 
