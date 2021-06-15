@@ -21,7 +21,7 @@ Public Class frmKeyMapperSDL
     Public NaomiChanged As Boolean = False
     Public DreamcastChanged As Boolean = False
     Public MednafenChanged As Boolean = False
-    Public MednafenControlChanged As Boolean = False
+    Public MupenChanged As Boolean = False
 
     <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
     Private Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Boolean
@@ -266,7 +266,6 @@ Public Class frmKeyMapperSDL
             NaomiChanged = True
             DreamcastChanged = True
             MednafenChanged = True
-            MednafenControlChanged = True
         Else
             Dim _tmpConfigFile As String() = File.ReadAllLines(_filepath)
 
@@ -278,7 +277,6 @@ Public Class frmKeyMapperSDL
                         NaomiChanged = True
                         DreamcastChanged = True
                         MednafenChanged = True
-                        MednafenControlChanged = True
                     End If
 
                     ' Naomi
@@ -294,7 +292,11 @@ Public Class frmKeyMapperSDL
                     ' Mednafen
                     If _line.StartsWith("med_") Or _line.StartsWith("MednafenControllerID=") Then
                         MednafenChanged = True
-                        MednafenControlChanged = True
+                    End If
+
+                    ' Mupen
+                    If _line.StartsWith("mup_") Then
+                        MupenChanged = True
                     End If
 
                 End If
@@ -312,7 +314,6 @@ Public Class frmKeyMapperSDL
         Else
             MednafenControllerConfigLines = {""}
             MednafenChanged = True
-            MednafenControlChanged = True
         End If
 
         For i = 0 To 1
@@ -332,7 +333,6 @@ Public Class frmKeyMapperSDL
 
                 If Not MednafenMappingFound Then
                     MednafenChanged = True
-                    MednafenControlChanged = True
                 End If
 
             End If
@@ -385,7 +385,6 @@ Public Class frmKeyMapperSDL
         NaomiChanged = True
         DreamcastChanged = True
         MednafenChanged = True
-        MednafenControlChanged = True
 
         LoadSettings(cbProfiles.Text.Trim)
         AddHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
@@ -728,9 +727,6 @@ Public Class frmKeyMapperSDL
 
         ' Update Control Configs for all the shit and hot-load if possible
         Dim ControlsConfigs() As String = File.ReadAllLines(ControlFilePath)
-        Dim NaomiConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
-        Dim DreamcastConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
-        Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
 
         ' We need the peripheral beforehand so we know which control settings to actually use
         Dim tempPeripheral As String() = {"", ""}
@@ -764,6 +760,7 @@ Public Class frmKeyMapperSDL
         Try
             If NaomiChanged Then
                 Console.WriteLine("Saving Naomi Controls")
+                Dim NaomiConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
                 For Each line As String In NaomiConfigs
                     btn_Close.Text = "Saving Naomi..."
                     If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
@@ -807,6 +804,7 @@ Public Class frmKeyMapperSDL
             linenumber = 0
             If DreamcastChanged Then
                 Console.WriteLine("Saving Dreamcast Controls")
+                Dim DreamcastConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
                 For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
                     btn_Close.Text = "Saving Dreamcast..."
                     If line.StartsWith("BPort") Then
@@ -891,6 +889,7 @@ Public Class frmKeyMapperSDL
                     End If
                 Next
 
+                Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
                 linenumber = 0
                 For Each line As String In MednafenConfigs
                     btn_Close.Text = "Saving Mednafen..."
@@ -912,7 +911,7 @@ Public Class frmKeyMapperSDL
                         Continue For
                     End If
 
-                    If MednafenControlChanged Then
+                    If MednafenChanged Then
                         Dim tmpControlString = ""
 
                         If line.Contains("rapid_") Or
@@ -1037,9 +1036,37 @@ Public Class frmKeyMapperSDL
         End Try
 
         ' Mupen Controls
+        If MupenChanged Then
+
+
+
+        End If
+
         Try
 
+            Dim MupenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini")
+            Dim ControllerName = SDL_JoystickNameForIndex(0)
+            ControllerName = ControllerName.Replace(" ", "")
+
+            For Each _line In MupenConfigs
+                If _line.StartsWith("[") Then
+                    _line = _line.Replace(" ", "").Replace("[", "").Replace("]", "")
+
+                    If _line = ControllerName Then
+                        Console.WriteLine(_line)
+                    End If
+
+                    If _line = "Generic   USB  Joystick" Then
+                        Console.WriteLine("F: " & _line)
+                    End If
+
+                End If
+
+
+            Next
+
         Catch ex As Exception
+            MsgBox("Error Saving Mupen Controls: " & ex.InnerException.Message)
 
         End Try
 

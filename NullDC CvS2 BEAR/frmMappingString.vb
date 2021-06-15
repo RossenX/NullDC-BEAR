@@ -96,7 +96,6 @@ Public Class frmMappingString
         frmKeyMapperSDL.NaomiChanged = True
         frmKeyMapperSDL.DreamcastChanged = True
         frmKeyMapperSDL.MednafenChanged = True
-        frmKeyMapperSDL.MednafenControlChanged = True
         Me.Close()
     End Sub
 

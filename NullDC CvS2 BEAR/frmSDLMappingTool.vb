@@ -469,7 +469,6 @@ Public Class frmSDLMappingTool
                       frmKeyMapperSDL.NaomiChanged = True
                       frmKeyMapperSDL.DreamcastChanged = True
                       frmKeyMapperSDL.MednafenChanged = True
-                      frmKeyMapperSDL.MednafenControlChanged = True
                   End Sub)
 
         Console.WriteLine(ConfigStringFinal)
