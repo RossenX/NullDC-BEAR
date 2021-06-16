@@ -1064,10 +1064,63 @@ UpdateTry:
         If _system = "all" Or _system = "n64" Then
             If Not Directory.Exists(NullDCPath & "\Mupen64Plus\roms") Then Directory.CreateDirectory(NullDCPath & "\Mupen64Plus\roms")
 
+            ' z64
             Files = Directory.GetFiles(NullDCPath & "\Mupen64Plus\roms", "*.z64", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
-                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".z64", "").Replace(",", ".")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".z64", "").Replace(".Z64", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("N64-" & RomName) Then
+                    GamesList.Add("N64-" & RomName, {GameName, RomPath, "n64", ""})
+                End If
+            Next
+
+            ' n64
+            Files = Directory.GetFiles(NullDCPath & "\Mupen64Plus\roms", "*.n64", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".n64", "").Replace(".N64", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("N64-" & RomName) Then
+                    GamesList.Add("N64-" & RomName, {GameName, RomPath, "n64", ""})
+                End If
+            Next
+
+            ' v64
+            Files = Directory.GetFiles(NullDCPath & "\Mupen64Plus\roms", "*.v64", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".v64", "").Replace(".V64", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("N64-" & RomName) Then
+                    GamesList.Add("N64-" & RomName, {GameName, RomPath, "n64", ""})
+                End If
+            Next
+
+            ' zip
+            Files = Directory.GetFiles(NullDCPath & "\Mupen64Plus\roms", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(".ZIP", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("N64-" & RomName) Then
+                    GamesList.Add("N64-" & RomName, {GameName, RomPath, "n64", ""})
+                End If
+            Next
+
+            ' 7z
+            Files = Directory.GetFiles(NullDCPath & "\Mupen64Plus\roms", "*.7z", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".7z", "").Replace(".7Z", "").Replace(",", ".")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
