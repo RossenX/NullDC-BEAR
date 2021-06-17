@@ -313,6 +313,12 @@ Public Class frmKeyMapperSDL
             MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
         Else
             MednafenControllerConfigLines = {""}
+            For i = 0 To 1
+                If Not Joystick(i) = -1 Then
+                    File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {GetFullMappingStringforIndex(Joystick(i)).Split("|")(1)})
+                End If
+            Next
+            MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
             MednafenChanged = True
         End If
 
@@ -1036,34 +1042,91 @@ Public Class frmKeyMapperSDL
         End Try
 
         ' Mupen Controls
-        If MupenChanged Then
-
-
-
-        End If
-
         Try
 
-            Dim MupenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini")
-            Dim ControllerName = SDL_JoystickNameForIndex(0)
-            ControllerName = ControllerName.Replace(" ", "")
+            If Not MupenChanged Then
 
-            For Each _line In MupenConfigs
-                If _line.StartsWith("[") Then
-                    _line = _line.Replace(" ", "").Replace("[", "").Replace("]", "")
+                Dim MupenP1Controls As String = ""
+                Dim MupenP2Controls As String = ""
 
-                    If _line = ControllerName Then
-                        Console.WriteLine(_line)
+                ' Lets Start with getting the name of the device
+                If Joystick(0) >= 0 Then
+                    MupenP1Controls += "[" & SDL_JoystickNameForIndex(Joystick(0)) & "]"
+                Else
+                    MupenP1Controls += "[Keyboard]"
+                End If
+
+                If Joystick(1) >= 0 Then
+                    MupenP1Controls += "[" & SDL_JoystickNameForIndex(Joystick(1)) & "]"
+                Else
+                    MupenP1Controls += "[Keyboard]"
+                End If
+
+                ' Go through the configs and generate a valid string for each of the buttons
+                ' Right so we save these axis for now since we need both of them before we can generate a string which we'll do in the end
+                Dim Y_AxisPlus As String() = {"", ""}
+                Dim Y_AxisMinus As String() = {"", ""}
+
+                Dim X_AxisPlus As String() = {"", ""}
+                Dim X_AxisMinus As String() = {"", ""}
+
+                For Each control_line In ControlsConfigs
+                    If control_line.StartsWith("mup_") Then
+                        If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
+
+                        End If
+
+                        If control_line.Split("=")(1).Split("|")(0).StartsWith("k") Then
+                            Dim Key = KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(0).Substring(1))
+
+                        End If
                     End If
 
-                    If _line = "Generic   USB  Joystick" Then
-                        Console.WriteLine("F: " & _line)
+                Next
+
+                ' Translate BEAR to Mupen
+                For i = 0 To 1
+                    If Joystick(i) >= 0 Then
+                        Dim TempMappingString = GetFullMappingStringforIndex(Joystick(i)).Split("|")(0)
+                        Dim TestButton As String = BEARButtonToMupenButton(TempMappingString, "b6")
+                        Console.WriteLine("Test Button: " & TestButton)
+
                     End If
+                Next
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                If 0 = 1 Then
+                    ' Save That Shit
+                    Dim MupenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini")
+                    Dim ControllerName = SDL_JoystickNameForIndex(0)
+                    ControllerName = ControllerName.Replace(" ", "")
+
+                    For Each _line In MupenConfigs
+                        If _line.StartsWith("[") Then
+                            _line = _line.Replace(" ", "").Replace("[", "").Replace("]", "")
+                            If _line = ControllerName Then
+                                Console.WriteLine(_line)
+                            End If
+                        End If
+                    Next
 
                 End If
 
 
-            Next
+
+            End If
 
         Catch ex As Exception
             MsgBox("Error Saving Mupen Controls: " & ex.InnerException.Message)
@@ -1359,15 +1422,6 @@ Public Class frmKeyMapperSDL
         End If
 
         Dim _KeyBindString = My.Computer.Clipboard.GetText
-
-
-
-
-
-
-
-
-
 
     End Sub
 

@@ -395,6 +395,7 @@ Public Class frmSDLMappingTool
         Next
 
         Dim ConfigStringFinal = ""
+
         Me.Invoke(Sub()
                       ConfigStringFinal = GUIDSTRING & "," & SDL_JoystickNameForIndex(frmKeyMapperSDL.ControllerCB.SelectedValue) & "," & ConfigString & "platform:Windows,"
                       'My.Computer.Clipboard.SetText(ConfigStringFinal)

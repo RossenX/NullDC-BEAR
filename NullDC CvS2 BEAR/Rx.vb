@@ -374,10 +374,498 @@ Module Rx
 
     End Function
 
+
+    ' List Of KeyCode Names To ScanCode Values
+    Public Enum KCtSC
+        ' Right here we go then MUST BE LOWER CASE BECAUSE FUCK DEALING WITH CASE SENSATIVE STUFF
+        ' CTRL, ALT, SHIFT are not mappable becuase they are used as modifiers
+        ' Basic Alphabet
+        a = SDL_Scancode.SDL_SCANCODE_A
+        b = SDL_Scancode.SDL_SCANCODE_B
+        c = SDL_Scancode.SDL_SCANCODE_C
+        d = SDL_Scancode.SDL_SCANCODE_D
+        e = SDL_Scancode.SDL_SCANCODE_E
+        f = SDL_Scancode.SDL_SCANCODE_F
+        g = SDL_Scancode.SDL_SCANCODE_G
+        h = SDL_Scancode.SDL_SCANCODE_H
+        i = SDL_Scancode.SDL_SCANCODE_I
+        j = SDL_Scancode.SDL_SCANCODE_J
+        k = SDL_Scancode.SDL_SCANCODE_K
+        l = SDL_Scancode.SDL_SCANCODE_L
+        m = SDL_Scancode.SDL_SCANCODE_M
+        n = SDL_Scancode.SDL_SCANCODE_N
+        o = SDL_Scancode.SDL_SCANCODE_O
+        p = SDL_Scancode.SDL_SCANCODE_P
+        q = SDL_Scancode.SDL_SCANCODE_Q
+        r = SDL_Scancode.SDL_SCANCODE_R
+        s = SDL_Scancode.SDL_SCANCODE_S
+        t = SDL_Scancode.SDL_SCANCODE_T
+        u = SDL_Scancode.SDL_SCANCODE_U
+        v = SDL_Scancode.SDL_SCANCODE_V
+        w = SDL_Scancode.SDL_SCANCODE_W
+        x = SDL_Scancode.SDL_SCANCODE_X
+        y = SDL_Scancode.SDL_SCANCODE_Y
+        z = SDL_Scancode.SDL_SCANCODE_Z
+
+        ' Number row from Tilde to Backspace
+        oemtilde = SDL_Scancode.SDL_SCANCODE_GRAVE
+        number0 = SDL_Scancode.SDL_SCANCODE_0
+        number1 = SDL_Scancode.SDL_SCANCODE_1
+        number2 = SDL_Scancode.SDL_SCANCODE_2
+        number3 = SDL_Scancode.SDL_SCANCODE_3
+        number4 = SDL_Scancode.SDL_SCANCODE_4
+        number5 = SDL_Scancode.SDL_SCANCODE_5
+        number6 = SDL_Scancode.SDL_SCANCODE_6
+        number7 = SDL_Scancode.SDL_SCANCODE_7
+        number8 = SDL_Scancode.SDL_SCANCODE_8
+        number9 = SDL_Scancode.SDL_SCANCODE_9
+        oemminus = SDL_Scancode.SDL_SCANCODE_MINUS
+        oemplus = SDL_Scancode.SDL_SCANCODE_EQUALS
+        back = SDL_Scancode.SDL_SCANCODE_BACKSPACE
+
+        ' misc symbols shit on the right of the letters
+        oemopenbrackets = SDL_Scancode.SDL_SCANCODE_LEFTBRACKET
+        oem6 = SDL_Scancode.SDL_SCANCODE_RIGHTBRACKET
+        oem5 = SDL_Scancode.SDL_SCANCODE_BACKSLASH
+        oem1 = SDL_Scancode.SDL_SCANCODE_SEMICOLON
+        oem7 = SDL_Scancode.SDL_SCANCODE_APOSTROPHE
+        oemcomma = SDL_Scancode.SDL_SCANCODE_COMMA
+        oemperiod = SDL_Scancode.SDL_SCANCODE_PERIOD
+        oemquestion = SDL_Scancode.SDL_SCANCODE_SLASH
+        enter = SDL_Scancode.SDL_SCANCODE_RETURN
+
+        ' numpad
+        numpad0 = SDL_Scancode.SDL_SCANCODE_KP_0
+        numpad1 = SDL_Scancode.SDL_SCANCODE_KP_1
+        numpad2 = SDL_Scancode.SDL_SCANCODE_KP_2
+        numpad3 = SDL_Scancode.SDL_SCANCODE_KP_3
+        numpad4 = SDL_Scancode.SDL_SCANCODE_KP_4
+        numpad5 = SDL_Scancode.SDL_SCANCODE_KP_5
+        numpad6 = SDL_Scancode.SDL_SCANCODE_KP_6
+        numpad7 = SDL_Scancode.SDL_SCANCODE_KP_7
+        numpad8 = SDL_Scancode.SDL_SCANCODE_KP_8
+        numpad9 = SDL_Scancode.SDL_SCANCODE_KP_9
+        kpdecimal = SDL_Scancode.SDL_SCANCODE_KP_PERIOD
+        divide = SDL_Scancode.SDL_SCANCODE_KP_DIVIDE
+        multiply = SDL_Scancode.SDL_SCANCODE_KP_MULTIPLY
+        subtract = SDL_Scancode.SDL_SCANCODE_KP_MINUS
+        add = SDL_Scancode.SDL_SCANCODE_KP_PLUS
+
+        ' Arrow Keys
+        up = SDL_Scancode.SDL_SCANCODE_UP
+        down = SDL_Scancode.SDL_SCANCODE_DOWN
+        left = SDL_Scancode.SDL_SCANCODE_LEFT
+        right = SDL_Scancode.SDL_SCANCODE_RIGHT
+
+        ' Home and Whatnot above the Arrow Keys
+        pgup = SDL_Scancode.SDL_SCANCODE_PAGEUP
+        home = SDL_Scancode.SDL_SCANCODE_HOME
+        ins = SDL_Scancode.SDL_SCANCODE_INSERT
+        del = SDL_Scancode.SDL_SCANCODE_DELETE
+        kend = SDL_Scancode.SDL_SCANCODE_END
+        pgdn = SDL_Scancode.SDL_SCANCODE_PAGEDOWN
+
+        ' Function Keys
+        f1 = SDL_Scancode.SDL_SCANCODE_F1
+        f2 = SDL_Scancode.SDL_SCANCODE_F2
+        f3 = SDL_Scancode.SDL_SCANCODE_F3
+        f4 = SDL_Scancode.SDL_SCANCODE_F4
+        f5 = SDL_Scancode.SDL_SCANCODE_F5
+        f6 = SDL_Scancode.SDL_SCANCODE_F6
+        f7 = SDL_Scancode.SDL_SCANCODE_F7
+        f8 = SDL_Scancode.SDL_SCANCODE_F8
+        f9 = SDL_Scancode.SDL_SCANCODE_F9
+        f10 = SDL_Scancode.SDL_SCANCODE_F10
+        f11 = SDL_Scancode.SDL_SCANCODE_F11
+        f12 = SDL_Scancode.SDL_SCANCODE_F12
+
+        ' Up to 24, cuz why not
+        f13 = SDL_Scancode.SDL_SCANCODE_F13
+        f14 = SDL_Scancode.SDL_SCANCODE_F14
+        f15 = SDL_Scancode.SDL_SCANCODE_F15
+        f16 = SDL_Scancode.SDL_SCANCODE_F16
+        f17 = SDL_Scancode.SDL_SCANCODE_F17
+        f18 = SDL_Scancode.SDL_SCANCODE_F18
+        f19 = SDL_Scancode.SDL_SCANCODE_F19
+        f20 = SDL_Scancode.SDL_SCANCODE_F20
+        f21 = SDL_Scancode.SDL_SCANCODE_F21
+        f22 = SDL_Scancode.SDL_SCANCODE_F22
+        f23 = SDL_Scancode.SDL_SCANCODE_F23
+        f24 = SDL_Scancode.SDL_SCANCODE_F24
+
+        space = SDL_Scancode.SDL_SCANCODE_SPACE
+
+    End Enum
+
+
+    Public Function KeyCodeToSDLScanCode(ByVal _keycode As Keys) As String
+
+        Dim a As String = KeyCon.ConvertToString(_keycode)
+        If IsNumeric(a) Then a = "Number" & a
+        If a = "Decimal" Then a = "kpDecimal"
+        If a = "End" Then a = "kEnd"
+
+        If [Enum].IsDefined(GetType(KCtSC), a.ToLower) Then Return DirectCast([Enum].Parse(GetType(KCtSC), a.ToLower, True), KCtSC)
+
+        Console.WriteLine("Undefined KeyName: " & a)
+
+        Return "0"
+
+    End Function
+
+    Dim ButtonNames As String() = {"b0", "b1", "b2", "b3", "b4",
+        "b6", "b7", "b8", ' b5 is Guide, we don't use guide
+        "b9", "b10",
+        "b11", "b12", "b13", "b14",
+        "a0+", "a0-", "a1+", "a1-",
+        "a2+", "a2-", "a3+", "a3-",
+        "a4+", "a5+"}
+
+    Dim ButtonMappedName As String() = {"a", "b", "x", "y", "back",
+        "start", "leftstick", "rightstick",
+        "leftshoulder", "rightshoulder",
+        "dpup", "dpdown", "dpleft", "dpright",
+        "leftx", "leftx", "lefty", "lefty",
+        "rightx", "rightx", "righty", "righty",
+        "lefttrigger", "righttrigger"}
+
+    ' a0+ = leftx
+    ' a1+ = lefty
+    ' a2+ = rightx
+    ' a3+ = righty
+
+    ' 03000000790000000600000000000000,Generic USB Joystick,a:b2,b:b1,x:b3,y:b0,leftshoulder:b4,rightshoulder:b5,lefttrigger:b6,righttrigger:b7,leftstick:b10,rightstick:b11,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,back:b8,start:b9,leftx:a0~,lefty:a1,rightx:a2~,righty:a4,platform:Windows,
+
+    ' Translate BEAR Button (SDL GameController Mapped Button) to Mednafen (Joystick old style mapping)
+    Public Function BEARButtonToMednafenButton(ByVal _configString As String, ByVal _numAxes As String) As Dictionary(Of String, String)
+        Dim _TranslatedControls As New Dictionary(Of String, String)
+
+        ' New method
+        Dim _buttonIndex = 0
+        For Each _buttonToMap In ButtonNames
+            Dim MednafenControlLine = ""
+            Dim SplitConfigLine = _configString.Split(",")
+
+            For Each _ButtonConfig In SplitConfigLine
+                If _ButtonConfig.Split(":")(0) = ButtonMappedName(_buttonIndex) Then
+                    Dim _ButtonButton = _ButtonConfig.Split(":")(1)
+
+                    If _ButtonButton.Contains("b") Then
+                        MednafenControlLine = _ButtonButton.Replace("b", "button_")
+
+                    ElseIf _ButtonButton.Contains("a") Then
+
+                        Dim Negative As Boolean = _ButtonButton.Contains("-")
+                        Dim Reverse As Boolean = _ButtonButton.Contains("~")
+                        Dim Axis As String = _ButtonButton.Replace("+", "").Replace("-", "").Replace("a", "").Replace("~", "")
+
+                        MednafenControlLine = "abs_" & Axis
+
+                        If Not ButtonNames(_buttonIndex).Contains("-") Then ' This is an axis that wants to be possitive
+                            If Negative Then ' Possitive axis map to negative joy direction
+                                MednafenControlLine += "-"
+                            Else
+                                MednafenControlLine += "+" ' Possive axis to possitive joy direction
+                            End If
+                        Else ' This is his bother, he's pretty negative
+                            If Negative Then ' negative axis map to negative joy direction
+                                MednafenControlLine += "+"
+                            Else
+                                MednafenControlLine += "-" ' negative axis to possitive joy direction
+                            End If
+                        End If
+
+                        If Reverse Then
+                            If MednafenControlLine.EndsWith("+") Then
+                                MednafenControlLine += "-"
+                            Else
+                                MednafenControlLine += "+"
+                            End If
+                        End If
+
+                    ElseIf _ButtonButton.Contains("h") Then
+                        Dim _hatNumber As Int16 = CInt(_ButtonButton.Chars(1).ToString)
+
+                        Select Case _ButtonButton.Split(".")(1)
+                            Case "1" ' UP
+                                MednafenControlLine = "abs_" & _numAxes + _hatNumber + 1 & "-"
+                            Case "4" ' DOWN
+                                MednafenControlLine = "abs_" & _numAxes + _hatNumber + 1 & "+"
+                            Case "8" ' LEFT
+                                MednafenControlLine = "abs_" & _numAxes + _hatNumber & "-"
+                            Case "2" ' RIGHT
+                                MednafenControlLine = "abs_" & _numAxes + _hatNumber & "+"
+                        End Select
+
+                    End If
+                End If
+            Next
+
+            If Not MednafenControlLine = "" Then
+                'Console.WriteLine("Translated: " & ButtonNames(_buttonIndex) & "=" & MednafenControlLine)
+                _TranslatedControls.Add(ButtonNames(_buttonIndex), MednafenControlLine)
+            End If
+
+            _buttonIndex += 1
+        Next
+
+        Return _TranslatedControls
+    End Function
+
+    Public Function GetMednafenControllerIDs() As String()
+        Try
+
+            Dim MedProc As Process = New Process()
+            MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
+            MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
+            MedProc.StartInfo.CreateNoWindow = True
+            MedProc.StartInfo.UseShellExecute = False
+            MedProc.StartInfo.Arguments = "Hi"
+            MedProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+
+            MedProc.Start()
+            MedProc.WaitForExit()
+
+            Dim MednafenControllerID(128) As String
+
+            Dim _xinput As New ArrayList
+            Dim _dinput As New ArrayList
+
+            For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
+                If line.StartsWith("  ID: ") Then
+
+                    If line.ToLower.Contains("xinput") Then
+                        _xinput.Add("xinput_" & line.Trim.Split(" ")(1))
+                    Else
+                        _dinput.Add(line.Trim.Split(" ")(1))
+                    End If
+
+                    Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
+                End If
+            Next
+
+            Dim ReOrderedIDS As New ArrayList
+
+            For Each _id In _xinput
+                ReOrderedIDS.Add(_id)
+            Next
+
+            _dinput.Reverse()
+
+            For Each _id In _dinput
+                ReOrderedIDS.Add(_id)
+            Next
+
+            Dim ControllerIndex = 0
+            For Each _id In ReOrderedIDS
+                MednafenControllerID(ControllerIndex) = _id
+                ControllerIndex += 1
+            Next
+
+            Console.WriteLine("Ran Mednafen once to get the controls output")
+
+            Return MednafenControllerID
+
+        Catch ex As Exception
+            MsgBox("Unable to get Mednafen Controller IDs: " & ex.Message)
+            Return {"0x0", "0x0"}
+
+        End Try
+
+    End Function
+
+    Public Function GetSDLControllerButtonName(ByVal _Button As String) As String
+        Dim SDLButtonName As String = ""
+
+        For i = 0 To ButtonNames.Count - 1
+            If ButtonNames(i) = _Button Then
+                SDLButtonName = ButtonMappedName(i)
+                Exit For
+            End If
+        Next
+
+        Return SDLButtonName
+    End Function
+
+    Public Function BEARButtonToMupenButton(ByVal _mappingString As String, ByVal _Button As String) As String
+
+        Dim SDLMappingString As String() = _mappingString.Split(",")
+        Dim SDLControllerButtonName As String = GetSDLControllerButtonName(_Button)
+        ' Button wasn't found might as well just stop here
+        If SDLControllerButtonName = "" Then Return ""
+
+        Dim MupenButton = ""
+        For i = 2 To SDLMappingString.Count
+            If SDLMappingString(i).Split(":")(0) = SDLControllerButtonName Then
+
+                Dim _key = SDLMappingString(i).Split(":")(1)
+
+                If _key.StartsWith("b") Then
+                    MupenButton = _key.Replace("b", "button(") & ")"
+
+                ElseIf _key.StartsWith("h") Then
+                    Dim HatNumber = _key.Replace("h", "").Split(".")(0)
+                    Dim HatDirection As String = ""
+
+                    Select Case _key.Replace("h", "").Split(".")(0)
+                        Case "1" ' Up
+                            HatDirection = "Up"
+                        Case "2" ' Right
+                            HatDirection = "Right"
+                        Case "4" ' Down
+                            HatDirection = "Down"
+                        Case "8" ' Left
+                            HatDirection = "Left"
+                        Case Else
+                            MupenButton = ""
+                    End Select
+
+                    MupenButton = _key.Replace("h", "hat(") & HatNumber & " " & HatDirection & ")"
+
+                ElseIf _key.StartsWith("a") Then
+                    MupenButton = _key.Replace("a", "")
+
+                End If
+
+                Exit For
+            End If
+        Next
+
+        Return MupenButton
+    End Function
+
+    Public Function GetFullMappingStringforIndex(ByVal _index) As String
+
+        Dim Fullstring = ""
+
+        Dim DeviceGUIDasString(40) As Byte
+        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(_index), DeviceGUIDasString, 40)
+        Dim GUIDSTRING As String = Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
+
+        Dim _SDLMapping = SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(_index))
+        Dim _MednafenMapping As String = ""
+
+        Dim MednafenControllerConfigLines As String()
+
+        If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
+            MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
+        Else
+            MednafenControllerConfigLines = {""}
+        End If
+
+        Dim MednafenMappingFound = False
+        For Each _line In MednafenControllerConfigLines
+            If _line.StartsWith(GUIDSTRING) Then
+                MednafenMappingFound = True
+                _MednafenMapping = _line.Trim
+                Exit For
+            End If
+        Next
+
+        If Not MednafenMappingFound Then
+            Dim Joy = SDL_JoystickOpen(_index)
+            Dim _numAxis = SDL_JoystickNumAxes(Joy)
+            ' DO EXTRA CHECK HERE FOR XINPUT AND SET NUM AXIS TO 6 REGARDLESS
+
+            ' If for w.e reason it could not get the mapping or one was never created for this device, then take a shot at using the xinput defaults
+            If _SDLMapping Is Nothing Then
+                _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
+            ElseIf _SDLMapping = "" Then
+                _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
+            End If
+
+            Dim MednafenTranslated = BEARButtonToMednafenButton(_SDLMapping, _numAxis)
+            If _MednafenMapping = "" Then
+                _MednafenMapping = GUIDSTRING
+                For i = 0 To MednafenTranslated.Count - 1
+                    _MednafenMapping += "," & MednafenTranslated.Keys(i) & ":" & MednafenTranslated.Values(i)
+                Next
+            End If
+
+            SDL_JoystickClose(Joy)
+        End If
+
+        If Not _SDLMapping.Trim.EndsWith("platform:Windows,") Then
+            If Not _SDLMapping.Trim.EndsWith(",") Then _SDLMapping += ","
+            _SDLMapping += "platform:Windows,"
+
+        End If
+
+        Return _SDLMapping.Trim & "|" & _MednafenMapping.Trim
+
+    End Function
+
+    Public Function MednafenXinputButtonToSDLxInputButton(ByVal _medbutton As String) As String
+        Dim Converted As String = _medbutton
+
+        Dim Reverse As Boolean = False
+        Select Case Converted
+            Case "button_0" ' A
+                Converted = "button_12"
+            Case "button_1" ' B
+                Converted = "button_13"
+            Case "button_2" ' X
+                Converted = "button_14"
+            Case "button_3" ' Y
+                Converted = "button_15"
+            Case "button_4" ' LS
+                Converted = "button_8"
+            Case "button_5" ' RS
+                Converted = "button_9"
+            Case "button_6" ' Select
+                Converted = "button_5"
+            Case "button_7" ' Start
+                Converted = "button_4"
+            Case "button_8" ' L3
+                Converted = "button_6"
+            Case "button_9" ' R3
+                Converted = "button_7"
+        End Select
+
+        'Dim AxisCount = SDL_JoystickNumAxes()
+
+        ' Convert Axis
+        If Converted.Contains("abs_0") Then
+        ElseIf Converted.Contains("abs_1") Then
+            Reverse = True
+        ElseIf Converted.Contains("abs_2") Then
+        ElseIf Converted.Contains("abs_3") Then
+            Reverse = True
+        ElseIf Converted.Contains("abs_4") Then
+        ElseIf Converted.Contains("abs_5") Then
+        ElseIf Converted.Contains("abs_6") Then
+            If Converted.Contains("-") Then
+                Converted = "button_2" ' DPAD
+            Else
+                Converted = "button_3" ' DPAD
+            End If
+        ElseIf Converted.Contains("abs_7") Then
+            If Converted.Contains("-") Then
+                Converted = "button_0" ' DPAD
+            Else
+                Converted = "button_1" ' DPAD
+            End If
+        End If
+
+        If Reverse Then
+            If Converted.Contains("-+") Then
+                Converted = Converted.Replace("-+", "+-")
+            ElseIf Converted.Contains("+-") Then
+                Converted = Converted.Replace("+-", "-+")
+            ElseIf Converted.Contains("+") Then
+                Converted = Converted.Replace("+", "-")
+            ElseIf Converted.Contains("-") Then
+                Converted = Converted.Replace("-", "+")
+            End If
+        End If
+
+        'Console.WriteLine("Xinput SDL to Mednafen Button: " & _medbutton & "|" & Converted)
+        Return Converted
+    End Function
+
 End Module
 
 Module BEARTheme
-
 
     Enum ThemeKeys
         PrimaryColor
@@ -817,434 +1305,6 @@ Module BEARTheme
         Next
 
     End Sub
-
-    ' List Of KeyCode Names To ScanCode Values
-    Public Enum KCtSC
-        ' Right here we go then MUST BE LOWER CASE BECAUSE FUCK DEALING WITH CASE SENSATIVE STUFF
-        ' CTRL, ALT, SHIFT are not mappable becuase they are used as modifiers
-        ' Basic Alphabet
-        a = SDL_Scancode.SDL_SCANCODE_A
-        b = SDL_Scancode.SDL_SCANCODE_B
-        c = SDL_Scancode.SDL_SCANCODE_C
-        d = SDL_Scancode.SDL_SCANCODE_D
-        e = SDL_Scancode.SDL_SCANCODE_E
-        f = SDL_Scancode.SDL_SCANCODE_F
-        g = SDL_Scancode.SDL_SCANCODE_G
-        h = SDL_Scancode.SDL_SCANCODE_H
-        i = SDL_Scancode.SDL_SCANCODE_I
-        j = SDL_Scancode.SDL_SCANCODE_J
-        k = SDL_Scancode.SDL_SCANCODE_K
-        l = SDL_Scancode.SDL_SCANCODE_L
-        m = SDL_Scancode.SDL_SCANCODE_M
-        n = SDL_Scancode.SDL_SCANCODE_N
-        o = SDL_Scancode.SDL_SCANCODE_O
-        p = SDL_Scancode.SDL_SCANCODE_P
-        q = SDL_Scancode.SDL_SCANCODE_Q
-        r = SDL_Scancode.SDL_SCANCODE_R
-        s = SDL_Scancode.SDL_SCANCODE_S
-        t = SDL_Scancode.SDL_SCANCODE_T
-        u = SDL_Scancode.SDL_SCANCODE_U
-        v = SDL_Scancode.SDL_SCANCODE_V
-        w = SDL_Scancode.SDL_SCANCODE_W
-        x = SDL_Scancode.SDL_SCANCODE_X
-        y = SDL_Scancode.SDL_SCANCODE_Y
-        z = SDL_Scancode.SDL_SCANCODE_Z
-
-        ' Number row from Tilde to Backspace
-        oemtilde = SDL_Scancode.SDL_SCANCODE_GRAVE
-        number0 = SDL_Scancode.SDL_SCANCODE_0
-        number1 = SDL_Scancode.SDL_SCANCODE_1
-        number2 = SDL_Scancode.SDL_SCANCODE_2
-        number3 = SDL_Scancode.SDL_SCANCODE_3
-        number4 = SDL_Scancode.SDL_SCANCODE_4
-        number5 = SDL_Scancode.SDL_SCANCODE_5
-        number6 = SDL_Scancode.SDL_SCANCODE_6
-        number7 = SDL_Scancode.SDL_SCANCODE_7
-        number8 = SDL_Scancode.SDL_SCANCODE_8
-        number9 = SDL_Scancode.SDL_SCANCODE_9
-        oemminus = SDL_Scancode.SDL_SCANCODE_MINUS
-        oemplus = SDL_Scancode.SDL_SCANCODE_EQUALS
-        back = SDL_Scancode.SDL_SCANCODE_BACKSPACE
-
-        ' misc symbols shit on the right of the letters
-        oemopenbrackets = SDL_Scancode.SDL_SCANCODE_LEFTBRACKET
-        oem6 = SDL_Scancode.SDL_SCANCODE_RIGHTBRACKET
-        oem5 = SDL_Scancode.SDL_SCANCODE_BACKSLASH
-        oem1 = SDL_Scancode.SDL_SCANCODE_SEMICOLON
-        oem7 = SDL_Scancode.SDL_SCANCODE_APOSTROPHE
-        oemcomma = SDL_Scancode.SDL_SCANCODE_COMMA
-        oemperiod = SDL_Scancode.SDL_SCANCODE_PERIOD
-        oemquestion = SDL_Scancode.SDL_SCANCODE_SLASH
-        enter = SDL_Scancode.SDL_SCANCODE_RETURN
-
-        ' numpad
-        numpad0 = SDL_Scancode.SDL_SCANCODE_KP_0
-        numpad1 = SDL_Scancode.SDL_SCANCODE_KP_1
-        numpad2 = SDL_Scancode.SDL_SCANCODE_KP_2
-        numpad3 = SDL_Scancode.SDL_SCANCODE_KP_3
-        numpad4 = SDL_Scancode.SDL_SCANCODE_KP_4
-        numpad5 = SDL_Scancode.SDL_SCANCODE_KP_5
-        numpad6 = SDL_Scancode.SDL_SCANCODE_KP_6
-        numpad7 = SDL_Scancode.SDL_SCANCODE_KP_7
-        numpad8 = SDL_Scancode.SDL_SCANCODE_KP_8
-        numpad9 = SDL_Scancode.SDL_SCANCODE_KP_9
-        kpdecimal = SDL_Scancode.SDL_SCANCODE_KP_PERIOD
-        divide = SDL_Scancode.SDL_SCANCODE_KP_DIVIDE
-        multiply = SDL_Scancode.SDL_SCANCODE_KP_MULTIPLY
-        subtract = SDL_Scancode.SDL_SCANCODE_KP_MINUS
-        add = SDL_Scancode.SDL_SCANCODE_KP_PLUS
-
-        ' Arrow Keys
-        up = SDL_Scancode.SDL_SCANCODE_UP
-        down = SDL_Scancode.SDL_SCANCODE_DOWN
-        left = SDL_Scancode.SDL_SCANCODE_LEFT
-        right = SDL_Scancode.SDL_SCANCODE_RIGHT
-
-        ' Home and Whatnot above the Arrow Keys
-        pgup = SDL_Scancode.SDL_SCANCODE_PAGEUP
-        home = SDL_Scancode.SDL_SCANCODE_HOME
-        ins = SDL_Scancode.SDL_SCANCODE_INSERT
-        del = SDL_Scancode.SDL_SCANCODE_DELETE
-        kend = SDL_Scancode.SDL_SCANCODE_END
-        pgdn = SDL_Scancode.SDL_SCANCODE_PAGEDOWN
-
-        ' Function Keys
-        f1 = SDL_Scancode.SDL_SCANCODE_F1
-        f2 = SDL_Scancode.SDL_SCANCODE_F2
-        f3 = SDL_Scancode.SDL_SCANCODE_F3
-        f4 = SDL_Scancode.SDL_SCANCODE_F4
-        f5 = SDL_Scancode.SDL_SCANCODE_F5
-        f6 = SDL_Scancode.SDL_SCANCODE_F6
-        f7 = SDL_Scancode.SDL_SCANCODE_F7
-        f8 = SDL_Scancode.SDL_SCANCODE_F8
-        f9 = SDL_Scancode.SDL_SCANCODE_F9
-        f10 = SDL_Scancode.SDL_SCANCODE_F10
-        f11 = SDL_Scancode.SDL_SCANCODE_F11
-        f12 = SDL_Scancode.SDL_SCANCODE_F12
-
-        ' Up to 24, cuz why not
-        f13 = SDL_Scancode.SDL_SCANCODE_F13
-        f14 = SDL_Scancode.SDL_SCANCODE_F14
-        f15 = SDL_Scancode.SDL_SCANCODE_F15
-        f16 = SDL_Scancode.SDL_SCANCODE_F16
-        f17 = SDL_Scancode.SDL_SCANCODE_F17
-        f18 = SDL_Scancode.SDL_SCANCODE_F18
-        f19 = SDL_Scancode.SDL_SCANCODE_F19
-        f20 = SDL_Scancode.SDL_SCANCODE_F20
-        f21 = SDL_Scancode.SDL_SCANCODE_F21
-        f22 = SDL_Scancode.SDL_SCANCODE_F22
-        f23 = SDL_Scancode.SDL_SCANCODE_F23
-        f24 = SDL_Scancode.SDL_SCANCODE_F24
-
-        space = SDL_Scancode.SDL_SCANCODE_SPACE
-
-    End Enum
-
-
-    Public Function KeyCodeToSDLScanCode(ByVal _keycode As Keys) As String
-
-        Dim a As String = KeyCon.ConvertToString(_keycode)
-        If IsNumeric(a) Then a = "Number" & a
-        If a = "Decimal" Then a = "kpDecimal"
-        If a = "End" Then a = "kEnd"
-
-        If [Enum].IsDefined(GetType(KCtSC), a.ToLower) Then Return DirectCast([Enum].Parse(GetType(KCtSC), a.ToLower, True), KCtSC)
-
-        Console.WriteLine("Undefined KeyName: " & a)
-
-        Return "0"
-
-    End Function
-
-    Dim ButtonNames As String() = {"b0", "b1", "b2", "b3", "b4",
-        "b6", "b7", "b8",
-        "b9", "b10",
-        "b11", "b12", "b13", "b14",
-        "a0+", "a0-", "a1+", "a1-",
-        "a2+", "a2-", "a3+", "a3-",
-        "a4+", "a5+"}
-
-    Dim ButtonMappedName As String() = {"a", "b", "x", "y", "back",
-        "start", "leftstick", "rightstick",
-        "leftshoulder", "rightshoulder",
-        "dpup", "dpdown", "dpleft", "dpright",
-        "leftx", "leftx", "lefty", "lefty",
-        "rightx", "rightx", "righty", "righty",
-        "lefttrigger", "righttrigger"}
-
-    ' a0+ = leftx
-    ' a1+ = lefty
-    ' a2+ = rightx
-    ' a3+ = righty
-
-    ' 03000000790000000600000000000000,Generic USB Joystick,a:b2,b:b1,x:b3,y:b0,leftshoulder:b4,rightshoulder:b5,lefttrigger:b6,righttrigger:b7,leftstick:b10,rightstick:b11,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,back:b8,start:b9,leftx:a0~,lefty:a1,rightx:a2~,righty:a4,platform:Windows,
-
-    ' Translate BEAR Button (SDL GameController Mapped Button) to Mednafen (Joystick old style mapping)
-    Public Function BEARButtonToMednafenButton(ByVal _configString As String, ByVal _numAxes As String) As Dictionary(Of String, String)
-        Dim _TranslatedControls As New Dictionary(Of String, String)
-
-        ' New method
-        Dim _buttonIndex = 0
-        For Each _buttonToMap In ButtonNames
-            Dim MednafenControlLine = ""
-            Dim SplitConfigLine = _configString.Split(",")
-
-            For Each _ButtonConfig In SplitConfigLine
-                If _ButtonConfig.Split(":")(0) = ButtonMappedName(_buttonIndex) Then
-                    Dim _ButtonButton = _ButtonConfig.Split(":")(1)
-
-                    If _ButtonButton.Contains("b") Then
-                        MednafenControlLine = _ButtonButton.Replace("b", "button_")
-
-                    ElseIf _ButtonButton.Contains("a") Then
-
-                        Dim Negative As Boolean = _ButtonButton.Contains("-")
-                        Dim Reverse As Boolean = _ButtonButton.Contains("~")
-                        Dim Axis As String = _ButtonButton.Replace("+", "").Replace("-", "").Replace("a", "").Replace("~", "")
-
-                        MednafenControlLine = "abs_" & Axis
-
-                        If Not ButtonNames(_buttonIndex).Contains("-") Then ' This is an axis that wants to be possitive
-                            If Negative Then ' Possitive axis map to negative joy direction
-                                MednafenControlLine += "-"
-                            Else
-                                MednafenControlLine += "+" ' Possive axis to possitive joy direction
-                            End If
-                        Else ' This is his bother, he's pretty negative
-                            If Negative Then ' negative axis map to negative joy direction
-                                MednafenControlLine += "+"
-                            Else
-                                MednafenControlLine += "-" ' negative axis to possitive joy direction
-                            End If
-                        End If
-
-                        If Reverse Then
-                            If MednafenControlLine.EndsWith("+") Then
-                                MednafenControlLine += "-"
-                            Else
-                                MednafenControlLine += "+"
-                            End If
-                        End If
-
-                    ElseIf _ButtonButton.Contains("h") Then
-                        Dim _hatNumber As Int16 = CInt(_ButtonButton.Chars(1).ToString)
-
-                        Select Case _ButtonButton.Split(".")(1)
-                            Case "1" ' UP
-                                MednafenControlLine = "abs_" & _numAxes + _hatNumber + 1 & "-"
-                            Case "4" ' DOWN
-                                MednafenControlLine = "abs_" & _numAxes + _hatNumber + 1 & "+"
-                            Case "8" ' LEFT
-                                MednafenControlLine = "abs_" & _numAxes + _hatNumber & "-"
-                            Case "2" ' RIGHT
-                                MednafenControlLine = "abs_" & _numAxes + _hatNumber & "+"
-                        End Select
-
-                    End If
-                End If
-            Next
-
-            If Not MednafenControlLine = "" Then
-                'Console.WriteLine("Translated: " & ButtonNames(_buttonIndex) & "=" & MednafenControlLine)
-                _TranslatedControls.Add(ButtonNames(_buttonIndex), MednafenControlLine)
-            End If
-
-            _buttonIndex += 1
-        Next
-
-        Return _TranslatedControls
-    End Function
-
-    Public Function GetMednafenControllerIDs() As String()
-        Try
-
-            Dim MedProc As Process = New Process()
-            MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
-            MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
-            MedProc.StartInfo.CreateNoWindow = True
-            MedProc.StartInfo.UseShellExecute = False
-            MedProc.StartInfo.Arguments = "Hi"
-            MedProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
-
-            MedProc.Start()
-            MedProc.WaitForExit()
-
-            Dim MednafenControllerID(128) As String
-
-            Dim _xinput As New ArrayList
-            Dim _dinput As New ArrayList
-
-            For Each line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\stdout.txt")
-                If line.StartsWith("  ID: ") Then
-
-                    If line.ToLower.Contains("xinput") Then
-                        _xinput.Add("xinput_" & line.Trim.Split(" ")(1))
-                    Else
-                        _dinput.Add(line.Trim.Split(" ")(1))
-                    End If
-
-                    Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
-                End If
-            Next
-
-            Dim ReOrderedIDS As New ArrayList
-
-            For Each _id In _xinput
-                ReOrderedIDS.Add(_id)
-            Next
-
-            _dinput.Reverse()
-
-            For Each _id In _dinput
-                ReOrderedIDS.Add(_id)
-            Next
-
-            Dim ControllerIndex = 0
-            For Each _id In ReOrderedIDS
-                MednafenControllerID(ControllerIndex) = _id
-                ControllerIndex += 1
-            Next
-
-            Console.WriteLine("Ran Mednafen once to get the controls output")
-
-            Return MednafenControllerID
-
-        Catch ex As Exception
-            MsgBox("Unable to get Mednafen Controller IDs: " & ex.Message)
-            Return {"0x0", "0x0"}
-
-        End Try
-
-    End Function
-
-    Public Function GetFullMappingStringforIndex(ByVal _index) As String
-
-        Dim Fullstring = ""
-
-        Dim DeviceGUIDasString(40) As Byte
-        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(_index), DeviceGUIDasString, 40)
-        Dim GUIDSTRING As String = Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
-
-        Dim _SDLMapping = SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(_index))
-        Dim _MednafenMapping As String = ""
-
-        Dim MednafenControllerConfigLines As String()
-
-        If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
-            MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
-        Else
-            MednafenControllerConfigLines = {""}
-        End If
-
-        Dim MednafenMappingFound = False
-        For Each _line In MednafenControllerConfigLines
-            If _line.StartsWith(GUIDSTRING) Then
-                MednafenMappingFound = True
-                _MednafenMapping = _line.Trim
-                Exit For
-            End If
-        Next
-
-        If Not MednafenMappingFound Then
-            Dim Joy = SDL_JoystickOpen(_index)
-            Dim _numAxis = SDL_JoystickNumAxes(Joy)
-            ' DO EXTRA CHECK HERE FOR XINPUT AND SET NUM AXIS TO 6 REGARDLESS
-
-            ' If for w.e reason it could not get the mapping or one was never created for this device, then take a shot at using the xinput defaults
-            If _SDLMapping Is Nothing Then
-                _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
-            ElseIf _SDLMapping = "" Then
-                _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
-            End If
-
-            Dim MednafenTranslated = BEARButtonToMednafenButton(_SDLMapping, _numAxis)
-            If _MednafenMapping = "" Then
-                _MednafenMapping = GUIDSTRING
-                For i = 0 To MednafenTranslated.Count - 1
-                    _MednafenMapping += "," & MednafenTranslated.Keys(i) & ":" & MednafenTranslated.Values(i)
-                Next
-            End If
-
-            SDL_JoystickClose(Joy)
-        End If
-
-        If Not _SDLMapping.Trim.EndsWith("platform:Windows,") Then
-            If Not _SDLMapping.Trim.EndsWith(",") Then _SDLMapping += ","
-            _SDLMapping += "platform:Windows,"
-
-        End If
-
-        Return _SDLMapping.Trim & "|" & _MednafenMapping.Trim
-
-    End Function
-
-    Public Function MednafenXinputButtonToSDLxInputButton(ByVal _medbutton As String) As String
-        Dim Converted As String = _medbutton
-
-        Dim Reverse As Boolean = False
-        Select Case Converted
-            Case "button_0" ' A
-                Converted = "button_12"
-            Case "button_1" ' B
-                Converted = "button_13"
-            Case "button_2" ' X
-                Converted = "button_14"
-            Case "button_3" ' Y
-                Converted = "button_15"
-            Case "button_4" ' LS
-                Converted = "button_8"
-            Case "button_5" ' RS
-                Converted = "button_9"
-            Case "button_6" ' Select
-                Converted = "button_5"
-            Case "button_7" ' Start
-                Converted = "button_4"
-            Case "button_8" ' L3
-                Converted = "button_6"
-            Case "button_9" ' R3
-                Converted = "button_7"
-        End Select
-
-        'Dim AxisCount = SDL_JoystickNumAxes()
-
-        ' Convert Axis
-        If Converted.Contains("abs_0") Then
-        ElseIf Converted.Contains("abs_1") Then
-            Reverse = True
-        ElseIf Converted.Contains("abs_2") Then
-        ElseIf Converted.Contains("abs_3") Then
-            Reverse = True
-        ElseIf Converted.Contains("abs_4") Then
-        ElseIf Converted.Contains("abs_5") Then
-        ElseIf Converted.Contains("abs_6") Then
-            If Converted.Contains("-") Then
-                Converted = "button_2" ' DPAD
-            Else
-                Converted = "button_3" ' DPAD
-            End If
-        ElseIf Converted.Contains("abs_7") Then
-            If Converted.Contains("-") Then
-                Converted = "button_0" ' DPAD
-            Else
-                Converted = "button_1" ' DPAD
-            End If
-        End If
-
-        If Reverse Then
-            If Converted.Contains("-+") Then
-                Converted = Converted.Replace("-+", "+-")
-            ElseIf Converted.Contains("+-") Then
-                Converted = Converted.Replace("+-", "-+")
-            ElseIf Converted.Contains("+") Then
-                Converted = Converted.Replace("+", "-")
-            ElseIf Converted.Contains("-") Then
-                Converted = Converted.Replace("-", "+")
-            End If
-        End If
-
-        'Console.WriteLine("Xinput SDL to Mednafen Button: " & _medbutton & "|" & Converted)
-        Return Converted
-    End Function
 
 End Module
 
