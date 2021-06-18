@@ -1046,21 +1046,22 @@ Public Class frmKeyMapperSDL
 
             If Not MupenChanged Then
 
-                Dim MupenP1Controls As String = ""
-                Dim MupenP2Controls As String = ""
+                Dim MupenControls As String() = {"", ""}
 
-                ' Lets Start with getting the name of the device
-                If Joystick(0) >= 0 Then
-                    MupenP1Controls += "[" & SDL_JoystickNameForIndex(Joystick(0)) & "]"
-                Else
-                    MupenP1Controls += "[Keyboard]"
-                End If
+                For i = 0 To 1
+                    If Joystick(i) >= 0 Then
+                        MupenControls(i) += "[" & SDL_JoystickNameForIndex(Joystick(i)).Trim() & "]" & vbNewLine
+                        MupenControls(i) += "AnalogDeadzone = " & 327268 * (Deadzone(i) / 100) & "," & 327268 * (Deadzone(i) / 100) & "" & vbNewLine
+                        MupenControls(i) += "AnalogPeak = 32768,32768" & vbNewLine
 
-                If Joystick(1) >= 0 Then
-                    MupenP1Controls += "[" & SDL_JoystickNameForIndex(Joystick(1)) & "]"
-                Else
-                    MupenP1Controls += "[Keyboard]"
-                End If
+                    Else
+                        MupenControls(i) += "[Keyboard]" & vbNewLine
+                    End If
+
+                    MupenControls(i) += "plugged = True" & vbNewLine
+                    MupenControls(i) += "mouse = False" & vbNewLine
+
+                Next
 
                 ' Go through the configs and generate a valid string for each of the buttons
                 ' Right so we save these axis for now since we need both of them before we can generate a string which we'll do in the end

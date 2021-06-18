@@ -816,10 +816,23 @@ UpdateTry:
 
         If _system = "all" Or _system = "ss" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\ss") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\ss")
+
             Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.cue", SearchOption.AllDirectories)
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
                 Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("SS-" & RomName) Then
+                    GamesList.Add("SS-" & RomName, {GameName, RomPath, "ss", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.m3u", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".m3u", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
