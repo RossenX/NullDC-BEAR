@@ -494,9 +494,13 @@ Public Class frmKeyMapperSDL
     Private Sub GetKeyCodeFromFile(ByRef _btn As keybindButton, ByRef _configlines As String())
 
         For Each line As String In _configlines
-            If line.StartsWith(_btn.Name & "=") Or line.StartsWith("med_" & _btn.ConfigString.Split(",")(0) & "=") Then
+            If line.StartsWith(_btn.Name & "=") Or
+                line.StartsWith("med_" & _btn.ConfigString.Split(",")(0) & "=") Or
+                line.StartsWith("mup_" & _btn.ConfigString.Split(",")(0) & "=") Then
+
                 _btn.SetKeyCode(line.Split("=")(1).Split("|")(0), 0)
                 _btn.SetKeyCode(line.Split("=")(1).Split("|")(1), 1)
+
                 Exit Sub
             End If
         Next
@@ -1044,23 +1048,28 @@ Public Class frmKeyMapperSDL
         ' Mupen Controls
         Try
 
-            If Not MupenChanged Then
+            If MupenChanged Then
+
+                Dim TempMappingString As String() = {"", ""}
 
                 Dim MupenControls As String() = {"", ""}
 
                 For i = 0 To 1
+
+
                     If Joystick(i) >= 0 Then
+                        TempMappingString(i) = GetFullMappingStringforIndex(Joystick(i)).Split("|")(0)
                         MupenControls(i) += "[" & SDL_JoystickNameForIndex(Joystick(i)).Trim() & "]" & vbNewLine
-                        MupenControls(i) += "AnalogDeadzone = " & 327268 * (Deadzone(i) / 100) & "," & 327268 * (Deadzone(i) / 100) & "" & vbNewLine
+                        MupenControls(i) += "plugged = True" & vbNewLine
+                        MupenControls(i) += "mouse = False" & vbNewLine
+                        MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (Deadzone(i) / 100)) & "," & Math.Floor(32768 * (Deadzone(i) / 100)) & "" & vbNewLine
                         MupenControls(i) += "AnalogPeak = 32768,32768" & vbNewLine
 
                     Else
                         MupenControls(i) += "[Keyboard]" & vbNewLine
+                        MupenControls(i) += "plugged = True" & vbNewLine
+                        MupenControls(i) += "mouse = False" & vbNewLine
                     End If
-
-                    MupenControls(i) += "plugged = True" & vbNewLine
-                    MupenControls(i) += "mouse = False" & vbNewLine
-
                 Next
 
                 ' Go through the configs and generate a valid string for each of the buttons
@@ -1073,57 +1082,69 @@ Public Class frmKeyMapperSDL
 
                 For Each control_line In ControlsConfigs
                     If control_line.StartsWith("mup_") Then
-                        If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
+                        For i = 0 To 1
+                            ' Check if this is the axis bind becuase that has to be handled differently
+                            If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
+                                If control_line.StartsWith("mup_X Axis+") Then
+                                    X_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                        End If
+                                ElseIf control_line.StartsWith("mup_X Axis-") Then
+                                    X_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                        If control_line.Split("=")(1).Split("|")(0).StartsWith("k") Then
-                            Dim Key = KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(0).Substring(1))
+                                ElseIf control_line.StartsWith("mup_Y Axis+") Then
+                                    Y_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                        End If
-                    End If
+                                ElseIf control_line.StartsWith("mup_Y Axis-") Then
+                                    Y_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                Next
+                                End If
 
-                ' Translate BEAR to Mupen
-                For i = 0 To 1
-                    If Joystick(i) >= 0 Then
-                        Dim TempMappingString = GetFullMappingStringforIndex(Joystick(i)).Split("|")(0)
-                        Dim TestButton As String = BEARButtonToMupenButton(TempMappingString, "b6")
-                        Console.WriteLine("Test Button: " & TestButton)
+                            Else
+                                MupenControls(i) += control_line.Split("=")(0).Replace("mup_", "") & " = " & BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i)) & vbNewLine
 
-                    End If
-                Next
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                If 0 = 1 Then
-                    ' Save That Shit
-                    Dim MupenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini")
-                    Dim ControllerName = SDL_JoystickNameForIndex(0)
-                    ControllerName = ControllerName.Replace(" ", "")
-
-                    For Each _line In MupenConfigs
-                        If _line.StartsWith("[") Then
-                            _line = _line.Replace(" ", "").Replace("[", "").Replace("]", "")
-                            If _line = ControllerName Then
-                                Console.WriteLine(_line)
                             End If
+                        Next
+                    End If
+
+                Next
+
+                ' Do The Analog Stuff
+                For i = 0 To 1
+                    MupenControls(i) += "X Axis = " & X_AxisMinus(i).Split("(")(0) & "(" & X_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & X_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+                    MupenControls(i) += "Y Axis = " & Y_AxisMinus(i).Split("(")(0) & "(" & Y_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & Y_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+
+                Next
+
+                ' Time To Save
+                ' Check if that entry already exists
+                Dim MupenConfigs() As String = File.ReadAllText(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini").Split("[")
+
+                For i = 0 To 1
+                    Dim ControlFound = False
+                    For l = 1 To MupenConfigs.Count - 1
+                        If MupenConfigs(l).Replace(" ", "").StartsWith(MupenControls(i).Remove(0, 1).Split("]")(0).Replace(" ", "")) Then
+                            MupenConfigs(l) = MupenControls(i)
+                            ControlFound = True
+                            Exit For
                         End If
                     Next
 
-                End If
+                    If Not ControlFound Then
+                        MupenConfigs(MupenConfigs.Count - 1) += vbNewLine & MupenControls(i)
+
+                    End If
+                Next
+
+                File.WriteAllLines(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini", MupenConfigs)
+
+                ' TO DO MAKE PROFILE AND SAVE PROFIEL NAMES
+
+
+
+
+
+
+
 
 
 
@@ -1133,6 +1154,7 @@ Public Class frmKeyMapperSDL
             MsgBox("Error Saving Mupen Controls: " & ex.InnerException.Message)
 
         End Try
+
 
         ' Check if nullDC is running to hotload the settings
         If MainformRef.IsNullDCRunning Then

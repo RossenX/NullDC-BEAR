@@ -6775,7 +6775,7 @@ Partial Class frmKeyMapperSDL
         'KeybindButton31
         '
         Me.KeybindButton31.BackColor = System.Drawing.Color.White
-        Me.KeybindButton31.ConfigString = "Y Axis+"
+        Me.KeybindButton31.ConfigString = "Y Axis-"
         Me.KeybindButton31.Emu = "mupen"
         Me.KeybindButton31.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.KeybindButton31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -6813,7 +6813,7 @@ Partial Class frmKeyMapperSDL
         'KeybindButton33
         '
         Me.KeybindButton33.BackColor = System.Drawing.Color.White
-        Me.KeybindButton33.ConfigString = "Y Axis-"
+        Me.KeybindButton33.ConfigString = "Y Axis+"
         Me.KeybindButton33.Emu = "mupen"
         Me.KeybindButton33.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.KeybindButton33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

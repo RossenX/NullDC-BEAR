@@ -15,7 +15,11 @@ Public Class Mupen64Launcher
         MupenLaunchInfo.Arguments = "--gfx mupen64plus-video-glide64mk2 "
         MupenLaunchInfo.Arguments += "--resolution 1280x720 "
         MupenLaunchInfo.Arguments += "--windowed "
-        MupenLaunchInfo.Arguments += "--online "
+        'MupenLaunchInfo.Arguments += "--online "
+        MupenLaunchInfo.Arguments += "--datadir " & """" & MainformRef.NullDCPath & "\Mupen64Plus" & """ "
+        MupenLaunchInfo.Arguments += "--configdir " & """" & MainformRef.NullDCPath & "\Mupen64Plus" & """ "
+        MupenLaunchInfo.Arguments += "--sshotdir " & """" & MainformRef.NullDCPath & "\Mupen64Plus\screenshot" & """ "
+        MupenLaunchInfo.Arguments += "--savedir " & """" & MainformRef.NullDCPath & "\Mupen64Plus\save" & """ "
 
         MupenLaunchInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
 

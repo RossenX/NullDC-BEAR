@@ -494,9 +494,128 @@ Module Rx
         f24 = SDL_Scancode.SDL_SCANCODE_F24
 
         space = SDL_Scancode.SDL_SCANCODE_SPACE
-
     End Enum
 
+    ' List Of KeyCode Names To ScanCode Values
+    Public Enum KCtSDLKC
+        ' Right here we go then MUST BE LOWER CASE BECAUSE FUCK DEALING WITH CASE SENSATIVE STUFF
+        ' CTRL, ALT, SHIFT are not mappable becuase they are used as modifiers
+        ' Basic Alphabet
+        a = SDL_Keycode.SDLK_a
+        b = SDL_Keycode.SDLK_b
+        c = SDL_Keycode.SDLK_c
+        d = SDL_Keycode.SDLK_d
+        e = SDL_Keycode.SDLK_e
+        f = SDL_Keycode.SDLK_f
+        g = SDL_Keycode.SDLK_g
+        h = SDL_Keycode.SDLK_h
+        i = SDL_Keycode.SDLK_i
+        j = SDL_Keycode.SDLK_j
+        k = SDL_Keycode.SDLK_k
+        l = SDL_Keycode.SDLK_l
+        m = SDL_Keycode.SDLK_m
+        n = SDL_Keycode.SDLK_n
+        o = SDL_Keycode.SDLK_o
+        p = SDL_Keycode.SDLK_p
+        q = SDL_Keycode.SDLK_q
+        r = SDL_Keycode.SDLK_r
+        s = SDL_Keycode.SDLK_s
+        t = SDL_Keycode.SDLK_t
+        u = SDL_Keycode.SDLK_u
+        v = SDL_Keycode.SDLK_v
+        w = SDL_Keycode.SDLK_w
+        x = SDL_Keycode.SDLK_x
+        y = SDL_Keycode.SDLK_y
+        z = SDL_Keycode.SDLK_z
+
+        ' Number row from Tilde to Backspace
+        oemtilde = SDL_Keycode.SDLK_BACKQUOTE
+        number0 = SDL_Keycode.SDLK_0
+        number1 = SDL_Keycode.SDLK_1
+        number2 = SDL_Keycode.SDLK_2
+        number3 = SDL_Keycode.SDLK_3
+        number4 = SDL_Keycode.SDLK_4
+        number5 = SDL_Keycode.SDLK_5
+        number6 = SDL_Keycode.SDLK_6
+        number7 = SDL_Keycode.SDLK_7
+        number8 = SDL_Keycode.SDLK_8
+        number9 = SDL_Keycode.SDLK_9
+        oemminus = SDL_Keycode.SDLK_MINUS
+        oemplus = SDL_Keycode.SDLK_EQUALS
+        back = SDL_Keycode.SDLK_BACKSPACE
+
+        ' misc symbols shit on the right of the letters
+        oemopenbrackets = SDL_Keycode.SDLK_LEFTBRACKET
+        oem6 = SDL_Keycode.SDLK_RIGHTBRACKET
+        oem5 = SDL_Keycode.SDLK_BACKSLASH
+        oem1 = SDL_Keycode.SDLK_SEMICOLON
+        oem7 = SDL_Keycode.SDLK_QUOTE
+        oemcomma = SDL_Keycode.SDLK_COMMA
+        oemperiod = SDL_Keycode.SDLK_PERIOD
+        oemquestion = SDL_Keycode.SDLK_SLASH
+        enter = SDL_Keycode.SDLK_RETURN
+
+        ' numpad
+        numpad0 = SDL_Keycode.SDLK_KP_0
+        numpad1 = SDL_Keycode.SDLK_KP_1
+        numpad2 = SDL_Keycode.SDLK_KP_2
+        numpad3 = SDL_Keycode.SDLK_KP_3
+        numpad4 = SDL_Keycode.SDLK_KP_4
+        numpad5 = SDL_Keycode.SDLK_KP_5
+        numpad6 = SDL_Keycode.SDLK_KP_6
+        numpad7 = SDL_Keycode.SDLK_KP_7
+        numpad8 = SDL_Keycode.SDLK_KP_8
+        numpad9 = SDL_Keycode.SDLK_KP_9
+        kpdecimal = SDL_Keycode.SDLK_KP_PERIOD
+        divide = SDL_Keycode.SDLK_KP_DIVIDE
+        multiply = SDL_Keycode.SDLK_KP_MULTIPLY
+        subtract = SDL_Keycode.SDLK_KP_MINUS
+        add = SDL_Keycode.SDLK_KP_PLUS
+
+        ' Arrow Keys
+        up = SDL_Keycode.SDLK_UP
+        down = SDL_Keycode.SDLK_DOWN
+        left = SDL_Keycode.SDLK_LEFT
+        right = SDL_Keycode.SDLK_RIGHT
+
+        ' Home and Whatnot above the Arrow Keys
+        pgup = SDL_Keycode.SDLK_PAGEUP
+        home = SDL_Keycode.SDLK_HOME
+        ins = SDL_Keycode.SDLK_INSERT
+        del = SDL_Keycode.SDLK_DELETE
+        kend = SDL_Keycode.SDLK_END
+        pgdn = SDL_Keycode.SDLK_PAGEDOWN
+
+        ' Function Keys
+        f1 = SDL_Keycode.SDLK_F1
+        f2 = SDL_Keycode.SDLK_F2
+        f3 = SDL_Keycode.SDLK_F3
+        f4 = SDL_Keycode.SDLK_F4
+        f5 = SDL_Keycode.SDLK_F5
+        f6 = SDL_Keycode.SDLK_F6
+        f7 = SDL_Keycode.SDLK_F7
+        f8 = SDL_Keycode.SDLK_F8
+        f9 = SDL_Keycode.SDLK_F9
+        f10 = SDL_Keycode.SDLK_F10
+        f11 = SDL_Keycode.SDLK_F11
+        f12 = SDL_Keycode.SDLK_F12
+
+        ' Up to 24, cuz why not
+        f13 = SDL_Keycode.SDLK_F13
+        f14 = SDL_Keycode.SDLK_F14
+        f15 = SDL_Keycode.SDLK_F15
+        f16 = SDL_Keycode.SDLK_F16
+        f17 = SDL_Keycode.SDLK_F17
+        f18 = SDL_Keycode.SDLK_F18
+        f19 = SDL_Keycode.SDLK_F19
+        f20 = SDL_Keycode.SDLK_F20
+        f21 = SDL_Keycode.SDLK_F21
+        f22 = SDL_Keycode.SDLK_F22
+        f23 = SDL_Keycode.SDLK_F23
+        f24 = SDL_Keycode.SDLK_F24
+
+        space = SDL_Keycode.SDLK_SPACE
+    End Enum
 
     Public Function KeyCodeToSDLScanCode(ByVal _keycode As Keys) As String
 
@@ -504,8 +623,25 @@ Module Rx
         If IsNumeric(a) Then a = "Number" & a
         If a = "Decimal" Then a = "kpDecimal"
         If a = "End" Then a = "kEnd"
+        If a = "None" Then Return "0"
 
         If [Enum].IsDefined(GetType(KCtSC), a.ToLower) Then Return DirectCast([Enum].Parse(GetType(KCtSC), a.ToLower, True), KCtSC)
+
+        Console.WriteLine("Undefined KeyName: " & a)
+
+        Return "0"
+
+    End Function
+
+    Public Function KeyCodeToSDLKeyCode(ByVal _keycode As Keys) As String
+
+        Dim a As String = KeyCon.ConvertToString(_keycode)
+        If IsNumeric(a) Then a = "Number" & a
+        If a = "Decimal" Then a = "kpDecimal"
+        If a = "End" Then a = "kEnd"
+        If a = "None" Then Return "0"
+
+        If [Enum].IsDefined(GetType(KCtSDLKC), a.ToLower) Then Return DirectCast([Enum].Parse(GetType(KCtSDLKC), a.ToLower, True), KCtSDLKC)
 
         Console.WriteLine("Undefined KeyName: " & a)
 
@@ -689,6 +825,12 @@ Module Rx
 
     Public Function BEARButtonToMupenButton(ByVal _mappingString As String, ByVal _Button As String) As String
 
+        ' If this is jut a key just return the keycode
+        If _Button.StartsWith("k") Then
+            Return "key(" & KeyCodeToSDLKeyCode(_Button.Substring(1)) & ")"
+
+        End If
+
         Dim SDLMappingString As String() = _mappingString.Split(",")
         Dim SDLControllerButtonName As String = GetSDLControllerButtonName(_Button)
         ' Button wasn't found might as well just stop here
@@ -707,7 +849,7 @@ Module Rx
                     Dim HatNumber = _key.Replace("h", "").Split(".")(0)
                     Dim HatDirection As String = ""
 
-                    Select Case _key.Replace("h", "").Split(".")(0)
+                    Select Case _key.Replace("h", "").Split(".")(1)
                         Case "1" ' Up
                             HatDirection = "Up"
                         Case "2" ' Right
@@ -720,10 +862,14 @@ Module Rx
                             MupenButton = ""
                     End Select
 
-                    MupenButton = _key.Replace("h", "hat(") & HatNumber & " " & HatDirection & ")"
+                    MupenButton = "hat(" & HatNumber & " " & HatDirection & ")"
 
                 ElseIf _key.StartsWith("a") Then
-                    MupenButton = _key.Replace("a", "")
+                    Dim PlusOrMinus = "-"
+                    If _Button.Contains("+") Then
+                        PlusOrMinus = "+"
+                    End If
+                    MupenButton = _key.Replace("a", "axis(") & PlusOrMinus & ")"
 
                 End If
 
