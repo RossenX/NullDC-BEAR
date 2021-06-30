@@ -7,9 +7,9 @@ Imports System.Text
 Public Class frmKeyMapperSDL
 
     ' From the Configs
-    Dim Joystick(2) As Int16
-    Dim Deadzone(2) As Int16
-    Dim Peripheral(2) As Int16
+    Dim Joystick(2) As Short
+    Dim Deadzone(2) As Short
+    Dim Peripheral(2) As Short
     Dim MednafenControllerID(128) As String ' Support up to 16 Controllers at once
 
     Public Joy As IntPtr
@@ -60,7 +60,7 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub frmKeyMapperSDL_VisibilityChange(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+    Private Sub FrmKeyMapperSDL_VisibilityChange(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
 
         Try
             If Me.Visible Then
@@ -84,8 +84,9 @@ Public Class frmKeyMapperSDL
                 DoInitialSetupShit()
                 LoadSettings()
 
-                _InputThread = New Threading.Thread(AddressOf InputThread)
-                _InputThread.IsBackground = True
+                _InputThread = New Threading.Thread(AddressOf InputThread) With {
+                    .IsBackground = True
+                }
                 _InputThread.Start()
 
                 AddHandler cbSDL.SelectedIndexChanged, AddressOf SDLVersionChanged
@@ -94,7 +95,7 @@ Public Class frmKeyMapperSDL
                 AddHandler PeripheralCB.SelectedIndexChanged, AddressOf PeripheralCB_SelectedIndexChanged
                 AddHandler PlayerTab.SelectedIndexChanged, AddressOf PlayerTab_SelectedIndexChanged
                 AddHandler ControllersTab.SelectedIndexChanged, Sub() ActiveControl = Nothing
-                AddHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
+                AddHandler cbProfiles.SelectedIndexChanged, AddressOf CbProfileIndexChanged
 
                 If MainformRef.IsNullDCRunning Then
                     PeripheralCB.Enabled = False
@@ -270,7 +271,7 @@ Public Class frmKeyMapperSDL
             Dim _tmpConfigFile As String() = File.ReadAllLines(_filepath)
 
             For Each _line In lines
-                If Not _tmpConfigFile.Contains(_line) And Not _line Is Nothing Then
+                If Not _tmpConfigFile.Contains(_line) And _line IsNot Nothing Then
 
                     ' Deadzone change applies to all
                     If _line.StartsWith("Deadzone=") Or _line.StartsWith("Joystick=") Then
@@ -360,7 +361,7 @@ Public Class frmKeyMapperSDL
         Next
 
         Dim SelectedProfile = ""
-        If Not _profile Is Nothing Then
+        If _profile IsNot Nothing Then
             SelectedProfile = _profile
         Else
             SelectedProfile = MainformRef.ConfigFile.KeyMapProfile
@@ -386,14 +387,14 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub cbProfileIndexChanged(sender As Object, e As EventArgs)
-        RemoveHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
+    Private Sub CbProfileIndexChanged(sender As Object, e As EventArgs)
+        RemoveHandler cbProfiles.SelectedIndexChanged, AddressOf CbProfileIndexChanged
         NaomiChanged = True
         DreamcastChanged = True
         MednafenChanged = True
 
         LoadSettings(cbProfiles.Text.Trim)
-        AddHandler cbProfiles.SelectedIndexChanged, AddressOf cbProfileIndexChanged
+        AddHandler cbProfiles.SelectedIndexChanged, AddressOf CbProfileIndexChanged
     End Sub
 
 
@@ -1135,6 +1136,12 @@ Public Class frmKeyMapperSDL
                     End If
                 Next
 
+                For i = 1 To MupenConfigs.Count - 1
+                    If Not MupenConfigs(i).StartsWith("[") Then
+                        MupenConfigs(i) = "[" & MupenConfigs(i).Trim & vbNewLine
+                    End If
+                Next
+
                 File.WriteAllLines(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini", MupenConfigs)
 
                 ' TO DO MAKE PROFILE AND SAVE PROFIEL NAMES
@@ -1190,7 +1197,7 @@ Public Class frmKeyMapperSDL
             Exit Sub
         End If
 
-        If Not Currently_Binding Is Nothing Then
+        If Currently_Binding IsNot Nothing Then
             Currently_Binding.BackColor = Color.White
             Currently_Binding = Nothing
         End If
@@ -1263,7 +1270,7 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub btn_Close_Click(sender As Object, e As EventArgs) Handles btn_Close.Click
+    Private Sub Btn_Close_Click(sender As Object, e As EventArgs) Handles btn_Close.Click
         If MainformRef.IsFileInUse(MainformRef.NullDCPath & "\mednafen\stdout.txt") And File.Exists(MainformRef.NullDCPath & "\mednafen\stdout.txt") Then
             MsgBox("Cannot Save While Mednafen Is Running")
         Else
@@ -1305,7 +1312,7 @@ Public Class frmKeyMapperSDL
 
         If Not ButtonsDown.ContainsKey(_keycode) Then
 
-            If Not Currently_Binding Is Nothing And (_down Or _keycode = "k13") Then
+            If Currently_Binding IsNot Nothing And (_down Or _keycode = "k13") Then
                 If TypeOf Currently_Binding Is keybindButton Then
                     Dim _tmp As keybindButton = Currently_Binding
                     _tmp.SetKeyCode(_keycode, PlayerTab.SelectedIndex)
@@ -1360,7 +1367,7 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSDL.Click
-        If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+        If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
             MsgBox("Cannot remap while emulation is running.")
             Exit Sub
         End If
@@ -1373,12 +1380,12 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-    Private Sub frmKeyMapperSDL_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub FrmKeyMapperSDL_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.fan_icon_text
     End Sub
 
-    Private Sub btnResetAll_Click(sender As Object, e As EventArgs) Handles ResetAllToolStripMenuItem.Click
-        If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+    Private Sub BtnResetAll_Click(sender As Object, e As EventArgs) Handles ResetAllToolStripMenuItem.Click
+        If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
             MsgBox("Cannot reset all while emulation is running.")
             Exit Sub
         End If
@@ -1425,7 +1432,7 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub ImportMappingStringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportMappingStringToolStripMenuItem.Click
-        If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+        If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
             MsgBox("Cannot edit mapping string while emulation is running.")
             Exit Sub
         End If
