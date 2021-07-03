@@ -927,6 +927,22 @@ UpdateTry:
             Next
         End If
 
+        If _system = "all" Or _system = "pce" Then
+            If Not Directory.Exists(NullDCPath & "\mednafen\roms\pce") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\pce")
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\pce", "*.cue", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".cue", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("PCE-" & RomName) Then
+                    GamesList.Add("PCE-" & RomName, {GameName, RomPath, "pce", ""})
+                End If
+            Next
+
+        End If
+
         If _system = "all" Or _system = "nes" Then
             If Not Directory.Exists(NullDCPath & "\mednafen\roms\nes") Then Directory.CreateDirectory(NullDCPath & "\mednafen\roms\nes")
 
@@ -1165,7 +1181,7 @@ UpdateTry:
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "na"
                 NullDCLauncher.LaunchNaomi(_romname, _region)
-            Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc", "fds", "sms"
+            Case "sg", "ss", "nes", "ngp", "snes", "psx", "gba", "gbc", "fds", "sms", "pce"
                 MednafenLauncher.LaunchEmulator(_romname)
             Case "n64"
                 MupenLauncher.LaunchEmulator(_romname)

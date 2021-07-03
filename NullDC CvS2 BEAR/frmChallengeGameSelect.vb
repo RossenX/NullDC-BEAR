@@ -343,6 +343,8 @@ Public Class frmChallengeGameSelect
                     TabName = "Famicom Disk System"
                 Case "sms"
                     TabName = "Sega Master System"
+                Case "pce"
+                    TabName = "PCE"
                 Case "n64"
                     TabName = "N64"
                 Case Else
