@@ -127,10 +127,15 @@ Public Class frmDLCCreator
                 FileToSave += "Folder=mednafen\roms\sg"
             Case "NGP"
                 FileToSave += "Folder=mednafen\roms\ngp"
+            Case "PCE"
+                FileToSave += "Folder=mednafen\roms\pce"
+            Case "N64"
+                FileToSave += "Folder=Mupen64Plus\roms"
             Case Else
                 MsgBox("Platform not found, not sure how this is possible but ok.")
                 Exit Sub
         End Select
+
         FileToSave += vbNewLine
         FileToSave += "Extract=" & cb_extract.SelectedIndex.ToString & vbNewLine
         FileToSave += "ExternalURL=" & TextBox1.Text & vbNewLine

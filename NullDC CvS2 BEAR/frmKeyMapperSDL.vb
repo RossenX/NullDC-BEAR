@@ -183,7 +183,7 @@ Public Class frmKeyMapperSDL
         MainformRef.ConfigFile.DebugControls = DebugControlsCB.SelectedIndex
         MainformRef.ConfigFile.SaveFile(False)
 
-        Dim lines(262) As String
+        Dim lines(300) As String
 
         Dim MednafenControllerID = GetMednafenControllerIDs()
 
@@ -231,6 +231,7 @@ Public Class frmKeyMapperSDL
         TabsToSave.Add(Page_GBC_GBC)
         TabsToSave.Add(Page_NGP_NGP)
         TabsToSave.Add(Page_SMS_Gamepad)
+        TabsToSave.Add(page_PCE_Controller)
         TabsToSave.Add(page_N64_Controller)
 
         Dim KeyCount = 5

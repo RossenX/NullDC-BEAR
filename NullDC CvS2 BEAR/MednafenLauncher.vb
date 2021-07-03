@@ -100,7 +100,7 @@ Public Class MednafenLauncher
                     Case "ngp" : forcedModule = "ngp"
                     Case "gba" : forcedModule = "gba"
                     Case "gbc" : forcedModule = "gb"
-                    Case "pce" : forcedModule = "pce"
+                    Case "pce" : forcedModule = "pce_fast"
                 End Select
 
                 If Rx.platform = "snes" Then

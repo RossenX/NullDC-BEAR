@@ -381,6 +381,22 @@ Partial Class frmKeyMapperSDL
         Me.ngp_builtin_down = New NullDC_CvS2_BEAR.keybindButton()
         Me.ngp_builtin_right = New NullDC_CvS2_BEAR.keybindButton()
         Me.ngp_builtin_up = New NullDC_CvS2_BEAR.keybindButton()
+        Me.PCE_Tab = New System.Windows.Forms.TabPage()
+        Me.TabControl12 = New System.Windows.Forms.TabControl()
+        Me.page_PCE_Controller = New System.Windows.Forms.TabPage()
+        Me.KeybindButton58 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton57 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton56 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton55 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton54 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton53 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton52 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton51 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton50 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton49 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton48 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton47 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton46 = New NullDC_CvS2_BEAR.keybindButton()
         Me.N64_Tab = New System.Windows.Forms.TabPage()
         Me.TabControl11 = New System.Windows.Forms.TabControl()
         Me.page_N64_Controller = New System.Windows.Forms.TabPage()
@@ -432,59 +448,62 @@ Partial Class frmKeyMapperSDL
         Me.ProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel1.SuspendLayout()
-        Me.ControllersTab.SuspendLayout()
-        Me.Naomi_Tab.SuspendLayout()
-        Me.TabControl2.SuspendLayout()
-        Me.Page_Naomi_ArcadeStick.SuspendLayout()
-        Me.Dreamcast_Tab.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
-        Me.Page_dc_Controller.SuspendLayout()
-        Me.Page_dc_ArcadeStick.SuspendLayout()
-        Me.PSX_Tab.SuspendLayout()
-        Me.TabControl3.SuspendLayout()
-        Me.Page_PSX_Gamepad.SuspendLayout()
-        Me.Page_PSX_Dualshock.SuspendLayout()
-        Me.Page_PSX_GunCon.SuspendLayout()
-        Me.NES_Tab.SuspendLayout()
-        Me.nes_tc.SuspendLayout()
-        Me.Page_NES_Gamepad.SuspendLayout()
-        Me.Page_NES_Zapper.SuspendLayout()
-        Me.SNES_Tab.SuspendLayout()
-        Me.TabControl5.SuspendLayout()
-        Me.Page_SNES_Gamepad.SuspendLayout()
-        Me.Page_SNES_SuperScope.SuspendLayout()
-        Me.Page_SNES_Mouse.SuspendLayout()
-        Me.GBC_Tab.SuspendLayout()
-        Me.TabControl8.SuspendLayout()
-        Me.Page_GBC_GBC.SuspendLayout()
-        Me.GBA_Tab.SuspendLayout()
-        Me.TabControl7.SuspendLayout()
-        Me.Page_GBA_GBA.SuspendLayout()
-        Me.Sega_Master_System_Tab.SuspendLayout()
-        Me.TabControl10.SuspendLayout()
-        Me.Page_SMS_Gamepad.SuspendLayout()
-        Me.Sega_Genesis_Tab.SuspendLayout()
-        Me.TabControl6.SuspendLayout()
-        Me.Page_Genesis_Gamepad3.SuspendLayout()
-        Me.Page_Genesis_Gamepad6.SuspendLayout()
-        Me.Sega_Saturn_Tab.SuspendLayout()
-        Me.TabControl4.SuspendLayout()
-        Me.Page_Saturn_Gamepad.SuspendLayout()
-        Me.Page_Saturn_Gun.SuspendLayout()
-        Me.NGP_Tab.SuspendLayout()
-        Me.TabControl9.SuspendLayout()
-        Me.Page_NGP_NGP.SuspendLayout()
-        Me.N64_Tab.SuspendLayout()
-        Me.TabControl11.SuspendLayout()
-        Me.page_N64_Controller.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.TableLayoutPanel2.SuspendLayout()
-        Me.TableLayoutPanel4.SuspendLayout()
-        Me.PlayerTab.SuspendLayout()
-        Me.MenuStrip1.SuspendLayout()
-        Me.SuspendLayout()
+        CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TableLayoutPanel1.SuspendLayout
+        Me.ControllersTab.SuspendLayout
+        Me.Naomi_Tab.SuspendLayout
+        Me.TabControl2.SuspendLayout
+        Me.Page_Naomi_ArcadeStick.SuspendLayout
+        Me.Dreamcast_Tab.SuspendLayout
+        Me.TabControl1.SuspendLayout
+        Me.Page_dc_Controller.SuspendLayout
+        Me.Page_dc_ArcadeStick.SuspendLayout
+        Me.PSX_Tab.SuspendLayout
+        Me.TabControl3.SuspendLayout
+        Me.Page_PSX_Gamepad.SuspendLayout
+        Me.Page_PSX_Dualshock.SuspendLayout
+        Me.Page_PSX_GunCon.SuspendLayout
+        Me.NES_Tab.SuspendLayout
+        Me.nes_tc.SuspendLayout
+        Me.Page_NES_Gamepad.SuspendLayout
+        Me.Page_NES_Zapper.SuspendLayout
+        Me.SNES_Tab.SuspendLayout
+        Me.TabControl5.SuspendLayout
+        Me.Page_SNES_Gamepad.SuspendLayout
+        Me.Page_SNES_SuperScope.SuspendLayout
+        Me.Page_SNES_Mouse.SuspendLayout
+        Me.GBC_Tab.SuspendLayout
+        Me.TabControl8.SuspendLayout
+        Me.Page_GBC_GBC.SuspendLayout
+        Me.GBA_Tab.SuspendLayout
+        Me.TabControl7.SuspendLayout
+        Me.Page_GBA_GBA.SuspendLayout
+        Me.Sega_Master_System_Tab.SuspendLayout
+        Me.TabControl10.SuspendLayout
+        Me.Page_SMS_Gamepad.SuspendLayout
+        Me.Sega_Genesis_Tab.SuspendLayout
+        Me.TabControl6.SuspendLayout
+        Me.Page_Genesis_Gamepad3.SuspendLayout
+        Me.Page_Genesis_Gamepad6.SuspendLayout
+        Me.Sega_Saturn_Tab.SuspendLayout
+        Me.TabControl4.SuspendLayout
+        Me.Page_Saturn_Gamepad.SuspendLayout
+        Me.Page_Saturn_Gun.SuspendLayout
+        Me.NGP_Tab.SuspendLayout
+        Me.TabControl9.SuspendLayout
+        Me.Page_NGP_NGP.SuspendLayout
+        Me.PCE_Tab.SuspendLayout
+        Me.TabControl12.SuspendLayout
+        Me.page_PCE_Controller.SuspendLayout
+        Me.N64_Tab.SuspendLayout
+        Me.TabControl11.SuspendLayout
+        Me.page_N64_Controller.SuspendLayout
+        Me.Panel1.SuspendLayout
+        Me.TableLayoutPanel2.SuspendLayout
+        Me.TableLayoutPanel4.SuspendLayout
+        Me.PlayerTab.SuspendLayout
+        Me.MenuStrip1.SuspendLayout
+        Me.SuspendLayout
         '
         'Label12
         '
@@ -557,6 +576,7 @@ Partial Class frmKeyMapperSDL
         Me.ControllersTab.Controls.Add(Me.Sega_Genesis_Tab)
         Me.ControllersTab.Controls.Add(Me.Sega_Saturn_Tab)
         Me.ControllersTab.Controls.Add(Me.NGP_Tab)
+        Me.ControllersTab.Controls.Add(Me.PCE_Tab)
         Me.ControllersTab.Controls.Add(Me.N64_Tab)
         Me.ControllersTab.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ControllersTab.Location = New System.Drawing.Point(212, 0)
@@ -6459,6 +6479,301 @@ Partial Class frmKeyMapperSDL
         Me.ngp_builtin_up.Text = "X"
         Me.ngp_builtin_up.UseVisualStyleBackColor = False
         '
+        'PCE_Tab
+        '
+        Me.PCE_Tab.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.PCE_Tab.Controls.Add(Me.TabControl12)
+        Me.PCE_Tab.Location = New System.Drawing.Point(4, 22)
+        Me.PCE_Tab.Margin = New System.Windows.Forms.Padding(0)
+        Me.PCE_Tab.Name = "PCE_Tab"
+        Me.PCE_Tab.Size = New System.Drawing.Size(689, 494)
+        Me.PCE_Tab.TabIndex = 15
+        Me.PCE_Tab.Text = "PCE"
+        '
+        'TabControl12
+        '
+        Me.TabControl12.Controls.Add(Me.page_PCE_Controller)
+        Me.TabControl12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl12.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl12.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabControl12.Name = "TabControl12"
+        Me.TabControl12.Padding = New System.Drawing.Point(0, 0)
+        Me.TabControl12.SelectedIndex = 0
+        Me.TabControl12.Size = New System.Drawing.Size(689, 494)
+        Me.TabControl12.TabIndex = 0
+        '
+        'page_PCE_Controller
+        '
+        Me.page_PCE_Controller.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.page_PCE_Controller.BackgroundImage = CType(resources.GetObject("page_PCE_Controller.BackgroundImage"), System.Drawing.Image)
+        Me.page_PCE_Controller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton58)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton57)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton56)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton55)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton54)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton53)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton52)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton51)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton50)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton49)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton48)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton47)
+        Me.page_PCE_Controller.Controls.Add(Me.KeybindButton46)
+        Me.page_PCE_Controller.Location = New System.Drawing.Point(4, 22)
+        Me.page_PCE_Controller.Name = "page_PCE_Controller"
+        Me.page_PCE_Controller.Padding = New System.Windows.Forms.Padding(3)
+        Me.page_PCE_Controller.Size = New System.Drawing.Size(681, 468)
+        Me.page_PCE_Controller.TabIndex = 0
+        Me.page_PCE_Controller.Text = "Controller"
+        '
+        'KeybindButton58
+        '
+        Me.KeybindButton58.BackColor = System.Drawing.Color.White
+        Me.KeybindButton58.ConfigString = "pce.input.port<port>.gamepad.iii"
+        Me.KeybindButton58.Emu = "mednafen"
+        Me.KeybindButton58.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton58.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton58.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton58.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton58.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton58.KeyLocked = False
+        Me.KeybindButton58.Location = New System.Drawing.Point(476, 269)
+        Me.KeybindButton58.Name = "KeybindButton58"
+        Me.KeybindButton58.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton58.TabIndex = 46
+        Me.KeybindButton58.TabStop = False
+        Me.KeybindButton58.Text = "X"
+        Me.KeybindButton58.UseVisualStyleBackColor = False
+        '
+        'KeybindButton57
+        '
+        Me.KeybindButton57.BackColor = System.Drawing.Color.White
+        Me.KeybindButton57.ConfigString = "pce.input.port<port>.gamepad.iv"
+        Me.KeybindButton57.Emu = "mednafen"
+        Me.KeybindButton57.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton57.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton57.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton57.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton57.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton57.KeyLocked = False
+        Me.KeybindButton57.Location = New System.Drawing.Point(453, 209)
+        Me.KeybindButton57.Name = "KeybindButton57"
+        Me.KeybindButton57.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton57.TabIndex = 45
+        Me.KeybindButton57.TabStop = False
+        Me.KeybindButton57.Text = "X"
+        Me.KeybindButton57.UseVisualStyleBackColor = False
+        '
+        'KeybindButton56
+        '
+        Me.KeybindButton56.BackColor = System.Drawing.Color.White
+        Me.KeybindButton56.ConfigString = "pce.input.port<port>.gamepad.ii"
+        Me.KeybindButton56.Emu = "mednafen"
+        Me.KeybindButton56.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton56.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton56.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton56.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton56.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton56.KeyLocked = False
+        Me.KeybindButton56.Location = New System.Drawing.Point(532, 243)
+        Me.KeybindButton56.Name = "KeybindButton56"
+        Me.KeybindButton56.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton56.TabIndex = 44
+        Me.KeybindButton56.TabStop = False
+        Me.KeybindButton56.Text = "X"
+        Me.KeybindButton56.UseVisualStyleBackColor = False
+        '
+        'KeybindButton55
+        '
+        Me.KeybindButton55.BackColor = System.Drawing.Color.White
+        Me.KeybindButton55.ConfigString = "pce.input.port<port>.gamepad.v"
+        Me.KeybindButton55.Emu = "mednafen"
+        Me.KeybindButton55.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton55.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton55.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton55.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton55.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton55.KeyLocked = False
+        Me.KeybindButton55.Location = New System.Drawing.Point(508, 185)
+        Me.KeybindButton55.Name = "KeybindButton55"
+        Me.KeybindButton55.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton55.TabIndex = 43
+        Me.KeybindButton55.TabStop = False
+        Me.KeybindButton55.Text = "X"
+        Me.KeybindButton55.UseVisualStyleBackColor = False
+        '
+        'KeybindButton54
+        '
+        Me.KeybindButton54.BackColor = System.Drawing.Color.White
+        Me.KeybindButton54.ConfigString = "pce.input.port<port>.gamepad.i"
+        Me.KeybindButton54.Emu = "mednafen"
+        Me.KeybindButton54.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton54.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton54.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton54.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton54.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton54.KeyLocked = False
+        Me.KeybindButton54.Location = New System.Drawing.Point(586, 225)
+        Me.KeybindButton54.Name = "KeybindButton54"
+        Me.KeybindButton54.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton54.TabIndex = 42
+        Me.KeybindButton54.TabStop = False
+        Me.KeybindButton54.Text = "X"
+        Me.KeybindButton54.UseVisualStyleBackColor = False
+        '
+        'KeybindButton53
+        '
+        Me.KeybindButton53.BackColor = System.Drawing.Color.White
+        Me.KeybindButton53.ConfigString = "pce.input.port<port>.gamepad.vi"
+        Me.KeybindButton53.Emu = "mednafen"
+        Me.KeybindButton53.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton53.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton53.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton53.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton53.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton53.KeyLocked = False
+        Me.KeybindButton53.Location = New System.Drawing.Point(564, 169)
+        Me.KeybindButton53.Name = "KeybindButton53"
+        Me.KeybindButton53.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton53.TabIndex = 41
+        Me.KeybindButton53.TabStop = False
+        Me.KeybindButton53.Text = "X"
+        Me.KeybindButton53.UseVisualStyleBackColor = False
+        '
+        'KeybindButton52
+        '
+        Me.KeybindButton52.BackColor = System.Drawing.Color.White
+        Me.KeybindButton52.ConfigString = "pce.input.port<port>.gamepad.run"
+        Me.KeybindButton52.Emu = "mednafen"
+        Me.KeybindButton52.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton52.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton52.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton52.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton52.KeyLocked = False
+        Me.KeybindButton52.Location = New System.Drawing.Point(348, 298)
+        Me.KeybindButton52.Name = "KeybindButton52"
+        Me.KeybindButton52.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton52.TabIndex = 40
+        Me.KeybindButton52.TabStop = False
+        Me.KeybindButton52.Text = "X"
+        Me.KeybindButton52.UseVisualStyleBackColor = False
+        '
+        'KeybindButton51
+        '
+        Me.KeybindButton51.BackColor = System.Drawing.Color.White
+        Me.KeybindButton51.ConfigString = "pce.input.port<port>.gamepad.select"
+        Me.KeybindButton51.Emu = "mednafen"
+        Me.KeybindButton51.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton51.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton51.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton51.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton51.KeyLocked = False
+        Me.KeybindButton51.Location = New System.Drawing.Point(293, 298)
+        Me.KeybindButton51.Name = "KeybindButton51"
+        Me.KeybindButton51.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton51.TabIndex = 39
+        Me.KeybindButton51.TabStop = False
+        Me.KeybindButton51.Text = "X"
+        Me.KeybindButton51.UseVisualStyleBackColor = False
+        '
+        'KeybindButton50
+        '
+        Me.KeybindButton50.BackColor = System.Drawing.Color.White
+        Me.KeybindButton50.ConfigString = "pce.input.port<port>.gamepad.mode_select"
+        Me.KeybindButton50.Emu = "mednafen"
+        Me.KeybindButton50.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton50.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton50.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton50.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton50.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton50.KeyLocked = False
+        Me.KeybindButton50.Location = New System.Drawing.Point(318, 222)
+        Me.KeybindButton50.Name = "KeybindButton50"
+        Me.KeybindButton50.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton50.TabIndex = 38
+        Me.KeybindButton50.TabStop = False
+        Me.KeybindButton50.Text = "X"
+        Me.KeybindButton50.UseVisualStyleBackColor = False
+        '
+        'KeybindButton49
+        '
+        Me.KeybindButton49.BackColor = System.Drawing.Color.White
+        Me.KeybindButton49.ConfigString = "pce.input.port<port>.gamepad.right"
+        Me.KeybindButton49.Emu = "mednafen"
+        Me.KeybindButton49.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton49.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton49.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton49.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton49.KeyLocked = False
+        Me.KeybindButton49.Location = New System.Drawing.Point(163, 228)
+        Me.KeybindButton49.Name = "KeybindButton49"
+        Me.KeybindButton49.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton49.TabIndex = 37
+        Me.KeybindButton49.TabStop = False
+        Me.KeybindButton49.Text = "X"
+        Me.KeybindButton49.UseVisualStyleBackColor = False
+        '
+        'KeybindButton48
+        '
+        Me.KeybindButton48.BackColor = System.Drawing.Color.White
+        Me.KeybindButton48.ConfigString = "pce.input.port<port>.gamepad.left"
+        Me.KeybindButton48.Emu = "mednafen"
+        Me.KeybindButton48.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton48.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton48.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton48.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton48.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton48.KeyLocked = False
+        Me.KeybindButton48.Location = New System.Drawing.Point(71, 228)
+        Me.KeybindButton48.Name = "KeybindButton48"
+        Me.KeybindButton48.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton48.TabIndex = 36
+        Me.KeybindButton48.TabStop = False
+        Me.KeybindButton48.Text = "X"
+        Me.KeybindButton48.UseVisualStyleBackColor = False
+        '
+        'KeybindButton47
+        '
+        Me.KeybindButton47.BackColor = System.Drawing.Color.White
+        Me.KeybindButton47.ConfigString = "pce.input.port<port>.gamepad.down"
+        Me.KeybindButton47.Emu = "mednafen"
+        Me.KeybindButton47.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton47.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton47.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton47.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton47.KeyDefaults = New String() {"a1-,k0,k0", "a1-,k0,k0"}
+        Me.KeybindButton47.KeyLocked = False
+        Me.KeybindButton47.Location = New System.Drawing.Point(117, 271)
+        Me.KeybindButton47.Name = "KeybindButton47"
+        Me.KeybindButton47.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton47.TabIndex = 35
+        Me.KeybindButton47.TabStop = False
+        Me.KeybindButton47.Text = "X"
+        Me.KeybindButton47.UseVisualStyleBackColor = False
+        '
+        'KeybindButton46
+        '
+        Me.KeybindButton46.BackColor = System.Drawing.Color.White
+        Me.KeybindButton46.ConfigString = "pce.input.port<port>.gamepad.up"
+        Me.KeybindButton46.Emu = "mednafen"
+        Me.KeybindButton46.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton46.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton46.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton46.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton46.KeyDefaults = New String() {"a1-,b11,k87", "a1-,k0,k0"}
+        Me.KeybindButton46.KeyLocked = False
+        Me.KeybindButton46.Location = New System.Drawing.Point(117, 182)
+        Me.KeybindButton46.Name = "KeybindButton46"
+        Me.KeybindButton46.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton46.TabIndex = 34
+        Me.KeybindButton46.TabStop = False
+        Me.KeybindButton46.Text = "X"
+        Me.KeybindButton46.UseVisualStyleBackColor = False
+        '
         'N64_Tab
         '
         Me.N64_Tab.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
@@ -7191,51 +7506,51 @@ Partial Class frmKeyMapperSDL
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Controls"
         Me.TransparencyKey = System.Drawing.Color.Pink
-        CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ControllersTab.ResumeLayout(False)
         Me.Naomi_Tab.ResumeLayout(False)
         Me.TabControl2.ResumeLayout(False)
         Me.Page_Naomi_ArcadeStick.ResumeLayout(False)
-        Me.Page_Naomi_ArcadeStick.PerformLayout()
+        Me.Page_Naomi_ArcadeStick.PerformLayout
         Me.Dreamcast_Tab.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.Page_dc_Controller.ResumeLayout(False)
-        Me.Page_dc_Controller.PerformLayout()
+        Me.Page_dc_Controller.PerformLayout
         Me.Page_dc_ArcadeStick.ResumeLayout(False)
-        Me.Page_dc_ArcadeStick.PerformLayout()
+        Me.Page_dc_ArcadeStick.PerformLayout
         Me.PSX_Tab.ResumeLayout(False)
         Me.TabControl3.ResumeLayout(False)
         Me.Page_PSX_Gamepad.ResumeLayout(False)
-        Me.Page_PSX_Gamepad.PerformLayout()
+        Me.Page_PSX_Gamepad.PerformLayout
         Me.Page_PSX_Dualshock.ResumeLayout(False)
-        Me.Page_PSX_Dualshock.PerformLayout()
+        Me.Page_PSX_Dualshock.PerformLayout
         Me.Page_PSX_GunCon.ResumeLayout(False)
-        Me.Page_PSX_GunCon.PerformLayout()
+        Me.Page_PSX_GunCon.PerformLayout
         Me.NES_Tab.ResumeLayout(False)
         Me.nes_tc.ResumeLayout(False)
         Me.Page_NES_Gamepad.ResumeLayout(False)
-        Me.Page_NES_Gamepad.PerformLayout()
+        Me.Page_NES_Gamepad.PerformLayout
         Me.Page_NES_Zapper.ResumeLayout(False)
-        Me.Page_NES_Zapper.PerformLayout()
+        Me.Page_NES_Zapper.PerformLayout
         Me.SNES_Tab.ResumeLayout(False)
         Me.TabControl5.ResumeLayout(False)
         Me.Page_SNES_Gamepad.ResumeLayout(False)
         Me.Page_SNES_SuperScope.ResumeLayout(False)
-        Me.Page_SNES_SuperScope.PerformLayout()
+        Me.Page_SNES_SuperScope.PerformLayout
         Me.Page_SNES_Mouse.ResumeLayout(False)
         Me.GBC_Tab.ResumeLayout(False)
         Me.TabControl8.ResumeLayout(False)
         Me.Page_GBC_GBC.ResumeLayout(False)
-        Me.Page_GBC_GBC.PerformLayout()
+        Me.Page_GBC_GBC.PerformLayout
         Me.GBA_Tab.ResumeLayout(False)
         Me.TabControl7.ResumeLayout(False)
         Me.Page_GBA_GBA.ResumeLayout(False)
-        Me.Page_GBA_GBA.PerformLayout()
+        Me.Page_GBA_GBA.PerformLayout
         Me.Sega_Master_System_Tab.ResumeLayout(False)
         Me.TabControl10.ResumeLayout(False)
         Me.Page_SMS_Gamepad.ResumeLayout(False)
-        Me.Page_SMS_Gamepad.PerformLayout()
+        Me.Page_SMS_Gamepad.PerformLayout
         Me.Sega_Genesis_Tab.ResumeLayout(False)
         Me.TabControl6.ResumeLayout(False)
         Me.Page_Genesis_Gamepad3.ResumeLayout(False)
@@ -7244,24 +7559,27 @@ Partial Class frmKeyMapperSDL
         Me.TabControl4.ResumeLayout(False)
         Me.Page_Saturn_Gamepad.ResumeLayout(False)
         Me.Page_Saturn_Gun.ResumeLayout(False)
-        Me.Page_Saturn_Gun.PerformLayout()
+        Me.Page_Saturn_Gun.PerformLayout
         Me.NGP_Tab.ResumeLayout(False)
         Me.TabControl9.ResumeLayout(False)
         Me.Page_NGP_NGP.ResumeLayout(False)
-        Me.Page_NGP_NGP.PerformLayout()
+        Me.Page_NGP_NGP.PerformLayout
+        Me.PCE_Tab.ResumeLayout(False)
+        Me.TabControl12.ResumeLayout(False)
+        Me.page_PCE_Controller.ResumeLayout(False)
         Me.N64_Tab.ResumeLayout(False)
         Me.TabControl11.ResumeLayout(False)
         Me.page_N64_Controller.ResumeLayout(False)
-        Me.page_N64_Controller.PerformLayout()
+        Me.page_N64_Controller.PerformLayout
         Me.Panel1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
-        Me.TableLayoutPanel4.PerformLayout()
+        Me.TableLayoutPanel4.PerformLayout
         Me.PlayerTab.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
+        Me.MenuStrip1.PerformLayout
         Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.PerformLayout
 
     End Sub
     Friend WithEvents Label12 As Label
@@ -7673,4 +7991,20 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents KeybindButton29 As keybindButton
     Friend WithEvents KeybindButton45 As keybindButton
     Friend WithEvents KeybindButton44 As keybindButton
+    Friend WithEvents PCE_Tab As TabPage
+    Friend WithEvents TabControl12 As TabControl
+    Friend WithEvents page_PCE_Controller As TabPage
+    Friend WithEvents KeybindButton58 As keybindButton
+    Friend WithEvents KeybindButton57 As keybindButton
+    Friend WithEvents KeybindButton56 As keybindButton
+    Friend WithEvents KeybindButton55 As keybindButton
+    Friend WithEvents KeybindButton54 As keybindButton
+    Friend WithEvents KeybindButton53 As keybindButton
+    Friend WithEvents KeybindButton52 As keybindButton
+    Friend WithEvents KeybindButton51 As keybindButton
+    Friend WithEvents KeybindButton50 As keybindButton
+    Friend WithEvents KeybindButton49 As keybindButton
+    Friend WithEvents KeybindButton48 As keybindButton
+    Friend WithEvents KeybindButton47 As keybindButton
+    Friend WithEvents KeybindButton46 As keybindButton
 End Class

@@ -94,7 +94,7 @@ Partial Class frmDLCCreator
         Me.cb_platform.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cb_platform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_platform.FormattingEnabled = True
-        Me.cb_platform.Items.AddRange(New Object() {"NA", "DC", "PSX", "SS", "FDS", "NES", "SNES", "GBA", "GBC", "SG", "NGP"})
+        Me.cb_platform.Items.AddRange(New Object() {"NA", "DC", "PSX", "SS", "FDS", "NES", "SNES", "GBA", "GBC", "SG", "NGP", "PCE", "N64"})
         Me.cb_platform.Location = New System.Drawing.Point(89, 13)
         Me.cb_platform.Name = "cb_platform"
         Me.cb_platform.Size = New System.Drawing.Size(532, 21)
