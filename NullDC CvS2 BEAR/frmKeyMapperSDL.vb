@@ -231,7 +231,7 @@ Public Class frmKeyMapperSDL
         TabsToSave.Add(Page_GBC_GBC)
         TabsToSave.Add(Page_NGP_NGP)
         TabsToSave.Add(Page_SMS_Gamepad)
-        TabsToSave.Add(page_PCE_Controller)
+        TabsToSave.Add(page_PCE_Gamepad)
         TabsToSave.Add(page_N64_Controller)
 
         Dim KeyCount = 5
@@ -658,6 +658,9 @@ Public Class frmKeyMapperSDL
         TabsToReset.Add(Page_GBC_GBC)
         TabsToReset.Add(Page_NGP_NGP)
         TabsToReset.Add(Page_SMS_Gamepad)
+        TabsToReset.Add(Page_PCE_Gamepad)
+        TabsToReset.Add(page_N64_Controller)
+
 
         For Each _tab As TabPage In TabsToReset
             For Each _tabCont As Control In _tab.Controls
