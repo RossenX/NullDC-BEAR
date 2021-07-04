@@ -661,7 +661,6 @@ Public Class frmKeyMapperSDL
         TabsToReset.Add(Page_PCE_Gamepad)
         TabsToReset.Add(page_N64_Controller)
 
-
         For Each _tab As TabPage In TabsToReset
             For Each _tabCont As Control In _tab.Controls
                 If TypeOf _tabCont Is keybindButton Then
