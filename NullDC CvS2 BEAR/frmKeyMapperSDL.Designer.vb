@@ -6987,7 +6987,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton38.ConfigString = "B Button"
         Me.KeybindButton38.Emu = "mupen"
         Me.KeybindButton38.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton38.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton38.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeybindButton38.ForeColor = System.Drawing.Color.Black
         Me.KeybindButton38.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton38.KeyDefaults = New String() {"b2,b2,k100", "b2,b2,k100"}
@@ -7006,7 +7006,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton39.ConfigString = "A Button"
         Me.KeybindButton39.Emu = "mupen"
         Me.KeybindButton39.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton39.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeybindButton39.ForeColor = System.Drawing.Color.Black
         Me.KeybindButton39.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton39.KeyDefaults = New String() {"b0,b0,k97", "b0,b0,k97"}
@@ -7025,7 +7025,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton34.ConfigString = "C Button L"
         Me.KeybindButton34.Emu = "mupen"
         Me.KeybindButton34.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton34.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeybindButton34.ForeColor = System.Drawing.Color.Black
         Me.KeybindButton34.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton34.KeyDefaults = New String() {"a2-,a2-,k101", "a2-,a2-,k101"}
@@ -7044,7 +7044,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton35.ConfigString = "C Button U"
         Me.KeybindButton35.Emu = "mupen"
         Me.KeybindButton35.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton35.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton35.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeybindButton35.ForeColor = System.Drawing.Color.Black
         Me.KeybindButton35.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton35.KeyDefaults = New String() {"a3-,a3-,k102", "a3-,a3-,k102"}
@@ -7063,7 +7063,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton36.ConfigString = "C Button R"
         Me.KeybindButton36.Emu = "mupen"
         Me.KeybindButton36.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton36.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton36.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeybindButton36.ForeColor = System.Drawing.Color.Black
         Me.KeybindButton36.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton36.KeyDefaults = New String() {"a2+,a2+,k99", "a2+,a2+,k99"}
@@ -7082,7 +7082,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton37.ConfigString = "C Button D"
         Me.KeybindButton37.Emu = "mupen"
         Me.KeybindButton37.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton37.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton37.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeybindButton37.ForeColor = System.Drawing.Color.Black
         Me.KeybindButton37.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton37.KeyDefaults = New String() {"a3+,a3+,k98", "a3+,a3+,k98"}

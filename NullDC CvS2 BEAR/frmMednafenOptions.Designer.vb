@@ -28,107 +28,9 @@ Partial Class frmMednafenOptions
         Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.tlp_general_cont = New System.Windows.Forms.TableLayoutPanel()
         Me.tlp_general = New System.Windows.Forms.TableLayoutPanel()
+        Me.MednafenSetting130 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.tlp_ss_cont = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label54 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label47 = New System.Windows.Forms.Label()
-        Me.TableLayoutPanel11 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.tlp_psx_cont = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel12 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label46 = New System.Windows.Forms.Label()
-        Me.Label55 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.tlp_sg_cont = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel13 = New System.Windows.Forms.TableLayoutPanel()
-        Me.sg_controllers_label = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label48 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.TableLayoutPanel16 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel17 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label60 = New System.Windows.Forms.Label()
-        Me.Label61 = New System.Windows.Forms.Label()
-        Me.Label62 = New System.Windows.Forms.Label()
-        Me.Label63 = New System.Windows.Forms.Label()
-        Me.Label64 = New System.Windows.Forms.Label()
-        Me.Label65 = New System.Windows.Forms.Label()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel14 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label56 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label29 = New System.Windows.Forms.Label()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.tlp_snes_cont = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel15 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label58 = New System.Windows.Forms.Label()
-        Me.Label57 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.Label50 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.tlp_ngp_cont = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label34 = New System.Windows.Forms.Label()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
-        Me.Label51 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TabPage8 = New System.Windows.Forms.TabPage()
-        Me.tlp_gba_cont = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.Label39 = New System.Windows.Forms.Label()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.Label41 = New System.Windows.Forms.Label()
-        Me.Label52 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.tlp_gbc_cont = New System.Windows.Forms.TableLayoutPanel()
-        Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Label42 = New System.Windows.Forms.Label()
-        Me.Label43 = New System.Windows.Forms.Label()
-        Me.Label44 = New System.Windows.Forms.Label()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.Label53 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.MednafenSetting130 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting11 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting15 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting13 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -137,25 +39,36 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting12 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting14 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting18 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.MednafenSetting6 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting5 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.MednafenSetting7 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting8 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting9 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting4 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting97 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting10 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tlp_ss_cont = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label54 = New System.Windows.Forms.Label()
         Me.MednafenSetting24 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting27 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.MednafenSetting23 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting28 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting31 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting32 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting33 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.MednafenSetting34 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting35 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting36 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting37 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.MednafenSetting22 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting29 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting21 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -167,6 +80,8 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting20 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting25 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting26 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel11 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting184 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting183 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting182 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -179,6 +94,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting169 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting156 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting149 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.tlp_psx_cont = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel12 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting189 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting190 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting191 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -189,10 +109,14 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting196 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting38 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting60 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.MednafenSetting66 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting67 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting68 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting69 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label25 = New System.Windows.Forms.Label()
         Me.MednafenSetting70 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting72 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting71 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -202,12 +126,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting63 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting64 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting65 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label46 = New System.Windows.Forms.Label()
         Me.MednafenSetting54 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting51 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting75 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting76 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting77 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting78 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tlp_sg_cont = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel13 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting185 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting186 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting187 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -216,11 +147,16 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting198 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting199 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting200 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.sg_controllers_label = New System.Windows.Forms.Label()
         Me.MednafenSetting41 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.MednafenSetting47 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting48 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting49 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting50 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.MednafenSetting53 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting52 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting55 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -235,11 +171,20 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting56 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting39 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting40 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel16 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel17 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting209 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.Label62 = New System.Windows.Forms.Label()
         Me.MednafenSetting210 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting211 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting212 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting213 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label63 = New System.Windows.Forms.Label()
         Me.MednafenSetting214 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting218 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting219 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -253,15 +198,26 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting227 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting228 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting229 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel14 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting205 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting206 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting207 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting208 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label56 = New System.Windows.Forms.Label()
         Me.MednafenSetting80 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.MednafenSetting81 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting82 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting83 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting84 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label29 = New System.Windows.Forms.Label()
         Me.MednafenSetting89 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting90 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting91 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -276,14 +232,26 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting85 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting73 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting79 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.tlp_snes_cont = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting201 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.TableLayoutPanel15 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting215 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting216 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.Label57 = New System.Windows.Forms.Label()
         Me.MednafenSetting100 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
         Me.MednafenSetting101 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting102 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting103 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting104 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label33 = New System.Windows.Forms.Label()
         Me.MednafenSetting109 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting110 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting116 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -299,11 +267,20 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting105 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting98 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting99 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.tlp_ngp_cont = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting120 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
         Me.MednafenSetting121 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting122 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting123 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting124 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label37 = New System.Windows.Forms.Label()
         Me.MednafenSetting129 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting136 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting135 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -317,11 +294,20 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting125 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting118 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting119 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label51 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TabPage8 = New System.Windows.Forms.TabPage()
+        Me.tlp_gba_cont = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting139 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
         Me.MednafenSetting140 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting141 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting142 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting143 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label41 = New System.Windows.Forms.Label()
         Me.MednafenSetting148 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting155 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting154 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -335,11 +321,20 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting144 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting137 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting138 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label52 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.tlp_gbc_cont = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
         Me.MednafenSetting159 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.Label44 = New System.Windows.Forms.Label()
         Me.MednafenSetting160 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting161 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting162 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting163 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label45 = New System.Windows.Forms.Label()
         Me.MednafenSetting168 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting175 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting174 = New NullDC_CvS2_BEAR.MednafenSetting()
@@ -353,6 +348,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting164 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting157 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.MednafenSetting158 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label53 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.SystemIcons = New System.Windows.Forms.ImageList(Me.components)
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TabPage11 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel18 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.MednafenSetting202 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting203 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.MednafenSetting204 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting217 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting230 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting231 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting232 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.MednafenSetting233 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting234 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting235 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting236 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.MednafenSetting238 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting239 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting241 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting242 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting243 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting244 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting245 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting246 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting247 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.Label70 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel19 = New System.Windows.Forms.TableLayoutPanel()
+        Me.MednafenSetting255 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting256 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting257 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting258 = New NullDC_CvS2_BEAR.MednafenSetting()
+        Me.MednafenSetting259 = New NullDC_CvS2_BEAR.MednafenSetting()
         Me.tc_options.SuspendLayout()
         Me.TabPage10.SuspendLayout()
         Me.tlp_general_cont.SuspendLayout()
@@ -391,6 +425,9 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel10.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.TabPage11.SuspendLayout()
+        Me.TableLayoutPanel18.SuspendLayout()
+        Me.TableLayoutPanel19.SuspendLayout()
         Me.SuspendLayout()
         '
         'tc_options
@@ -408,6 +445,7 @@ Partial Class frmMednafenOptions
         Me.tc_options.Controls.Add(Me.TabPage7)
         Me.tc_options.Controls.Add(Me.TabPage8)
         Me.tc_options.Controls.Add(Me.TabPage9)
+        Me.tc_options.Controls.Add(Me.TabPage11)
         Me.tc_options.ImageList = Me.SystemIcons
         Me.tc_options.ItemSize = New System.Drawing.Size(32, 32)
         Me.tc_options.Location = New System.Drawing.Point(-5, 6)
@@ -491,6 +529,22 @@ Partial Class frmMednafenOptions
         Me.tlp_general.Size = New System.Drawing.Size(928, 534)
         Me.tlp_general.TabIndex = 3
         '
+        'MednafenSetting130
+        '
+        Me.MednafenSetting130.AutoSize = True
+        Me.MednafenSetting130.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting130.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting130.ChangeRate = 1.0!
+        Me.MednafenSetting130.ConfigString = "video.glvsync"
+        Me.MednafenSetting130.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting130.Limits = ""
+        Me.MednafenSetting130.Location = New System.Drawing.Point(314, 295)
+        Me.MednafenSetting130.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting130.Name = "MednafenSetting130"
+        Me.MednafenSetting130.ProperName = "GL Vsync"
+        Me.MednafenSetting130.Size = New System.Drawing.Size(299, 30)
+        Me.MednafenSetting130.TabIndex = 21
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -516,1771 +570,6 @@ Partial Class frmMednafenOptions
         Me.Label13.TabIndex = 10
         Me.Label13.Text = "Audio"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(5, 0)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(299, 25)
-        Me.Label11.TabIndex = 2
-        Me.Label11.Text = "Fast Forward"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(5, 108)
-        Me.Label12.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(299, 52)
-        Me.Label12.TabIndex = 5
-        Me.Label12.Text = "FPS Display"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(0, 0)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(928, 29)
-        Me.Label10.TabIndex = 0
-        Me.Label10.Text = "General Emulator Settings"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage1
-        '
-        Me.TabPage1.BackColor = System.Drawing.Color.Black
-        Me.TabPage1.Controls.Add(Me.tlp_ss_cont)
-        Me.TabPage1.ImageIndex = 2
-        Me.TabPage1.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage1.TabIndex = 0
-        '
-        'tlp_ss_cont
-        '
-        Me.tlp_ss_cont.BackColor = System.Drawing.Color.DimGray
-        Me.tlp_ss_cont.ColumnCount = 1
-        Me.tlp_ss_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_ss_cont.Controls.Add(Me.TableLayoutPanel2, 0, 1)
-        Me.tlp_ss_cont.Controls.Add(Me.Label1, 0, 0)
-        Me.tlp_ss_cont.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlp_ss_cont.Location = New System.Drawing.Point(0, 0)
-        Me.tlp_ss_cont.Margin = New System.Windows.Forms.Padding(0)
-        Me.tlp_ss_cont.Name = "tlp_ss_cont"
-        Me.tlp_ss_cont.RowCount = 2
-        Me.tlp_ss_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlp_ss_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_ss_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlp_ss_cont.Size = New System.Drawing.Size(928, 563)
-        Me.tlp_ss_cont.TabIndex = 2
-        '
-        'TableLayoutPanel2
-        '
-        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel2.ColumnCount = 4
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.Label54, 3, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting24, 0, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting27, 1, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label16, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label17, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting23, 0, 7)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting28, 0, 8)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting31, 0, 9)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting32, 0, 10)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting33, 0, 11)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label14, 2, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting34, 2, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting35, 2, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting36, 2, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting37, 2, 5)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label15, 2, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting22, 0, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting29, 0, 5)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting21, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting30, 0, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting3, 0, 6)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting19, 1, 8)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting2, 1, 7)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting1, 1, 6)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting20, 1, 5)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting25, 1, 4)
-        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting26, 1, 3)
-        Me.TableLayoutPanel2.Controls.Add(Me.Label47, 1, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel11, 3, 1)
-        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 13
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel2.TabIndex = 4
-        '
-        'Label54
-        '
-        Me.Label54.AutoSize = True
-        Me.Label54.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label54.Location = New System.Drawing.Point(716, 0)
-        Me.Label54.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(207, 25)
-        Me.Label54.TabIndex = 37
-        Me.Label54.Text = "Controllers"
-        Me.Label54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(242, 0)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(227, 25)
-        Me.Label16.TabIndex = 5
-        Me.Label16.Text = "Shader"
-        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(5, 0)
-        Me.Label17.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(227, 25)
-        Me.Label17.TabIndex = 2
-        Me.Label17.Text = "Options"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(479, 0)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(227, 25)
-        Me.Label14.TabIndex = 28
-        Me.Label14.Text = "Window"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(479, 129)
-        Me.Label15.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(227, 31)
-        Me.Label15.TabIndex = 33
-        Me.Label15.Text = "Full Screen"
-        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label47
-        '
-        Me.Label47.AutoSize = True
-        Me.Label47.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label47.Location = New System.Drawing.Point(242, 77)
-        Me.Label47.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(227, 52)
-        Me.Label47.TabIndex = 35
-        Me.Label47.Text = "GOAT Settings"
-        Me.Label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TableLayoutPanel11
-        '
-        Me.TableLayoutPanel11.ColumnCount = 1
-        Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting184, 0, 11)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting183, 0, 10)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting182, 0, 8)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting181, 0, 9)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting180, 0, 7)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting179, 0, 6)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting178, 0, 5)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting177, 0, 4)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting176, 0, 3)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting169, 0, 2)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting156, 0, 1)
-        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting149, 0, 0)
-        Me.TableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel11.Location = New System.Drawing.Point(711, 25)
-        Me.TableLayoutPanel11.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel11.Name = "TableLayoutPanel11"
-        Me.TableLayoutPanel11.RowCount = 13
-        Me.TableLayoutPanel2.SetRowSpan(Me.TableLayoutPanel11, 12)
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel11.Size = New System.Drawing.Size(217, 509)
-        Me.TableLayoutPanel11.TabIndex = 36
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(0, 0)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(928, 29)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Sega Saturn"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage3
-        '
-        Me.TabPage3.BackColor = System.Drawing.Color.Black
-        Me.TabPage3.Controls.Add(Me.tlp_psx_cont)
-        Me.TabPage3.ImageIndex = 4
-        Me.TabPage3.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage3.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage3.TabIndex = 2
-        '
-        'tlp_psx_cont
-        '
-        Me.tlp_psx_cont.BackColor = System.Drawing.Color.DimGray
-        Me.tlp_psx_cont.ColumnCount = 1
-        Me.tlp_psx_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.tlp_psx_cont.Controls.Add(Me.TableLayoutPanel4, 0, 1)
-        Me.tlp_psx_cont.Controls.Add(Me.Label3, 0, 0)
-        Me.tlp_psx_cont.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlp_psx_cont.Location = New System.Drawing.Point(0, 0)
-        Me.tlp_psx_cont.Name = "tlp_psx_cont"
-        Me.tlp_psx_cont.RowCount = 2
-        Me.tlp_psx_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlp_psx_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_psx_cont.Size = New System.Drawing.Size(928, 563)
-        Me.tlp_psx_cont.TabIndex = 1
-        '
-        'TableLayoutPanel4
-        '
-        Me.TableLayoutPanel4.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel4.ColumnCount = 4
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
-        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel12, 3, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting38, 0, 3)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting60, 1, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label22, 1, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label23, 0, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label24, 2, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting66, 2, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting67, 2, 2)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting68, 2, 4)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting69, 2, 5)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label25, 2, 3)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting70, 0, 1)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting72, 0, 2)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting71, 0, 4)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting74, 0, 5)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting61, 0, 6)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting62, 0, 7)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting63, 0, 8)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting64, 0, 9)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting65, 0, 10)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label46, 1, 2)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting54, 1, 3)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting51, 1, 4)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting75, 1, 5)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting76, 1, 6)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting77, 1, 7)
-        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting78, 1, 8)
-        Me.TableLayoutPanel4.Controls.Add(Me.Label55, 3, 0)
-        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 13
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel4.TabIndex = 5
-        '
-        'TableLayoutPanel12
-        '
-        Me.TableLayoutPanel12.ColumnCount = 1
-        Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting189, 0, 7)
-        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting190, 0, 6)
-        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting191, 0, 5)
-        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting192, 0, 4)
-        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting193, 0, 3)
-        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting194, 0, 2)
-        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting195, 0, 1)
-        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting196, 0, 0)
-        Me.TableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel12.Location = New System.Drawing.Point(711, 25)
-        Me.TableLayoutPanel12.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
-        Me.TableLayoutPanel12.RowCount = 13
-        Me.TableLayoutPanel4.SetRowSpan(Me.TableLayoutPanel12, 12)
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel12.Size = New System.Drawing.Size(217, 509)
-        Me.TableLayoutPanel12.TabIndex = 37
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(242, 0)
-        Me.Label22.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(227, 25)
-        Me.Label22.TabIndex = 5
-        Me.Label22.Text = "Shader"
-        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(5, 0)
-        Me.Label23.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(227, 25)
-        Me.Label23.TabIndex = 2
-        Me.Label23.Text = "Options"
-        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(479, 0)
-        Me.Label24.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(227, 25)
-        Me.Label24.TabIndex = 28
-        Me.Label24.Text = "Window"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(479, 129)
-        Me.Label25.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(227, 31)
-        Me.Label25.TabIndex = 33
-        Me.Label25.Text = "Full Screen"
-        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label46
-        '
-        Me.Label46.AutoSize = True
-        Me.Label46.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label46.Location = New System.Drawing.Point(242, 77)
-        Me.Label46.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(227, 52)
-        Me.Label46.TabIndex = 34
-        Me.Label46.Text = "GOAT Settings"
-        Me.Label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label55
-        '
-        Me.Label55.AutoSize = True
-        Me.Label55.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label55.Location = New System.Drawing.Point(716, 0)
-        Me.Label55.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(207, 25)
-        Me.Label55.TabIndex = 35
-        Me.Label55.Text = "Controllers"
-        Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(3, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(922, 29)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "PlayStation"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage2
-        '
-        Me.TabPage2.BackColor = System.Drawing.Color.Black
-        Me.TabPage2.Controls.Add(Me.tlp_sg_cont)
-        Me.TabPage2.ImageIndex = 3
-        Me.TabPage2.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage2.TabIndex = 1
-        '
-        'tlp_sg_cont
-        '
-        Me.tlp_sg_cont.BackColor = System.Drawing.Color.DimGray
-        Me.tlp_sg_cont.ColumnCount = 1
-        Me.tlp_sg_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.tlp_sg_cont.Controls.Add(Me.TableLayoutPanel3, 0, 1)
-        Me.tlp_sg_cont.Controls.Add(Me.Label2, 0, 0)
-        Me.tlp_sg_cont.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlp_sg_cont.Location = New System.Drawing.Point(0, 0)
-        Me.tlp_sg_cont.Margin = New System.Windows.Forms.Padding(0)
-        Me.tlp_sg_cont.Name = "tlp_sg_cont"
-        Me.tlp_sg_cont.RowCount = 2
-        Me.tlp_sg_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlp_sg_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_sg_cont.Size = New System.Drawing.Size(928, 563)
-        Me.tlp_sg_cont.TabIndex = 1
-        '
-        'TableLayoutPanel3
-        '
-        Me.TableLayoutPanel3.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel3.ColumnCount = 4
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel13, 3, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.sg_controllers_label, 3, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting41, 1, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label18, 1, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label19, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label20, 2, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting47, 2, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting48, 2, 2)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting49, 2, 4)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting50, 2, 5)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label21, 2, 3)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting53, 0, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting52, 0, 2)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting55, 0, 3)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting42, 0, 4)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting43, 0, 5)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting44, 0, 6)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting45, 0, 7)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting46, 0, 8)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting59, 1, 8)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting58, 1, 7)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting57, 1, 6)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting56, 1, 5)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting39, 1, 4)
-        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting40, 1, 3)
-        Me.TableLayoutPanel3.Controls.Add(Me.Label48, 1, 2)
-        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 13
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel3.TabIndex = 5
-        '
-        'TableLayoutPanel13
-        '
-        Me.TableLayoutPanel13.ColumnCount = 1
-        Me.TableLayoutPanel13.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting185, 0, 7)
-        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting186, 0, 6)
-        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting187, 0, 5)
-        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting188, 0, 4)
-        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting197, 0, 3)
-        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting198, 0, 2)
-        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting199, 0, 1)
-        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting200, 0, 0)
-        Me.TableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel13.Location = New System.Drawing.Point(711, 25)
-        Me.TableLayoutPanel13.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel13.Name = "TableLayoutPanel13"
-        Me.TableLayoutPanel13.RowCount = 13
-        Me.TableLayoutPanel3.SetRowSpan(Me.TableLayoutPanel13, 12)
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel13.Size = New System.Drawing.Size(217, 509)
-        Me.TableLayoutPanel13.TabIndex = 38
-        '
-        'sg_controllers_label
-        '
-        Me.sg_controllers_label.AutoSize = True
-        Me.sg_controllers_label.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.sg_controllers_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sg_controllers_label.Location = New System.Drawing.Point(716, 0)
-        Me.sg_controllers_label.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.sg_controllers_label.Name = "sg_controllers_label"
-        Me.sg_controllers_label.Size = New System.Drawing.Size(207, 25)
-        Me.sg_controllers_label.TabIndex = 36
-        Me.sg_controllers_label.Text = "Controllers"
-        Me.sg_controllers_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(242, 0)
-        Me.Label18.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(227, 25)
-        Me.Label18.TabIndex = 5
-        Me.Label18.Text = "Shader"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(5, 0)
-        Me.Label19.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(227, 25)
-        Me.Label19.TabIndex = 2
-        Me.Label19.Text = "Video"
-        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(479, 0)
-        Me.Label20.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(227, 25)
-        Me.Label20.TabIndex = 28
-        Me.Label20.Text = "Window"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(479, 129)
-        Me.Label21.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(227, 52)
-        Me.Label21.TabIndex = 33
-        Me.Label21.Text = "Full Screen"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label48
-        '
-        Me.Label48.AutoSize = True
-        Me.Label48.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label48.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label48.Location = New System.Drawing.Point(242, 77)
-        Me.Label48.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(227, 52)
-        Me.Label48.TabIndex = 35
-        Me.Label48.Text = "GOAT Settings"
-        Me.Label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(0, 0)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(928, 29)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Sega Genesis / Mega Drive"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage6
-        '
-        Me.TabPage6.Controls.Add(Me.TableLayoutPanel16)
-        Me.TabPage6.ImageIndex = 11
-        Me.TabPage6.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage6.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage6.TabIndex = 10
-        Me.TabPage6.UseVisualStyleBackColor = True
-        '
-        'TableLayoutPanel16
-        '
-        Me.TableLayoutPanel16.BackColor = System.Drawing.Color.DimGray
-        Me.TableLayoutPanel16.ColumnCount = 1
-        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel16.Controls.Add(Me.TableLayoutPanel17, 0, 1)
-        Me.TableLayoutPanel16.Controls.Add(Me.Label65, 0, 0)
-        Me.TableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel16.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel16.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel16.Name = "TableLayoutPanel16"
-        Me.TableLayoutPanel16.RowCount = 2
-        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel16.Size = New System.Drawing.Size(928, 563)
-        Me.TableLayoutPanel16.TabIndex = 2
-        '
-        'TableLayoutPanel17
-        '
-        Me.TableLayoutPanel17.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel17.ColumnCount = 3
-        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
-        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting209, 1, 1)
-        Me.TableLayoutPanel17.Controls.Add(Me.Label60, 1, 0)
-        Me.TableLayoutPanel17.Controls.Add(Me.Label61, 0, 0)
-        Me.TableLayoutPanel17.Controls.Add(Me.Label62, 2, 0)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting210, 2, 1)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting211, 2, 2)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting212, 2, 4)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting213, 2, 5)
-        Me.TableLayoutPanel17.Controls.Add(Me.Label63, 2, 3)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting214, 0, 1)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting218, 0, 2)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting219, 0, 3)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting220, 0, 4)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting221, 0, 5)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting222, 0, 6)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting223, 0, 7)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting224, 1, 8)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting225, 1, 7)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting226, 1, 6)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting227, 1, 5)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting228, 1, 4)
-        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting229, 1, 3)
-        Me.TableLayoutPanel17.Controls.Add(Me.Label64, 1, 2)
-        Me.TableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel17.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel17.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel17.Name = "TableLayoutPanel17"
-        Me.TableLayoutPanel17.RowCount = 13
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel17.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel17.TabIndex = 6
-        '
-        'Label60
-        '
-        Me.Label60.AutoSize = True
-        Me.Label60.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label60.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label60.Location = New System.Drawing.Point(314, 0)
-        Me.Label60.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(299, 25)
-        Me.Label60.TabIndex = 5
-        Me.Label60.Text = "Shader"
-        Me.Label60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label61
-        '
-        Me.Label61.AutoSize = True
-        Me.Label61.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label61.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label61.Location = New System.Drawing.Point(5, 0)
-        Me.Label61.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(299, 25)
-        Me.Label61.TabIndex = 2
-        Me.Label61.Text = "Video"
-        Me.Label61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label62
-        '
-        Me.Label62.AutoSize = True
-        Me.Label62.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label62.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label62.Location = New System.Drawing.Point(623, 0)
-        Me.Label62.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(300, 25)
-        Me.Label62.TabIndex = 28
-        Me.Label62.Text = "Window"
-        Me.Label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label63
-        '
-        Me.Label63.AutoSize = True
-        Me.Label63.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label63.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label63.Location = New System.Drawing.Point(623, 129)
-        Me.Label63.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label63.Name = "Label63"
-        Me.Label63.Size = New System.Drawing.Size(300, 31)
-        Me.Label63.TabIndex = 33
-        Me.Label63.Text = "Full Screen"
-        Me.Label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label64
-        '
-        Me.Label64.AutoSize = True
-        Me.Label64.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label64.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label64.Location = New System.Drawing.Point(314, 77)
-        Me.Label64.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label64.Name = "Label64"
-        Me.Label64.Size = New System.Drawing.Size(299, 52)
-        Me.Label64.TabIndex = 36
-        Me.Label64.Text = "GOAT Settings"
-        Me.Label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label65
-        '
-        Me.Label65.AutoSize = True
-        Me.Label65.BackColor = System.Drawing.Color.Transparent
-        Me.Label65.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label65.Location = New System.Drawing.Point(0, 0)
-        Me.Label65.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(928, 29)
-        Me.Label65.TabIndex = 0
-        Me.Label65.Text = "Sega Master System"
-        Me.Label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage4
-        '
-        Me.TabPage4.BackColor = System.Drawing.Color.Black
-        Me.TabPage4.Controls.Add(Me.TableLayoutPanel5)
-        Me.TabPage4.ImageIndex = 5
-        Me.TabPage4.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage4.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage4.TabIndex = 3
-        '
-        'TableLayoutPanel5
-        '
-        Me.TableLayoutPanel5.BackColor = System.Drawing.Color.DimGray
-        Me.TableLayoutPanel5.ColumnCount = 1
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel5.Controls.Add(Me.TableLayoutPanel6, 0, 1)
-        Me.TableLayoutPanel5.Controls.Add(Me.Label4, 0, 0)
-        Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel5.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel5.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
-        Me.TableLayoutPanel5.RowCount = 2
-        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(928, 563)
-        Me.TableLayoutPanel5.TabIndex = 1
-        '
-        'TableLayoutPanel6
-        '
-        Me.TableLayoutPanel6.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel6.ColumnCount = 4
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
-        Me.TableLayoutPanel6.Controls.Add(Me.TableLayoutPanel14, 3, 1)
-        Me.TableLayoutPanel6.Controls.Add(Me.Label56, 3, 0)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting80, 1, 1)
-        Me.TableLayoutPanel6.Controls.Add(Me.Label26, 1, 0)
-        Me.TableLayoutPanel6.Controls.Add(Me.Label27, 0, 0)
-        Me.TableLayoutPanel6.Controls.Add(Me.Label28, 2, 0)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting81, 2, 1)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting82, 2, 2)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting83, 2, 4)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting84, 2, 5)
-        Me.TableLayoutPanel6.Controls.Add(Me.Label29, 2, 3)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting89, 0, 1)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting90, 0, 2)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting91, 0, 3)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting92, 0, 4)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting93, 0, 5)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting94, 0, 6)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting95, 0, 7)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting96, 0, 8)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting88, 1, 8)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting87, 1, 7)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting86, 1, 6)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting85, 1, 5)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting73, 1, 4)
-        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting79, 1, 3)
-        Me.TableLayoutPanel6.Controls.Add(Me.Label49, 1, 2)
-        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel6.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
-        Me.TableLayoutPanel6.RowCount = 13
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel6.TabIndex = 6
-        '
-        'TableLayoutPanel14
-        '
-        Me.TableLayoutPanel14.ColumnCount = 1
-        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting205, 0, 3)
-        Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting206, 0, 2)
-        Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting207, 0, 1)
-        Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting208, 0, 0)
-        Me.TableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel14.Location = New System.Drawing.Point(711, 25)
-        Me.TableLayoutPanel14.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
-        Me.TableLayoutPanel14.RowCount = 13
-        Me.TableLayoutPanel6.SetRowSpan(Me.TableLayoutPanel14, 9)
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel14.Size = New System.Drawing.Size(217, 503)
-        Me.TableLayoutPanel14.TabIndex = 39
-        '
-        'Label56
-        '
-        Me.Label56.AutoSize = True
-        Me.Label56.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label56.Location = New System.Drawing.Point(716, 0)
-        Me.Label56.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(207, 25)
-        Me.Label56.TabIndex = 37
-        Me.Label56.Text = "Controllers"
-        Me.Label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(242, 0)
-        Me.Label26.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(227, 25)
-        Me.Label26.TabIndex = 5
-        Me.Label26.Text = "Shader"
-        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(5, 0)
-        Me.Label27.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(227, 25)
-        Me.Label27.TabIndex = 2
-        Me.Label27.Text = "Video"
-        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(479, 0)
-        Me.Label28.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(227, 25)
-        Me.Label28.TabIndex = 28
-        Me.Label28.Text = "Window"
-        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.Location = New System.Drawing.Point(479, 129)
-        Me.Label29.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(227, 52)
-        Me.Label29.TabIndex = 33
-        Me.Label29.Text = "Full Screen"
-        Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label49
-        '
-        Me.Label49.AutoSize = True
-        Me.Label49.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label49.Location = New System.Drawing.Point(242, 77)
-        Me.Label49.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(227, 52)
-        Me.Label49.TabIndex = 36
-        Me.Label49.Text = "GOAT Settings"
-        Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(0, 0)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(928, 29)
-        Me.Label4.TabIndex = 0
-        Me.Label4.Text = "Nintendo Entertainment System / Famicom Disk System"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage5
-        '
-        Me.TabPage5.BackColor = System.Drawing.Color.Black
-        Me.TabPage5.Controls.Add(Me.tlp_snes_cont)
-        Me.TabPage5.ImageIndex = 6
-        Me.TabPage5.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage5.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage5.TabIndex = 4
-        '
-        'tlp_snes_cont
-        '
-        Me.tlp_snes_cont.BackColor = System.Drawing.Color.DimGray
-        Me.tlp_snes_cont.ColumnCount = 1
-        Me.tlp_snes_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.tlp_snes_cont.Controls.Add(Me.TableLayoutPanel7, 0, 1)
-        Me.tlp_snes_cont.Controls.Add(Me.Label5, 0, 0)
-        Me.tlp_snes_cont.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlp_snes_cont.Location = New System.Drawing.Point(0, 0)
-        Me.tlp_snes_cont.Margin = New System.Windows.Forms.Padding(0)
-        Me.tlp_snes_cont.Name = "tlp_snes_cont"
-        Me.tlp_snes_cont.RowCount = 2
-        Me.tlp_snes_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlp_snes_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_snes_cont.Size = New System.Drawing.Size(928, 563)
-        Me.tlp_snes_cont.TabIndex = 1
-        '
-        'TableLayoutPanel7
-        '
-        Me.TableLayoutPanel7.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel7.ColumnCount = 4
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting201, 2, 11)
-        Me.TableLayoutPanel7.Controls.Add(Me.TableLayoutPanel15, 3, 1)
-        Me.TableLayoutPanel7.Controls.Add(Me.Label57, 3, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting100, 1, 1)
-        Me.TableLayoutPanel7.Controls.Add(Me.Label30, 1, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.Label31, 0, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.Label32, 2, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting101, 2, 1)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting102, 2, 2)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting103, 2, 4)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting104, 2, 5)
-        Me.TableLayoutPanel7.Controls.Add(Me.Label33, 2, 3)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting109, 0, 1)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting110, 0, 2)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting116, 0, 9)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting115, 0, 8)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting114, 0, 7)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting113, 0, 6)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting112, 0, 5)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting111, 0, 4)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting117, 0, 3)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting108, 1, 8)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting107, 1, 7)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting106, 1, 6)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting105, 1, 5)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting98, 1, 4)
-        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting99, 1, 3)
-        Me.TableLayoutPanel7.Controls.Add(Me.Label50, 1, 2)
-        Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel7.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
-        Me.TableLayoutPanel7.RowCount = 13
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel7.TabIndex = 7
-        '
-        'TableLayoutPanel15
-        '
-        Me.TableLayoutPanel15.ColumnCount = 1
-        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel15.Controls.Add(Me.MednafenSetting215, 0, 1)
-        Me.TableLayoutPanel15.Controls.Add(Me.MednafenSetting216, 0, 0)
-        Me.TableLayoutPanel15.Controls.Add(Me.Label58, 0, 2)
-        Me.TableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel15.Location = New System.Drawing.Point(711, 25)
-        Me.TableLayoutPanel15.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
-        Me.TableLayoutPanel15.RowCount = 4
-        Me.TableLayoutPanel7.SetRowSpan(Me.TableLayoutPanel15, 12)
-        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel15.Size = New System.Drawing.Size(217, 509)
-        Me.TableLayoutPanel15.TabIndex = 38
-        '
-        'Label58
-        '
-        Me.Label58.AutoSize = True
-        Me.Label58.Location = New System.Drawing.Point(3, 56)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(204, 104)
-        Me.Label58.TabIndex = 40
-        Me.Label58.Text = "All Multitap Ports on a SNES only support gamepad. Port 3-8 are gamepad" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 3 =" &
-    " 2B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 4 = 2C" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 5 = 2D" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 6 = 1B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 7 = 1C" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 8 = 1D"
-        '
-        'Label57
-        '
-        Me.Label57.AutoSize = True
-        Me.Label57.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label57.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label57.Location = New System.Drawing.Point(716, 0)
-        Me.Label57.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(207, 25)
-        Me.Label57.TabIndex = 37
-        Me.Label57.Text = "Controllers"
-        Me.Label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(242, 0)
-        Me.Label30.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(227, 25)
-        Me.Label30.TabIndex = 5
-        Me.Label30.Text = "Shader"
-        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label31.Location = New System.Drawing.Point(5, 0)
-        Me.Label31.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(227, 25)
-        Me.Label31.TabIndex = 2
-        Me.Label31.Text = "Video"
-        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label32.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label32.Location = New System.Drawing.Point(479, 0)
-        Me.Label32.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(227, 25)
-        Me.Label32.TabIndex = 28
-        Me.Label32.Text = "Window"
-        Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(479, 129)
-        Me.Label33.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(227, 31)
-        Me.Label33.TabIndex = 33
-        Me.Label33.Text = "Full Screen"
-        Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label50
-        '
-        Me.Label50.AutoSize = True
-        Me.Label50.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.Location = New System.Drawing.Point(242, 77)
-        Me.Label50.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(227, 52)
-        Me.Label50.TabIndex = 36
-        Me.Label50.Text = "GOAT Settings"
-        Me.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(0, 0)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(928, 29)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Super Nintendo Entertainment System"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage7
-        '
-        Me.TabPage7.BackColor = System.Drawing.Color.Black
-        Me.TabPage7.Controls.Add(Me.tlp_ngp_cont)
-        Me.TabPage7.ImageIndex = 8
-        Me.TabPage7.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage7.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage7.TabIndex = 6
-        '
-        'tlp_ngp_cont
-        '
-        Me.tlp_ngp_cont.BackColor = System.Drawing.Color.DimGray
-        Me.tlp_ngp_cont.ColumnCount = 1
-        Me.tlp_ngp_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.tlp_ngp_cont.Controls.Add(Me.TableLayoutPanel8, 0, 1)
-        Me.tlp_ngp_cont.Controls.Add(Me.Label7, 0, 0)
-        Me.tlp_ngp_cont.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlp_ngp_cont.Location = New System.Drawing.Point(0, 0)
-        Me.tlp_ngp_cont.Margin = New System.Windows.Forms.Padding(0)
-        Me.tlp_ngp_cont.Name = "tlp_ngp_cont"
-        Me.tlp_ngp_cont.RowCount = 2
-        Me.tlp_ngp_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlp_ngp_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_ngp_cont.Size = New System.Drawing.Size(928, 563)
-        Me.tlp_ngp_cont.TabIndex = 1
-        '
-        'TableLayoutPanel8
-        '
-        Me.TableLayoutPanel8.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel8.ColumnCount = 3
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting120, 1, 1)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label34, 1, 0)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label35, 0, 0)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label36, 2, 0)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting121, 2, 1)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting122, 2, 2)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting123, 2, 4)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting124, 2, 5)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label37, 2, 3)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting129, 0, 1)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting136, 0, 2)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting135, 0, 3)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting134, 0, 4)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting133, 0, 5)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting132, 0, 6)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting131, 0, 7)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting128, 1, 8)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting127, 1, 7)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting126, 1, 6)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting125, 1, 5)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting118, 1, 4)
-        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting119, 1, 3)
-        Me.TableLayoutPanel8.Controls.Add(Me.Label51, 1, 2)
-        Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel8.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel8.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
-        Me.TableLayoutPanel8.RowCount = 10
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel8.TabIndex = 8
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.Location = New System.Drawing.Point(314, 0)
-        Me.Label34.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(299, 25)
-        Me.Label34.TabIndex = 5
-        Me.Label34.Text = "Shader"
-        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label35
-        '
-        Me.Label35.AutoSize = True
-        Me.Label35.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label35.Location = New System.Drawing.Point(5, 0)
-        Me.Label35.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(299, 25)
-        Me.Label35.TabIndex = 2
-        Me.Label35.Text = "Video"
-        Me.Label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label36
-        '
-        Me.Label36.AutoSize = True
-        Me.Label36.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.Location = New System.Drawing.Point(623, 0)
-        Me.Label36.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(300, 25)
-        Me.Label36.TabIndex = 28
-        Me.Label36.Text = "Window"
-        Me.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(623, 129)
-        Me.Label37.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(300, 31)
-        Me.Label37.TabIndex = 33
-        Me.Label37.Text = "Full Screen"
-        Me.Label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label51
-        '
-        Me.Label51.AutoSize = True
-        Me.Label51.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label51.Location = New System.Drawing.Point(314, 77)
-        Me.Label51.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(299, 52)
-        Me.Label51.TabIndex = 36
-        Me.Label51.Text = "GOAT Settings"
-        Me.Label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(0, 0)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(928, 29)
-        Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Neo-Geo Pocket Color"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage8
-        '
-        Me.TabPage8.BackColor = System.Drawing.Color.Black
-        Me.TabPage8.Controls.Add(Me.tlp_gba_cont)
-        Me.TabPage8.ImageIndex = 9
-        Me.TabPage8.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage8.Name = "TabPage8"
-        Me.TabPage8.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage8.TabIndex = 7
-        '
-        'tlp_gba_cont
-        '
-        Me.tlp_gba_cont.BackColor = System.Drawing.Color.DimGray
-        Me.tlp_gba_cont.ColumnCount = 1
-        Me.tlp_gba_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.tlp_gba_cont.Controls.Add(Me.TableLayoutPanel9, 0, 1)
-        Me.tlp_gba_cont.Controls.Add(Me.Label8, 0, 0)
-        Me.tlp_gba_cont.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlp_gba_cont.Location = New System.Drawing.Point(0, 0)
-        Me.tlp_gba_cont.Name = "tlp_gba_cont"
-        Me.tlp_gba_cont.RowCount = 2
-        Me.tlp_gba_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlp_gba_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_gba_cont.Size = New System.Drawing.Size(928, 563)
-        Me.tlp_gba_cont.TabIndex = 1
-        '
-        'TableLayoutPanel9
-        '
-        Me.TableLayoutPanel9.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel9.ColumnCount = 3
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting139, 1, 1)
-        Me.TableLayoutPanel9.Controls.Add(Me.Label38, 1, 0)
-        Me.TableLayoutPanel9.Controls.Add(Me.Label39, 0, 0)
-        Me.TableLayoutPanel9.Controls.Add(Me.Label40, 2, 0)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting140, 2, 1)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting141, 2, 2)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting142, 2, 4)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting143, 2, 5)
-        Me.TableLayoutPanel9.Controls.Add(Me.Label41, 2, 3)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting148, 0, 1)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting155, 0, 2)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting154, 0, 3)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting153, 0, 4)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting152, 0, 5)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting151, 0, 6)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting150, 0, 7)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting147, 1, 8)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting146, 1, 7)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting145, 1, 6)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting144, 1, 5)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting137, 1, 4)
-        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting138, 1, 3)
-        Me.TableLayoutPanel9.Controls.Add(Me.Label52, 1, 2)
-        Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel9.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel9.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
-        Me.TableLayoutPanel9.RowCount = 10
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel9.TabIndex = 8
-        '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.Location = New System.Drawing.Point(314, 0)
-        Me.Label38.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(299, 25)
-        Me.Label38.TabIndex = 5
-        Me.Label38.Text = "Shader"
-        Me.Label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label39
-        '
-        Me.Label39.AutoSize = True
-        Me.Label39.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(5, 0)
-        Me.Label39.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(299, 25)
-        Me.Label39.TabIndex = 2
-        Me.Label39.Text = "Video"
-        Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label40
-        '
-        Me.Label40.AutoSize = True
-        Me.Label40.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label40.Location = New System.Drawing.Point(623, 0)
-        Me.Label40.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(300, 25)
-        Me.Label40.TabIndex = 28
-        Me.Label40.Text = "Window"
-        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label41
-        '
-        Me.Label41.AutoSize = True
-        Me.Label41.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label41.Location = New System.Drawing.Point(623, 129)
-        Me.Label41.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(300, 31)
-        Me.Label41.TabIndex = 33
-        Me.Label41.Text = "Full Screen"
-        Me.Label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label52
-        '
-        Me.Label52.AutoSize = True
-        Me.Label52.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label52.Location = New System.Drawing.Point(314, 77)
-        Me.Label52.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(299, 52)
-        Me.Label52.TabIndex = 36
-        Me.Label52.Text = "GOAT Settings"
-        Me.Label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(3, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(922, 29)
-        Me.Label8.TabIndex = 0
-        Me.Label8.Text = "Game Boy Advance"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TabPage9
-        '
-        Me.TabPage9.BackColor = System.Drawing.Color.Black
-        Me.TabPage9.Controls.Add(Me.tlp_gbc_cont)
-        Me.TabPage9.ImageIndex = 10
-        Me.TabPage9.Location = New System.Drawing.Point(4, 36)
-        Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.Size = New System.Drawing.Size(928, 563)
-        Me.TabPage9.TabIndex = 8
-        '
-        'tlp_gbc_cont
-        '
-        Me.tlp_gbc_cont.BackColor = System.Drawing.Color.DimGray
-        Me.tlp_gbc_cont.ColumnCount = 1
-        Me.tlp_gbc_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.tlp_gbc_cont.Controls.Add(Me.TableLayoutPanel10, 0, 1)
-        Me.tlp_gbc_cont.Controls.Add(Me.Label9, 0, 0)
-        Me.tlp_gbc_cont.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlp_gbc_cont.Location = New System.Drawing.Point(0, 0)
-        Me.tlp_gbc_cont.Name = "tlp_gbc_cont"
-        Me.tlp_gbc_cont.RowCount = 2
-        Me.tlp_gbc_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tlp_gbc_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlp_gbc_cont.Size = New System.Drawing.Size(928, 563)
-        Me.tlp_gbc_cont.TabIndex = 2
-        '
-        'TableLayoutPanel10
-        '
-        Me.TableLayoutPanel10.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel10.ColumnCount = 3
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting159, 1, 1)
-        Me.TableLayoutPanel10.Controls.Add(Me.Label42, 1, 0)
-        Me.TableLayoutPanel10.Controls.Add(Me.Label43, 0, 0)
-        Me.TableLayoutPanel10.Controls.Add(Me.Label44, 2, 0)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting160, 2, 1)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting161, 2, 2)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting162, 2, 4)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting163, 2, 5)
-        Me.TableLayoutPanel10.Controls.Add(Me.Label45, 2, 3)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting168, 0, 1)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting175, 0, 2)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting174, 0, 3)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting173, 0, 4)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting171, 0, 6)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting172, 0, 5)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting170, 0, 7)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting167, 1, 8)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting166, 1, 7)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting165, 1, 6)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting164, 1, 5)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting157, 1, 4)
-        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting158, 1, 3)
-        Me.TableLayoutPanel10.Controls.Add(Me.Label53, 1, 2)
-        Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel10.Location = New System.Drawing.Point(0, 29)
-        Me.TableLayoutPanel10.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
-        Me.TableLayoutPanel10.RowCount = 10
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel10.Size = New System.Drawing.Size(928, 534)
-        Me.TableLayoutPanel10.TabIndex = 9
-        '
-        'Label42
-        '
-        Me.Label42.AutoSize = True
-        Me.Label42.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label42.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label42.Location = New System.Drawing.Point(314, 0)
-        Me.Label42.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(299, 25)
-        Me.Label42.TabIndex = 5
-        Me.Label42.Text = "Shader"
-        Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label43
-        '
-        Me.Label43.AutoSize = True
-        Me.Label43.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label43.Location = New System.Drawing.Point(5, 0)
-        Me.Label43.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(299, 25)
-        Me.Label43.TabIndex = 2
-        Me.Label43.Text = "Video"
-        Me.Label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label44
-        '
-        Me.Label44.AutoSize = True
-        Me.Label44.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label44.Location = New System.Drawing.Point(623, 0)
-        Me.Label44.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(300, 25)
-        Me.Label44.TabIndex = 28
-        Me.Label44.Text = "Window"
-        Me.Label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label45
-        '
-        Me.Label45.AutoSize = True
-        Me.Label45.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(623, 129)
-        Me.Label45.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(300, 31)
-        Me.Label45.TabIndex = 33
-        Me.Label45.Text = "Full Screen"
-        Me.Label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label53
-        '
-        Me.Label53.AutoSize = True
-        Me.Label53.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label53.Location = New System.Drawing.Point(314, 77)
-        Me.Label53.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(299, 52)
-        Me.Label53.TabIndex = 36
-        Me.Label53.Text = "GOAT Settings"
-        Me.Label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.BackColor = System.Drawing.Color.Transparent
-        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(3, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(922, 29)
-        Me.Label9.TabIndex = 0
-        Me.Label9.Text = "Game Boy Color"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'SystemIcons
-        '
-        Me.SystemIcons.ImageStream = CType(resources.GetObject("SystemIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.SystemIcons.TransparentColor = System.Drawing.Color.Transparent
-        Me.SystemIcons.Images.SetKeyName(0, "icon_Naomi.png")
-        Me.SystemIcons.Images.SetKeyName(1, "icon_dreamcast.png")
-        Me.SystemIcons.Images.SetKeyName(2, "Icon_SegaSaturn.png")
-        Me.SystemIcons.Images.SetKeyName(3, "icon_Genesis.png")
-        Me.SystemIcons.Images.SetKeyName(4, "icon_PSX.png")
-        Me.SystemIcons.Images.SetKeyName(5, "icon_NES.png")
-        Me.SystemIcons.Images.SetKeyName(6, "icon_SNES.png")
-        Me.SystemIcons.Images.SetKeyName(7, "icon_fds.png")
-        Me.SystemIcons.Images.SetKeyName(8, "icon_NGP.png")
-        Me.SystemIcons.Images.SetKeyName(9, "icon_GBA.png")
-        Me.SystemIcons.Images.SetKeyName(10, "icon_GBC.png")
-        Me.SystemIcons.Images.SetKeyName(11, "Icon_SMS.png")
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.DimGray
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.Padding = New System.Windows.Forms.Padding(5, 0, 5, 5)
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(937, 603)
-        Me.TableLayoutPanel1.TabIndex = 1
-        '
-        'Panel1
-        '
-        Me.Panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.Panel1.BackColor = System.Drawing.Color.Maroon
-        Me.Panel1.Controls.Add(Me.tc_options)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(5, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(927, 598)
-        Me.Panel1.TabIndex = 1
-        '
-        'MednafenSetting130
-        '
-        Me.MednafenSetting130.AutoSize = True
-        Me.MednafenSetting130.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.MednafenSetting130.BackColor = System.Drawing.Color.DarkGray
-        Me.MednafenSetting130.ChangeRate = 1.0!
-        Me.MednafenSetting130.ConfigString = "video.glvsync"
-        Me.MednafenSetting130.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MednafenSetting130.Limits = ""
-        Me.MednafenSetting130.Location = New System.Drawing.Point(314, 295)
-        Me.MednafenSetting130.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
-        Me.MednafenSetting130.Name = "MednafenSetting130"
-        Me.MednafenSetting130.ProperName = "GL Vsync"
-        Me.MednafenSetting130.Size = New System.Drawing.Size(299, 30)
-        Me.MednafenSetting130.TabIndex = 21
         '
         'MednafenSetting11
         '
@@ -2410,6 +699,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting18.Size = New System.Drawing.Size(299, 30)
         Me.MednafenSetting18.TabIndex = 19
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(5, 0)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(299, 25)
+        Me.Label11.TabIndex = 2
+        Me.Label11.Text = "Fast Forward"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'MednafenSetting6
         '
         Me.MednafenSetting6.AutoSize = True
@@ -2441,6 +743,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting5.ProperName = "Mute while FF"
         Me.MednafenSetting5.Size = New System.Drawing.Size(299, 30)
         Me.MednafenSetting5.TabIndex = 3
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(5, 108)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(299, 52)
+        Me.Label12.TabIndex = 5
+        Me.Label12.Text = "FPS Display"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting7
         '
@@ -2538,6 +853,120 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting10.Size = New System.Drawing.Size(299, 51)
         Me.MednafenSetting10.TabIndex = 11
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.BackColor = System.Drawing.Color.Transparent
+        Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(0, 0)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(928, 29)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "General Emulator Settings"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage1
+        '
+        Me.TabPage1.BackColor = System.Drawing.Color.Black
+        Me.TabPage1.Controls.Add(Me.tlp_ss_cont)
+        Me.TabPage1.ImageIndex = 2
+        Me.TabPage1.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage1.TabIndex = 0
+        '
+        'tlp_ss_cont
+        '
+        Me.tlp_ss_cont.BackColor = System.Drawing.Color.DimGray
+        Me.tlp_ss_cont.ColumnCount = 1
+        Me.tlp_ss_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlp_ss_cont.Controls.Add(Me.TableLayoutPanel2, 0, 1)
+        Me.tlp_ss_cont.Controls.Add(Me.Label1, 0, 0)
+        Me.tlp_ss_cont.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlp_ss_cont.Location = New System.Drawing.Point(0, 0)
+        Me.tlp_ss_cont.Margin = New System.Windows.Forms.Padding(0)
+        Me.tlp_ss_cont.Name = "tlp_ss_cont"
+        Me.tlp_ss_cont.RowCount = 2
+        Me.tlp_ss_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlp_ss_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlp_ss_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlp_ss_cont.Size = New System.Drawing.Size(928, 563)
+        Me.tlp_ss_cont.TabIndex = 2
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel2.ColumnCount = 4
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Label54, 3, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting24, 0, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting27, 1, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label16, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label17, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting23, 0, 7)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting28, 0, 8)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting31, 0, 9)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting32, 0, 10)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting33, 0, 11)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label14, 2, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting34, 2, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting35, 2, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting36, 2, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting37, 2, 5)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label15, 2, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting22, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting29, 0, 5)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting21, 0, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting30, 0, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting3, 0, 6)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting19, 1, 8)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting2, 1, 7)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting1, 1, 6)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting20, 1, 5)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting25, 1, 4)
+        Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting26, 1, 3)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label47, 1, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel11, 3, 1)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 13
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel2.TabIndex = 4
+        '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label54.Location = New System.Drawing.Point(716, 0)
+        Me.Label54.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(207, 25)
+        Me.Label54.TabIndex = 37
+        Me.Label54.Text = "Controllers"
+        Me.Label54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'MednafenSetting24
         '
         Me.MednafenSetting24.AutoSize = True
@@ -2570,6 +999,32 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting27.ProperName = "Shader"
         Me.MednafenSetting27.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting27.TabIndex = 6
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(242, 0)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(227, 25)
+        Me.Label16.TabIndex = 5
+        Me.Label16.Text = "Shader"
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(5, 0)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(227, 25)
+        Me.Label17.TabIndex = 2
+        Me.Label17.Text = "Options"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting23
         '
@@ -2651,6 +1106,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting33.Size = New System.Drawing.Size(227, 27)
         Me.MednafenSetting33.TabIndex = 27
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(479, 0)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(227, 25)
+        Me.Label14.TabIndex = 28
+        Me.Label14.Text = "Window"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'MednafenSetting34
         '
         Me.MednafenSetting34.AutoSize = True
@@ -2714,6 +1182,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting37.ProperName = "Height:"
         Me.MednafenSetting37.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting37.TabIndex = 32
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(479, 129)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(227, 31)
+        Me.Label15.TabIndex = 33
+        Me.Label15.Text = "Full Screen"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting22
         '
@@ -2890,6 +1371,57 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting26.ProperName = "Force Progressive"
         Me.MednafenSetting26.Size = New System.Drawing.Size(227, 30)
         Me.MednafenSetting26.TabIndex = 7
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label47.Location = New System.Drawing.Point(242, 77)
+        Me.Label47.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(227, 52)
+        Me.Label47.TabIndex = 35
+        Me.Label47.Text = "GOAT Settings"
+        Me.Label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TableLayoutPanel11
+        '
+        Me.TableLayoutPanel11.ColumnCount = 1
+        Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting184, 0, 11)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting183, 0, 10)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting182, 0, 8)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting181, 0, 9)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting180, 0, 7)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting179, 0, 6)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting178, 0, 5)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting177, 0, 4)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting176, 0, 3)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting169, 0, 2)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting156, 0, 1)
+        Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting149, 0, 0)
+        Me.TableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel11.Location = New System.Drawing.Point(711, 25)
+        Me.TableLayoutPanel11.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel11.Name = "TableLayoutPanel11"
+        Me.TableLayoutPanel11.RowCount = 13
+        Me.TableLayoutPanel2.SetRowSpan(Me.TableLayoutPanel11, 12)
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel11.Size = New System.Drawing.Size(217, 509)
+        Me.TableLayoutPanel11.TabIndex = 36
         '
         'MednafenSetting184
         '
@@ -3083,6 +1615,138 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting149.Size = New System.Drawing.Size(207, 27)
         Me.MednafenSetting149.TabIndex = 38
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(0, 0)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(928, 29)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "Sega Saturn"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage3
+        '
+        Me.TabPage3.BackColor = System.Drawing.Color.Black
+        Me.TabPage3.Controls.Add(Me.tlp_psx_cont)
+        Me.TabPage3.ImageIndex = 4
+        Me.TabPage3.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage3.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage3.TabIndex = 2
+        '
+        'tlp_psx_cont
+        '
+        Me.tlp_psx_cont.BackColor = System.Drawing.Color.DimGray
+        Me.tlp_psx_cont.ColumnCount = 1
+        Me.tlp_psx_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlp_psx_cont.Controls.Add(Me.TableLayoutPanel4, 0, 1)
+        Me.tlp_psx_cont.Controls.Add(Me.Label3, 0, 0)
+        Me.tlp_psx_cont.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlp_psx_cont.Location = New System.Drawing.Point(0, 0)
+        Me.tlp_psx_cont.Name = "tlp_psx_cont"
+        Me.tlp_psx_cont.RowCount = 2
+        Me.tlp_psx_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlp_psx_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlp_psx_cont.Size = New System.Drawing.Size(928, 563)
+        Me.tlp_psx_cont.TabIndex = 1
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel4.ColumnCount = 4
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel12, 3, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting38, 0, 3)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting60, 1, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label22, 1, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label23, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label24, 2, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting66, 2, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting67, 2, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting68, 2, 4)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting69, 2, 5)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label25, 2, 3)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting70, 0, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting72, 0, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting71, 0, 4)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting74, 0, 5)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting61, 0, 6)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting62, 0, 7)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting63, 0, 8)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting64, 0, 9)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting65, 0, 10)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label46, 1, 2)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting54, 1, 3)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting51, 1, 4)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting75, 1, 5)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting76, 1, 6)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting77, 1, 7)
+        Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting78, 1, 8)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label55, 3, 0)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 13
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel4.TabIndex = 5
+        '
+        'TableLayoutPanel12
+        '
+        Me.TableLayoutPanel12.ColumnCount = 1
+        Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting189, 0, 7)
+        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting190, 0, 6)
+        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting191, 0, 5)
+        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting192, 0, 4)
+        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting193, 0, 3)
+        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting194, 0, 2)
+        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting195, 0, 1)
+        Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting196, 0, 0)
+        Me.TableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel12.Location = New System.Drawing.Point(711, 25)
+        Me.TableLayoutPanel12.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
+        Me.TableLayoutPanel12.RowCount = 13
+        Me.TableLayoutPanel4.SetRowSpan(Me.TableLayoutPanel12, 12)
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel12.Size = New System.Drawing.Size(217, 509)
+        Me.TableLayoutPanel12.TabIndex = 37
+        '
         'MednafenSetting189
         '
         Me.MednafenSetting189.AutoSize = True
@@ -3244,6 +1908,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting60.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting60.TabIndex = 6
         '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(242, 0)
+        Me.Label22.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(227, 25)
+        Me.Label22.TabIndex = 5
+        Me.Label22.Text = "Shader"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(5, 0)
+        Me.Label23.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(227, 25)
+        Me.Label23.TabIndex = 2
+        Me.Label23.Text = "Options"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(479, 0)
+        Me.Label24.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(227, 25)
+        Me.Label24.TabIndex = 28
+        Me.Label24.Text = "Window"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'MednafenSetting66
         '
         Me.MednafenSetting66.AutoSize = True
@@ -3307,6 +2010,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting69.ProperName = "Height:"
         Me.MednafenSetting69.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting69.TabIndex = 32
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.Location = New System.Drawing.Point(479, 129)
+        Me.Label25.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(227, 31)
+        Me.Label25.TabIndex = 33
+        Me.Label25.Text = "Full Screen"
+        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting70
         '
@@ -3452,6 +2168,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting65.Size = New System.Drawing.Size(227, 27)
         Me.MednafenSetting65.TabIndex = 27
         '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label46.Location = New System.Drawing.Point(242, 77)
+        Me.Label46.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(227, 52)
+        Me.Label46.TabIndex = 34
+        Me.Label46.Text = "GOAT Settings"
+        Me.Label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'MednafenSetting54
         '
         Me.MednafenSetting54.AutoSize = True
@@ -3547,6 +2276,149 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting78.ProperName = "Transparency:"
         Me.MednafenSetting78.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting78.TabIndex = 20
+        '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label55.Location = New System.Drawing.Point(716, 0)
+        Me.Label55.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(207, 25)
+        Me.Label55.TabIndex = 35
+        Me.Label55.Text = "Controllers"
+        Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(3, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(922, 29)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "PlayStation"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage2
+        '
+        Me.TabPage2.BackColor = System.Drawing.Color.Black
+        Me.TabPage2.Controls.Add(Me.tlp_sg_cont)
+        Me.TabPage2.ImageIndex = 3
+        Me.TabPage2.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage2.TabIndex = 1
+        '
+        'tlp_sg_cont
+        '
+        Me.tlp_sg_cont.BackColor = System.Drawing.Color.DimGray
+        Me.tlp_sg_cont.ColumnCount = 1
+        Me.tlp_sg_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlp_sg_cont.Controls.Add(Me.TableLayoutPanel3, 0, 1)
+        Me.tlp_sg_cont.Controls.Add(Me.Label2, 0, 0)
+        Me.tlp_sg_cont.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlp_sg_cont.Location = New System.Drawing.Point(0, 0)
+        Me.tlp_sg_cont.Margin = New System.Windows.Forms.Padding(0)
+        Me.tlp_sg_cont.Name = "tlp_sg_cont"
+        Me.tlp_sg_cont.RowCount = 2
+        Me.tlp_sg_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlp_sg_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlp_sg_cont.Size = New System.Drawing.Size(928, 563)
+        Me.tlp_sg_cont.TabIndex = 1
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel3.ColumnCount = 4
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel13, 3, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.sg_controllers_label, 3, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting41, 1, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label18, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label19, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label20, 2, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting47, 2, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting48, 2, 2)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting49, 2, 4)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting50, 2, 5)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label21, 2, 3)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting53, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting52, 0, 2)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting55, 0, 3)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting42, 0, 4)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting43, 0, 5)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting44, 0, 6)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting45, 0, 7)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting46, 0, 8)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting59, 1, 8)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting58, 1, 7)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting57, 1, 6)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting56, 1, 5)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting39, 1, 4)
+        Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting40, 1, 3)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label48, 1, 2)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 13
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel3.TabIndex = 5
+        '
+        'TableLayoutPanel13
+        '
+        Me.TableLayoutPanel13.ColumnCount = 1
+        Me.TableLayoutPanel13.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting185, 0, 7)
+        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting186, 0, 6)
+        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting187, 0, 5)
+        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting188, 0, 4)
+        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting197, 0, 3)
+        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting198, 0, 2)
+        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting199, 0, 1)
+        Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting200, 0, 0)
+        Me.TableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel13.Location = New System.Drawing.Point(711, 25)
+        Me.TableLayoutPanel13.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel13.Name = "TableLayoutPanel13"
+        Me.TableLayoutPanel13.RowCount = 13
+        Me.TableLayoutPanel3.SetRowSpan(Me.TableLayoutPanel13, 12)
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel13.Size = New System.Drawing.Size(217, 509)
+        Me.TableLayoutPanel13.TabIndex = 38
         '
         'MednafenSetting185
         '
@@ -3676,6 +2548,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting200.Size = New System.Drawing.Size(207, 27)
         Me.MednafenSetting200.TabIndex = 38
         '
+        'sg_controllers_label
+        '
+        Me.sg_controllers_label.AutoSize = True
+        Me.sg_controllers_label.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sg_controllers_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sg_controllers_label.Location = New System.Drawing.Point(716, 0)
+        Me.sg_controllers_label.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.sg_controllers_label.Name = "sg_controllers_label"
+        Me.sg_controllers_label.Size = New System.Drawing.Size(207, 25)
+        Me.sg_controllers_label.TabIndex = 36
+        Me.sg_controllers_label.Text = "Controllers"
+        Me.sg_controllers_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'MednafenSetting41
         '
         Me.MednafenSetting41.AutoSize = True
@@ -3692,6 +2577,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting41.ProperName = "Shader"
         Me.MednafenSetting41.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting41.TabIndex = 6
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(242, 0)
+        Me.Label18.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(227, 25)
+        Me.Label18.TabIndex = 5
+        Me.Label18.Text = "Shader"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(5, 0)
+        Me.Label19.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(227, 25)
+        Me.Label19.TabIndex = 2
+        Me.Label19.Text = "Video"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(479, 0)
+        Me.Label20.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(227, 25)
+        Me.Label20.TabIndex = 28
+        Me.Label20.Text = "Window"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting47
         '
@@ -3756,6 +2680,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting50.ProperName = "Height:"
         Me.MednafenSetting50.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting50.TabIndex = 32
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(479, 129)
+        Me.Label21.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(227, 52)
+        Me.Label21.TabIndex = 33
+        Me.Label21.Text = "Full Screen"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting53
         '
@@ -3981,6 +2918,112 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting40.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting40.TabIndex = 7
         '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label48.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label48.Location = New System.Drawing.Point(242, 77)
+        Me.Label48.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(227, 52)
+        Me.Label48.TabIndex = 35
+        Me.Label48.Text = "GOAT Settings"
+        Me.Label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(0, 0)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(928, 29)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Sega Genesis / Mega Drive"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage6
+        '
+        Me.TabPage6.Controls.Add(Me.TableLayoutPanel16)
+        Me.TabPage6.ImageIndex = 11
+        Me.TabPage6.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage6.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage6.TabIndex = 10
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel16
+        '
+        Me.TableLayoutPanel16.BackColor = System.Drawing.Color.DimGray
+        Me.TableLayoutPanel16.ColumnCount = 1
+        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel16.Controls.Add(Me.TableLayoutPanel17, 0, 1)
+        Me.TableLayoutPanel16.Controls.Add(Me.Label65, 0, 0)
+        Me.TableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel16.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel16.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel16.Name = "TableLayoutPanel16"
+        Me.TableLayoutPanel16.RowCount = 2
+        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel16.Size = New System.Drawing.Size(928, 563)
+        Me.TableLayoutPanel16.TabIndex = 2
+        '
+        'TableLayoutPanel17
+        '
+        Me.TableLayoutPanel17.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel17.ColumnCount = 3
+        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
+        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting209, 1, 1)
+        Me.TableLayoutPanel17.Controls.Add(Me.Label60, 1, 0)
+        Me.TableLayoutPanel17.Controls.Add(Me.Label61, 0, 0)
+        Me.TableLayoutPanel17.Controls.Add(Me.Label62, 2, 0)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting210, 2, 1)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting211, 2, 2)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting212, 2, 4)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting213, 2, 5)
+        Me.TableLayoutPanel17.Controls.Add(Me.Label63, 2, 3)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting214, 0, 1)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting218, 0, 2)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting219, 0, 3)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting220, 0, 4)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting221, 0, 5)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting222, 0, 6)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting223, 0, 7)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting224, 1, 8)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting225, 1, 7)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting226, 1, 6)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting227, 1, 5)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting228, 1, 4)
+        Me.TableLayoutPanel17.Controls.Add(Me.MednafenSetting229, 1, 3)
+        Me.TableLayoutPanel17.Controls.Add(Me.Label64, 1, 2)
+        Me.TableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel17.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel17.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel17.Name = "TableLayoutPanel17"
+        Me.TableLayoutPanel17.RowCount = 13
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel17.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel17.TabIndex = 6
+        '
         'MednafenSetting209
         '
         Me.MednafenSetting209.AutoSize = True
@@ -3997,6 +3040,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting209.ProperName = "Shader"
         Me.MednafenSetting209.Size = New System.Drawing.Size(299, 51)
         Me.MednafenSetting209.TabIndex = 6
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label60.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label60.Location = New System.Drawing.Point(314, 0)
+        Me.Label60.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(299, 25)
+        Me.Label60.TabIndex = 5
+        Me.Label60.Text = "Shader"
+        Me.Label60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label61.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label61.Location = New System.Drawing.Point(5, 0)
+        Me.Label61.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(299, 25)
+        Me.Label61.TabIndex = 2
+        Me.Label61.Text = "Video"
+        Me.Label61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label62.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label62.Location = New System.Drawing.Point(623, 0)
+        Me.Label62.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(300, 25)
+        Me.Label62.TabIndex = 28
+        Me.Label62.Text = "Window"
+        Me.Label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting210
         '
@@ -4061,6 +3143,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting213.ProperName = "Height:"
         Me.MednafenSetting213.Size = New System.Drawing.Size(300, 51)
         Me.MednafenSetting213.TabIndex = 32
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label63.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label63.Location = New System.Drawing.Point(623, 129)
+        Me.Label63.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(300, 31)
+        Me.Label63.TabIndex = 33
+        Me.Label63.Text = "Full Screen"
+        Me.Label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting214
         '
@@ -4270,6 +3365,146 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting229.Size = New System.Drawing.Size(299, 30)
         Me.MednafenSetting229.TabIndex = 7
         '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label64.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label64.Location = New System.Drawing.Point(314, 77)
+        Me.Label64.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(299, 52)
+        Me.Label64.TabIndex = 36
+        Me.Label64.Text = "GOAT Settings"
+        Me.Label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.BackColor = System.Drawing.Color.Transparent
+        Me.Label65.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label65.Location = New System.Drawing.Point(0, 0)
+        Me.Label65.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(928, 29)
+        Me.Label65.TabIndex = 0
+        Me.Label65.Text = "Sega Master System"
+        Me.Label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage4
+        '
+        Me.TabPage4.BackColor = System.Drawing.Color.Black
+        Me.TabPage4.Controls.Add(Me.TableLayoutPanel5)
+        Me.TabPage4.ImageIndex = 5
+        Me.TabPage4.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage4.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage4.TabIndex = 3
+        '
+        'TableLayoutPanel5
+        '
+        Me.TableLayoutPanel5.BackColor = System.Drawing.Color.DimGray
+        Me.TableLayoutPanel5.ColumnCount = 1
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel5.Controls.Add(Me.TableLayoutPanel6, 0, 1)
+        Me.TableLayoutPanel5.Controls.Add(Me.Label4, 0, 0)
+        Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel5.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel5.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
+        Me.TableLayoutPanel5.RowCount = 2
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(928, 563)
+        Me.TableLayoutPanel5.TabIndex = 1
+        '
+        'TableLayoutPanel6
+        '
+        Me.TableLayoutPanel6.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel6.ColumnCount = 4
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
+        Me.TableLayoutPanel6.Controls.Add(Me.TableLayoutPanel14, 3, 1)
+        Me.TableLayoutPanel6.Controls.Add(Me.Label56, 3, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting80, 1, 1)
+        Me.TableLayoutPanel6.Controls.Add(Me.Label26, 1, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.Label27, 0, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.Label28, 2, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting81, 2, 1)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting82, 2, 2)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting83, 2, 4)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting84, 2, 5)
+        Me.TableLayoutPanel6.Controls.Add(Me.Label29, 2, 3)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting89, 0, 1)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting90, 0, 2)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting91, 0, 3)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting92, 0, 4)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting93, 0, 5)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting94, 0, 6)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting95, 0, 7)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting96, 0, 8)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting88, 1, 8)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting87, 1, 7)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting86, 1, 6)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting85, 1, 5)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting73, 1, 4)
+        Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting79, 1, 3)
+        Me.TableLayoutPanel6.Controls.Add(Me.Label49, 1, 2)
+        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel6.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
+        Me.TableLayoutPanel6.RowCount = 13
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel6.TabIndex = 6
+        '
+        'TableLayoutPanel14
+        '
+        Me.TableLayoutPanel14.ColumnCount = 1
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting205, 0, 3)
+        Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting206, 0, 2)
+        Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting207, 0, 1)
+        Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting208, 0, 0)
+        Me.TableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel14.Location = New System.Drawing.Point(711, 25)
+        Me.TableLayoutPanel14.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
+        Me.TableLayoutPanel14.RowCount = 13
+        Me.TableLayoutPanel6.SetRowSpan(Me.TableLayoutPanel14, 9)
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel14.Size = New System.Drawing.Size(217, 503)
+        Me.TableLayoutPanel14.TabIndex = 39
+        '
         'MednafenSetting205
         '
         Me.MednafenSetting205.AutoSize = True
@@ -4334,6 +3569,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting208.Size = New System.Drawing.Size(207, 27)
         Me.MednafenSetting208.TabIndex = 38
         '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label56.Location = New System.Drawing.Point(716, 0)
+        Me.Label56.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(207, 25)
+        Me.Label56.TabIndex = 37
+        Me.Label56.Text = "Controllers"
+        Me.Label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'MednafenSetting80
         '
         Me.MednafenSetting80.AutoSize = True
@@ -4350,6 +3598,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting80.ProperName = "Shader"
         Me.MednafenSetting80.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting80.TabIndex = 6
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.Location = New System.Drawing.Point(242, 0)
+        Me.Label26.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(227, 25)
+        Me.Label26.TabIndex = 5
+        Me.Label26.Text = "Shader"
+        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.Location = New System.Drawing.Point(5, 0)
+        Me.Label27.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(227, 25)
+        Me.Label27.TabIndex = 2
+        Me.Label27.Text = "Video"
+        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.Location = New System.Drawing.Point(479, 0)
+        Me.Label28.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(227, 25)
+        Me.Label28.TabIndex = 28
+        Me.Label28.Text = "Window"
+        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting81
         '
@@ -4414,6 +3701,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting84.ProperName = "Height:"
         Me.MednafenSetting84.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting84.TabIndex = 32
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label29.Location = New System.Drawing.Point(479, 129)
+        Me.Label29.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(227, 52)
+        Me.Label29.TabIndex = 33
+        Me.Label29.Text = "Full Screen"
+        Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting89
         '
@@ -4639,6 +3939,119 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting79.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting79.TabIndex = 7
         '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label49.Location = New System.Drawing.Point(242, 77)
+        Me.Label49.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(227, 52)
+        Me.Label49.TabIndex = 36
+        Me.Label49.Text = "GOAT Settings"
+        Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
+        Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(0, 0)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(928, 29)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Nintendo Entertainment System / Famicom Disk System"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage5
+        '
+        Me.TabPage5.BackColor = System.Drawing.Color.Black
+        Me.TabPage5.Controls.Add(Me.tlp_snes_cont)
+        Me.TabPage5.ImageIndex = 6
+        Me.TabPage5.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage5.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage5.TabIndex = 4
+        '
+        'tlp_snes_cont
+        '
+        Me.tlp_snes_cont.BackColor = System.Drawing.Color.DimGray
+        Me.tlp_snes_cont.ColumnCount = 1
+        Me.tlp_snes_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlp_snes_cont.Controls.Add(Me.TableLayoutPanel7, 0, 1)
+        Me.tlp_snes_cont.Controls.Add(Me.Label5, 0, 0)
+        Me.tlp_snes_cont.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlp_snes_cont.Location = New System.Drawing.Point(0, 0)
+        Me.tlp_snes_cont.Margin = New System.Windows.Forms.Padding(0)
+        Me.tlp_snes_cont.Name = "tlp_snes_cont"
+        Me.tlp_snes_cont.RowCount = 2
+        Me.tlp_snes_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlp_snes_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlp_snes_cont.Size = New System.Drawing.Size(928, 563)
+        Me.tlp_snes_cont.TabIndex = 1
+        '
+        'TableLayoutPanel7
+        '
+        Me.TableLayoutPanel7.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel7.ColumnCount = 4
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting201, 2, 11)
+        Me.TableLayoutPanel7.Controls.Add(Me.TableLayoutPanel15, 3, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label57, 3, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting100, 1, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label30, 1, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label31, 0, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label32, 2, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting101, 2, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting102, 2, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting103, 2, 4)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting104, 2, 5)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label33, 2, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting109, 0, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting110, 0, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting116, 0, 9)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting115, 0, 8)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting114, 0, 7)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting113, 0, 6)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting112, 0, 5)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting111, 0, 4)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting117, 0, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting108, 1, 8)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting107, 1, 7)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting106, 1, 6)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting105, 1, 5)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting98, 1, 4)
+        Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting99, 1, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label50, 1, 2)
+        Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel7.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
+        Me.TableLayoutPanel7.RowCount = 13
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel7.TabIndex = 7
+        '
         'MednafenSetting201
         '
         Me.MednafenSetting201.AutoSize = True
@@ -4654,6 +4067,26 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting201.ProperName = "Old Core Offline"
         Me.MednafenSetting201.Size = New System.Drawing.Size(227, 30)
         Me.MednafenSetting201.TabIndex = 39
+        '
+        'TableLayoutPanel15
+        '
+        Me.TableLayoutPanel15.ColumnCount = 1
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel15.Controls.Add(Me.MednafenSetting215, 0, 1)
+        Me.TableLayoutPanel15.Controls.Add(Me.MednafenSetting216, 0, 0)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label58, 0, 2)
+        Me.TableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel15.Location = New System.Drawing.Point(711, 25)
+        Me.TableLayoutPanel15.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
+        Me.TableLayoutPanel15.RowCount = 4
+        Me.TableLayoutPanel7.SetRowSpan(Me.TableLayoutPanel15, 12)
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel15.Size = New System.Drawing.Size(217, 509)
+        Me.TableLayoutPanel15.TabIndex = 38
         '
         'MednafenSetting215
         '
@@ -4687,6 +4120,29 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting216.Size = New System.Drawing.Size(207, 27)
         Me.MednafenSetting216.TabIndex = 38
         '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.Location = New System.Drawing.Point(3, 56)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(204, 104)
+        Me.Label58.TabIndex = 40
+        Me.Label58.Text = "All Multitap Ports on a SNES only support gamepad. Port 3-8 are gamepad" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 3 =" &
+    " 2B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 4 = 2C" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 5 = 2D" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 6 = 1B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 7 = 1C" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Port 8 = 1D"
+        '
+        'Label57
+        '
+        Me.Label57.AutoSize = True
+        Me.Label57.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label57.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label57.Location = New System.Drawing.Point(716, 0)
+        Me.Label57.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(207, 25)
+        Me.Label57.TabIndex = 37
+        Me.Label57.Text = "Controllers"
+        Me.Label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'MednafenSetting100
         '
         Me.MednafenSetting100.AutoSize = True
@@ -4703,6 +4159,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting100.ProperName = "Shader"
         Me.MednafenSetting100.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting100.TabIndex = 6
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Location = New System.Drawing.Point(242, 0)
+        Me.Label30.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(227, 25)
+        Me.Label30.TabIndex = 5
+        Me.Label30.Text = "Shader"
+        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.Location = New System.Drawing.Point(5, 0)
+        Me.Label31.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(227, 25)
+        Me.Label31.TabIndex = 2
+        Me.Label31.Text = "Video"
+        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label32.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label32.Location = New System.Drawing.Point(479, 0)
+        Me.Label32.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(227, 25)
+        Me.Label32.TabIndex = 28
+        Me.Label32.Text = "Window"
+        Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting101
         '
@@ -4767,6 +4262,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting104.ProperName = "Height:"
         Me.MednafenSetting104.Size = New System.Drawing.Size(227, 51)
         Me.MednafenSetting104.TabIndex = 32
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.Location = New System.Drawing.Point(479, 129)
+        Me.Label33.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(227, 31)
+        Me.Label33.TabIndex = 33
+        Me.Label33.Text = "Full Screen"
+        Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting109
         '
@@ -5008,6 +4516,109 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting99.Size = New System.Drawing.Size(227, 30)
         Me.MednafenSetting99.TabIndex = 7
         '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label50.Location = New System.Drawing.Point(242, 77)
+        Me.Label50.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(227, 52)
+        Me.Label50.TabIndex = 36
+        Me.Label50.Text = "GOAT Settings"
+        Me.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
+        Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(0, 0)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(928, 29)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Super Nintendo Entertainment System"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage7
+        '
+        Me.TabPage7.BackColor = System.Drawing.Color.Black
+        Me.TabPage7.Controls.Add(Me.tlp_ngp_cont)
+        Me.TabPage7.ImageIndex = 8
+        Me.TabPage7.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage7.Margin = New System.Windows.Forms.Padding(0)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage7.TabIndex = 6
+        '
+        'tlp_ngp_cont
+        '
+        Me.tlp_ngp_cont.BackColor = System.Drawing.Color.DimGray
+        Me.tlp_ngp_cont.ColumnCount = 1
+        Me.tlp_ngp_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlp_ngp_cont.Controls.Add(Me.TableLayoutPanel8, 0, 1)
+        Me.tlp_ngp_cont.Controls.Add(Me.Label7, 0, 0)
+        Me.tlp_ngp_cont.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlp_ngp_cont.Location = New System.Drawing.Point(0, 0)
+        Me.tlp_ngp_cont.Margin = New System.Windows.Forms.Padding(0)
+        Me.tlp_ngp_cont.Name = "tlp_ngp_cont"
+        Me.tlp_ngp_cont.RowCount = 2
+        Me.tlp_ngp_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlp_ngp_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlp_ngp_cont.Size = New System.Drawing.Size(928, 563)
+        Me.tlp_ngp_cont.TabIndex = 1
+        '
+        'TableLayoutPanel8
+        '
+        Me.TableLayoutPanel8.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel8.ColumnCount = 3
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting120, 1, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label34, 1, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label35, 0, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label36, 2, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting121, 2, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting122, 2, 2)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting123, 2, 4)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting124, 2, 5)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label37, 2, 3)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting129, 0, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting136, 0, 2)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting135, 0, 3)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting134, 0, 4)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting133, 0, 5)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting132, 0, 6)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting131, 0, 7)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting128, 1, 8)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting127, 1, 7)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting126, 1, 6)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting125, 1, 5)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting118, 1, 4)
+        Me.TableLayoutPanel8.Controls.Add(Me.MednafenSetting119, 1, 3)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label51, 1, 2)
+        Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel8.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel8.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
+        Me.TableLayoutPanel8.RowCount = 10
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel8.TabIndex = 8
+        '
         'MednafenSetting120
         '
         Me.MednafenSetting120.AutoSize = True
@@ -5024,6 +4635,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting120.ProperName = "Shader"
         Me.MednafenSetting120.Size = New System.Drawing.Size(299, 51)
         Me.MednafenSetting120.TabIndex = 6
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.Location = New System.Drawing.Point(314, 0)
+        Me.Label34.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(299, 25)
+        Me.Label34.TabIndex = 5
+        Me.Label34.Text = "Shader"
+        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label35.Location = New System.Drawing.Point(5, 0)
+        Me.Label35.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(299, 25)
+        Me.Label35.TabIndex = 2
+        Me.Label35.Text = "Video"
+        Me.Label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.Location = New System.Drawing.Point(623, 0)
+        Me.Label36.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(300, 25)
+        Me.Label36.TabIndex = 28
+        Me.Label36.Text = "Window"
+        Me.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting121
         '
@@ -5088,6 +4738,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting124.ProperName = "Height:"
         Me.MednafenSetting124.Size = New System.Drawing.Size(300, 51)
         Me.MednafenSetting124.TabIndex = 32
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.Location = New System.Drawing.Point(623, 129)
+        Me.Label37.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(300, 31)
+        Me.Label37.TabIndex = 33
+        Me.Label37.Text = "Full Screen"
+        Me.Label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting129
         '
@@ -5297,6 +4960,107 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting119.Size = New System.Drawing.Size(299, 30)
         Me.MednafenSetting119.TabIndex = 7
         '
+        'Label51
+        '
+        Me.Label51.AutoSize = True
+        Me.Label51.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label51.Location = New System.Drawing.Point(314, 77)
+        Me.Label51.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label51.Name = "Label51"
+        Me.Label51.Size = New System.Drawing.Size(299, 52)
+        Me.Label51.TabIndex = 36
+        Me.Label51.Text = "GOAT Settings"
+        Me.Label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.BackColor = System.Drawing.Color.Transparent
+        Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(0, 0)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(928, 29)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "Neo-Geo Pocket Color"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage8
+        '
+        Me.TabPage8.BackColor = System.Drawing.Color.Black
+        Me.TabPage8.Controls.Add(Me.tlp_gba_cont)
+        Me.TabPage8.ImageIndex = 9
+        Me.TabPage8.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage8.Name = "TabPage8"
+        Me.TabPage8.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage8.TabIndex = 7
+        '
+        'tlp_gba_cont
+        '
+        Me.tlp_gba_cont.BackColor = System.Drawing.Color.DimGray
+        Me.tlp_gba_cont.ColumnCount = 1
+        Me.tlp_gba_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlp_gba_cont.Controls.Add(Me.TableLayoutPanel9, 0, 1)
+        Me.tlp_gba_cont.Controls.Add(Me.Label8, 0, 0)
+        Me.tlp_gba_cont.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlp_gba_cont.Location = New System.Drawing.Point(0, 0)
+        Me.tlp_gba_cont.Name = "tlp_gba_cont"
+        Me.tlp_gba_cont.RowCount = 2
+        Me.tlp_gba_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlp_gba_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlp_gba_cont.Size = New System.Drawing.Size(928, 563)
+        Me.tlp_gba_cont.TabIndex = 1
+        '
+        'TableLayoutPanel9
+        '
+        Me.TableLayoutPanel9.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel9.ColumnCount = 3
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting139, 1, 1)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label38, 1, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label39, 0, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label40, 2, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting140, 2, 1)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting141, 2, 2)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting142, 2, 4)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting143, 2, 5)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label41, 2, 3)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting148, 0, 1)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting155, 0, 2)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting154, 0, 3)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting153, 0, 4)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting152, 0, 5)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting151, 0, 6)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting150, 0, 7)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting147, 1, 8)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting146, 1, 7)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting145, 1, 6)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting144, 1, 5)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting137, 1, 4)
+        Me.TableLayoutPanel9.Controls.Add(Me.MednafenSetting138, 1, 3)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label52, 1, 2)
+        Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel9.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel9.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
+        Me.TableLayoutPanel9.RowCount = 10
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel9.TabIndex = 8
+        '
         'MednafenSetting139
         '
         Me.MednafenSetting139.AutoSize = True
@@ -5313,6 +5077,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting139.ProperName = "Shader"
         Me.MednafenSetting139.Size = New System.Drawing.Size(299, 51)
         Me.MednafenSetting139.TabIndex = 6
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.Location = New System.Drawing.Point(314, 0)
+        Me.Label38.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(299, 25)
+        Me.Label38.TabIndex = 5
+        Me.Label38.Text = "Shader"
+        Me.Label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.Location = New System.Drawing.Point(5, 0)
+        Me.Label39.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(299, 25)
+        Me.Label39.TabIndex = 2
+        Me.Label39.Text = "Video"
+        Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label40.Location = New System.Drawing.Point(623, 0)
+        Me.Label40.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(300, 25)
+        Me.Label40.TabIndex = 28
+        Me.Label40.Text = "Window"
+        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting140
         '
@@ -5377,6 +5180,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting143.ProperName = "Height:"
         Me.MednafenSetting143.Size = New System.Drawing.Size(300, 51)
         Me.MednafenSetting143.TabIndex = 32
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label41.Location = New System.Drawing.Point(623, 129)
+        Me.Label41.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(300, 31)
+        Me.Label41.TabIndex = 33
+        Me.Label41.Text = "Full Screen"
+        Me.Label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting148
         '
@@ -5586,6 +5402,106 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting138.Size = New System.Drawing.Size(299, 30)
         Me.MednafenSetting138.TabIndex = 7
         '
+        'Label52
+        '
+        Me.Label52.AutoSize = True
+        Me.Label52.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label52.Location = New System.Drawing.Point(314, 77)
+        Me.Label52.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label52.Name = "Label52"
+        Me.Label52.Size = New System.Drawing.Size(299, 52)
+        Me.Label52.TabIndex = 36
+        Me.Label52.Text = "GOAT Settings"
+        Me.Label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.BackColor = System.Drawing.Color.Transparent
+        Me.Label8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(3, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(922, 29)
+        Me.Label8.TabIndex = 0
+        Me.Label8.Text = "Game Boy Advance"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TabPage9
+        '
+        Me.TabPage9.BackColor = System.Drawing.Color.Black
+        Me.TabPage9.Controls.Add(Me.tlp_gbc_cont)
+        Me.TabPage9.ImageIndex = 10
+        Me.TabPage9.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage9.Name = "TabPage9"
+        Me.TabPage9.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage9.TabIndex = 8
+        '
+        'tlp_gbc_cont
+        '
+        Me.tlp_gbc_cont.BackColor = System.Drawing.Color.DimGray
+        Me.tlp_gbc_cont.ColumnCount = 1
+        Me.tlp_gbc_cont.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tlp_gbc_cont.Controls.Add(Me.TableLayoutPanel10, 0, 1)
+        Me.tlp_gbc_cont.Controls.Add(Me.Label9, 0, 0)
+        Me.tlp_gbc_cont.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlp_gbc_cont.Location = New System.Drawing.Point(0, 0)
+        Me.tlp_gbc_cont.Name = "tlp_gbc_cont"
+        Me.tlp_gbc_cont.RowCount = 2
+        Me.tlp_gbc_cont.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.tlp_gbc_cont.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlp_gbc_cont.Size = New System.Drawing.Size(928, 563)
+        Me.tlp_gbc_cont.TabIndex = 2
+        '
+        'TableLayoutPanel10
+        '
+        Me.TableLayoutPanel10.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel10.ColumnCount = 3
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting159, 1, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label42, 1, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label43, 0, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label44, 2, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting160, 2, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting161, 2, 2)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting162, 2, 4)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting163, 2, 5)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label45, 2, 3)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting168, 0, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting175, 0, 2)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting174, 0, 3)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting173, 0, 4)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting171, 0, 6)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting172, 0, 5)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting170, 0, 7)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting167, 1, 8)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting166, 1, 7)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting165, 1, 6)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting164, 1, 5)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting157, 1, 4)
+        Me.TableLayoutPanel10.Controls.Add(Me.MednafenSetting158, 1, 3)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label53, 1, 2)
+        Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel10.Location = New System.Drawing.Point(0, 29)
+        Me.TableLayoutPanel10.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
+        Me.TableLayoutPanel10.RowCount = 10
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(928, 534)
+        Me.TableLayoutPanel10.TabIndex = 9
+        '
         'MednafenSetting159
         '
         Me.MednafenSetting159.AutoSize = True
@@ -5602,6 +5518,45 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting159.ProperName = "Shader"
         Me.MednafenSetting159.Size = New System.Drawing.Size(299, 51)
         Me.MednafenSetting159.TabIndex = 6
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label42.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label42.Location = New System.Drawing.Point(314, 0)
+        Me.Label42.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(299, 25)
+        Me.Label42.TabIndex = 5
+        Me.Label42.Text = "Shader"
+        Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label43.Location = New System.Drawing.Point(5, 0)
+        Me.Label43.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(299, 25)
+        Me.Label43.TabIndex = 2
+        Me.Label43.Text = "Video"
+        Me.Label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label44.Location = New System.Drawing.Point(623, 0)
+        Me.Label44.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(300, 25)
+        Me.Label44.TabIndex = 28
+        Me.Label44.Text = "Window"
+        Me.Label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting160
         '
@@ -5666,6 +5621,19 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting163.ProperName = "Height:"
         Me.MednafenSetting163.Size = New System.Drawing.Size(300, 51)
         Me.MednafenSetting163.TabIndex = 32
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label45.Location = New System.Drawing.Point(623, 129)
+        Me.Label45.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(300, 31)
+        Me.Label45.TabIndex = 33
+        Me.Label45.Text = "Full Screen"
+        Me.Label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'MednafenSetting168
         '
@@ -5875,6 +5843,653 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting158.Size = New System.Drawing.Size(299, 30)
         Me.MednafenSetting158.TabIndex = 7
         '
+        'Label53
+        '
+        Me.Label53.AutoSize = True
+        Me.Label53.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label53.Location = New System.Drawing.Point(314, 77)
+        Me.Label53.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(299, 52)
+        Me.Label53.TabIndex = 36
+        Me.Label53.Text = "GOAT Settings"
+        Me.Label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.BackColor = System.Drawing.Color.Transparent
+        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(3, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(922, 29)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "Game Boy Color"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'SystemIcons
+        '
+        Me.SystemIcons.ImageStream = CType(resources.GetObject("SystemIcons.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.SystemIcons.TransparentColor = System.Drawing.Color.Transparent
+        Me.SystemIcons.Images.SetKeyName(0, "icon_Naomi.png")
+        Me.SystemIcons.Images.SetKeyName(1, "icon_dreamcast.png")
+        Me.SystemIcons.Images.SetKeyName(2, "Icon_SegaSaturn.png")
+        Me.SystemIcons.Images.SetKeyName(3, "icon_Genesis.png")
+        Me.SystemIcons.Images.SetKeyName(4, "icon_PSX.png")
+        Me.SystemIcons.Images.SetKeyName(5, "icon_NES.png")
+        Me.SystemIcons.Images.SetKeyName(6, "icon_SNES.png")
+        Me.SystemIcons.Images.SetKeyName(7, "icon_fds.png")
+        Me.SystemIcons.Images.SetKeyName(8, "icon_NGP.png")
+        Me.SystemIcons.Images.SetKeyName(9, "icon_GBA.png")
+        Me.SystemIcons.Images.SetKeyName(10, "icon_GBC.png")
+        Me.SystemIcons.Images.SetKeyName(11, "Icon_SMS.png")
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.DimGray
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.Padding = New System.Windows.Forms.Padding(5, 0, 5, 5)
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(937, 603)
+        Me.TableLayoutPanel1.TabIndex = 1
+        '
+        'Panel1
+        '
+        Me.Panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Panel1.BackColor = System.Drawing.Color.Maroon
+        Me.Panel1.Controls.Add(Me.tc_options)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(5, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(927, 598)
+        Me.Panel1.TabIndex = 1
+        '
+        'TabPage11
+        '
+        Me.TabPage11.BackColor = System.Drawing.Color.DimGray
+        Me.TabPage11.Controls.Add(Me.TableLayoutPanel18)
+        Me.TabPage11.Location = New System.Drawing.Point(4, 36)
+        Me.TabPage11.Name = "TabPage11"
+        Me.TabPage11.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage11.Size = New System.Drawing.Size(928, 563)
+        Me.TabPage11.TabIndex = 11
+        Me.TabPage11.Text = "TabPage11"
+        '
+        'TableLayoutPanel18
+        '
+        Me.TableLayoutPanel18.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel18.ColumnCount = 4
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 215.0!))
+        Me.TableLayoutPanel18.Controls.Add(Me.Label59, 3, 0)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting202, 0, 2)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting203, 1, 1)
+        Me.TableLayoutPanel18.Controls.Add(Me.Label66, 1, 0)
+        Me.TableLayoutPanel18.Controls.Add(Me.Label67, 0, 0)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting204, 0, 5)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting217, 0, 6)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting230, 0, 7)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting231, 0, 8)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting232, 0, 9)
+        Me.TableLayoutPanel18.Controls.Add(Me.Label68, 2, 0)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting233, 2, 1)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting234, 2, 2)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting235, 2, 4)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting236, 2, 5)
+        Me.TableLayoutPanel18.Controls.Add(Me.Label69, 2, 3)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting238, 0, 3)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting239, 0, 1)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting241, 0, 4)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting242, 1, 8)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting243, 1, 7)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting244, 1, 6)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting245, 1, 5)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting246, 1, 4)
+        Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting247, 1, 3)
+        Me.TableLayoutPanel18.Controls.Add(Me.Label70, 1, 2)
+        Me.TableLayoutPanel18.Controls.Add(Me.TableLayoutPanel19, 3, 1)
+        Me.TableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel18.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel18.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel18.Name = "TableLayoutPanel18"
+        Me.TableLayoutPanel18.RowCount = 13
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel18.Size = New System.Drawing.Size(922, 557)
+        Me.TableLayoutPanel18.TabIndex = 5
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label59.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label59.Location = New System.Drawing.Point(710, 0)
+        Me.Label59.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(207, 25)
+        Me.Label59.TabIndex = 37
+        Me.Label59.Text = "Controllers"
+        Me.Label59.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'MednafenSetting202
+        '
+        Me.MednafenSetting202.AutoSize = True
+        Me.MednafenSetting202.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting202.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting202.ChangeRate = 1.0!
+        Me.MednafenSetting202.ConfigString = "pce.h_overscan,pce_fast.h_overscan"
+        Me.MednafenSetting202.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting202.Limits = ""
+        Me.MednafenSetting202.Location = New System.Drawing.Point(5, 77)
+        Me.MednafenSetting202.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting202.Name = "MednafenSetting202"
+        Me.MednafenSetting202.ProperName = "H Overscan"
+        Me.MednafenSetting202.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting202.TabIndex = 11
+        '
+        'MednafenSetting203
+        '
+        Me.MednafenSetting203.AutoSize = True
+        Me.MednafenSetting203.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting203.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting203.ChangeRate = 1.0!
+        Me.MednafenSetting203.ConfigString = "pce.shader,pce_fast.shader"
+        Me.MednafenSetting203.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting203.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sabr" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnoty" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnotys" &
+    "harper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotxsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "goat"
+        Me.MednafenSetting203.Location = New System.Drawing.Point(240, 25)
+        Me.MednafenSetting203.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting203.Name = "MednafenSetting203"
+        Me.MednafenSetting203.ProperName = "Shader"
+        Me.MednafenSetting203.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting203.TabIndex = 6
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label66.Location = New System.Drawing.Point(240, 0)
+        Me.Label66.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(225, 25)
+        Me.Label66.TabIndex = 5
+        Me.Label66.Text = "Shader"
+        Me.Label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label67
+        '
+        Me.Label67.AutoSize = True
+        Me.Label67.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label67.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label67.Location = New System.Drawing.Point(5, 0)
+        Me.Label67.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(225, 25)
+        Me.Label67.TabIndex = 2
+        Me.Label67.Text = "Options"
+        Me.Label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'MednafenSetting204
+        '
+        Me.MednafenSetting204.AutoSize = True
+        Me.MednafenSetting204.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting204.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting204.ChangeRate = 1.0!
+        Me.MednafenSetting204.ConfigString = "pce.stretch,pce_fast.stretch"
+        Me.MednafenSetting204.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting204.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "full" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "aspect" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "aspect_int" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "aspect_mult2"
+        Me.MednafenSetting204.Location = New System.Drawing.Point(5, 212)
+        Me.MednafenSetting204.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting204.Name = "MednafenSetting204"
+        Me.MednafenSetting204.ProperName = "Stretch"
+        Me.MednafenSetting204.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting204.TabIndex = 23
+        '
+        'MednafenSetting217
+        '
+        Me.MednafenSetting217.AutoSize = True
+        Me.MednafenSetting217.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting217.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting217.ChangeRate = 1.0!
+        Me.MednafenSetting217.ConfigString = "pce.tblur,pce_fast.tblur"
+        Me.MednafenSetting217.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting217.Limits = ""
+        Me.MednafenSetting217.Location = New System.Drawing.Point(5, 264)
+        Me.MednafenSetting217.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting217.Name = "MednafenSetting217"
+        Me.MednafenSetting217.ProperName = "Temporal Blur"
+        Me.MednafenSetting217.Size = New System.Drawing.Size(225, 30)
+        Me.MednafenSetting217.TabIndex = 24
+        '
+        'MednafenSetting230
+        '
+        Me.MednafenSetting230.AutoSize = True
+        Me.MednafenSetting230.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting230.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting230.ChangeRate = 1.0!
+        Me.MednafenSetting230.ConfigString = "pce.tblur.accum,pce_fast.tblur.accum"
+        Me.MednafenSetting230.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting230.Limits = ""
+        Me.MednafenSetting230.Location = New System.Drawing.Point(5, 295)
+        Me.MednafenSetting230.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting230.Name = "MednafenSetting230"
+        Me.MednafenSetting230.ProperName = "T Blur Accum"
+        Me.MednafenSetting230.Size = New System.Drawing.Size(225, 30)
+        Me.MednafenSetting230.TabIndex = 25
+        '
+        'MednafenSetting231
+        '
+        Me.MednafenSetting231.AutoSize = True
+        Me.MednafenSetting231.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting231.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting231.ChangeRate = 1.0!
+        Me.MednafenSetting231.ConfigString = "pce.tblur.accum.amount,pce_fast.tblur.accum.amount"
+        Me.MednafenSetting231.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting231.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "100"
+        Me.MednafenSetting231.Location = New System.Drawing.Point(5, 326)
+        Me.MednafenSetting231.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting231.Name = "MednafenSetting231"
+        Me.MednafenSetting231.ProperName = "T Blur Accum Amount:"
+        Me.MednafenSetting231.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting231.TabIndex = 26
+        '
+        'MednafenSetting232
+        '
+        Me.MednafenSetting232.AutoSize = True
+        Me.MednafenSetting232.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting232.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting232.ChangeRate = 1.0!
+        Me.MednafenSetting232.ConfigString = "pce.videoip,pce_fast.videoip" & Global.Microsoft.VisualBasic.ChrW(9)
+        Me.MednafenSetting232.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting232.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "y"
+        Me.MednafenSetting232.Location = New System.Drawing.Point(5, 378)
+        Me.MednafenSetting232.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting232.Name = "MednafenSetting232"
+        Me.MednafenSetting232.ProperName = "Interpolation"
+        Me.MednafenSetting232.Size = New System.Drawing.Size(225, 27)
+        Me.MednafenSetting232.TabIndex = 27
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label68.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label68.Location = New System.Drawing.Point(475, 0)
+        Me.Label68.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(225, 25)
+        Me.Label68.TabIndex = 28
+        Me.Label68.Text = "Window"
+        Me.Label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'MednafenSetting233
+        '
+        Me.MednafenSetting233.AutoSize = True
+        Me.MednafenSetting233.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting233.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting233.ChangeRate = 10.0!
+        Me.MednafenSetting233.ConfigString = "pce.xscale,pce_fast.xscale"
+        Me.MednafenSetting233.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting233.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
+        Me.MednafenSetting233.Location = New System.Drawing.Point(475, 25)
+        Me.MednafenSetting233.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting233.Name = "MednafenSetting233"
+        Me.MednafenSetting233.ProperName = "Width:"
+        Me.MednafenSetting233.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting233.TabIndex = 29
+        '
+        'MednafenSetting234
+        '
+        Me.MednafenSetting234.AutoSize = True
+        Me.MednafenSetting234.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting234.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting234.ChangeRate = 10.0!
+        Me.MednafenSetting234.ConfigString = "pce.yscale,pce_fast.yscale"
+        Me.MednafenSetting234.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting234.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
+        Me.MednafenSetting234.Location = New System.Drawing.Point(475, 77)
+        Me.MednafenSetting234.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting234.Name = "MednafenSetting234"
+        Me.MednafenSetting234.ProperName = "Height:"
+        Me.MednafenSetting234.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting234.TabIndex = 30
+        '
+        'MednafenSetting235
+        '
+        Me.MednafenSetting235.AutoSize = True
+        Me.MednafenSetting235.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting235.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting235.ChangeRate = 10.0!
+        Me.MednafenSetting235.ConfigString = "pce.xscalefs,pce_fast.xscalefs"
+        Me.MednafenSetting235.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting235.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
+        Me.MednafenSetting235.Location = New System.Drawing.Point(475, 160)
+        Me.MednafenSetting235.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting235.Name = "MednafenSetting235"
+        Me.MednafenSetting235.ProperName = "Width:"
+        Me.MednafenSetting235.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting235.TabIndex = 31
+        '
+        'MednafenSetting236
+        '
+        Me.MednafenSetting236.AutoSize = True
+        Me.MednafenSetting236.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting236.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting236.ChangeRate = 10.0!
+        Me.MednafenSetting236.ConfigString = "pce.yscalefs,pce_fast.yscalefs"
+        Me.MednafenSetting236.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting236.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
+        Me.MednafenSetting236.Location = New System.Drawing.Point(475, 212)
+        Me.MednafenSetting236.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting236.Name = "MednafenSetting236"
+        Me.MednafenSetting236.ProperName = "Height:"
+        Me.MednafenSetting236.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting236.TabIndex = 32
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label69.Location = New System.Drawing.Point(475, 129)
+        Me.Label69.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(225, 31)
+        Me.Label69.TabIndex = 33
+        Me.Label69.Text = "Full Screen"
+        Me.Label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'MednafenSetting238
+        '
+        Me.MednafenSetting238.AutoSize = True
+        Me.MednafenSetting238.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting238.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting238.ChangeRate = 1.0!
+        Me.MednafenSetting238.ConfigString = "pce.correct_aspect,pce_fast.correct_aspect"
+        Me.MednafenSetting238.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting238.Limits = ""
+        Me.MednafenSetting238.Location = New System.Drawing.Point(5, 129)
+        Me.MednafenSetting238.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting238.Name = "MednafenSetting238"
+        Me.MednafenSetting238.ProperName = "Correct Aspect"
+        Me.MednafenSetting238.Size = New System.Drawing.Size(225, 30)
+        Me.MednafenSetting238.TabIndex = 4
+        '
+        'MednafenSetting239
+        '
+        Me.MednafenSetting239.AutoSize = True
+        Me.MednafenSetting239.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting239.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting239.ChangeRate = 1.0!
+        Me.MednafenSetting239.ConfigString = "pce.special,pce_fast.special"
+        Me.MednafenSetting239.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting239.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "hq2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "hq3x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "hq4x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale3x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale4x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2xsai" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "super2xsai" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "supereagle" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "nn2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "nn3x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "nn4x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "nny2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "nny3x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "nny4x"
+        Me.MednafenSetting239.Location = New System.Drawing.Point(5, 25)
+        Me.MednafenSetting239.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting239.Name = "MednafenSetting239"
+        Me.MednafenSetting239.ProperName = "Upscaler"
+        Me.MednafenSetting239.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting239.TabIndex = 22
+        '
+        'MednafenSetting241
+        '
+        Me.MednafenSetting241.AutoSize = True
+        Me.MednafenSetting241.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting241.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting241.ChangeRate = 1.0!
+        Me.MednafenSetting241.ConfigString = "pce.scanlines,pce_fast.scanlines"
+        Me.MednafenSetting241.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting241.Limits = "-100" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "100"
+        Me.MednafenSetting241.Location = New System.Drawing.Point(5, 160)
+        Me.MednafenSetting241.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting241.Name = "MednafenSetting241"
+        Me.MednafenSetting241.ProperName = "Scanlines:"
+        Me.MednafenSetting241.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting241.TabIndex = 17
+        '
+        'MednafenSetting242
+        '
+        Me.MednafenSetting242.AutoSize = True
+        Me.MednafenSetting242.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting242.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting242.ChangeRate = 10.0!
+        Me.MednafenSetting242.ConfigString = "pce.shader.goat.tp,pce_fast.shader.goat.tp"
+        Me.MednafenSetting242.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting242.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1"
+        Me.MednafenSetting242.Location = New System.Drawing.Point(240, 326)
+        Me.MednafenSetting242.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting242.Name = "MednafenSetting242"
+        Me.MednafenSetting242.ProperName = "Transparency:"
+        Me.MednafenSetting242.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting242.TabIndex = 20
+        '
+        'MednafenSetting243
+        '
+        Me.MednafenSetting243.AutoSize = True
+        Me.MednafenSetting243.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting243.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting243.ChangeRate = 1.0!
+        Me.MednafenSetting243.ConfigString = "pce.shader.goat.slen,pce_fast.shader.goat.slen"
+        Me.MednafenSetting243.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting243.Limits = ""
+        Me.MednafenSetting243.Location = New System.Drawing.Point(240, 295)
+        Me.MednafenSetting243.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting243.Name = "MednafenSetting243"
+        Me.MednafenSetting243.ProperName = "Scanlines"
+        Me.MednafenSetting243.Size = New System.Drawing.Size(225, 30)
+        Me.MednafenSetting243.TabIndex = 19
+        '
+        'MednafenSetting244
+        '
+        Me.MednafenSetting244.AutoSize = True
+        Me.MednafenSetting244.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting244.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting244.ChangeRate = 1.0!
+        Me.MednafenSetting244.ConfigString = "pce.shader.goat.pat,pce_fast.shader.goat.pat"
+        Me.MednafenSetting244.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting244.Limits = "goatron" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "borg" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "slenderman"
+        Me.MednafenSetting244.Location = New System.Drawing.Point(240, 264)
+        Me.MednafenSetting244.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting244.Name = "MednafenSetting244"
+        Me.MednafenSetting244.ProperName = "Pattern"
+        Me.MednafenSetting244.Size = New System.Drawing.Size(225, 30)
+        Me.MednafenSetting244.TabIndex = 18
+        '
+        'MednafenSetting245
+        '
+        Me.MednafenSetting245.AutoSize = True
+        Me.MednafenSetting245.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting245.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting245.ChangeRate = 10.0!
+        Me.MednafenSetting245.ConfigString = "pce.shader.goat.vdiv,pce_fast.shader.goat.vdiv"
+        Me.MednafenSetting245.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting245.Limits = "-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
+        Me.MednafenSetting245.Location = New System.Drawing.Point(240, 212)
+        Me.MednafenSetting245.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting245.Name = "MednafenSetting245"
+        Me.MednafenSetting245.ProperName = "V Divergence:"
+        Me.MednafenSetting245.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting245.TabIndex = 21
+        '
+        'MednafenSetting246
+        '
+        Me.MednafenSetting246.AutoSize = True
+        Me.MednafenSetting246.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting246.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting246.ChangeRate = 10.0!
+        Me.MednafenSetting246.ConfigString = "pce.shader.goat.hdiv,pce_fast.shader.goat.hdiv"
+        Me.MednafenSetting246.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting246.Limits = "-2.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
+        Me.MednafenSetting246.Location = New System.Drawing.Point(240, 160)
+        Me.MednafenSetting246.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting246.Name = "MednafenSetting246"
+        Me.MednafenSetting246.ProperName = "H Divergence:"
+        Me.MednafenSetting246.Size = New System.Drawing.Size(225, 51)
+        Me.MednafenSetting246.TabIndex = 8
+        '
+        'MednafenSetting247
+        '
+        Me.MednafenSetting247.AutoSize = True
+        Me.MednafenSetting247.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting247.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting247.ChangeRate = 1.0!
+        Me.MednafenSetting247.ConfigString = "pce.shader.goat.fprog,pce_fast.shader.goat.fprog"
+        Me.MednafenSetting247.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting247.Limits = ""
+        Me.MednafenSetting247.Location = New System.Drawing.Point(240, 129)
+        Me.MednafenSetting247.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting247.Name = "MednafenSetting247"
+        Me.MednafenSetting247.ProperName = "Force Progressive"
+        Me.MednafenSetting247.Size = New System.Drawing.Size(225, 30)
+        Me.MednafenSetting247.TabIndex = 7
+        '
+        'Label70
+        '
+        Me.Label70.AutoSize = True
+        Me.Label70.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label70.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label70.Location = New System.Drawing.Point(240, 77)
+        Me.Label70.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        Me.Label70.Name = "Label70"
+        Me.Label70.Size = New System.Drawing.Size(225, 52)
+        Me.Label70.TabIndex = 35
+        Me.Label70.Text = "GOAT Settings"
+        Me.Label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TableLayoutPanel19
+        '
+        Me.TableLayoutPanel19.ColumnCount = 1
+        Me.TableLayoutPanel19.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel19.Controls.Add(Me.MednafenSetting255, 0, 4)
+        Me.TableLayoutPanel19.Controls.Add(Me.MednafenSetting256, 0, 3)
+        Me.TableLayoutPanel19.Controls.Add(Me.MednafenSetting257, 0, 2)
+        Me.TableLayoutPanel19.Controls.Add(Me.MednafenSetting258, 0, 1)
+        Me.TableLayoutPanel19.Controls.Add(Me.MednafenSetting259, 0, 0)
+        Me.TableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel19.Location = New System.Drawing.Point(705, 25)
+        Me.TableLayoutPanel19.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel19.Name = "TableLayoutPanel19"
+        Me.TableLayoutPanel19.RowCount = 13
+        Me.TableLayoutPanel18.SetRowSpan(Me.TableLayoutPanel19, 12)
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel19.Size = New System.Drawing.Size(217, 532)
+        Me.TableLayoutPanel19.TabIndex = 36
+        '
+        'MednafenSetting255
+        '
+        Me.MednafenSetting255.AutoSize = True
+        Me.MednafenSetting255.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting255.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting255.ChangeRate = 1.0!
+        Me.MednafenSetting255.ConfigString = "pce.input.port5,pce_fast.input.port5"
+        Me.MednafenSetting255.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting255.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "gamepad" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "mouse"
+        Me.MednafenSetting255.Location = New System.Drawing.Point(5, 112)
+        Me.MednafenSetting255.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting255.Name = "MednafenSetting255"
+        Me.MednafenSetting255.ProperName = "Port 5"
+        Me.MednafenSetting255.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting255.TabIndex = 42
+        '
+        'MednafenSetting256
+        '
+        Me.MednafenSetting256.AutoSize = True
+        Me.MednafenSetting256.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting256.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting256.ChangeRate = 1.0!
+        Me.MednafenSetting256.ConfigString = "pce.input.port4,pce_fast.input.port4"
+        Me.MednafenSetting256.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting256.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "gamepad" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "mouse"
+        Me.MednafenSetting256.Location = New System.Drawing.Point(5, 84)
+        Me.MednafenSetting256.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting256.Name = "MednafenSetting256"
+        Me.MednafenSetting256.ProperName = "Port 4"
+        Me.MednafenSetting256.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting256.TabIndex = 41
+        '
+        'MednafenSetting257
+        '
+        Me.MednafenSetting257.AutoSize = True
+        Me.MednafenSetting257.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting257.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting257.ChangeRate = 1.0!
+        Me.MednafenSetting257.ConfigString = "pce.input.port3,pce_fast.input.port3"
+        Me.MednafenSetting257.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting257.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "gamepad" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "mouse"
+        Me.MednafenSetting257.Location = New System.Drawing.Point(5, 56)
+        Me.MednafenSetting257.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting257.Name = "MednafenSetting257"
+        Me.MednafenSetting257.ProperName = "Port 3"
+        Me.MednafenSetting257.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting257.TabIndex = 40
+        '
+        'MednafenSetting258
+        '
+        Me.MednafenSetting258.AutoSize = True
+        Me.MednafenSetting258.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting258.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting258.ChangeRate = 1.0!
+        Me.MednafenSetting258.ConfigString = "pce.input.port2,pce_fast.input.port2"
+        Me.MednafenSetting258.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting258.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "gamepad" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "mouse"
+        Me.MednafenSetting258.Location = New System.Drawing.Point(5, 28)
+        Me.MednafenSetting258.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting258.Name = "MednafenSetting258"
+        Me.MednafenSetting258.ProperName = "Port 2"
+        Me.MednafenSetting258.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting258.TabIndex = 39
+        '
+        'MednafenSetting259
+        '
+        Me.MednafenSetting259.AutoSize = True
+        Me.MednafenSetting259.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.MednafenSetting259.BackColor = System.Drawing.Color.DarkGray
+        Me.MednafenSetting259.ChangeRate = 1.0!
+        Me.MednafenSetting259.ConfigString = "pce.input.port1,pce_fast.input.port1"
+        Me.MednafenSetting259.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MednafenSetting259.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "gamepad" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "mouse"
+        Me.MednafenSetting259.Location = New System.Drawing.Point(5, 0)
+        Me.MednafenSetting259.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
+        Me.MednafenSetting259.Name = "MednafenSetting259"
+        Me.MednafenSetting259.ProperName = "Port 1"
+        Me.MednafenSetting259.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting259.TabIndex = 38
+        '
         'frmMednafenOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5950,6 +6565,11 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel10.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.TabPage11.ResumeLayout(False)
+        Me.TableLayoutPanel18.ResumeLayout(False)
+        Me.TableLayoutPanel18.PerformLayout()
+        Me.TableLayoutPanel19.ResumeLayout(False)
+        Me.TableLayoutPanel19.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -6283,4 +6903,38 @@ Partial Class frmMednafenOptions
     Friend WithEvents Label64 As Label
     Friend WithEvents Label65 As Label
     Friend WithEvents MednafenSetting201 As MednafenSetting
+    Friend WithEvents TabPage11 As TabPage
+    Friend WithEvents TableLayoutPanel18 As TableLayoutPanel
+    Friend WithEvents Label59 As Label
+    Friend WithEvents MednafenSetting202 As MednafenSetting
+    Friend WithEvents MednafenSetting203 As MednafenSetting
+    Friend WithEvents Label66 As Label
+    Friend WithEvents Label67 As Label
+    Friend WithEvents MednafenSetting204 As MednafenSetting
+    Friend WithEvents MednafenSetting217 As MednafenSetting
+    Friend WithEvents MednafenSetting230 As MednafenSetting
+    Friend WithEvents MednafenSetting231 As MednafenSetting
+    Friend WithEvents MednafenSetting232 As MednafenSetting
+    Friend WithEvents Label68 As Label
+    Friend WithEvents MednafenSetting233 As MednafenSetting
+    Friend WithEvents MednafenSetting234 As MednafenSetting
+    Friend WithEvents MednafenSetting235 As MednafenSetting
+    Friend WithEvents MednafenSetting236 As MednafenSetting
+    Friend WithEvents Label69 As Label
+    Friend WithEvents MednafenSetting238 As MednafenSetting
+    Friend WithEvents MednafenSetting239 As MednafenSetting
+    Friend WithEvents MednafenSetting241 As MednafenSetting
+    Friend WithEvents MednafenSetting242 As MednafenSetting
+    Friend WithEvents MednafenSetting243 As MednafenSetting
+    Friend WithEvents MednafenSetting244 As MednafenSetting
+    Friend WithEvents MednafenSetting245 As MednafenSetting
+    Friend WithEvents MednafenSetting246 As MednafenSetting
+    Friend WithEvents MednafenSetting247 As MednafenSetting
+    Friend WithEvents Label70 As Label
+    Friend WithEvents TableLayoutPanel19 As TableLayoutPanel
+    Friend WithEvents MednafenSetting255 As MednafenSetting
+    Friend WithEvents MednafenSetting256 As MednafenSetting
+    Friend WithEvents MednafenSetting257 As MednafenSetting
+    Friend WithEvents MednafenSetting258 As MednafenSetting
+    Friend WithEvents MednafenSetting259 As MednafenSetting
 End Class
