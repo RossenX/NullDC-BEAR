@@ -292,9 +292,11 @@ Module Rx
         cfgEntry += ".input.port"
         For Each _line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
             For i = 1 To 12
-                If _line.StartsWith(cfgEntry & i & " ") Then
+                If _line.StartsWith(cfgEntry & i & " ") Or
+                    (MainformRef.GamesList(MainformRef.ConfigFile.Game)(2) = "nes" And _line.StartsWith("nes.input.fcexp ")) Then
                     If PeripheralList.Count > 0 Then PeripheralList += "|"
                     PeripheralList += _line.Replace(cfgEntry & i & " ", "").Trim
+
                 End If
             Next
 
@@ -336,7 +338,6 @@ Module Rx
 
         cfgEntry += ".input.port"
         Dim EntryCount As Int16 = 1
-        Dim LineCount As Int16 = 0
 
         File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
         Dim _Lines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
@@ -348,15 +349,20 @@ Module Rx
                         _Lines(i) = cfgEntry & l & " " & _peri(EntryCount - 1)
                         EntryCount += 1
                         Exit For
+
+                    ElseIf MainformRef.GamesList(_game)(2) = "nes" And _Lines(i).StartsWith("nes.input.fcexp ") Then
+                        _Lines(i) = "nes.input.fcexp " & _peri(EntryCount - 1)
+                        EntryCount += 1
+                        Exit For
+
                     End If
+
                 Next
             End If
         Next
 
         Rx.MultiTap = CInt(_peri(_peri.Count - 1))
-
         File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", _Lines)
-
 
     End Sub
 

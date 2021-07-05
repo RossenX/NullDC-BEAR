@@ -126,27 +126,76 @@ Public Class MednafenSetting
 
             Case Else ' Anything else is an enum
                 Dim Controller As New ComboBox
-                For Each _item In _configs : Controller.Items.Add(_item.Trim) : Next
-                Controller.Dock = DockStyle.Fill
-                Controller.DropDownStyle = ComboBoxStyle.DropDownList
-                If Not _loadedValue = "" Then
-                    For i = 0 To Controller.Items.Count - 1
-                        If Controller.Items(i).trim = _loadedValue.Trim Then
-                            Controller.SelectedIndex = i
-                            Exit For
-                        End If
-                    Next
-                Else
-                    Controller.SelectedIndex = 0
-                End If
-
-                AddHandler Controller.SelectedIndexChanged, Sub()
-                                                                UpdateCFG(Controller.Text)
-                                                            End Sub
-
                 SettingContainer.SetRow(Controller, 1)
                 SettingContainer.SetColumn(Controller, 1)
                 SettingContainer.Controls.Add(Controller)
+
+                Dim comboSource As New Dictionary(Of String, String)()
+
+                For Each _item In _configs
+                    If _item.Contains("|") Then
+                        comboSource.Add(_item.Split("|")(1), _item.Split("|")(0))
+                    Else
+                        Controller.Items.Add(_item.Trim)
+                    End If
+
+                Next
+
+                If _configs(0).Contains("|") Then
+                    Controller.DataSource = New BindingSource(comboSource, Nothing)
+                    Controller.DisplayMember = "Value"
+                    Controller.ValueMember = "Key"
+
+                End If
+
+                Controller.Dock = DockStyle.Fill
+                Controller.DropDownStyle = ComboBoxStyle.DropDownList
+                Controller.Update()
+
+                If Not _loadedValue = "" Then
+
+                    If comboSource.Count > 0 Then
+
+                        For Each _key In comboSource.Keys
+
+                            If _key = _loadedValue.Trim Then
+                                Controller.SelectedValue = _key
+
+                            End If
+                        Next
+
+                    Else
+
+                        For i = 0 To Controller.Items.Count - 1
+                            If Controller.Items(i).trim = _loadedValue.Trim Then
+                                Controller.SelectedIndex = i
+                                Exit For
+
+                            End If
+
+                        Next
+
+                    End If
+
+
+
+                Else
+                    Controller.SelectedIndex = 0
+
+                End If
+
+                AddHandler Controller.SelectedIndexChanged, Sub()
+                                                                If _configs(0).Contains("|") Then
+                                                                    UpdateCFG(Controller.SelectedValue)
+                                                                Else
+                                                                    UpdateCFG(Controller.Text)
+
+                                                                End If
+
+
+                                                            End Sub
+
+
 
         End Select
 
@@ -171,7 +220,7 @@ Public Class MednafenSetting
         End Select
 
         Dim Separator As String = " "
-        If UseQuotes Then
+        If Emulator = "mup" Then
             Separator = " = "
         End If
 
