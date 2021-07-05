@@ -4,6 +4,7 @@ Public Class frmMednafenOptions
 
     Public Sub New()
         Rx.MednafenConfigCache = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
+        Rx.MupenConfigCache = File.ReadAllLines(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg")
         InitializeComponent()
 
     End Sub

@@ -9,3 +9,4 @@ snes_faust.input.sport1.multitap 0
 snes_faust.input.sport2.multitap 1
 ss.input.sport1.multitap 0
 ss.input.sport2.multitap 1
+nes.input.fcexp 4player

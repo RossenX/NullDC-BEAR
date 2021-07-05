@@ -7,6 +7,8 @@ Public Class MednafenSetting
     Public Property ConfigString As String = ""
     <Editor(GetType(Design.MultilineStringEditor), GetType(Drawing.Design.UITypeEditor))> Public Property Limits As String = ""
     Public Property ChangeRate As Single = 1
+    Public Property Emulator As String = "med"
+    Public Property UseQuotes As Boolean = False
 
     Dim Controller As Control
 
@@ -31,11 +33,22 @@ Public Class MednafenSetting
 
         Dim _loadedValue = ""
         Dim cfgSplit = ConfigString.Split(",")(0)
+        Dim ConfigFile As String() = {""}
+        Dim Separator As String = " "
 
-        If Not Rx.MednafenConfigCache Is Nothing Then
-            For i = 0 To Rx.MednafenConfigCache.Count - 1
-                If Rx.MednafenConfigCache(i).StartsWith(cfgSplit.Trim & " ") Then
-                    _loadedValue = Rx.MednafenConfigCache(i).Split(" ")(1)
+        Select Case Emulator
+            Case "med"
+                ConfigFile = Rx.MednafenConfigCache
+                Separator = " "
+            Case "mup"
+                ConfigFile = Rx.MupenConfigCache
+                Separator = " = "
+        End Select
+
+        If ConfigFile IsNot Nothing Then
+            For i = 0 To ConfigFile.Count - 1
+                If ConfigFile(i).StartsWith(cfgSplit.Trim & Separator) Then
+                    _loadedValue = ConfigFile(i).Split(" ")(ConfigFile(i).Split.Count - 1).Replace("""", "")
                 End If
             Next
         End If
@@ -142,11 +155,41 @@ Public Class MednafenSetting
     Private Sub UpdateCFG(ByVal _newvalue As String)
         Dim EntryFound As Boolean = False
         Dim cfgSplit = ConfigString.Split(",")
-        For i = 0 To Rx.MednafenConfigCache.Count - 1
+
+        Dim ConfigFile As String() = {""}
+        Dim ConfigFilePath As String = ""
+        Dim UseEquals As Boolean = False
+
+        Select Case Emulator
+            Case "med"
+                ConfigFile = Rx.MednafenConfigCache
+                ConfigFilePath = MainformRef.NullDCPath & "\mednafen\mednafen.cfg"
+            Case "mup"
+                ConfigFile = Rx.MupenConfigCache
+                ConfigFilePath = MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg"
+                UseEquals = True
+        End Select
+
+        Dim Separator As String = " "
+        If UseQuotes Then
+            Separator = " = "
+        End If
+
+        For i = 0 To ConfigFile.Count - 1
             For Each _cfg In cfgSplit
 
-                If Rx.MednafenConfigCache(i).StartsWith(_cfg.Trim & " ") Then
-                    Rx.MednafenConfigCache(i) = _cfg.Trim & " " & _newvalue
+                If ConfigFile(i).StartsWith(_cfg.Trim & " ") Then
+
+                    If UseEquals Then
+
+                    End If
+                    If UseQuotes Then
+                        ConfigFile(i) = _cfg.Trim & Separator & """" & _newvalue & """"
+                    Else
+                        ConfigFile(i) = _cfg.Trim & Separator & _newvalue
+                    End If
+
+
                     EntryFound = True
                     Exit For
 
@@ -157,7 +200,7 @@ Public Class MednafenSetting
         Next
 
         If EntryFound Then
-            File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", Rx.MednafenConfigCache)
+            File.WriteAllLines(ConfigFilePath, ConfigFile)
             Console.WriteLine("Changed: " & _newvalue)
         Else
             MsgBox("Could not find Config String: " & ConfigString)

@@ -14,6 +14,7 @@ Module Rx
     Public MultiTap As Int16 = 0
     Public GaggedUsers As New Dictionary(Of String, String)
     Public MednafenConfigCache As String()
+    Public MupenConfigCache As String()
     Public SecretSettings As String = ""
     Public KeyCon As New KeysConverter
 
