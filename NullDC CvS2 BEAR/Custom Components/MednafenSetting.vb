@@ -9,6 +9,7 @@ Public Class MednafenSetting
     Public Property ChangeRate As Single = 1
     Public Property Emulator As String = "med"
     Public Property UseQuotes As Boolean = False
+    Public Property SpecialFunction As Int16 = 0
 
     Dim Controller As Control
 
@@ -29,6 +30,8 @@ Public Class MednafenSetting
     End Function
 
     Private Sub MednafenSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SuspendLayout()
+
         Dim _configs = Limits.Split(vbNewLine)
 
         Dim _loadedValue = ""
@@ -47,9 +50,20 @@ Public Class MednafenSetting
 
         If ConfigFile IsNot Nothing Then
             For i = 0 To ConfigFile.Count - 1
-                If ConfigFile(i).StartsWith(cfgSplit.Trim & Separator) Then
-                    _loadedValue = ConfigFile(i).Split(" ")(ConfigFile(i).Split.Count - 1).Replace("""", "")
+                If SpecialFunction = 1 Then
+                    If ConfigFile(i).StartsWith("ScreenWidth = ") Then
+                        Dim cw As Short = CInt(ConfigFile(i).Split("=")(1).Trim)
+                        _loadedValue = cw / 320
+
+                    End If
+
+                Else
+                    If ConfigFile(i).StartsWith(cfgSplit.Trim & Separator) Then
+                        _loadedValue = ConfigFile(i).Split(" ")(ConfigFile(i).Split.Count - 1).Replace("""", "")
+                    End If
+
                 End If
+
             Next
         End If
 
@@ -199,6 +213,7 @@ Public Class MednafenSetting
 
         End Select
 
+        ResumeLayout()
     End Sub
 
     Private Sub UpdateCFG(ByVal _newvalue As String)
@@ -207,7 +222,6 @@ Public Class MednafenSetting
 
         Dim ConfigFile As String() = {""}
         Dim ConfigFilePath As String = ""
-        Dim UseEquals As Boolean = False
 
         Select Case Emulator
             Case "med"
@@ -216,7 +230,6 @@ Public Class MednafenSetting
             Case "mup"
                 ConfigFile = Rx.MupenConfigCache
                 ConfigFilePath = MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg"
-                UseEquals = True
         End Select
 
         Dim Separator As String = " "
@@ -227,22 +240,33 @@ Public Class MednafenSetting
         For i = 0 To ConfigFile.Count - 1
             For Each _cfg In cfgSplit
 
-                If ConfigFile(i).StartsWith(_cfg.Trim & " ") Then
+                If SpecialFunction = 1 Then ' Special Functino for Mupen Resolution Handling
 
-                    If UseEquals Then
+                    If ConfigFile(i).StartsWith("ScreenWidth = ") Then
+                        ConfigFile(i) = "ScreenWidth = " & (320 * _newvalue)
+                        EntryFound = True
+                    ElseIf ConfigFile(i).StartsWith("ScreenHeight = ") Then
+                        ConfigFile(i) = "ScreenHeight = " & (240 * _newvalue)
+                        EntryFound = True
+                    End If
+
+                Else
+                    If ConfigFile(i).StartsWith(_cfg.Trim & " ") Then
+
+                        If UseQuotes Then
+                            ConfigFile(i) = _cfg.Trim & Separator & """" & _newvalue & """"
+                        Else
+                            ConfigFile(i) = _cfg.Trim & Separator & _newvalue
+                        End If
+
+                        EntryFound = True
+                        Exit For
 
                     End If
-                    If UseQuotes Then
-                        ConfigFile(i) = _cfg.Trim & Separator & """" & _newvalue & """"
-                    Else
-                        ConfigFile(i) = _cfg.Trim & Separator & _newvalue
-                    End If
-
-
-                    EntryFound = True
-                    Exit For
 
                 End If
+
+
 
             Next
 

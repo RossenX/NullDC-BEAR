@@ -12,22 +12,19 @@ Public Class Mupen64Launcher
         Environment.CurrentDirectory = MainformRef.NullDCPath & "\Mupen64Plus"
 
         MupenLaunchInfo.FileName = MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus-ui-console.exe"
-        'MupenLaunchInfo.Arguments = "--gfx mupen64plus-video-glide64mk2 --rsp mupen64plus-rsp-hle "
-        'MupenLaunchInfo.Arguments = "--gfx mupen64plus-video-rice --rsp mupen64plus-rsp-hle "
-        'MupenLaunchInfo.Arguments = " "
-        MupenLaunchInfo.Arguments += "--resolution 1280x960 "
-        MupenLaunchInfo.Arguments += "--windowed "
-        'MupenLaunchInfo.Arguments += "--console "
+        If MainformRef.ConfigFile.ShowConsole Then MupenLaunchInfo.Arguments += "--console "
+
         'MupenLaunchInfo.Arguments += "--online "
         MupenLaunchInfo.Arguments += "--datadir " & """" & MainformRef.NullDCPath & "\Mupen64Plus" & """ "
         MupenLaunchInfo.Arguments += "--configdir " & """" & MainformRef.NullDCPath & "\Mupen64Plus" & """ "
         MupenLaunchInfo.Arguments += "--sshotdir " & """" & MainformRef.NullDCPath & "\Mupen64Plus\screenshot" & """ "
         MupenLaunchInfo.Arguments += "--savedir " & """" & MainformRef.NullDCPath & "\Mupen64Plus\save" & """ "
         MupenLaunchInfo.Arguments += "--vol " & MainformRef.ConfigFile.EmulatorVolume & " "
+        'MupenLaunchInfo.Arguments += "--cheats all "
 
         MupenLaunchInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
 
-        Console.WriteLine("Mupen Comand: " & MupenLaunchInfo.Arguments)
+        Console.WriteLine("Mupen Command: " & MupenLaunchInfo.Arguments)
         MupenInstance = Process.Start(MupenLaunchInfo)
         MupenInstance.EnableRaisingEvents = True
 

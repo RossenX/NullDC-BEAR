@@ -428,19 +428,19 @@ Partial Class frmMain
         'GeneralToolStripMenuItem
         '
         Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
-        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.GeneralToolStripMenuItem.Text = "General"
         '
         'MednafenToolStripMenuItem
         '
         Me.MednafenToolStripMenuItem.Name = "MednafenToolStripMenuItem"
-        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
-        Me.MednafenToolStripMenuItem.Text = "Mednafen"
+        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.MednafenToolStripMenuItem.Text = "Emulator"
         '
         'GaggedUsersToolStripMenuItem
         '
         Me.GaggedUsersToolStripMenuItem.Name = "GaggedUsersToolStripMenuItem"
-        Me.GaggedUsersToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.GaggedUsersToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.GaggedUsersToolStripMenuItem.Text = "Gagged Users"
         '
         'FreeDLCToolStripMenuItem

@@ -450,6 +450,7 @@ Partial Class frmKeyMapperSDL
         Me.ProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label96 = New System.Windows.Forms.Label()
         CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).BeginInit
         Me.TableLayoutPanel1.SuspendLayout
         Me.ControllersTab.SuspendLayout
@@ -6804,6 +6805,9 @@ Partial Class frmKeyMapperSDL
         Me.page_N64_Controller.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.page_N64_Controller.BackgroundImage = CType(resources.GetObject("page_N64_Controller.BackgroundImage"), System.Drawing.Image)
         Me.page_N64_Controller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.page_N64_Controller.Controls.Add(Me.Label96)
+        Me.page_N64_Controller.Controls.Add(Me.KeybindButton33)
+        Me.page_N64_Controller.Controls.Add(Me.KeybindButton31)
         Me.page_N64_Controller.Controls.Add(Me.Label95)
         Me.page_N64_Controller.Controls.Add(Me.Label94)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton45)
@@ -6820,9 +6824,7 @@ Partial Class frmKeyMapperSDL
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton36)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton37)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton30)
-        Me.page_N64_Controller.Controls.Add(Me.KeybindButton31)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton32)
-        Me.page_N64_Controller.Controls.Add(Me.KeybindButton33)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton22)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton27)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton28)
@@ -6884,7 +6886,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton44.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.KeybindButton44.ForeColor = System.Drawing.Color.Black
         Me.KeybindButton44.KeyCode = New String() {"k0", "k0"}
-        Me.KeybindButton44.KeyDefaults = New String() {"k88,k88,k88", "k88,k88,k88"}
+        Me.KeybindButton44.KeyDefaults = New String() {"b4,b4,b4", "b4,b4,b4"}
         Me.KeybindButton44.KeyLocked = False
         Me.KeybindButton44.Location = New System.Drawing.Point(619, 363)
         Me.KeybindButton44.Name = "KeybindButton44"
@@ -7068,7 +7070,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton36.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton36.KeyDefaults = New String() {"a2+,a2+,k99", "a2+,a2+,k99"}
         Me.KeybindButton36.KeyLocked = False
-        Me.KeybindButton36.Location = New System.Drawing.Point(521, 126)
+        Me.KeybindButton36.Location = New System.Drawing.Point(522, 126)
         Me.KeybindButton36.Name = "KeybindButton36"
         Me.KeybindButton36.Size = New System.Drawing.Size(35, 35)
         Me.KeybindButton36.TabIndex = 42
@@ -7087,7 +7089,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton37.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton37.KeyDefaults = New String() {"a3+,a3+,k98", "a3+,a3+,k98"}
         Me.KeybindButton37.KeyLocked = False
-        Me.KeybindButton37.Location = New System.Drawing.Point(488, 161)
+        Me.KeybindButton37.Location = New System.Drawing.Point(488, 160)
         Me.KeybindButton37.Name = "KeybindButton37"
         Me.KeybindButton37.Size = New System.Drawing.Size(35, 35)
         Me.KeybindButton37.TabIndex = 43
@@ -7106,7 +7108,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton30.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton30.KeyDefaults = New String() {"a0-,a0-,k70", "a0-,a0-,k70"}
         Me.KeybindButton30.KeyLocked = False
-        Me.KeybindButton30.Location = New System.Drawing.Point(286, 262)
+        Me.KeybindButton30.Location = New System.Drawing.Point(285, 261)
         Me.KeybindButton30.Name = "KeybindButton30"
         Me.KeybindButton30.Size = New System.Drawing.Size(40, 40)
         Me.KeybindButton30.TabIndex = 36
@@ -7125,7 +7127,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton31.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton31.KeyDefaults = New String() {"a1-,a1-,k84", "a1-,a1-,k84"}
         Me.KeybindButton31.KeyLocked = False
-        Me.KeybindButton31.Location = New System.Drawing.Point(323, 225)
+        Me.KeybindButton31.Location = New System.Drawing.Point(324, 222)
         Me.KeybindButton31.Name = "KeybindButton31"
         Me.KeybindButton31.Size = New System.Drawing.Size(40, 40)
         Me.KeybindButton31.TabIndex = 37
@@ -7144,7 +7146,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton32.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton32.KeyDefaults = New String() {"a0+,a0+,k72", "a0+,a0+,k72"}
         Me.KeybindButton32.KeyLocked = False
-        Me.KeybindButton32.Location = New System.Drawing.Point(360, 262)
+        Me.KeybindButton32.Location = New System.Drawing.Point(363, 261)
         Me.KeybindButton32.Name = "KeybindButton32"
         Me.KeybindButton32.Size = New System.Drawing.Size(40, 40)
         Me.KeybindButton32.TabIndex = 38
@@ -7163,7 +7165,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton33.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton33.KeyDefaults = New String() {"a1+,a1+,k71", "a1+,a1+,k71"}
         Me.KeybindButton33.KeyLocked = False
-        Me.KeybindButton33.Location = New System.Drawing.Point(323, 298)
+        Me.KeybindButton33.Location = New System.Drawing.Point(324, 301)
         Me.KeybindButton33.Name = "KeybindButton33"
         Me.KeybindButton33.Size = New System.Drawing.Size(40, 40)
         Me.KeybindButton33.TabIndex = 39
@@ -7182,7 +7184,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton22.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton22.KeyDefaults = New String() {"b13,b13,k65", "b13,b13,k65"}
         Me.KeybindButton22.KeyLocked = False
-        Me.KeybindButton22.Location = New System.Drawing.Point(133, 153)
+        Me.KeybindButton22.Location = New System.Drawing.Point(131, 154)
         Me.KeybindButton22.Name = "KeybindButton22"
         Me.KeybindButton22.Size = New System.Drawing.Size(40, 40)
         Me.KeybindButton22.TabIndex = 32
@@ -7201,7 +7203,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton27.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton27.KeyDefaults = New String() {"b11,b11,k87", "b11,b11,k87"}
         Me.KeybindButton27.KeyLocked = False
-        Me.KeybindButton27.Location = New System.Drawing.Point(170, 116)
+        Me.KeybindButton27.Location = New System.Drawing.Point(170, 115)
         Me.KeybindButton27.Name = "KeybindButton27"
         Me.KeybindButton27.Size = New System.Drawing.Size(40, 40)
         Me.KeybindButton27.TabIndex = 33
@@ -7220,7 +7222,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton28.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton28.KeyDefaults = New String() {"b14,b14,k68", "b14,b14,k68"}
         Me.KeybindButton28.KeyLocked = False
-        Me.KeybindButton28.Location = New System.Drawing.Point(207, 153)
+        Me.KeybindButton28.Location = New System.Drawing.Point(209, 154)
         Me.KeybindButton28.Name = "KeybindButton28"
         Me.KeybindButton28.Size = New System.Drawing.Size(40, 40)
         Me.KeybindButton28.TabIndex = 34
@@ -7239,7 +7241,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton29.KeyCode = New String() {"k0", "k0"}
         Me.KeybindButton29.KeyDefaults = New String() {"b12,b12,k83", "b12,b12,k83"}
         Me.KeybindButton29.KeyLocked = False
-        Me.KeybindButton29.Location = New System.Drawing.Point(170, 189)
+        Me.KeybindButton29.Location = New System.Drawing.Point(170, 193)
         Me.KeybindButton29.Name = "KeybindButton29"
         Me.KeybindButton29.Size = New System.Drawing.Size(40, 40)
         Me.KeybindButton29.TabIndex = 35
@@ -7515,6 +7517,15 @@ Partial Class frmKeyMapperSDL
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
+        '
+        'Label96
+        '
+        Me.Label96.AutoSize = True
+        Me.Label96.Location = New System.Drawing.Point(6, 452)
+        Me.Label96.Name = "Label96"
+        Me.Label96.Size = New System.Drawing.Size(263, 13)
+        Me.Label96.TabIndex = 94
+        Me.Label96.Text = "Note: Two player on same keyboard not supported yet"
         '
         'frmKeyMapperSDL
         '
@@ -8036,4 +8047,5 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents KeybindButton46 As keybindButton
     Friend WithEvents Label95 As Label
     Friend WithEvents Label94 As Label
+    Friend WithEvents Label96 As Label
 End Class
