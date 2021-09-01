@@ -400,6 +400,8 @@ Partial Class frmKeyMapperSDL
         Me.N64_Tab = New System.Windows.Forms.TabPage()
         Me.TabControl11 = New System.Windows.Forms.TabControl()
         Me.page_N64_Controller = New System.Windows.Forms.TabPage()
+        Me.KeybindButton33 = New NullDC_CvS2_BEAR.keybindButton()
+        Me.KeybindButton31 = New NullDC_CvS2_BEAR.keybindButton()
         Me.Label95 = New System.Windows.Forms.Label()
         Me.Label94 = New System.Windows.Forms.Label()
         Me.KeybindButton45 = New NullDC_CvS2_BEAR.keybindButton()
@@ -416,9 +418,7 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton36 = New NullDC_CvS2_BEAR.keybindButton()
         Me.KeybindButton37 = New NullDC_CvS2_BEAR.keybindButton()
         Me.KeybindButton30 = New NullDC_CvS2_BEAR.keybindButton()
-        Me.KeybindButton31 = New NullDC_CvS2_BEAR.keybindButton()
         Me.KeybindButton32 = New NullDC_CvS2_BEAR.keybindButton()
-        Me.KeybindButton33 = New NullDC_CvS2_BEAR.keybindButton()
         Me.KeybindButton22 = New NullDC_CvS2_BEAR.keybindButton()
         Me.KeybindButton27 = New NullDC_CvS2_BEAR.keybindButton()
         Me.KeybindButton28 = New NullDC_CvS2_BEAR.keybindButton()
@@ -450,7 +450,6 @@ Partial Class frmKeyMapperSDL
         Me.ProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label96 = New System.Windows.Forms.Label()
         CType(Me.DeadzoneTB, System.ComponentModel.ISupportInitialize).BeginInit
         Me.TableLayoutPanel1.SuspendLayout
         Me.ControllersTab.SuspendLayout
@@ -6805,7 +6804,6 @@ Partial Class frmKeyMapperSDL
         Me.page_N64_Controller.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.page_N64_Controller.BackgroundImage = CType(resources.GetObject("page_N64_Controller.BackgroundImage"), System.Drawing.Image)
         Me.page_N64_Controller.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.page_N64_Controller.Controls.Add(Me.Label96)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton33)
         Me.page_N64_Controller.Controls.Add(Me.KeybindButton31)
         Me.page_N64_Controller.Controls.Add(Me.Label95)
@@ -6835,6 +6833,44 @@ Partial Class frmKeyMapperSDL
         Me.page_N64_Controller.Size = New System.Drawing.Size(681, 468)
         Me.page_N64_Controller.TabIndex = 0
         Me.page_N64_Controller.Text = "Controller"
+        '
+        'KeybindButton33
+        '
+        Me.KeybindButton33.BackColor = System.Drawing.Color.White
+        Me.KeybindButton33.ConfigString = "Y Axis+"
+        Me.KeybindButton33.Emu = "mupen"
+        Me.KeybindButton33.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton33.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton33.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton33.KeyDefaults = New String() {"a1+,a1+,k71", "a1+,a1+,k71"}
+        Me.KeybindButton33.KeyLocked = False
+        Me.KeybindButton33.Location = New System.Drawing.Point(324, 301)
+        Me.KeybindButton33.Name = "KeybindButton33"
+        Me.KeybindButton33.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton33.TabIndex = 39
+        Me.KeybindButton33.TabStop = False
+        Me.KeybindButton33.Text = "X"
+        Me.KeybindButton33.UseVisualStyleBackColor = False
+        '
+        'KeybindButton31
+        '
+        Me.KeybindButton31.BackColor = System.Drawing.Color.White
+        Me.KeybindButton31.ConfigString = "Y Axis-"
+        Me.KeybindButton31.Emu = "mupen"
+        Me.KeybindButton31.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.KeybindButton31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeybindButton31.ForeColor = System.Drawing.Color.Black
+        Me.KeybindButton31.KeyCode = New String() {"k0", "k0"}
+        Me.KeybindButton31.KeyDefaults = New String() {"a1-,a1-,k84", "a1-,a1-,k84"}
+        Me.KeybindButton31.KeyLocked = False
+        Me.KeybindButton31.Location = New System.Drawing.Point(324, 222)
+        Me.KeybindButton31.Name = "KeybindButton31"
+        Me.KeybindButton31.Size = New System.Drawing.Size(40, 40)
+        Me.KeybindButton31.TabIndex = 37
+        Me.KeybindButton31.TabStop = False
+        Me.KeybindButton31.Text = "X"
+        Me.KeybindButton31.UseVisualStyleBackColor = False
         '
         'Label95
         '
@@ -7116,25 +7152,6 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton30.Text = "X"
         Me.KeybindButton30.UseVisualStyleBackColor = False
         '
-        'KeybindButton31
-        '
-        Me.KeybindButton31.BackColor = System.Drawing.Color.White
-        Me.KeybindButton31.ConfigString = "Y Axis-"
-        Me.KeybindButton31.Emu = "mupen"
-        Me.KeybindButton31.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.KeybindButton31.ForeColor = System.Drawing.Color.Black
-        Me.KeybindButton31.KeyCode = New String() {"k0", "k0"}
-        Me.KeybindButton31.KeyDefaults = New String() {"a1-,a1-,k84", "a1-,a1-,k84"}
-        Me.KeybindButton31.KeyLocked = False
-        Me.KeybindButton31.Location = New System.Drawing.Point(324, 222)
-        Me.KeybindButton31.Name = "KeybindButton31"
-        Me.KeybindButton31.Size = New System.Drawing.Size(40, 40)
-        Me.KeybindButton31.TabIndex = 37
-        Me.KeybindButton31.TabStop = False
-        Me.KeybindButton31.Text = "X"
-        Me.KeybindButton31.UseVisualStyleBackColor = False
-        '
         'KeybindButton32
         '
         Me.KeybindButton32.BackColor = System.Drawing.Color.White
@@ -7153,25 +7170,6 @@ Partial Class frmKeyMapperSDL
         Me.KeybindButton32.TabStop = False
         Me.KeybindButton32.Text = "X"
         Me.KeybindButton32.UseVisualStyleBackColor = False
-        '
-        'KeybindButton33
-        '
-        Me.KeybindButton33.BackColor = System.Drawing.Color.White
-        Me.KeybindButton33.ConfigString = "Y Axis+"
-        Me.KeybindButton33.Emu = "mupen"
-        Me.KeybindButton33.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.KeybindButton33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.KeybindButton33.ForeColor = System.Drawing.Color.Black
-        Me.KeybindButton33.KeyCode = New String() {"k0", "k0"}
-        Me.KeybindButton33.KeyDefaults = New String() {"a1+,a1+,k71", "a1+,a1+,k71"}
-        Me.KeybindButton33.KeyLocked = False
-        Me.KeybindButton33.Location = New System.Drawing.Point(324, 301)
-        Me.KeybindButton33.Name = "KeybindButton33"
-        Me.KeybindButton33.Size = New System.Drawing.Size(40, 40)
-        Me.KeybindButton33.TabIndex = 39
-        Me.KeybindButton33.TabStop = False
-        Me.KeybindButton33.Text = "X"
-        Me.KeybindButton33.UseVisualStyleBackColor = False
         '
         'KeybindButton22
         '
@@ -7517,15 +7515,6 @@ Partial Class frmKeyMapperSDL
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
-        '
-        'Label96
-        '
-        Me.Label96.AutoSize = True
-        Me.Label96.Location = New System.Drawing.Point(6, 452)
-        Me.Label96.Name = "Label96"
-        Me.Label96.Size = New System.Drawing.Size(263, 13)
-        Me.Label96.TabIndex = 94
-        Me.Label96.Text = "Note: Two player on same keyboard not supported yet"
         '
         'frmKeyMapperSDL
         '
@@ -8047,5 +8036,4 @@ Partial Class frmKeyMapperSDL
     Friend WithEvents KeybindButton46 As keybindButton
     Friend WithEvents Label95 As Label
     Friend WithEvents Label94 As Label
-    Friend WithEvents Label96 As Label
 End Class

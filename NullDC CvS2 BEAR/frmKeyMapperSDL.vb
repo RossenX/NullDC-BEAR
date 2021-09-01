@@ -268,6 +268,7 @@ Public Class frmKeyMapperSDL
             NaomiChanged = True
             DreamcastChanged = True
             MednafenChanged = True
+            MupenChanged = True
         Else
             Dim _tmpConfigFile As String() = File.ReadAllLines(_filepath)
 
@@ -279,6 +280,7 @@ Public Class frmKeyMapperSDL
                         NaomiChanged = True
                         DreamcastChanged = True
                         MednafenChanged = True
+                        MupenChanged = True
                     End If
 
                     ' Naomi
@@ -393,6 +395,7 @@ Public Class frmKeyMapperSDL
         NaomiChanged = True
         DreamcastChanged = True
         MednafenChanged = True
+        MupenChanged = True
 
         LoadSettings(cbProfiles.Text.Trim)
         AddHandler cbProfiles.SelectedIndexChanged, AddressOf CbProfileIndexChanged
@@ -1055,25 +1058,66 @@ Public Class frmKeyMapperSDL
             If MupenChanged Then
 
                 Dim TempMappingString As String() = {"", ""}
-
                 Dim MupenControls As String() = {"", ""}
 
+                ' Ok new IDEA. FULLY MANUAL
+
+                ' Here's what we need in the configs
+                ' version = 2.000000
+                ' mode = 0
+                ' device = {Joystick}
+                ' name = {Name}
+                ' plugged = True
+                ' plugin = 2
+                ' mouse = False
+                ' MouseSensitivity = "2.00,2.00"
+                ' AnalogDeadzone = "6553,6553"
+                ' AnalogPeak = "32768,32768"
+
+                ' DPad R
+                ' DPad L
+                ' DPad D
+                ' DPad U
+                ' Start
+                ' Z Trig
+                ' B Button
+                ' A Button
+                ' C Button R 
+                ' C Button L
+                ' C Button D 
+                ' C Button U 
+                ' R Trig
+                ' L Trig
+                ' Mempak switch
+                ' Rumblepak switch
+                ' X Axis
+                ' Y Axis
+
+                ' Initial Setup Stuff of values that are always the same
                 For i = 0 To 1
+                    MupenControls(i) += "Input-SDL-Control" & i + 1 & "]" & vbNewLine
+                    MupenControls(i) += vbNewLine
+                    MupenControls(i) += "version = 2.000000" & vbNewLine
 
+                    MupenControls(i) += "mode = 0" & vbNewLine
 
-                    If Joystick(i) >= 0 Then
-                        TempMappingString(i) = GetFullMappingStringforIndex(Joystick(i)).Split("|")(0)
-                        MupenControls(i) += "[" & SDL_JoystickNameForIndex(Joystick(i)).Trim() & "]" & vbNewLine
-                        MupenControls(i) += "plugged = True" & vbNewLine
-                        MupenControls(i) += "mouse = False" & vbNewLine
-                        MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (Deadzone(i) / 100)) & "," & Math.Floor(32768 * (Deadzone(i) / 100)) & "" & vbNewLine
-                        MupenControls(i) += "AnalogPeak = 32768,32768" & vbNewLine
+                    MupenControls(i) += "device = " & Joystick(i) & vbNewLine
 
+                    If Joystick(i) = -1 Then
+                        MupenControls(i) += "name = ""Keyboard""" & vbNewLine
                     Else
-                        MupenControls(i) += "[Keyboard]" & vbNewLine
-                        MupenControls(i) += "plugged = True" & vbNewLine
-                        MupenControls(i) += "mouse = False" & vbNewLine
+                        TempMappingString(i) = GetFullMappingStringforIndex(Joystick(i)).Split("|")(0)
+                        MupenControls(i) += "name = """ & SDL_GameControllerNameForIndex(Joystick(i)) & """" & vbNewLine
                     End If
+
+                    MupenControls(i) += "plugged = True" & vbNewLine
+
+                    MupenControls(i) += "plugin = 2" & vbNewLine
+                    MupenControls(i) += "MouseSensitivity = ""2.00,2.00"" " & vbNewLine
+
+                    MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (Deadzone(i) / 100)) & "," & Math.Floor(32768 * (Deadzone(i) / 100)) & "" & vbNewLine
+                    MupenControls(i) += "AnalogPeak = ""32768,32768"" " & vbNewLine
+
                 Next
 
                 ' Go through the configs and generate a valid string for each of the buttons
@@ -1114,54 +1158,56 @@ Public Class frmKeyMapperSDL
 
                 ' Do The Analog Stuff
                 For i = 0 To 1
-                    MupenControls(i) += "X Axis = " & X_AxisMinus(i).Split("(")(0) & "(" & X_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & X_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
-                    MupenControls(i) += "Y Axis = " & Y_AxisMinus(i).Split("(")(0) & "(" & Y_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & Y_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+
+                    If X_AxisMinus(i) = "" Or X_AxisPlus(i) = "" Then
+                        MupenControls(i) += "X Axis = "
+                    Else
+                        MupenControls(i) += "X Axis = " & X_AxisMinus(i).Split("(")(0) & "(" & X_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & X_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+                    End If
+
+
+                    If Y_AxisMinus(i) = "" Or Y_AxisPlus(i) = "" Then
+                        MupenControls(i) += "Y Axis = "
+                    Else
+                        MupenControls(i) += "Y Axis = " & Y_AxisMinus(i).Split("(")(0) & "(" & Y_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & Y_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+                    End If
 
                 Next
 
-                ' Time To Save
-                ' Check if that entry already exists
-                Dim MupenConfigs() As String = File.ReadAllText(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini").Split("[")
+                Dim MupenConfigs = File.ReadAllText(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg").Split("[")
 
-                For i = 0 To 1
-                    Dim ControlFound = False
-                    For l = 1 To MupenConfigs.Count - 1
-                        If MupenConfigs(l).Replace(" ", "").StartsWith(MupenControls(i).Remove(0, 1).Split("]")(0).Replace(" ", "")) Then
-                            MupenConfigs(l) = MupenControls(i)
-                            ControlFound = True
-                            Exit For
-                        End If
-                    Next
+                Dim PCount = 0
+                For i = 0 To MupenConfigs.Count - 1
 
-                    If Not ControlFound Then
-                        MupenConfigs(MupenConfigs.Count - 1) += vbNewLine & MupenControls(i)
+                    If MupenConfigs(i).StartsWith("Input-SDL-Control1]") Then MupenConfigs(i) = MupenControls(0)
 
-                    End If
+                    If MupenConfigs(i).StartsWith("Input-SDL-Control2]") Then MupenConfigs(i) = MupenControls(1) : Exit For
+
+                    ' Just in case we make it down this far somehow
+                    If MupenConfigs(i).StartsWith("Input-SDL-Control3]") Then Exit For
+
                 Next
 
                 For i = 1 To MupenConfigs.Count - 1
-                    If Not MupenConfigs(i).StartsWith("[") Then
-                        MupenConfigs(i) = "[" & MupenConfigs(i).Trim & vbNewLine
-                    End If
+                    MupenConfigs(i) = "[" & MupenConfigs(i)
+
                 Next
 
-                File.WriteAllLines(MainformRef.NullDCPath & "\Mupen64Plus\InputAutoCfg.ini", MupenConfigs)
+                For i = 0 To MupenConfigs.Count - 1
+                    If i > 0 Then
+                        MupenConfigs(i) = vbNewLine & MupenConfigs(i).Trim
+                    Else
+                        MupenConfigs(i) = MupenConfigs(i).Trim
+                    End If
 
-                ' TO DO MAKE PROFILE AND SAVE PROFIEL NAMES
+                Next
 
-
-
-
-
-
-
-
-
+                File.WriteAllLines(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg", MupenConfigs)
 
             End If
 
         Catch ex As Exception
-            MsgBox("Error Saving Mupen Controls: " & ex.InnerException.Message)
+            MsgBox("Error Saving Mupen Controls " & ex.InnerException.Message)
 
         End Try
 
@@ -1194,9 +1240,9 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub ClickedBindButton(sender As keybindButton, e As EventArgs)
-        'Console.WriteLine("Bind clicked: " & sender.Name)
+        'Console.WriteLine("Bind clicked " & sender.Name)
         If sender.KeyLocked Then
-            MsgBox("this bind is locked for now")
+            MsgBox("this bind Is locked for now")
             Exit Sub
         End If
 
@@ -1250,7 +1296,7 @@ Public Class frmKeyMapperSDL
             UpdateButtonLabels()
 
         Catch ex As Exception
-            MsgBox("Error Changing Controller: " & ex.InnerException.Message)
+            MsgBox("Error Changing Controller " & ex.InnerException.Message)
             DeadzoneTB.Value = Deadzone(PlayerTab.SelectedIndex)
 
             ControllerCB.SelectedIndex = 0
@@ -1289,7 +1335,7 @@ Public Class frmKeyMapperSDL
     Private Sub ControllerCB_SelectedIndexChanged(sender As Object, e As EventArgs)
 
         Try
-            'Console.Write("Changing Controller: ")
+            'Console.Write("Changing Controller ")
             If Not Joy = Nothing Then
                 If SDL_GameControllerGetAttached(Joy) = SDL_bool.SDL_TRUE Then
                     SDL_GameControllerClose(Joy)
@@ -1301,10 +1347,10 @@ Public Class frmKeyMapperSDL
                 Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)
             End If
 
-            'Console.WriteLine("joystick: " & ControllerCB.SelectedValue)
+            'Console.WriteLine("joystick " & ControllerCB.SelectedValue)
             Joystick(PlayerTab.SelectedIndex) = ControllerCB.SelectedValue
         Catch ex As Exception
-            MsgBox("Error Opening Controller: " & ex.InnerException.Message)
+            MsgBox("Error Opening Controller " & ex.InnerException.Message)
 
         End Try
 
@@ -1371,7 +1417,7 @@ Public Class frmKeyMapperSDL
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSDL.Click
         If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
-            MsgBox("Cannot remap while emulation is running.")
+            MsgBox("Cannot remap while emulation Is running.")
             Exit Sub
         End If
 
@@ -1389,7 +1435,7 @@ Public Class frmKeyMapperSDL
 
     Private Sub BtnResetAll_Click(sender As Object, e As EventArgs) Handles ResetAllToolStripMenuItem.Click
         If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
-            MsgBox("Cannot reset all while emulation is running.")
+            MsgBox("Cannot reset all while emulation Is running.")
             Exit Sub
         End If
 
@@ -1436,7 +1482,7 @@ Public Class frmKeyMapperSDL
 
     Private Sub ImportMappingStringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportMappingStringToolStripMenuItem.Click
         If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
-            MsgBox("Cannot edit mapping string while emulation is running.")
+            MsgBox("Cannot edit mapping string while emulation Is running.")
             Exit Sub
         End If
 

@@ -60,11 +60,17 @@ Public Class MednafenSetting
                 Else
                     If ConfigFile(i).StartsWith(cfgSplit.Trim & Separator) Then
                         _loadedValue = ConfigFile(i).Split(" ")(ConfigFile(i).Split.Count - 1).Replace("""", "")
+
                     End If
 
                 End If
 
             Next
+        End If
+
+        ' Check for Comma and make it a period
+        If _loadedValue.Contains(",") Then
+            _loadedValue = _loadedValue.Replace(",", ".")
         End If
 
         Setting_Label.Text = GetLabelName()
