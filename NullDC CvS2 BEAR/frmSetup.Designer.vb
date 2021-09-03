@@ -62,6 +62,8 @@ Partial Class frmSetup
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.cb_nullDCPriority = New System.Windows.Forms.ComboBox()
+        Me.cb_MinimizeToTray = New System.Windows.Forms.CheckBox()
+        Me.cb_mono = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_Volume, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tb_eVolume, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -486,6 +488,8 @@ Partial Class frmSetup
         Me.OptionsContainer.Controls.Add(Me.cb_nullDCPriority, 0, 3)
         Me.OptionsContainer.Controls.Add(Me.Label8, 1, 4)
         Me.OptionsContainer.Controls.Add(Me.cbAllowSpectators, 1, 5)
+        Me.OptionsContainer.Controls.Add(Me.cb_MinimizeToTray, 1, 6)
+        Me.OptionsContainer.Controls.Add(Me.cb_mono, 1, 7)
         Me.OptionsContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.OptionsContainer.Location = New System.Drawing.Point(0, 0)
         Me.OptionsContainer.Name = "OptionsContainer"
@@ -563,6 +567,26 @@ Partial Class frmSetup
         Me.cb_nullDCPriority.Size = New System.Drawing.Size(154, 21)
         Me.cb_nullDCPriority.TabIndex = 33
         '
+        'cb_MinimizeToTray
+        '
+        Me.cb_MinimizeToTray.AutoSize = True
+        Me.cb_MinimizeToTray.Location = New System.Drawing.Point(173, 133)
+        Me.cb_MinimizeToTray.Name = "cb_MinimizeToTray"
+        Me.cb_MinimizeToTray.Size = New System.Drawing.Size(102, 17)
+        Me.cb_MinimizeToTray.TabIndex = 34
+        Me.cb_MinimizeToTray.Text = "Minimize to Tray"
+        Me.cb_MinimizeToTray.UseVisualStyleBackColor = True
+        '
+        'cb_mono
+        '
+        Me.cb_mono.AutoSize = True
+        Me.cb_mono.Location = New System.Drawing.Point(173, 156)
+        Me.cb_mono.Name = "cb_mono"
+        Me.cb_mono.Size = New System.Drawing.Size(119, 17)
+        Me.cb_mono.TabIndex = 35
+        Me.cb_mono.Text = "Force MONO Audio"
+        Me.cb_mono.UseVisualStyleBackColor = True
+        '
         'frmSetup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -633,4 +657,6 @@ Partial Class frmSetup
     Friend WithEvents Label13 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents cb_nullDCPriority As ComboBox
+    Friend WithEvents cb_MinimizeToTray As CheckBox
+    Friend WithEvents cb_mono As CheckBox
 End Class

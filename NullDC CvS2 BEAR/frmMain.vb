@@ -1410,7 +1410,8 @@ UpdateTry:
                     Case "GBA" : IconIndex = 9
                     Case "GBC" : IconIndex = 10
                     Case "SMS" : IconIndex = 11
-                    Case "N64" : IconIndex = 12
+                    Case "PCE" : IconIndex = 12
+                    Case "N64" : IconIndex = 13
                 End Select
             End If
 
@@ -1804,8 +1805,10 @@ UpdateTry:
 
     Private Sub TryToChallenge()
 
-        If Not Challenger Is Nothing Or GameSelectForm.Visible Then
-            NotificationForm.ShowMessage("Already Challenging someone")
+        If GameSelectForm.Visible Then GameSelectForm.Close()
+
+        If Challenger IsNot Nothing Or GameSelectForm.Visible Then
+            NotificationForm.ShowMessage("You Are already Challenging someone else")
             Exit Sub
         End If
 
@@ -1817,7 +1820,12 @@ UpdateTry:
         If SelectedPlayer.name.StartsWith(ConfigFile.Name.Trim) Then
             NotificationForm.ShowMessage("I can't really help you with your inner demons if you want to fight yourself.")
             Exit Sub
+        End If
 
+        ' Check if it's N64 if it is then don't allow challanges
+        If SelectedPlayer.game.Split("|")(1).StartsWith("N64") Then
+            NotificationForm.ShowMessage("N64 Netplay coming soon.")
+            Exit Sub
         End If
 
         ' Check if player is already hosting, if they are then just join and skip all the checks
@@ -1900,12 +1908,14 @@ UpdateTry:
         PlayerList.Columns(2).Width = 50
 
         If Me.WindowState = FormWindowState.Minimized Then
-            niBEAR.Visible = True
-            niBEAR.BalloonTipIcon = ToolTipIcon.None
-            niBEAR.BalloonTipTitle = "NulDC BEAR"
-            niBEAR.BalloonTipText = "Aight, I'll be here if you need me."
-            niBEAR.ShowBalloonTip(50000)
-            ShowInTaskbar = False ' this removes the form from the openforms... so gona disable it for now
+            If ConfigFile.MinimizeToTray = 1 Then
+                niBEAR.Visible = True
+                niBEAR.BalloonTipIcon = ToolTipIcon.None
+                niBEAR.BalloonTipTitle = "NulDC BEAR"
+                niBEAR.BalloonTipText = "Aight, I'll be here if you need me."
+                niBEAR.ShowBalloonTip(50000)
+                ShowInTaskbar = False ' this removes the form from the openforms... so gona disable it for now
+            End If
         End If
 
     End Sub
@@ -2280,6 +2290,8 @@ Public Class Configs
     Private _simDelay As Int16 = 0
     Private _region As Int16 = 0
     Private _nokey As Int16 = 0
+    Private _mintotray As Int16 = 1
+    Private _forcemono As Int16 = 0
 
 #Region "Properties"
 
@@ -2571,6 +2583,26 @@ Public Class Configs
 
     End Property
 
+    Public Property MinimizeToTray() As Int16
+        Get
+            Return _mintotray
+        End Get
+        Set(ByVal value As Int16)
+            _mintotray = value
+        End Set
+
+    End Property
+
+    Public Property ForceMono() As Int16
+        Get
+            Return _forcemono
+        End Get
+        Set(ByVal value As Int16)
+            _forcemono = value
+        End Set
+
+    End Property
+
 #End Region
 
     Public Sub SaveFile(Optional ByVal SendIam As Boolean = True)
@@ -2608,7 +2640,9 @@ Public Class Configs
                 "DebugControls=" & DebugControls,
                 "SimulatedDelay=" & SimulatedDelay,
                 "Region=" & Region,
-                "NoKey=" & NoKey
+                "NoKey=" & NoKey,
+                "MinimizeToTray=" & MinimizeToTray,
+                "ForceMono=" & ForceMono
             }
         File.WriteAllLines(NullDCPath & "\NullDC_BEAR.cfg", lines)
 
@@ -2682,6 +2716,8 @@ Public Class Configs
                 If line.StartsWith("SimulatedDelay=") Then SimulatedDelay = line.Split("=")(1).Trim
                 If line.StartsWith("Region=") Then Region = line.Split("=")(1).Trim
                 If line.StartsWith("NoKey=") Then NoKey = line.Split("=")(1).Trim
+                If line.StartsWith("MinimizeToTray=") Then MinimizeToTray = line.Split("=")(1).Trim
+                If line.StartsWith("ForceMono=") Then ForceMono = line.Split("=")(1).Trim
             Next
 
             Game = "None"

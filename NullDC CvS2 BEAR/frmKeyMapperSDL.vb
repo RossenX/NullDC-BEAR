@@ -1057,6 +1057,8 @@ Public Class frmKeyMapperSDL
 
             If MupenChanged Then
 
+                Console.WriteLine("Saving Mupen Controls")
+
                 Dim TempMappingString As String() = {"", ""}
                 Dim MupenControls As String() = {"", ""}
 

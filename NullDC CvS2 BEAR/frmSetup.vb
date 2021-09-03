@@ -61,6 +61,9 @@ Public Class frmSetup
 
         cbOverlay.SelectedIndex = MainformRef.ConfigFile.VsNames
         cb_ShowGameInTitle.Checked = MainformRef.ConfigFile.ShowGameNameInTitle
+        cb_MinimizeToTray.Checked = MainformRef.ConfigFile.MinimizeToTray
+        cb_mono.Checked = MainformRef.ConfigFile.ForceMono
+
         cbVsync.SelectedIndex = MainformRef.ConfigFile.Vsync
 
         ' Themes
@@ -100,6 +103,8 @@ Public Class frmSetup
         MainformRef.ConfigFile.Vsync = cbVsync.SelectedIndex
         MainformRef.ConfigFile.Theme = cbThemes.SelectedValue
         MainformRef.ConfigFile.NullDCPriority = cb_nullDCPriority.SelectedIndex
+        MainformRef.ConfigFile.MinimizeToTray = Convert.ToInt32(cb_MinimizeToTray.Checked)
+        MainformRef.ConfigFile.ForceMono = Convert.ToInt32(cb_mono.Checked)
 
         If cbAllowSpectators.Text = "Yes" Then
             MainformRef.ConfigFile.AllowSpectators = 1

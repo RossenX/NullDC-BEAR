@@ -464,6 +464,7 @@ Public Class NullDCLauncher
             If line.StartsWith("CDDAMute=") Then lines(linenumber) = "CDDAMute=0"
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
+            If line.StartsWith("ForceMono=") Then lines(linenumber) = "ForceMono=" & MainformRef.ConfigFile.ForceMono
 
             If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
 
@@ -684,6 +685,7 @@ Public Class NullDCLauncher
             If line.StartsWith("CDDAMute=") Then lines(linenumber) = "CDDAMute=0"
             If line.StartsWith("DSPEnabled=") Then lines(linenumber) = "DSPEnabled=0"
             If line.StartsWith("GlobalFocus=") Then lines(linenumber) = "GlobalFocus=1"
+            If line.StartsWith("ForceMono=") Then lines(linenumber) = "ForceMono=" & MainformRef.ConfigFile.ForceMono
 
             If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
 

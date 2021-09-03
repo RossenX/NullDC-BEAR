@@ -64,6 +64,8 @@ Partial Class frmMain
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExtrasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MVC2TierListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForceOpenPanelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaitingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -175,7 +177,8 @@ Partial Class frmMain
         Me.SystemIcons.Images.SetKeyName(9, "icon_GBA.png")
         Me.SystemIcons.Images.SetKeyName(10, "icon_GBC.png")
         Me.SystemIcons.Images.SetKeyName(11, "Icon_SMS.png")
-        Me.SystemIcons.Images.SetKeyName(12, "icon_N64.png")
+        Me.SystemIcons.Images.SetKeyName(12, "icon_supergrafx.png")
+        Me.SystemIcons.Images.SetKeyName(13, "icon_N64.png")
         '
         'btnSearch
         '
@@ -382,7 +385,7 @@ Partial Class frmMain
         '_MainMenuStrip
         '
         Me._MainMenuStrip.BackColor = System.Drawing.Color.Transparent
-        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem, Me.ForceOpenPanelToolStripMenuItem})
+        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem, Me.ExtrasToolStripMenuItem, Me.ForceOpenPanelToolStripMenuItem})
         Me._MainMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me._MainMenuStrip.Name = "_MainMenuStrip"
         Me._MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
@@ -428,19 +431,19 @@ Partial Class frmMain
         'GeneralToolStripMenuItem
         '
         Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
-        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.GeneralToolStripMenuItem.Text = "General"
         '
         'MednafenToolStripMenuItem
         '
         Me.MednafenToolStripMenuItem.Name = "MednafenToolStripMenuItem"
-        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.MednafenToolStripMenuItem.Text = "Emulator"
+        Me.MednafenToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.MednafenToolStripMenuItem.Text = "Emulators"
         '
         'GaggedUsersToolStripMenuItem
         '
         Me.GaggedUsersToolStripMenuItem.Name = "GaggedUsersToolStripMenuItem"
-        Me.GaggedUsersToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.GaggedUsersToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.GaggedUsersToolStripMenuItem.Text = "Gagged Users"
         '
         'FreeDLCToolStripMenuItem
@@ -461,6 +464,19 @@ Partial Class frmMain
         Me.PatreonO3oToolStripMenuItem.Name = "PatreonO3oToolStripMenuItem"
         Me.PatreonO3oToolStripMenuItem.Size = New System.Drawing.Size(83, 29)
         Me.PatreonO3oToolStripMenuItem.Text = "Patreon o3o"
+        '
+        'ExtrasToolStripMenuItem
+        '
+        Me.ExtrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MVC2TierListToolStripMenuItem})
+        Me.ExtrasToolStripMenuItem.Name = "ExtrasToolStripMenuItem"
+        Me.ExtrasToolStripMenuItem.Size = New System.Drawing.Size(50, 29)
+        Me.ExtrasToolStripMenuItem.Text = "Extras"
+        '
+        'MVC2TierListToolStripMenuItem
+        '
+        Me.MVC2TierListToolStripMenuItem.Name = "MVC2TierListToolStripMenuItem"
+        Me.MVC2TierListToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.MVC2TierListToolStripMenuItem.Text = "MVC2 Ratio List"
         '
         'ForceOpenPanelToolStripMenuItem
         '
@@ -560,4 +576,6 @@ Partial Class frmMain
     Friend WithEvents HostToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SystemIcons As ImageList
     Friend WithEvents WaitingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExtrasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MVC2TierListToolStripMenuItem As ToolStripMenuItem
 End Class
