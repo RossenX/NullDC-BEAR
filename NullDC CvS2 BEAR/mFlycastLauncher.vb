@@ -14,7 +14,10 @@ Public Class MFlycastLauncher
 
         ' Bunch of bullshit here
 
-        'So some of these don't change in the command line so have to do them manually
+        Dim ForceMono = "no"
+        If MainformRef.ConfigFile.ForceMono = 1 Then ForceMono = "yes"
+
+        'Some settings are locked some are not, these are not or maybe they're settings i know won't cause desync so i let people change
         Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg")
         Dim linenumber = 0
         For Each line As String In lines
@@ -35,12 +38,16 @@ Public Class MFlycastLauncher
             If line.StartsWith("device4.1 = ") Then lines(linenumber) = "device4.1 = 10"
             If line.StartsWith("device4.2 = ") Then lines(linenumber) = "device4.2 = 10"
 
+            ' This one is here only so people can still edit it in game
+            If line.StartsWith("aica.AudioVolume = ") Then lines(linenumber) = "aica.AudioVolume = " & MainformRef.ConfigFile.EmulatorVolume
+            If line.StartsWith("aica.ForceMono = ") Then lines(linenumber) = "aica.ForceMono = " & ForceMono
+
             linenumber += 1
         Next
 
         File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
 
-        FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=no "
+        FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=yes "
         FlycastInfo.Arguments += "-config config:rend.DumpTextures=no "
         ' FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no " Ok so this causes instant crash
         FlycastInfo.Arguments += "-config config:rend.UseMipmaps=no "
@@ -66,10 +73,6 @@ Public Class MFlycastLauncher
         FlycastInfo.Arguments += "-config config:Dreamcast.Language=1 "
         FlycastInfo.Arguments += "-config config:FastGDRomLoad=no "
 
-        Dim ForceMono = "no"
-        If MainformRef.ConfigFile.ForceMono = 1 Then ForceMono = "yes"
-        FlycastInfo.Arguments += "-config config:ForceMono=" & ForceMono & " "
-
         ' Enable GGPO if it's online
         If MainformRef.ConfigFile.Status = "Offline" Then
             FlycastInfo.Arguments += "-config network:GGPO=no "
@@ -86,7 +89,7 @@ Public Class MFlycastLauncher
 
             ' This is Online lets check if we're the host
             FlycastInfo.Arguments += "-config network:GGPO=yes "
-            FlycastInfo.Arguments += "-config network:GGPODelay=" & MainformRef.ConfigFile.SimulatedDelay & " "
+            FlycastInfo.Arguments += "-config network:GGPODelay=" & MainformRef.ConfigFile.Delay & " "
 
             ' Yeah no automatic states when playing online cuz who knows whatafak those states are
             FlycastInfo.Arguments += "-config config:Dreamcast.AutoLoadState=no "
