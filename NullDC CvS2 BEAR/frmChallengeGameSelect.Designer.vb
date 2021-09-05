@@ -38,14 +38,14 @@ Partial Class frmChallengeGameSelect
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cbRegion = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cb_nulldc_emulator = New System.Windows.Forms.ComboBox()
         Me.tc_games = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.DLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultidiscPlaylistCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.cb_nulldc_emulator = New System.Windows.Forms.ComboBox()
         Me.tb_mednafen.SuspendLayout()
         Me.GameSelectContainer.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -292,6 +292,32 @@ Partial Class frmChallengeGameSelect
         Me.cbRegion.Size = New System.Drawing.Size(151, 21)
         Me.cbRegion.TabIndex = 23
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.Label6.Location = New System.Drawing.Point(3, 56)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(122, 27)
+        Me.Label6.TabIndex = 27
+        Me.Label6.Text = "Emulator"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'cb_nulldc_emulator
+        '
+        Me.cb_nulldc_emulator.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb_nulldc_emulator.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cb_nulldc_emulator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_nulldc_emulator.FormattingEnabled = True
+        Me.cb_nulldc_emulator.Items.AddRange(New Object() {"NullDC", "Flycast (Rollback Beta)"})
+        Me.cb_nulldc_emulator.Location = New System.Drawing.Point(131, 59)
+        Me.cb_nulldc_emulator.Name = "cb_nulldc_emulator"
+        Me.cb_nulldc_emulator.Size = New System.Drawing.Size(153, 21)
+        Me.cb_nulldc_emulator.TabIndex = 28
+        '
         'tc_games
         '
         Me.GameSelectContainer.SetColumnSpan(Me.tc_games, 3)
@@ -345,32 +371,6 @@ Partial Class frmChallengeGameSelect
         Me.MultidiscPlaylistCreatorToolStripMenuItem.Name = "MultidiscPlaylistCreatorToolStripMenuItem"
         Me.MultidiscPlaylistCreatorToolStripMenuItem.Size = New System.Drawing.Size(150, 20)
         Me.MultidiscPlaylistCreatorToolStripMenuItem.Text = "Multidisc Playlist Creator"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(3, 56)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(122, 27)
-        Me.Label6.TabIndex = 27
-        Me.Label6.Text = "Emulator"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'cb_nulldc_emulator
-        '
-        Me.cb_nulldc_emulator.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.cb_nulldc_emulator.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cb_nulldc_emulator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cb_nulldc_emulator.FormattingEnabled = True
-        Me.cb_nulldc_emulator.Items.AddRange(New Object() {"NullDC", "Flycast (Rollback Beta)"})
-        Me.cb_nulldc_emulator.Location = New System.Drawing.Point(131, 59)
-        Me.cb_nulldc_emulator.Name = "cb_nulldc_emulator"
-        Me.cb_nulldc_emulator.Size = New System.Drawing.Size(153, 21)
-        Me.cb_nulldc_emulator.TabIndex = 28
         '
         'frmChallengeGameSelect
         '

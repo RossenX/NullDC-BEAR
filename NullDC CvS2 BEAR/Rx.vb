@@ -18,6 +18,13 @@ Module Rx
     Public SecretSettings As String = ""
     Public KeyCon As New KeysConverter
 
+    Public Sub SafeDeleteFile(ByVal _file As String)
+        If File.Exists(_file) Then
+            File.SetAttributes(_file, FileAttributes.Normal)
+            File.Delete(_file)
+        End If
+    End Sub
+
     Public Function GetControlsFilePath(Optional ByVal _profile As String = Nothing) As String
         Dim KeyProfileFile As String = ""
         Dim ProfileName = ""

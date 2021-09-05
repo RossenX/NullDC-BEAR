@@ -451,4 +451,14 @@ Public Class frmChallengeGameSelect
         MainformRef.ConfigFile.NoKey = sender.Checked
 
     End Sub
+
+    Private Sub cb_nulldc_emulator_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cb_nulldc_emulator.SelectedIndexChanged
+        If cb_nulldc_emulator.Text = "NullDC" Then
+            Label2.Text = "Simulated Delay"
+        Else
+            Label2.Text = "Rollback Delay"
+        End If
+
+    End Sub
+
 End Class

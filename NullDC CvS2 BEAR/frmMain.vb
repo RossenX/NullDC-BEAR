@@ -1236,6 +1236,10 @@ UpdateTry:
             NullDCLauncher.NullDCproc.CloseMainWindow()
         End If
 
+        If FlycastLauncher.FlycastProc IsNot Nothing Then
+            FlycastLauncher.FlycastProc.CloseMainWindow()
+        End If
+
         If Not Challenger Is Nothing Then NetworkHandler.SendMessage(">, Q", Challenger.ip)
 
         If Not MednafenLauncher.MednafenServerInstance Is Nothing Then
