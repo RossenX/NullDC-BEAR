@@ -296,6 +296,7 @@
     <Compile Include="Custom Components\MednafenSetting.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="mFlycastLauncher.vb" />
     <Compile Include="Mupen64Launcher.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

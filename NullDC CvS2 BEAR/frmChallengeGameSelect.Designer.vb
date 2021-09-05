@@ -44,6 +44,8 @@ Partial Class frmChallengeGameSelect
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.DLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultidiscPlaylistCreatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cb_nulldc_emulator = New System.Windows.Forms.ComboBox()
         Me.tb_mednafen.SuspendLayout()
         Me.GameSelectContainer.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -202,8 +204,8 @@ Partial Class frmChallengeGameSelect
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.tb_mednafen)
         Me.Panel1.Controls.Add(Me.tb_nulldc)
+        Me.Panel1.Controls.Add(Me.tb_mednafen)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(13, 415)
         Me.Panel1.Name = "Panel1"
@@ -215,17 +217,21 @@ Partial Class frmChallengeGameSelect
         Me.tb_nulldc.AutoSize = True
         Me.tb_nulldc.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.tb_nulldc.BackColor = System.Drawing.Color.Transparent
-        Me.tb_nulldc.ColumnCount = 2
+        Me.tb_nulldc.ColumnCount = 3
         Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.tb_nulldc.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tb_nulldc.Controls.Add(Me.cbDelay, 0, 0)
         Me.tb_nulldc.Controls.Add(Me.Label2, 0, 0)
         Me.tb_nulldc.Controls.Add(Me.Label4, 0, 1)
         Me.tb_nulldc.Controls.Add(Me.cbRegion, 1, 1)
+        Me.tb_nulldc.Controls.Add(Me.Label6, 0, 2)
+        Me.tb_nulldc.Controls.Add(Me.cb_nulldc_emulator, 1, 2)
         Me.tb_nulldc.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tb_nulldc.Location = New System.Drawing.Point(0, 0)
         Me.tb_nulldc.Name = "tb_nulldc"
-        Me.tb_nulldc.RowCount = 3
+        Me.tb_nulldc.RowCount = 4
+        Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tb_nulldc.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -235,13 +241,14 @@ Partial Class frmChallengeGameSelect
         'cbDelay
         '
         Me.cbDelay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(250, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.cbDelay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbDelay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.cbDelay.FormattingEnabled = True
         Me.cbDelay.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7"})
         Me.cbDelay.Location = New System.Drawing.Point(131, 3)
         Me.cbDelay.Name = "cbDelay"
-        Me.cbDelay.Size = New System.Drawing.Size(69, 21)
+        Me.cbDelay.Size = New System.Drawing.Size(153, 21)
         Me.cbDelay.TabIndex = 26
         '
         'Label2
@@ -275,13 +282,14 @@ Partial Class frmChallengeGameSelect
         'cbRegion
         '
         Me.cbRegion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cbRegion.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cbRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRegion.FormattingEnabled = True
         Me.cbRegion.Items.AddRange(New Object() {"JPN", "USA", "EUR"})
         Me.cbRegion.Location = New System.Drawing.Point(132, 31)
         Me.cbRegion.Margin = New System.Windows.Forms.Padding(4)
         Me.cbRegion.Name = "cbRegion"
-        Me.cbRegion.Size = New System.Drawing.Size(68, 21)
+        Me.cbRegion.Size = New System.Drawing.Size(151, 21)
         Me.cbRegion.TabIndex = 23
         '
         'tc_games
@@ -338,6 +346,32 @@ Partial Class frmChallengeGameSelect
         Me.MultidiscPlaylistCreatorToolStripMenuItem.Size = New System.Drawing.Size(150, 20)
         Me.MultidiscPlaylistCreatorToolStripMenuItem.Text = "Multidisc Playlist Creator"
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
+        Me.Label6.Location = New System.Drawing.Point(3, 56)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(122, 27)
+        Me.Label6.TabIndex = 27
+        Me.Label6.Text = "Emulator"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'cb_nulldc_emulator
+        '
+        Me.cb_nulldc_emulator.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(200, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb_nulldc_emulator.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cb_nulldc_emulator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cb_nulldc_emulator.FormattingEnabled = True
+        Me.cb_nulldc_emulator.Items.AddRange(New Object() {"NullDC", "Flycast (Rollback Beta)"})
+        Me.cb_nulldc_emulator.Location = New System.Drawing.Point(131, 59)
+        Me.cb_nulldc_emulator.Name = "cb_nulldc_emulator"
+        Me.cb_nulldc_emulator.Size = New System.Drawing.Size(153, 21)
+        Me.cb_nulldc_emulator.TabIndex = 28
+        '
         'frmChallengeGameSelect
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -347,7 +381,7 @@ Partial Class frmChallengeGameSelect
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximumSize = New System.Drawing.Size(770, 9000)
-        Me.MinimumSize = New System.Drawing.Size(770, 38)
+        Me.MinimumSize = New System.Drawing.Size(770, 39)
         Me.Name = "frmChallengeGameSelect"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Game Select"
@@ -388,4 +422,6 @@ Partial Class frmChallengeGameSelect
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents cb_nokey As CheckBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents cb_nulldc_emulator As ComboBox
 End Class

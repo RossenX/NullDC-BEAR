@@ -19,6 +19,7 @@ Public Class frmMain
     Public NullDCLauncher As New NullDCLauncher
     Public MednafenLauncher As New MednafenLauncher
     Public MupenLauncher As New Mupen64Launcher
+    Public FlycastLauncher As New MFlycastLauncher
 
     Public NullDCPath As String = Application.StartupPath
 
@@ -1187,9 +1188,11 @@ UpdateTry:
 
     Public Sub GameLauncher(ByVal _romname, ByVal _region)
 
-        Rx.platform = GamesList(_romname)(2)
+        'Rx.platform = GamesList(_romname)(2)
 
         Select Case Rx.platform
+            Case "fc_dc", "fc_na"
+                FlycastLauncher.LaunchFlycast(_romname, _region)
             Case "dc"
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
             Case "na"

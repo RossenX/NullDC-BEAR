@@ -451,7 +451,7 @@ Public Class NullDCLauncher
             If line.StartsWith("Enhancements.ShowGameName=") Then lines(linenumber) = "Enhancements.ShowGameName=" & MainformRef.ConfigFile.ShowGameNameInTitle
 
             ' [ImageReader]
-            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=0"
+            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=1"
             If line.StartsWith("LoadDefaultImage=") Then lines(linenumber) = "LoadDefaultImage=1"
             If line.StartsWith("DefaultImage=") Then lines(linenumber) = "DefaultImage=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1).ToString.Replace("\roms\", "roms\")
             If line.StartsWith("LastImage=") Then lines(linenumber) = "LastImage=" & MainformRef.GamesList(MainformRef.ConfigFile.Game)(1).ToString.Replace("\roms\", "roms\")
@@ -701,7 +701,7 @@ Public Class NullDCLauncher
             If line.StartsWith("ShowVMU=") Then lines(linenumber) = "ShowVMU=1"
 
             ' [ImageReader]
-            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=0"
+            If line.StartsWith("PatchRegion=") Then lines(linenumber) = "PatchRegion=1"
             If line.StartsWith("LoadDefaultImage=") Then lines(linenumber) = "LoadDefaultImage=0"
             If line.StartsWith("DefaultImage=") Then lines(linenumber) = "DefaultImage=default.gdi"
             If line.StartsWith("LastImage=") Then lines(linenumber) = "LastImage=c:\game.gdi"

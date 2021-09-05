@@ -32,6 +32,10 @@ Public Class frmChallengeGameSelect
         Rx.MultiTap = cb_Multitap.SelectedIndex
         Console.WriteLine("Multitap=" & Rx.MultiTap)
         Rx.platform = MainformRef.GamesList(SelectedGame(0))(2)
+        If (Rx.platform = "dc" Or Rx.platform = "na") And Not cb_nulldc_emulator.Text = "NullDC" Then
+            Rx.platform = "fc_" & Rx.platform
+        End If
+
         MainformRef.MednafenLauncher.IsHost = True
 
         'File.ReadAllLines(MainformRef.NullDCPath & "\recent.glist")
@@ -69,6 +73,9 @@ Public Class frmChallengeGameSelect
     Public Sub StartOffline()
 
         Select Case Rx.platform
+            Case "fc_na", "fc_dc" 'Flycast
+                MainformRef.ConfigFile.Status = "Offline"
+                MainformRef.ConfigFile.Host = ""
             Case "na", "dc" 'NullDC
                 MainformRef.ConfigFile.Status = "Offline"
                 MainformRef.ConfigFile.Host = ""
@@ -135,6 +142,8 @@ Public Class frmChallengeGameSelect
         ApplyThemeToControl(Label2)
         ApplyThemeToControl(Label3)
         ApplyThemeToControl(Label4)
+        ApplyThemeToControl(Label6)
+        ApplyThemeToControl(cb_nulldc_emulator)
         ApplyThemeToControl(btnLetsGo)
         ApplyThemeToControl(MenuStrip1)
         ApplyThemeToControl(cbRegion)
@@ -181,6 +190,10 @@ Public Class frmChallengeGameSelect
 
             If cbRegion.Text = "" Then
                 cbRegion.SelectedIndex = 0
+            End If
+
+            If cb_nulldc_emulator.Text = "" Then
+                cb_nulldc_emulator.SelectedIndex = 0
             End If
 
             'ShowExtraSettings()

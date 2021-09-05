@@ -647,7 +647,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 277.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Label54, 3, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting24, 0, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.MednafenSetting27, 1, 1)
@@ -703,10 +703,10 @@ Partial Class frmMednafenOptions
         Me.Label54.AutoSize = True
         Me.Label54.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label54.Location = New System.Drawing.Point(658, 0)
+        Me.Label54.Location = New System.Drawing.Point(655, 0)
         Me.Label54.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(265, 25)
+        Me.Label54.Size = New System.Drawing.Size(268, 25)
         Me.Label54.TabIndex = 37
         Me.Label54.Text = "Controllers"
         Me.Label54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -716,10 +716,10 @@ Partial Class frmMednafenOptions
         Me.Label16.AutoSize = True
         Me.Label16.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(222, 0)
+        Me.Label16.Location = New System.Drawing.Point(221, 0)
         Me.Label16.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(208, 25)
+        Me.Label16.Size = New System.Drawing.Size(207, 25)
         Me.Label16.TabIndex = 5
         Me.Label16.Text = "Shader"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -732,7 +732,7 @@ Partial Class frmMednafenOptions
         Me.Label17.Location = New System.Drawing.Point(5, 0)
         Me.Label17.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(207, 25)
+        Me.Label17.Size = New System.Drawing.Size(206, 25)
         Me.Label17.TabIndex = 2
         Me.Label17.Text = "Options"
         Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -742,10 +742,10 @@ Partial Class frmMednafenOptions
         Me.Label14.AutoSize = True
         Me.Label14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(440, 0)
+        Me.Label14.Location = New System.Drawing.Point(438, 0)
         Me.Label14.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(208, 25)
+        Me.Label14.Size = New System.Drawing.Size(207, 25)
         Me.Label14.TabIndex = 28
         Me.Label14.Text = "Window"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -755,10 +755,10 @@ Partial Class frmMednafenOptions
         Me.Label15.AutoSize = True
         Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(440, 129)
+        Me.Label15.Location = New System.Drawing.Point(438, 129)
         Me.Label15.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(208, 31)
+        Me.Label15.Size = New System.Drawing.Size(207, 31)
         Me.Label15.TabIndex = 33
         Me.Label15.Text = "Full Screen"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -768,10 +768,10 @@ Partial Class frmMednafenOptions
         Me.Label47.AutoSize = True
         Me.Label47.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label47.Location = New System.Drawing.Point(222, 77)
+        Me.Label47.Location = New System.Drawing.Point(221, 77)
         Me.Label47.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(208, 52)
+        Me.Label47.Size = New System.Drawing.Size(207, 52)
         Me.Label47.TabIndex = 35
         Me.Label47.Text = "GOAT Settings"
         Me.Label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -793,7 +793,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting156, 0, 1)
         Me.TableLayoutPanel11.Controls.Add(Me.MednafenSetting149, 0, 0)
         Me.TableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel11.Location = New System.Drawing.Point(653, 25)
+        Me.TableLayoutPanel11.Location = New System.Drawing.Point(650, 25)
         Me.TableLayoutPanel11.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel11.Name = "TableLayoutPanel11"
         Me.TableLayoutPanel11.RowCount = 13
@@ -811,7 +811,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel11.Size = New System.Drawing.Size(275, 509)
+        Me.TableLayoutPanel11.Size = New System.Drawing.Size(278, 509)
         Me.TableLayoutPanel11.TabIndex = 36
         '
         'Label1
@@ -862,7 +862,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 277.0!))
         Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel12, 3, 1)
         Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting38, 0, 3)
         Me.TableLayoutPanel4.Controls.Add(Me.MednafenSetting60, 1, 1)
@@ -925,7 +925,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting195, 0, 1)
         Me.TableLayoutPanel12.Controls.Add(Me.MednafenSetting196, 0, 0)
         Me.TableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel12.Location = New System.Drawing.Point(653, 25)
+        Me.TableLayoutPanel12.Location = New System.Drawing.Point(650, 25)
         Me.TableLayoutPanel12.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
         Me.TableLayoutPanel12.RowCount = 13
@@ -943,7 +943,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel12.Size = New System.Drawing.Size(275, 509)
+        Me.TableLayoutPanel12.Size = New System.Drawing.Size(278, 509)
         Me.TableLayoutPanel12.TabIndex = 37
         '
         'Label22
@@ -951,10 +951,10 @@ Partial Class frmMednafenOptions
         Me.Label22.AutoSize = True
         Me.Label22.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(222, 0)
+        Me.Label22.Location = New System.Drawing.Point(221, 0)
         Me.Label22.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(208, 25)
+        Me.Label22.Size = New System.Drawing.Size(207, 25)
         Me.Label22.TabIndex = 5
         Me.Label22.Text = "Shader"
         Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -967,7 +967,7 @@ Partial Class frmMednafenOptions
         Me.Label23.Location = New System.Drawing.Point(5, 0)
         Me.Label23.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(207, 25)
+        Me.Label23.Size = New System.Drawing.Size(206, 25)
         Me.Label23.TabIndex = 2
         Me.Label23.Text = "Options"
         Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -977,10 +977,10 @@ Partial Class frmMednafenOptions
         Me.Label24.AutoSize = True
         Me.Label24.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(440, 0)
+        Me.Label24.Location = New System.Drawing.Point(438, 0)
         Me.Label24.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(208, 25)
+        Me.Label24.Size = New System.Drawing.Size(207, 25)
         Me.Label24.TabIndex = 28
         Me.Label24.Text = "Window"
         Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -990,10 +990,10 @@ Partial Class frmMednafenOptions
         Me.Label25.AutoSize = True
         Me.Label25.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(440, 129)
+        Me.Label25.Location = New System.Drawing.Point(438, 129)
         Me.Label25.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(208, 31)
+        Me.Label25.Size = New System.Drawing.Size(207, 31)
         Me.Label25.TabIndex = 33
         Me.Label25.Text = "Full Screen"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1003,10 +1003,10 @@ Partial Class frmMednafenOptions
         Me.Label46.AutoSize = True
         Me.Label46.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label46.Location = New System.Drawing.Point(222, 77)
+        Me.Label46.Location = New System.Drawing.Point(221, 77)
         Me.Label46.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(208, 52)
+        Me.Label46.Size = New System.Drawing.Size(207, 52)
         Me.Label46.TabIndex = 34
         Me.Label46.Text = "GOAT Settings"
         Me.Label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1016,10 +1016,10 @@ Partial Class frmMednafenOptions
         Me.Label55.AutoSize = True
         Me.Label55.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label55.Location = New System.Drawing.Point(658, 0)
+        Me.Label55.Location = New System.Drawing.Point(655, 0)
         Me.Label55.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(265, 25)
+        Me.Label55.Size = New System.Drawing.Size(268, 25)
         Me.Label55.TabIndex = 35
         Me.Label55.Text = "Controllers"
         Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1072,7 +1072,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 277.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel13, 3, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.sg_controllers_label, 3, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.MednafenSetting41, 1, 1)
@@ -1133,7 +1133,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting199, 0, 1)
         Me.TableLayoutPanel13.Controls.Add(Me.MednafenSetting200, 0, 0)
         Me.TableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel13.Location = New System.Drawing.Point(653, 25)
+        Me.TableLayoutPanel13.Location = New System.Drawing.Point(650, 25)
         Me.TableLayoutPanel13.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel13.Name = "TableLayoutPanel13"
         Me.TableLayoutPanel13.RowCount = 13
@@ -1151,7 +1151,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel13.Size = New System.Drawing.Size(275, 509)
+        Me.TableLayoutPanel13.Size = New System.Drawing.Size(278, 509)
         Me.TableLayoutPanel13.TabIndex = 38
         '
         'sg_controllers_label
@@ -1159,10 +1159,10 @@ Partial Class frmMednafenOptions
         Me.sg_controllers_label.AutoSize = True
         Me.sg_controllers_label.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sg_controllers_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sg_controllers_label.Location = New System.Drawing.Point(658, 0)
+        Me.sg_controllers_label.Location = New System.Drawing.Point(655, 0)
         Me.sg_controllers_label.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.sg_controllers_label.Name = "sg_controllers_label"
-        Me.sg_controllers_label.Size = New System.Drawing.Size(265, 25)
+        Me.sg_controllers_label.Size = New System.Drawing.Size(268, 25)
         Me.sg_controllers_label.TabIndex = 36
         Me.sg_controllers_label.Text = "Controllers"
         Me.sg_controllers_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1172,10 +1172,10 @@ Partial Class frmMednafenOptions
         Me.Label18.AutoSize = True
         Me.Label18.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(222, 0)
+        Me.Label18.Location = New System.Drawing.Point(221, 0)
         Me.Label18.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(208, 25)
+        Me.Label18.Size = New System.Drawing.Size(207, 25)
         Me.Label18.TabIndex = 5
         Me.Label18.Text = "Shader"
         Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1188,7 +1188,7 @@ Partial Class frmMednafenOptions
         Me.Label19.Location = New System.Drawing.Point(5, 0)
         Me.Label19.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(207, 25)
+        Me.Label19.Size = New System.Drawing.Size(206, 25)
         Me.Label19.TabIndex = 2
         Me.Label19.Text = "Video"
         Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1198,10 +1198,10 @@ Partial Class frmMednafenOptions
         Me.Label20.AutoSize = True
         Me.Label20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(440, 0)
+        Me.Label20.Location = New System.Drawing.Point(438, 0)
         Me.Label20.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(208, 25)
+        Me.Label20.Size = New System.Drawing.Size(207, 25)
         Me.Label20.TabIndex = 28
         Me.Label20.Text = "Window"
         Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1211,10 +1211,10 @@ Partial Class frmMednafenOptions
         Me.Label21.AutoSize = True
         Me.Label21.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(440, 129)
+        Me.Label21.Location = New System.Drawing.Point(438, 129)
         Me.Label21.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(208, 52)
+        Me.Label21.Size = New System.Drawing.Size(207, 52)
         Me.Label21.TabIndex = 33
         Me.Label21.Text = "Full Screen"
         Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1224,10 +1224,10 @@ Partial Class frmMednafenOptions
         Me.Label48.AutoSize = True
         Me.Label48.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label48.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label48.Location = New System.Drawing.Point(222, 77)
+        Me.Label48.Location = New System.Drawing.Point(221, 77)
         Me.Label48.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(208, 52)
+        Me.Label48.Size = New System.Drawing.Size(207, 52)
         Me.Label48.TabIndex = 35
         Me.Label48.Text = "GOAT Settings"
         Me.Label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1439,7 +1439,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274.0!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 277.0!))
         Me.TableLayoutPanel6.Controls.Add(Me.TableLayoutPanel14, 3, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.Label56, 3, 0)
         Me.TableLayoutPanel6.Controls.Add(Me.MednafenSetting80, 1, 1)
@@ -1496,7 +1496,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting207, 0, 1)
         Me.TableLayoutPanel14.Controls.Add(Me.MednafenSetting208, 0, 0)
         Me.TableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel14.Location = New System.Drawing.Point(653, 25)
+        Me.TableLayoutPanel14.Location = New System.Drawing.Point(650, 25)
         Me.TableLayoutPanel14.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
         Me.TableLayoutPanel14.RowCount = 13
@@ -1514,7 +1514,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel14.Size = New System.Drawing.Size(275, 503)
+        Me.TableLayoutPanel14.Size = New System.Drawing.Size(278, 503)
         Me.TableLayoutPanel14.TabIndex = 39
         '
         'Label56
@@ -1522,10 +1522,10 @@ Partial Class frmMednafenOptions
         Me.Label56.AutoSize = True
         Me.Label56.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label56.Location = New System.Drawing.Point(658, 0)
+        Me.Label56.Location = New System.Drawing.Point(655, 0)
         Me.Label56.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(265, 25)
+        Me.Label56.Size = New System.Drawing.Size(268, 25)
         Me.Label56.TabIndex = 37
         Me.Label56.Text = "Controllers"
         Me.Label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1535,10 +1535,10 @@ Partial Class frmMednafenOptions
         Me.Label26.AutoSize = True
         Me.Label26.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(222, 0)
+        Me.Label26.Location = New System.Drawing.Point(221, 0)
         Me.Label26.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(208, 25)
+        Me.Label26.Size = New System.Drawing.Size(207, 25)
         Me.Label26.TabIndex = 5
         Me.Label26.Text = "Shader"
         Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1551,7 +1551,7 @@ Partial Class frmMednafenOptions
         Me.Label27.Location = New System.Drawing.Point(5, 0)
         Me.Label27.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(207, 25)
+        Me.Label27.Size = New System.Drawing.Size(206, 25)
         Me.Label27.TabIndex = 2
         Me.Label27.Text = "Video"
         Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1561,10 +1561,10 @@ Partial Class frmMednafenOptions
         Me.Label28.AutoSize = True
         Me.Label28.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(440, 0)
+        Me.Label28.Location = New System.Drawing.Point(438, 0)
         Me.Label28.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(208, 25)
+        Me.Label28.Size = New System.Drawing.Size(207, 25)
         Me.Label28.TabIndex = 28
         Me.Label28.Text = "Window"
         Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1574,10 +1574,10 @@ Partial Class frmMednafenOptions
         Me.Label29.AutoSize = True
         Me.Label29.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.Location = New System.Drawing.Point(440, 129)
+        Me.Label29.Location = New System.Drawing.Point(438, 129)
         Me.Label29.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(208, 52)
+        Me.Label29.Size = New System.Drawing.Size(207, 52)
         Me.Label29.TabIndex = 33
         Me.Label29.Text = "Full Screen"
         Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1587,10 +1587,10 @@ Partial Class frmMednafenOptions
         Me.Label49.AutoSize = True
         Me.Label49.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label49.Location = New System.Drawing.Point(222, 77)
+        Me.Label49.Location = New System.Drawing.Point(221, 77)
         Me.Label49.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(208, 52)
+        Me.Label49.Size = New System.Drawing.Size(207, 52)
         Me.Label49.TabIndex = 36
         Me.Label49.Text = "GOAT Settings"
         Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1644,7 +1644,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 277.0!))
         Me.TableLayoutPanel7.Controls.Add(Me.MednafenSetting201, 2, 11)
         Me.TableLayoutPanel7.Controls.Add(Me.TableLayoutPanel15, 3, 1)
         Me.TableLayoutPanel7.Controls.Add(Me.Label57, 3, 0)
@@ -1703,7 +1703,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel15.Controls.Add(Me.MednafenSetting216, 0, 0)
         Me.TableLayoutPanel15.Controls.Add(Me.Label58, 0, 2)
         Me.TableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel15.Location = New System.Drawing.Point(653, 25)
+        Me.TableLayoutPanel15.Location = New System.Drawing.Point(650, 25)
         Me.TableLayoutPanel15.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
         Me.TableLayoutPanel15.RowCount = 4
@@ -1712,7 +1712,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel15.Size = New System.Drawing.Size(275, 509)
+        Me.TableLayoutPanel15.Size = New System.Drawing.Size(278, 509)
         Me.TableLayoutPanel15.TabIndex = 38
         '
         'Label58
@@ -1730,10 +1730,10 @@ Partial Class frmMednafenOptions
         Me.Label57.AutoSize = True
         Me.Label57.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label57.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label57.Location = New System.Drawing.Point(658, 0)
+        Me.Label57.Location = New System.Drawing.Point(655, 0)
         Me.Label57.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(265, 25)
+        Me.Label57.Size = New System.Drawing.Size(268, 25)
         Me.Label57.TabIndex = 37
         Me.Label57.Text = "Controllers"
         Me.Label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1743,10 +1743,10 @@ Partial Class frmMednafenOptions
         Me.Label30.AutoSize = True
         Me.Label30.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(222, 0)
+        Me.Label30.Location = New System.Drawing.Point(221, 0)
         Me.Label30.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(208, 25)
+        Me.Label30.Size = New System.Drawing.Size(207, 25)
         Me.Label30.TabIndex = 5
         Me.Label30.Text = "Shader"
         Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1759,7 +1759,7 @@ Partial Class frmMednafenOptions
         Me.Label31.Location = New System.Drawing.Point(5, 0)
         Me.Label31.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(207, 25)
+        Me.Label31.Size = New System.Drawing.Size(206, 25)
         Me.Label31.TabIndex = 2
         Me.Label31.Text = "Video"
         Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1769,10 +1769,10 @@ Partial Class frmMednafenOptions
         Me.Label32.AutoSize = True
         Me.Label32.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label32.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label32.Location = New System.Drawing.Point(440, 0)
+        Me.Label32.Location = New System.Drawing.Point(438, 0)
         Me.Label32.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(208, 25)
+        Me.Label32.Size = New System.Drawing.Size(207, 25)
         Me.Label32.TabIndex = 28
         Me.Label32.Text = "Window"
         Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1782,10 +1782,10 @@ Partial Class frmMednafenOptions
         Me.Label33.AutoSize = True
         Me.Label33.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(440, 129)
+        Me.Label33.Location = New System.Drawing.Point(438, 129)
         Me.Label33.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(208, 31)
+        Me.Label33.Size = New System.Drawing.Size(207, 31)
         Me.Label33.TabIndex = 33
         Me.Label33.Text = "Full Screen"
         Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1795,10 +1795,10 @@ Partial Class frmMednafenOptions
         Me.Label50.AutoSize = True
         Me.Label50.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.Location = New System.Drawing.Point(222, 77)
+        Me.Label50.Location = New System.Drawing.Point(221, 77)
         Me.Label50.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(208, 52)
+        Me.Label50.Size = New System.Drawing.Size(207, 52)
         Me.Label50.TabIndex = 36
         Me.Label50.Text = "GOAT Settings"
         Me.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2324,7 +2324,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274.0!))
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 277.0!))
         Me.TableLayoutPanel18.Controls.Add(Me.Label59, 3, 0)
         Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting202, 0, 2)
         Me.TableLayoutPanel18.Controls.Add(Me.MednafenSetting203, 1, 1)
@@ -2378,10 +2378,10 @@ Partial Class frmMednafenOptions
         Me.Label59.AutoSize = True
         Me.Label59.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label59.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label59.Location = New System.Drawing.Point(658, 0)
+        Me.Label59.Location = New System.Drawing.Point(655, 0)
         Me.Label59.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label59.Name = "Label59"
-        Me.Label59.Size = New System.Drawing.Size(265, 25)
+        Me.Label59.Size = New System.Drawing.Size(268, 25)
         Me.Label59.TabIndex = 37
         Me.Label59.Text = "Controllers"
         Me.Label59.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2391,10 +2391,10 @@ Partial Class frmMednafenOptions
         Me.Label66.AutoSize = True
         Me.Label66.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label66.Location = New System.Drawing.Point(222, 0)
+        Me.Label66.Location = New System.Drawing.Point(221, 0)
         Me.Label66.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label66.Name = "Label66"
-        Me.Label66.Size = New System.Drawing.Size(208, 25)
+        Me.Label66.Size = New System.Drawing.Size(207, 25)
         Me.Label66.TabIndex = 5
         Me.Label66.Text = "Shader"
         Me.Label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2407,7 +2407,7 @@ Partial Class frmMednafenOptions
         Me.Label67.Location = New System.Drawing.Point(5, 0)
         Me.Label67.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label67.Name = "Label67"
-        Me.Label67.Size = New System.Drawing.Size(207, 25)
+        Me.Label67.Size = New System.Drawing.Size(206, 25)
         Me.Label67.TabIndex = 2
         Me.Label67.Text = "Options"
         Me.Label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2417,10 +2417,10 @@ Partial Class frmMednafenOptions
         Me.Label68.AutoSize = True
         Me.Label68.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label68.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label68.Location = New System.Drawing.Point(440, 0)
+        Me.Label68.Location = New System.Drawing.Point(438, 0)
         Me.Label68.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label68.Name = "Label68"
-        Me.Label68.Size = New System.Drawing.Size(208, 25)
+        Me.Label68.Size = New System.Drawing.Size(207, 25)
         Me.Label68.TabIndex = 28
         Me.Label68.Text = "Window"
         Me.Label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2430,10 +2430,10 @@ Partial Class frmMednafenOptions
         Me.Label69.AutoSize = True
         Me.Label69.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label69.Location = New System.Drawing.Point(440, 129)
+        Me.Label69.Location = New System.Drawing.Point(438, 129)
         Me.Label69.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label69.Name = "Label69"
-        Me.Label69.Size = New System.Drawing.Size(208, 31)
+        Me.Label69.Size = New System.Drawing.Size(207, 31)
         Me.Label69.TabIndex = 33
         Me.Label69.Text = "Full Screen"
         Me.Label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2443,10 +2443,10 @@ Partial Class frmMednafenOptions
         Me.Label70.AutoSize = True
         Me.Label70.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label70.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label70.Location = New System.Drawing.Point(222, 77)
+        Me.Label70.Location = New System.Drawing.Point(221, 77)
         Me.Label70.Margin = New System.Windows.Forms.Padding(5, 0, 5, 0)
         Me.Label70.Name = "Label70"
-        Me.Label70.Size = New System.Drawing.Size(208, 52)
+        Me.Label70.Size = New System.Drawing.Size(207, 52)
         Me.Label70.TabIndex = 35
         Me.Label70.Text = "GOAT Settings"
         Me.Label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2460,7 +2460,7 @@ Partial Class frmMednafenOptions
         Me.TableLayoutPanel19.Controls.Add(Me.MednafenSetting257, 0, 2)
         Me.TableLayoutPanel19.Controls.Add(Me.MednafenSetting258, 0, 1)
         Me.TableLayoutPanel19.Controls.Add(Me.MednafenSetting259, 0, 0)
-        Me.TableLayoutPanel19.Location = New System.Drawing.Point(653, 25)
+        Me.TableLayoutPanel19.Location = New System.Drawing.Point(650, 25)
         Me.TableLayoutPanel19.Margin = New System.Windows.Forms.Padding(0)
         Me.TableLayoutPanel19.Name = "TableLayoutPanel19"
         Me.TableLayoutPanel19.RowCount = 13
@@ -2948,7 +2948,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting24.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting24.Name = "MednafenSetting24"
         Me.MednafenSetting24.ProperName = "H Overscan"
-        Me.MednafenSetting24.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting24.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting24.SpecialFunction = CType(0, Short)
         Me.MednafenSetting24.TabIndex = 11
         Me.MednafenSetting24.UseQuotes = False
@@ -2964,11 +2964,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting27.Emulator = "med"
         Me.MednafenSetting27.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sabr" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnoty" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnotys" &
     "harper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotxsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "goat"
-        Me.MednafenSetting27.Location = New System.Drawing.Point(222, 25)
+        Me.MednafenSetting27.Location = New System.Drawing.Point(221, 25)
         Me.MednafenSetting27.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting27.Name = "MednafenSetting27"
         Me.MednafenSetting27.ProperName = "Shader"
-        Me.MednafenSetting27.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting27.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting27.SpecialFunction = CType(0, Short)
         Me.MednafenSetting27.TabIndex = 6
         Me.MednafenSetting27.UseQuotes = False
@@ -2987,7 +2987,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting23.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting23.Name = "MednafenSetting23"
         Me.MednafenSetting23.ProperName = "Stretch"
-        Me.MednafenSetting23.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting23.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting23.SpecialFunction = CType(0, Short)
         Me.MednafenSetting23.TabIndex = 23
         Me.MednafenSetting23.UseQuotes = False
@@ -3006,7 +3006,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting28.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting28.Name = "MednafenSetting28"
         Me.MednafenSetting28.ProperName = "Temporal Blur"
-        Me.MednafenSetting28.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting28.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting28.SpecialFunction = CType(0, Short)
         Me.MednafenSetting28.TabIndex = 24
         Me.MednafenSetting28.UseQuotes = False
@@ -3025,7 +3025,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting31.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting31.Name = "MednafenSetting31"
         Me.MednafenSetting31.ProperName = "T Blur Accum"
-        Me.MednafenSetting31.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting31.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting31.SpecialFunction = CType(0, Short)
         Me.MednafenSetting31.TabIndex = 25
         Me.MednafenSetting31.UseQuotes = False
@@ -3044,7 +3044,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting32.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting32.Name = "MednafenSetting32"
         Me.MednafenSetting32.ProperName = "T Blur Accum Amount:"
-        Me.MednafenSetting32.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting32.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting32.SpecialFunction = CType(0, Short)
         Me.MednafenSetting32.TabIndex = 26
         Me.MednafenSetting32.UseQuotes = False
@@ -3063,7 +3063,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting33.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting33.Name = "MednafenSetting33"
         Me.MednafenSetting33.ProperName = "Interpolation"
-        Me.MednafenSetting33.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting33.Size = New System.Drawing.Size(206, 27)
         Me.MednafenSetting33.SpecialFunction = CType(0, Short)
         Me.MednafenSetting33.TabIndex = 27
         Me.MednafenSetting33.UseQuotes = False
@@ -3078,11 +3078,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting34.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting34.Emulator = "med"
         Me.MednafenSetting34.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting34.Location = New System.Drawing.Point(440, 25)
+        Me.MednafenSetting34.Location = New System.Drawing.Point(438, 25)
         Me.MednafenSetting34.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting34.Name = "MednafenSetting34"
         Me.MednafenSetting34.ProperName = "Width:"
-        Me.MednafenSetting34.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting34.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting34.SpecialFunction = CType(0, Short)
         Me.MednafenSetting34.TabIndex = 29
         Me.MednafenSetting34.UseQuotes = False
@@ -3097,11 +3097,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting35.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting35.Emulator = "med"
         Me.MednafenSetting35.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting35.Location = New System.Drawing.Point(440, 77)
+        Me.MednafenSetting35.Location = New System.Drawing.Point(438, 77)
         Me.MednafenSetting35.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting35.Name = "MednafenSetting35"
         Me.MednafenSetting35.ProperName = "Height:"
-        Me.MednafenSetting35.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting35.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting35.SpecialFunction = CType(0, Short)
         Me.MednafenSetting35.TabIndex = 30
         Me.MednafenSetting35.UseQuotes = False
@@ -3116,11 +3116,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting36.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting36.Emulator = "med"
         Me.MednafenSetting36.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting36.Location = New System.Drawing.Point(440, 160)
+        Me.MednafenSetting36.Location = New System.Drawing.Point(438, 160)
         Me.MednafenSetting36.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting36.Name = "MednafenSetting36"
         Me.MednafenSetting36.ProperName = "Width:"
-        Me.MednafenSetting36.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting36.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting36.SpecialFunction = CType(0, Short)
         Me.MednafenSetting36.TabIndex = 31
         Me.MednafenSetting36.UseQuotes = False
@@ -3135,11 +3135,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting37.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting37.Emulator = "med"
         Me.MednafenSetting37.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting37.Location = New System.Drawing.Point(440, 212)
+        Me.MednafenSetting37.Location = New System.Drawing.Point(438, 212)
         Me.MednafenSetting37.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting37.Name = "MednafenSetting37"
         Me.MednafenSetting37.ProperName = "Height:"
-        Me.MednafenSetting37.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting37.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting37.SpecialFunction = CType(0, Short)
         Me.MednafenSetting37.TabIndex = 32
         Me.MednafenSetting37.UseQuotes = False
@@ -3158,7 +3158,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting22.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting22.Name = "MednafenSetting22"
         Me.MednafenSetting22.ProperName = "Resample Quality:"
-        Me.MednafenSetting22.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting22.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting22.SpecialFunction = CType(0, Short)
         Me.MednafenSetting22.TabIndex = 13
         Me.MednafenSetting22.UseQuotes = False
@@ -3177,7 +3177,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting29.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting29.Name = "MednafenSetting29"
         Me.MednafenSetting29.ProperName = "Correct Aspect"
-        Me.MednafenSetting29.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting29.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting29.SpecialFunction = CType(0, Short)
         Me.MednafenSetting29.TabIndex = 4
         Me.MednafenSetting29.UseQuotes = False
@@ -3196,7 +3196,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting21.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting21.Name = "MednafenSetting21"
         Me.MednafenSetting21.ProperName = "Upscaler"
-        Me.MednafenSetting21.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting21.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting21.SpecialFunction = CType(0, Short)
         Me.MednafenSetting21.TabIndex = 22
         Me.MednafenSetting21.UseQuotes = False
@@ -3215,7 +3215,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting30.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting30.Name = "MednafenSetting30"
         Me.MednafenSetting30.ProperName = "H Blend"
-        Me.MednafenSetting30.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting30.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting30.SpecialFunction = CType(0, Short)
         Me.MednafenSetting30.TabIndex = 3
         Me.MednafenSetting30.UseQuotes = False
@@ -3234,7 +3234,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting3.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting3.Name = "MednafenSetting3"
         Me.MednafenSetting3.ProperName = "Scanlines:"
-        Me.MednafenSetting3.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting3.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting3.SpecialFunction = CType(0, Short)
         Me.MednafenSetting3.TabIndex = 17
         Me.MednafenSetting3.UseQuotes = False
@@ -3249,11 +3249,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting19.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting19.Emulator = "med"
         Me.MednafenSetting19.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1"
-        Me.MednafenSetting19.Location = New System.Drawing.Point(222, 347)
+        Me.MednafenSetting19.Location = New System.Drawing.Point(221, 347)
         Me.MednafenSetting19.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting19.Name = "MednafenSetting19"
         Me.MednafenSetting19.ProperName = "Transparency:"
-        Me.MednafenSetting19.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting19.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting19.SpecialFunction = CType(0, Short)
         Me.MednafenSetting19.TabIndex = 20
         Me.MednafenSetting19.UseQuotes = False
@@ -3268,11 +3268,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting2.Emulator = "med"
         Me.MednafenSetting2.Limits = ""
-        Me.MednafenSetting2.Location = New System.Drawing.Point(222, 316)
+        Me.MednafenSetting2.Location = New System.Drawing.Point(221, 316)
         Me.MednafenSetting2.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting2.Name = "MednafenSetting2"
         Me.MednafenSetting2.ProperName = "Scanlines"
-        Me.MednafenSetting2.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting2.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting2.SpecialFunction = CType(0, Short)
         Me.MednafenSetting2.TabIndex = 19
         Me.MednafenSetting2.UseQuotes = False
@@ -3287,11 +3287,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting1.Emulator = "med"
         Me.MednafenSetting1.Limits = "goatron" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "borg" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "slenderman"
-        Me.MednafenSetting1.Location = New System.Drawing.Point(222, 264)
+        Me.MednafenSetting1.Location = New System.Drawing.Point(221, 264)
         Me.MednafenSetting1.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting1.Name = "MednafenSetting1"
         Me.MednafenSetting1.ProperName = "Pattern"
-        Me.MednafenSetting1.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting1.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting1.SpecialFunction = CType(0, Short)
         Me.MednafenSetting1.TabIndex = 18
         Me.MednafenSetting1.UseQuotes = False
@@ -3306,11 +3306,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting20.Emulator = "med"
         Me.MednafenSetting20.Limits = "-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting20.Location = New System.Drawing.Point(222, 212)
+        Me.MednafenSetting20.Location = New System.Drawing.Point(221, 212)
         Me.MednafenSetting20.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting20.Name = "MednafenSetting20"
         Me.MednafenSetting20.ProperName = "V Divergence:"
-        Me.MednafenSetting20.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting20.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting20.SpecialFunction = CType(0, Short)
         Me.MednafenSetting20.TabIndex = 21
         Me.MednafenSetting20.UseQuotes = False
@@ -3325,11 +3325,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting25.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting25.Emulator = "med"
         Me.MednafenSetting25.Limits = "-2.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting25.Location = New System.Drawing.Point(222, 160)
+        Me.MednafenSetting25.Location = New System.Drawing.Point(221, 160)
         Me.MednafenSetting25.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting25.Name = "MednafenSetting25"
         Me.MednafenSetting25.ProperName = "H Divergence:"
-        Me.MednafenSetting25.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting25.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting25.SpecialFunction = CType(0, Short)
         Me.MednafenSetting25.TabIndex = 8
         Me.MednafenSetting25.UseQuotes = False
@@ -3344,11 +3344,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting26.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting26.Emulator = "med"
         Me.MednafenSetting26.Limits = ""
-        Me.MednafenSetting26.Location = New System.Drawing.Point(222, 129)
+        Me.MednafenSetting26.Location = New System.Drawing.Point(221, 129)
         Me.MednafenSetting26.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting26.Name = "MednafenSetting26"
         Me.MednafenSetting26.ProperName = "Force Progressive"
-        Me.MednafenSetting26.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting26.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting26.SpecialFunction = CType(0, Short)
         Me.MednafenSetting26.TabIndex = 7
         Me.MednafenSetting26.UseQuotes = False
@@ -3367,7 +3367,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting184.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting184.Name = "MednafenSetting184"
         Me.MednafenSetting184.ProperName = "Port 12"
-        Me.MednafenSetting184.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting184.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting184.SpecialFunction = CType(0, Short)
         Me.MednafenSetting184.TabIndex = 49
         Me.MednafenSetting184.UseQuotes = False
@@ -3386,7 +3386,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting183.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting183.Name = "MednafenSetting183"
         Me.MednafenSetting183.ProperName = "Port 11"
-        Me.MednafenSetting183.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting183.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting183.SpecialFunction = CType(0, Short)
         Me.MednafenSetting183.TabIndex = 48
         Me.MednafenSetting183.UseQuotes = False
@@ -3405,7 +3405,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting182.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting182.Name = "MednafenSetting182"
         Me.MednafenSetting182.ProperName = "Port 9"
-        Me.MednafenSetting182.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting182.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting182.SpecialFunction = CType(0, Short)
         Me.MednafenSetting182.TabIndex = 47
         Me.MednafenSetting182.UseQuotes = False
@@ -3424,7 +3424,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting181.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting181.Name = "MednafenSetting181"
         Me.MednafenSetting181.ProperName = "Port 10"
-        Me.MednafenSetting181.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting181.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting181.SpecialFunction = CType(0, Short)
         Me.MednafenSetting181.TabIndex = 46
         Me.MednafenSetting181.UseQuotes = False
@@ -3443,7 +3443,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting180.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting180.Name = "MednafenSetting180"
         Me.MednafenSetting180.ProperName = "Port 8"
-        Me.MednafenSetting180.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting180.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting180.SpecialFunction = CType(0, Short)
         Me.MednafenSetting180.TabIndex = 45
         Me.MednafenSetting180.UseQuotes = False
@@ -3462,7 +3462,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting179.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting179.Name = "MednafenSetting179"
         Me.MednafenSetting179.ProperName = "Port 7"
-        Me.MednafenSetting179.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting179.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting179.SpecialFunction = CType(0, Short)
         Me.MednafenSetting179.TabIndex = 44
         Me.MednafenSetting179.UseQuotes = False
@@ -3481,7 +3481,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting178.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting178.Name = "MednafenSetting178"
         Me.MednafenSetting178.ProperName = "Port 6"
-        Me.MednafenSetting178.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting178.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting178.SpecialFunction = CType(0, Short)
         Me.MednafenSetting178.TabIndex = 43
         Me.MednafenSetting178.UseQuotes = False
@@ -3500,7 +3500,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting177.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting177.Name = "MednafenSetting177"
         Me.MednafenSetting177.ProperName = "Port 5"
-        Me.MednafenSetting177.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting177.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting177.SpecialFunction = CType(0, Short)
         Me.MednafenSetting177.TabIndex = 42
         Me.MednafenSetting177.UseQuotes = False
@@ -3519,7 +3519,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting176.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting176.Name = "MednafenSetting176"
         Me.MednafenSetting176.ProperName = "Port 4"
-        Me.MednafenSetting176.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting176.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting176.SpecialFunction = CType(0, Short)
         Me.MednafenSetting176.TabIndex = 41
         Me.MednafenSetting176.UseQuotes = False
@@ -3538,7 +3538,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting169.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting169.Name = "MednafenSetting169"
         Me.MednafenSetting169.ProperName = "Port 3"
-        Me.MednafenSetting169.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting169.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting169.SpecialFunction = CType(0, Short)
         Me.MednafenSetting169.TabIndex = 40
         Me.MednafenSetting169.UseQuotes = False
@@ -3557,7 +3557,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting156.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting156.Name = "MednafenSetting156"
         Me.MednafenSetting156.ProperName = "Port 2"
-        Me.MednafenSetting156.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting156.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting156.SpecialFunction = CType(0, Short)
         Me.MednafenSetting156.TabIndex = 39
         Me.MednafenSetting156.UseQuotes = False
@@ -3576,7 +3576,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting149.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting149.Name = "MednafenSetting149"
         Me.MednafenSetting149.ProperName = "Port 1"
-        Me.MednafenSetting149.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting149.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting149.SpecialFunction = CType(0, Short)
         Me.MednafenSetting149.TabIndex = 38
         Me.MednafenSetting149.UseQuotes = False
@@ -3595,7 +3595,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting189.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting189.Name = "MednafenSetting189"
         Me.MednafenSetting189.ProperName = "Port 8"
-        Me.MednafenSetting189.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting189.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting189.SpecialFunction = CType(0, Short)
         Me.MednafenSetting189.TabIndex = 45
         Me.MednafenSetting189.UseQuotes = False
@@ -3614,7 +3614,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting190.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting190.Name = "MednafenSetting190"
         Me.MednafenSetting190.ProperName = "Port 7"
-        Me.MednafenSetting190.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting190.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting190.SpecialFunction = CType(0, Short)
         Me.MednafenSetting190.TabIndex = 44
         Me.MednafenSetting190.UseQuotes = False
@@ -3633,7 +3633,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting191.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting191.Name = "MednafenSetting191"
         Me.MednafenSetting191.ProperName = "Port 6"
-        Me.MednafenSetting191.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting191.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting191.SpecialFunction = CType(0, Short)
         Me.MednafenSetting191.TabIndex = 43
         Me.MednafenSetting191.UseQuotes = False
@@ -3652,7 +3652,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting192.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting192.Name = "MednafenSetting192"
         Me.MednafenSetting192.ProperName = "Port 5"
-        Me.MednafenSetting192.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting192.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting192.SpecialFunction = CType(0, Short)
         Me.MednafenSetting192.TabIndex = 42
         Me.MednafenSetting192.UseQuotes = False
@@ -3671,7 +3671,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting193.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting193.Name = "MednafenSetting193"
         Me.MednafenSetting193.ProperName = "Port 4"
-        Me.MednafenSetting193.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting193.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting193.SpecialFunction = CType(0, Short)
         Me.MednafenSetting193.TabIndex = 41
         Me.MednafenSetting193.UseQuotes = False
@@ -3690,7 +3690,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting194.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting194.Name = "MednafenSetting194"
         Me.MednafenSetting194.ProperName = "Port 3"
-        Me.MednafenSetting194.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting194.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting194.SpecialFunction = CType(0, Short)
         Me.MednafenSetting194.TabIndex = 40
         Me.MednafenSetting194.UseQuotes = False
@@ -3709,7 +3709,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting195.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting195.Name = "MednafenSetting195"
         Me.MednafenSetting195.ProperName = "Port 2"
-        Me.MednafenSetting195.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting195.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting195.SpecialFunction = CType(0, Short)
         Me.MednafenSetting195.TabIndex = 39
         Me.MednafenSetting195.UseQuotes = False
@@ -3728,7 +3728,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting196.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting196.Name = "MednafenSetting196"
         Me.MednafenSetting196.ProperName = "Port 1"
-        Me.MednafenSetting196.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting196.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting196.SpecialFunction = CType(0, Short)
         Me.MednafenSetting196.TabIndex = 38
         Me.MednafenSetting196.UseQuotes = False
@@ -3747,7 +3747,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting38.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting38.Name = "MednafenSetting38"
         Me.MednafenSetting38.ProperName = "H Overscan"
-        Me.MednafenSetting38.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting38.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting38.SpecialFunction = CType(0, Short)
         Me.MednafenSetting38.TabIndex = 11
         Me.MednafenSetting38.UseQuotes = False
@@ -3763,11 +3763,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting60.Emulator = "med"
         Me.MednafenSetting60.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sabr" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnoty" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnotys" &
     "harper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotxsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "goat"
-        Me.MednafenSetting60.Location = New System.Drawing.Point(222, 25)
+        Me.MednafenSetting60.Location = New System.Drawing.Point(221, 25)
         Me.MednafenSetting60.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting60.Name = "MednafenSetting60"
         Me.MednafenSetting60.ProperName = "Shader"
-        Me.MednafenSetting60.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting60.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting60.SpecialFunction = CType(0, Short)
         Me.MednafenSetting60.TabIndex = 6
         Me.MednafenSetting60.UseQuotes = False
@@ -3782,11 +3782,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting66.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting66.Emulator = "med"
         Me.MednafenSetting66.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting66.Location = New System.Drawing.Point(440, 25)
+        Me.MednafenSetting66.Location = New System.Drawing.Point(438, 25)
         Me.MednafenSetting66.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting66.Name = "MednafenSetting66"
         Me.MednafenSetting66.ProperName = "Width:"
-        Me.MednafenSetting66.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting66.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting66.SpecialFunction = CType(0, Short)
         Me.MednafenSetting66.TabIndex = 29
         Me.MednafenSetting66.UseQuotes = False
@@ -3801,11 +3801,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting67.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting67.Emulator = "med"
         Me.MednafenSetting67.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting67.Location = New System.Drawing.Point(440, 77)
+        Me.MednafenSetting67.Location = New System.Drawing.Point(438, 77)
         Me.MednafenSetting67.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting67.Name = "MednafenSetting67"
         Me.MednafenSetting67.ProperName = "Height:"
-        Me.MednafenSetting67.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting67.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting67.SpecialFunction = CType(0, Short)
         Me.MednafenSetting67.TabIndex = 30
         Me.MednafenSetting67.UseQuotes = False
@@ -3820,11 +3820,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting68.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting68.Emulator = "med"
         Me.MednafenSetting68.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting68.Location = New System.Drawing.Point(440, 160)
+        Me.MednafenSetting68.Location = New System.Drawing.Point(438, 160)
         Me.MednafenSetting68.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting68.Name = "MednafenSetting68"
         Me.MednafenSetting68.ProperName = "Width:"
-        Me.MednafenSetting68.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting68.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting68.SpecialFunction = CType(0, Short)
         Me.MednafenSetting68.TabIndex = 31
         Me.MednafenSetting68.UseQuotes = False
@@ -3839,11 +3839,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting69.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting69.Emulator = "med"
         Me.MednafenSetting69.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting69.Location = New System.Drawing.Point(440, 212)
+        Me.MednafenSetting69.Location = New System.Drawing.Point(438, 212)
         Me.MednafenSetting69.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting69.Name = "MednafenSetting69"
         Me.MednafenSetting69.ProperName = "Height:"
-        Me.MednafenSetting69.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting69.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting69.SpecialFunction = CType(0, Short)
         Me.MednafenSetting69.TabIndex = 32
         Me.MednafenSetting69.UseQuotes = False
@@ -3862,7 +3862,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting70.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting70.Name = "MednafenSetting70"
         Me.MednafenSetting70.ProperName = "Resample Quality:"
-        Me.MednafenSetting70.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting70.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting70.SpecialFunction = CType(0, Short)
         Me.MednafenSetting70.TabIndex = 13
         Me.MednafenSetting70.UseQuotes = False
@@ -3881,7 +3881,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting72.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting72.Name = "MednafenSetting72"
         Me.MednafenSetting72.ProperName = "Upscaler"
-        Me.MednafenSetting72.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting72.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting72.SpecialFunction = CType(0, Short)
         Me.MednafenSetting72.TabIndex = 22
         Me.MednafenSetting72.UseQuotes = False
@@ -3900,7 +3900,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting71.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting71.Name = "MednafenSetting71"
         Me.MednafenSetting71.ProperName = "Correct Aspect"
-        Me.MednafenSetting71.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting71.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting71.SpecialFunction = CType(0, Short)
         Me.MednafenSetting71.TabIndex = 4
         Me.MednafenSetting71.UseQuotes = False
@@ -3919,7 +3919,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting74.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting74.Name = "MednafenSetting74"
         Me.MednafenSetting74.ProperName = "Scanlines:"
-        Me.MednafenSetting74.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting74.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting74.SpecialFunction = CType(0, Short)
         Me.MednafenSetting74.TabIndex = 17
         Me.MednafenSetting74.UseQuotes = False
@@ -3938,7 +3938,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting61.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting61.Name = "MednafenSetting61"
         Me.MednafenSetting61.ProperName = "Stretch"
-        Me.MednafenSetting61.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting61.Size = New System.Drawing.Size(206, 27)
         Me.MednafenSetting61.SpecialFunction = CType(0, Short)
         Me.MednafenSetting61.TabIndex = 23
         Me.MednafenSetting61.UseQuotes = False
@@ -3957,7 +3957,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting62.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting62.Name = "MednafenSetting62"
         Me.MednafenSetting62.ProperName = "Temporal Blur"
-        Me.MednafenSetting62.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting62.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting62.SpecialFunction = CType(0, Short)
         Me.MednafenSetting62.TabIndex = 24
         Me.MednafenSetting62.UseQuotes = False
@@ -3976,7 +3976,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting63.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting63.Name = "MednafenSetting63"
         Me.MednafenSetting63.ProperName = "T Blur Accum"
-        Me.MednafenSetting63.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting63.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting63.SpecialFunction = CType(0, Short)
         Me.MednafenSetting63.TabIndex = 25
         Me.MednafenSetting63.UseQuotes = False
@@ -3995,7 +3995,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting64.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting64.Name = "MednafenSetting64"
         Me.MednafenSetting64.ProperName = "T Blur Accum Amount:"
-        Me.MednafenSetting64.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting64.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting64.SpecialFunction = CType(0, Short)
         Me.MednafenSetting64.TabIndex = 26
         Me.MednafenSetting64.UseQuotes = False
@@ -4014,7 +4014,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting65.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting65.Name = "MednafenSetting65"
         Me.MednafenSetting65.ProperName = "Interpolation"
-        Me.MednafenSetting65.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting65.Size = New System.Drawing.Size(206, 27)
         Me.MednafenSetting65.SpecialFunction = CType(0, Short)
         Me.MednafenSetting65.TabIndex = 27
         Me.MednafenSetting65.UseQuotes = False
@@ -4029,11 +4029,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting54.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting54.Emulator = "med"
         Me.MednafenSetting54.Limits = ""
-        Me.MednafenSetting54.Location = New System.Drawing.Point(222, 129)
+        Me.MednafenSetting54.Location = New System.Drawing.Point(221, 129)
         Me.MednafenSetting54.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting54.Name = "MednafenSetting54"
         Me.MednafenSetting54.ProperName = "Force Progressive"
-        Me.MednafenSetting54.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting54.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting54.SpecialFunction = CType(0, Short)
         Me.MednafenSetting54.TabIndex = 7
         Me.MednafenSetting54.UseQuotes = False
@@ -4048,11 +4048,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting51.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting51.Emulator = "med"
         Me.MednafenSetting51.Limits = "-2.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting51.Location = New System.Drawing.Point(222, 160)
+        Me.MednafenSetting51.Location = New System.Drawing.Point(221, 160)
         Me.MednafenSetting51.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting51.Name = "MednafenSetting51"
         Me.MednafenSetting51.ProperName = "H Divergence:"
-        Me.MednafenSetting51.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting51.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting51.SpecialFunction = CType(0, Short)
         Me.MednafenSetting51.TabIndex = 8
         Me.MednafenSetting51.UseQuotes = False
@@ -4067,11 +4067,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting75.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting75.Emulator = "med"
         Me.MednafenSetting75.Limits = "-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting75.Location = New System.Drawing.Point(222, 212)
+        Me.MednafenSetting75.Location = New System.Drawing.Point(221, 212)
         Me.MednafenSetting75.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting75.Name = "MednafenSetting75"
         Me.MednafenSetting75.ProperName = "V Divergence:"
-        Me.MednafenSetting75.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting75.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting75.SpecialFunction = CType(0, Short)
         Me.MednafenSetting75.TabIndex = 21
         Me.MednafenSetting75.UseQuotes = False
@@ -4086,11 +4086,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting76.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting76.Emulator = "med"
         Me.MednafenSetting76.Limits = "goatron" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "borg" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "slenderman"
-        Me.MednafenSetting76.Location = New System.Drawing.Point(222, 264)
+        Me.MednafenSetting76.Location = New System.Drawing.Point(221, 264)
         Me.MednafenSetting76.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting76.Name = "MednafenSetting76"
         Me.MednafenSetting76.ProperName = "Pattern"
-        Me.MednafenSetting76.Size = New System.Drawing.Size(208, 27)
+        Me.MednafenSetting76.Size = New System.Drawing.Size(207, 27)
         Me.MednafenSetting76.SpecialFunction = CType(0, Short)
         Me.MednafenSetting76.TabIndex = 18
         Me.MednafenSetting76.UseQuotes = False
@@ -4105,11 +4105,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting77.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting77.Emulator = "med"
         Me.MednafenSetting77.Limits = ""
-        Me.MednafenSetting77.Location = New System.Drawing.Point(222, 292)
+        Me.MednafenSetting77.Location = New System.Drawing.Point(221, 292)
         Me.MednafenSetting77.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting77.Name = "MednafenSetting77"
         Me.MednafenSetting77.ProperName = "Scanlines"
-        Me.MednafenSetting77.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting77.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting77.SpecialFunction = CType(0, Short)
         Me.MednafenSetting77.TabIndex = 19
         Me.MednafenSetting77.UseQuotes = False
@@ -4124,11 +4124,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting78.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting78.Emulator = "med"
         Me.MednafenSetting78.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1"
-        Me.MednafenSetting78.Location = New System.Drawing.Point(222, 323)
+        Me.MednafenSetting78.Location = New System.Drawing.Point(221, 323)
         Me.MednafenSetting78.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting78.Name = "MednafenSetting78"
         Me.MednafenSetting78.ProperName = "Transparency:"
-        Me.MednafenSetting78.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting78.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting78.SpecialFunction = CType(0, Short)
         Me.MednafenSetting78.TabIndex = 20
         Me.MednafenSetting78.UseQuotes = False
@@ -4147,7 +4147,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting185.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting185.Name = "MednafenSetting185"
         Me.MednafenSetting185.ProperName = "Port 8"
-        Me.MednafenSetting185.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting185.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting185.SpecialFunction = CType(0, Short)
         Me.MednafenSetting185.TabIndex = 45
         Me.MednafenSetting185.UseQuotes = False
@@ -4166,7 +4166,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting186.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting186.Name = "MednafenSetting186"
         Me.MednafenSetting186.ProperName = "Port 7"
-        Me.MednafenSetting186.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting186.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting186.SpecialFunction = CType(0, Short)
         Me.MednafenSetting186.TabIndex = 44
         Me.MednafenSetting186.UseQuotes = False
@@ -4185,7 +4185,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting187.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting187.Name = "MednafenSetting187"
         Me.MednafenSetting187.ProperName = "Port 6"
-        Me.MednafenSetting187.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting187.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting187.SpecialFunction = CType(0, Short)
         Me.MednafenSetting187.TabIndex = 43
         Me.MednafenSetting187.UseQuotes = False
@@ -4204,7 +4204,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting188.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting188.Name = "MednafenSetting188"
         Me.MednafenSetting188.ProperName = "Port 5"
-        Me.MednafenSetting188.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting188.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting188.SpecialFunction = CType(0, Short)
         Me.MednafenSetting188.TabIndex = 42
         Me.MednafenSetting188.UseQuotes = False
@@ -4223,7 +4223,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting197.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting197.Name = "MednafenSetting197"
         Me.MednafenSetting197.ProperName = "Port 4"
-        Me.MednafenSetting197.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting197.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting197.SpecialFunction = CType(0, Short)
         Me.MednafenSetting197.TabIndex = 41
         Me.MednafenSetting197.UseQuotes = False
@@ -4242,7 +4242,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting198.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting198.Name = "MednafenSetting198"
         Me.MednafenSetting198.ProperName = "Port 3"
-        Me.MednafenSetting198.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting198.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting198.SpecialFunction = CType(0, Short)
         Me.MednafenSetting198.TabIndex = 40
         Me.MednafenSetting198.UseQuotes = False
@@ -4261,7 +4261,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting199.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting199.Name = "MednafenSetting199"
         Me.MednafenSetting199.ProperName = "Port 2"
-        Me.MednafenSetting199.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting199.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting199.SpecialFunction = CType(0, Short)
         Me.MednafenSetting199.TabIndex = 39
         Me.MednafenSetting199.UseQuotes = False
@@ -4280,7 +4280,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting200.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting200.Name = "MednafenSetting200"
         Me.MednafenSetting200.ProperName = "Port 1"
-        Me.MednafenSetting200.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting200.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting200.SpecialFunction = CType(0, Short)
         Me.MednafenSetting200.TabIndex = 38
         Me.MednafenSetting200.UseQuotes = False
@@ -4296,11 +4296,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting41.Emulator = "med"
         Me.MednafenSetting41.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sabr" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnoty" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnotys" &
     "harper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotxsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "goat"
-        Me.MednafenSetting41.Location = New System.Drawing.Point(222, 25)
+        Me.MednafenSetting41.Location = New System.Drawing.Point(221, 25)
         Me.MednafenSetting41.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting41.Name = "MednafenSetting41"
         Me.MednafenSetting41.ProperName = "Shader"
-        Me.MednafenSetting41.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting41.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting41.SpecialFunction = CType(0, Short)
         Me.MednafenSetting41.TabIndex = 6
         Me.MednafenSetting41.UseQuotes = False
@@ -4315,11 +4315,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting47.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting47.Emulator = "med"
         Me.MednafenSetting47.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting47.Location = New System.Drawing.Point(440, 25)
+        Me.MednafenSetting47.Location = New System.Drawing.Point(438, 25)
         Me.MednafenSetting47.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting47.Name = "MednafenSetting47"
         Me.MednafenSetting47.ProperName = "Width:"
-        Me.MednafenSetting47.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting47.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting47.SpecialFunction = CType(0, Short)
         Me.MednafenSetting47.TabIndex = 29
         Me.MednafenSetting47.UseQuotes = False
@@ -4334,11 +4334,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting48.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting48.Emulator = "med"
         Me.MednafenSetting48.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting48.Location = New System.Drawing.Point(440, 77)
+        Me.MednafenSetting48.Location = New System.Drawing.Point(438, 77)
         Me.MednafenSetting48.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting48.Name = "MednafenSetting48"
         Me.MednafenSetting48.ProperName = "Height:"
-        Me.MednafenSetting48.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting48.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting48.SpecialFunction = CType(0, Short)
         Me.MednafenSetting48.TabIndex = 30
         Me.MednafenSetting48.UseQuotes = False
@@ -4353,11 +4353,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting49.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting49.Emulator = "med"
         Me.MednafenSetting49.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting49.Location = New System.Drawing.Point(440, 181)
+        Me.MednafenSetting49.Location = New System.Drawing.Point(438, 181)
         Me.MednafenSetting49.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting49.Name = "MednafenSetting49"
         Me.MednafenSetting49.ProperName = "Width:"
-        Me.MednafenSetting49.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting49.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting49.SpecialFunction = CType(0, Short)
         Me.MednafenSetting49.TabIndex = 31
         Me.MednafenSetting49.UseQuotes = False
@@ -4372,11 +4372,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting50.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting50.Emulator = "med"
         Me.MednafenSetting50.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting50.Location = New System.Drawing.Point(440, 233)
+        Me.MednafenSetting50.Location = New System.Drawing.Point(438, 233)
         Me.MednafenSetting50.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting50.Name = "MednafenSetting50"
         Me.MednafenSetting50.ProperName = "Height:"
-        Me.MednafenSetting50.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting50.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting50.SpecialFunction = CType(0, Short)
         Me.MednafenSetting50.TabIndex = 32
         Me.MednafenSetting50.UseQuotes = False
@@ -4395,7 +4395,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting53.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting53.Name = "MednafenSetting53"
         Me.MednafenSetting53.ProperName = "Upscaler"
-        Me.MednafenSetting53.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting53.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting53.SpecialFunction = CType(0, Short)
         Me.MednafenSetting53.TabIndex = 22
         Me.MednafenSetting53.UseQuotes = False
@@ -4414,7 +4414,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting52.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting52.Name = "MednafenSetting52"
         Me.MednafenSetting52.ProperName = "Correct Aspect"
-        Me.MednafenSetting52.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting52.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting52.SpecialFunction = CType(0, Short)
         Me.MednafenSetting52.TabIndex = 4
         Me.MednafenSetting52.UseQuotes = False
@@ -4433,7 +4433,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting55.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting55.Name = "MednafenSetting55"
         Me.MednafenSetting55.ProperName = "Scanlines:"
-        Me.MednafenSetting55.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting55.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting55.SpecialFunction = CType(0, Short)
         Me.MednafenSetting55.TabIndex = 17
         Me.MednafenSetting55.UseQuotes = False
@@ -4452,7 +4452,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting42.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting42.Name = "MednafenSetting42"
         Me.MednafenSetting42.ProperName = "Stretch"
-        Me.MednafenSetting42.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting42.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting42.SpecialFunction = CType(0, Short)
         Me.MednafenSetting42.TabIndex = 23
         Me.MednafenSetting42.UseQuotes = False
@@ -4471,7 +4471,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting43.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting43.Name = "MednafenSetting43"
         Me.MednafenSetting43.ProperName = "Temporal Blur"
-        Me.MednafenSetting43.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting43.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting43.SpecialFunction = CType(0, Short)
         Me.MednafenSetting43.TabIndex = 24
         Me.MednafenSetting43.UseQuotes = False
@@ -4490,7 +4490,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting44.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting44.Name = "MednafenSetting44"
         Me.MednafenSetting44.ProperName = "T Blur Accum"
-        Me.MednafenSetting44.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting44.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting44.SpecialFunction = CType(0, Short)
         Me.MednafenSetting44.TabIndex = 25
         Me.MednafenSetting44.UseQuotes = False
@@ -4509,7 +4509,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting45.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting45.Name = "MednafenSetting45"
         Me.MednafenSetting45.ProperName = "T Blur Accum Amount:"
-        Me.MednafenSetting45.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting45.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting45.SpecialFunction = CType(0, Short)
         Me.MednafenSetting45.TabIndex = 26
         Me.MednafenSetting45.UseQuotes = False
@@ -4528,7 +4528,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting46.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting46.Name = "MednafenSetting46"
         Me.MednafenSetting46.ProperName = "Interpolation"
-        Me.MednafenSetting46.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting46.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting46.SpecialFunction = CType(0, Short)
         Me.MednafenSetting46.TabIndex = 27
         Me.MednafenSetting46.UseQuotes = False
@@ -4543,11 +4543,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting59.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting59.Emulator = "med"
         Me.MednafenSetting59.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1"
-        Me.MednafenSetting59.Location = New System.Drawing.Point(222, 368)
+        Me.MednafenSetting59.Location = New System.Drawing.Point(221, 368)
         Me.MednafenSetting59.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting59.Name = "MednafenSetting59"
         Me.MednafenSetting59.ProperName = "Transparency:"
-        Me.MednafenSetting59.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting59.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting59.SpecialFunction = CType(0, Short)
         Me.MednafenSetting59.TabIndex = 20
         Me.MednafenSetting59.UseQuotes = False
@@ -4562,11 +4562,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting58.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting58.Emulator = "med"
         Me.MednafenSetting58.Limits = ""
-        Me.MednafenSetting58.Location = New System.Drawing.Point(222, 316)
+        Me.MednafenSetting58.Location = New System.Drawing.Point(221, 316)
         Me.MednafenSetting58.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting58.Name = "MednafenSetting58"
         Me.MednafenSetting58.ProperName = "Scanlines"
-        Me.MednafenSetting58.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting58.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting58.SpecialFunction = CType(0, Short)
         Me.MednafenSetting58.TabIndex = 19
         Me.MednafenSetting58.UseQuotes = False
@@ -4581,11 +4581,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting57.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting57.Emulator = "med"
         Me.MednafenSetting57.Limits = "goatron" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "borg" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "slenderman"
-        Me.MednafenSetting57.Location = New System.Drawing.Point(222, 285)
+        Me.MednafenSetting57.Location = New System.Drawing.Point(221, 285)
         Me.MednafenSetting57.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting57.Name = "MednafenSetting57"
         Me.MednafenSetting57.ProperName = "Pattern"
-        Me.MednafenSetting57.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting57.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting57.SpecialFunction = CType(0, Short)
         Me.MednafenSetting57.TabIndex = 18
         Me.MednafenSetting57.UseQuotes = False
@@ -4600,11 +4600,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting56.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting56.Emulator = "med"
         Me.MednafenSetting56.Limits = "-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting56.Location = New System.Drawing.Point(222, 233)
+        Me.MednafenSetting56.Location = New System.Drawing.Point(221, 233)
         Me.MednafenSetting56.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting56.Name = "MednafenSetting56"
         Me.MednafenSetting56.ProperName = "V Divergence:"
-        Me.MednafenSetting56.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting56.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting56.SpecialFunction = CType(0, Short)
         Me.MednafenSetting56.TabIndex = 21
         Me.MednafenSetting56.UseQuotes = False
@@ -4619,11 +4619,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting39.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting39.Emulator = "med"
         Me.MednafenSetting39.Limits = "-2.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting39.Location = New System.Drawing.Point(222, 181)
+        Me.MednafenSetting39.Location = New System.Drawing.Point(221, 181)
         Me.MednafenSetting39.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting39.Name = "MednafenSetting39"
         Me.MednafenSetting39.ProperName = "H Divergence:"
-        Me.MednafenSetting39.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting39.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting39.SpecialFunction = CType(0, Short)
         Me.MednafenSetting39.TabIndex = 8
         Me.MednafenSetting39.UseQuotes = False
@@ -4638,11 +4638,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting40.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting40.Emulator = "med"
         Me.MednafenSetting40.Limits = ""
-        Me.MednafenSetting40.Location = New System.Drawing.Point(222, 129)
+        Me.MednafenSetting40.Location = New System.Drawing.Point(221, 129)
         Me.MednafenSetting40.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting40.Name = "MednafenSetting40"
         Me.MednafenSetting40.ProperName = "Force Progressive"
-        Me.MednafenSetting40.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting40.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting40.SpecialFunction = CType(0, Short)
         Me.MednafenSetting40.TabIndex = 7
         Me.MednafenSetting40.UseQuotes = False
@@ -5004,7 +5004,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting205.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting205.Name = "MednafenSetting205"
         Me.MednafenSetting205.ProperName = "Port 4"
-        Me.MednafenSetting205.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting205.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting205.SpecialFunction = CType(0, Short)
         Me.MednafenSetting205.TabIndex = 41
         Me.MednafenSetting205.UseQuotes = False
@@ -5023,7 +5023,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting206.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting206.Name = "MednafenSetting206"
         Me.MednafenSetting206.ProperName = "Port 3"
-        Me.MednafenSetting206.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting206.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting206.SpecialFunction = CType(0, Short)
         Me.MednafenSetting206.TabIndex = 40
         Me.MednafenSetting206.UseQuotes = False
@@ -5042,7 +5042,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting207.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting207.Name = "MednafenSetting207"
         Me.MednafenSetting207.ProperName = "Port 2"
-        Me.MednafenSetting207.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting207.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting207.SpecialFunction = CType(0, Short)
         Me.MednafenSetting207.TabIndex = 39
         Me.MednafenSetting207.UseQuotes = False
@@ -5061,7 +5061,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting208.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting208.Name = "MednafenSetting208"
         Me.MednafenSetting208.ProperName = "Port 1"
-        Me.MednafenSetting208.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting208.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting208.SpecialFunction = CType(0, Short)
         Me.MednafenSetting208.TabIndex = 38
         Me.MednafenSetting208.UseQuotes = False
@@ -5077,11 +5077,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting80.Emulator = "med"
         Me.MednafenSetting80.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sabr" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnoty" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnotys" &
     "harper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotxsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "goat"
-        Me.MednafenSetting80.Location = New System.Drawing.Point(222, 25)
+        Me.MednafenSetting80.Location = New System.Drawing.Point(221, 25)
         Me.MednafenSetting80.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting80.Name = "MednafenSetting80"
         Me.MednafenSetting80.ProperName = "Shader"
-        Me.MednafenSetting80.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting80.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting80.SpecialFunction = CType(0, Short)
         Me.MednafenSetting80.TabIndex = 6
         Me.MednafenSetting80.UseQuotes = False
@@ -5096,11 +5096,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting81.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting81.Emulator = "med"
         Me.MednafenSetting81.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting81.Location = New System.Drawing.Point(440, 25)
+        Me.MednafenSetting81.Location = New System.Drawing.Point(438, 25)
         Me.MednafenSetting81.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting81.Name = "MednafenSetting81"
         Me.MednafenSetting81.ProperName = "Width:"
-        Me.MednafenSetting81.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting81.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting81.SpecialFunction = CType(0, Short)
         Me.MednafenSetting81.TabIndex = 29
         Me.MednafenSetting81.UseQuotes = False
@@ -5115,11 +5115,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting82.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting82.Emulator = "med"
         Me.MednafenSetting82.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting82.Location = New System.Drawing.Point(440, 77)
+        Me.MednafenSetting82.Location = New System.Drawing.Point(438, 77)
         Me.MednafenSetting82.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting82.Name = "MednafenSetting82"
         Me.MednafenSetting82.ProperName = "Height:"
-        Me.MednafenSetting82.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting82.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting82.SpecialFunction = CType(0, Short)
         Me.MednafenSetting82.TabIndex = 30
         Me.MednafenSetting82.UseQuotes = False
@@ -5134,11 +5134,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting83.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting83.Emulator = "med"
         Me.MednafenSetting83.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting83.Location = New System.Drawing.Point(440, 181)
+        Me.MednafenSetting83.Location = New System.Drawing.Point(438, 181)
         Me.MednafenSetting83.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting83.Name = "MednafenSetting83"
         Me.MednafenSetting83.ProperName = "Width:"
-        Me.MednafenSetting83.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting83.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting83.SpecialFunction = CType(0, Short)
         Me.MednafenSetting83.TabIndex = 31
         Me.MednafenSetting83.UseQuotes = False
@@ -5153,11 +5153,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting84.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting84.Emulator = "med"
         Me.MednafenSetting84.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting84.Location = New System.Drawing.Point(440, 233)
+        Me.MednafenSetting84.Location = New System.Drawing.Point(438, 233)
         Me.MednafenSetting84.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting84.Name = "MednafenSetting84"
         Me.MednafenSetting84.ProperName = "Height:"
-        Me.MednafenSetting84.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting84.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting84.SpecialFunction = CType(0, Short)
         Me.MednafenSetting84.TabIndex = 32
         Me.MednafenSetting84.UseQuotes = False
@@ -5176,7 +5176,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting89.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting89.Name = "MednafenSetting89"
         Me.MednafenSetting89.ProperName = "Upscaler"
-        Me.MednafenSetting89.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting89.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting89.SpecialFunction = CType(0, Short)
         Me.MednafenSetting89.TabIndex = 22
         Me.MednafenSetting89.UseQuotes = False
@@ -5195,7 +5195,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting90.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting90.Name = "MednafenSetting90"
         Me.MednafenSetting90.ProperName = "Correct Aspect"
-        Me.MednafenSetting90.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting90.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting90.SpecialFunction = CType(0, Short)
         Me.MednafenSetting90.TabIndex = 4
         Me.MednafenSetting90.UseQuotes = False
@@ -5214,7 +5214,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting91.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting91.Name = "MednafenSetting91"
         Me.MednafenSetting91.ProperName = "Scanlines:"
-        Me.MednafenSetting91.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting91.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting91.SpecialFunction = CType(0, Short)
         Me.MednafenSetting91.TabIndex = 17
         Me.MednafenSetting91.UseQuotes = False
@@ -5233,7 +5233,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting92.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting92.Name = "MednafenSetting92"
         Me.MednafenSetting92.ProperName = "Stretch"
-        Me.MednafenSetting92.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting92.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting92.SpecialFunction = CType(0, Short)
         Me.MednafenSetting92.TabIndex = 23
         Me.MednafenSetting92.UseQuotes = False
@@ -5252,7 +5252,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting93.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting93.Name = "MednafenSetting93"
         Me.MednafenSetting93.ProperName = "Temporal Blur"
-        Me.MednafenSetting93.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting93.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting93.SpecialFunction = CType(0, Short)
         Me.MednafenSetting93.TabIndex = 24
         Me.MednafenSetting93.UseQuotes = False
@@ -5271,7 +5271,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting94.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting94.Name = "MednafenSetting94"
         Me.MednafenSetting94.ProperName = "T Blur Accum"
-        Me.MednafenSetting94.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting94.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting94.SpecialFunction = CType(0, Short)
         Me.MednafenSetting94.TabIndex = 25
         Me.MednafenSetting94.UseQuotes = False
@@ -5290,7 +5290,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting95.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting95.Name = "MednafenSetting95"
         Me.MednafenSetting95.ProperName = "T Blur Accum Amount:"
-        Me.MednafenSetting95.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting95.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting95.SpecialFunction = CType(0, Short)
         Me.MednafenSetting95.TabIndex = 26
         Me.MednafenSetting95.UseQuotes = False
@@ -5309,7 +5309,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting96.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting96.Name = "MednafenSetting96"
         Me.MednafenSetting96.ProperName = "Interpolation"
-        Me.MednafenSetting96.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting96.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting96.SpecialFunction = CType(0, Short)
         Me.MednafenSetting96.TabIndex = 27
         Me.MednafenSetting96.UseQuotes = False
@@ -5324,11 +5324,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting88.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting88.Emulator = "med"
         Me.MednafenSetting88.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1"
-        Me.MednafenSetting88.Location = New System.Drawing.Point(222, 368)
+        Me.MednafenSetting88.Location = New System.Drawing.Point(221, 368)
         Me.MednafenSetting88.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting88.Name = "MednafenSetting88"
         Me.MednafenSetting88.ProperName = "Transparency:"
-        Me.MednafenSetting88.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting88.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting88.SpecialFunction = CType(0, Short)
         Me.MednafenSetting88.TabIndex = 20
         Me.MednafenSetting88.UseQuotes = False
@@ -5343,11 +5343,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting87.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting87.Emulator = "med"
         Me.MednafenSetting87.Limits = ""
-        Me.MednafenSetting87.Location = New System.Drawing.Point(222, 316)
+        Me.MednafenSetting87.Location = New System.Drawing.Point(221, 316)
         Me.MednafenSetting87.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting87.Name = "MednafenSetting87"
         Me.MednafenSetting87.ProperName = "Scanlines"
-        Me.MednafenSetting87.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting87.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting87.SpecialFunction = CType(0, Short)
         Me.MednafenSetting87.TabIndex = 19
         Me.MednafenSetting87.UseQuotes = False
@@ -5362,11 +5362,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting86.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting86.Emulator = "med"
         Me.MednafenSetting86.Limits = "goatron" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "borg" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "slenderman"
-        Me.MednafenSetting86.Location = New System.Drawing.Point(222, 285)
+        Me.MednafenSetting86.Location = New System.Drawing.Point(221, 285)
         Me.MednafenSetting86.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting86.Name = "MednafenSetting86"
         Me.MednafenSetting86.ProperName = "Pattern"
-        Me.MednafenSetting86.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting86.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting86.SpecialFunction = CType(0, Short)
         Me.MednafenSetting86.TabIndex = 18
         Me.MednafenSetting86.UseQuotes = False
@@ -5381,11 +5381,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting85.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting85.Emulator = "med"
         Me.MednafenSetting85.Limits = "-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting85.Location = New System.Drawing.Point(222, 233)
+        Me.MednafenSetting85.Location = New System.Drawing.Point(221, 233)
         Me.MednafenSetting85.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting85.Name = "MednafenSetting85"
         Me.MednafenSetting85.ProperName = "V Divergence:"
-        Me.MednafenSetting85.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting85.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting85.SpecialFunction = CType(0, Short)
         Me.MednafenSetting85.TabIndex = 21
         Me.MednafenSetting85.UseQuotes = False
@@ -5400,11 +5400,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting73.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting73.Emulator = "med"
         Me.MednafenSetting73.Limits = "-2.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting73.Location = New System.Drawing.Point(222, 181)
+        Me.MednafenSetting73.Location = New System.Drawing.Point(221, 181)
         Me.MednafenSetting73.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting73.Name = "MednafenSetting73"
         Me.MednafenSetting73.ProperName = "H Divergence:"
-        Me.MednafenSetting73.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting73.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting73.SpecialFunction = CType(0, Short)
         Me.MednafenSetting73.TabIndex = 8
         Me.MednafenSetting73.UseQuotes = False
@@ -5419,11 +5419,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting79.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting79.Emulator = "med"
         Me.MednafenSetting79.Limits = ""
-        Me.MednafenSetting79.Location = New System.Drawing.Point(222, 129)
+        Me.MednafenSetting79.Location = New System.Drawing.Point(221, 129)
         Me.MednafenSetting79.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting79.Name = "MednafenSetting79"
         Me.MednafenSetting79.ProperName = "Force Progressive"
-        Me.MednafenSetting79.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting79.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting79.SpecialFunction = CType(0, Short)
         Me.MednafenSetting79.TabIndex = 7
         Me.MednafenSetting79.UseQuotes = False
@@ -5438,11 +5438,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting201.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting201.Emulator = "med"
         Me.MednafenSetting201.Limits = ""
-        Me.MednafenSetting201.Location = New System.Drawing.Point(440, 483)
+        Me.MednafenSetting201.Location = New System.Drawing.Point(438, 483)
         Me.MednafenSetting201.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting201.Name = "MednafenSetting201"
         Me.MednafenSetting201.ProperName = "Old Core Offline"
-        Me.MednafenSetting201.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting201.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting201.SpecialFunction = CType(0, Short)
         Me.MednafenSetting201.TabIndex = 39
         Me.MednafenSetting201.UseQuotes = False
@@ -5461,7 +5461,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting215.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting215.Name = "MednafenSetting215"
         Me.MednafenSetting215.ProperName = "Port 2/2A"
-        Me.MednafenSetting215.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting215.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting215.SpecialFunction = CType(0, Short)
         Me.MednafenSetting215.TabIndex = 39
         Me.MednafenSetting215.UseQuotes = False
@@ -5480,7 +5480,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting216.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting216.Name = "MednafenSetting216"
         Me.MednafenSetting216.ProperName = "Port 1/1A"
-        Me.MednafenSetting216.Size = New System.Drawing.Size(265, 27)
+        Me.MednafenSetting216.Size = New System.Drawing.Size(268, 27)
         Me.MednafenSetting216.SpecialFunction = CType(0, Short)
         Me.MednafenSetting216.TabIndex = 38
         Me.MednafenSetting216.UseQuotes = False
@@ -5496,11 +5496,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting100.Emulator = "med"
         Me.MednafenSetting100.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sabr" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnoty" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnotys" &
     "harper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotxsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "goat"
-        Me.MednafenSetting100.Location = New System.Drawing.Point(222, 25)
+        Me.MednafenSetting100.Location = New System.Drawing.Point(221, 25)
         Me.MednafenSetting100.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting100.Name = "MednafenSetting100"
         Me.MednafenSetting100.ProperName = "Shader"
-        Me.MednafenSetting100.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting100.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting100.SpecialFunction = CType(0, Short)
         Me.MednafenSetting100.TabIndex = 6
         Me.MednafenSetting100.UseQuotes = False
@@ -5515,11 +5515,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting101.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting101.Emulator = "med"
         Me.MednafenSetting101.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting101.Location = New System.Drawing.Point(440, 25)
+        Me.MednafenSetting101.Location = New System.Drawing.Point(438, 25)
         Me.MednafenSetting101.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting101.Name = "MednafenSetting101"
         Me.MednafenSetting101.ProperName = "Width:"
-        Me.MednafenSetting101.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting101.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting101.SpecialFunction = CType(0, Short)
         Me.MednafenSetting101.TabIndex = 29
         Me.MednafenSetting101.UseQuotes = False
@@ -5534,11 +5534,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting102.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting102.Emulator = "med"
         Me.MednafenSetting102.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting102.Location = New System.Drawing.Point(440, 77)
+        Me.MednafenSetting102.Location = New System.Drawing.Point(438, 77)
         Me.MednafenSetting102.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting102.Name = "MednafenSetting102"
         Me.MednafenSetting102.ProperName = "Height:"
-        Me.MednafenSetting102.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting102.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting102.SpecialFunction = CType(0, Short)
         Me.MednafenSetting102.TabIndex = 30
         Me.MednafenSetting102.UseQuotes = False
@@ -5553,11 +5553,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting103.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting103.Emulator = "med"
         Me.MednafenSetting103.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting103.Location = New System.Drawing.Point(440, 160)
+        Me.MednafenSetting103.Location = New System.Drawing.Point(438, 160)
         Me.MednafenSetting103.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting103.Name = "MednafenSetting103"
         Me.MednafenSetting103.ProperName = "Width:"
-        Me.MednafenSetting103.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting103.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting103.SpecialFunction = CType(0, Short)
         Me.MednafenSetting103.TabIndex = 31
         Me.MednafenSetting103.UseQuotes = False
@@ -5572,11 +5572,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting104.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting104.Emulator = "med"
         Me.MednafenSetting104.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting104.Location = New System.Drawing.Point(440, 212)
+        Me.MednafenSetting104.Location = New System.Drawing.Point(438, 212)
         Me.MednafenSetting104.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting104.Name = "MednafenSetting104"
         Me.MednafenSetting104.ProperName = "Height:"
-        Me.MednafenSetting104.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting104.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting104.SpecialFunction = CType(0, Short)
         Me.MednafenSetting104.TabIndex = 32
         Me.MednafenSetting104.UseQuotes = False
@@ -5595,7 +5595,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting109.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting109.Name = "MednafenSetting109"
         Me.MednafenSetting109.ProperName = "Upscaler"
-        Me.MednafenSetting109.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting109.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting109.SpecialFunction = CType(0, Short)
         Me.MednafenSetting109.TabIndex = 22
         Me.MednafenSetting109.UseQuotes = False
@@ -5614,7 +5614,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting110.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting110.Name = "MednafenSetting110"
         Me.MednafenSetting110.ProperName = "Correct Aspect"
-        Me.MednafenSetting110.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting110.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting110.SpecialFunction = CType(0, Short)
         Me.MednafenSetting110.TabIndex = 4
         Me.MednafenSetting110.UseQuotes = False
@@ -5633,7 +5633,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting116.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting116.Name = "MednafenSetting116"
         Me.MednafenSetting116.ProperName = "Interpolation"
-        Me.MednafenSetting116.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting116.Size = New System.Drawing.Size(206, 27)
         Me.MednafenSetting116.SpecialFunction = CType(0, Short)
         Me.MednafenSetting116.TabIndex = 27
         Me.MednafenSetting116.UseQuotes = False
@@ -5652,7 +5652,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting115.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting115.Name = "MednafenSetting115"
         Me.MednafenSetting115.ProperName = "T Blur Accum Amount:"
-        Me.MednafenSetting115.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting115.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting115.SpecialFunction = CType(0, Short)
         Me.MednafenSetting115.TabIndex = 26
         Me.MednafenSetting115.UseQuotes = False
@@ -5671,7 +5671,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting114.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting114.Name = "MednafenSetting114"
         Me.MednafenSetting114.ProperName = "T Blur Accum"
-        Me.MednafenSetting114.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting114.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting114.SpecialFunction = CType(0, Short)
         Me.MednafenSetting114.TabIndex = 25
         Me.MednafenSetting114.UseQuotes = False
@@ -5690,7 +5690,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting113.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting113.Name = "MednafenSetting113"
         Me.MednafenSetting113.ProperName = "Temporal Blur"
-        Me.MednafenSetting113.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting113.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting113.SpecialFunction = CType(0, Short)
         Me.MednafenSetting113.TabIndex = 24
         Me.MednafenSetting113.UseQuotes = False
@@ -5709,7 +5709,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting112.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting112.Name = "MednafenSetting112"
         Me.MednafenSetting112.ProperName = "Stretch"
-        Me.MednafenSetting112.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting112.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting112.SpecialFunction = CType(0, Short)
         Me.MednafenSetting112.TabIndex = 23
         Me.MednafenSetting112.UseQuotes = False
@@ -5728,7 +5728,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting111.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting111.Name = "MednafenSetting111"
         Me.MednafenSetting111.ProperName = "Scanlines:"
-        Me.MednafenSetting111.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting111.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting111.SpecialFunction = CType(0, Short)
         Me.MednafenSetting111.TabIndex = 17
         Me.MednafenSetting111.UseQuotes = False
@@ -5747,7 +5747,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting117.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting117.Name = "MednafenSetting117"
         Me.MednafenSetting117.ProperName = "H Blend"
-        Me.MednafenSetting117.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting117.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting117.SpecialFunction = CType(0, Short)
         Me.MednafenSetting117.TabIndex = 34
         Me.MednafenSetting117.UseQuotes = False
@@ -5762,11 +5762,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting108.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting108.Emulator = "med"
         Me.MednafenSetting108.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1"
-        Me.MednafenSetting108.Location = New System.Drawing.Point(222, 326)
+        Me.MednafenSetting108.Location = New System.Drawing.Point(221, 326)
         Me.MednafenSetting108.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting108.Name = "MednafenSetting108"
         Me.MednafenSetting108.ProperName = "Transparency:"
-        Me.MednafenSetting108.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting108.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting108.SpecialFunction = CType(0, Short)
         Me.MednafenSetting108.TabIndex = 20
         Me.MednafenSetting108.UseQuotes = False
@@ -5781,11 +5781,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting107.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting107.Emulator = "med"
         Me.MednafenSetting107.Limits = ""
-        Me.MednafenSetting107.Location = New System.Drawing.Point(222, 295)
+        Me.MednafenSetting107.Location = New System.Drawing.Point(221, 295)
         Me.MednafenSetting107.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting107.Name = "MednafenSetting107"
         Me.MednafenSetting107.ProperName = "Scanlines"
-        Me.MednafenSetting107.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting107.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting107.SpecialFunction = CType(0, Short)
         Me.MednafenSetting107.TabIndex = 19
         Me.MednafenSetting107.UseQuotes = False
@@ -5800,11 +5800,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting106.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting106.Emulator = "med"
         Me.MednafenSetting106.Limits = "goatron" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "borg" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "slenderman"
-        Me.MednafenSetting106.Location = New System.Drawing.Point(222, 264)
+        Me.MednafenSetting106.Location = New System.Drawing.Point(221, 264)
         Me.MednafenSetting106.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting106.Name = "MednafenSetting106"
         Me.MednafenSetting106.ProperName = "Pattern"
-        Me.MednafenSetting106.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting106.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting106.SpecialFunction = CType(0, Short)
         Me.MednafenSetting106.TabIndex = 18
         Me.MednafenSetting106.UseQuotes = False
@@ -5819,11 +5819,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting105.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting105.Emulator = "med"
         Me.MednafenSetting105.Limits = "-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting105.Location = New System.Drawing.Point(222, 212)
+        Me.MednafenSetting105.Location = New System.Drawing.Point(221, 212)
         Me.MednafenSetting105.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting105.Name = "MednafenSetting105"
         Me.MednafenSetting105.ProperName = "V Divergence:"
-        Me.MednafenSetting105.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting105.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting105.SpecialFunction = CType(0, Short)
         Me.MednafenSetting105.TabIndex = 21
         Me.MednafenSetting105.UseQuotes = False
@@ -5838,11 +5838,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting98.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting98.Emulator = "med"
         Me.MednafenSetting98.Limits = "-2.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting98.Location = New System.Drawing.Point(222, 160)
+        Me.MednafenSetting98.Location = New System.Drawing.Point(221, 160)
         Me.MednafenSetting98.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting98.Name = "MednafenSetting98"
         Me.MednafenSetting98.ProperName = "H Divergence:"
-        Me.MednafenSetting98.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting98.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting98.SpecialFunction = CType(0, Short)
         Me.MednafenSetting98.TabIndex = 8
         Me.MednafenSetting98.UseQuotes = False
@@ -5857,11 +5857,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting99.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting99.Emulator = "med"
         Me.MednafenSetting99.Limits = ""
-        Me.MednafenSetting99.Location = New System.Drawing.Point(222, 129)
+        Me.MednafenSetting99.Location = New System.Drawing.Point(221, 129)
         Me.MednafenSetting99.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting99.Name = "MednafenSetting99"
         Me.MednafenSetting99.ProperName = "Force Progressive"
-        Me.MednafenSetting99.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting99.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting99.SpecialFunction = CType(0, Short)
         Me.MednafenSetting99.TabIndex = 7
         Me.MednafenSetting99.UseQuotes = False
@@ -6909,7 +6909,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting202.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting202.Name = "MednafenSetting202"
         Me.MednafenSetting202.ProperName = "H Overscan"
-        Me.MednafenSetting202.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting202.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting202.SpecialFunction = CType(0, Short)
         Me.MednafenSetting202.TabIndex = 11
         Me.MednafenSetting202.UseQuotes = False
@@ -6925,11 +6925,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting203.Emulator = "med"
         Me.MednafenSetting203.Limits = "none" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoip" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "autoipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "scale2x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "sabr" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnoty" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipxnotys" &
     "harper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ipynotxsharper" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "goat"
-        Me.MednafenSetting203.Location = New System.Drawing.Point(222, 25)
+        Me.MednafenSetting203.Location = New System.Drawing.Point(221, 25)
         Me.MednafenSetting203.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting203.Name = "MednafenSetting203"
         Me.MednafenSetting203.ProperName = "Shader"
-        Me.MednafenSetting203.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting203.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting203.SpecialFunction = CType(0, Short)
         Me.MednafenSetting203.TabIndex = 6
         Me.MednafenSetting203.UseQuotes = False
@@ -6948,7 +6948,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting204.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting204.Name = "MednafenSetting204"
         Me.MednafenSetting204.ProperName = "Stretch"
-        Me.MednafenSetting204.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting204.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting204.SpecialFunction = CType(0, Short)
         Me.MednafenSetting204.TabIndex = 23
         Me.MednafenSetting204.UseQuotes = False
@@ -6967,7 +6967,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting217.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting217.Name = "MednafenSetting217"
         Me.MednafenSetting217.ProperName = "Temporal Blur"
-        Me.MednafenSetting217.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting217.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting217.SpecialFunction = CType(0, Short)
         Me.MednafenSetting217.TabIndex = 24
         Me.MednafenSetting217.UseQuotes = False
@@ -6986,7 +6986,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting230.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting230.Name = "MednafenSetting230"
         Me.MednafenSetting230.ProperName = "T Blur Accum"
-        Me.MednafenSetting230.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting230.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting230.SpecialFunction = CType(0, Short)
         Me.MednafenSetting230.TabIndex = 25
         Me.MednafenSetting230.UseQuotes = False
@@ -7005,7 +7005,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting231.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting231.Name = "MednafenSetting231"
         Me.MednafenSetting231.ProperName = "T Blur Accum Amount:"
-        Me.MednafenSetting231.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting231.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting231.SpecialFunction = CType(0, Short)
         Me.MednafenSetting231.TabIndex = 26
         Me.MednafenSetting231.UseQuotes = False
@@ -7024,7 +7024,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting232.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting232.Name = "MednafenSetting232"
         Me.MednafenSetting232.ProperName = "Interpolation"
-        Me.MednafenSetting232.Size = New System.Drawing.Size(207, 27)
+        Me.MednafenSetting232.Size = New System.Drawing.Size(206, 27)
         Me.MednafenSetting232.SpecialFunction = CType(0, Short)
         Me.MednafenSetting232.TabIndex = 27
         Me.MednafenSetting232.UseQuotes = False
@@ -7039,11 +7039,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting233.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting233.Emulator = "med"
         Me.MednafenSetting233.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting233.Location = New System.Drawing.Point(440, 25)
+        Me.MednafenSetting233.Location = New System.Drawing.Point(438, 25)
         Me.MednafenSetting233.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting233.Name = "MednafenSetting233"
         Me.MednafenSetting233.ProperName = "Width:"
-        Me.MednafenSetting233.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting233.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting233.SpecialFunction = CType(0, Short)
         Me.MednafenSetting233.TabIndex = 29
         Me.MednafenSetting233.UseQuotes = False
@@ -7058,11 +7058,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting234.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting234.Emulator = "med"
         Me.MednafenSetting234.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting234.Location = New System.Drawing.Point(440, 77)
+        Me.MednafenSetting234.Location = New System.Drawing.Point(438, 77)
         Me.MednafenSetting234.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting234.Name = "MednafenSetting234"
         Me.MednafenSetting234.ProperName = "Height:"
-        Me.MednafenSetting234.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting234.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting234.SpecialFunction = CType(0, Short)
         Me.MednafenSetting234.TabIndex = 30
         Me.MednafenSetting234.UseQuotes = False
@@ -7077,11 +7077,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting235.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting235.Emulator = "med"
         Me.MednafenSetting235.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting235.Location = New System.Drawing.Point(440, 160)
+        Me.MednafenSetting235.Location = New System.Drawing.Point(438, 160)
         Me.MednafenSetting235.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting235.Name = "MednafenSetting235"
         Me.MednafenSetting235.ProperName = "Width:"
-        Me.MednafenSetting235.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting235.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting235.SpecialFunction = CType(0, Short)
         Me.MednafenSetting235.TabIndex = 31
         Me.MednafenSetting235.UseQuotes = False
@@ -7096,11 +7096,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting236.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting236.Emulator = "med"
         Me.MednafenSetting236.Limits = "1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "10"
-        Me.MednafenSetting236.Location = New System.Drawing.Point(440, 212)
+        Me.MednafenSetting236.Location = New System.Drawing.Point(438, 212)
         Me.MednafenSetting236.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting236.Name = "MednafenSetting236"
         Me.MednafenSetting236.ProperName = "Height:"
-        Me.MednafenSetting236.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting236.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting236.SpecialFunction = CType(0, Short)
         Me.MednafenSetting236.TabIndex = 32
         Me.MednafenSetting236.UseQuotes = False
@@ -7119,7 +7119,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting238.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting238.Name = "MednafenSetting238"
         Me.MednafenSetting238.ProperName = "Correct Aspect"
-        Me.MednafenSetting238.Size = New System.Drawing.Size(207, 30)
+        Me.MednafenSetting238.Size = New System.Drawing.Size(206, 30)
         Me.MednafenSetting238.SpecialFunction = CType(0, Short)
         Me.MednafenSetting238.TabIndex = 4
         Me.MednafenSetting238.UseQuotes = False
@@ -7138,7 +7138,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting239.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting239.Name = "MednafenSetting239"
         Me.MednafenSetting239.ProperName = "Upscaler"
-        Me.MednafenSetting239.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting239.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting239.SpecialFunction = CType(0, Short)
         Me.MednafenSetting239.TabIndex = 22
         Me.MednafenSetting239.UseQuotes = False
@@ -7157,7 +7157,7 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting241.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting241.Name = "MednafenSetting241"
         Me.MednafenSetting241.ProperName = "Scanlines:"
-        Me.MednafenSetting241.Size = New System.Drawing.Size(207, 51)
+        Me.MednafenSetting241.Size = New System.Drawing.Size(206, 51)
         Me.MednafenSetting241.SpecialFunction = CType(0, Short)
         Me.MednafenSetting241.TabIndex = 17
         Me.MednafenSetting241.UseQuotes = False
@@ -7172,11 +7172,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting242.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting242.Emulator = "med"
         Me.MednafenSetting242.Limits = "0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1"
-        Me.MednafenSetting242.Location = New System.Drawing.Point(222, 326)
+        Me.MednafenSetting242.Location = New System.Drawing.Point(221, 326)
         Me.MednafenSetting242.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting242.Name = "MednafenSetting242"
         Me.MednafenSetting242.ProperName = "Transparency:"
-        Me.MednafenSetting242.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting242.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting242.SpecialFunction = CType(0, Short)
         Me.MednafenSetting242.TabIndex = 20
         Me.MednafenSetting242.UseQuotes = False
@@ -7191,11 +7191,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting243.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting243.Emulator = "med"
         Me.MednafenSetting243.Limits = ""
-        Me.MednafenSetting243.Location = New System.Drawing.Point(222, 295)
+        Me.MednafenSetting243.Location = New System.Drawing.Point(221, 295)
         Me.MednafenSetting243.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting243.Name = "MednafenSetting243"
         Me.MednafenSetting243.ProperName = "Scanlines"
-        Me.MednafenSetting243.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting243.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting243.SpecialFunction = CType(0, Short)
         Me.MednafenSetting243.TabIndex = 19
         Me.MednafenSetting243.UseQuotes = False
@@ -7210,11 +7210,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting244.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting244.Emulator = "med"
         Me.MednafenSetting244.Limits = "goatron" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "borg" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "slenderman"
-        Me.MednafenSetting244.Location = New System.Drawing.Point(222, 264)
+        Me.MednafenSetting244.Location = New System.Drawing.Point(221, 264)
         Me.MednafenSetting244.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting244.Name = "MednafenSetting244"
         Me.MednafenSetting244.ProperName = "Pattern"
-        Me.MednafenSetting244.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting244.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting244.SpecialFunction = CType(0, Short)
         Me.MednafenSetting244.TabIndex = 18
         Me.MednafenSetting244.UseQuotes = False
@@ -7229,11 +7229,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting245.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting245.Emulator = "med"
         Me.MednafenSetting245.Limits = "-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting245.Location = New System.Drawing.Point(222, 212)
+        Me.MednafenSetting245.Location = New System.Drawing.Point(221, 212)
         Me.MednafenSetting245.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting245.Name = "MednafenSetting245"
         Me.MednafenSetting245.ProperName = "V Divergence:"
-        Me.MednafenSetting245.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting245.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting245.SpecialFunction = CType(0, Short)
         Me.MednafenSetting245.TabIndex = 21
         Me.MednafenSetting245.UseQuotes = False
@@ -7248,11 +7248,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting246.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting246.Emulator = "med"
         Me.MednafenSetting246.Limits = "-2.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "2"
-        Me.MednafenSetting246.Location = New System.Drawing.Point(222, 160)
+        Me.MednafenSetting246.Location = New System.Drawing.Point(221, 160)
         Me.MednafenSetting246.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting246.Name = "MednafenSetting246"
         Me.MednafenSetting246.ProperName = "H Divergence:"
-        Me.MednafenSetting246.Size = New System.Drawing.Size(208, 51)
+        Me.MednafenSetting246.Size = New System.Drawing.Size(207, 51)
         Me.MednafenSetting246.SpecialFunction = CType(0, Short)
         Me.MednafenSetting246.TabIndex = 8
         Me.MednafenSetting246.UseQuotes = False
@@ -7267,11 +7267,11 @@ Partial Class frmMednafenOptions
         Me.MednafenSetting247.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MednafenSetting247.Emulator = "med"
         Me.MednafenSetting247.Limits = ""
-        Me.MednafenSetting247.Location = New System.Drawing.Point(222, 129)
+        Me.MednafenSetting247.Location = New System.Drawing.Point(221, 129)
         Me.MednafenSetting247.Margin = New System.Windows.Forms.Padding(5, 0, 5, 1)
         Me.MednafenSetting247.Name = "MednafenSetting247"
         Me.MednafenSetting247.ProperName = "Force Progressive"
-        Me.MednafenSetting247.Size = New System.Drawing.Size(208, 30)
+        Me.MednafenSetting247.Size = New System.Drawing.Size(207, 30)
         Me.MednafenSetting247.SpecialFunction = CType(0, Short)
         Me.MednafenSetting247.TabIndex = 7
         Me.MednafenSetting247.UseQuotes = False
