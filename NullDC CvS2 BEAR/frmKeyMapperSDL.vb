@@ -1216,8 +1216,8 @@ Public Class frmKeyMapperSDL
 
         ' Check if nullDC is running to hotload the settings
         If MainformRef.IsNullDCRunning Then
-            If platform = "na" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
-            If platform = "dc" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
+            If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "na" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
+            If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "dc" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
 
         End If
 

@@ -91,7 +91,6 @@ Public Class NullDCLauncher
     End Sub
 
     Public Sub LaunchDreamcast(ByVal _romname As String, ByRef _region As String)
-        Platform = "dc"
         'MainformRef.InputHandler.GetKeyboardConfigs("dc")
         'MainformRef.InputHandler.NeedConfigReload = True
         Region = _region
@@ -106,7 +105,6 @@ Public Class NullDCLauncher
     End Sub
 
     Public Sub LaunchNaomi(ByVal _romname As String, ByRef _region As String)
-        Platform = "na"
         'MainformRef.InputHandler.GetKeyboardConfigs("na")
         'MainformRef.InputHandler.NeedConfigReload = True
         Region = _region
@@ -225,7 +223,10 @@ Public Class NullDCLauncher
         Console.WriteLine("Game Launched")
         If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
 
-            If platform = "dc" Then Rx.EEPROM = ""
+            If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "dc" Then
+                Rx.EEPROM = ""
+            End If
+
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
 
         End If

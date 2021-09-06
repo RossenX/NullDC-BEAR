@@ -146,6 +146,13 @@ Public Class frmMain
             needsUpdate = True
         End If
 
+        ' Flycast unpack
+        If Not File.Exists(NullDCPath & "\flycast\flycast.exe") Then
+            Directory.CreateDirectory(NullDCPath & "\flycast")
+            UnzipResToDir(My.Resources.flycast, "bear_tmp_mednafen.zip", NullDCPath & "\flycast", True)
+            needsUpdate = True
+        End If
+
         ' Mednafen Server
         If Not File.Exists(NullDCPath & "\mednafen\server\mednafen-server.exe") Then
             Directory.CreateDirectory(NullDCPath & "\mednafen\server")
@@ -363,7 +370,8 @@ UpdateTry:
             NullDCPath & "\roms",
             NullDCPath & "\dc\roms",
             NullDCPath & "\mednafen\roms",
-            NullDCPath & "\Mupen64Plus\roms"
+            NullDCPath & "\Mupen64Plus\roms",
+            NullDCPath & "\flycast\roms"
         }
 
         Dim Watchers(RomFolders.Count) As FileSystemWatcher
@@ -1172,6 +1180,32 @@ UpdateTry:
                 End If
             Next
 
+            ' Flycast NAOMI
+            Files = Directory.GetFiles(NullDCPath & "\flycast\roms\naomi", "*.zip", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".zip", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("FLY-" & RomName) Then
+                    GamesList.Add("FLY_NA-" & RomName, {GameName, RomPath, "fly_na", ""})
+                End If
+            Next
+
+            ' Flycast DREAMCAST
+            Files = Directory.GetFiles(NullDCPath & "\flycast\roms\dreamcast", "*.chd", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".chd", "").Replace(",", ".")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("FLY-" & RomName) Then
+                    GamesList.Add("FLY_DC-" & RomName, {GameName, RomPath, "fly_dc", ""})
+                End If
+            Next
+
         End If
 
         ' New Games List Code
@@ -1186,12 +1220,10 @@ UpdateTry:
 
     End Sub
 
-    Public Sub GameLauncher(ByVal _romname, ByVal _region)
+    Public Sub GameLauncher(ByVal _romname As String, ByVal _region As String)
 
-        'Rx.platform = GamesList(_romname)(2)
-
-        Select Case Rx.platform
-            Case "fc_dc", "fc_na"
+        Select Case MainformRef.ConfigFile.Game.Split("-")(0).ToLower
+            Case "fc_dc", "fc_na", "fly_na", "fly_dc"
                 FlycastLauncher.LaunchFlycast(_romname, _region)
             Case "dc"
                 NullDCLauncher.LaunchDreamcast(_romname, _region)
@@ -1202,7 +1234,7 @@ UpdateTry:
             Case "n64"
                 MupenLauncher.LaunchEmulator(_romname)
             Case Else
-                MsgBox("Missing emulator type: " & Rx.platform)
+                MsgBox("Missing emulator type: " & MainformRef.ConfigFile.Game.Split("-")(0).ToLower)
         End Select
 
     End Sub
@@ -1251,7 +1283,11 @@ UpdateTry:
             MednafenLauncher.MednafenInstance.CloseMainWindow()
         End If
 
-        While Not MednafenLauncher.MednafenInstance Is Nothing Or IsNullDCRunning()
+        If Not FlycastLauncher.FlycastProc Is Nothing Then
+            FlycastLauncher.FlycastProc.CloseMainWindow()
+        End If
+
+        While MednafenLauncher.MednafenInstance IsNot Nothing Or IsNullDCRunning() Or FlycastLauncher.FlycastProc IsNot Nothing
             Thread.Sleep(100)
         End While
 
@@ -1295,18 +1331,29 @@ UpdateTry:
     Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
 
         ' Ignore being told to join the host if we havn't gotten the VMU yet
-        If MainformRef.GamesList(_game)(2) = "dc" And Rx.VMU Is Nothing Then
+        Dim Platform = _game.Split("-")(0).ToLower
+        Dim NeedaVMU = False
+        If Platform = "dc" Or Platform = "fc_dc" Or Platform = "fly_dc" Then
+            NeedaVMU = True
+        End If
+
+        If NeedaVMU And Rx.VMU Is Nothing Then
             Console.WriteLine("Host started before VMU Data was Recieved, wait")
             Exit Sub
         End If
 
-        Select Case MainformRef.GamesList(_game)(2)
-            Case "na"
-                Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(_game)(1))
+        Select Case Platform
+            Case "na", "fc_na", "fly_na"
+                Dim TempName = _game
+                If _game.StartsWith("FC_") Then
+                    TempName = _game.Remove(0, 3)
+                End If
+
+                Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(TempName)(1))
                 ConfigFile.Status = "Client"
                 ConfigFile.Port = _port
                 ConfigFile.Delay = _delay
-            Case "dc"
+            Case "dc", "fc_dc", "fly_dc"
                 ConfigFile.Status = "Client"
                 ConfigFile.Port = _port
                 ConfigFile.Delay = _delay
@@ -1404,7 +1451,7 @@ UpdateTry:
 
             Dim IconIndex = 0
             If Not Player.game = "None" Then
-                Select Case Player.game.Split("|")(1).Split("-")(0)
+                Select Case Player.game.Split("-")(0)
                     Case "NA" : IconIndex = 0
                     Case "DC" : IconIndex = 1
                     Case "SS" : IconIndex = 2
@@ -1419,6 +1466,7 @@ UpdateTry:
                     Case "SMS" : IconIndex = 11
                     Case "PCE" : IconIndex = 12
                     Case "N64" : IconIndex = 13
+                    Case "FC_NA", "FC_DC", "FLY" : IconIndex = 14
                 End Select
             End If
 
@@ -1607,6 +1655,13 @@ UpdateTry:
             End If
         End If
 
+        If Not MainformRef.FlycastLauncher.FlycastProc Is Nothing Then
+            If Not MainformRef.FlycastLauncher.FlycastProc.HasExited Then
+                MainformRef.FlycastLauncher.FlycastProc.Kill()
+                MainformRef.FlycastLauncher.FlycastProc = Nothing
+            End If
+        End If
+
         If _canceledby Is Nothing Then
             Select Case Reason
                 Case "Window Closed" ' This is only fired automatically by the emulator when it closes, sometimes we need to ignore this
@@ -1775,9 +1830,7 @@ UpdateTry:
             Dim NameToSend As String = MainformRef.ConfigFile.Name
             If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " & " & MainformRef.Challenger.name
 
-            Dim GameNameAndRomName = "None"
-            If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
-            NetworkHandler.SendMessage("<," & NameToSend & ",," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & MainformRef.ConfigFile.Status)
+            NetworkHandler.SendMessage("<," & NameToSend & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Status)
         Else
             NotificationForm.ShowMessage("Slow down cowboy, wait at least 5 seconds between refreshing")
         End If
@@ -1830,8 +1883,13 @@ UpdateTry:
         End If
 
         ' Check if it's N64 if it is then don't allow challanges
-        If SelectedPlayer.game.Split("|")(1).StartsWith("N64") Then
+        If SelectedPlayer.game.StartsWith("N64") Then
             NotificationForm.ShowMessage("N64 Netplay coming soon.")
+            Exit Sub
+        End If
+
+        If SelectedPlayer.game.StartsWith("FC_") Or SelectedPlayer.game.StartsWith("FLY") Then
+            NotificationForm.ShowMessage("Flycast Spectating Coming Soon...")
             Exit Sub
         End If
 
@@ -1840,7 +1898,6 @@ UpdateTry:
         Dim c_ip As String = SelectedPlayer.ip
         Dim c_port As String = SelectedPlayer.port
         Dim c_gamerom As String = SelectedPlayer.game
-        If Not c_gamerom = "None" Then c_gamerom = c_gamerom.Split("|")(1) ' Game is not None, so get what rom it is.
         Dim c_status As String = SelectedPlayer.status
 
         Console.WriteLine("Challange: " & c_ip)
@@ -2658,8 +2715,6 @@ Public Class Configs
                 MainformRef.NetworkHandler.SendMessage("&")
             Else
                 If SendIam Then
-                    Dim GameNameAndRomName = "None"
-                    If Not Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0).ToString.Replace(",", ".") & "|" & MainformRef.ConfigFile.Game
 
                     Dim NameToSend As String = Name
                     If Not MainformRef.Challenger Is Nothing Then NameToSend = Name & " & " & MainformRef.Challenger.name
@@ -2668,7 +2723,7 @@ Public Class Configs
                     Dim t As Task = New Task(Async Sub()
                                                  ' 2 Second Delay just to avoid crashing some rare PCs that don't like to send data too quickly
                                                  Await Task.Delay(2000)
-                                                 MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & Rx.SecretSettings & "," & Port & "," & GameNameAndRomName & "," & Status)
+                                                 MainformRef.NetworkHandler.SendMessage("<," & NameToSend & "," & Rx.SecretSettings & "," & Port & "," & MainformRef.ConfigFile.Game & "," & Status)
                                              End Sub)
                     t.Start()
                 End If

@@ -122,7 +122,12 @@ Public Class frmChallenge
 
             End Try
 
-            Dim GameName As String = MainformRef.GamesList(_Challenger.game)(0)
+            Dim TempGameName = _Challenger.game
+            If TempGameName.StartsWith("FC_") Then
+                TempGameName = TempGameName.Remove(0, 3)
+            End If
+
+            Dim GameName As String = MainformRef.GamesList(TempGameName)(0)
             lbChallengeText.Text = _Challenger.name & " Has challenged you to " & vbCrLf & GameName
         Else
             _Challenger = Nothing

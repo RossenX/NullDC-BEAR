@@ -179,6 +179,7 @@ Partial Class frmMain
         Me.SystemIcons.Images.SetKeyName(11, "Icon_SMS.png")
         Me.SystemIcons.Images.SetKeyName(12, "icon_supergrafx.png")
         Me.SystemIcons.Images.SetKeyName(13, "icon_N64.png")
+        Me.SystemIcons.Images.SetKeyName(14, "icon_Flycast.png")
         '
         'btnSearch
         '

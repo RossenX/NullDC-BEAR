@@ -1,12 +1,57 @@
 ﻿Imports System.IO
+Imports System.Threading
 Imports NullDC_CvS2_BEAR.frmMain
 
 Public Class MFlycastLauncher
     Public FlycastProc As Process
+    Dim LoadRomThread As Thread
+    Public Region As String
 
+    Public Sub LoadGame()
+        If Not LoadRomThread Is Nothing Then If LoadRomThread.IsAlive Then LoadRomThread.Abort() ' Abort the old thread if it exists
+        LoadRomThread = New Thread(AddressOf LoadGame_Thread)
+        LoadRomThread.IsBackground = True
+        LoadRomThread.Start()
+
+    End Sub
+
+    Private Sub LoadGame_Thread()
+        Try
+            While MainformRef.FlycastLauncher.FlycastProc Is Nothing
+                Thread.Sleep(5)
+            End While
+
+            FlycastProc.WaitForInputIdle()
+            GameLoaded()
+
+        Catch ex As Exception
+            MsgBox("Rom Loader Failed, woops.")
+        End Try
+
+    End Sub
+
+    Private Sub GameLoaded()
+        ' If we're a host then send out call to my partner to join
+        Console.WriteLine("Game Launched")
+        If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
+
+            If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "dc" Then Rx.EEPROM = ""
+            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
+
+        End If
+
+    End Sub
     Public Sub LaunchFlycast(ByVal _romname As String, ByRef _region As String)
 
-        RemoveAllTheShit()
+        ' Tell difference between dreamcast and naomi
+        Region = _region
+        If _romname.ToLower.StartsWith("fc_") Then
+            _romname = _romname.Remove(0, 3)
+        End If
+
+        Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
+
+        'RemoveAllTheShit()
 
         Dim FlycastInfo As New ProcessStartInfo
         FlycastInfo.FileName = MainformRef.NullDCPath & "\flycast\flycast.exe"
@@ -48,7 +93,7 @@ Public Class MFlycastLauncher
         File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
 
         FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=yes "
-        FlycastInfo.Arguments += "-config config:rend.DumpTextures=no "
+
         ' FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no " Ok so this causes instant crash
         FlycastInfo.Arguments += "-config config:rend.UseMipmaps=no "
 
@@ -56,19 +101,19 @@ Public Class MFlycastLauncher
         If MainformRef.ConfigFile.Vsync = 1 Then Vsync = "yes"
         FlycastInfo.Arguments += "-config config:rend.vsync=" & Vsync & " "
 
-        Dim Region = 0
+        Dim __Region = 0
         Dim Broadcast = 0
         Select Case _region
             Case "JPN"
-                Region = 0
+                __Region = 0
             Case "USA"
-                Region = 1
+                __Region = 1
             Case "EUR"
-                Region = 2
+                __Region = 2
                 Broadcast = 1
         End Select
 
-        FlycastInfo.Arguments += "-config config:Dreamcast.Region=" & Region & " "
+        FlycastInfo.Arguments += "-config config:Dreamcast.Region=" & __Region & " "
         FlycastInfo.Arguments += "-config config:Dreamcast.Broadcast=" & Broadcast & " "
         FlycastInfo.Arguments += "-config config:Dreamcast.Language=1 "
         FlycastInfo.Arguments += "-config config:FastGDRomLoad=no "
@@ -87,6 +132,12 @@ Public Class MFlycastLauncher
 
         Else
 
+            ' Come stuff that should probably never be on while playing ONLINE
+            FlycastInfo.Arguments += "-config config:rend.CustomTextures=no "
+            FlycastInfo.Arguments += "-config config:rend.DumpTextures=no "
+
+
+
             ' This is Online lets check if we're the host
             FlycastInfo.Arguments += "-config network:GGPO=yes "
             FlycastInfo.Arguments += "-config network:GGPODelay=" & MainformRef.ConfigFile.Delay & " "
@@ -98,14 +149,14 @@ Public Class MFlycastLauncher
 
             If MainformRef.ConfigFile.Status = "Hosting" Then
                 FlycastInfo.Arguments += "-config network:ActAsServer=yes "
-                FlycastInfo.Arguments += "-config network:server= """ & MainformRef.Challenger.ip & ":" & MainformRef.ConfigFile.Port & """"
+                FlycastInfo.Arguments += "-config network:server=" & MainformRef.Challenger.ip & " "
 
                 ' Copy the VMU from NullDC to Flycast
                 FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
 
             Else
                 FlycastInfo.Arguments += "-config network:ActAsServer=no "
-                FlycastInfo.Arguments += "-config network:server= " & MainformRef.ConfigFile.Host & ":" & MainformRef.ConfigFile.Port & """"
+                FlycastInfo.Arguments += "-config network:server=" & MainformRef.ConfigFile.Host & " "
 
                 ' Copy the VMU from NullDC to Flycast
                 FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_client.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
@@ -114,8 +165,10 @@ Public Class MFlycastLauncher
 
         End If
 
-        If Rx.platform = "fc_dc" Then
+        If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "fc_dc" Then
             FlycastInfo.Arguments += """" & MainformRef.NullDCPath & "\dc\" & romdetails(1) & """"
+        ElseIf MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "fc_na" Then
+            FlycastInfo.Arguments += """" & MainformRef.NullDCPath & romdetails(1) & """"
         Else
             FlycastInfo.Arguments += """" & MainformRef.NullDCPath & romdetails(1) & """"
         End If
@@ -124,6 +177,7 @@ Public Class MFlycastLauncher
         FlycastProc.EnableRaisingEvents = True
 
         AddHandler FlycastProc.Exited, AddressOf FlycastProcExited
+        LoadGame()
 
     End Sub
 
@@ -141,6 +195,8 @@ Public Class MFlycastLauncher
     Private Sub FlycastProcExited()
 
         Rx.EEPROM = ""
+        Rx.VMU = Nothing
+        Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
 
         If Not MainformRef.IsClosing Then
             Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession

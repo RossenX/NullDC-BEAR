@@ -421,6 +421,7 @@
     <None Include="Resources\Controls.bear" />
     <None Include="Resources\default_nullDC_dreamcast.cfg" />
     <None Include="Resources\default_nullDC_naomi.cfg" />
+    <None Include="Resources\flycast.zip" />
     <None Include="Resources\mednafen-server.zip" />
     <None Include="Resources\mednafen.zip" />
     <None Include="Resources\Mupen64Plus.zip" />

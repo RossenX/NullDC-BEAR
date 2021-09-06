@@ -10,7 +10,6 @@ Module Rx
     Public EEPROM As String ' the EEPROM we're using saved here for people that wanna join as spectator
     Public VMU As String ' the p1 VMU
     Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
-    Public platform As String = ""
     Public MultiTap As Int16 = 0
     Public GaggedUsers As New Dictionary(Of String, String)
     Public MednafenConfigCache As String()
@@ -240,7 +239,11 @@ Module Rx
             CombinedVMU += VMUPieces(i)
         Next
 
-        File.WriteAllBytes(MainformRef.NullDCPath + "\dc\vmu_data_client.bin", Convert.FromBase64String(CombinedVMU))
+        Select Case MainformRef.ConfigFile.Game.Split("-")(0).ToLower
+            Case "fc_dc", "fly_dc" : File.WriteAllBytes(MainformRef.NullDCPath + "\flycast\data\vmu_save_A1_client.bin", Convert.FromBase64String(CombinedVMU))
+            Case "dc" : File.WriteAllBytes(MainformRef.NullDCPath + "\dc\vmu_data_client.bin", Convert.FromBase64String(CombinedVMU))
+        End Select
+
         Rx.VMU = CombinedVMU
         MainformRef.NetworkHandler.SendMessage("G", MainformRef.Challenger.ip)
 
@@ -271,7 +274,7 @@ Module Rx
         Dim PeripheralList = ""
 
         Select Case MainformRef.GamesList(MainformRef.ConfigFile.Game)(2)
-            Case "dc", "na"
+            Case "dc", "na", "fc_dc", "fc_na", "fly"
 
             Case "sg"
                 cfgEntry = "md"
@@ -317,8 +320,9 @@ Module Rx
 
         Dim cfgEntry = ""
 
-        Select Case MainformRef.GamesList(_game)(2)
-            Case "dc", "na"
+        Select Case _game.Split("-")(0).ToLower
+            Case "dc", "na", "fc_dc", "fc_na", "fly_na", "fly_dc"
+
             Case "sg"
                 cfgEntry = "md"
             Case "ss"

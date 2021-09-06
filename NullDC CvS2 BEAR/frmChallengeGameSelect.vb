@@ -24,6 +24,7 @@ Public Class frmChallengeGameSelect
     End Sub
 
     Public Sub btnLetsGo_Click(sender As Object, e As EventArgs) Handles btnLetsGo.Click
+
         If SelectedGame(0) = "" Then
             MainformRef.NotificationForm.ShowMessage("No Game Selected")
             Exit Sub
@@ -31,16 +32,22 @@ Public Class frmChallengeGameSelect
 
         Rx.MultiTap = cb_Multitap.SelectedIndex
         Console.WriteLine("Multitap=" & Rx.MultiTap)
-        Rx.platform = MainformRef.GamesList(SelectedGame(0))(2)
-        If (Rx.platform = "dc" Or Rx.platform = "na") And Not cb_nulldc_emulator.Text = "NullDC" Then
-            Rx.platform = "fc_" & Rx.platform
+        Dim platform = MainformRef.GamesList(SelectedGame(0))(2)
+
+        If (platform = "dc" Or platform = "na") And Not cb_nulldc_emulator.Text = "NullDC" Then
+            SelectedGame(0) = "FC_" & SelectedGame(0)
         End If
 
         MainformRef.MednafenLauncher.IsHost = True
 
         'File.ReadAllLines(MainformRef.NullDCPath & "\recent.glist")
         If File.Exists(MainformRef.NullDCPath & "\recent.glist") Then
-            Dim RecentGames = File.ReadAllText(MainformRef.NullDCPath & "\recent.glist").Replace(SelectedGame(0) & vbNewLine, "")
+            Dim tempgamename As String = SelectedGame(0)
+            If tempgamename.StartsWith("FC_") Then
+                tempgamename = tempgamename.Remove(0, 3)
+            End If
+
+            Dim RecentGames = File.ReadAllText(MainformRef.NullDCPath & "\recent.glist").Replace(tempgamename & vbNewLine, "")
             Dim RecentGamesCount = RecentGames.Split(vbNewLine)
 
             RecentGames = ""
@@ -50,10 +57,17 @@ Public Class frmChallengeGameSelect
                     RecentGames += RecentGamesCount(i) & vbNewLine
                 End If
             Next
-            RecentGames = SelectedGame(0) & vbNewLine & RecentGames
+
+            RecentGames = tempgamename & vbNewLine & RecentGames
             File.WriteAllText(MainformRef.NullDCPath & "\recent.glist", RecentGames)
         Else
-            File.WriteAllText(MainformRef.NullDCPath & "\recent.glist", SelectedGame(0) & vbNewLine)
+            Dim tempgamename As String = SelectedGame(0)
+            If tempgamename.StartsWith("FC_") Then
+                tempgamename = tempgamename.Remove(0, 3)
+            End If
+
+            File.WriteAllText(MainformRef.NullDCPath & "\recent.glist", tempgamename & vbNewLine)
+
         End If
 
         If tb_gamekey.Text.Trim.Length > 0 And MainformRef.ConfigFile.NoKey = 0 Then
@@ -72,8 +86,8 @@ Public Class frmChallengeGameSelect
 
     Public Sub StartOffline()
 
-        Select Case Rx.platform
-            Case "fc_na", "fc_dc" 'Flycast
+        Select Case MainformRef.ConfigFile.Game.Split("-")(0).ToLower
+            Case "fc_na", "fc_dc", "fly" 'Flycast
                 MainformRef.ConfigFile.Status = "Offline"
                 MainformRef.ConfigFile.Host = ""
             Case "na", "dc" 'NullDC
@@ -248,18 +262,29 @@ Public Class frmChallengeGameSelect
             If MainformRef.GamesList.ContainsKey(sender.SelectedItems(0).SubItems(1).Text) Then
 
                 Select Case MainformRef.GamesList(sender.SelectedItems(0).SubItems(1).Text)(2)
-                    Case "na", "dc"
+                    Case "na", "dc", "fc_na", "fc_dc"
                         tb_mednafen.Visible = False
 
                         If _Challenger Is Nothing Then
                             tb_nulldc.Visible = True
+                            cbRegion.Visible = True
+                            Label4.Visible = True
+                            cbDelay.Visible = True
+                            Label2.Visible = True
                         Else
-                            tb_nulldc.Visible = False
+                            tb_nulldc.Visible = True
+                            cbRegion.Visible = False
+                            Label4.Visible = False
+                            cbDelay.Visible = False
+                            Label2.Visible = False
                         End If
+
                     Case "n64"
                         tb_nulldc.Visible = False
                         tb_mednafen.Visible = False
-
+                    Case "fly_dc", "fly_na"
+                        tb_nulldc.Visible = False
+                        tb_mednafen.Visible = False
                     Case Else
                         tb_nulldc.Visible = False
                         tb_mednafen.Visible = True
@@ -360,6 +385,10 @@ Public Class frmChallengeGameSelect
                     TabName = "PCE"
                 Case "n64"
                     TabName = "N64"
+                Case "fly_na"
+                    TabName = "FC Naomi"
+                Case "fly_dc"
+                    TabName = "FC DC"
                 Case Else
                     TabName = "Unknown"
                     Console.WriteLine("No System?")

@@ -93,14 +93,20 @@ Public Class frmHostPanel
 
                 End Try
 
-                Select Case MainformRef.GamesList(MainformRef.ConfigFile.Game)(2)
-                    Case "na"
+                Dim tempGameName = MainformRef.ConfigFile.Game
+                If MainformRef.ConfigFile.Game.StartsWith("FC_") Then
+                    tempGameName = tempGameName.Remove(0, 3)
+                End If
+
+                Select Case MainformRef.GamesList(tempGameName)(2)
+                    Case "na", "fly_na"
                         tb_nulldc.Visible = True
                         tb_mednafen.Visible = False
 
-                    Case "dc"
+                    Case "dc", "fly_dc"
                         tb_nulldc.Visible = True
                         tb_mednafen.Visible = False
+
                         If Rx.VMU Is Nothing Then
                             Rx.VMU = Rx.ReadVMU()
                         End If
@@ -165,8 +171,16 @@ Public Class frmHostPanel
             Exit Sub
         End If
 
-        Select Case MainformRef.GamesList(MainformRef.ConfigFile.Game)(2)
+
+        Dim tempGameName = MainformRef.ConfigFile.Game.Split("-")(0).ToLower
+
+        Select Case tempGameName
             Case "na", "dc"
+                tb_nulldc.Visible = True
+                tb_mednafen.Visible = False
+                MainformRef.ConfigFile.Host = "127.0.0.1"
+                MainformRef.ConfigFile.Status = "Hosting"
+            Case "fc_na", "fc_dc", "fly_dc", "fly_na"
                 tb_nulldc.Visible = True
                 tb_mednafen.Visible = False
                 MainformRef.ConfigFile.Host = "127.0.0.1"

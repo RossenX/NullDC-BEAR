@@ -286,4 +286,7 @@
   <data name="Mupen64Plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Mupen64Plus.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="flycast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flycast.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

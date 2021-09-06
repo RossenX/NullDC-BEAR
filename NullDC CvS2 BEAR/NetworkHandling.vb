@@ -133,7 +133,7 @@ Public Class NetworkHandling
 
         ' Messages
         ' ? - WHO IS                    ?(0)
-        ' < - I AM                      <(0),<name>(1),<ip>(2),<port>(3),<gamename|gamerom>(4),<status>(5)
+        ' < - I AM                      <(0),<name>(1),<ip>(2),<port>(3),<gamename>(4),<status>(5)
         ' ! - Wanna Fite                !(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<host>(5),<peripheral>(6)
         ' ^ - Lets FITE                 ^(0),<name>(1),<ip>(2),<port>(3),<gamerom>(4),<peripheral>(5)
         ' > - Session Ending            >(0),<reason>(1)
@@ -152,10 +152,7 @@ Public Class NetworkHandling
                 Dim Status As String = MainformRef.ConfigFile.Status
                 Dim NameToSend As String = MainformRef.ConfigFile.Name
                 If Not MainformRef.Challenger Is Nothing Then NameToSend = NameToSend & " & " & MainformRef.Challenger.name
-                Dim GameNameAndRomName = "None"
-
-                If Not MainformRef.ConfigFile.Game = "None" Then GameNameAndRomName = MainformRef.GamesList(MainformRef.ConfigFile.Game)(0) & "|" & MainformRef.ConfigFile.Game
-                SendMessage("<," & NameToSend & "," & SecretSettings & "," & MainformRef.ConfigFile.Port & "," & GameNameAndRomName & "," & Status, senderip)
+                SendMessage("<," & NameToSend & "," & SecretSettings & "," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & Status, senderip)
 
             Case "<"
                 MainformRef.AddPlayerToList(New BEARPlayer(Split(1), senderip, Split(3), Split(4), Split(5),, Split(2)))
@@ -165,11 +162,12 @@ Public Class NetworkHandling
                 Console.WriteLine("<-Being Challenged->")
                 If MainformRef.IsNullDCRunning And (Not MainformRef.Challenger Is Nothing Or MainformRef.ConfigFile.Status = "Offline") Then
                     If MainformRef.ConfigFile.AllowSpectators = 0 Then SendMessage(">,NS", senderip) : Exit Sub
-                    If Rx.platform = "na" Then
-                        SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
-                    End If
 
-                ElseIf Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+                    If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "na" Then
+                            SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
+                        End If
+
+                    ElseIf Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
 
                     Select Case MainformRef.ConfigFile.Status
                         Case "Offline" : SendMessage(">,MDN", senderip) : Exit Sub
@@ -185,7 +183,12 @@ Public Class NetworkHandling
 
                 Else
 
-                    If Not MainformRef.GamesList.ContainsKey(Split(4)) Then SendMessage(">,NG", senderip) : Exit Sub
+                    Dim TempGameName = Split(4)
+                    If Split(4).StartsWith("FC_") Then
+                        TempGameName = TempGameName.Remove(0, 3)
+                    End If
+
+                    If Not MainformRef.GamesList.ContainsKey(TempGameName) Then SendMessage(">,NG", senderip) : Exit Sub
 
                     If MainformRef.ConfigFile.AwayStatus = "DND" Or MainformRef.ConfigFile.AwayStatus = "Hidden" Then
                         SendMessage(">,DND", senderip)
@@ -236,6 +239,8 @@ Public Class NetworkHandling
 
                 Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
                 Dim delay As Int16 = CInt(Split(5))
+
+                Dim PlatformTag = Split(4).Split("-")(0)
 
                 ' If we were not send an IP to join we join the senderip, otherwise we join w.e IP the host told us to
                 If Split(2) = "" Then

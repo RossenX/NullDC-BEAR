@@ -86,11 +86,9 @@ Public Class MednafenLauncher
                 End If
 
                 'MednafenInfo.Arguments += "-force_module "
-                ' GET THE CORE HERE TO FORCE IT TO USE THE CORRECT CORE
-                Console.WriteLine(Rx.platform)
 
                 Dim forcedModule = ""
-                Select Case Rx.platform
+                Select Case MainformRef.ConfigFile.Game.Split("-")(0).ToLower
                     Case "ss" : forcedModule = "ss"
                     Case "sg" : forcedModule = "md"
                     Case "sms" : forcedModule = "sms"
@@ -103,7 +101,7 @@ Public Class MednafenLauncher
                     Case "pce" : forcedModule = "pce_fast"
                 End Select
 
-                If Rx.platform = "snes" Then
+                If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "snes" Then
                     ' we always use Faust for online play, the other core is only kept so people can keep their save games in single player
                     If Not MainformRef.Challenger Is Nothing Or MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Public" Or MainformRef.ConfigFile.Status = "Client" Then
                         forcedModule = "snes_faust"

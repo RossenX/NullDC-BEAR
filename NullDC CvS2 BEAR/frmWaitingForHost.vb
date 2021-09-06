@@ -66,7 +66,12 @@
             lbWaitingForHost.Location = New Point(Me.Width / 2 - lbWaitingForHost.Width / 2)
 
             btnRetryVMU.Visible = False
-            If MainformRef.GamesList(MainformRef.Challenger.game)(2) = "dc" Then ' Only if it's a DC game ask for VMU
+            Dim SyncVMU = False
+            If MainformRef.Challenger.game.StartsWith("FC_DC") Or MainformRef.Challenger.game.StartsWith("FLY_DC") Or MainformRef.Challenger.game.StartsWith("DC") Then
+                SyncVMU = True
+            End If
+
+            If SyncVMU Then ' Only if it's a DC game ask for VMU
                 lbWaitingForHost.Text = "Syncing VMU..."
                 MainformRef.NetworkHandler.SendMessage("V", MainformRef.Challenger.ip)
                 VMUTimer.Interval = 5000

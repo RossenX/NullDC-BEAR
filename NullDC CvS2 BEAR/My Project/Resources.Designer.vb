@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -405,6 +405,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property flycast() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("flycast", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property icon_GBC() As System.Drawing.Bitmap
@@ -488,7 +498,8 @@ Namespace My.Resources
         '''snes_faust.input.sport1.multitap 1
         '''snes_faust.input.sport2.multitap 0
         '''ss.input.sport1.multitap 1
-        '''ss.input.sport2.multitap 0.
+        '''ss.input.sport2.multitap 0
+        '''nes.input.fcexp 4player.
         '''</summary>
         Friend ReadOnly Property Multitap_1() As String
             Get
@@ -507,7 +518,8 @@ Namespace My.Resources
         '''snes_faust.input.sport1.multitap 0
         '''snes_faust.input.sport2.multitap 1
         '''ss.input.sport1.multitap 0
-        '''ss.input.sport2.multitap 1.
+        '''ss.input.sport2.multitap 1
+        '''nes.input.fcexp 4player.
         '''</summary>
         Friend ReadOnly Property Multitap_2() As String
             Get
@@ -526,7 +538,8 @@ Namespace My.Resources
         '''snes_faust.input.sport1.multitap 1
         '''snes_faust.input.sport2.multitap 1
         '''ss.input.sport1.multitap 1
-        '''ss.input.sport2.multitap 1.
+        '''ss.input.sport2.multitap 1
+        '''nes.input.fcexp 4player.
         '''</summary>
         Friend ReadOnly Property Multitap_both() As String
             Get
@@ -545,7 +558,8 @@ Namespace My.Resources
         '''snes_faust.input.sport1.multitap 0
         '''snes_faust.input.sport2.multitap 0
         '''ss.input.sport1.multitap 0
-        '''ss.input.sport2.multitap 0.
+        '''ss.input.sport2.multitap 0
+        '''nes.input.fcexp none.
         '''</summary>
         Friend ReadOnly Property Multitap_None() As String
             Get
