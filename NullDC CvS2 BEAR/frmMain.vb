@@ -1240,6 +1240,7 @@ UpdateTry:
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+
         IsClosing = True
 
         SaveGaggedUsers()
@@ -1268,10 +1269,6 @@ UpdateTry:
             NullDCLauncher.NullDCproc.CloseMainWindow()
         End If
 
-        If FlycastLauncher.FlycastProc IsNot Nothing Then
-            FlycastLauncher.FlycastProc.CloseMainWindow()
-        End If
-
         If Not Challenger Is Nothing Then NetworkHandler.SendMessage(">, Q", Challenger.ip)
 
         If Not MednafenLauncher.MednafenServerInstance Is Nothing Then
@@ -1288,7 +1285,7 @@ UpdateTry:
         End If
 
         While MednafenLauncher.MednafenInstance IsNot Nothing Or IsNullDCRunning() Or FlycastLauncher.FlycastProc IsNot Nothing
-            Thread.Sleep(100)
+            Thread.Sleep(2000)
         End While
 
         ' Iono if i wanna have this to auto stop Radmin when BEAR closes

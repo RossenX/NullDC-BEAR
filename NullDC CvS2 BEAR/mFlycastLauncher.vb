@@ -61,6 +61,8 @@ Public Class MFlycastLauncher
 
         Dim ForceMono = "no"
         If MainformRef.ConfigFile.ForceMono = 1 Then ForceMono = "yes"
+        Dim PlayerID = 0
+        If MainformRef.ConfigFile.Status = "Client" Then PlayerID = 1
 
         'Some settings are locked some are not, these are not or maybe they're settings i know won't cause desync so i let people change
         Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg")
@@ -87,14 +89,16 @@ Public Class MFlycastLauncher
             If line.StartsWith("aica.AudioVolume = ") Then lines(linenumber) = "aica.AudioVolume = " & MainformRef.ConfigFile.EmulatorVolume
             If line.StartsWith("aica.ForceMono = ") Then lines(linenumber) = "aica.ForceMono = " & ForceMono
 
+            If line.StartsWith("maple_sdl_") Then lines(linenumber) = lines(linenumber).Split("=")(0).Trim & " = " & PlayerID
+
             linenumber += 1
         Next
 
         File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
 
-        FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=yes "
-
+        ' FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=no "
         ' FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no " Ok so this causes instant crash
+
         FlycastInfo.Arguments += "-config config:rend.UseMipmaps=no "
 
         Dim Vsync = "no"
