@@ -64,10 +64,16 @@ Public Class MFlycastLauncher
         Dim PlayerID = 0
         If MainformRef.ConfigFile.Status = "Client" Then PlayerID = 1
 
+        Dim Vsync = "no"
+        If MainformRef.ConfigFile.Vsync = 1 Then Vsync = "yes"
+        'FlycastInfo.Arguments += "-config config:rend.vsync=" & Vsync & " "
+
         'Some settings are locked some are not, these are not or maybe they're settings i know won't cause desync so i let people change
         Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg")
         Dim linenumber = 0
         For Each line As String In lines
+
+            If line.StartsWith("rend.vsync = ") Then lines(linenumber) = "rend.vsync = " & Vsync
 
             If line.StartsWith("device1 = ") Then lines(linenumber) = "device1 = 0"
             If line.StartsWith("device1.1 = ") Then lines(linenumber) = "device1.1 = 1"
@@ -100,10 +106,6 @@ Public Class MFlycastLauncher
         ' FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no " Ok so this causes instant crash
 
         FlycastInfo.Arguments += "-config config:rend.UseMipmaps=no "
-
-        Dim Vsync = "no"
-        If MainformRef.ConfigFile.Vsync = 1 Then Vsync = "yes"
-        FlycastInfo.Arguments += "-config config:rend.vsync=" & Vsync & " "
 
         Dim __Region = 0
         Dim Broadcast = 0
@@ -201,6 +203,11 @@ Public Class MFlycastLauncher
         Rx.EEPROM = ""
         Rx.VMU = Nothing
         Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
+
+        If Not MainformRef.Challenger Is Nothing And (MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Client") Then
+            Console.WriteLine("Telling challenger i quit")
+            MainformRef.NetworkHandler.SendMessage(">,E", MainformRef.Challenger.ip)
+        End If
 
         If Not MainformRef.IsClosing Then
             Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession

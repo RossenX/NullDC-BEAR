@@ -317,12 +317,17 @@ Public Class frmKeyMapperSDL
             MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
         Else
             MednafenControllerConfigLines = {""}
+
             For i = 0 To 1
                 If Not Joystick(i) = -1 Then
                     File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {GetFullMappingStringforIndex(Joystick(i)).Split("|")(1)})
                 End If
             Next
+            If Not File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
+                File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {})
+            End If
             MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
+
             MednafenChanged = True
         End If
 
@@ -771,6 +776,25 @@ Public Class frmKeyMapperSDL
                 MednafenControllerID(1) = line.Split("=")(1).Split("|")(1)
             End If
         Next
+
+        ' Flycast
+        For i = 0 To SDL_NumJoysticks()
+            For j = 0 To 1
+                ' Save the Mapping used for this joystick
+                If i = Joystick(j) Then
+                    GenerateFlycastMapping(SDL_JoystickNameForIndex(i), "arcade", ControlsConfigs, j)
+                    GenerateFlycastMapping(SDL_JoystickNameForIndex(i), "dc", ControlsConfigs, j)
+                End If
+
+                If j = 0 And i = 0 Then
+                    GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, j)
+                    GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, j)
+                End If
+
+            Next
+
+        Next
+
 
         ' Naomi Controls
         Dim linenumber = 0
@@ -1225,6 +1249,253 @@ Public Class frmKeyMapperSDL
         SDL_Quit() ' Turn off SDL make sure nothing changes before we write the controls to the configs.
     End Sub
 
+
+
+
+    Private Sub DoAnnoyingFlycastStuff(ByRef CompatStuff As String,
+                                       ByRef DreamcastStuff As String,
+                                       ByRef EmulatorStuff As String,
+                                       ByVal _ButtonAxisName As String,
+                                       ByVal _ButtonName As String,
+                                       ByVal _line As String,
+                                       ByVal _player As Int16,
+                                       ByVal _ControllerName As String,
+                                       ByVal isAxis As Boolean)
+
+        Dim _ButtonKey = _line.Split("=")(1).Split("|")(_player)
+
+        If _line.Split("=")(1).Split("|")(_player).StartsWith("k") Then ' Key
+            If _ControllerName = "Keyboard" Then ' Keyboard saves Keyboard keys, makes sense
+                DreamcastStuff += _ButtonName & " = " & KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) & vbNewLine
+            End If
+
+        ElseIf _ButtonKey.StartsWith("b") Then ' Button
+            If Not _ControllerName = "Keyboard" Then
+                If isAxis Then
+                    CompatStuff += _ButtonName & " = " & _ButtonKey.Remove(0, 1) & vbNewLine
+                Else
+                    DreamcastStuff += _ButtonName & " = " & _ButtonKey.Remove(0, 1) & vbNewLine
+                End If
+            End If
+
+        ElseIf _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' Axis
+            If Not _ControllerName = "Keyboard" Then
+                Dim FlycastMap = _ButtonAxisName & " = " & _ButtonKey.Remove(0, 1).Replace("+", "").Replace("-", "")
+                If isAxis Then
+                    DreamcastStuff += FlycastMap & vbNewLine
+                Else
+                    CompatStuff += FlycastMap & vbNewLine
+                End If
+                CompatStuff += FlycastMap.Split("=")(0).Trim & "_inverted = no" & vbNewLine ' Never need to invest shit
+            End If
+
+        End If
+
+
+    End Sub
+
+
+    Private Sub GenerateFlycastMapping(ByVal _ControllerName As String, ByVal _System As String, ByVal _Controls As String(), ByVal _player As Int16)
+
+        Dim FlycastDreamcastMappingFile As String = ""
+        Dim CompatStuff = "[compat]" & vbNewLine
+        Dim DreamcastStuff = "[dreamcast]" & vbNewLine
+        Dim EmulatorStuff = "[emulator]" & vbNewLine & "version = 2" & vbNewLine & "mapping_name = " & _ControllerName & vbNewLine
+
+        For Each _line In _Controls
+
+            If _line.StartsWith("Deadzone=") Then EmulatorStuff += "dead_zone = " & _line.Split("=")(1).Split("|")(_player) & vbNewLine
+
+            If _System = "arcade" Then
+
+                ' Direction mapping is weird, sometimes it's 2 buttons sometimes it's 2 axis watafak flycast
+
+                If _line.StartsWith("I_LEFT_KEY=") Or _line.StartsWith("I_RIGHT_KEY=") Then ' btn_dpad2_down
+                    ' ok this is elft or right
+                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
+                        If _line.StartsWith("I_LEFT_KEY=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_x", "axis_dpad1_x", _line, _player, _ControllerName, False)
+                        End If
+
+                    Else
+                        If _line.StartsWith("I_LEFT_KEY=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_left", "btn_dpad1_left", _line, _player, _ControllerName, False)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_right", "btn_dpad1_right", _line, _player, _ControllerName, False)
+                        End If
+
+                    End If
+
+                End If
+
+                If _line.StartsWith("I_UP_KEY=") Or _line.StartsWith("I_DOWN_KEY=") Then ' btn_dpad2_down
+                    ' ok this is elft or right
+                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
+                        If _line.StartsWith("I_UP_KEY=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_y", "axis_dpad1_y", _line, _player, _ControllerName, False)
+                        End If
+
+                    Else
+                        If _line.StartsWith("I_UP_KEY=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_up", "btn_dpad1_up", _line, _player, _ControllerName, False)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_down", "btn_dpad1_down", _line, _player, _ControllerName, False)
+                        End If
+
+                    End If
+
+                End If
+
+                If _line.StartsWith("I_BTN0_KEY=") Then ' btn_a 
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_a", "btn_a", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_BTN1_KEY=") Then ' btn_b
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_b", "btn_b", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_BTN2_KEY=") Then ' btn_x
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_x", "btn_x", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_BTN3_KEY=") Then ' btn_y
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_y", "btn_y", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_BTN4_KEY=") Then ' btn_dpad2_up
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad2_up", "btn_dpad2_up", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_BTN5_KEY=") Then ' btn_dpad2_down
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad2_down", "btn_dpad2_down", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_START_KEY=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_start", "btn_start", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_COIN_KEY=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_d", "btn_d", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_TEST_KEY_1=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_z", "btn_z", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_SERVICE_KEY_1=") Then ' btn_c
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_c", "btn_c", _line, _player, _ControllerName, False)
+                End If
+
+            Else
+                Dim ToStickornotToStick = "CONT_"
+                If Peripheral(_player) = 1 Then
+                    ToStickornotToStick = "STICK_"
+                End If
+
+                ' Direction mapping is weird, sometimes it's 2 buttons sometimes it's 2 axis watafak flycast
+
+                If _line.StartsWith(ToStickornotToStick & "DPAD_LEFT=") Or _line.StartsWith(ToStickornotToStick & "DPAD_RIGHT=") Then ' btn_dpad2_down
+                    ' ok this is elft or right
+                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
+                        If _line.StartsWith(ToStickornotToStick & "DPAD_LEFT=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_x", "axis_dpad1_x", _line, _player, _ControllerName, False)
+                        End If
+
+                    Else
+                        If _line.StartsWith(ToStickornotToStick & "DPAD_LEFT=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_left", "btn_dpad1_left", _line, _player, _ControllerName, False)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_right", "btn_dpad1_right", _line, _player, _ControllerName, False)
+                        End If
+
+                    End If
+
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "DPAD_UP=") Or _line.StartsWith(ToStickornotToStick & "DPAD_DOWN=") Then ' btn_dpad2_down
+                    ' ok this is elft or right
+                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
+                        If _line.StartsWith(ToStickornotToStick & "DPAD_UP=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_y", "axis_dpad1_y", _line, _player, _ControllerName, False)
+                        End If
+
+                    Else
+                        If _line.StartsWith(ToStickornotToStick & "DPAD_UP=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_up", "btn_dpad1_up", _line, _player, _ControllerName, False)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_down", "btn_dpad1_down", _line, _player, _ControllerName, False)
+                        End If
+
+                    End If
+
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "A=") Then ' btn_a 
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_a", "btn_a", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "B=") Then ' btn_b
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_b", "btn_b", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "X=") Then ' btn_x
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_x", "btn_x", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "Y=") Then ' btn_y
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_y", "btn_y", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "LSLIDER=") Then ' btn_dpad2_up
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_trigger_left", "btn_trigger_left", _line, _player, _ControllerName, True)
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "RSLIDER=") Then ' btn_dpad2_down
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_trigger_right", "btn_trigger_right", _line, _player, _ControllerName, True)
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "START=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_start", "btn_start", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "Z=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_z", "btn_z", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith(ToStickornotToStick & "C=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_c", "btn_c", _line, _player, _ControllerName, False)
+                End If
+
+            End If
+
+        Next
+
+        Dim isArcadeHuh = ""
+        If _System = "arcade" Then
+            isArcadeHuh = "_arcade"
+        End If
+
+        If _ControllerName = "Keyboard" Then
+            EmulatorStuff += "btn_menu = 43" & vbNewLine
+        End If
+
+        Dim FullMappingFile = ""
+        If Not CompatStuff.Trim = "[compat]" Then FullMappingFile += CompatStuff & vbNewLine
+        If Not DreamcastStuff.Trim = "[dreamcast]" Then FullMappingFile += DreamcastStuff & vbNewLine
+        If Not EmulatorStuff.Trim = "[emulator]" Then FullMappingFile += EmulatorStuff
+
+        File.WriteAllText(MainformRef.NullDCPath & "\flycast\mappings\SDL_" & _ControllerName & isArcadeHuh & ".cfg", FullMappingFile)
+
+        Console.WriteLine("Created Flycast Mapping file for {0} player {1}", _ControllerName, _player)
+
+    End Sub
+
+
+
+
+
+
+
     Private Sub frmKeyMapperSDL_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         ButtonClicked("k" & e.KeyCode, True)
 
@@ -1244,7 +1515,7 @@ Public Class frmKeyMapperSDL
     Private Sub ClickedBindButton(sender As keybindButton, e As EventArgs)
         'Console.WriteLine("Bind clicked " & sender.Name)
         If sender.KeyLocked Then
-            MsgBox("this bind Is locked for now")
+            MsgBox("this bind Is locked For now")
             Exit Sub
         End If
 
@@ -1419,12 +1690,12 @@ Public Class frmKeyMapperSDL
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSDL.Click
         If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
-            MsgBox("Cannot remap while emulation Is running.")
+            MsgBox("Cannot remap While emulation Is running.")
             Exit Sub
         End If
 
         If ControllerCB.SelectedIndex = 0 Then
-            MsgBox("Select a CONTROLLER from the list first. For Keyboard just click a button on the right, when it turns red press a key on your keyboard.")
+            MsgBox("Select a CONTROLLER from the list first. For Keyboard just click a button On the right, When it turns red press a key On your keyboard.")
         Else
             frmSDLMappingTool.ShowDialog(Me)
         End If
@@ -1437,7 +1708,7 @@ Public Class frmKeyMapperSDL
 
     Private Sub BtnResetAll_Click(sender As Object, e As EventArgs) Handles ResetAllToolStripMenuItem.Click
         If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
-            MsgBox("Cannot reset all while emulation Is running.")
+            MsgBox("Cannot reset all While emulation Is running.")
             Exit Sub
         End If
 
@@ -1484,12 +1755,12 @@ Public Class frmKeyMapperSDL
 
     Private Sub ImportMappingStringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportMappingStringToolStripMenuItem.Click
         If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Then
-            MsgBox("Cannot edit mapping string while emulation Is running.")
+            MsgBox("Cannot edit mapping String While emulation Is running.")
             Exit Sub
         End If
 
         If ControllerCB.SelectedIndex = 0 Then
-            MsgBox("Mapping Strings are for Controllers only, select one from the list below.")
+            MsgBox("Mapping Strings are For Controllers only, Select one from the list below.")
         Else
             frmMappingString.ShowDialog(Me)
         End If
@@ -1498,7 +1769,7 @@ Public Class frmKeyMapperSDL
 
     Private Sub ExportMappingStringToolStripMenuItem_Click(sender As Object, e As EventArgs)
         If Not My.Computer.Clipboard.ContainsText Then
-            MsgBox("Copy mapping text then try again.")
+            MsgBox("Copy mapping text Then Try again.")
             Exit Sub
         End If
 
