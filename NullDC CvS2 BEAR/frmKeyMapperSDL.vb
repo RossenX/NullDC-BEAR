@@ -1430,6 +1430,44 @@ Public Class frmKeyMapperSDL
 
                 End If
 
+                ' axis_x
+                If _line.StartsWith(ToStickornotToStick & "ANALOG_LEFT=") Or _line.StartsWith(ToStickornotToStick & "ANALOG_RIGHT=") Then ' btn_dpad2_down
+                    ' ok this is elft or right
+                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
+                        If _line.StartsWith(ToStickornotToStick & "ANALOG_LEFT=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_x", "axis_x", _line, _player, _ControllerName, True)
+                        End If
+
+                    Else
+                        If _line.StartsWith(ToStickornotToStick & "ANALOG_LEFT=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_left", "btn_analog_left", _line, _player, _ControllerName, True)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_right", "btn_analog_right", _line, _player, _ControllerName, True)
+                        End If
+
+                    End If
+
+                End If
+
+                ' axis_y
+                If _line.StartsWith(ToStickornotToStick & "ANALOG_UP=") Or _line.StartsWith(ToStickornotToStick & "ANALOG_DOWN=") Then ' btn_dpad2_down
+                    ' ok this is elft or right
+                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
+                        If _line.StartsWith(ToStickornotToStick & "ANALOG_UP=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_y", "axis_y", _line, _player, _ControllerName, True)
+                        End If
+
+                    Else
+                        If _line.StartsWith(ToStickornotToStick & "ANALOG_UP=") Then
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_up", "btn_analog_up", _line, _player, _ControllerName, True)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_down", "btn_analog_down", _line, _player, _ControllerName, True)
+                        End If
+
+                    End If
+
+                End If
+
                 If _line.StartsWith(ToStickornotToStick & "A=") Then ' btn_a 
                     DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_a", "btn_a", _line, _player, _ControllerName, False)
                 End If

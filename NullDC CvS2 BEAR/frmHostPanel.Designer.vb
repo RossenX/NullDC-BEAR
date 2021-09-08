@@ -63,7 +63,7 @@ Partial Class frmHostPanel
         Me.cbDelay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbDelay.ForeColor = System.Drawing.Color.FromArgb(CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer), CType(CType(5, Byte), Integer))
         Me.cbDelay.FormattingEnabled = True
-        Me.cbDelay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7"})
+        Me.cbDelay.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7"})
         Me.cbDelay.Location = New System.Drawing.Point(72, 3)
         Me.cbDelay.Name = "cbDelay"
         Me.cbDelay.Size = New System.Drawing.Size(102, 21)

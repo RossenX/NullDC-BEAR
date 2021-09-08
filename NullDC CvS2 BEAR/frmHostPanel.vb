@@ -152,11 +152,21 @@ Public Class frmHostPanel
                 Exit Sub
             End If
 
-            Dim DelayFrameRate = 32 '32.66
-            Dim delay = Math.Ceiling(ping.RoundtripTime / DelayFrameRate)
-            If delay < 2 Then delay = 2
-            cbDelay.Invoke(Sub() cbDelay.Text = delay)
-            lbPing.Invoke(Sub() lbPing.Text = "Ping: " & ping.RoundtripTime & " | Delay rating: " & (ping.RoundtripTime / DelayFrameRate).ToString("0.##"))
+            If MainformRef.ConfigFile.Game.StartsWith("FC_") Or MainformRef.ConfigFile.Game.StartsWith("FLY_") Then
+                Dim DelayFrameRate = 75
+                Dim delay = Math.Floor(ping.RoundtripTime / DelayFrameRate)
+                cbDelay.Invoke(Sub() cbDelay.Text = delay)
+                lbPing.Invoke(Sub() lbPing.Text = "Ping: " & ping.RoundtripTime & " | Delay rating: " & (ping.RoundtripTime / DelayFrameRate).ToString("0.##"))
+
+            Else
+                Dim DelayFrameRate = 32 '32.66
+                Dim delay = Math.Ceiling(ping.RoundtripTime / DelayFrameRate)
+                If delay < 2 Then delay = 2
+                cbDelay.Invoke(Sub() cbDelay.Text = delay)
+                lbPing.Invoke(Sub() lbPing.Text = "Ping: " & ping.RoundtripTime & " | Delay rating: " & (ping.RoundtripTime / DelayFrameRate).ToString("0.##"))
+            End If
+
+
 
         Catch ex As Exception
 

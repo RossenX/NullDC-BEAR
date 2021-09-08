@@ -21,7 +21,7 @@ Public Class MFlycastLauncher
                 Thread.Sleep(5)
             End While
 
-            FlycastProc.WaitForInputIdle()
+            'FlycastProc.WaitForInputIdle()
             GameLoaded()
 
         Catch ex As Exception
@@ -119,6 +119,7 @@ Public Class MFlycastLauncher
                 Broadcast = 1
         End Select
 
+        FlycastInfo.Arguments += "-config config:Dynarec.idleskip=yes "
         FlycastInfo.Arguments += "-config config:Dreamcast.Region=" & __Region & " "
         FlycastInfo.Arguments += "-config config:Dreamcast.Broadcast=" & Broadcast & " "
         FlycastInfo.Arguments += "-config config:Dreamcast.Language=1 "
@@ -149,8 +150,8 @@ Public Class MFlycastLauncher
             FlycastInfo.Arguments += "-config network:GGPODelay=" & MainformRef.ConfigFile.Delay & " "
 
             ' Yeah no automatic states when playing online cuz who knows whatafak those states are
-            FlycastInfo.Arguments += "-config config:Dreamcast.AutoLoadState=no "
-            FlycastInfo.Arguments += "-config config:Dreamcast.AutoSaveState=no "
+            ' FlycastInfo.Arguments += "-config config:Dreamcast.AutoLoadState=no "
+            ' FlycastInfo.Arguments += "-config config:Dreamcast.AutoSaveState=no "
 
 
             If MainformRef.ConfigFile.Status = "Hosting" Then
