@@ -85,7 +85,8 @@ Public Class NullDCLauncher
             GameLoaded()
 
         Catch ex As Exception
-            MsgBox("Rom Loader Failed, woops.")
+            MsgBox("Romloader error: " & ex.InnerException.Message)
+
         End Try
 
     End Sub

@@ -21,11 +21,12 @@ Public Class MFlycastLauncher
                 Thread.Sleep(5)
             End While
 
-            'FlycastProc.WaitForInputIdle()
+            FlycastProc.WaitForInputIdle()
             GameLoaded()
 
         Catch ex As Exception
-            MsgBox("Rom Loader Failed, woops.")
+            MsgBox("Romloader error: " & ex.InnerException.Message)
+
         End Try
 
     End Sub
@@ -33,7 +34,7 @@ Public Class MFlycastLauncher
     Private Sub GameLoaded()
         ' If we're a host then send out call to my partner to join
         Console.WriteLine("Game Launched")
-        If MainformRef.ConfigFile.Status = "Hosting" And Not MainformRef.Challenger Is Nothing Then
+        If MainformRef.ConfigFile.Status = "Hosting" And MainformRef.Challenger IsNot Nothing Then
 
             If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "dc" Then Rx.EEPROM = ""
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)

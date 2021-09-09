@@ -230,7 +230,7 @@ Public Class NetworkHandling
 
             Case "$"
 
-                If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then ' We were told to join a game but we're already in a game
+                If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Or MainformRef.FlycastLauncher.FlycastProc IsNot Nothing Then ' We were told to join a game but we're already in a game
                     Exit Sub
                 End If
 
@@ -287,7 +287,7 @@ Public Class NetworkHandling
 
                 Else
                     If senderip = MainformRef.Challenger.ip Then
-                        If MainformRef.IsNullDCRunning Then
+                        If MainformRef.IsNullDCRunning Or MainformRef.FlycastLauncher.FlycastProc IsNot Nothing Then
                             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom,", MainformRef.Challenger.ip)
 
                         End If

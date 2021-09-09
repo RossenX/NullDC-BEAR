@@ -1881,7 +1881,7 @@ UpdateTry:
 
         ' Check if it's N64 if it is then don't allow challanges
         If SelectedPlayer.game.StartsWith("N64") Then
-            NotificationForm.ShowMessage("N64 Netplay coming soon.")
+            NotificationForm.ShowMessage("N64 Netplay coming soon...")
             Exit Sub
         End If
 
