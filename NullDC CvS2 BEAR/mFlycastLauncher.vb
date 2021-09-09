@@ -241,6 +241,8 @@ Public Class MFlycastLauncher
 
     Private Sub FlycastProcExited()
 
+        FlycastProc = Nothing
+
         Rx.EEPROM = ""
         Rx.VMU = Nothing
         Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
@@ -254,8 +256,6 @@ Public Class MFlycastLauncher
             Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
             MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
         End If
-
-        FlycastProc = Nothing
 
     End Sub
 

@@ -558,7 +558,7 @@ UpdateTry:
                             Dim Compare = ExistingFileLastWriteTime.CompareTo(entry.LastWriteTime.DateTime)
                             If Compare >= 0 Then
                                 ' DLL and EXE always get overwritten to make sure they are up to date.
-                                If Not entry.Name.EndsWith(".dll") And Not entry.Name.EndsWith(".exe") Then
+                                If Not entry.Name.EndsWith(".dll") And Not entry.Name.EndsWith(".exe") And Not entry.Name.EndsWith(".state-ggpo") Then
                                     Console.WriteLine("Skipped: " & entry.FullName)
                                     Continue For
                                 End If
