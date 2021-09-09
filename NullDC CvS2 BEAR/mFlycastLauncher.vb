@@ -98,7 +98,17 @@ Public Class MFlycastLauncher
 
             If line.StartsWith("maple_sdl_") Then lines(linenumber) = lines(linenumber).Split("=")(0).Trim & " = " & PlayerID
 
+            If line.StartsWith("Dreamcast.AutoLoadState = ") Then lines(linenumber) = "Dreamcast.AutoLoadState = yes"
+            'Dreamcast.SavestateSlot = 0
+            If line.StartsWith("Dreamcast.SavestateSlot = ") Then lines(linenumber) = "Dreamcast.SavestateSlot = 0"
+
+            If MainformRef.ConfigFile.Status = "Offline" Then
+                If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = no"
+            Else
+                If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = yes"
+            End If
             linenumber += 1
+
         Next
 
         File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
@@ -128,7 +138,6 @@ Public Class MFlycastLauncher
 
         ' Enable GGPO if it's online
         If MainformRef.ConfigFile.Status = "Offline" Then
-            FlycastInfo.Arguments += "-config network:GGPO=no "
             FlycastInfo.Arguments += "-config network:ActAsServer=no "
             ' FlycastInfo.Arguments += "-config network:DNS= "
             FlycastInfo.Arguments += "-config network:EmulateBBA=no "
@@ -143,8 +152,6 @@ Public Class MFlycastLauncher
             ' Come stuff that should probably never be on while playing ONLINE
             FlycastInfo.Arguments += "-config config:rend.CustomTextures=no "
             FlycastInfo.Arguments += "-config config:rend.DumpTextures=no "
-
-
 
             ' This is Online lets check if we're the host
             FlycastInfo.Arguments += "-config network:GGPO=yes "

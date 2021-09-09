@@ -1463,7 +1463,7 @@ UpdateTry:
                     Case "SMS" : IconIndex = 11
                     Case "PCE" : IconIndex = 12
                     Case "N64" : IconIndex = 13
-                    Case "FC_NA", "FC_DC", "FLY" : IconIndex = 14
+                    Case "FC_NA", "FC_DC", "FLY", "FLY_DC", "FLY_NA" : IconIndex = 14
                 End Select
             End If
 
