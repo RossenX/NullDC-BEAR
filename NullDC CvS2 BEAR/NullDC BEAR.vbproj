@@ -235,6 +235,12 @@
     <Compile Include="frmMultiDiskCreator.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMvC2Ratio.Designer.vb">
+      <DependentUpon>frmMvC2Ratio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMvC2Ratio.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewProfile.Designer.vb">
       <DependentUpon>frmNewProfile.vb</DependentUpon>
     </Compile>
@@ -369,6 +375,9 @@
     <EmbeddedResource Include="frmMultiDiskCreator.resx">
       <DependentUpon>frmMultiDiskCreator.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMvC2Ratio.resx">
+      <DependentUpon>frmMvC2Ratio.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmNewProfile.resx">
       <DependentUpon>frmNewProfile.vb</DependentUpon>
     </EmbeddedResource>
@@ -449,6 +458,8 @@
     <None Include="Resources\Clippy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\MvC2Ratio.png" />
+    <None Include="Resources\MvC2RatioList.bmp" />
     <None Include="Resources\System Icons\NullDCBEAR-Title.png" />
     <None Include="Resources\MessagePop.wav" />
     <None Include="Resources\Controller Types\BEARJamma_Dreamcast.png" />

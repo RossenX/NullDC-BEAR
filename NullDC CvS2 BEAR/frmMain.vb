@@ -2295,6 +2295,12 @@ UpdateTry:
         frmWaitingForHost.Show()
 
     End Sub
+
+    Private Sub MVC2TierListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MVC2TierListToolStripMenuItem.Click
+        frmMvC2Ratio.Show()
+
+    End Sub
+
 End Class
 
 Public Class BEARPlayer

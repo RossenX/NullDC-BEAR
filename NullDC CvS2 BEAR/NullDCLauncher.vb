@@ -470,7 +470,7 @@ Public Class NullDCLauncher
 
             If line.StartsWith("LimitFPS=") Then lines(linenumber) = "LimitFPS=1" ' & FPSLimiter
 
-            If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & CInt((MainformRef.ConfigFile.EmulatorVolume / 10) + ((MainformRef.ConfigFile.EmulatorVolume - (MainformRef.ConfigFile.EmulatorVolume / 10)) * (MainformRef.ConfigFile.EmulatorVolume / 100)))
+            If line.StartsWith("Volume=") Then lines(linenumber) = "Volume=" & MainformRef.ConfigFile.EmulatorVolume
 
             ' [nullExtDev]
             If line.StartsWith("mode=") Then lines(linenumber) = "mode=0"

@@ -163,11 +163,13 @@ Public Class NetworkHandling
                 If MainformRef.IsNullDCRunning And (Not MainformRef.Challenger Is Nothing Or MainformRef.ConfigFile.Status = "Offline") Then
                     If MainformRef.ConfigFile.AllowSpectators = 0 Then SendMessage(">,NS", senderip) : Exit Sub
 
-                    If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "na" Then
-                            SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
-                        End If
+                    If MainformRef.ConfigFile.Game.StartsWith("NA") Or
+                         MainformRef.ConfigFile.Game.StartsWith("FC_NA") Or
+                          MainformRef.ConfigFile.Game.StartsWith("FLY_NA") Then
+                        SendMessage("@," & MainformRef.NullDCLauncher.P1Name & "," & MainformRef.NullDCLauncher.P2Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.NullDCLauncher.P1Peripheral & "," & MainformRef.NullDCLauncher.P2Peripheral & ",eeprom," & Rx.EEPROM, senderip)
+                    End If
 
-                    ElseIf Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+                ElseIf Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
 
                     Select Case MainformRef.ConfigFile.Status
                         Case "Offline" : SendMessage(">,MDN", senderip) : Exit Sub

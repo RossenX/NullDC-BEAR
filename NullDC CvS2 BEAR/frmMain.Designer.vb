@@ -476,7 +476,7 @@ Partial Class frmMain
         'MVC2TierListToolStripMenuItem
         '
         Me.MVC2TierListToolStripMenuItem.Name = "MVC2TierListToolStripMenuItem"
-        Me.MVC2TierListToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.MVC2TierListToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.MVC2TierListToolStripMenuItem.Text = "MVC2 Ratio List"
         '
         'ForceOpenPanelToolStripMenuItem

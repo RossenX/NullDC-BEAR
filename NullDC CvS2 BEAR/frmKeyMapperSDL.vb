@@ -1238,10 +1238,10 @@ Public Class frmKeyMapperSDL
         End Try
 
 
-        ' Check if nullDC is running to hotload the settings
+        ' Check if nullDC is running to hotload the settings this is getting to annoying to keep up, i'ma just disable it for now
         If MainformRef.IsNullDCRunning Then
-            If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "na" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
-            If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "dc" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 144, 0) ' 180 144
+            ' If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "na" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
+            ' If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "dc" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 180, 0) ' 180 144 141
 
         End If
 
@@ -1379,11 +1379,11 @@ Public Class frmKeyMapperSDL
                 End If
 
                 If _line.StartsWith("I_TEST_KEY_1=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_z", "btn_z", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_c", "btn_c", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_SERVICE_KEY_1=") Then ' btn_c
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_c", "btn_c", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_z", "btn_z", _line, _player, _ControllerName, False)
                 End If
 
             Else

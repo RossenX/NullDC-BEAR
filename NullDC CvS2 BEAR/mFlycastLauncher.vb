@@ -21,7 +21,7 @@ Public Class MFlycastLauncher
                 Thread.Sleep(5)
             End While
 
-            FlycastProc.WaitForInputIdle()
+            'FlycastProc.WaitForInputIdle()
             GameLoaded()
 
         Catch ex As Exception
@@ -35,13 +35,13 @@ Public Class MFlycastLauncher
         ' If we're a host then send out call to my partner to join
         Console.WriteLine("Game Launched")
         If MainformRef.ConfigFile.Status = "Hosting" And MainformRef.Challenger IsNot Nothing Then
-
-            If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "dc" Then Rx.EEPROM = ""
+            ' eeprom causing issues, so not going to sync them for now.
             MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
 
         End If
 
     End Sub
+
     Public Sub LaunchFlycast(ByVal _romname As String, ByRef _region As String)
 
         ' Tell difference between dreamcast and naomi
@@ -52,7 +52,7 @@ Public Class MFlycastLauncher
 
         Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
 
-        'RemoveAllTheShit()
+        RemoveAllTheShit()
 
         Dim FlycastInfo As New ProcessStartInfo
         FlycastInfo.FileName = MainformRef.NullDCPath & "\flycast\flycast.exe"
@@ -197,6 +197,38 @@ Public Class MFlycastLauncher
             End If
 
         Next
+
+        Dim _romname = MainformRef.ConfigFile.Game
+        If _romname.ToLower.StartsWith("fc_") Then
+            _romname = _romname.Remove(0, 3)
+        End If
+
+        Dim romdetails = MainformRef.GamesList(_romname)
+
+        Dim FullRomPath = ""
+        If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "fc_dc" Then
+            FullRomPath = MainformRef.NullDCPath & "\dc\" & romdetails(1)
+        ElseIf MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "fc_na" Then
+            FullRomPath = MainformRef.NullDCPath & romdetails(1)
+        Else
+            FullRomPath = MainformRef.NullDCPath & romdetails(1)
+        End If
+
+        If File.Exists(FullRomPath & ".nvmem") Then
+            File.Delete(FullRomPath & ".nvmem")
+        End If
+
+        If File.Exists(FullRomPath & ".nvmem2") Then
+            File.Delete(FullRomPath & ".nvmem2")
+        End If
+
+        If File.Exists(FullRomPath & ".eeprom_host") Then
+            File.Delete(FullRomPath & ".eeprom_host")
+        End If
+
+        If File.Exists(FullRomPath & ".eeprom_client") Then
+            File.Delete(FullRomPath & ".eeprom_client")
+        End If
 
     End Sub
 
