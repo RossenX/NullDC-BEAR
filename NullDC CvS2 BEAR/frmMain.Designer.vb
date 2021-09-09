@@ -66,6 +66,7 @@ Partial Class frmMain
         Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtrasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MVC2TierListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFlycastDataFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForceOpenPanelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaitingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -468,7 +469,7 @@ Partial Class frmMain
         '
         'ExtrasToolStripMenuItem
         '
-        Me.ExtrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MVC2TierListToolStripMenuItem})
+        Me.ExtrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MVC2TierListToolStripMenuItem, Me.OpenFlycastDataFolderToolStripMenuItem})
         Me.ExtrasToolStripMenuItem.Name = "ExtrasToolStripMenuItem"
         Me.ExtrasToolStripMenuItem.Size = New System.Drawing.Size(50, 29)
         Me.ExtrasToolStripMenuItem.Text = "Extras"
@@ -476,8 +477,14 @@ Partial Class frmMain
         'MVC2TierListToolStripMenuItem
         '
         Me.MVC2TierListToolStripMenuItem.Name = "MVC2TierListToolStripMenuItem"
-        Me.MVC2TierListToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.MVC2TierListToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.MVC2TierListToolStripMenuItem.Text = "MVC2 Ratio List"
+        '
+        'OpenFlycastDataFolderToolStripMenuItem
+        '
+        Me.OpenFlycastDataFolderToolStripMenuItem.Name = "OpenFlycastDataFolderToolStripMenuItem"
+        Me.OpenFlycastDataFolderToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
+        Me.OpenFlycastDataFolderToolStripMenuItem.Text = "Open Flycast Data Folder"
         '
         'ForceOpenPanelToolStripMenuItem
         '
@@ -579,4 +586,5 @@ Partial Class frmMain
     Friend WithEvents WaitingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExtrasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MVC2TierListToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenFlycastDataFolderToolStripMenuItem As ToolStripMenuItem
 End Class

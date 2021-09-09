@@ -2301,6 +2301,11 @@ UpdateTry:
 
     End Sub
 
+    Private Sub OpenFlycastDataFolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenFlycastDataFolderToolStripMenuItem.Click
+        Process.Start(NullDCPath & "\flycast\data")
+
+    End Sub
+
 End Class
 
 Public Class BEARPlayer
