@@ -29,7 +29,7 @@ Partial Class frmMvC2Ratio
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(108, Byte), Integer), CType(CType(238, Byte), Integer))
-        Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.MvC2Ratio
+        Me.BackgroundImage = Global.NullDC_CvS2_BEAR.My.Resources.Resources.mvc2_r_list
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ClientSize = New System.Drawing.Size(1107, 622)
         Me.DoubleBuffered = True

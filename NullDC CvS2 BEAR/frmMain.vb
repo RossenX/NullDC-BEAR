@@ -6,7 +6,7 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = True
+    Public IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient

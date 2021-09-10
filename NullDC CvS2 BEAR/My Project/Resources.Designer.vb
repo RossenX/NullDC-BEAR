@@ -580,9 +580,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property MvC2Ratio() As System.Drawing.Bitmap
+        Friend ReadOnly Property mvc2_r_list() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("MvC2Ratio", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("mvc2_r_list", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

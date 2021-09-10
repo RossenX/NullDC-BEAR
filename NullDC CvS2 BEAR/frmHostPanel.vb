@@ -153,8 +153,8 @@ Public Class frmHostPanel
             End If
 
             If MainformRef.ConfigFile.Game.StartsWith("FC_") Or MainformRef.ConfigFile.Game.StartsWith("FLY_") Then
-                Dim DelayFrameRate = 75
-                Dim delay = Math.Floor(ping.RoundtripTime / DelayFrameRate)
+                Dim DelayFrameRate = 64
+                Dim delay = Math.Floor(ping.RoundtripTime / DelayFrameRate) + 1
                 cbDelay.Invoke(Sub() cbDelay.Text = delay)
                 lbPing.Invoke(Sub() lbPing.Text = "Ping: " & ping.RoundtripTime & " | Delay rating: " & (ping.RoundtripTime / DelayFrameRate).ToString("0.##"))
 
