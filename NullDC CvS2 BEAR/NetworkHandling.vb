@@ -234,21 +234,26 @@ Public Class NetworkHandling
 
                 If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Or MainformRef.FlycastLauncher.FlycastProc IsNot Nothing Then ' We were told to join a game but we're already in a game
                     Exit Sub
+
                 End If
 
                 Console.WriteLine("<-Host Started->" & message)
                 Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
 
-                Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
-                Dim delay As Int16 = CInt(Split(5))
+                If message.Split(New String() {",eeprom,"}, StringSplitOptions.None).Count > 1 Then
+                    Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
+                End If
 
+                Dim delay As Int16 = CInt(Split(5))
                 Dim PlatformTag = Split(4).Split("-")(0)
 
                 ' If we were not send an IP to join we join the senderip, otherwise we join w.e IP the host told us to
                 If Split(2) = "" Then
                     MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+
                 Else
                     MainformRef.Invoke(INVOKATION, {Split(1), Split(2), Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})
+
                 End If
 
             Case "@"

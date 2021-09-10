@@ -743,7 +743,6 @@ Public Class frmKeyMapperSDL
             If SDL_GameControllerGetAttached(SDL_GameControllerFromInstanceID(i)) = SDL_bool.SDL_TRUE Then
                 Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
                 SDL_GameControllerClose(SDL_GameControllerFromInstanceID(i))
-
             End If
         Next
 
@@ -778,23 +777,20 @@ Public Class frmKeyMapperSDL
         Next
 
         ' Flycast
-        For i = 0 To SDL_NumJoysticks()
-            For j = 0 To 1
-                ' Save the Mapping used for this joystick
-                If i = Joystick(j) Then
-                    GenerateFlycastMapping(SDL_JoystickNameForIndex(i), "arcade", ControlsConfigs, j)
-                    GenerateFlycastMapping(SDL_JoystickNameForIndex(i), "dc", ControlsConfigs, j)
+        For _playerID = 0 To 1 ' p1 p2
+            For _JoystickID = 0 To SDL_NumJoysticks() - 1
+                If Joystick(_playerID) = _JoystickID Then
+                    GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "arcade", ControlsConfigs, _playerID)
+                    GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "dc", ControlsConfigs, _playerID)
                 End If
-
-                If j = 0 And i = 0 Then
-                    GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, j)
-                    GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, j)
-                End If
-
             Next
 
-        Next
+            If _playerID = 0 Then
+                GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, 0)
+                GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, 0)
+            End If
 
+        Next
 
         ' Naomi Controls
         Dim linenumber = 0

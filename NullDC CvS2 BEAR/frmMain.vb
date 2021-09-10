@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.93" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.93a" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -1337,40 +1337,55 @@ UpdateTry:
         If NeedaVMU And Rx.VMU Is Nothing Then
             Console.WriteLine("Host started before VMU Data was Recieved, wait")
             Exit Sub
+
         End If
 
         Select Case Platform
             Case "na", "fc_na", "fly_na"
+
                 Dim TempName = _game
                 If _game.StartsWith("FC_") Then
                     TempName = _game.Remove(0, 3)
                 End If
 
-                Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(TempName)(1))
+                If _eeprom.Length > 0 Then
+                    Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(TempName)(1))
+                Else
+                    Rx.WriteEEPROM("", MainformRef.NullDCPath & MainformRef.GamesList(TempName)(1))
+
+                End If
+
                 ConfigFile.Status = "Client"
                 ConfigFile.Port = _port
                 ConfigFile.Delay = _delay
+
             Case "dc", "fc_dc", "fly_dc"
                 ConfigFile.Status = "Client"
                 ConfigFile.Port = _port
                 ConfigFile.Delay = _delay
+
             Case Else ' For Mednafen the 'region' setting is used as an indicator if it's public server or not the eeprom setting is used as the gamekey in mednafen
                 Select Case _delay
                     Case 0
                         ConfigFile.Status = "Client"
                         Rx.EEPROM = _eeprom
+
                     Case 1
                         ConfigFile.Status = "Public"
                         Rx.EEPROM = _eeprom
+
                     Case 2
                         ConfigFile.Status = "Private"
                         Rx.EEPROM = _eeprom
+
                     Case Else
+
                 End Select
                 DeleteMednafenClientFiles()
                 MainformRef.MednafenLauncher.IsHost = False
 
                 Rx.SetCurrentPeripheralsFromString(_peripheral, _game)
+
         End Select
 
         If WaitingForm.Visible Then WaitingForm.Visible = False

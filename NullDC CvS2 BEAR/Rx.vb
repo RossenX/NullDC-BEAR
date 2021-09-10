@@ -127,6 +127,7 @@ Module Rx
 
     ' Write the client EEPROM, only used to sync, has no actual use outside of sync
     Public Sub WriteEEPROM(ByVal EEPROMString As String, ByVal _romfullpath As String)
+        EEPROMString = EEPROMString.Trim
         Dim EEPROMPath As String = _romfullpath & ".eeprom_client"
 
         If Not EEPROMString = "" Then
@@ -136,6 +137,11 @@ Module Rx
                 EEPROMasByte(i) = Convert.ToByte(EEPROMString.Substring(i * 2, 2), 16)
             Next
             File.WriteAllBytes(EEPROMPath, EEPROMasByte)
+
+        Else
+            ' eeprom that was sent was blank, so delete it.
+            If File.Exists(EEPROMPath) Then File.Delete(EEPROMPath)
+
         End If
 
     End Sub
@@ -322,7 +328,7 @@ Module Rx
 
         Select Case _game.Split("-")(0).ToLower
             Case "dc", "na", "fc_dc", "fc_na", "fly_na", "fly_dc"
-
+                Return
             Case "sg"
                 cfgEntry = "md"
             Case "ss"

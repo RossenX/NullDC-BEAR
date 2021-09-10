@@ -157,6 +157,9 @@ Public Class frmSetup
         ' Mednafen Server
         processStartInfo.Arguments = processStartInfo.Arguments &
                                      String.Format(" & netsh advfirewall firewall delete rule name=""Mednafen Server"" program=""{0}"" & netsh advfirewall firewall delete rule name=""mednafen-server.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""Mednafen Server"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""Mednafen Server"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\mednafen\server\mednafen-server.exe")
+        ' Flycast
+        processStartInfo.Arguments = processStartInfo.Arguments &
+                                     String.Format(" & netsh advfirewall firewall delete rule name=""Flycast"" program=""{0}"" & netsh advfirewall firewall delete rule name=""Flycast.exe"" program=""{0}"" & netsh advfirewall firewall add rule name=""Flycast"" dir=in action=allow program=""{0}"" enable=yes & netsh advfirewall firewall add rule name=""Flycast"" dir=out action=allow program=""{0}"" enable=yes", Application.StartupPath & "\flycast\flycast.exe")
         Dim Firewall = Process.Start(processStartInfo)
 
     End Sub

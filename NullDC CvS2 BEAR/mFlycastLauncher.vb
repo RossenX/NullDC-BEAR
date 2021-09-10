@@ -21,7 +21,7 @@ Public Class MFlycastLauncher
                 Thread.Sleep(5)
             End While
 
-            'FlycastProc.WaitForInputIdle()
+            FlycastProc.WaitForInputIdle()
             GameLoaded()
 
         Catch ex As Exception
@@ -36,7 +36,7 @@ Public Class MFlycastLauncher
         Console.WriteLine("Game Launched")
         If MainformRef.ConfigFile.Status = "Hosting" And MainformRef.Challenger IsNot Nothing Then
             ' eeprom causing issues, so not going to sync them for now.
-            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
+            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom,", MainformRef.Challenger.ip)
 
         End If
 
@@ -49,8 +49,6 @@ Public Class MFlycastLauncher
         If _romname.ToLower.StartsWith("fc_") Then
             _romname = _romname.Remove(0, 3)
         End If
-
-        Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
 
         RemoveAllTheShit()
 
@@ -156,6 +154,9 @@ Public Class MFlycastLauncher
             ' This is Online lets check if we're the host
             FlycastInfo.Arguments += "-config network:GGPO=yes "
             FlycastInfo.Arguments += "-config network:GGPODelay=" & MainformRef.ConfigFile.Delay & " "
+
+            ' This has to be forced of it'll cause desyncs
+            FlycastInfo.Arguments += "-config config:rend.LimitFPS=yes "
 
             ' Yeah no automatic states when playing online cuz who knows whatafak those states are
             ' FlycastInfo.Arguments += "-config config:Dreamcast.AutoLoadState=no "
