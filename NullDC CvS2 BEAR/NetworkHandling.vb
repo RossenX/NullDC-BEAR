@@ -242,6 +242,8 @@ Public Class NetworkHandling
 
                 If message.Split(New String() {",eeprom,"}, StringSplitOptions.None).Count > 1 Then
                     Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
+                Else
+                    Rx.EEPROM = ""
                 End If
 
                 Dim delay As Int16 = CInt(Split(5))

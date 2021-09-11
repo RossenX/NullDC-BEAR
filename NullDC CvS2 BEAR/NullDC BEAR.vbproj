@@ -459,7 +459,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mvc2_r_list.jpg" />
-    <None Include="Resources\MvC2Ratio.png" />
     <None Include="Resources\MvC2RatioList.bmp" />
     <None Include="Resources\System Icons\NullDCBEAR-Title.png" />
     <None Include="Resources\MessagePop.wav" />

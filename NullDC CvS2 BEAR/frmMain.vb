@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.93b" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.93c" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -384,9 +384,7 @@ UpdateTry:
             Watchers(RomFoldersCount).NotifyFilter =
             NotifyFilters.CreationTime Or
             NotifyFilters.DirectoryName Or
-            NotifyFilters.FileName Or
-            NotifyFilters.LastWrite Or
-            NotifyFilters.Size
+            NotifyFilters.FileName
 
             AddHandler Watchers(RomFoldersCount).Changed, AddressOf RomFolderChange
             AddHandler Watchers(RomFoldersCount).Created, AddressOf RomFolderChange
@@ -1297,7 +1295,11 @@ UpdateTry:
         ' ProcessStartInfo.Arguments = "/c net stop RvControlSvc"
         ' Process.Start(processStartInfo)
 
-        End
+        Try
+            End
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
@@ -1327,76 +1329,99 @@ UpdateTry:
     Public Delegate Sub JoinHost_delegate(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
     Public Sub JoinHost(ByVal _name As String, ByVal _ip As String, ByVal _port As String, ByVal _game As String, ByVal _delay As Int16, ByVal _region As String, ByVal _peripheral As String, ByVal _eeprom As String)
 
-        ' Ignore being told to join the host if we havn't gotten the VMU yet
-        Dim Platform = _game.Split("-")(0).ToLower
-        Dim NeedaVMU = False
-        If Platform = "dc" Or Platform = "fc_dc" Or Platform = "fly_dc" Then
-            NeedaVMU = True
-        End If
+        Try
+            If _eeprom Is Nothing Then _eeprom = ""
 
-        If NeedaVMU And Rx.VMU Is Nothing Then
-            Console.WriteLine("Host started before VMU Data was Recieved, wait")
-            Exit Sub
+            ' Ignore being told to join the host if we havn't gotten the VMU yet
+            Dim Platform = _game.Split("-")(0).ToLower
+            Dim NeedaVMU = False
+            If Platform = "dc" Or Platform = "fc_dc" Or Platform = "fly_dc" Then
+                NeedaVMU = True
+            End If
 
-        End If
+            If NeedaVMU And Rx.VMU Is Nothing Then
+                Console.WriteLine("Host started before VMU Data was Recieved, wait")
+                Exit Sub
 
-        Select Case Platform
-            Case "na", "fc_na", "fly_na"
+            End If
 
-                Dim TempName = _game
-                If _game.StartsWith("FC_") Then
-                    TempName = _game.Remove(0, 3)
-                End If
+            Select Case Platform
+                Case "na", "fc_na", "fly_na"
 
-                If _eeprom.Length > 0 Then
-                    Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(TempName)(1))
-                Else
-                    Rx.WriteEEPROM("", MainformRef.NullDCPath & MainformRef.GamesList(TempName)(1))
+                    Dim TempName = _game
+                    If _game.StartsWith("FC_") Then
+                        TempName = _game.Remove(0, 3)
+                    End If
 
-                End If
+                    If _eeprom.Length > 0 Then
+                        Rx.WriteEEPROM(_eeprom, MainformRef.NullDCPath & MainformRef.GamesList(TempName)(1))
+                    Else
+                        Rx.WriteEEPROM("", MainformRef.NullDCPath & MainformRef.GamesList(TempName)(1))
 
-                ConfigFile.Status = "Client"
-                ConfigFile.Port = _port
-                ConfigFile.Delay = _delay
+                    End If
 
-            Case "dc", "fc_dc", "fly_dc"
-                ConfigFile.Status = "Client"
-                ConfigFile.Port = _port
-                ConfigFile.Delay = _delay
+                    ConfigFile.Status = "Client"
+                    ConfigFile.Port = _port
+                    ConfigFile.Delay = _delay
 
-            Case Else ' For Mednafen the 'region' setting is used as an indicator if it's public server or not the eeprom setting is used as the gamekey in mednafen
-                Select Case _delay
-                    Case 0
-                        ConfigFile.Status = "Client"
-                        Rx.EEPROM = _eeprom
+                Case "dc", "fc_dc", "fly_dc"
+                    ConfigFile.Status = "Client"
+                    ConfigFile.Port = _port
+                    ConfigFile.Delay = _delay
 
-                    Case 1
-                        ConfigFile.Status = "Public"
-                        Rx.EEPROM = _eeprom
+                Case Else ' For Mednafen the 'region' setting is used as an indicator if it's public server or not the eeprom setting is used as the gamekey in mednafen
+                    Select Case _delay
+                        Case 0
+                            ConfigFile.Status = "Client"
+                            Rx.EEPROM = _eeprom
 
-                    Case 2
-                        ConfigFile.Status = "Private"
-                        Rx.EEPROM = _eeprom
+                        Case 1
+                            ConfigFile.Status = "Public"
+                            Rx.EEPROM = _eeprom
 
-                    Case Else
+                        Case 2
+                            ConfigFile.Status = "Private"
+                            Rx.EEPROM = _eeprom
 
-                End Select
-                DeleteMednafenClientFiles()
-                MainformRef.MednafenLauncher.IsHost = False
+                        Case Else
 
-                Rx.SetCurrentPeripheralsFromString(_peripheral, _game)
+                    End Select
+                    DeleteMednafenClientFiles()
+                    MainformRef.MednafenLauncher.IsHost = False
 
-        End Select
+                    Rx.SetCurrentPeripheralsFromString(_peripheral, _game)
 
-        If WaitingForm.Visible Then WaitingForm.Visible = False
+            End Select
 
-        Challenger = New BEARPlayer(_name, _ip, _port, _game,, _peripheral)
-        ConfigFile.Host = _ip
-        ConfigFile.Game = _game
-        ConfigFile.ReplayFile = ""
-        ConfigFile.SaveFile()
+            If WaitingForm.Visible Then WaitingForm.Visible = False
 
-        GameLauncher(ConfigFile.Game, _region)
+            Challenger = New BEARPlayer(_name, _ip, _port, _game,, _peripheral)
+            ConfigFile.Host = _ip
+            ConfigFile.Game = _game
+            ConfigFile.ReplayFile = ""
+            ConfigFile.SaveFile()
+
+            GameLauncher(ConfigFile.Game, _region)
+
+        Catch ex As Exception
+            MainformRef.NetworkHandler.SendMessage(">,E", MainformRef.Challenger.ip)
+
+            Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
+            MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
+
+            MainformRef.RemoveChallenger()
+            MainformRef.ConfigFile.Game = "None"
+            MainformRef.ConfigFile.Status = MainformRef.ConfigFile.AwayStatus
+            MainformRef.ConfigFile.SaveFile()
+
+            Rx.EEPROM = ""
+            Rx.VMU = Nothing
+            Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
+
+            MsgBox("Failed to Join Host. Error: " & ex.InnerException.Message)
+        End Try
+
+
 
     End Sub
 

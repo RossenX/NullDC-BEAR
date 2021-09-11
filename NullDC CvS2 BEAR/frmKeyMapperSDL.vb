@@ -27,8 +27,6 @@ Public Class frmKeyMapperSDL
     Private Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Boolean
     End Function
 
-    Private Declare Function GetActiveWindow Lib "user32" Alias "GetActiveWindow" () As IntPtr
-
     Private Declare Function SendMessage Lib "user32.dll" _
         Alias "SendMessageA" (ByVal hWnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As IntPtr) As IntPtr
 
@@ -776,21 +774,29 @@ Public Class frmKeyMapperSDL
             End If
         Next
 
-        ' Flycast
-        For _playerID = 0 To 1 ' p1 p2
-            For _JoystickID = 0 To SDL_NumJoysticks() - 1
-                If Joystick(_playerID) = _JoystickID Then
-                    GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "arcade", ControlsConfigs, _playerID)
-                    GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "dc", ControlsConfigs, _playerID)
+        Try
+            ' Flycast
+            Console.WriteLine("Saving Flycast Controls")
+            For _playerID = 0 To 1 ' p1 p2
+                For _JoystickID = 0 To SDL_NumJoysticks() - 1
+                    If Joystick(_playerID) = _JoystickID Then
+                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "arcade", ControlsConfigs, _playerID)
+                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "dc", ControlsConfigs, _playerID)
+
+                    End If
+                Next
+
+                If _playerID = 0 Then
+                    GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, 0)
+                    GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, 0)
+
                 End If
+
             Next
+        Catch ex As Exception
+            MsgBox("Failed to save Flycast Controls. Error: " & ex.InnerException.Message)
 
-            If _playerID = 0 Then
-                GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, 0)
-                GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, 0)
-            End If
-
-        Next
+        End Try
 
         ' Naomi Controls
         Dim linenumber = 0
@@ -1384,9 +1390,7 @@ Public Class frmKeyMapperSDL
 
             Else
                 Dim ToStickornotToStick = "CONT_"
-                If Peripheral(_player) = 1 Then
-                    ToStickornotToStick = "STICK_"
-                End If
+                If Peripheral(_player) = 1 Then ToStickornotToStick = "STICK_"
 
                 ' Direction mapping is weird, sometimes it's 2 buttons sometimes it's 2 axis watafak flycast
 
@@ -1518,7 +1522,19 @@ Public Class frmKeyMapperSDL
         If Not DreamcastStuff.Trim = "[dreamcast]" Then FullMappingFile += DreamcastStuff & vbNewLine
         If Not EmulatorStuff.Trim = "[emulator]" Then FullMappingFile += EmulatorStuff
 
-        File.WriteAllText(MainformRef.NullDCPath & "\flycast\mappings\SDL_" & _ControllerName & isArcadeHuh & ".cfg", FullMappingFile)
+        Dim MappingFileName = _ControllerName & isArcadeHuh & ".cfg"
+        MappingFileName = MappingFileName.Replace("/", "-")
+        MappingFileName = MappingFileName.Replace("\\", "-")
+        MappingFileName = MappingFileName.Replace(":", "-")
+        MappingFileName = MappingFileName.Replace("?", "-")
+        MappingFileName = MappingFileName.Replace("*", "-")
+        MappingFileName = MappingFileName.Replace("|", "-")
+        MappingFileName = MappingFileName.Replace("""", "-")
+        MappingFileName = MappingFileName.Replace("<", "-")
+        MappingFileName = MappingFileName.Replace(">", "-")
+
+
+        File.WriteAllText(MainformRef.NullDCPath & "\flycast\mappings\SDL_" & MappingFileName, FullMappingFile)
 
         Console.WriteLine("Created Flycast Mapping file for {0} player {1}", _ControllerName, _player)
 

@@ -7,7 +7,7 @@ Imports SDL2.SDL
 Module Rx
 
     Public MainformRef As frmMain ' Mainly here to have a constatn reference to the main form even after minimzing to tray
-    Public EEPROM As String ' the EEPROM we're using saved here for people that wanna join as spectator
+    Public EEPROM As String = "" ' the EEPROM we're using saved here for people that wanna join as spectator
     Public VMU As String ' the p1 VMU
     Public VMUPieces As New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
     Public MultiTap As Int16 = 0
@@ -139,7 +139,7 @@ Module Rx
             File.WriteAllBytes(EEPROMPath, EEPROMasByte)
 
         Else
-            ' eeprom that was sent was blank, so delete it.
+            ' eeprom that was sent was blank, so delete the client side EEPROM
             If File.Exists(EEPROMPath) Then File.Delete(EEPROMPath)
 
         End If
