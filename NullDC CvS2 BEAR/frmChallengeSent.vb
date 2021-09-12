@@ -1,6 +1,4 @@
-﻿Imports NullDC_CvS2_BEAR.NetworkHandling
-
-Public Class frmChallengeSent
+﻿Public Class frmChallengeSent
 
 #Region "Properties"
 #End Region

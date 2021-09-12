@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.93c" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.93d" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -511,6 +511,13 @@ UpdateTry:
 
         Using archive As ZipArchive = ZipFile.OpenRead(My.Computer.FileSystem.SpecialDirectories.Temp & "\" & _name)
             For Each entry As ZipArchiveEntry In archive.Entries
+                If entry.Name.EndsWith(".pdb") And Debugger.IsAttached Then
+                    Continue For
+                    Console.WriteLine("Skipped: " & entry.FullName & "Because we're debugging")
+
+                End If
+
+                Console.Write(">:" & entry.FullName & "|")
                 'Console.WriteLine("Extracting: " & entry.FullName)
                 Dim FolderOnly As Boolean = False
                 If entry.FullName.EndsWith("\") Or entry.FullName.EndsWith("/") Then
@@ -555,11 +562,18 @@ UpdateTry:
                             Dim ExistingFileLastWriteTime = File.GetLastWriteTime(_dir & "\" & entry.FullName.Replace("/", "\"))
                             Dim Compare = ExistingFileLastWriteTime.CompareTo(entry.LastWriteTime.DateTime)
                             If Compare >= 0 Then
+
                                 ' DLL and EXE always get overwritten to make sure they are up to date.
-                                If Not entry.Name.EndsWith(".dll") And Not entry.Name.EndsWith(".exe") And Not entry.Name.EndsWith(".state-ggpo") And Not entry.Name.EndsWith(".freedlc") Then
+                                If Not entry.Name.EndsWith(".dll") And
+                                    Not entry.Name.EndsWith(".exe") And
+                                    Not entry.Name.EndsWith(".state-ggpo") And
+                                    Not entry.Name.EndsWith(".freedlc") And
+                                    Not entry.Name.EndsWith(".pdb") Then
                                     Console.WriteLine("Skipped: " & entry.FullName)
                                     Continue For
+
                                 End If
+
                             End If
 
                         End If
@@ -2343,6 +2357,19 @@ UpdateTry:
 
     Private Sub OpenFlycastDataFolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenFlycastDataFolderToolStripMenuItem.Click
         Process.Start(NullDCPath & "\flycast\data")
+
+    End Sub
+
+    Private Sub CrashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CrashToolStripMenuItem.Click
+        Throw New System.Exception("An exception has occurred.")
+    End Sub
+
+    Private Sub CrashthreadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CrashthreadToolStripMenuItem.Click
+        Dim CrashMeDaddy = New Thread(Sub()
+                                          Throw New System.Exception("An exception has occurred.")
+                                      End Sub)
+        CrashMeDaddy.IsBackground = True
+        CrashMeDaddy.Start()
 
     End Sub
 

@@ -70,6 +70,8 @@ Partial Class frmMain
         Me.ForceOpenPanelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaitingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CrashToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CrashthreadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgBeta = New System.Windows.Forms.PictureBox()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.MainMenuContainer.SuspendLayout()
@@ -488,7 +490,7 @@ Partial Class frmMain
         '
         'ForceOpenPanelToolStripMenuItem
         '
-        Me.ForceOpenPanelToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HostToolStripMenuItem, Me.WaitingToolStripMenuItem})
+        Me.ForceOpenPanelToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HostToolStripMenuItem, Me.WaitingToolStripMenuItem, Me.CrashToolStripMenuItem, Me.CrashthreadToolStripMenuItem})
         Me.ForceOpenPanelToolStripMenuItem.Name = "ForceOpenPanelToolStripMenuItem"
         Me.ForceOpenPanelToolStripMenuItem.Size = New System.Drawing.Size(80, 29)
         Me.ForceOpenPanelToolStripMenuItem.Text = "Open Panel"
@@ -496,14 +498,26 @@ Partial Class frmMain
         'HostToolStripMenuItem
         '
         Me.HostToolStripMenuItem.Name = "HostToolStripMenuItem"
-        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.HostToolStripMenuItem.Text = "Host"
         '
         'WaitingToolStripMenuItem
         '
         Me.WaitingToolStripMenuItem.Name = "WaitingToolStripMenuItem"
-        Me.WaitingToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
+        Me.WaitingToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.WaitingToolStripMenuItem.Text = "Waiting"
+        '
+        'CrashToolStripMenuItem
+        '
+        Me.CrashToolStripMenuItem.Name = "CrashToolStripMenuItem"
+        Me.CrashToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CrashToolStripMenuItem.Text = "Crash"
+        '
+        'CrashthreadToolStripMenuItem
+        '
+        Me.CrashthreadToolStripMenuItem.Name = "CrashthreadToolStripMenuItem"
+        Me.CrashthreadToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CrashthreadToolStripMenuItem.Text = "Crash (thread)"
         '
         'imgBeta
         '
@@ -587,4 +601,6 @@ Partial Class frmMain
     Friend WithEvents ExtrasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MVC2TierListToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenFlycastDataFolderToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CrashToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CrashthreadToolStripMenuItem As ToolStripMenuItem
 End Class

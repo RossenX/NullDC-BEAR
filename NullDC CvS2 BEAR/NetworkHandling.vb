@@ -35,15 +35,9 @@ Public Class NetworkHandling
         Dim toSend As String = MainformRef.ConfigFile.Version & ":" & message
         Dim data() As Byte = Encoding.ASCII.GetBytes(toSend)
 
-        Try
-            BEAR_UDPSender = New UdpClient(SendtoIP, port)
-            BEAR_UDPSender.EnableBroadcast = True
-            BEAR_UDPSender.SendAsync(data, data.Length)
-
-        Catch ex As Exception
-            Console.WriteLine("Failed to send")
-
-        End Try
+        BEAR_UDPSender = New UdpClient(SendtoIP, port)
+        BEAR_UDPSender.EnableBroadcast = True
+        BEAR_UDPSender.SendAsync(data, data.Length)
 
     End Sub
 
@@ -60,6 +54,7 @@ Public Class NetworkHandling
                     Dim data() As Byte = BEAR_UDPReceiver.Receive(endPoint)
                     Dim message As String = Encoding.ASCII.GetString(data)
                     MessageReceived(message, endPoint.Address.ToString, endPoint.Port.ToString)
+
                 End While
 
             End Sub)
@@ -71,6 +66,7 @@ Public Class NetworkHandling
 
     Delegate Sub MessageReceived_delegate(ByRef message As String, ByRef senderip As String, ByRef port As String)
     Private Sub MessageReceived(ByRef message As String, ByRef senderip As String, ByRef port As String)
+
         If message.Length > 500 Then
             Console.WriteLine("<-Recieved-> long ass message from " & senderip & ":" & port)
         Else
@@ -234,14 +230,18 @@ Public Class NetworkHandling
 
                 If MainformRef.IsNullDCRunning Or MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Or MainformRef.FlycastLauncher.FlycastProc IsNot Nothing Then ' We were told to join a game but we're already in a game
                     Exit Sub
-
                 End If
+
 
                 Console.WriteLine("<-Host Started->" & message)
                 Dim INVOKATION As JoinHost_delegate = AddressOf MainformRef.JoinHost
 
                 If message.Split(New String() {",eeprom,"}, StringSplitOptions.None).Count > 1 Then
-                    Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
+                    If message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1) IsNot Nothing Then
+                        Rx.EEPROM = message.Split(New String() {",eeprom,"}, StringSplitOptions.None)(1)
+                    Else
+                        Rx.EEPROM = ""
+                    End If
                 Else
                     Rx.EEPROM = ""
                 End If
