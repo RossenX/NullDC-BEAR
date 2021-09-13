@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.93d" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.93e" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -862,6 +862,42 @@ UpdateTry:
                 End If
             Next
 
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.ccd", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".ccd", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("SS-" & RomName) Then
+                    GamesList.Add("SS-" & RomName, {GameName, RomPath, "ss", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.img", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".img", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("SS-" & RomName) Then
+                    GamesList.Add("SS-" & RomName, {GameName, RomPath, "ss", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\ss", "*.sub", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".sub", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("SS-" & RomName) Then
+                    GamesList.Add("SS-" & RomName, {GameName, RomPath, "ss", ""})
+                End If
+            Next
+
         End If
 
         If _system = "all" Or _system = "sg" Then
@@ -939,6 +975,42 @@ UpdateTry:
             For Each _file In Files
                 Dim GameName_Split As String() = _file.Split("\")
                 Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".m3u", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("PSX-" & RomName) Then
+                    GamesList.Add("PSX-" & RomName, {GameName, RomPath, "psx", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.ccd", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".ccd", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("PSX-" & RomName) Then
+                    GamesList.Add("PSX-" & RomName, {GameName, RomPath, "psx", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.img", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".img", "").Replace(",", ".").Replace("_", " ")
+                Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
+                Dim RomPath As String = _file.Replace(NullDCPath, "")
+
+                If Not GamesList.ContainsKey("PSX-" & RomName) Then
+                    GamesList.Add("PSX-" & RomName, {GameName, RomPath, "psx", ""})
+                End If
+            Next
+
+            Files = Directory.GetFiles(NullDCPath & "\mednafen\roms\psx", "*.sub", SearchOption.AllDirectories)
+            For Each _file In Files
+                Dim GameName_Split As String() = _file.Split("\")
+                Dim GameName As String = GameName_Split(GameName_Split.Count - 1).Trim.Replace(".sub", "").Replace(",", ".").Replace("_", " ")
                 Dim RomName As String = GameName_Split(GameName_Split.Count - 1).Replace(",", ".")
                 Dim RomPath As String = _file.Replace(NullDCPath, "")
 
@@ -1418,8 +1490,8 @@ UpdateTry:
             GameLauncher(ConfigFile.Game, _region)
 
         Catch ex As Exception
-            MainformRef.NetworkHandler.SendMessage(">,E", MainformRef.Challenger.ip)
 
+            MainformRef.NetworkHandler.SendMessage(">,E", MainformRef.Challenger.ip)
             Dim INVOKATION As EndSession_delegate = AddressOf MainformRef.EndSession
             MainformRef.Invoke(INVOKATION, {"Window Closed", Nothing})
 
@@ -1432,7 +1504,8 @@ UpdateTry:
             Rx.VMU = Nothing
             Rx.VMUPieces = New ArrayList From {"", "", "", "", "", "", "", "", "", ""}
 
-            MsgBox("Failed to Join Host. Error: " & ex.InnerException.Message)
+            MsgBox("Failed to Join Host. Error: " & ex.Message)
+
         End Try
 
 

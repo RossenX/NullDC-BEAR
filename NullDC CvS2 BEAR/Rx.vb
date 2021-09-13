@@ -245,10 +245,7 @@ Module Rx
             CombinedVMU += VMUPieces(i)
         Next
 
-        Select Case MainformRef.ConfigFile.Game.Split("-")(0).ToLower
-            Case "fc_dc", "fly_dc" : File.WriteAllBytes(MainformRef.NullDCPath + "\flycast\data\vmu_save_A1_client.bin", Convert.FromBase64String(CombinedVMU))
-            Case "dc" : File.WriteAllBytes(MainformRef.NullDCPath + "\dc\vmu_data_client.bin", Convert.FromBase64String(CombinedVMU))
-        End Select
+        File.WriteAllBytes(MainformRef.NullDCPath + "\dc\vmu_data_client.bin", Convert.FromBase64String(CombinedVMU))
 
         Rx.VMU = CombinedVMU
         MainformRef.NetworkHandler.SendMessage("G", MainformRef.Challenger.ip)

@@ -25,24 +25,28 @@ Public Class frmChallengeGameSelect
 
     Public Sub btnLetsGo_Click(sender As Object, e As EventArgs) Handles btnLetsGo.Click
 
-        If SelectedGame(0) = "" Then
+        Dim GameToLaunch = SelectedGame(0)
+        If GameToLaunch = "" Then
             MainformRef.NotificationForm.ShowMessage("No Game Selected")
             Exit Sub
         End If
 
+        Select Case MainformRef.GamesList(GameToLaunch)(2)
+            Case "na", "dc"
+                If Not cb_nulldc_emulator.Text = "NullDC" Then GameToLaunch = "FC_" & GameToLaunch
+
+            Case "n64"
+                MainformRef.NotificationForm.ShowMessage("N64 Netplay coming soon...")
+                Exit Sub
+
+        End Select
+
         Rx.MultiTap = cb_Multitap.SelectedIndex
-        Console.WriteLine("Multitap=" & Rx.MultiTap)
-        Dim platform = MainformRef.GamesList(SelectedGame(0))(2)
-
-        If (platform = "dc" Or platform = "na") And Not cb_nulldc_emulator.Text = "NullDC" Then
-            SelectedGame(0) = "FC_" & SelectedGame(0)
-        End If
-
         MainformRef.MednafenLauncher.IsHost = True
 
         'File.ReadAllLines(MainformRef.NullDCPath & "\recent.glist")
         If File.Exists(MainformRef.NullDCPath & "\recent.glist") Then
-            Dim tempgamename As String = SelectedGame(0)
+            Dim tempgamename As String = GameToLaunch
             If tempgamename.StartsWith("FC_") Then
                 tempgamename = tempgamename.Remove(0, 3)
             End If
@@ -61,7 +65,7 @@ Public Class frmChallengeGameSelect
             RecentGames = tempgamename & vbNewLine & RecentGames
             File.WriteAllText(MainformRef.NullDCPath & "\recent.glist", RecentGames)
         Else
-            Dim tempgamename As String = SelectedGame(0)
+            Dim tempgamename As String = GameToLaunch
             If tempgamename.StartsWith("FC_") Then
                 tempgamename = tempgamename.Remove(0, 3)
             End If
@@ -75,6 +79,9 @@ Public Class frmChallengeGameSelect
         Else
             Rx.EEPROM = ""
         End If
+
+        MainformRef.ConfigFile.Game = GameToLaunch
+        MainformRef.ConfigFile.SaveFile()
 
         If _Challenger Is Nothing Then
             StartOffline()
@@ -111,12 +118,11 @@ Public Class frmChallengeGameSelect
 
         End Select
 
-        MainformRef.ConfigFile.Game = SelectedGame(0)
         MainformRef.ConfigFile.ReplayFile = ""
         MainformRef.ConfigFile.SaveFile()
         MainformRef.ConfigFile.Delay = cbDelay.Text.Trim
 
-        MainformRef.GameLauncher(SelectedGame(0), cbRegion.Text)
+        MainformRef.GameLauncher(MainformRef.ConfigFile.Game, cbRegion.Text)
 
         Me.Close()
 
@@ -124,9 +130,7 @@ Public Class frmChallengeGameSelect
 
     Public Sub StartOnline()
 
-        MainformRef.ConfigFile.Game = SelectedGame(0)
-
-        MainformRef.Challenger = New BEARPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, SelectedGame(0))
+        MainformRef.Challenger = New BEARPlayer(_Challenger.name, _Challenger.ip, _Challenger.port, MainformRef.ConfigFile.Game)
         MainformRef.ChallengeSentForm.StartChallenge(MainformRef.Challenger)
         Me.Close()
 
@@ -194,20 +198,24 @@ Public Class frmChallengeGameSelect
                 cb_nokey.Checked = MainformRef.ConfigFile.NoKey
                 Label3.Visible = True
                 cb_Serverlist.Visible = True
+
             Else
                 cbDelay.Text = MainformRef.ConfigFile.SimulatedDelay
                 cbRegion.SelectedIndex = MainformRef.ConfigFile.Region
                 cb_nokey.Checked = MainformRef.ConfigFile.NoKey
                 Label3.Visible = False
                 cb_Serverlist.Visible = False
+
             End If
 
             If cbRegion.Text = "" Then
                 cbRegion.SelectedIndex = 0
+
             End If
 
             If cb_nulldc_emulator.Text = "" Then
                 cb_nulldc_emulator.SelectedIndex = 0
+
             End If
 
             'ShowExtraSettings()

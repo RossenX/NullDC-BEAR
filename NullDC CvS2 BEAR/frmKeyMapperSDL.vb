@@ -110,7 +110,16 @@ Public Class frmKeyMapperSDL
                     ProfileToolStripMenuItem.Enabled = True
 
                 End If
+            Else
 
+                For i = 0 To SDL_NumJoysticks() - 1
+                    If SDL_GameControllerGetAttached(SDL_GameControllerFromInstanceID(i)) = SDL_bool.SDL_TRUE Then
+                        Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
+                        SDL_GameControllerClose(SDL_GameControllerFromInstanceID(i))
+                    End If
+                Next
+
+                SDL_Quit()
             End If
         Catch ex As Exception
             Console.WriteLine(ex.InnerException)
@@ -1268,27 +1277,47 @@ Public Class frmKeyMapperSDL
 
         If _line.Split("=")(1).Split("|")(_player).StartsWith("k") Then ' Key
             If _ControllerName = "Keyboard" Then ' Keyboard saves Keyboard keys, makes sense
-                DreamcastStuff += _ButtonName & " = " & KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) & vbNewLine
+                If Not KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) = "0" Then
+                    If _ButtonName.Contains("analog") Or _ButtonName.Contains("trigger") Then
+                        CompatStuff += _ButtonName & " = " & KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) & vbNewLine
+                    Else
+                        DreamcastStuff += _ButtonName & " = " & KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) & vbNewLine
+                    End If
+
+
+                End If
             End If
 
         ElseIf _ButtonKey.StartsWith("b") Then ' Button
             If Not _ControllerName = "Keyboard" Then
                 If isAxis Then
                     CompatStuff += _ButtonName & " = " & _ButtonKey.Remove(0, 1) & vbNewLine
+
                 Else
                     DreamcastStuff += _ButtonName & " = " & _ButtonKey.Remove(0, 1) & vbNewLine
+
                 End If
+
             End If
 
         ElseIf _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' Axis
             If Not _ControllerName = "Keyboard" Then
-                Dim FlycastMap = _ButtonAxisName & " = " & _ButtonKey.Remove(0, 1).Replace("+", "").Replace("-", "")
+                Dim FlycastMap = _ButtonAxisName & " = " & _ButtonKey.Replace("+", "").Replace("-", "").Replace("~", "").Replace("a", "")
+
                 If isAxis Then
                     DreamcastStuff += FlycastMap & vbNewLine
+
                 Else
                     CompatStuff += FlycastMap & vbNewLine
+
                 End If
-                CompatStuff += FlycastMap.Split("=")(0).Trim & "_inverted = no" & vbNewLine ' Never need to invest shit
+
+                If _ButtonKey.Contains("-") Then
+                    CompatStuff += FlycastMap.Split("=")(0).Trim & "_inverted = yes" & vbNewLine
+                Else
+                    CompatStuff += FlycastMap.Split("=")(0).Trim & "_inverted = no" & vbNewLine
+                End If
+
             End If
 
         End If
@@ -1315,15 +1344,15 @@ Public Class frmKeyMapperSDL
                 If _line.StartsWith("I_LEFT_KEY=") Or _line.StartsWith("I_RIGHT_KEY=") Then ' btn_dpad2_down
                     ' ok this is elft or right
                     If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith("I_LEFT_KEY=") Then
+                        If _line.StartsWith("I_RIGHT_KEY=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_x", "axis_dpad1_x", _line, _player, _ControllerName, False)
                         End If
 
                     Else
-                        If _line.StartsWith("I_LEFT_KEY=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_left", "btn_dpad1_left", _line, _player, _ControllerName, False)
-                        Else
+                        If _line.StartsWith("I_RIGHT_KEY=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_right", "btn_dpad1_right", _line, _player, _ControllerName, False)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_left", "btn_dpad1_left", _line, _player, _ControllerName, False)
                         End If
 
                     End If
@@ -1333,15 +1362,15 @@ Public Class frmKeyMapperSDL
                 If _line.StartsWith("I_UP_KEY=") Or _line.StartsWith("I_DOWN_KEY=") Then ' btn_dpad2_down
                     ' ok this is elft or right
                     If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith("I_UP_KEY=") Then
+                        If _line.StartsWith("I_DOWN_KEY=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_y", "axis_dpad1_y", _line, _player, _ControllerName, False)
                         End If
 
                     Else
-                        If _line.StartsWith("I_UP_KEY=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_up", "btn_dpad1_up", _line, _player, _ControllerName, False)
-                        Else
+                        If _line.StartsWith("I_DOWN_KEY=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_down", "btn_dpad1_down", _line, _player, _ControllerName, False)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_up", "btn_dpad1_up", _line, _player, _ControllerName, False)
                         End If
 
                     End If
@@ -1397,15 +1426,15 @@ Public Class frmKeyMapperSDL
                 If _line.StartsWith(ToStickornotToStick & "DPAD_LEFT=") Or _line.StartsWith(ToStickornotToStick & "DPAD_RIGHT=") Then ' btn_dpad2_down
                     ' ok this is elft or right
                     If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith(ToStickornotToStick & "DPAD_LEFT=") Then
+                        If _line.StartsWith(ToStickornotToStick & "DPAD_RIGHT=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_x", "axis_dpad1_x", _line, _player, _ControllerName, False)
                         End If
 
                     Else
-                        If _line.StartsWith(ToStickornotToStick & "DPAD_LEFT=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_left", "btn_dpad1_left", _line, _player, _ControllerName, False)
-                        Else
+                        If _line.StartsWith(ToStickornotToStick & "DPAD_RIGHT=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_right", "btn_dpad1_right", _line, _player, _ControllerName, False)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_left", "btn_dpad1_left", _line, _player, _ControllerName, False)
                         End If
 
                     End If
@@ -1415,15 +1444,15 @@ Public Class frmKeyMapperSDL
                 If _line.StartsWith(ToStickornotToStick & "DPAD_UP=") Or _line.StartsWith(ToStickornotToStick & "DPAD_DOWN=") Then ' btn_dpad2_down
                     ' ok this is elft or right
                     If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith(ToStickornotToStick & "DPAD_UP=") Then
+                        If _line.StartsWith(ToStickornotToStick & "DPAD_DOWN=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_y", "axis_dpad1_y", _line, _player, _ControllerName, False)
                         End If
 
                     Else
-                        If _line.StartsWith(ToStickornotToStick & "DPAD_UP=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_up", "btn_dpad1_up", _line, _player, _ControllerName, False)
-                        Else
+                        If _line.StartsWith(ToStickornotToStick & "DPAD_DOWN=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_down", "btn_dpad1_down", _line, _player, _ControllerName, False)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_up", "btn_dpad1_up", _line, _player, _ControllerName, False)
                         End If
 
                     End If
@@ -1434,15 +1463,15 @@ Public Class frmKeyMapperSDL
                 If _line.StartsWith(ToStickornotToStick & "ANALOG_LEFT=") Or _line.StartsWith(ToStickornotToStick & "ANALOG_RIGHT=") Then ' btn_dpad2_down
                     ' ok this is elft or right
                     If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith(ToStickornotToStick & "ANALOG_LEFT=") Then
+                        If _line.StartsWith(ToStickornotToStick & "ANALOG_RIGHT=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_x", "axis_x", _line, _player, _ControllerName, True)
                         End If
 
                     Else
-                        If _line.StartsWith(ToStickornotToStick & "ANALOG_LEFT=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_left", "btn_analog_left", _line, _player, _ControllerName, True)
-                        Else
+                        If _line.StartsWith(ToStickornotToStick & "ANALOG_RIGHT=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_right", "btn_analog_right", _line, _player, _ControllerName, True)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_left", "btn_analog_left", _line, _player, _ControllerName, True)
                         End If
 
                     End If
@@ -1453,15 +1482,15 @@ Public Class frmKeyMapperSDL
                 If _line.StartsWith(ToStickornotToStick & "ANALOG_UP=") Or _line.StartsWith(ToStickornotToStick & "ANALOG_DOWN=") Then ' btn_dpad2_down
                     ' ok this is elft or right
                     If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith(ToStickornotToStick & "ANALOG_UP=") Then
+                        If _line.StartsWith(ToStickornotToStick & "ANALOG_DOWN=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_y", "axis_y", _line, _player, _ControllerName, True)
                         End If
 
                     Else
-                        If _line.StartsWith(ToStickornotToStick & "ANALOG_UP=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_up", "btn_analog_up", _line, _player, _ControllerName, True)
-                        Else
+                        If _line.StartsWith(ToStickornotToStick & "ANALOG_DOWN=") Then
                             DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_down", "btn_analog_down", _line, _player, _ControllerName, True)
+                        Else
+                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_up", "btn_analog_up", _line, _player, _ControllerName, True)
                         End If
 
                     End If

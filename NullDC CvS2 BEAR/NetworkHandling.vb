@@ -247,8 +247,6 @@ Public Class NetworkHandling
                 End If
 
                 Dim delay As Int16 = CInt(Split(5))
-                Dim PlatformTag = Split(4).Split("-")(0)
-
                 ' If we were not send an IP to join we join the senderip, otherwise we join w.e IP the host told us to
                 If Split(2) = "" Then
                     MainformRef.Invoke(INVOKATION, {Split(1), senderip, Split(3), Split(4), delay, Split(6), Split(7), Rx.EEPROM})

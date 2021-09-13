@@ -17,11 +17,7 @@ Public Class MFlycastLauncher
 
     Private Sub LoadGame_Thread()
         Try
-            While MainformRef.FlycastLauncher.FlycastProc Is Nothing
-                Thread.Sleep(5)
-            End While
-
-            FlycastProc.WaitForInputIdle()
+            'FlycastProc.WaitForInputIdle()
             GameLoaded()
 
         Catch ex As Exception
@@ -46,7 +42,8 @@ Public Class MFlycastLauncher
 
         ' Tell difference between dreamcast and naomi
         Region = _region
-        If _romname.ToLower.StartsWith("fc_") Then
+
+        If _romname.StartsWith("FC_") Then
             _romname = _romname.Remove(0, 3)
         End If
 
@@ -143,7 +140,11 @@ Public Class MFlycastLauncher
             FlycastInfo.Arguments += "-config network:server= "
 
             ' Copy the VMU from NullDC to Flycast
-            FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
+            If File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
+                If romdetails(2) = "dc" Or romdetails(2) = "fly_dc" Then
+                    FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
+                End If
+            End If
 
         Else
 
@@ -168,14 +169,24 @@ Public Class MFlycastLauncher
                 FlycastInfo.Arguments += "-config network:server=" & MainformRef.Challenger.ip & " "
 
                 ' Copy the VMU from NullDC to Flycast
-                FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
+                If File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
+                    If romdetails(2) = "dc" Or romdetails(2) = "fly_dc" Then
+                        FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
+                    End If
+                End If
+
 
             Else
                 FlycastInfo.Arguments += "-config network:ActAsServer=no "
                 FlycastInfo.Arguments += "-config network:server=" & MainformRef.ConfigFile.Host & " "
 
                 ' Copy the VMU from NullDC to Flycast
-                FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_client.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
+                If File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_client.bin") Then
+                    If romdetails(2) = "dc" Or romdetails(2) = "fly_dc" Then
+                        FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_client.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1_client.bin")
+                    End If
+                End If
+
 
             End If
 
@@ -189,6 +200,7 @@ Public Class MFlycastLauncher
             FlycastInfo.Arguments += """" & MainformRef.NullDCPath & romdetails(1) & """"
         End If
 
+        Console.WriteLine("Flycast launched: " & FlycastInfo.Arguments)
         FlycastProc = Process.Start(FlycastInfo)
         FlycastProc.EnableRaisingEvents = True
 

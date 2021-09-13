@@ -312,7 +312,7 @@ Partial Class frmChallengeGameSelect
         Me.cb_nulldc_emulator.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cb_nulldc_emulator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb_nulldc_emulator.FormattingEnabled = True
-        Me.cb_nulldc_emulator.Items.AddRange(New Object() {"NullDC", "Flycast (Rollback Beta)"})
+        Me.cb_nulldc_emulator.Items.AddRange(New Object() {"Flycast (Rollback Beta)", "NullDC"})
         Me.cb_nulldc_emulator.Location = New System.Drawing.Point(131, 59)
         Me.cb_nulldc_emulator.Name = "cb_nulldc_emulator"
         Me.cb_nulldc_emulator.Size = New System.Drawing.Size(153, 21)

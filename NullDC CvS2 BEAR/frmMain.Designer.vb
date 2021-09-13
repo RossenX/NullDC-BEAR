@@ -498,25 +498,25 @@ Partial Class frmMain
         'HostToolStripMenuItem
         '
         Me.HostToolStripMenuItem.Name = "HostToolStripMenuItem"
-        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HostToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.HostToolStripMenuItem.Text = "Host"
         '
         'WaitingToolStripMenuItem
         '
         Me.WaitingToolStripMenuItem.Name = "WaitingToolStripMenuItem"
-        Me.WaitingToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.WaitingToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.WaitingToolStripMenuItem.Text = "Waiting"
         '
         'CrashToolStripMenuItem
         '
         Me.CrashToolStripMenuItem.Name = "CrashToolStripMenuItem"
-        Me.CrashToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CrashToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.CrashToolStripMenuItem.Text = "Crash"
         '
         'CrashthreadToolStripMenuItem
         '
         Me.CrashthreadToolStripMenuItem.Name = "CrashthreadToolStripMenuItem"
-        Me.CrashthreadToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CrashthreadToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.CrashthreadToolStripMenuItem.Text = "Crash (thread)"
         '
         'imgBeta
