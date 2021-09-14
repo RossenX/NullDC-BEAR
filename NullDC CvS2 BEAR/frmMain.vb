@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = True
+    Public IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.93f" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.94" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -91,9 +91,11 @@ Public Class frmMain
                 End If
 
             End If
+
         Catch ex As Exception
             MsgBox("Couldn't change SDL version make sure nullDC is closed. Error: " & vbNewLine & ex.Message)
             End
+
         End Try
     End Sub
 

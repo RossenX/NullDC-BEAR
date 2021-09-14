@@ -38,6 +38,7 @@ Public Class MednafenLauncher
 
                 Dim LineCount = 0
                 For Each _line In _mednafenConfigs
+
                     If _line.Length > 1 Then
                         For Each _optimization As String In SpecialSettings
                             If _line.StartsWith(_optimization.Split(" ")(0).Trim & " ") Then
@@ -53,6 +54,12 @@ Public Class MednafenLauncher
 
                         If _line.StartsWith("sound.volume") Then
                             _mednafenConfigs(LineCount) = "sound.volume " & MainformRef.ConfigFile.EmulatorVolume
+                        End If
+
+                        If _line.StartsWith("nes.input.port") Then
+                            If Not _line.Split(" ")(1) = "none" And Not _line.Split(" ")(1) = "gamepad" And Not _line.Split(" ")(1) = "zapper" Then
+                                _mednafenConfigs(LineCount) = _line.Split(" ")(0) & " gamepad"
+                            End If
                         End If
 
                     End If

@@ -64,10 +64,35 @@ Public Class MFlycastLauncher
         If MainformRef.ConfigFile.Vsync = 1 Then Vsync = "yes"
         'FlycastInfo.Arguments += "-config config:rend.vsync=" & Vsync & " "
 
+        Dim CheckIfCreated As String() = {"GGPOAnalogAxes", "Stats"}
+        Dim InSection As String() = {"network", "network"}
+        Dim ValueDefault As String() = {"2", "yes"}
+        Dim WereCreated As Boolean() = {False, False}
+
+ReDoConfigs:
+
         'Some settings are locked some are not, these are not or maybe they're settings i know won't cause desync so i let people change
         Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg")
+
+        For Each line As String In lines
+            For i = 0 To CheckIfCreated.Count - 1
+                If line.StartsWith(CheckIfCreated(i)) Then WereCreated(i) = True
+            Next
+        Next
+
         Dim linenumber = 0
         For Each line As String In lines
+
+            For i = 0 To CheckIfCreated.Count - 1
+                If WereCreated(i) = False Then
+                    If line.Trim = "[" & InSection(i) & "]" Then
+                        lines(linenumber) = lines(linenumber) & vbNewLine & CheckIfCreated(i) & " = " & ValueDefault(i)
+                        File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
+                        GoTo ReDoConfigs
+
+                    End If
+                End If
+            Next
 
             If line.StartsWith("rend.vsync = ") Then lines(linenumber) = "rend.vsync = " & Vsync
 
@@ -97,14 +122,27 @@ Public Class MFlycastLauncher
             'Dreamcast.SavestateSlot = 0
             If line.StartsWith("Dreamcast.SavestateSlot = ") Then lines(linenumber) = "Dreamcast.SavestateSlot = 0"
 
+            If line.StartsWith("GGPOAnalogAxes = ") Then
+                Select Case romdetails(2)
+                    Case "na", "fc_na", "fly_na"
+                        lines(linenumber) = "GGPOAnalogAxes = 0"
+                    Case Else
+                        lines(linenumber) = "GGPOAnalogAxes = 2"
+                End Select
+
+            End If
+
             If MainformRef.ConfigFile.Status = "Offline" Then
                 If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = no"
             Else
                 If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = yes"
-            End If
-            linenumber += 1
 
+            End If
+
+            linenumber += 1
         Next
+
+        ' Check if created stuff and if not then create them
 
         File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
 
@@ -143,6 +181,9 @@ Public Class MFlycastLauncher
             If File.Exists(MainformRef.NullDCPath & "\dc\vmu_data_host.bin") Then
                 If romdetails(2) = "dc" Or romdetails(2) = "fly_dc" Then
                     FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
+                    FlycastInfo.Arguments += "-config config:GGPOAnalogAxes=2 "
+                Else
+                    FlycastInfo.Arguments += "-config config:GGPOAnalogAxes=0 "
                 End If
             End If
 
