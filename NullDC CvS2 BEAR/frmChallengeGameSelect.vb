@@ -31,14 +31,17 @@ Public Class frmChallengeGameSelect
             Exit Sub
         End If
 
+        If MainformRef.Challenger IsNot Nothing And MainformRef.GamesList(GameToLaunch)(2) = "n64" Then
+            MainformRef.NotificationForm.ShowMessage("N64 Netplay coming soon...")
+            Exit Sub
+
+        End If
+
         Select Case MainformRef.GamesList(GameToLaunch)(2)
             Case "na", "dc"
-                If Not cb_nulldc_emulator.Text = "NullDC" Then GameToLaunch = "FC_" & GameToLaunch
-
-            Case "n64"
-                MainformRef.NotificationForm.ShowMessage("N64 Netplay coming soon...")
-                Exit Sub
-
+                If Not cb_nulldc_emulator.Text = "NullDC" Then
+                    GameToLaunch = "FC_" & GameToLaunch
+                End If
         End Select
 
         Rx.MultiTap = cb_Multitap.SelectedIndex
