@@ -6,7 +6,7 @@
         Private Sub ShowDebugOutput(ByVal ex As Exception)
 
             Dim st As StackTrace = New StackTrace(ex, True)
-            FrmCrash.ShowDialog2("Yo something went wrong! Send this to RossenX: " & vbNewLine & vbNewLine & ex.ToString)
+            FrmCrash.ShowDialog2("Yo something went wrong! Send this to RossenX: " & ex.Message & vbNewLine & vbNewLine & ex.ToString)
             'MsgBox("Yo something went wrong! Send this to RossenX: " & vbNewLine & ex.Message & vbNewLine & ">" & FileName & "(" & st.GetFrame(0).GetFileLineNumber & ")" & vbNewLine & Stacktrace & vbNewLine & ex.ToString,, "Crashy McCrashface                                                                                                              ")
 
             Environment.Exit(0)

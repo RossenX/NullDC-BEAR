@@ -40,13 +40,13 @@ Public Class MednafenLauncher
                 For Each _line In _mednafenConfigs
                     If _line.Length > 1 Then
                         For Each _optimization As String In SpecialSettings
-                            If _line.StartsWith(_optimization.Split(" ")(0).Trim) Then
+                            If _line.StartsWith(_optimization.Split(" ")(0).Trim & " ") Then
                                 _mednafenConfigs(LineCount) = _optimization.Replace(vbNewLine, "")
                             End If
                         Next
 
                         For Each _multitapsetting As String In MultiTapSettings
-                            If _line.StartsWith(_multitapsetting.Split(" ")(0).Trim) Then
+                            If _line.StartsWith(_multitapsetting.Split(" ")(0).Trim & " ") Then
                                 _mednafenConfigs(LineCount) = _multitapsetting.Replace(vbNewLine, "")
                             End If
                         Next
@@ -133,7 +133,7 @@ Public Class MednafenLauncher
                                                            MainformRef.ConfigFile.Name & ",," &
                                                            MainformRef.ConfigFile.Port & "," &
                                                            MainformRef.ConfigFile.Game & "," &
-                                                            "0,0," & Rx.GetCurrentPeripherals &
+                                                            "0,0," & Rx.GetCurrentPeripherals() &
                                                             ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                         Case "Public"
                             MainformRef.NetworkHandler.SendMessage("$," &
@@ -141,7 +141,7 @@ Public Class MednafenLauncher
                                                            MainformRef.ConfigFile.Host & "," &
                                                            MainformRef.ConfigFile.Port & "," &
                                                            MainformRef.ConfigFile.Game & "," &
-                                                            "1,0," & Rx.GetCurrentPeripherals &
+                                                            "1,0," & Rx.GetCurrentPeripherals() &
                                                             ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
                     End Select
 

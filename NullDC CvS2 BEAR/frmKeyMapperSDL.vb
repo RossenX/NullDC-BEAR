@@ -783,30 +783,6 @@ Public Class frmKeyMapperSDL
             End If
         Next
 
-        Try
-            ' Flycast
-            Console.WriteLine("Saving Flycast Controls")
-            For _playerID = 0 To 1 ' p1 p2
-                For _JoystickID = 0 To SDL_NumJoysticks() - 1
-                    If Joystick(_playerID) = _JoystickID Then
-                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "arcade", ControlsConfigs, _playerID)
-                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "dc", ControlsConfigs, _playerID)
-
-                    End If
-                Next
-
-                If _playerID = 0 Then
-                    GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, 0)
-                    GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, 0)
-
-                End If
-
-            Next
-        Catch ex As Exception
-            MsgBox("Failed to save Flycast Controls. Error: " & ex.InnerException.Message)
-
-        End Try
-
         ' Naomi Controls
         Dim linenumber = 0
         Try
@@ -845,11 +821,9 @@ Public Class frmKeyMapperSDL
             End If
 
         Catch ex As Exception
-            MsgBox("Error Saving Naomi Controls: " & ex.InnerException.Message)
+            MsgBox("Failed to save NullDC-Naomi Controls. Error: " & ex.Message)
 
         End Try
-
-
 
         ' Dreamcast Controls
         Try
@@ -906,7 +880,7 @@ Public Class frmKeyMapperSDL
             End If
 
         Catch ex As Exception
-            MsgBox("Error Saving Dreamcast Controls: " & ex.InnerException.Message)
+            MsgBox("Failed to save NullDC-Dreamcast Controls. Error: " & ex.Message)
         End Try
 
         Try
@@ -918,10 +892,10 @@ Public Class frmKeyMapperSDL
                 Dim _TranslatedControls(2) As Dictionary(Of String, String)
 
                 For i = 0 To 1
-                    If Not Joystick(i) = -1 Then
+                    If Not tempJoystick(i) = -1 Then
                         If _TranslatedControls(i) Is Nothing Then
 
-                            Dim _MednafenMapping = GetFullMappingStringforIndex(Joystick(i)).Split("|")(1).Split(",")
+                            Dim _MednafenMapping = GetFullMappingStringforIndex(tempJoystick(i)).Split("|")(1).Split(",")
 
                             For Each _split In _MednafenMapping
                                 Dim _splitsplit = _split.Split(":")
@@ -958,7 +932,7 @@ Public Class frmKeyMapperSDL
 
                     ' Deadzone
                     If line.StartsWith("input.joystick.axis_threshold ") Then
-                        MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & DeadzoneTB.Value
+                        MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & TempDeadzone(0)
                         linenumber += 1
                         Continue For
                     End If
@@ -1083,7 +1057,7 @@ Public Class frmKeyMapperSDL
             End If
 
         Catch ex As Exception
-            MsgBox("Error Saving Mednafen Controls: " & ex.InnerException.Message)
+            MsgBox("Failed to save Mednafen Controls. Error: " & ex.Message)
 
         End Try
 
@@ -1140,11 +1114,11 @@ Public Class frmKeyMapperSDL
 
                     MupenControls(i) += "device = " & Joystick(i) & vbNewLine
 
-                    If Joystick(i) = -1 Then
+                    If tempJoystick(i) = -1 Then
                         MupenControls(i) += "name = ""Keyboard""" & vbNewLine
                     Else
-                        TempMappingString(i) = GetFullMappingStringforIndex(Joystick(i)).Split("|")(0)
-                        MupenControls(i) += "name = """ & SDL_GameControllerNameForIndex(Joystick(i)) & """" & vbNewLine
+                        TempMappingString(i) = GetFullMappingStringforIndex(tempJoystick(i)).Split("|")(0)
+                        MupenControls(i) += "name = """ & SDL_GameControllerNameForIndex(tempJoystick(i)) & """" & vbNewLine
                     End If
 
                     MupenControls(i) += "plugged = True" & vbNewLine
@@ -1152,7 +1126,7 @@ Public Class frmKeyMapperSDL
                     MupenControls(i) += "plugin = 2" & vbNewLine
                     MupenControls(i) += "MouseSensitivity = ""2.00,2.00"" " & vbNewLine
 
-                    MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (Deadzone(i) / 100)) & "," & Math.Floor(32768 * (Deadzone(i) / 100)) & "" & vbNewLine
+                    MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "," & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "" & vbNewLine
                     MupenControls(i) += "AnalogPeak = ""32768,32768"" " & vbNewLine
 
                 Next
@@ -1244,10 +1218,33 @@ Public Class frmKeyMapperSDL
             End If
 
         Catch ex As Exception
-            MsgBox("Error Saving Mupen Controls " & ex.InnerException.Message)
+            MsgBox("Failed to save Mupen Controls. Error: " & ex.Message)
 
         End Try
 
+        ' Flycast
+        Try
+            Console.WriteLine("Saving Flycast Controls")
+            For _playerID = 0 To 1 ' p1 p2
+                For _JoystickID = 0 To SDL_NumJoysticks() - 1
+                    If tempJoystick(_playerID) = _JoystickID Then
+                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "arcade", ControlsConfigs, _playerID, tempPeripheral(_playerID))
+                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "dc", ControlsConfigs, _playerID, tempPeripheral(_playerID))
+
+                    End If
+                Next
+
+                If _playerID = 0 Then
+                    GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, 0, tempPeripheral(_playerID))
+                    GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, 0, tempPeripheral(_playerID))
+
+                End If
+
+            Next
+        Catch ex As Exception
+            MsgBox("Failed to save Flycast Controls. Error: " & ex.Message)
+
+        End Try
 
         ' Check if nullDC is running to hotload the settings this is getting to annoying to keep up, i'ma just disable it for now
         If MainformRef.IsNullDCRunning Then
@@ -1326,7 +1323,7 @@ Public Class frmKeyMapperSDL
     End Sub
 
 
-    Private Sub GenerateFlycastMapping(ByVal _ControllerName As String, ByVal _System As String, ByVal _Controls As String(), ByVal _player As Int16)
+    Private Sub GenerateFlycastMapping(ByVal _ControllerName As String, ByVal _System As String, ByVal _Controls As String(), ByVal _player As Int16, ByVal _Peripheral As String)
 
         Dim FlycastDreamcastMappingFile As String = ""
         Dim CompatStuff = "[compat]" & vbNewLine
@@ -1419,7 +1416,7 @@ Public Class frmKeyMapperSDL
 
             Else
                 Dim ToStickornotToStick = "CONT_"
-                If Peripheral(_player) = 1 Then ToStickornotToStick = "STICK_"
+                If _Peripheral = "1" Then ToStickornotToStick = "STICK_"
 
                 ' Direction mapping is weird, sometimes it's 2 buttons sometimes it's 2 axis watafak flycast
 
@@ -1648,7 +1645,7 @@ Public Class frmKeyMapperSDL
             UpdateButtonLabels()
 
         Catch ex As Exception
-            MsgBox("Error Changing Controller " & ex.InnerException.Message)
+            MsgBox("Error Changing Controller " & ex.Message)
             DeadzoneTB.Value = Deadzone(PlayerTab.SelectedIndex)
 
             ControllerCB.SelectedIndex = 0
@@ -1702,7 +1699,7 @@ Public Class frmKeyMapperSDL
             'Console.WriteLine("joystick " & ControllerCB.SelectedValue)
             Joystick(PlayerTab.SelectedIndex) = ControllerCB.SelectedValue
         Catch ex As Exception
-            MsgBox("Error Opening Controller " & ex.InnerException.Message)
+            MsgBox("Error Opening Controller " & ex.Message)
 
         End Try
 
@@ -1900,7 +1897,7 @@ Public Class frmKeyMapperSDL
 
             End If
         Catch ex As Exception
-            MsgBox("Unable to delete profile: " & ex.InnerException.Message)
+            MsgBox("Unable to delete profile: " & ex.Message)
 
         End Try
 

@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.93e" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.93f" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -568,7 +568,8 @@ UpdateTry:
                                     Not entry.Name.EndsWith(".exe") And
                                     Not entry.Name.EndsWith(".state-ggpo") And
                                     Not entry.Name.EndsWith(".freedlc") And
-                                    Not entry.Name.EndsWith(".pdb") Then
+                                    Not entry.Name.EndsWith(".pdb") And
+                                    Not entry.Name = "gamecontrollerdb.txt" Then ' Make sure the controller database is always updated
                                     Console.WriteLine("Skipped: " & entry.FullName)
                                     Continue For
 
@@ -1475,6 +1476,7 @@ UpdateTry:
                     DeleteMednafenClientFiles()
                     MainformRef.MednafenLauncher.IsHost = False
 
+                    Rx.MultiTap = CInt(_region) ' Region in Mednafen is used for the Multitap setting
                     Rx.SetCurrentPeripheralsFromString(_peripheral, _game)
 
             End Select

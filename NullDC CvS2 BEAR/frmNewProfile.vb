@@ -20,7 +20,7 @@ Public Class frmNewProfile
             File.WriteAllLines(MainformRef.NullDCPath & "\Controls_" & TextBox1.Text.Trim() & ".bear", {})
             frmKeyMapperSDL.LoadSettings()
         Catch ex As Exception
-            MsgBox("Unable to create profile: " & ex.InnerException.Message)
+            MsgBox("Unable to create profile: " & ex.Message)
 
         End Try
 

@@ -302,14 +302,14 @@ Module Rx
             Case Else
                 MsgBox("Missing emulator type: " & MainformRef.GamesList(MainformRef.ConfigFile.Game)(2))
         End Select
+
         cfgEntry += ".input.port"
         For Each _line As String In File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
             For i = 1 To 12
-                If _line.StartsWith(cfgEntry & i & " ") Or
-                    (MainformRef.GamesList(MainformRef.ConfigFile.Game)(2) = "nes" And _line.StartsWith("nes.input.fcexp ")) Then
+                If _line.StartsWith(cfgEntry & i & " ") Then
                     If PeripheralList.Count > 0 Then PeripheralList += "|"
                     PeripheralList += _line.Replace(cfgEntry & i & " ", "").Trim
-
+                    Exit For
                 End If
             Next
 
