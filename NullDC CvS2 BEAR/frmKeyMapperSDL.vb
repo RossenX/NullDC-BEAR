@@ -1426,39 +1426,40 @@ Public Class frmKeyMapperSDL
                 'I_BC_03 = k0|k0
 
                 If _line.StartsWith("I_BC_03=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_1+4", "1+4", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_03", "BC_03", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BC_14=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_2+5", "2+5", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_14", "BC_14", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BC_25=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_3+6", "3+6", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_25", "BC_25", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BC_01=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_1+2", "1+2", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_01", "BC_01", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_AB", "BC_AB", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BC_12=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_2+3", "2+3", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_12", "BC_12", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BC_34=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_4+5", "4+5", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_34", "BC_34", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BC_45=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_5+6", "5+6", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_45", "BC_45", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BC_012=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_1+2+3", "1+2+3", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_012", "BC_012", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BC_345=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_4+5+6", "4+5+6", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_345", "BC_345", _line, _player, _ControllerName, False)
                 End If
 
             Else
@@ -1590,39 +1591,40 @@ Public Class frmKeyMapperSDL
                 'CONT_BC_XA = k0|k0
 
                 If _line.StartsWith(ToStickornotToStick & "BC_XA=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_X+A", "X+A", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_XA", "BC_XA", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith(ToStickornotToStick & "BC_YB=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_Y+B", "Y+B", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_YB", "BC_YB", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith(ToStickornotToStick & "BC_CZ=") Then ' L/R
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_L+R", "L+R", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_LR", "BC_LR", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith(ToStickornotToStick & "BC_XY=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_X+Y", "X+Y", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_XY", "BC_XY", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith(ToStickornotToStick & "BC_YZ=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_Y+L", "Y+L", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_YL", "BC_YL", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith(ToStickornotToStick & "BC_AB=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_A+B", "A+B", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_AB", "BC_AB", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_01", "BC_01", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith(ToStickornotToStick & "BC_BC=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_B+R", "B+R", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_BR", "BC_BR", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith(ToStickornotToStick & "BC_ABC=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_A+B+R", "A+B+R", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_ABR", "BC_ABR", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith(ToStickornotToStick & "BC_XYZ=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_X+Y+L", "X+Y+L", _line, _player, _ControllerName, False)
+                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_XYL", "BC_XYL", _line, _player, _ControllerName, False)
                 End If
 
 

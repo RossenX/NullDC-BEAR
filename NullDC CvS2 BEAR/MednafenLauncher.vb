@@ -56,9 +56,16 @@ Public Class MednafenLauncher
                             _mednafenConfigs(LineCount) = "sound.volume " & MainformRef.ConfigFile.EmulatorVolume
                         End If
 
-                        If _line.StartsWith("nes.input.port") Then
-                            If Not _line.Split(" ")(1) = "none" And Not _line.Split(" ")(1) = "gamepad" And Not _line.Split(" ")(1) = "zapper" Then
-                                _mednafenConfigs(LineCount) = _line.Split(" ")(0) & " gamepad"
+                        If _line.Split(" ")(0).Trim = "nes.input.port1" Or
+                            _line.Split(" ")(0).Trim = "nes.input.port2" Or
+                            _line.Split(" ")(0).Trim = "nes.input.port3" Or
+                            _line.Split(" ")(0).Trim = "nes.input.port4" Then
+                            If _line.Split(" ").Count > 1 Then
+                                If Not _line.Split(" ")(1).Trim = "none" And Not _line.Split(" ")(1).Trim = "gamepad" And Not _line.Split(" ")(1).Trim = "zapper" Then
+                                    _mednafenConfigs(LineCount) = _line.Split(" ")(0).Trim & " gamepad"
+                                End If
+                            Else
+                                _mednafenConfigs(LineCount) = _line.Split(" ")(0).Trim & " gamepad"
                             End If
                         End If
 
