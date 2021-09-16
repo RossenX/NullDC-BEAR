@@ -63,22 +63,26 @@ Public Class frmKeyMapperSDL
         Try
             If Me.Visible Then
 
+                SDL_SetHint(SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS, "1")
+                SDL_SetHint(SDL_HINT_XINPUT_ENABLED, "0")
+
                 Me.CenterToParent()
                 Me.Icon = My.Resources.fan_icon_text
                 ReloadTheme()
 
                 If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
-                    SDL_Init(SDL_INIT_GAMECONTROLLER)
+                    SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER)
                     Console.WriteLine("SDL_INIT GAME CONTROLLER")
                 End If
 
+                SDL_Delay(500)
+
                 If SDL_WasInit(SDL_INIT_JOYSTICK) = 0 Then
-                    SDL_Init(SDL_INIT_JOYSTICK)
+                    SDL_InitSubSystem(SDL_INIT_JOYSTICK)
                     Console.WriteLine("SDL_INIT JOYSTICK")
                 End If
 
-
-                SDL_Delay(100)
+                SDL_Delay(500)
                 DoInitialSetupShit()
                 LoadSettings()
 
@@ -112,14 +116,8 @@ Public Class frmKeyMapperSDL
                 End If
             Else
 
-                For i = 0 To SDL_NumJoysticks() - 1
-                    If SDL_GameControllerGetAttached(SDL_GameControllerFromInstanceID(i)) = SDL_bool.SDL_TRUE Then
-                        Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
-                        SDL_GameControllerClose(SDL_GameControllerFromInstanceID(i))
-                    End If
-                Next
 
-                SDL_Quit()
+
             End If
         Catch ex As Exception
             Console.WriteLine(ex.InnerException)
@@ -341,8 +339,8 @@ Public Class frmKeyMapperSDL
         For i = 0 To 1
             If MednafenChanged = False And Not Joystick(i) = -1 Then
 
-                Dim DeviceGUIDasString(40) As Byte
-                SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(i)), DeviceGUIDasString, 40)
+                Dim DeviceGUIDasString(64) As Byte
+                SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(i)), DeviceGUIDasString, 64)
                 Dim GUIDSTRING As String = Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
 
                 Dim MednafenMappingFound = False
@@ -568,9 +566,9 @@ Public Class frmKeyMapperSDL
                     Select Case _event.type
                         Case 1616 ' Axis Motion
 
-                            Console.WriteLine("Axis Motion: " & _event.caxis.axis & "|" & _event.caxis.axisValue & "|" & SDL_JoystickNumAxes(SDL_GameControllerGetJoystick(Joy)))
-
                             Me.Invoke(Sub()
+
+                                          Console.WriteLine("Axis Motion: " & _event.caxis.axis & "|" & _event.caxis.axisValue & "|" & SDL_JoystickNumAxes(SDL_GameControllerGetJoystick(Joy)))
 
                                           Dim _deadzonetotal As Decimal = 32768 * Decimal.Divide(DeadzoneTB.Value, 100)
                                           Dim _axisnorm As Int32 = _event.caxis.axisValue
@@ -1141,29 +1139,34 @@ Public Class frmKeyMapperSDL
 
                 For Each control_line In ControlsConfigs
                     If control_line.StartsWith("mup_") Then
+                        If control_line.Contains("Z Trig") Then
+                            Console.WriteLine("hello")
+                        End If
+
                         For i = 0 To 1
-                            ' Check if this is the axis bind becuase that has to be handled differently
-                            If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
-                                If control_line.StartsWith("mup_X Axis+") Then
-                                    X_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+                                ' Check if this is the axis bind becuase that has to be handled differently
+                                If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
 
-                                ElseIf control_line.StartsWith("mup_X Axis-") Then
-                                    X_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+                                    If control_line.StartsWith("mup_X Axis+") Then
+                                        X_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                                ElseIf control_line.StartsWith("mup_Y Axis+") Then
-                                    Y_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+                                    ElseIf control_line.StartsWith("mup_X Axis-") Then
+                                        X_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                                ElseIf control_line.StartsWith("mup_Y Axis-") Then
-                                    Y_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+                                    ElseIf control_line.StartsWith("mup_Y Axis+") Then
+                                        Y_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+
+                                    ElseIf control_line.StartsWith("mup_Y Axis-") Then
+                                        Y_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+
+                                    End If
+
+                                Else
+                                    MupenControls(i) += control_line.Split("=")(0).Replace("mup_", "") & " = " & BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i)) & vbNewLine
 
                                 End If
-
-                            Else
-                                MupenControls(i) += control_line.Split("=")(0).Replace("mup_", "") & " = " & BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i)) & vbNewLine
-
-                            End If
-                        Next
-                    End If
+                            Next
+                        End If
 
                 Next
 
@@ -1254,7 +1257,6 @@ Public Class frmKeyMapperSDL
         End If
 
         ' Finally Turn Off SDL
-        SDL_Quit() ' Turn off SDL make sure nothing changes before we write the controls to the configs.
     End Sub
 
 
@@ -1338,6 +1340,38 @@ Public Class frmKeyMapperSDL
 
                 ' Direction mapping is weird, sometimes it's 2 buttons sometimes it's 2 axis watafak flycast
 
+                If _line.StartsWith("I_BTN0_KEY=") Then ' btn_a 
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_a", "btn_a", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_BTN1_KEY=") Then ' btn_b
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_b", "btn_b", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_TEST_KEY_1=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_c", "btn_c", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_COIN_KEY=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_d", "btn_d", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_BTN2_KEY=") Then ' btn_x
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_x", "btn_x", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_BTN3_KEY=") Then ' btn_y
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_y", "btn_y", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_SERVICE_KEY_1=") Then ' btn_c
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_z", "btn_z", _line, _player, _ControllerName, False)
+                End If
+
+                If _line.StartsWith("I_START_KEY=") Then ' btn_start
+                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_start", "btn_start", _line, _player, _ControllerName, False)
+                End If
+
                 If _line.StartsWith("I_LEFT_KEY=") Or _line.StartsWith("I_RIGHT_KEY=") Then ' btn_dpad2_down
                     ' ok this is elft or right
                     If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
@@ -1374,44 +1408,12 @@ Public Class frmKeyMapperSDL
 
                 End If
 
-                If _line.StartsWith("I_BTN0_KEY=") Then ' btn_a 
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_a", "btn_a", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BTN1_KEY=") Then ' btn_b
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_b", "btn_b", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BTN2_KEY=") Then ' btn_x
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_x", "btn_x", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BTN3_KEY=") Then ' btn_y
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_y", "btn_y", _line, _player, _ControllerName, False)
-                End If
-
                 If _line.StartsWith("I_BTN4_KEY=") Then ' btn_dpad2_up
                     DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad2_up", "btn_dpad2_up", _line, _player, _ControllerName, False)
                 End If
 
                 If _line.StartsWith("I_BTN5_KEY=") Then ' btn_dpad2_down
                     DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad2_down", "btn_dpad2_down", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_START_KEY=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_start", "btn_start", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_COIN_KEY=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_d", "btn_d", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_TEST_KEY_1=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_c", "btn_c", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_SERVICE_KEY_1=") Then ' btn_c
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_z", "btn_z", _line, _player, _ControllerName, False)
                 End If
 
                 ' MACROS
@@ -2000,6 +2002,15 @@ Public Class frmKeyMapperSDL
         End Try
 
 
+    End Sub
+
+    Private Sub frmKeyMapperSDL_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        For i = 0 To SDL_NumJoysticks() - 1
+            Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
+            SDL_GameControllerClose(SDL_GameControllerFromInstanceID(i))
+        Next
+
+        SDL_Quit()
     End Sub
 
 End Class

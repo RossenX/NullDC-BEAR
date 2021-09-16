@@ -378,11 +378,11 @@ Public Class frmSDLMappingTool
 
         End While
 
-        Dim DeviceGUIDasString(40) As Byte
+        Dim DeviceGUIDasString(64) As Byte
 
         Me.Invoke(
             Sub()
-                SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(frmKeyMapperSDL.ControllerCB.SelectedValue), DeviceGUIDasString, 40)
+                SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(frmKeyMapperSDL.ControllerCB.SelectedValue), DeviceGUIDasString, 64)
             End Sub)
 
         Dim GUIDSTRING As String = System.Text.Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim

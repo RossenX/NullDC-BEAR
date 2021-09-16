@@ -1090,51 +1090,14 @@ Module Rx
 
         End If
 
-        Dim SDLMappingString As String() = _mappingString.Split(",")
-        Dim SDLControllerButtonName As String = GetSDLControllerButtonName(_Button)
-        ' Button wasn't found might as well just stop here
-        If SDLControllerButtonName = "" Then Return ""
-
         Dim MupenButton = ""
-        For i = 2 To SDLMappingString.Count
-            If SDLMappingString(i).Split(":")(0) = SDLControllerButtonName Then
+        If _Button.StartsWith("b") Then
+            MupenButton = _Button.Replace("b", "button(") & ")"
 
-                Dim _key = SDLMappingString(i).Split(":")(1)
+        ElseIf _Button.Contains("a") Then
+            MupenButton = _Button.Replace("a", "axis(") & ")"
 
-                If _key.StartsWith("b") Then
-                    MupenButton = _key.Replace("b", "button(") & ")"
-
-                ElseIf _key.StartsWith("h") Then
-                    Dim HatNumber = _key.Replace("h", "").Split(".")(0)
-                    Dim HatDirection As String = ""
-
-                    Select Case _key.Replace("h", "").Split(".")(1)
-                        Case "1" ' Up
-                            HatDirection = "Up"
-                        Case "2" ' Right
-                            HatDirection = "Right"
-                        Case "4" ' Down
-                            HatDirection = "Down"
-                        Case "8" ' Left
-                            HatDirection = "Left"
-                        Case Else
-                            MupenButton = ""
-                    End Select
-
-                    MupenButton = "hat(" & HatNumber & " " & HatDirection & ")"
-
-                ElseIf _key.StartsWith("a") Then
-                    Dim PlusOrMinus = "-"
-                    If _Button.Contains("+") Then
-                        PlusOrMinus = "+"
-                    End If
-                    MupenButton = _key.Replace("a", "axis(") & PlusOrMinus & ")"
-
-                End If
-
-                Exit For
-            End If
-        Next
+        End If
 
         Return MupenButton
     End Function

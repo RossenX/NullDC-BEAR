@@ -122,6 +122,11 @@ ReDoConfigs:
             'Dreamcast.SavestateSlot = 0
             If line.StartsWith("Dreamcast.SavestateSlot = ") Then lines(linenumber) = "Dreamcast.SavestateSlot = 0"
 
+            If line.StartsWith("rend.CrossHairColor1 = ") Then lines(linenumber) = "rend.CrossHairColor1 = 0"
+            If line.StartsWith("rend.CrossHairColor2 = ") Then lines(linenumber) = "rend.CrossHairColor2 = 0"
+            If line.StartsWith("rend.CrossHairColor3 = ") Then lines(linenumber) = "rend.CrossHairColor3 = 0"
+            If line.StartsWith("rend.CrossHairColor4 = ") Then lines(linenumber) = "rend.CrossHairColor4 = 0"
+
             If line.StartsWith("GGPOAnalogAxes = ") Then
                 Select Case romdetails(2)
                     Case "na", "fc_na", "fly_na"
