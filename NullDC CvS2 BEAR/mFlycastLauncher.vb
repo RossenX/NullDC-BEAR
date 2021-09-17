@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Threading
 Imports NullDC_CvS2_BEAR.frmMain
-
+Imports SDL2.SDL
 Public Class MFlycastLauncher
     Public FlycastProc As Process
     Dim LoadRomThread As Thread
@@ -64,10 +64,19 @@ Public Class MFlycastLauncher
         If MainformRef.ConfigFile.Vsync = 1 Then Vsync = "yes"
         'FlycastInfo.Arguments += "-config config:rend.vsync=" & Vsync & " "
 
-        Dim CheckIfCreated As String() = {"GGPOAnalogAxes", "Stats"}
-        Dim InSection As String() = {"network", "network"}
-        Dim ValueDefault As String() = {"2", "yes"}
-        Dim WereCreated As Boolean() = {False, False}
+        Dim CheckIfCreated As String() = {"GGPOAnalogAxes", "Stats", "maple_sdl_joystick_0", "maple_sdl_joystick_1", "maple_sdl_joystick_2", "maple_sdl_joystick_3", "maple_sdl_joystick_4"}
+        Dim InSection As String() = {"network", "network", "input", "input", "input", "input", "input"}
+        Dim ValueDefault As String() = {"2", "yes", "-1", "-1", "-1", "-1", "-1"}
+        Dim WereCreated As Boolean() = {False, False, False, False, False, False, False}
+
+        Dim ControlsFile = File.ReadAllLines(GetControlsFilePath())
+        Dim Joystick As String() = {"0", "0"}
+        For Each _line In ControlsFile
+            If _line.StartsWith("Joystick=") Then
+                Joystick = _line.Split("=")(1).Split("|")
+                Exit For
+            End If
+        Next
 
 ReDoConfigs:
 
@@ -116,7 +125,9 @@ ReDoConfigs:
             If line.StartsWith("aica.AudioVolume = ") Then lines(linenumber) = "aica.AudioVolume = " & MainformRef.ConfigFile.EmulatorVolume
             If line.StartsWith("aica.ForceMono = ") Then lines(linenumber) = "aica.ForceMono = " & ForceMono
 
-            If line.StartsWith("maple_sdl_") Then lines(linenumber) = lines(linenumber).Split("=")(0).Trim & " = " & PlayerID
+            If line.StartsWith("maple_sdl_") Then
+                lines(linenumber) = lines(linenumber).Split("=")(0).Trim & " = " & PlayerID
+            End If
 
             If line.StartsWith("Dreamcast.AutoLoadState = ") Then lines(linenumber) = "Dreamcast.AutoLoadState = yes"
             'Dreamcast.SavestateSlot = 0

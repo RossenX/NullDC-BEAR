@@ -260,6 +260,7 @@ UpdateTry:
         GameSelectForm = New frmChallengeGameSelect(Me)
         WaitingForm = New frmWaitingForHost
         NotificationForm = New frmNotification(Me)
+
         NetworkHandler = New NetworkHandling(Me)
 
         CheckFilesAndShit()
@@ -282,6 +283,16 @@ UpdateTry:
         cbStatus.Text = ConfigFile.Status
 
         ForceOpenPanelToolStripMenuItem.Visible = IsBeta
+
+        ' Let people know of anything
+        If needsUpdate Then
+            NotificationForm.ShowMessageDialog("SDL Updated. Please Check Your Controls")
+        End If
+
+        If needsUpdate Or FirstRun Then
+            frmKeyMapperSDL.Show(Me)
+
+        End If
 
     End Sub
 

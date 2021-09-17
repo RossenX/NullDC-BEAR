@@ -30,6 +30,22 @@
 
     End Sub
 
+    Public Sub ShowMessageDialog(ByVal msg As String)
+        If MainformRef.InvokeRequired Then
+            Me.Invoke(Sub()
+                          Me.Hide()
+                          Label1.Text = msg
+                          Me.ShowDialog(MainformRef)
+                      End Sub)
+        Else
+            Me.Hide()
+            Label1.Text = msg
+            Me.ShowDialog(MainformRef)
+        End If
+
+
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         HideTimer.Stop()
         If MainformRef.Visible Then

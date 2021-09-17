@@ -19,7 +19,7 @@ Public Class Mupen64Launcher
         MupenLaunchInfo.Arguments += "--configdir " & """" & MainformRef.NullDCPath & "\Mupen64Plus" & """ "
         MupenLaunchInfo.Arguments += "--sshotdir " & """" & MainformRef.NullDCPath & "\Mupen64Plus\screenshot" & """ "
         MupenLaunchInfo.Arguments += "--savedir " & """" & MainformRef.NullDCPath & "\Mupen64Plus\save" & """ "
-        MupenLaunchInfo.Arguments += "--vol " & MainformRef.ConfigFile.EmulatorVolume & " "
+        MupenLaunchInfo.Arguments += "--vol " & 200 * (MainformRef.ConfigFile.EmulatorVolume / 100) & " "
         'MupenLaunchInfo.Arguments += "--cheats all "
 
         MupenLaunchInfo.Arguments += """" & MainformRef.NullDCPath & "\" & MainformRef.GamesList(_romname)(1) & """"
