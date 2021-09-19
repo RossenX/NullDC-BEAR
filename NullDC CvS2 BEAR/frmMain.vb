@@ -285,11 +285,11 @@ UpdateTry:
         ForceOpenPanelToolStripMenuItem.Visible = IsBeta
 
         ' Let people know of anything
-        If needsUpdate Then
-            NotificationForm.ShowMessageDialog("SDL Updated. Please Check Your Controls")
+        If needsUpdate And Not IsBeta Then
+            NotificationForm.ShowMessageDialog("SDL Updated. Please Check Your Controls and re-save")
         End If
 
-        If needsUpdate Or FirstRun Then
+        If (needsUpdate Or FirstRun) And Not IsBeta Then
             frmKeyMapperSDL.Show(Me)
 
         End If
@@ -2281,6 +2281,8 @@ UpdateTry:
     Private Sub ControlsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ControlsToolStripMenuItem1.Click
         If Not Application.OpenForms().OfType(Of frmKeyMapperSDL).Any Then
             frmKeyMapperSDL.Show(Me)
+        Else
+            frmKeyMapperSDL.Focus()
         End If
     End Sub
 
@@ -2460,6 +2462,14 @@ UpdateTry:
         CrashMeDaddy.IsBackground = True
         CrashMeDaddy.Start()
 
+    End Sub
+
+    Private Sub ControlsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ControlsToolStripMenuItem.Click
+        If Not Application.OpenForms().OfType(Of frmKeyMapperSDL).Any Then
+            frmKeyMapperSDL.Show(Me)
+        Else
+            frmKeyMapperSDL.Focus()
+        End If
     End Sub
 
 End Class

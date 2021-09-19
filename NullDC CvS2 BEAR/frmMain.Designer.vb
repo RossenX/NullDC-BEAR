@@ -59,6 +59,7 @@ Partial Class frmMain
         Me.ControlsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GeneralToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ControlsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MednafenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GaggedUsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -426,7 +427,7 @@ Partial Class frmMain
         '
         Me.OptionsToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
         Me.OptionsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.MednafenToolStripMenuItem, Me.GaggedUsersToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.ControlsToolStripMenuItem, Me.MednafenToolStripMenuItem, Me.GaggedUsersToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.ShowShortcutKeys = False
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 29)
@@ -437,6 +438,12 @@ Partial Class frmMain
         Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
         Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.GeneralToolStripMenuItem.Text = "General"
+        '
+        'ControlsToolStripMenuItem
+        '
+        Me.ControlsToolStripMenuItem.Name = "ControlsToolStripMenuItem"
+        Me.ControlsToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ControlsToolStripMenuItem.Text = "Controls"
         '
         'MednafenToolStripMenuItem
         '
@@ -545,7 +552,7 @@ Partial Class frmMain
         Me.KeyPreview = True
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "NullDC BEAR"
+        Me.Text = "BEAR"
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.MainMenuContainer.ResumeLayout(False)
         Me.MainMenuContainer.PerformLayout()
@@ -603,4 +610,5 @@ Partial Class frmMain
     Friend WithEvents OpenFlycastDataFolderToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CrashToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CrashthreadToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ControlsToolStripMenuItem As ToolStripMenuItem
 End Class

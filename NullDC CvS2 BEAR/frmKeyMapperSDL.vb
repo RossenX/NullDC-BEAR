@@ -1007,15 +1007,20 @@ Public Class frmKeyMapperSDL
 
                                             If _TranslatedControls(_player - 1) Is Nothing Then
                                                 tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+
                                             ElseIf _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
+
                                                 If isXinput Then
                                                     tmpControlString += " " & MednafenXinputButtonToSDLxInputButton(_TranslatedControls(_player - 1)(_KeyCode))
+
                                                 Else
                                                     tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
+
                                                 End If
 
                                             Else
                                                 tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+
                                             End If
                                             Exit For
 
