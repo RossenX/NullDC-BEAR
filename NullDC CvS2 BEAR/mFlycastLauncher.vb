@@ -162,7 +162,7 @@ ReDoConfigs:
 
         File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
 
-        ' FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=no "
+        FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=no "
         ' FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no " Ok so this causes instant crash
 
         FlycastInfo.Arguments += "-config config:rend.UseMipmaps=no "
@@ -198,6 +198,7 @@ ReDoConfigs:
                 If romdetails(2) = "dc" Or romdetails(2) = "fly_dc" Then
                     FileSystem.FileCopy(MainformRef.NullDCPath & "\dc\vmu_data_host.bin", MainformRef.NullDCPath & "\flycast\data\vmu_save_A1.bin")
                     FlycastInfo.Arguments += "-config config:GGPOAnalogAxes=2 "
+
                 Else
                     FlycastInfo.Arguments += "-config config:GGPOAnalogAxes=0 "
                 End If
