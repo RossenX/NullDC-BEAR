@@ -133,6 +133,8 @@ ReDoConfigs:
             'Dreamcast.SavestateSlot = 0
             If line.StartsWith("Dreamcast.SavestateSlot = ") Then lines(linenumber) = "Dreamcast.SavestateSlot = 0"
 
+            If line.StartsWith("pvr.AutoSkipFrame = ") Then lines(linenumber) = "pvr.AutoSkipFrame = 0"
+
             If line.StartsWith("rend.CrossHairColor1 = ") Then lines(linenumber) = "rend.CrossHairColor1 = 0"
             If line.StartsWith("rend.CrossHairColor2 = ") Then lines(linenumber) = "rend.CrossHairColor2 = 0"
             If line.StartsWith("rend.CrossHairColor3 = ") Then lines(linenumber) = "rend.CrossHairColor3 = 0"
@@ -184,6 +186,8 @@ ReDoConfigs:
         FlycastInfo.Arguments += "-config config:Dreamcast.Broadcast=" & Broadcast & " "
         FlycastInfo.Arguments += "-config config:Dreamcast.Language=1 "
         FlycastInfo.Arguments += "-config config:FastGDRomLoad=no "
+
+        FlycastInfo.Arguments += "-config network:pvr.AutoSkipFrame=0 "
 
         ' Enable GGPO if it's online
         If MainformRef.ConfigFile.Status = "Offline" Then

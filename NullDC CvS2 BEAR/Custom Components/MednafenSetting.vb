@@ -52,14 +52,14 @@ Public Class MednafenSetting
             For i = 0 To ConfigFile.Count - 1
                 If SpecialFunction = 1 Then
                     If ConfigFile(i).StartsWith("ScreenWidth = ") Then
-                        Dim cw As Short = CInt(ConfigFile(i).Split("=")(1).Trim)
+                        Dim cw As Short = CInt(ConfigFile(i).Split("=")(1).Trim.Replace(",", "."))
                         _loadedValue = cw / 320
 
                     End If
 
                 Else
                     If ConfigFile(i).StartsWith(cfgSplit.Trim & Separator) Then
-                        _loadedValue = ConfigFile(i).Split(" ")(ConfigFile(i).Split.Count - 1).Replace("""", "")
+                        _loadedValue = ConfigFile(i).Split(" ")(ConfigFile(i).Split.Count - 1).Replace("""", "").Replace(",", ".")
 
                     End If
 
@@ -99,7 +99,10 @@ Public Class MednafenSetting
                 SettingContainer.SetRow(Controller, 1)
                 SettingContainer.SetColumn(Controller, 1)
                 SettingContainer.Controls.Add(Controller)
-            Case 2 And IsNumeric(_configs(0)) And IsNumeric(_configs(1)) ' Min/Max Value
+            Case 2 And IsNumeric(_configs(0).Replace(",", ".")) And IsNumeric(_configs(1).Replace(",", ".")) ' Min/Max Value
+                _configs(0) = _configs(0).Replace(",", ".")
+                _configs(1) = _configs(0).Replace(",", ".")
+
                 Dim Controller As New TrackBar
                 Controller.Minimum = CInt(_configs(0)) * ChangeRate
                 Controller.Maximum = CInt(_configs(1)) * ChangeRate
@@ -111,12 +114,12 @@ Public Class MednafenSetting
 
                 If Not _loadedValue = "" Then
 
-                    If (CInt(_loadedValue.Trim) * ChangeRate) > Controller.Maximum Then
+                    If (CInt(_loadedValue.Trim.Replace(",", ".")) * ChangeRate) > Controller.Maximum Then
                         Controller.Value = Controller.Maximum
-                    ElseIf (CInt(_loadedValue.Trim) * ChangeRate) < Controller.Minimum Then
+                    ElseIf (CInt(_loadedValue.Trim.Replace(",", ".")) * ChangeRate) < Controller.Minimum Then
                         Controller.Value = Controller.Minimum
                     Else
-                        Controller.Value = (CDec(_loadedValue) * ChangeRate)
+                        Controller.Value = (CDec(_loadedValue.Trim.Replace(",", ".")) * ChangeRate)
                     End If
 
                 End If
@@ -223,6 +226,8 @@ Public Class MednafenSetting
     End Sub
 
     Private Sub UpdateCFG(ByVal _newvalue As String)
+        _newvalue = _newvalue.Replace(",", ".")
+
         Dim EntryFound As Boolean = False
         Dim cfgSplit = ConfigString.Split(",")
 
@@ -249,10 +254,10 @@ Public Class MednafenSetting
                 If SpecialFunction = 1 Then ' Special Functino for Mupen Resolution Handling
 
                     If ConfigFile(i).StartsWith("ScreenWidth = ") Then
-                        ConfigFile(i) = "ScreenWidth = " & (320 * _newvalue)
+                        ConfigFile(i) = "ScreenWidth = " & (320 * CInt(_newvalue.Trim.Replace(",", ".")))
                         EntryFound = True
                     ElseIf ConfigFile(i).StartsWith("ScreenHeight = ") Then
-                        ConfigFile(i) = "ScreenHeight = " & (240 * _newvalue)
+                        ConfigFile(i) = "ScreenHeight = " & (240 * CInt(_newvalue.Trim.Replace(",", ".")))
                         EntryFound = True
                     End If
 
