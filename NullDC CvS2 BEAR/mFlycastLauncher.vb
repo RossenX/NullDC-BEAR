@@ -64,19 +64,34 @@ Public Class MFlycastLauncher
         If MainformRef.ConfigFile.Vsync = 1 Then Vsync = "yes"
         'FlycastInfo.Arguments += "-config config:rend.vsync=" & Vsync & " "
 
-        Dim CheckIfCreated As String() = {"GGPOAnalogAxes", "Stats", "maple_sdl_joystick_0", "maple_sdl_joystick_1", "maple_sdl_joystick_2", "maple_sdl_joystick_3", "maple_sdl_joystick_4"}
-        Dim InSection As String() = {"network", "network", "input", "input", "input", "input", "input"}
-        Dim ValueDefault As String() = {"2", "yes", "-1", "-1", "-1", "-1", "-1"}
-        Dim WereCreated As Boolean() = {False, False, False, False, False, False, False}
+        Dim CheckIfCreated As String() = {"GGPOAnalogAxes", "Stats", "maple_sdl_joystick_0", "maple_sdl_joystick_1", "maple_sdl_joystick_2", "maple_sdl_joystick_3", "maple_sdl_joystick_4", "p1Name", "p2Name"}
+        Dim InSection As String() = {"network", "network", "input", "input", "input", "input", "input", "network", "network"}
+        Dim ValueDefault As String() = {"2", "yes", "-1", "-1", "-1", "-1", "-1", "Player 1", "Player 2"}
+        Dim WereCreated As Boolean() = {False, False, False, False, False, False, False, False, False}
 
         Dim ControlsFile = File.ReadAllLines(GetControlsFilePath())
-        Dim Joystick As String() = {"0", "0"}
-        For Each _line In ControlsFile
-            If _line.StartsWith("Joystick=") Then
-                Joystick = _line.Split("=")(1).Split("|")
-                Exit For
+
+        Dim tempPeripheral As String() = {"", ""}
+        Dim tempJoystick As String() = {"", ""}
+
+        For Each line As String In ControlsFile
+            If line.StartsWith("Peripheral=") Then
+                tempPeripheral(0) = (CInt(line.Split("=")(1).Split("|")(0)) * 4).ToString
+                tempPeripheral(1) = (CInt(line.Split("=")(1).Split("|")(1)) * 4).ToString
+            End If
+            If line.StartsWith("Joystick=") Then
+                tempJoystick(0) = line.Split("=")(1).Split("|")(0)
+                tempJoystick(1) = line.Split("=")(1).Split("|")(1)
             End If
         Next
+
+        Dim WeArePort = 0
+        'We're port A
+        If MainformRef.ConfigFile.Status = "Hosting" Or MainformRef.ConfigFile.Status = "Offline" Then
+            WeArePort = 0
+        Else ' We're port B
+            WeArePort = 1
+        End If
 
 ReDoConfigs:
 
@@ -103,11 +118,52 @@ ReDoConfigs:
                 End If
             Next
 
+            If line.StartsWith("p1Name = ") Then
+                If MainformRef.ConfigFile.Status = "Hosting" Then
+                    lines(linenumber) = "p1Name = " & MainformRef.ConfigFile.Name
+                ElseIf MainformRef.ConfigFile.Status = "Client" Then
+                    lines(linenumber) = "p1Name = " & MainformRef.Challenger.name
+                Else
+                    lines(linenumber) = "p1Name = " & MainformRef.ConfigFile.Name
+                End If
+            End If
+
+            If line.StartsWith("p2Name = ") Then
+                If MainformRef.ConfigFile.Status = "Hosting" Then
+                    lines(linenumber) = "p2Name = " & MainformRef.Challenger.name
+                ElseIf MainformRef.ConfigFile.Status = "Client" Then
+                    lines(linenumber) = "p2Name = " & MainformRef.ConfigFile.Name
+                Else
+                    lines(linenumber) = "p2Name = " & MainformRef.ConfigFile.P2Name
+                End If
+            End If
+
             If line.StartsWith("rend.vsync = ") Then lines(linenumber) = "rend.vsync = " & Vsync
+
+            ' For now set them all to controller, since the savestates use two controllers. When savestatesa re all removed,i'll enable this
+            'If line.StartsWith("device1 = ") Then
+            'If MainformRef.ConfigFile.Status = "Offline" Then ' This is Offline
+            'lines(linenumber) = "device1 = " & tempPeripheral(0)
+            'ElseIf MainformRef.ConfigFile.Status = "Hosting" Then ' We're Hosting
+            'lines(linenumber) = "device1 = " & tempPeripheral(0)
+            'Else ' We're client (Since spectating isn't a thing yet
+            'lines(linenumber) = "device1 = " & MainformRef.Challenger.peripheral
+            'End If
+            'End If
 
             If line.StartsWith("device1 = ") Then lines(linenumber) = "device1 = 0"
             If line.StartsWith("device1.1 = ") Then lines(linenumber) = "device1.1 = 1"
             If line.StartsWith("device1.2 = ") Then lines(linenumber) = "device1.2 = 10"
+
+            'If line.StartsWith("device2 = ") Then
+            'If MainformRef.ConfigFile.Status = "Offline" Then
+            'lines(linenumber) = "device2 = " & tempPeripheral(1)
+            'ElseIf MainformRef.ConfigFile.Status = "Hosting" Then
+            'lines(linenumber) = "device2 = " & MainformRef.Challenger.peripheral
+            'Else
+            'lines(linenumber) = "device2 = " & tempPeripheral(0)
+            'End If
+            'End If
 
             If line.StartsWith("device2 = ") Then lines(linenumber) = "device2 = 0"
             If line.StartsWith("device2.1 = ") Then lines(linenumber) = "device2.1 = 10"
@@ -156,6 +212,31 @@ ReDoConfigs:
                 If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = yes"
 
             End If
+
+            ' Set Joysticks
+
+            If line.StartsWith("maple_sdl_joystick_") Then
+
+                If line.StartsWith("maple_sdl_joystick_" & tempJoystick(0)) Then ' This is our Controller we want to use
+                    lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(0) & " = " & WeArePort
+
+                ElseIf line.StartsWith("maple_sdl_joystick_" & tempJoystick(1)) Then ' This is the second player controller, for offline we set it for online we don't
+
+                    If MainformRef.ConfigFile.Status = "Offline" Then
+                        lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = 1"
+                    Else
+                        lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = -1"
+                    End If
+                Else
+
+                    lines(linenumber) = line.Split("=")(0) & " = -1"
+                End If
+
+            End If
+
+            If line.StartsWith("maple_sdl_keyboard =") Then lines(linenumber) = "maple_sdl_keyboard = " & WeArePort
+            If line.StartsWith("maple_sdl_mouse =") Then lines(linenumber) = "maple_sdl_mouse = -1" ' No Mouse For Now
+
 
             linenumber += 1
         Next

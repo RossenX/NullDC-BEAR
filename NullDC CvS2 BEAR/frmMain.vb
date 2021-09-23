@@ -171,9 +171,24 @@ Public Class frmMain
         End If
 
         If needsUpdate Or IsBeta Then
+            RemoveGGPOStates() ' Remove the states in case some are messed up so we can extract the ones we use
             UnzipResToDir(My.Resources.Updates, "bear_tmp_updates.zip", NullDCPath)
             UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath, True)
             UnzipResToDir(My.Resources.Deps, "bear_tmp_deps.zip", NullDCPath & "\dc", True)
+        End If
+
+    End Sub
+
+    Private Sub RemoveGGPOStates()
+        If Directory.Exists(NullDCPath & "\Flycast") Then
+            If Directory.Exists(NullDCPath & "\Flycast\data") Then
+                Dim files As String() = Directory.GetFiles(NullDCPath & "\Flycast\data\", "*.state-ggpo")
+                For Each _file In files
+                    File.SetAttributes(_file, FileAttributes.Normal)
+                    File.Delete(_file)
+
+                Next
+            End If
         End If
 
     End Sub

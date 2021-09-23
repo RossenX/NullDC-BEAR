@@ -540,7 +540,8 @@ Partial Class frmKeyMapperSDL
         'DeadzoneTB
         '
         Me.DeadzoneTB.Location = New System.Drawing.Point(3, 85)
-        Me.DeadzoneTB.Maximum = 100
+        Me.DeadzoneTB.Maximum = 95
+        Me.DeadzoneTB.Minimum = 5
         Me.DeadzoneTB.Name = "DeadzoneTB"
         Me.DeadzoneTB.Size = New System.Drawing.Size(194, 45)
         Me.DeadzoneTB.TabIndex = 58
