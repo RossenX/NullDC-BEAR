@@ -100,8 +100,8 @@ Public Class MednafenSetting
                 SettingContainer.SetColumn(Controller, 1)
                 SettingContainer.Controls.Add(Controller)
             Case 2 And IsNumeric(_configs(0).Replace(",", ".")) And IsNumeric(_configs(1).Replace(",", ".")) ' Min/Max Value
-                _configs(0) = _configs(0).Replace(",", ".")
-                _configs(1) = _configs(0).Replace(",", ".")
+                _configs(0) = _configs(0).Trim.Replace(",", ".")
+                _configs(1) = _configs(1).Trim.Replace(",", ".")
 
                 Dim Controller As New TrackBar
                 Controller.Minimum = CInt(_configs(0)) * ChangeRate
