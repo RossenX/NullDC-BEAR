@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = True
+    Public IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.94i" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.95" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -290,7 +290,7 @@ UpdateTry:
         If ConfigFile.FirstRun Then frmSetup.ShowDialog(Me)
         AddHandler RefreshTimer.Tick, AddressOf RefreshTimer_tick
 
-        If GamesList.Count = 0 Then NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
+        'If GamesList.Count = 0 Then NotificationForm.ShowMessage("You don't seem to have any games, click the Free DLC button to get some.")
 
         CreateRomFolderWatcher()
         RefreshPlayerList(False)
@@ -304,7 +304,7 @@ UpdateTry:
             NotificationForm.ShowMessageDialog("SDL Updated. Please Check Your Controls and re-save")
         End If
 
-        If (needsUpdate Or FirstRun) And Not IsBeta Then
+        If (needsUpdate Or ConfigFile.FirstRun) And Not IsBeta Then
             frmKeyMapperSDL.Show(Me)
 
         End If
@@ -413,7 +413,8 @@ UpdateTry:
             Watchers(RomFoldersCount).NotifyFilter =
             NotifyFilters.CreationTime Or
             NotifyFilters.DirectoryName Or
-            NotifyFilters.FileName
+            NotifyFilters.FileName Or
+            NotifyFilters.LastWrite
 
             AddHandler Watchers(RomFoldersCount).Changed, AddressOf RomFolderChange
             AddHandler Watchers(RomFoldersCount).Created, AddressOf RomFolderChange

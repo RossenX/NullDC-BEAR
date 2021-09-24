@@ -31,7 +31,7 @@ Public Class frmChallengeGameSelect
             Exit Sub
         End If
 
-        If MainformRef.Challenger IsNot Nothing And MainformRef.GamesList(GameToLaunch)(2) = "n64" Then
+        If _Challenger IsNot Nothing And MainformRef.GamesList(GameToLaunch)(2) = "n64" Then
             MainformRef.NotificationForm.ShowMessage("N64 Netplay coming soon...")
             Exit Sub
 

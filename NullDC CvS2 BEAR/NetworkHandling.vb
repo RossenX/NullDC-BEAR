@@ -295,7 +295,7 @@ Public Class NetworkHandling
                 Else
                     If senderip = MainformRef.Challenger.ip Then
                         If MainformRef.IsNullDCRunning Or MainformRef.FlycastLauncher.FlycastProc IsNot Nothing Then
-                            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & ",eeprom,", MainformRef.Challenger.ip)
+                            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & MainformRef.NullDCLauncher.Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom,", MainformRef.Challenger.ip)
 
                         End If
                     Else

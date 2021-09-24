@@ -140,110 +140,122 @@ ReDoConfigs:
 
             If line.StartsWith("rend.vsync = ") Then lines(linenumber) = "rend.vsync = " & Vsync
 
-            ' For now set them all to controller, since the savestates use two controllers. When savestatesa re all removed,i'll enable this
-            'If line.StartsWith("device1 = ") Then
-            'If MainformRef.ConfigFile.Status = "Offline" Then ' This is Offline
-            'lines(linenumber) = "device1 = " & tempPeripheral(0)
-            'ElseIf MainformRef.ConfigFile.Status = "Hosting" Then ' We're Hosting
-            'lines(linenumber) = "device1 = " & tempPeripheral(0)
-            'Else ' We're client (Since spectating isn't a thing yet
-            'lines(linenumber) = "device1 = " & MainformRef.Challenger.peripheral
-            'End If
-            'End If
+            'For Now set them all To controller, since the savestates use two controllers. When savestatesa re all removed,i'll enable this
+            If line.StartsWith("device1 = ") Then
+                If romdetails(2) = "na" Or romdetails(2) = "fly_na" Then ' If this is Naomi then it's always the dreamcast controller
+                    lines(linenumber) = "device1 = 0"
 
-            If line.StartsWith("device1 = ") Then lines(linenumber) = "device1 = 0"
-            If line.StartsWith("device1.1 = ") Then lines(linenumber) = "device1.1 = 1"
-            If line.StartsWith("device1.2 = ") Then lines(linenumber) = "device1.2 = 10"
-
-            'If line.StartsWith("device2 = ") Then
-            'If MainformRef.ConfigFile.Status = "Offline" Then
-            'lines(linenumber) = "device2 = " & tempPeripheral(1)
-            'ElseIf MainformRef.ConfigFile.Status = "Hosting" Then
-            'lines(linenumber) = "device2 = " & MainformRef.Challenger.peripheral
-            'Else
-            'lines(linenumber) = "device2 = " & tempPeripheral(0)
-            'End If
-            'End If
-
-            If line.StartsWith("device2 = ") Then lines(linenumber) = "device2 = 0"
-            If line.StartsWith("device2.1 = ") Then lines(linenumber) = "device2.1 = 10"
-            If line.StartsWith("device2.2 = ") Then lines(linenumber) = "device2.2 = 10"
-
-            If line.StartsWith("device3 = ") Then lines(linenumber) = "device3 = 10"
-            If line.StartsWith("device3.1 = ") Then lines(linenumber) = "device3.1 = 10"
-            If line.StartsWith("device3.2 = ") Then lines(linenumber) = "device3.2 = 10"
-
-            If line.StartsWith("device4 = ") Then lines(linenumber) = "device4 = 10"
-            If line.StartsWith("device4.1 = ") Then lines(linenumber) = "device4.1 = 10"
-            If line.StartsWith("device4.2 = ") Then lines(linenumber) = "device4.2 = 10"
-
-            ' This one is here only so people can still edit it in game
-            If line.StartsWith("aica.AudioVolume = ") Then lines(linenumber) = "aica.AudioVolume = " & MainformRef.ConfigFile.EmulatorVolume
-            If line.StartsWith("aica.ForceMono = ") Then lines(linenumber) = "aica.ForceMono = " & ForceMono
-
-            If line.StartsWith("maple_sdl_") Then
-                lines(linenumber) = lines(linenumber).Split("=")(0).Trim & " = " & PlayerID
-            End If
-
-            If line.StartsWith("Dreamcast.AutoLoadState = ") Then lines(linenumber) = "Dreamcast.AutoLoadState = yes"
-            'Dreamcast.SavestateSlot = 0
-            If line.StartsWith("Dreamcast.SavestateSlot = ") Then lines(linenumber) = "Dreamcast.SavestateSlot = 0"
-
-            If line.StartsWith("pvr.AutoSkipFrame = ") Then lines(linenumber) = "pvr.AutoSkipFrame = 0"
-
-            If line.StartsWith("rend.CrossHairColor1 = ") Then lines(linenumber) = "rend.CrossHairColor1 = 0"
-            If line.StartsWith("rend.CrossHairColor2 = ") Then lines(linenumber) = "rend.CrossHairColor2 = 0"
-            If line.StartsWith("rend.CrossHairColor3 = ") Then lines(linenumber) = "rend.CrossHairColor3 = 0"
-            If line.StartsWith("rend.CrossHairColor4 = ") Then lines(linenumber) = "rend.CrossHairColor4 = 0"
-
-            If line.StartsWith("GGPOAnalogAxes = ") Then
-                Select Case romdetails(2)
-                    Case "na", "fc_na", "fly_na"
-                        lines(linenumber) = "GGPOAnalogAxes = 0"
-                    Case Else
-                        lines(linenumber) = "GGPOAnalogAxes = 2"
-                End Select
-
-            End If
-
-            If MainformRef.ConfigFile.Status = "Offline" Then
-                If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = no"
-            Else
-                If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = yes"
-
-            End If
-
-            ' Set Joysticks
-
-            If line.StartsWith("maple_sdl_joystick_") Then
-
-                If line.StartsWith("maple_sdl_joystick_" & tempJoystick(0)) Then ' This is our Controller we want to use
-                    lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(0) & " = " & WeArePort
-
-                ElseIf line.StartsWith("maple_sdl_joystick_" & tempJoystick(1)) Then ' This is the second player controller, for offline we set it for online we don't
-
-                    If MainformRef.ConfigFile.Status = "Offline" Then
-                        lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = 1"
-                    Else
-                        lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = -1"
-                    End If
                 Else
-
-                    lines(linenumber) = line.Split("=")(0) & " = -1"
+                    If MainformRef.ConfigFile.Status = "Offline" Then ' This is Offline
+                        lines(linenumber) = "device1 = " & tempPeripheral(0)
+                    ElseIf MainformRef.ConfigFile.Status = "Hosting" Then ' We're Hosting
+                        lines(linenumber) = "device1 = " & tempPeripheral(0)
+                    Else ' We're client (Since spectating isn't a thing yet
+                        lines(linenumber) = "device1 = " & CInt(MainformRef.Challenger.peripheral) * 4
+                    End If
                 End If
 
             End If
 
-            If line.StartsWith("maple_sdl_keyboard =") Then lines(linenumber) = "maple_sdl_keyboard = " & WeArePort
-            If line.StartsWith("maple_sdl_mouse =") Then lines(linenumber) = "maple_sdl_mouse = -1" ' No Mouse For Now
+            'If line.StartsWith("device1 = ") Then lines(linenumber) = "device1 = 0"
+            If line.StartsWith("device1.1 = ") Then lines(linenumber) = "device1.1 = 1"
+            If line.StartsWith("device1.2 = ") Then lines(linenumber) = "device1.2 = 10"
+
+            If line.StartsWith("device2 = ") Then
+                If romdetails(2) = "na" Or romdetails(2) = "fly_na" Then
+                    lines(linenumber) = "device2 = 0"
+
+                Else
+                    If MainformRef.ConfigFile.Status = "Offline" Then
+                        lines(linenumber) = "device2 = " & tempPeripheral(1)
+                    ElseIf MainformRef.ConfigFile.Status = "Hosting" Then
+                        lines(linenumber) = "device2 = " & CInt(MainformRef.Challenger.peripheral) * 4
+                    Else
+                        lines(linenumber) = "device2 = " & tempPeripheral(0)
+                    End If
+                End If
+
+            End If
+
+            'If line.StartsWith("device2 = ") Then lines(linenumber) = "device2 = 0"
+            If line.StartsWith("device2.1 = ") Then lines(linenumber) = "device2.1 = 10"
+                If line.StartsWith("device2.2 = ") Then lines(linenumber) = "device2.2 = 10"
+
+                If line.StartsWith("device3 = ") Then lines(linenumber) = "device3 = 10"
+                If line.StartsWith("device3.1 = ") Then lines(linenumber) = "device3.1 = 10"
+                If line.StartsWith("device3.2 = ") Then lines(linenumber) = "device3.2 = 10"
+
+                If line.StartsWith("device4 = ") Then lines(linenumber) = "device4 = 10"
+                If line.StartsWith("device4.1 = ") Then lines(linenumber) = "device4.1 = 10"
+                If line.StartsWith("device4.2 = ") Then lines(linenumber) = "device4.2 = 10"
+
+                ' This one is here only so people can still edit it in game
+                If line.StartsWith("aica.AudioVolume = ") Then lines(linenumber) = "aica.AudioVolume = " & MainformRef.ConfigFile.EmulatorVolume
+                If line.StartsWith("aica.ForceMono = ") Then lines(linenumber) = "aica.ForceMono = " & ForceMono
+
+                If line.StartsWith("maple_sdl_") Then
+                    lines(linenumber) = lines(linenumber).Split("=")(0).Trim & " = " & PlayerID
+                End If
+
+                If line.StartsWith("Dreamcast.AutoLoadState = ") Then lines(linenumber) = "Dreamcast.AutoLoadState = yes"
+                'Dreamcast.SavestateSlot = 0
+                If line.StartsWith("Dreamcast.SavestateSlot = ") Then lines(linenumber) = "Dreamcast.SavestateSlot = 0"
+
+                If line.StartsWith("pvr.AutoSkipFrame = ") Then lines(linenumber) = "pvr.AutoSkipFrame = 0"
+
+                If line.StartsWith("rend.CrossHairColor1 = ") Then lines(linenumber) = "rend.CrossHairColor1 = 0"
+                If line.StartsWith("rend.CrossHairColor2 = ") Then lines(linenumber) = "rend.CrossHairColor2 = 0"
+                If line.StartsWith("rend.CrossHairColor3 = ") Then lines(linenumber) = "rend.CrossHairColor3 = 0"
+                If line.StartsWith("rend.CrossHairColor4 = ") Then lines(linenumber) = "rend.CrossHairColor4 = 0"
+
+                If line.StartsWith("GGPOAnalogAxes = ") Then
+                    Select Case romdetails(2)
+                        Case "na", "fc_na", "fly_na"
+                            lines(linenumber) = "GGPOAnalogAxes = 0"
+                        Case Else
+                            lines(linenumber) = "GGPOAnalogAxes = 2"
+                    End Select
+
+                End If
+
+                If MainformRef.ConfigFile.Status = "Offline" Then
+                    If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = no"
+                Else
+                    If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = yes"
+
+                End If
+
+                ' Set Joysticks
+
+                If line.StartsWith("maple_sdl_joystick_") Then
+
+                    If line.StartsWith("maple_sdl_joystick_" & tempJoystick(0)) Then ' This is our Controller we want to use
+                        lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(0) & " = " & WeArePort
+
+                    ElseIf line.StartsWith("maple_sdl_joystick_" & tempJoystick(1)) Then ' This is the second player controller, for offline we set it for online we don't
+
+                        If MainformRef.ConfigFile.Status = "Offline" Then
+                            lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = 1"
+                        Else
+                            lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = -1"
+                        End If
+                    Else
+
+                        lines(linenumber) = line.Split("=")(0) & " = -1"
+                    End If
+
+                End If
+
+                If line.StartsWith("maple_sdl_keyboard =") Then lines(linenumber) = "maple_sdl_keyboard = " & WeArePort
+                If line.StartsWith("maple_sdl_mouse =") Then lines(linenumber) = "maple_sdl_mouse = -1" ' No Mouse For Now
 
 
-            linenumber += 1
-        Next
+                linenumber += 1
+            Next
 
-        ' Check if created stuff and if not then create them
+            ' Check if created stuff and if not then create them
 
-        File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
+            File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
 
         FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=no "
         ' FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no " Ok so this causes instant crash
