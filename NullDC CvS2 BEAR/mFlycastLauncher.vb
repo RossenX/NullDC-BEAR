@@ -50,6 +50,7 @@ Public Class MFlycastLauncher
         RemoveAllTheShit()
 
         Dim FlycastInfo As New ProcessStartInfo
+        FlycastInfo.WorkingDirectory = MainformRef.NullDCPath & "\flycast"
         FlycastInfo.FileName = MainformRef.NullDCPath & "\flycast\flycast.exe"
         Dim romdetails = MainformRef.GamesList(_romname)
 

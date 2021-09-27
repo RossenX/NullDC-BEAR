@@ -11,7 +11,7 @@ Public Class frmMain
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.95a" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.95c" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -298,11 +298,6 @@ UpdateTry:
         cbStatus.Text = ConfigFile.Status
 
         ForceOpenPanelToolStripMenuItem.Visible = IsBeta
-
-        ' Let people know of anything
-        If needsUpdate And Not IsBeta Then
-            NotificationForm.ShowMessageDialog("SDL Updated. Please Check Your Controls and re-save")
-        End If
 
     End Sub
 

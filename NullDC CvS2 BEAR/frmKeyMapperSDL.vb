@@ -496,6 +496,7 @@ Public Class frmKeyMapperSDL
 
         If ControllerCB.SelectedIndex > -1 Then
             Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)
+            CheckForMappingFile(Joy)
             Console.WriteLine(Joy)
         End If
 
@@ -1740,6 +1741,7 @@ Public Class frmKeyMapperSDL
 
             If Not Joystick(PlayerTab.SelectedIndex) = -1 Then
                 Joy = SDL_GameControllerOpen(Joystick(PlayerTab.SelectedIndex))
+                CheckForMappingFile(Joy)
             End If
 
             AddHandler ControllerCB.SelectedIndexChanged, AddressOf ControllerCB_SelectedIndexChanged
@@ -1773,6 +1775,17 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
+    Private Sub CheckForMappingFile(ByRef _joy As IntPtr)
+        Dim map = SDL_GameControllerMapping(_joy)
+        If map Is Nothing Then
+            MsgBox("No Mapping Found for This Controller, please click REMAP CONTROLLER")
+            If Not ControllerCB.SelectedIndex = 0 Then
+                frmSDLMappingTool.ShowDialog(Me)
+            End If
+        End If
+
+    End Sub
+
     Private Sub Btn_Close_Click(sender As Object, e As EventArgs) Handles btn_Close.Click
         If MainformRef.IsFileInUse(MainformRef.NullDCPath & "\mednafen\stdout.txt") And File.Exists(MainformRef.NullDCPath & "\mednafen\stdout.txt") Then
             MsgBox("Cannot Save While Mednafen Is Running")
@@ -1799,6 +1812,7 @@ Public Class frmKeyMapperSDL
 
             If ControllerCB.SelectedValue >= 0 Then
                 Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)
+                CheckForMappingFile(Joy)
             End If
 
             'Console.WriteLine("joystick " & ControllerCB.SelectedValue)

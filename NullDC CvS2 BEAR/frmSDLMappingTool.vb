@@ -36,15 +36,16 @@ Public Class frmSDLMappingTool
         If Me.Visible Then
             Me.CenterToParent()
 
+            If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
+                SDL_Init(SDL_INIT_GAMECONTROLLER)
+                Console.WriteLine("SDL_INIT")
+            End If
+
             If SDL_WasInit(SDL_INIT_JOYSTICK) = 0 Then
                 SDL_Init(SDL_INIT_JOYSTICK)
                 Console.WriteLine("SDL_INIT")
             End If
 
-            If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
-                SDL_Init(SDL_INIT_GAMECONTROLLER)
-                Console.WriteLine("SDL_INIT")
-            End If
 
             If frmKeyMapperSDL.ControllerCB.SelectedValue >= 0 Then
                 Joy = SDL_JoystickOpen(frmKeyMapperSDL.ControllerCB.SelectedValue)
@@ -96,10 +97,12 @@ Public Class frmSDLMappingTool
     Private Sub GetIdles()
 
         AxisIdle.Clear()
+        SDL_PumpEvents()
+        SDL_JoystickUpdate()
         For i = 0 To SDL_JoystickNumAxes(Joy) - 1
-            SDL_JoystickUpdate()
             AxisIdle.Add(SDL_JoystickGetAxis(Joy, i))
             Console.WriteLine("Idle: " & i & ":" & SDL_JoystickGetAxis(Joy, i))
+
         Next
 
     End Sub

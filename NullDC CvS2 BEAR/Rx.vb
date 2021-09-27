@@ -1111,6 +1111,7 @@ Module Rx
         Dim GUIDSTRING As String = Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
 
         Dim _SDLMapping = SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(_index))
+
         Dim _MednafenMapping As String = ""
 
         Dim MednafenControllerConfigLines As String()
