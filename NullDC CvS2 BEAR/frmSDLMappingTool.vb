@@ -430,41 +430,6 @@ Public Class frmSDLMappingTool
 
                       SDL_GameControllerAddMappingsFromFile(MainformRef.NullDCPath & "\bearcontrollerdb.txt")
 
-                      ' Mednafen Shit
-                      Dim MednafenControllerConfigLines() As String
-
-                      If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
-                          MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
-                      Else
-                          MednafenControllerConfigLines = {""}
-                      End If
-
-                      Dim MednafenTranslated = BEARButtonToMednafenButton(ConfigStringFinal, SDL_JoystickNumAxes(Joy))
-                      ' Mednafen Mapping String is:
-                      Dim MednafenConfigString = GUIDSTRING
-
-                      For i = 0 To MednafenTranslated.Count - 1
-                          MednafenConfigString += "," & MednafenTranslated.Keys(i) & ":" & MednafenTranslated.Values(i)
-                      Next
-
-                      ' Ok now the Mednafen Mapping should look like: GUID:MEDNAFENID,<Mapping>:<MednafenTranslation>,...
-                      Dim MednafenEntryFound As Boolean = False
-                      For i = 0 To MednafenControllerConfigLines.Count - 1
-                          If MednafenControllerConfigLines(i).StartsWith(GUIDSTRING) Then ' Config for this controller was found already, override it
-                              MednafenControllerConfigLines(i) = MednafenConfigString
-                              MednafenEntryFound = True
-                              Console.WriteLine("Found Existing Mednafen Controller Entry")
-                              Exit For
-                          End If
-                      Next
-
-                      If Not MednafenEntryFound Then
-                          File.AppendAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {MednafenConfigString})
-                      Else
-                          File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", MednafenControllerConfigLines)
-                      End If
-
-                      ' Done Mednafen shit
                       SDL_GameControllerAddMapping(ConfigStringFinal)
                       frmKeyMapperSDL.UpdateControllersList()
                       frmKeyMapperSDL.AutoGenerateButtonConfigs(ConfigStringFinal)

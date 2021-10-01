@@ -6,12 +6,12 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = False
+    Public IsBeta As Boolean = True
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
 
-    Public Ver As String = "1.95c" 'Psst make sure to also change DreamcastGameOptimizations.txt
+    Public Ver As String = "1.95d" 'Psst make sure to also change DreamcastGameOptimizations.txt
 
     ' Public InputHandler As InputHandling
     Public NetworkHandler As NetworkHandling
@@ -49,7 +49,6 @@ Public Class frmMain
         ' This call is required by the designer.
         InitializeComponent()
         needsUpdate = IsBeta
-
     End Sub
 
     Private Sub CheckifUpdateRequired()
@@ -1360,6 +1359,8 @@ UpdateTry:
 
         For Each _opnForm As Form In _OpenForms
             _opnForm.Close()
+            _opnForm.Dispose()
+            Me.Close()
         Next
 
         ConfigFile.Status = ConfigFile.AwayStatus
@@ -1401,12 +1402,6 @@ UpdateTry:
         ' ProcessStartInfo.CreateNoWindow = True
         ' ProcessStartInfo.Arguments = "/c net stop RvControlSvc"
         ' Process.Start(processStartInfo)
-
-        Try
-            End
-        Catch ex As Exception
-
-        End Try
 
     End Sub
 

@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing.Drawing2D
 Imports System.IO
+Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Threading
 Imports SDL2.SDL
@@ -45,7 +46,7 @@ Module Rx
 
         End If
 
-            Return KeyProfileFile
+        Return KeyProfileFile
     End Function
 
     Public Sub LoadGaggedUsers()
@@ -845,9 +846,9 @@ Module Rx
         SDLK_F11 = 292
         SDLK_F12 = 293
         SDLK_F13 = 294
-        SDLK_F14		= 295
+        SDLK_F14 = 295
         SDLK_F15 = 296
-        SDLK_NUMLOCK		= 300
+        SDLK_NUMLOCK = 300
         SDLK_CAPSLOCK = 301
         SDLK_SCROLLOCK = 302
         SDLK_RSHIFT = 303
@@ -921,84 +922,189 @@ Module Rx
         "rightx", "rightx", "righty", "righty",
         "lefttrigger", "righttrigger"}
 
-    ' a0+ = leftx
-    ' a1+ = lefty
-    ' a2+ = rightx
-    ' a3+ = righty
+    Public Function ConvertBEARMappingToMednafen(ByVal _BearString As String, ByVal _numaxes As Int16, ByVal _isXINPUT As Boolean) As Dictionary(Of String, String)
+        _numaxes -= 1
 
-    ' 03000000790000000600000000000000,Generic USB Joystick,a:b2,b:b1,x:b3,y:b0,leftshoulder:b4,rightshoulder:b5,lefttrigger:b6,righttrigger:b7,leftstick:b10,rightstick:b11,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,back:b8,start:b9,leftx:a0~,lefty:a1,rightx:a2~,righty:a4,platform:Windows,
-
-    ' Translate BEAR Button (SDL GameController Mapped Button) to Mednafen (Joystick old style mapping)
-    Public Function BEARButtonToMednafenButton(ByVal _configString As String, ByVal _numAxes As String) As Dictionary(Of String, String)
         Dim _TranslatedControls As New Dictionary(Of String, String)
+        Dim SplitConfigLine = _BearString.Split(",")
 
-        ' New method
-        Dim _buttonIndex = 0
-        For Each _buttonToMap In ButtonNames
+        Dim BindIndex = 0
+        For Each _ButtonName In ButtonNames
             Dim MednafenControlLine = ""
-            Dim SplitConfigLine = _configString.Split(",")
 
             For Each _ButtonConfig In SplitConfigLine
-                If _ButtonConfig.Split(":")(0) = ButtonMappedName(_buttonIndex) Then
-                    Dim _ButtonButton = _ButtonConfig.Split(":")(1)
+                If _ButtonConfig.Split(":")(0) = ButtonMappedName(BindIndex) Then
+                    Dim _ButtonBind = _ButtonConfig.Split(":")(1)
 
-                    If _ButtonButton.Contains("b") Then
-                        MednafenControlLine = _ButtonButton.Replace("b", "button_")
+                    ' This is a button
+                    If _ButtonBind.Contains("b") Then
+                        If _isXINPUT Then ' XINPUT all buttons are 4 offsets higher to make room for the dpad
 
-                    ElseIf _ButtonButton.Contains("a") Then
+                            Dim btnIndex = ""
+                            Select Case _ButtonBind.Replace("b", "")
+                                Case "0" ' A
+                                    btnIndex = "12"
+                                Case "1" ' B
+                                    btnIndex = "13"
+                                Case "2" ' X
+                                    btnIndex = "14"
+                                Case "3" ' Y
+                                    btnIndex = "15"
+                                Case "4" ' LS
+                                    btnIndex = "8"
+                                Case "5" ' RS
+                                    btnIndex = "9"
+                                Case "6" ' Select
+                                    btnIndex = "5"
+                                Case "7" ' Start
+                                    btnIndex = "4"
+                                Case "8" ' L3
+                                    btnIndex = "6"
+                                Case "9" ' R3
+                                    btnIndex = "7"
+                                Case "11" ' DPAD
+                                    btnIndex = "0"
+                                Case "12" ' DPAD
+                                    btnIndex = "1"
+                                Case "13" ' DPAD
+                                    btnIndex = "2"
+                                Case "14" ' DPAD
+                                    btnIndex = "3"
+                            End Select
 
-                        Dim Negative As Boolean = _ButtonButton.Contains("-")
-                        Dim Reverse As Boolean = _ButtonButton.Contains("~")
-                        Dim Axis As String = _ButtonButton.Replace("+", "").Replace("-", "").Replace("a", "").Replace("~", "")
+                            MednafenControlLine = "button_" & btnIndex
+                        Else
+                            MednafenControlLine = _ButtonBind.Replace("b", "button_") ' DINPUT Should not need any adjustments
+
+                        End If
+
+                    ElseIf _ButtonBind.Contains("a") Then
+
+                        Dim Negative As Boolean = _ButtonBind.Contains("-")
+                        Dim Reverse As Boolean = _ButtonBind.Contains("~")
+                        Dim Axis As Int16 = CInt(_ButtonBind.Replace("+", "").Replace("-", "").Replace("a", "").Replace("~", ""))
+
+                        Dim Lower = False
+                        If CInt(Axis) > 2 And _numaxes > 3 Then ' Skip the Z Axis
+                            Axis -= 1
+                            Lower = True
+                        End If
 
                         MednafenControlLine = "abs_" & Axis
 
-                        If Not ButtonNames(_buttonIndex).Contains("-") Then ' This is an axis that wants to be possitive
-                            If Negative Then ' Possitive axis map to negative joy direction
+                        If Not ButtonNames(BindIndex).Contains("-") Then
+                            If Negative Then
                                 MednafenControlLine += "-"
                             Else
-                                MednafenControlLine += "+" ' Possive axis to possitive joy direction
+                                MednafenControlLine += "+"
                             End If
-                        Else ' This is his bother, he's pretty negative
-                            If Negative Then ' negative axis map to negative joy direction
+                        Else
+                            If Negative Then
                                 MednafenControlLine += "+"
                             Else
-                                MednafenControlLine += "-" ' negative axis to possitive joy direction
+                                MednafenControlLine += "-"
                             End If
+                        End If
+
+                        If _isXINPUT And ButtonMappedName(BindIndex).EndsWith("y") Then 'Y Axis is flipped in xinput 
+                            If MednafenControlLine.EndsWith("+") Then
+                                MednafenControlLine = MednafenControlLine.Replace("+", "-")
+                            Else
+                                MednafenControlLine = MednafenControlLine.Replace("-", "+")
+                            End If
+
                         End If
 
                         If Reverse Then
-                            If MednafenControlLine.EndsWith("+") Then
-                                MednafenControlLine += "-"
+                            If ButtonMappedName(BindIndex).EndsWith("trigger") Then
+                                If MednafenControlLine.EndsWith("+") Then
+                                    MednafenControlLine += "-"
+                                Else
+                                    MednafenControlLine += "+"
+                                End If
                             Else
-                                MednafenControlLine += "+"
+                                If MednafenControlLine.EndsWith("+") Then
+                                    MednafenControlLine = MednafenControlLine.Replace("+", "-")
+                                Else
+                                    MednafenControlLine = MednafenControlLine.Replace("-", "+")
+                                End If
+
                             End If
+
                         End If
 
-                    ElseIf _ButtonButton.Contains("h") Then
-                        Dim _hatNumber As Int16 = CInt(_ButtonButton.Chars(1).ToString)
+                        If _isXINPUT And Not Lower Then ' XINPUT the Z Trigger (2) + - are 4+ 5+
 
-                        Select Case _ButtonButton.Split(".")(1)
-                            Case "1" ' UP
-                                MednafenControlLine = "abs_" & _numAxes + _hatNumber + 1 & "-"
-                            Case "4" ' DOWN
-                                MednafenControlLine = "abs_" & _numAxes + _hatNumber + 1 & "+"
-                            Case "8" ' LEFT
-                                MednafenControlLine = "abs_" & _numAxes + _hatNumber & "-"
-                            Case "2" ' RIGHT
-                                MednafenControlLine = "abs_" & _numAxes + _hatNumber & "+"
-                        End Select
+                            If MednafenControlLine.Contains("abs_2") Then
+
+                                If MednafenControlLine.Contains("abs_2+") Then
+                                    MednafenControlLine = "abs_4+"
+
+                                ElseIf MednafenControlLine.Contains("abs_2-") Then
+                                    MednafenControlLine = "abs_5+"
+
+                                End If
+
+                                If Reverse Then
+                                    MednafenControlLine += "-"
+                                End If
+
+                            End If
+
+                        End If
+
+                    ElseIf _ButtonBind.Contains("h") Then
+                        Dim _hatNumber As Int16 = CInt(_ButtonBind.Chars(1).ToString)
+
+                        If _isXINPUT Then ' XINPUT all buttons are 4 offsets higher to make room for the dpad
+
+                            Select Case _ButtonBind.Split(".")(1)
+                                Case "1" ' UP
+                                    MednafenControlLine = "button_0"
+
+                                Case "4" ' DOWN
+                                    MednafenControlLine = "button_1"
+
+                                Case "8" ' LEFT
+                                    MednafenControlLine = "button_2"
+
+                                Case "2" ' RIGHT
+                                    MednafenControlLine = "button_3"
+
+                            End Select
+
+                        Else
+
+                            Select Case _ButtonBind.Split(".")(1)
+                                Case "1" ' UP
+                                    MednafenControlLine = "abs_" & _numaxes + _hatNumber + 1 & "-"
+
+                                Case "4" ' DOWN
+                                    MednafenControlLine = "abs_" & _numaxes + _hatNumber + 1 & "+"
+
+                                Case "8" ' LEFT
+                                    MednafenControlLine = "abs_" & _numaxes + _hatNumber & "-"
+
+                                Case "2" ' RIGHT
+                                    MednafenControlLine = "abs_" & _numaxes + _hatNumber & "+"
+
+                            End Select
+
+                        End If
+
+
+
 
                     End If
+
+                    If Not MednafenControlLine = "" Then
+                        _TranslatedControls.Add(ButtonNames(BindIndex), MednafenControlLine)
+                    End If
+
                 End If
             Next
 
-            If Not MednafenControlLine = "" Then
-                'Console.WriteLine("Translated: " & ButtonNames(_buttonIndex) & "=" & MednafenControlLine)
-                _TranslatedControls.Add(ButtonNames(_buttonIndex), MednafenControlLine)
-            End If
-
-            _buttonIndex += 1
+            BindIndex += 1
         Next
 
         Return _TranslatedControls
@@ -1006,7 +1112,6 @@ Module Rx
 
     Public Function GetMednafenControllerIDs() As String()
         Try
-
             Dim MedProc As Process = New Process()
             MedProc.StartInfo.FileName = MainformRef.NullDCPath & "\mednafen\mednafen.exe"
             MedProc.StartInfo.EnvironmentVariables.Add("MEDNAFEN_NOPOPUPS", "1")
@@ -1032,7 +1137,6 @@ Module Rx
                         _dinput.Add(line.Trim.Split(" ")(1))
                     End If
 
-                    Console.WriteLine("Found Medanfen Controller ID: " & line.Trim)
                 End If
             Next
 
@@ -1046,6 +1150,10 @@ Module Rx
 
             For Each _id In _dinput
                 ReOrderedIDS.Add(_id)
+            Next
+
+            For Each _c In ReOrderedIDS
+                Console.WriteLine("Found Medanfen Controller ID: " & _c)
             Next
 
             Dim ControllerIndex = 0
@@ -1100,68 +1208,6 @@ Module Rx
         End If
 
         Return MupenButton
-    End Function
-
-    Public Function GetFullMappingStringforIndex(ByVal _index) As String
-
-        Dim Fullstring = ""
-
-        Dim DeviceGUIDasString(40) As Byte
-        SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(_index), DeviceGUIDasString, 40)
-        Dim GUIDSTRING As String = Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
-
-        Dim _SDLMapping = SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(_index))
-
-        Dim _MednafenMapping As String = ""
-
-        Dim MednafenControllerConfigLines As String()
-
-        If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
-            MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
-        Else
-            MednafenControllerConfigLines = {""}
-        End If
-
-        Dim MednafenMappingFound = False
-        For Each _line In MednafenControllerConfigLines
-            If _line.StartsWith(GUIDSTRING) Then
-                MednafenMappingFound = True
-                _MednafenMapping = _line.Trim
-                Exit For
-            End If
-        Next
-
-        If Not MednafenMappingFound Then
-            Dim Joy = SDL_JoystickOpen(_index)
-            Dim _numAxis = SDL_JoystickNumAxes(Joy)
-            ' DO EXTRA CHECK HERE FOR XINPUT AND SET NUM AXIS TO 6 REGARDLESS
-
-            ' If for w.e reason it could not get the mapping or one was never created for this device, then take a shot at using the xinput defaults
-            If _SDLMapping Is Nothing Then
-                _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
-            ElseIf _SDLMapping = "" Then
-                _SDLMapping = "00000000000000000000000000000000,XInput Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Windows,"
-            End If
-
-            Dim MednafenTranslated = BEARButtonToMednafenButton(_SDLMapping, _numAxis)
-            If _MednafenMapping = "" Then
-                _MednafenMapping = GUIDSTRING
-                For i = 0 To MednafenTranslated.Count - 1
-                    _MednafenMapping += "," & MednafenTranslated.Keys(i) & ":" & MednafenTranslated.Values(i)
-                Next
-            End If
-
-            SDL_JoystickClose(Joy)
-        End If
-
-        If Not _SDLMapping.Trim.EndsWith("platform:Windows,") Then
-            If Not _SDLMapping.Trim.EndsWith(",") Then _SDLMapping += ","
-            _SDLMapping += "platform:Windows,"
-
-        End If
-
-        Return _SDLMapping.Trim & "|" & _MednafenMapping.Trim
-
     End Function
 
     Public Function MednafenXinputButtonToSDLxInputButton(ByVal _medbutton As String) As String

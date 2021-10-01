@@ -140,8 +140,10 @@ Public Class frmChallengeGameSelect
     End Sub
 
     Private Sub frmChallengeGameSelect_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        e.Cancel = True
-        Me.Visible = False
+        If Not MainformRef.IsClosing Then
+            e.Cancel = True
+            Me.Visible = False
+        End If
 
     End Sub
 

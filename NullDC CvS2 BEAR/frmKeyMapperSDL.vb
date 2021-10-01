@@ -315,49 +315,6 @@ Public Class frmKeyMapperSDL
 
         File.WriteAllLines(_filepath, lines)
 
-        ' Check if we have a mednafen mapping or if we should just make one on the fly
-        Dim MednafenControllerConfigLines
-
-        If File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
-            MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
-        Else
-            MednafenControllerConfigLines = {""}
-
-            For i = 0 To 1
-                If Not Joystick(i) = -1 Then
-                    File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {GetFullMappingStringforIndex(Joystick(i)).Split("|")(1)})
-                End If
-            Next
-            If Not File.Exists(MainformRef.NullDCPath & "\mednafenmapping.txt") Then
-                File.WriteAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt", {})
-            End If
-            MednafenControllerConfigLines = File.ReadAllLines(MainformRef.NullDCPath & "\mednafenmapping.txt")
-
-            MednafenChanged = True
-        End If
-
-        For i = 0 To 1
-            If MednafenChanged = False And Not Joystick(i) = -1 Then
-
-                Dim DeviceGUIDasString(64) As Byte
-                SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(Joystick(i)), DeviceGUIDasString, 64)
-                Dim GUIDSTRING As String = Encoding.ASCII.GetString(DeviceGUIDasString).ToString.Replace(vbNullChar, "").Trim
-
-                Dim MednafenMappingFound = False
-                For Each _line In MednafenControllerConfigLines
-                    If _line.StartsWith(GUIDSTRING) Then
-                        MednafenMappingFound = True
-                        Exit For
-                    End If
-                Next
-
-                If Not MednafenMappingFound Then
-                    MednafenChanged = True
-                End If
-
-            End If
-        Next
-
     End Sub
 
     Private Sub LoadProfiles(Optional ByVal _profile As String = Nothing)
@@ -891,28 +848,15 @@ Public Class frmKeyMapperSDL
                 Dim _TranslatedControls(2) As Dictionary(Of String, String)
 
                 For i = 0 To 1
-                    If Not tempJoystick(i) = -1 Then
-                        If _TranslatedControls(i) Is Nothing Then
-
-                            Dim _MednafenMapping = GetFullMappingStringforIndex(tempJoystick(i)).Split("|")(1).Split(",")
-
-                            For Each _split In _MednafenMapping
-                                Dim _splitsplit = _split.Split(":")
-
-                                If _TranslatedControls(i) Is Nothing Then
-                                    _TranslatedControls(i) = New Dictionary(Of String, String)
-                                End If
-
-                                If _splitsplit.Count = 1 Then
-                                    _TranslatedControls(i).Add(_splitsplit(0), _splitsplit(0))
-                                Else
-                                    _TranslatedControls(i).Add(_splitsplit(0), _splitsplit(1))
-                                End If
-
-                            Next
-                        End If
+                    If Not tempJoystick(i) = "-1" Then
+                        Dim _isx = False
+                        If MednafenControllerID(i).Contains("xinput_") Then _isx = True
+                        Dim tmpJoy = SDL_JoystickOpen(CInt(tempJoystick(i)))
+                        _TranslatedControls(i) = ConvertBEARMappingToMednafen(SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(tempJoystick(i))), SDL_JoystickNumAxes(tmpJoy), _isx)
+                        SDL_JoystickClose(tmpJoy)
                     End If
                 Next
+
 
                 Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
                 linenumber = 0
@@ -993,14 +937,11 @@ Public Class frmKeyMapperSDL
                                     Else ' Joystick
                                         Dim _tmpID = ""
                                         If Not MednafenControllerID(_player - 1) = "0x0" Then
-                                            Dim isXinput = False
-                                            If MednafenControllerID(_player - 1).StartsWith("xinput_") Then
-                                                _tmpID = MednafenControllerID(_player - 1).Replace("xinput_", "")
-                                                isXinput = True
-                                            Else
-                                                _tmpID = MednafenControllerID(_player - 1)
-                                            End If
 
+                                            _tmpID = MednafenControllerID(_player - 1)
+                                            If _tmpID.Contains("xinput_") Then
+                                                _tmpID = _tmpID.Replace("xinput_", "")
+                                            End If
                                             tmpControlString += "joystick " & _tmpID
                                             If _tmpID Is Nothing Then
                                                 tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
@@ -1011,13 +952,7 @@ Public Class frmKeyMapperSDL
 
                                             ElseIf _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
 
-                                                If isXinput Then
-                                                    tmpControlString += " " & MednafenXinputButtonToSDLxInputButton(_TranslatedControls(_player - 1)(_KeyCode))
-
-                                                Else
-                                                    tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
-
-                                                End If
+                                                tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
 
                                             Else
                                                 tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
@@ -1121,7 +1056,7 @@ Public Class frmKeyMapperSDL
                     If tempJoystick(i) = -1 Then
                         MupenControls(i) += "name = ""Keyboard""" & vbNewLine
                     Else
-                        TempMappingString(i) = GetFullMappingStringforIndex(tempJoystick(i)).Split("|")(0)
+                        TempMappingString(i) = SDL_GameControllerMappingForIndex(tempJoystick(i))
                         MupenControls(i) += "name = """ & SDL_GameControllerNameForIndex(tempJoystick(i)) & """" & vbNewLine
                     End If
 
