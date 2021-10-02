@@ -10,7 +10,6 @@ Public Class frmKeyMapperSDL
     Dim Joystick(2) As Short
     Dim Deadzone(2) As Short
     Dim Peripheral(2) As Short
-    Dim MednafenControllerID(128) As String ' Support up to 16 Controllers at once
 
     Public Joy As IntPtr
     Dim _InputThread As Threading.Thread
@@ -196,26 +195,16 @@ Public Class frmKeyMapperSDL
         lines(1) = "Joystick=" & Joystick(0) & "|" & Joystick(1)
         lines(2) = "Deadzone=" & Deadzone(0) & "|" & Deadzone(1)
         lines(3) = "Peripheral=" & Peripheral(0) & "|" & Peripheral(1)
-        Dim Med_string = "MednafenControllerID="
+        lines(4) = "MednafenControllerID=0x0|0x0"
 
-        If Joystick(0) = -1 Then
-            Med_string += "0x0"
-        ElseIf MednafenControllerID(Joystick(0)) Is Nothing Then
-            Med_string += "0x0"
-        Else
-            Med_string += MednafenControllerID(Joystick(0))
-        End If
+        ' Shift Mednafen IDs
 
-        Med_string += "|"
-        If Joystick(1) = -1 Then
-            Med_string += "0x0"
-        ElseIf MednafenControllerID(Joystick(1)) Is Nothing Then
-            Med_string += "0x0"
-        Else
-            Med_string += MednafenControllerID(Joystick(1))
-        End If
+        Dim CurrentIDs As New ArrayList
+        Dim MednafenIDs As New ArrayList
 
-        lines(4) = Med_string
+        For i = 0 To SDL_NumJoysticks() - 1
+            CurrentIDs.Add(SDL_JoystickGetDeviceGUID(i).ToString.Substring(0, 23))
+        Next
 
         Dim TabsToSave As New ArrayList
         TabsToSave.Add(Page_Naomi_ArcadeStick)
@@ -371,16 +360,21 @@ Public Class frmKeyMapperSDL
 
     Public Sub LoadSettings(Optional _profile As String = Nothing)
 
-        LoadProfiles(_profile)
-
-        Dim configLines As String()
-
         Dim KeyProfileFile As String = GetControlsFilePath(_profile)
-        Console.WriteLine("Loaded Profile: " & KeyProfileFile)
 
         If Not File.Exists(KeyProfileFile) Then
             GenerateDefaults(KeyProfileFile)
+        Else
+            Dim a = File.ReadAllLines(KeyProfileFile)
+            If a.Count < 200 Then
+                GenerateDefaults(KeyProfileFile)
+            End If
         End If
+
+        LoadProfiles(_profile)
+
+        Dim configLines As String()
+        Console.WriteLine("Loaded Profile: " & KeyProfileFile)
 
         Dim LoadingControls As Int16 = 0
         While MainformRef.IsFileInUse(KeyProfileFile)
@@ -695,7 +689,8 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub SaveEverything()
-        '_InputThread.Abort() ' Aight not accepting inputs anymore
+
+        _InputThread.Abort()
         btn_Close.Text = "Saving..."
         Dim ControlFilePath = GetControlsFilePath()
         SaveSettings(ControlFilePath)
@@ -716,7 +711,6 @@ Public Class frmKeyMapperSDL
         Dim tempPeripheral As String() = {"", ""}
         Dim tempJoystick As String() = {"", ""}
         Dim TempDeadzone As String() = {"", ""}
-        Dim MednafenControllerID As String() = {"", ""}
 
         For Each line As String In ControlsConfigs
             If line.StartsWith("Peripheral=") Then
@@ -732,10 +726,6 @@ Public Class frmKeyMapperSDL
             If line.StartsWith("Deadzone=") Then
                 TempDeadzone(0) = line.Split("=")(1).Split("|")(0)
                 TempDeadzone(1) = line.Split("=")(1).Split("|")(1)
-            End If
-            If line.StartsWith("MednafenControllerID=") Then
-                MednafenControllerID(0) = line.Split("=")(1).Split("|")(0)
-                MednafenControllerID(1) = line.Split("=")(1).Split("|")(1)
             End If
         Next
 
@@ -839,9 +829,282 @@ Public Class frmKeyMapperSDL
             MsgBox("Failed to save NullDC-Dreamcast Controls. Error: " & ex.Message)
         End Try
 
+        ' Mupen Controls
         Try
-            ' Mednafen Controls
+
+            If MupenChanged Then
+
+                Console.WriteLine("Saving Mupen Controls")
+
+                Dim TempMappingString As String() = {"", ""}
+                Dim MupenControls As String() = {"", ""}
+
+                ' Ok new IDEA. FULLY MANUAL
+
+                ' Here's what we need in the configs
+                ' version = 2.000000
+                ' mode = 0
+                ' device = {Joystick}
+                ' name = {Name}
+                ' plugged = True
+                ' plugin = 2
+                ' mouse = False
+                ' MouseSensitivity = "2.00,2.00"
+                ' AnalogDeadzone = "6553,6553"
+                ' AnalogPeak = "32768,32768"
+
+                ' DPad R
+                ' DPad L
+                ' DPad D
+                ' DPad U
+                ' Start
+                ' Z Trig
+                ' B Button
+                ' A Button
+                ' C Button R 
+                ' C Button L
+                ' C Button D 
+                ' C Button U 
+                ' R Trig
+                ' L Trig
+                ' Mempak switch
+                ' Rumblepak switch
+                ' X Axis
+                ' Y Axis
+
+                ' Initial Setup Stuff of values that are always the same
+                For i = 0 To 1
+                    MupenControls(i) += "Input-SDL-Control" & i + 1 & "]" & vbNewLine
+                    MupenControls(i) += vbNewLine
+                    MupenControls(i) += "version = 2.000000" & vbNewLine
+
+                    MupenControls(i) += "mode = 0" & vbNewLine
+
+                    MupenControls(i) += "device = " & Joystick(i) & vbNewLine
+
+                    If tempJoystick(i) = -1 Then
+                        MupenControls(i) += "name = ""Keyboard""" & vbNewLine
+                    Else
+                        TempMappingString(i) = SDL_GameControllerMappingForIndex(tempJoystick(i))
+                        MupenControls(i) += "name = """ & SDL_GameControllerNameForIndex(tempJoystick(i)) & """" & vbNewLine
+                    End If
+
+                    MupenControls(i) += "plugged = True" & vbNewLine
+
+                    MupenControls(i) += "plugin = 2" & vbNewLine
+                    MupenControls(i) += "MouseSensitivity = ""2.00,2.00"" " & vbNewLine
+
+                    MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "," & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "" & vbNewLine
+                    MupenControls(i) += "AnalogPeak = ""32768,32768"" " & vbNewLine
+
+                Next
+
+                ' Go through the configs and generate a valid string for each of the buttons
+                ' Right so we save these axis for now since we need both of them before we can generate a string which we'll do in the end
+                Dim Y_AxisPlus As String() = {"", ""}
+                Dim Y_AxisMinus As String() = {"", ""}
+
+                Dim X_AxisPlus As String() = {"", ""}
+                Dim X_AxisMinus As String() = {"", ""}
+
+                For Each control_line In ControlsConfigs
+                    If control_line.StartsWith("mup_") Then
+                        If control_line.Contains("Z Trig") Then
+                            Console.WriteLine("hello")
+                        End If
+
+                        For i = 0 To 1
+                            ' Check if this is the axis bind becuase that has to be handled differently
+                            If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
+
+                                If control_line.StartsWith("mup_X Axis+") Then
+                                    X_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+
+                                ElseIf control_line.StartsWith("mup_X Axis-") Then
+                                    X_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+
+                                ElseIf control_line.StartsWith("mup_Y Axis+") Then
+                                    Y_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+
+                                ElseIf control_line.StartsWith("mup_Y Axis-") Then
+                                    Y_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
+
+                                End If
+
+                            Else
+                                MupenControls(i) += control_line.Split("=")(0).Replace("mup_", "") & " = " & BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i)) & vbNewLine
+
+                            End If
+                        Next
+                    End If
+
+                Next
+
+                ' Do The Analog Stuff
+                For i = 0 To 1
+
+                    If X_AxisMinus(i) = "" Or X_AxisPlus(i) = "" Then
+                        MupenControls(i) += "X Axis = "
+                    Else
+                        MupenControls(i) += "X Axis = " & X_AxisMinus(i).Split("(")(0) & "(" & X_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & X_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+                    End If
+
+
+                    If Y_AxisMinus(i) = "" Or Y_AxisPlus(i) = "" Then
+                        MupenControls(i) += "Y Axis = "
+                    Else
+                        MupenControls(i) += "Y Axis = " & Y_AxisMinus(i).Split("(")(0) & "(" & Y_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & Y_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+                    End If
+
+                Next
+
+                Dim MupenConfigs = File.ReadAllText(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg").Split("[")
+
+                Dim PCount = 0
+                For i = 0 To MupenConfigs.Count - 1
+
+                    If MupenConfigs(i).StartsWith("Input-SDL-Control1]") Then MupenConfigs(i) = MupenControls(0)
+
+                    If MupenConfigs(i).StartsWith("Input-SDL-Control2]") Then MupenConfigs(i) = MupenControls(1) : Exit For
+
+                    ' Just in case we make it down this far somehow
+                    If MupenConfigs(i).StartsWith("Input-SDL-Control3]") Then Exit For
+
+                Next
+
+                For i = 1 To MupenConfigs.Count - 1
+                    MupenConfigs(i) = "[" & MupenConfigs(i)
+
+                Next
+
+                For i = 0 To MupenConfigs.Count - 1
+                    If i > 0 Then
+                        MupenConfigs(i) = vbNewLine & MupenConfigs(i).Trim
+                    Else
+                        MupenConfigs(i) = MupenConfigs(i).Trim
+                    End If
+
+                Next
+
+                File.WriteAllLines(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg", MupenConfigs)
+
+            End If
+
+        Catch ex As Exception
+            MsgBox("Failed to save Mupen Controls. Error: " & ex.Message)
+
+        End Try
+
+        ' Flycast
+        Try
+            Console.WriteLine("Saving Flycast Controls")
+            For _playerID = 0 To 1 ' p1 p2
+                For _JoystickID = 0 To SDL_NumJoysticks() - 1
+                    If tempJoystick(_playerID) = _JoystickID Then
+                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "arcade", ControlsConfigs, _playerID, tempPeripheral(_playerID))
+                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "dc", ControlsConfigs, _playerID, tempPeripheral(_playerID))
+
+                    End If
+                Next
+
+                If _playerID = 0 Then
+                    GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, 0, tempPeripheral(_playerID))
+                    GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, 0, tempPeripheral(_playerID))
+
+                End If
+
+            Next
+        Catch ex As Exception
+            MsgBox("Failed to save Flycast Controls. Error: " & ex.Message)
+
+        End Try
+
+        ' Mednafen Controls
+        Try
+
             btn_Close.Text = "Saving..."
+
+            ' Open GameController this time but with xinput on, to fix the mednafen IDs
+
+            Dim MednafenControllerIDs = Rx.GetMednafenControllerIDs
+            Dim CurrentIDs As New ArrayList
+            Dim MednafenIDs As New ArrayList
+
+            Dim OriginalGUID As New ArrayList
+
+            Dim TempMappingStrings = {"", ""}
+
+            For i = 0 To 1
+                If Not tempJoystick(i) = "-1" Then
+                    TempMappingStrings(i) = SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(tempJoystick(i)))
+                End If
+            Next
+
+            For i = 0 To SDL_NumJoysticks() - 1
+                CurrentIDs.Add(SDL_JoystickGetDeviceGUID(i).ToString.Substring(0, 23))
+                OriginalGUID.Add(SDL_JoystickGetDeviceGUID(i))
+            Next
+
+            ' Give unique names to things with the same GUID
+
+            For i = 0 To CurrentIDs.Count - 1
+                Dim DuplicateCount = 0
+                For j = 0 To CurrentIDs.Count - 1
+                    If Not i = j Then
+                        If CurrentIDs(j) = CurrentIDs(i) Then
+                            CurrentIDs(j) += DuplicateCount.ToString
+                            DuplicateCount += 1
+                        End If
+                    End If
+                Next
+            Next
+
+            SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER)
+            SDL_QuitSubSystem(SDL_INIT_JOYSTICK)
+            SDL_Quit()
+            SDL_Delay(2500)
+
+            While SDL_WasInit(SDL_INIT_JOYSTICK) Or SDL_WasInit(SDL_INIT_GAMECONTROLLER)
+                SDL_Delay(100)
+            End While
+
+            SDL_SetHint(SDL_HINT_XINPUT_ENABLED, "1")
+            SDL_Init(SDL_INIT_GAMECONTROLLER)
+            SDL_Init(SDL_INIT_JOYSTICK)
+
+            For i = 0 To SDL_NumJoysticks() - 1
+                MednafenIDs.Add(SDL_JoystickGetDeviceGUID(i).ToString.Substring(0, 23))
+            Next
+
+            For i = 0 To MednafenIDs.Count - 1
+                Dim DuplicateCount = 0
+                For j = 0 To MednafenIDs.Count - 1
+                    If Not i = j Then
+                        If MednafenIDs(j) = MednafenIDs(i) Then
+                            MednafenIDs(j) += DuplicateCount.ToString
+                            DuplicateCount += 1
+                        End If
+                    End If
+                Next
+            Next
+
+            Dim MednafenControllerID = {"0x0", "0x0"}
+            For i = 0 To 1
+                If Not tempJoystick(i) = "-1" Then
+                    Dim ShiftID = 0
+                    For Each _medID In MednafenIDs
+                        If CurrentIDs(CInt(tempJoystick(i))) = _medID Then
+                            MednafenControllerID(i) = MednafenControllerIDs(ShiftID)
+                            Exit For
+
+                        End If
+                        ShiftID += 1
+                    Next
+                Else
+                    MednafenControllerID(i) = "0x0"
+
+                End If
+            Next
 
             If MednafenChanged Then
                 Console.WriteLine("Saving Mednafen Controls")
@@ -852,11 +1115,11 @@ Public Class frmKeyMapperSDL
                         Dim _isx = False
                         If MednafenControllerID(i).Contains("xinput_") Then _isx = True
                         Dim tmpJoy = SDL_JoystickOpen(CInt(tempJoystick(i)))
-                        _TranslatedControls(i) = ConvertBEARMappingToMednafen(SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(tempJoystick(i))), SDL_JoystickNumAxes(tmpJoy), _isx)
+                        _TranslatedControls(i) = ConvertBEARMappingToMednafen(TempMappingStrings(i), SDL_JoystickNumAxes(tmpJoy), _isx)
                         SDL_JoystickClose(tmpJoy)
+
                     End If
                 Next
-
 
                 Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
                 linenumber = 0
@@ -1000,196 +1263,6 @@ Public Class frmKeyMapperSDL
 
         End Try
 
-        ' Mupen Controls
-        Try
-
-            If MupenChanged Then
-
-                Console.WriteLine("Saving Mupen Controls")
-
-                Dim TempMappingString As String() = {"", ""}
-                Dim MupenControls As String() = {"", ""}
-
-                ' Ok new IDEA. FULLY MANUAL
-
-                ' Here's what we need in the configs
-                ' version = 2.000000
-                ' mode = 0
-                ' device = {Joystick}
-                ' name = {Name}
-                ' plugged = True
-                ' plugin = 2
-                ' mouse = False
-                ' MouseSensitivity = "2.00,2.00"
-                ' AnalogDeadzone = "6553,6553"
-                ' AnalogPeak = "32768,32768"
-
-                ' DPad R
-                ' DPad L
-                ' DPad D
-                ' DPad U
-                ' Start
-                ' Z Trig
-                ' B Button
-                ' A Button
-                ' C Button R 
-                ' C Button L
-                ' C Button D 
-                ' C Button U 
-                ' R Trig
-                ' L Trig
-                ' Mempak switch
-                ' Rumblepak switch
-                ' X Axis
-                ' Y Axis
-
-                ' Initial Setup Stuff of values that are always the same
-                For i = 0 To 1
-                    MupenControls(i) += "Input-SDL-Control" & i + 1 & "]" & vbNewLine
-                    MupenControls(i) += vbNewLine
-                    MupenControls(i) += "version = 2.000000" & vbNewLine
-
-                    MupenControls(i) += "mode = 0" & vbNewLine
-
-                    MupenControls(i) += "device = " & Joystick(i) & vbNewLine
-
-                    If tempJoystick(i) = -1 Then
-                        MupenControls(i) += "name = ""Keyboard""" & vbNewLine
-                    Else
-                        TempMappingString(i) = SDL_GameControllerMappingForIndex(tempJoystick(i))
-                        MupenControls(i) += "name = """ & SDL_GameControllerNameForIndex(tempJoystick(i)) & """" & vbNewLine
-                    End If
-
-                    MupenControls(i) += "plugged = True" & vbNewLine
-
-                    MupenControls(i) += "plugin = 2" & vbNewLine
-                    MupenControls(i) += "MouseSensitivity = ""2.00,2.00"" " & vbNewLine
-
-                    MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "," & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "" & vbNewLine
-                    MupenControls(i) += "AnalogPeak = ""32768,32768"" " & vbNewLine
-
-                Next
-
-                ' Go through the configs and generate a valid string for each of the buttons
-                ' Right so we save these axis for now since we need both of them before we can generate a string which we'll do in the end
-                Dim Y_AxisPlus As String() = {"", ""}
-                Dim Y_AxisMinus As String() = {"", ""}
-
-                Dim X_AxisPlus As String() = {"", ""}
-                Dim X_AxisMinus As String() = {"", ""}
-
-                For Each control_line In ControlsConfigs
-                    If control_line.StartsWith("mup_") Then
-                        If control_line.Contains("Z Trig") Then
-                            Console.WriteLine("hello")
-                        End If
-
-                        For i = 0 To 1
-                                ' Check if this is the axis bind becuase that has to be handled differently
-                                If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
-
-                                    If control_line.StartsWith("mup_X Axis+") Then
-                                        X_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
-
-                                    ElseIf control_line.StartsWith("mup_X Axis-") Then
-                                        X_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
-
-                                    ElseIf control_line.StartsWith("mup_Y Axis+") Then
-                                        Y_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
-
-                                    ElseIf control_line.StartsWith("mup_Y Axis-") Then
-                                        Y_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
-
-                                    End If
-
-                                Else
-                                    MupenControls(i) += control_line.Split("=")(0).Replace("mup_", "") & " = " & BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i)) & vbNewLine
-
-                                End If
-                            Next
-                        End If
-
-                Next
-
-                ' Do The Analog Stuff
-                For i = 0 To 1
-
-                    If X_AxisMinus(i) = "" Or X_AxisPlus(i) = "" Then
-                        MupenControls(i) += "X Axis = "
-                    Else
-                        MupenControls(i) += "X Axis = " & X_AxisMinus(i).Split("(")(0) & "(" & X_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & X_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
-                    End If
-
-
-                    If Y_AxisMinus(i) = "" Or Y_AxisPlus(i) = "" Then
-                        MupenControls(i) += "Y Axis = "
-                    Else
-                        MupenControls(i) += "Y Axis = " & Y_AxisMinus(i).Split("(")(0) & "(" & Y_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & Y_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
-                    End If
-
-                Next
-
-                Dim MupenConfigs = File.ReadAllText(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg").Split("[")
-
-                Dim PCount = 0
-                For i = 0 To MupenConfigs.Count - 1
-
-                    If MupenConfigs(i).StartsWith("Input-SDL-Control1]") Then MupenConfigs(i) = MupenControls(0)
-
-                    If MupenConfigs(i).StartsWith("Input-SDL-Control2]") Then MupenConfigs(i) = MupenControls(1) : Exit For
-
-                    ' Just in case we make it down this far somehow
-                    If MupenConfigs(i).StartsWith("Input-SDL-Control3]") Then Exit For
-
-                Next
-
-                For i = 1 To MupenConfigs.Count - 1
-                    MupenConfigs(i) = "[" & MupenConfigs(i)
-
-                Next
-
-                For i = 0 To MupenConfigs.Count - 1
-                    If i > 0 Then
-                        MupenConfigs(i) = vbNewLine & MupenConfigs(i).Trim
-                    Else
-                        MupenConfigs(i) = MupenConfigs(i).Trim
-                    End If
-
-                Next
-
-                File.WriteAllLines(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg", MupenConfigs)
-
-            End If
-
-        Catch ex As Exception
-            MsgBox("Failed to save Mupen Controls. Error: " & ex.Message)
-
-        End Try
-
-        ' Flycast
-        Try
-            Console.WriteLine("Saving Flycast Controls")
-            For _playerID = 0 To 1 ' p1 p2
-                For _JoystickID = 0 To SDL_NumJoysticks() - 1
-                    If tempJoystick(_playerID) = _JoystickID Then
-                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "arcade", ControlsConfigs, _playerID, tempPeripheral(_playerID))
-                        GenerateFlycastMapping(SDL_JoystickNameForIndex(_JoystickID), "dc", ControlsConfigs, _playerID, tempPeripheral(_playerID))
-
-                    End If
-                Next
-
-                If _playerID = 0 Then
-                    GenerateFlycastMapping("Keyboard", "dc", ControlsConfigs, 0, tempPeripheral(_playerID))
-                    GenerateFlycastMapping("Keyboard", "arcade", ControlsConfigs, 0, tempPeripheral(_playerID))
-
-                End If
-
-            Next
-        Catch ex As Exception
-            MsgBox("Failed to save Flycast Controls. Error: " & ex.Message)
-
-        End Try
-
         ' Check if nullDC is running to hotload the settings this is getting to annoying to keep up, i'ma just disable it for now
         If MainformRef.IsNullDCRunning Then
             ' If MainformRef.ConfigFile.Game.Split("-")(0).ToLower = "na" Then SendMessage(MainformRef.NullDCLauncher.NullDCproc.MainWindowHandle, &H111, 141, 0)
@@ -1197,7 +1270,6 @@ Public Class frmKeyMapperSDL
 
         End If
 
-        ' Finally Turn Off SDL
     End Sub
 
 
@@ -1728,6 +1800,18 @@ Public Class frmKeyMapperSDL
             MainformRef.ConfigFile.KeyMapProfile = cbProfiles.Text.Trim
             MainformRef.ConfigFile.SaveFile(False)
             SaveEverything()
+
+            If SDL_WasInit(SDL_INIT_JOYSTICK) Or SDL_WasInit(SDL_INIT_GAMECONTROLLER) Then
+                For i = 0 To SDL_NumJoysticks() - 1
+                    Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
+                    SDL_GameControllerClose(SDL_GameControllerFromInstanceID(i))
+                Next
+                SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER)
+                SDL_QuitSubSystem(SDL_INIT_JOYSTICK)
+
+                SDL_Quit()
+            End If
+
             Me.Close()
 
         End If
@@ -1959,12 +2043,16 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub frmKeyMapperSDL_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        For i = 0 To SDL_NumJoysticks() - 1
-            Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
-            SDL_GameControllerClose(SDL_GameControllerFromInstanceID(i))
-        Next
+        If SDL_WasInit(SDL_INIT_JOYSTICK) Or SDL_WasInit(SDL_INIT_GAMECONTROLLER) Then
+            For i = 0 To SDL_NumJoysticks() - 1
+                Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
+                SDL_GameControllerClose(SDL_GameControllerFromInstanceID(i))
+            Next
+            SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER)
+            SDL_QuitSubSystem(SDL_INIT_JOYSTICK)
 
-        SDL_Quit()
+            SDL_Quit()
+        End If
     End Sub
 
 End Class
