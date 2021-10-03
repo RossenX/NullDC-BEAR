@@ -259,7 +259,7 @@ ReDoConfigs:
             File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
 
         FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=no "
-        ' FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no " Ok so this causes instant crash
+        FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no "
 
         FlycastInfo.Arguments += "-config config:rend.UseMipmaps=no "
 

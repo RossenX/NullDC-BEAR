@@ -1272,11 +1272,8 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
-
-
-
-    Private Sub DoAnnoyingFlycastStuff(ByRef CompatStuff As String,
-                                       ByRef DreamcastStuff As String,
+    Private Sub DoAnnoyingFlycastStuff(ByRef analogStuff As String,
+                                       ByRef digitalStuff As String,
                                        ByRef EmulatorStuff As String,
                                        ByVal _ButtonAxisName As String,
                                        ByVal _ButtonName As String,
@@ -1291,9 +1288,9 @@ Public Class frmKeyMapperSDL
             If _ControllerName = "Keyboard" Then ' Keyboard saves Keyboard keys, makes sense
                 If Not KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) = "0" Then
                     If _ButtonName.Contains("analog") Or _ButtonName.Contains("trigger") Then
-                        CompatStuff += _ButtonName & " = " & KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) & vbNewLine
+                        analogStuff += _ButtonName & " = " & KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) & vbNewLine
                     Else
-                        DreamcastStuff += _ButtonName & " = " & KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) & vbNewLine
+                        digitalStuff += _ButtonName & " = " & KeyCodeToSDLScanCode(_ButtonKey.Remove(0, 1)) & vbNewLine
                     End If
 
 
@@ -1303,10 +1300,10 @@ Public Class frmKeyMapperSDL
         ElseIf _ButtonKey.StartsWith("b") Then ' Button
             If Not _ControllerName = "Keyboard" Then
                 If isAxis Then
-                    CompatStuff += _ButtonName & " = " & _ButtonKey.Remove(0, 1) & vbNewLine
+                    analogStuff += _ButtonName & " = " & _ButtonKey.Remove(0, 1) & vbNewLine
 
                 Else
-                    DreamcastStuff += _ButtonName & " = " & _ButtonKey.Remove(0, 1) & vbNewLine
+                    digitalStuff += _ButtonName & " = " & _ButtonKey.Remove(0, 1) & vbNewLine
 
                 End If
 
@@ -1317,17 +1314,17 @@ Public Class frmKeyMapperSDL
                 Dim FlycastMap = _ButtonAxisName & " = " & _ButtonKey.Replace("+", "").Replace("-", "").Replace("~", "").Replace("a", "")
 
                 If isAxis Then
-                    DreamcastStuff += FlycastMap & vbNewLine
+                    digitalStuff += FlycastMap & vbNewLine
 
                 Else
-                    CompatStuff += FlycastMap & vbNewLine
+                    analogStuff += FlycastMap & vbNewLine
 
                 End If
 
                 If _ButtonKey.Contains("-") Then
-                    CompatStuff += FlycastMap.Split("=")(0).Trim & "_inverted = yes" & vbNewLine
+                    analogStuff += FlycastMap.Split("=")(0).Trim & "_inverted = yes" & vbNewLine
                 Else
-                    CompatStuff += FlycastMap.Split("=")(0).Trim & "_inverted = no" & vbNewLine
+                    analogStuff += FlycastMap.Split("=")(0).Trim & "_inverted = no" & vbNewLine
                 End If
 
             End If
@@ -1337,311 +1334,153 @@ Public Class frmKeyMapperSDL
 
     End Sub
 
+    ReadOnly BearToFlycast_Arcade As New Dictionary(Of String, String) From {
+        {"I_BTN0_KEY", "btn_a"},
+        {"I_BTN1_KEY", "btn_b"},
+        {"I_TEST_KEY_1", "btn_dpad2_up"}, '
+        {"I_COIN_KEY", "btn_d"},
+        {"I_BTN2_KEY", "btn_c"}, '
+        {"I_BTN3_KEY", "btn_x"}, '
+        {"I_SERVICE_KEY_1", "btn_dpad2_down"}, '
+        {"I_START_KEY", "btn_start"},
+        {"I_RIGHT_KEY", "btn_dpad1_right"},
+        {"I_LEFT_KEY", "btn_dpad1_left"},
+        {"I_UP_KEY", "btn_dpad1_up"},
+        {"I_DOWN_KEY", "btn_dpad1_down"},
+        {"I_BTN4_KEY", "btn_y"}, '
+        {"I_BTN5_KEY", "btn_z"}, '
+        {"I_BC_03", "BC_03"},
+        {"I_BC_14", "BC_14"},
+        {"I_BC_25", "BC_25"},
+        {"I_BC_01", "BC_01"},
+        {"I_BC_12", "BC_12"},
+        {"I_BC_34", "BC_34"},
+        {"I_BC_45", "BC_45"},
+        {"I_BC_012", "BC_012"},
+        {"I_BC_345", "BC_345"}
+    }
+
+    ReadOnly BearToFlycast_DC As New Dictionary(Of String, String) From {
+        {"CONT_A", "btn_a"},
+        {"CONT_B", "btn_b"},
+        {"CONT_C", "btn_c"},
+        {"CONT_X", "btn_x"},
+        {"CONT_Y", "btn_y"},
+        {"CONT_Z", "btn_z"},
+        {"CONT_START", "btn_start"},
+        {"CONT_DPAD_RIGHT", "btn_dpad1_right"},
+        {"CONT_DPAD_LEFT", "btn_dpad1_left"},
+        {"CONT_DPAD_UP", "btn_dpad1_up"},
+        {"CONT_DPAD_DOWN", "btn_dpad1_down"},
+        {"CONT_ANALOG_LEFT", "btn_analog_left"},
+        {"CONT_ANALOG_RIGHT", "btn_analog_right"},
+        {"CONT_ANALOG_UP", "btn_analog_up"},
+        {"CONT_ANALOG_DOWN", "btn_analog_down"},
+        {"CONT_BC_XA", "BC_XA"},
+        {"CONT_BC_YB", "BC_YB"},
+        {"CONT_BC_CZ", "BC_LR"},
+        {"CONT_BC_ABC", "BC_ABR"},
+        {"CONT_BC_XYZ", "BC_XYL"},
+        {"CONT_BC_AB", "BC_AB"},
+        {"CONT_BC_BC", "BC_BR"},
+        {"CONT_BC_XY", "BC_XY"},
+        {"CONT_BC_YZ", "BC_YL"}
+    }
+
+    ReadOnly BearToFlycast_DC_ArcadeStick As New Dictionary(Of String, String) From {
+        {"STICK_A", "btn_a"},
+        {"STICK_B", "btn_b"},
+        {"STICK_C", "btn_c"},
+        {"STICK_X", "btn_x"},
+        {"STICK_Y", "btn_y"},
+        {"STICK_Z", "btn_z"},
+        {"STICK_START", "btn_start"},
+        {"STICK_DPAD_RIGHT", "btn_dpad1_right"},
+        {"STICK_DPAD_LEFT", "btn_dpad1_left"},
+        {"STICK_DPAD_UP", "btn_dpad1_up"},
+        {"STICK_DPAD_DOWN", "btn_dpad1_down"},
+        {"STICK_ANALOG_LEFT", "btn_analog_left"},
+        {"STICK_ANALOG_RIGHT", "btn_analog_right"},
+        {"STICK_ANALOG_UP", "btn_analog_up"},
+        {"STICK_ANALOG_DOWN", "btn_analog_down"},
+        {"STICK_BC_XA", "BC_XA"},
+        {"STICK_BC_YB", "BC_YB"},
+        {"STICK_BC_CZ", "BC_LR"},
+        {"STICK_BC_ABC", "BC_ABR"},
+        {"STICK_BC_XYZ", "BC_XYL"},
+        {"STICK_BC_AB", "BC_AB"},
+        {"STICK_BC_BC", "BC_BR"},
+        {"STICK_BC_XY", "BC_XY"},
+        {"STICK_BC_YZ", "BC_YL"}
+    }
+
+    Private Sub BEARToFlycastButton(ByRef _Section As String, ByVal FlycastButtonName As String, ByVal FlycastButtonValue As String, ByRef _bindingCount As Int16)
+        _Section += "bind" & _bindingCount & " = " & FlycastButtonValue & ":" & FlycastButtonName & vbNewLine
+        _bindingCount += 1
+    End Sub
 
     Private Sub GenerateFlycastMapping(ByVal _ControllerName As String, ByVal _System As String, ByVal _Controls As String(), ByVal _player As Int16, ByVal _Peripheral As String)
 
         Dim FlycastDreamcastMappingFile As String = ""
-        Dim CompatStuff = "[compat]" & vbNewLine
-        Dim DreamcastStuff = "[dreamcast]" & vbNewLine
-        Dim EmulatorStuff = "[emulator]" & vbNewLine & "version = 2" & vbNewLine & "mapping_name = " & _ControllerName & vbNewLine
+        Dim analogStuff = "[analog]" & vbNewLine
+        Dim analogBindCount = 0
+        Dim digitalStuff = "[digital]" & vbNewLine
+        Dim digitalBindCount = 0
+        Dim EmulatorStuff = "[emulator]" & vbNewLine & "version = 3" & vbNewLine & "mapping_name = " & _ControllerName & vbNewLine
 
         For Each _line In _Controls
 
-            If _line.StartsWith("Deadzone=") Then EmulatorStuff += "dead_zone = " & _line.Split("=")(1).Split("|")(_player) & vbNewLine
+            If _line.Split("=").Count = 1 Then Continue For
+
+            If _line.StartsWith("Deadzone=") Then
+                EmulatorStuff += "dead_zone = " & _line.Split("=")(1).Split("|")(_player) & vbNewLine
+                Continue For
+            End If
+
+            Dim ButtonBEARName = _line.Split("=")(0)
+            Dim BEARButtonValue = _line.Split("=")(1).Split("|")(_player)
+
+            If BEARButtonValue = "k0" Or
+                (_ControllerName = "Keyboard" And Not BEARButtonValue.StartsWith("k")) Or
+                (Not _ControllerName = "Keyboard" And BEARButtonValue.StartsWith("k")) Then
+                Continue For
+            End If
+
+            If _ControllerName = "Keyboard" Then
+                BEARButtonValue = "k" & KeyCodeToSDLScanCode(BEARButtonValue.Remove(0, 1))
+            End If
 
             If _System = "arcade" Then
 
-                ' Direction mapping is weird, sometimes it's 2 buttons sometimes it's 2 axis watafak flycast
+                If Not BearToFlycast_Arcade.ContainsKey(ButtonBEARName) Then Continue For
 
-                If _line.StartsWith("I_BTN0_KEY=") Then ' btn_a 
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_a", "btn_a", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BTN1_KEY=") Then ' btn_b
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_b", "btn_b", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_TEST_KEY_1=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_c", "btn_c", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_COIN_KEY=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_d", "btn_d", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BTN2_KEY=") Then ' btn_x
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_x", "btn_x", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BTN3_KEY=") Then ' btn_y
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_y", "btn_y", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_SERVICE_KEY_1=") Then ' btn_c
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_z", "btn_z", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_START_KEY=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_start", "btn_start", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_LEFT_KEY=") Or _line.StartsWith("I_RIGHT_KEY=") Then ' btn_dpad2_down
-                    ' ok this is elft or right
-                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith("I_RIGHT_KEY=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_x", "axis_dpad1_x", _line, _player, _ControllerName, False)
-                        End If
-
-                    Else
-                        If _line.StartsWith("I_RIGHT_KEY=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_right", "btn_dpad1_right", _line, _player, _ControllerName, False)
-                        Else
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_left", "btn_dpad1_left", _line, _player, _ControllerName, False)
-                        End If
-
-                    End If
-
-                End If
-
-                If _line.StartsWith("I_UP_KEY=") Or _line.StartsWith("I_DOWN_KEY=") Then ' btn_dpad2_down
-                    ' ok this is elft or right
-                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith("I_DOWN_KEY=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_y", "axis_dpad1_y", _line, _player, _ControllerName, False)
-                        End If
-
-                    Else
-                        If _line.StartsWith("I_DOWN_KEY=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_down", "btn_dpad1_down", _line, _player, _ControllerName, False)
-                        Else
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_up", "btn_dpad1_up", _line, _player, _ControllerName, False)
-                        End If
-
-                    End If
-
-                End If
-
-                If _line.StartsWith("I_BTN4_KEY=") Then ' btn_dpad2_up
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad2_up", "btn_dpad2_up", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BTN5_KEY=") Then ' btn_dpad2_down
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad2_down", "btn_dpad2_down", _line, _player, _ControllerName, False)
-                End If
-
-                ' MACROS
-                'I_BC_345 = k0|k0
-                'I_BC_012 = k0|k0
-                'I_BC_45 = k0|k0
-                'I_BC_34 = k0|k0
-                'I_BC_12 = k0|k0
-                'I_BC_01 = k0|k0
-                'I_BC_25 = k0|k0
-                'I_BC_14 = k0|k0
-                'I_BC_03 = k0|k0
-
-                If _line.StartsWith("I_BC_03=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_03", "BC_03", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BC_14=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_14", "BC_14", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BC_25=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_25", "BC_25", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BC_01=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_01", "BC_01", _line, _player, _ControllerName, False)
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_AB", "BC_AB", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BC_12=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_12", "BC_12", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BC_34=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_34", "BC_34", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BC_45=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_45", "BC_45", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BC_012=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_012", "BC_012", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith("I_BC_345=") Then ' 
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_345", "BC_345", _line, _player, _ControllerName, False)
+                If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then
+                    BEARToFlycastButton(analogStuff, BearToFlycast_Arcade(ButtonBEARName), BEARButtonValue.Substring(1, BEARButtonValue.Length - 1), analogBindCount)
+                Else
+                    BEARToFlycastButton(digitalStuff, BearToFlycast_Arcade(ButtonBEARName), BEARButtonValue.Substring(1, BEARButtonValue.Length - 1), digitalBindCount)
                 End If
 
             Else
-                Dim ToStickornotToStick = "CONT_"
-                If _Peripheral = "1" Then ToStickornotToStick = "STICK_"
 
-                ' Direction mapping is weird, sometimes it's 2 buttons sometimes it's 2 axis watafak flycast
+                If _Peripheral = "1" Then ' Arcade Stick
+                    If Not BearToFlycast_DC_ArcadeStick.ContainsKey(ButtonBEARName) Then Continue For
 
-                If _line.StartsWith(ToStickornotToStick & "DPAD_LEFT=") Or _line.StartsWith(ToStickornotToStick & "DPAD_RIGHT=") Then ' btn_dpad2_down
-                    ' ok this is elft or right
-                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith(ToStickornotToStick & "DPAD_RIGHT=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_x", "axis_dpad1_x", _line, _player, _ControllerName, False)
-                        End If
-
+                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then
+                        BEARToFlycastButton(analogStuff, BearToFlycast_DC_ArcadeStick(ButtonBEARName), BEARButtonValue.Substring(1, BEARButtonValue.Length - 1), analogBindCount)
                     Else
-                        If _line.StartsWith(ToStickornotToStick & "DPAD_RIGHT=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_right", "btn_dpad1_right", _line, _player, _ControllerName, False)
-                        Else
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_left", "btn_dpad1_left", _line, _player, _ControllerName, False)
-                        End If
+                        BEARToFlycastButton(digitalStuff, BearToFlycast_DC_ArcadeStick(ButtonBEARName), BEARButtonValue.Substring(1, BEARButtonValue.Length - 1), digitalBindCount)
+                    End If
 
+                Else ' Controller
+                    If Not BearToFlycast_DC.ContainsKey(ButtonBEARName) Then Continue For
+
+                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then
+                        BEARToFlycastButton(analogStuff, BearToFlycast_DC(ButtonBEARName), BEARButtonValue.Substring(1, BEARButtonValue.Length - 1), analogBindCount)
+                    Else
+                        BEARToFlycastButton(digitalStuff, BearToFlycast_DC(ButtonBEARName), BEARButtonValue.Substring(1, BEARButtonValue.Length - 1), digitalBindCount)
                     End If
 
                 End If
-
-                If _line.StartsWith(ToStickornotToStick & "DPAD_UP=") Or _line.StartsWith(ToStickornotToStick & "DPAD_DOWN=") Then ' btn_dpad2_down
-                    ' ok this is elft or right
-                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith(ToStickornotToStick & "DPAD_DOWN=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_dpad1_y", "axis_dpad1_y", _line, _player, _ControllerName, False)
-                        End If
-
-                    Else
-                        If _line.StartsWith(ToStickornotToStick & "DPAD_DOWN=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_down", "btn_dpad1_down", _line, _player, _ControllerName, False)
-                        Else
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_dpad1_up", "btn_dpad1_up", _line, _player, _ControllerName, False)
-                        End If
-
-                    End If
-
-                End If
-
-                ' axis_x
-                If _line.StartsWith(ToStickornotToStick & "ANALOG_LEFT=") Or _line.StartsWith(ToStickornotToStick & "ANALOG_RIGHT=") Then ' btn_dpad2_down
-                    ' ok this is elft or right
-                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith(ToStickornotToStick & "ANALOG_RIGHT=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_x", "axis_x", _line, _player, _ControllerName, True)
-                        End If
-
-                    Else
-                        If _line.StartsWith(ToStickornotToStick & "ANALOG_RIGHT=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_right", "btn_analog_right", _line, _player, _ControllerName, True)
-                        Else
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_left", "btn_analog_left", _line, _player, _ControllerName, True)
-                        End If
-
-                    End If
-
-                End If
-
-                ' axis_y
-                If _line.StartsWith(ToStickornotToStick & "ANALOG_UP=") Or _line.StartsWith(ToStickornotToStick & "ANALOG_DOWN=") Then ' btn_dpad2_down
-                    ' ok this is elft or right
-                    If _line.Split("=")(1).Split("|")(_player).StartsWith("a") Then ' We mapped this to an axis so we have to use the axis thing in flycast
-                        If _line.StartsWith(ToStickornotToStick & "ANALOG_DOWN=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_y", "axis_y", _line, _player, _ControllerName, True)
-                        End If
-
-                    Else
-                        If _line.StartsWith(ToStickornotToStick & "ANALOG_DOWN=") Then
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_down", "btn_analog_down", _line, _player, _ControllerName, True)
-                        Else
-                            DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "btn_analog_up", "btn_analog_up", _line, _player, _ControllerName, True)
-                        End If
-
-                    End If
-
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "A=") Then ' btn_a 
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_a", "btn_a", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "B=") Then ' btn_b
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_b", "btn_b", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "X=") Then ' btn_x
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_x", "btn_x", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "Y=") Then ' btn_y
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_y", "btn_y", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "LSLIDER=") Then ' btn_dpad2_up
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_trigger_left", "btn_trigger_left", _line, _player, _ControllerName, True)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "RSLIDER=") Then ' btn_dpad2_down
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_trigger_right", "btn_trigger_right", _line, _player, _ControllerName, True)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "START=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_start", "btn_start", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "Z=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_z", "btn_z", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "C=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, DreamcastStuff, EmulatorStuff, "axis_btn_c", "btn_c", _line, _player, _ControllerName, False)
-                End If
-
-                ' Macros
-
-                'CONT_BC_ABC = k0|k0
-                'CONT_BC_XYZ = k0|k0
-                'CONT_BC_BC = k0|k0
-                'CONT_BC_AB = k0|k0
-                'CONT_BC_YZ = k0|k0
-                'CONT_BC_XY = k0|k0
-                'CONT_BC_CZ = k0|k0
-                'CONT_BC_YB = k0|k0
-                'CONT_BC_XA = k0|k0
-
-                If _line.StartsWith(ToStickornotToStick & "BC_XA=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_XA", "BC_XA", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "BC_YB=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_YB", "BC_YB", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "BC_CZ=") Then ' L/R
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_LR", "BC_LR", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "BC_XY=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_XY", "BC_XY", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "BC_YZ=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_YL", "BC_YL", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "BC_AB=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_AB", "BC_AB", _line, _player, _ControllerName, False)
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_01", "BC_01", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "BC_BC=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_BR", "BC_BR", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "BC_ABC=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_ABR", "BC_ABR", _line, _player, _ControllerName, False)
-                End If
-
-                If _line.StartsWith(ToStickornotToStick & "BC_XYZ=") Then ' btn_start
-                    DoAnnoyingFlycastStuff(CompatStuff, CompatStuff, CompatStuff, "axis_BC_XYL", "BC_XYL", _line, _player, _ControllerName, False)
-                End If
-
 
             End If
 
@@ -1653,12 +1492,12 @@ Public Class frmKeyMapperSDL
         End If
 
         If _ControllerName = "Keyboard" Then
-            EmulatorStuff += "btn_menu = 43" & vbNewLine
+            digitalStuff += "bind" & digitalBindCount & "= 43:btn_menu" & vbNewLine
         End If
 
         Dim FullMappingFile = ""
-        If Not CompatStuff.Trim = "[compat]" Then FullMappingFile += CompatStuff & vbNewLine
-        If Not DreamcastStuff.Trim = "[dreamcast]" Then FullMappingFile += DreamcastStuff & vbNewLine
+        If Not analogStuff.Trim = "[analog]" Then FullMappingFile += analogStuff & vbNewLine
+        If Not digitalStuff.Trim = "[digital]" Then FullMappingFile += digitalStuff & vbNewLine
         If Not EmulatorStuff.Trim = "[emulator]" Then FullMappingFile += EmulatorStuff
 
         Dim MappingFileName = _ControllerName & isArcadeHuh & ".cfg"
