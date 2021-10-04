@@ -445,7 +445,7 @@ Public Class frmKeyMapperSDL
             Next
         Next
 
-        If ControllerCB.SelectedIndex > -1 Then
+        If ControllerCB.SelectedValue > -1 Then
             Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)
             CheckForMappingFile(Joy)
             Console.WriteLine(Joy)
@@ -1363,10 +1363,10 @@ Public Class frmKeyMapperSDL
     ReadOnly BearToFlycast_DC As New Dictionary(Of String, String) From {
         {"CONT_A", "btn_a"},
         {"CONT_B", "btn_b"},
-        {"CONT_C", "btn_c"},
+        {"CONT_C", "btn_c"}, ' These don't exist but just in case
         {"CONT_X", "btn_x"},
         {"CONT_Y", "btn_y"},
-        {"CONT_Z", "btn_z"},
+        {"CONT_Z", "btn_z"}, ' These don't exist but just in case
         {"CONT_START", "btn_start"},
         {"CONT_DPAD_RIGHT", "btn_dpad1_right"},
         {"CONT_DPAD_LEFT", "btn_dpad1_left"},
@@ -1384,7 +1384,9 @@ Public Class frmKeyMapperSDL
         {"CONT_BC_AB", "BC_AB"},
         {"CONT_BC_BC", "BC_BR"},
         {"CONT_BC_XY", "BC_XY"},
-        {"CONT_BC_YZ", "BC_YL"}
+        {"CONT_BC_YZ", "BC_YL"},
+        {"CONT_LSLIDER", "btn_trigger_left"},
+        {"CONT_RSLIDER", "btn_trigger_right"}
     }
 
     ReadOnly BearToFlycast_DC_ArcadeStick As New Dictionary(Of String, String) From {
@@ -1411,7 +1413,9 @@ Public Class frmKeyMapperSDL
         {"STICK_BC_AB", "BC_AB"},
         {"STICK_BC_BC", "BC_BR"},
         {"STICK_BC_XY", "BC_XY"},
-        {"STICK_BC_YZ", "BC_YL"}
+        {"STICK_BC_YZ", "BC_YL"},
+        {"CONT_LSLIDER", "btn_trigger_left"}, ' These don't exist but just in case
+        {"CONT_RSLIDER", "btn_trigger_right"} ' These don't exist but just in case
     }
 
     Private Sub BEARToFlycastButton(ByRef _Section As String, ByVal FlycastButtonName As String, ByVal FlycastButtonValue As String, ByRef _bindingCount As Int16)
@@ -1624,12 +1628,11 @@ Public Class frmKeyMapperSDL
     Private Sub CheckForMappingFile(ByRef _joy As IntPtr)
         Dim map = SDL_GameControllerMapping(_joy)
         If map Is Nothing Then
-            MsgBox("No Mapping Found for This Controller, please click REMAP CONTROLLER")
+            MsgBox("No Mapping Found for This Controller")
             If Not ControllerCB.SelectedIndex = 0 Then
                 frmSDLMappingTool.ShowDialog(Me)
             End If
         End If
-
     End Sub
 
     Private Sub Btn_Close_Click(sender As Object, e As EventArgs) Handles btn_Close.Click
