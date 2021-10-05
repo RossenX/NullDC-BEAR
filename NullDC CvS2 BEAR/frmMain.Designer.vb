@@ -64,10 +64,12 @@ Partial Class frmMain
         Me.GaggedUsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FreeDLCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiscordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtrasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MVC2TierListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFlycastDataFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PatreonO3oToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BEARToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FlycastToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForceOpenPanelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WaitingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -357,7 +359,7 @@ Partial Class frmMain
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(703, 35)
         Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Current Network Games"
+        Me.Label2.Text = "Current Matches"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label1
@@ -390,7 +392,7 @@ Partial Class frmMain
         '_MainMenuStrip
         '
         Me._MainMenuStrip.BackColor = System.Drawing.Color.Transparent
-        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.PatreonO3oToolStripMenuItem, Me.ExtrasToolStripMenuItem, Me.ForceOpenPanelToolStripMenuItem})
+        Me._MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLogo, Me.ReplaysToolStripMenuItem, Me.ControlsToolStripMenuItem1, Me.OptionsToolStripMenuItem, Me.FreeDLCToolStripMenuItem, Me.DiscordToolStripMenuItem, Me.ExtrasToolStripMenuItem, Me.PatreonO3oToolStripMenuItem, Me.ForceOpenPanelToolStripMenuItem})
         Me._MainMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me._MainMenuStrip.Name = "_MainMenuStrip"
         Me._MainMenuStrip.Padding = New System.Windows.Forms.Padding(0)
@@ -470,12 +472,6 @@ Partial Class frmMain
         Me.DiscordToolStripMenuItem.Size = New System.Drawing.Size(59, 29)
         Me.DiscordToolStripMenuItem.Text = "Discord"
         '
-        'PatreonO3oToolStripMenuItem
-        '
-        Me.PatreonO3oToolStripMenuItem.Name = "PatreonO3oToolStripMenuItem"
-        Me.PatreonO3oToolStripMenuItem.Size = New System.Drawing.Size(83, 29)
-        Me.PatreonO3oToolStripMenuItem.Text = "Patreon o3o"
-        '
         'ExtrasToolStripMenuItem
         '
         Me.ExtrasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MVC2TierListToolStripMenuItem, Me.OpenFlycastDataFolderToolStripMenuItem})
@@ -494,6 +490,25 @@ Partial Class frmMain
         Me.OpenFlycastDataFolderToolStripMenuItem.Name = "OpenFlycastDataFolderToolStripMenuItem"
         Me.OpenFlycastDataFolderToolStripMenuItem.Size = New System.Drawing.Size(205, 22)
         Me.OpenFlycastDataFolderToolStripMenuItem.Text = "Open Flycast Data Folder"
+        '
+        'PatreonO3oToolStripMenuItem
+        '
+        Me.PatreonO3oToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BEARToolStripMenuItem, Me.FlycastToolStripMenuItem})
+        Me.PatreonO3oToolStripMenuItem.Name = "PatreonO3oToolStripMenuItem"
+        Me.PatreonO3oToolStripMenuItem.Size = New System.Drawing.Size(57, 29)
+        Me.PatreonO3oToolStripMenuItem.Text = "Donate"
+        '
+        'BEARToolStripMenuItem
+        '
+        Me.BEARToolStripMenuItem.Name = "BEARToolStripMenuItem"
+        Me.BEARToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BEARToolStripMenuItem.Text = "BEAR"
+        '
+        'FlycastToolStripMenuItem
+        '
+        Me.FlycastToolStripMenuItem.Name = "FlycastToolStripMenuItem"
+        Me.FlycastToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FlycastToolStripMenuItem.Text = "Flycast"
         '
         'ForceOpenPanelToolStripMenuItem
         '
@@ -611,4 +626,6 @@ Partial Class frmMain
     Friend WithEvents CrashToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CrashthreadToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ControlsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BEARToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FlycastToolStripMenuItem As ToolStripMenuItem
 End Class

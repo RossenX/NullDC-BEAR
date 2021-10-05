@@ -1663,13 +1663,8 @@ Public Class frmKeyMapperSDL
     Private Sub ControllerCB_SelectedIndexChanged(sender As Object, e As EventArgs)
 
         Try
-            'Console.Write("Changing Controller ")
-            If Not Joy = Nothing Then
-                If SDL_GameControllerGetAttached(Joy) = SDL_bool.SDL_TRUE Then
-                    SDL_GameControllerClose(Joy)
-                End If
-                Joy = Nothing
-            End If
+            SDL_GameControllerClose(Joy)
+            Joy = Nothing
 
             If ControllerCB.SelectedValue >= 0 Then
                 Joy = SDL_GameControllerOpen(ControllerCB.SelectedValue)

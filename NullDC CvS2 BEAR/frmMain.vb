@@ -6,7 +6,7 @@ Imports System.Text
 Imports System.Threading
 
 Public Class frmMain
-    Public IsBeta As Boolean = True
+    Public IsBeta As Boolean = False
 
     ' Update Stuff
     Dim UpdateCheckClient As New WebClient
@@ -2291,16 +2291,13 @@ UpdateTry:
         Process.Start("https://discord.gg/u2YzdNB6SN")
     End Sub
 
-    Private Sub PatreonO3oToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PatreonO3oToolStripMenuItem.Click
-        Process.Start("https://www.patreon.com/NullDCBEAR")
-    End Sub
-
     Private Sub FreeDLCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FreeDLCToolStripMenuItem.Click
         If Not Application.OpenForms().OfType(Of frmDLC).Any Then
             frmDLC.Show(Me)
         Else
             frmDLC.Focus()
         End If
+
     End Sub
 
     Private Sub MednafenOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -2473,6 +2470,13 @@ UpdateTry:
         End If
     End Sub
 
+    Private Sub BEARToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BEARToolStripMenuItem.Click
+        Process.Start("https://www.patreon.com/NullDCBEAR")
+    End Sub
+
+    Private Sub FlycastToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FlycastToolStripMenuItem.Click
+        Process.Start("https://www.paypal.com/paypalme/FlycastEmu")
+    End Sub
 End Class
 
 Public Class BEARPlayer

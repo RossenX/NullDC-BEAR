@@ -47,10 +47,24 @@ Public Class frmChallenge
                 Label1.Invoke(Sub() Label1.Text = "Ping: N/A")
                 Exit Sub
             End If
-            Dim DelayFrameRate = 32.66 '32.66
-            Dim delay = Math.Ceiling(ping.RoundtripTime / DelayFrameRate)
-            If delay = 0 Then delay = 1
-            Label1.Invoke(Sub() Label1.Text = "Ping: " & ping.RoundtripTime & vbNewLine & "Delay: " & (ping.RoundtripTime / DelayFrameRate).ToString("0.##"))
+
+            If _Challenger.game.StartsWith("FC_") Or _Challenger.game.StartsWith("FLY_") Then
+                Dim DelayFrameRate = 64
+                Dim delay = Math.Floor(ping.RoundtripTime / DelayFrameRate)
+
+                If ping.RoundtripTime < DelayFrameRate Then
+                    delay = 0
+                End If
+
+                Label1.Invoke(Sub() Label1.Text = "Ping: " & ping.RoundtripTime & vbNewLine & "Delay: " & delay)
+
+            Else
+                Dim DelayFrameRate = 32 '32.66
+                Dim delay = Math.Ceiling(ping.RoundtripTime / DelayFrameRate)
+                If delay < 2 Then delay = 2
+                Label1.Invoke(Sub() Label1.Text = "Ping: " & ping.RoundtripTime & vbNewLine & "Delay: " & delay)
+            End If
+
         Catch ex As Exception
             Label1.Invoke(Sub() Label1.Text = "Ping: N/A")
         End Try
