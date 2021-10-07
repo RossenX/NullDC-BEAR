@@ -32,7 +32,7 @@ Public Class MFlycastLauncher
         Console.WriteLine("Game Launched")
         If MainformRef.ConfigFile.Status = "Hosting" And MainformRef.Challenger IsNot Nothing Then
             ' eeprom causing issues, so not going to sync them for now.
-            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom,", MainformRef.Challenger.ip)
+            MainformRef.NetworkHandler.SendMessage("$," & MainformRef.ConfigFile.Name & ",," & MainformRef.ConfigFile.Port & "," & MainformRef.ConfigFile.Game & "," & MainformRef.ConfigFile.Delay & "," & Region & "," & MainformRef.ConfigFile.Peripheral & ",eeprom," & Rx.EEPROM, MainformRef.Challenger.ip)
 
         End If
 
@@ -40,12 +40,19 @@ Public Class MFlycastLauncher
 
     Public Sub LaunchFlycast(ByVal _romname As String, ByRef _region As String)
 
+        If Not File.Exists(MainformRef.NullDCPath & "\flycast\emu.cfg") Then
+            Console.WriteLine("Config Missing, Extracting again")
+            MainformRef.UnzipResToDir(My.Resources.flycast, "bear_tmp_mednafen.zip", MainformRef.NullDCPath & "\flycast", True)
+        End If
+
         ' Tell difference between dreamcast and naomi
         Region = _region
 
         If _romname.StartsWith("FC_") Then
             _romname = _romname.Remove(0, 3)
         End If
+
+        Rx.EEPROM = Rx.GetEEPROM(MainformRef.NullDCPath & MainformRef.GamesList(_romname)(1))
 
         RemoveAllTheShit()
 
@@ -94,10 +101,9 @@ Public Class MFlycastLauncher
             WeArePort = 1
         End If
 
-ReDoConfigs:
-
         'Some settings are locked some are not, these are not or maybe they're settings i know won't cause desync so i let people change
-        Dim lines() As String = File.ReadAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg")
+        Dim lines As ArrayList = New ArrayList(File.ReadAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg"))
+        Dim tmplines As ArrayList = lines.Clone()
 
         For Each line As String In lines
             For i = 0 To CheckIfCreated.Count - 1
@@ -106,20 +112,21 @@ ReDoConfigs:
         Next
 
         Dim linenumber = 0
-        For Each line As String In lines
-
+        For Each line As String In tmplines
             For i = 0 To CheckIfCreated.Count - 1
                 If WereCreated(i) = False Then
                     If line.Trim = "[" & InSection(i) & "]" Then
-                        lines(linenumber) = lines(linenumber) & vbNewLine & CheckIfCreated(i) & " = " & ValueDefault(i)
-                        File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
-                        GoTo ReDoConfigs
-
+                        lines.Insert(linenumber + 1, CheckIfCreated(i) & " = " & ValueDefault(i))
                     End If
                 End If
             Next
+            linenumber += 1
+        Next
 
-            If line.StartsWith("p1Name = ") Then
+        linenumber = 0
+        For i = 0 To lines.Count - 1
+
+            If lines(linenumber).StartsWith("p1Name = ") Then
                 If MainformRef.ConfigFile.Status = "Hosting" Then
                     lines(linenumber) = "p1Name = " & MainformRef.ConfigFile.Name
                 ElseIf MainformRef.ConfigFile.Status = "Client" Then
@@ -129,7 +136,7 @@ ReDoConfigs:
                 End If
             End If
 
-            If line.StartsWith("p2Name = ") Then
+            If lines(linenumber).StartsWith("p2Name = ") Then
                 If MainformRef.ConfigFile.Status = "Hosting" Then
                     lines(linenumber) = "p2Name = " & MainformRef.Challenger.name
                 ElseIf MainformRef.ConfigFile.Status = "Client" Then
@@ -139,10 +146,10 @@ ReDoConfigs:
                 End If
             End If
 
-            If line.StartsWith("rend.vsync = ") Then lines(linenumber) = "rend.vsync = " & Vsync
+            If lines(linenumber).StartsWith("rend.vsync = ") Then lines(linenumber) = "rend.vsync = " & Vsync
 
             'For Now set them all To controller, since the savestates use two controllers. When savestatesa re all removed,i'll enable this
-            If line.StartsWith("device1 = ") Then
+            If lines(linenumber).StartsWith("device1 = ") Then
                 If romdetails(2) = "na" Or romdetails(2) = "fly_na" Then ' If this is Naomi then it's always the dreamcast controller
                     lines(linenumber) = "device1 = 0"
 
@@ -159,10 +166,10 @@ ReDoConfigs:
             End If
 
             'If line.StartsWith("device1 = ") Then lines(linenumber) = "device1 = 0"
-            If line.StartsWith("device1.1 = ") Then lines(linenumber) = "device1.1 = 1"
-            If line.StartsWith("device1.2 = ") Then lines(linenumber) = "device1.2 = 10"
+            If lines(linenumber).StartsWith("device1.1 = ") Then lines(linenumber) = "device1.1 = 1"
+            If lines(linenumber).StartsWith("device1.2 = ") Then lines(linenumber) = "device1.2 = 10"
 
-            If line.StartsWith("device2 = ") Then
+            If lines(linenumber).StartsWith("device2 = ") Then
                 If romdetails(2) = "na" Or romdetails(2) = "fly_na" Then
                     lines(linenumber) = "device2 = 0"
 
@@ -179,84 +186,89 @@ ReDoConfigs:
             End If
 
             'If line.StartsWith("device2 = ") Then lines(linenumber) = "device2 = 0"
-            If line.StartsWith("device2.1 = ") Then lines(linenumber) = "device2.1 = 10"
-                If line.StartsWith("device2.2 = ") Then lines(linenumber) = "device2.2 = 10"
+            If lines(linenumber).StartsWith("device2.1 = ") Then lines(linenumber) = "device2.1 = 10"
+            If lines(linenumber).StartsWith("device2.2 = ") Then lines(linenumber) = "device2.2 = 10"
 
-                If line.StartsWith("device3 = ") Then lines(linenumber) = "device3 = 10"
-                If line.StartsWith("device3.1 = ") Then lines(linenumber) = "device3.1 = 10"
-                If line.StartsWith("device3.2 = ") Then lines(linenumber) = "device3.2 = 10"
+            If lines(linenumber).StartsWith("device3 = ") Then lines(linenumber) = "device3 = 10"
+            If lines(linenumber).StartsWith("device3.1 = ") Then lines(linenumber) = "device3.1 = 10"
+            If lines(linenumber).StartsWith("device3.2 = ") Then lines(linenumber) = "device3.2 = 10"
 
-                If line.StartsWith("device4 = ") Then lines(linenumber) = "device4 = 10"
-                If line.StartsWith("device4.1 = ") Then lines(linenumber) = "device4.1 = 10"
-                If line.StartsWith("device4.2 = ") Then lines(linenumber) = "device4.2 = 10"
+            If lines(linenumber).StartsWith("device4 = ") Then lines(linenumber) = "device4 = 10"
+            If lines(linenumber).StartsWith("device4.1 = ") Then lines(linenumber) = "device4.1 = 10"
+            If lines(linenumber).StartsWith("device4.2 = ") Then lines(linenumber) = "device4.2 = 10"
 
-                ' This one is here only so people can still edit it in game
-                If line.StartsWith("aica.AudioVolume = ") Then lines(linenumber) = "aica.AudioVolume = " & MainformRef.ConfigFile.EmulatorVolume
-                If line.StartsWith("aica.ForceMono = ") Then lines(linenumber) = "aica.ForceMono = " & ForceMono
+            ' This one is here only so people can still edit it in game
+            If lines(linenumber).StartsWith("aica.AudioVolume = ") Then lines(linenumber) = "aica.AudioVolume = " & MainformRef.ConfigFile.EmulatorVolume
+            If lines(linenumber).StartsWith("aica.ForceMono = ") Then lines(linenumber) = "aica.ForceMono = " & ForceMono
 
-                If line.StartsWith("maple_sdl_") Then
-                    lines(linenumber) = lines(linenumber).Split("=")(0).Trim & " = " & PlayerID
-                End If
+            If lines(linenumber).StartsWith("maple_sdl_") Then
+                lines(linenumber) = lines(linenumber).Split("=")(0).Trim & " = " & PlayerID
+            End If
 
-                If line.StartsWith("Dreamcast.AutoLoadState = ") Then lines(linenumber) = "Dreamcast.AutoLoadState = yes"
-                'Dreamcast.SavestateSlot = 0
-                If line.StartsWith("Dreamcast.SavestateSlot = ") Then lines(linenumber) = "Dreamcast.SavestateSlot = 0"
+            If lines(linenumber).StartsWith("Dreamcast.AutoLoadState = ") Then lines(linenumber) = "Dreamcast.AutoLoadState = no"
 
-                If line.StartsWith("pvr.AutoSkipFrame = ") Then lines(linenumber) = "pvr.AutoSkipFrame = 0"
+            'Dreamcast.SavestateSlot = 0
+            If lines(linenumber).StartsWith("Dreamcast.SavestateSlot = ") Then lines(linenumber) = "Dreamcast.SavestateSlot = 0"
 
-                If line.StartsWith("rend.CrossHairColor1 = ") Then lines(linenumber) = "rend.CrossHairColor1 = 0"
-                If line.StartsWith("rend.CrossHairColor2 = ") Then lines(linenumber) = "rend.CrossHairColor2 = 0"
-                If line.StartsWith("rend.CrossHairColor3 = ") Then lines(linenumber) = "rend.CrossHairColor3 = 0"
-                If line.StartsWith("rend.CrossHairColor4 = ") Then lines(linenumber) = "rend.CrossHairColor4 = 0"
+            If lines(linenumber).StartsWith("pvr.AutoSkipFrame = ") Then lines(linenumber) = "pvr.AutoSkipFrame = 0"
 
-                If line.StartsWith("GGPOAnalogAxes = ") Then
-                    Select Case romdetails(2)
-                        Case "na", "fc_na", "fly_na"
-                            lines(linenumber) = "GGPOAnalogAxes = 0"
-                        Case Else
-                            lines(linenumber) = "GGPOAnalogAxes = 2"
-                    End Select
+            If lines(linenumber).StartsWith("rend.CrossHairColor1 = ") Then lines(linenumber) = "rend.CrossHairColor1 = 0"
+            If lines(linenumber).StartsWith("rend.CrossHairColor2 = ") Then lines(linenumber) = "rend.CrossHairColor2 = 0"
+            If lines(linenumber).StartsWith("rend.CrossHairColor3 = ") Then lines(linenumber) = "rend.CrossHairColor3 = 0"
+            If lines(linenumber).StartsWith("rend.CrossHairColor4 = ") Then lines(linenumber) = "rend.CrossHairColor4 = 0"
 
-                End If
+            If lines(linenumber).StartsWith("GGPOAnalogAxes = ") Then
+                Select Case romdetails(2)
+                    Case "na", "fc_na", "fly_na"
+                        lines(linenumber) = "GGPOAnalogAxes = 0"
+                    Case Else
+                        lines(linenumber) = "GGPOAnalogAxes = 2"
+                End Select
 
-                If MainformRef.ConfigFile.Status = "Offline" Then
-                    If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = no"
-                Else
-                    If line.StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = yes"
+            End If
 
-                End If
+            If MainformRef.ConfigFile.Status = "Offline" Then
+                If lines(linenumber).StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = no"
+            Else
+                If lines(linenumber).StartsWith("GGPO = ") Then lines(linenumber) = "GGPO = yes"
 
-                ' Set Joysticks
+            End If
 
-                If line.StartsWith("maple_sdl_joystick_") Then
+            ' Set Joysticks
 
-                    If line.StartsWith("maple_sdl_joystick_" & tempJoystick(0)) Then ' This is our Controller we want to use
-                        lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(0) & " = " & WeArePort
+            If lines(linenumber).StartsWith("maple_sdl_joystick_") Then
 
-                    ElseIf line.StartsWith("maple_sdl_joystick_" & tempJoystick(1)) Then ' This is the second player controller, for offline we set it for online we don't
+                If lines(linenumber).StartsWith("maple_sdl_joystick_" & tempJoystick(0)) Then ' This is our Controller we want to use
+                    lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(0) & " = " & WeArePort
 
-                        If MainformRef.ConfigFile.Status = "Offline" Then
-                            lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = 1"
-                        Else
-                            lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = -1"
-                        End If
+                ElseIf lines(linenumber).StartsWith("maple_sdl_joystick_" & tempJoystick(1)) Then ' This is the second player controller, for offline we set it for online we don't
+
+                    If MainformRef.ConfigFile.Status = "Offline" Then
+                        lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = 1"
                     Else
-
-                        lines(linenumber) = line.Split("=")(0) & " = -1"
+                        lines(linenumber) = "maple_sdl_joystick_" & tempJoystick(1) & " = -1"
                     End If
+                Else
 
+                    lines(linenumber) = lines(linenumber).Split("=")(0).trim & " = -1"
                 End If
 
-                If line.StartsWith("maple_sdl_keyboard =") Then lines(linenumber) = "maple_sdl_keyboard = " & WeArePort
-                If line.StartsWith("maple_sdl_mouse =") Then lines(linenumber) = "maple_sdl_mouse = -1" ' No Mouse For Now
+            End If
+
+            If lines(linenumber).StartsWith("maple_sdl_keyboard =") Then lines(linenumber) = "maple_sdl_keyboard = " & WeArePort
+            If lines(linenumber).StartsWith("maple_sdl_mouse =") Then lines(linenumber) = "maple_sdl_mouse = -1" ' No Mouse For Now
 
 
-                linenumber += 1
-            Next
+            linenumber += 1
+        Next
 
-            ' Check if created stuff and if not then create them
+        ' Check if created stuff and if not then create them
+        Dim FinalLines As String = ""
+        For i = 0 To lines.Count - 1
+            FinalLines += lines(i) & vbNewLine
+        Next
 
-            File.WriteAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg", lines)
+        File.WriteAllText(MainformRef.NullDCPath & "\flycast\emu.cfg", FinalLines)
 
         FlycastInfo.Arguments += "-config config:rend.DelayFrameSwapping=no "
         FlycastInfo.Arguments += "-config config:rend.ThreadedRendering=no "
@@ -398,12 +410,16 @@ ReDoConfigs:
             File.Delete(FullRomPath & ".nvmem2")
         End If
 
-        If File.Exists(FullRomPath & ".eeprom_host") Then
-            File.Delete(FullRomPath & ".eeprom_host")
+        If File.Exists(FullRomPath & ".nvmem_client") Then
+            File.Delete(FullRomPath & ".nvmem_client")
         End If
 
-        If File.Exists(FullRomPath & ".eeprom_client") Then
-            File.Delete(FullRomPath & ".eeprom_client")
+        If File.Exists(FullRomPath & ".nvmem2_client") Then
+            File.Delete(FullRomPath & ".nvmem2_client")
+        End If
+
+        If File.Exists(FullRomPath & ".eeprom_host") Then
+            File.Delete(FullRomPath & ".eeprom_host")
         End If
 
     End Sub

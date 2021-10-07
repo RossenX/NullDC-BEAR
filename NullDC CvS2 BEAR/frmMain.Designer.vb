@@ -501,13 +501,13 @@ Partial Class frmMain
         'BEARToolStripMenuItem
         '
         Me.BEARToolStripMenuItem.Name = "BEARToolStripMenuItem"
-        Me.BEARToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BEARToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
         Me.BEARToolStripMenuItem.Text = "BEAR"
         '
         'FlycastToolStripMenuItem
         '
         Me.FlycastToolStripMenuItem.Name = "FlycastToolStripMenuItem"
-        Me.FlycastToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.FlycastToolStripMenuItem.Size = New System.Drawing.Size(110, 22)
         Me.FlycastToolStripMenuItem.Text = "Flycast"
         '
         'ForceOpenPanelToolStripMenuItem
