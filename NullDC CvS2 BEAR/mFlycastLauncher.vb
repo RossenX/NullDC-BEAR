@@ -105,18 +105,36 @@ Public Class MFlycastLauncher
         Dim lines As ArrayList = New ArrayList(File.ReadAllLines(MainformRef.NullDCPath & "\flycast\emu.cfg"))
         Dim tmplines As ArrayList = lines.Clone()
 
+        Dim CurrentSection = ""
         For Each line As String In lines
+            If line.StartsWith("[") Then
+                CurrentSection = line.Replace("[", "").Replace("]", "")
+            End If
+
             For i = 0 To CheckIfCreated.Count - 1
-                If line.StartsWith(CheckIfCreated(i)) Then WereCreated(i) = True
+                If line.StartsWith(CheckIfCreated(i)) And CurrentSection = InSection(i) Then
+                    WereCreated(i) = True
+                End If
             Next
         Next
 
         Dim linenumber = 0
+        CurrentSection = ""
         For Each line As String In tmplines
+            If line.StartsWith("[") Then
+                CurrentSection = line.Replace("[", "").Replace("]", "")
+            End If
+
             For i = 0 To CheckIfCreated.Count - 1
-                If WereCreated(i) = False Then
+                ' Check if Config is in the wrong section
+                If line.StartsWith(CheckIfCreated(i)) And Not CurrentSection = InSection(i) Then
+                    lines(linenumber) = ""
+                End If
+
+                If WereCreated(i) = False And CurrentSection = InSection(i) Then
                     If line.Trim = "[" & InSection(i) & "]" Then
                         lines.Insert(linenumber + 1, CheckIfCreated(i) & " = " & ValueDefault(i))
+                        linenumber += 1
                     End If
                 End If
             Next
@@ -161,6 +179,7 @@ Public Class MFlycastLauncher
                     Else ' We're client (Since spectating isn't a thing yet
                         lines(linenumber) = "device1 = " & CInt(MainformRef.Challenger.peripheral) * 4
                     End If
+
                 End If
 
             End If
