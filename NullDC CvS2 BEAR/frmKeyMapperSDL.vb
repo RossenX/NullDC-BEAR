@@ -1041,134 +1041,74 @@ Public Class frmKeyMapperSDL
                 End If
             Next
 
+
             If MednafenChanged Then
-                Console.WriteLine("Saving Mednafen Controls")
+                Dim AllConfigLines As String = vbNewLine
+                ' Deadzone
+                AllConfigLines += "input.joystick.axis_threshold " & TempDeadzone(0) & vbNewLine
 
-                Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
-                linenumber = 0
-                For Each line As String In MednafenConfigs
-                    btn_Close.Text = "Saving Mednafen..."
-
-                    ' Trim down the lines we're looking for to reduce saving time
-                    If line.StartsWith(";") Or
-                        line.Trim.Length = 0 Or
-                        (Not line.Contains("input") And
-                        Not line.Contains("command.")) Then
-                        MednafenConfigs(linenumber) = line
-                        linenumber += 1
-                        Continue For
-                    End If
-
-                    ' Deadzone
-                    If line.StartsWith("input.joystick.axis_threshold ") Then
-                        MednafenConfigs(linenumber) = "input.joystick.axis_threshold " & TempDeadzone(0)
-                        linenumber += 1
-                        Continue For
-                    End If
-
-                    If MednafenChanged Then
-                        Dim tmpControlString = ""
-
-                        If line.Contains("rapid_") Or
-                                line.StartsWith("command.0 ") Or
-                                line.StartsWith("command.1 ") Or
-                                line.StartsWith("command.2 ") Or
-                                line.StartsWith("command.3 ") Or
-                                line.StartsWith("command.4 ") Or
-                                line.StartsWith("command.5 ") Or
-                                line.StartsWith("command.6 ") Or
-                                line.StartsWith("command.7 ") Or
-                                line.StartsWith("command.8 ") Or
-                                line.StartsWith("command.9 ") Or
-                                line.StartsWith("command.state_slot_dec ") Then
-                            tmpControlString = line.Split(" ")(0) & " " ' Disable Rapid Control unless they are found in our configs
-                            MednafenConfigs(linenumber) = tmpControlString
-                            linenumber += 1
-                            Continue For
-                        End If
-
-                        For Each control_line In ControlsConfigs
-                            If control_line.StartsWith("med_") Then
-                                control_line = control_line.Substring(4)
-
-                                If line.StartsWith(control_line.Split("=")(0).Replace("<port>", "1") & " ") Or
-                                   line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2") & " ") Then
-
-                                    Dim _player = 1
-
-                                    If control_line.Contains("<port>") And line.StartsWith(control_line.Split("=")(0).Replace("<port>", "2") & " ") Then
-                                        _player = 2
-                                    End If
-
-                                    tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString) & " " ' Initial String
-
-                                    Dim _KeyCode = control_line.Split("=")(1).Split("|")(_player - 1)
-
-                                    If _KeyCode.StartsWith("k") Then ' Keyboard
-
-                                        If Not _KeyCode = "k0" Then
-                                            tmpControlString += "keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(_player - 1).Substring(1))
-                                            Exit For
-                                        End If
-
-                                    ElseIf _KeyCode.StartsWith("m") Then
-                                        If _KeyCode = "m1" Then
-                                            tmpControlString += "mouse 0x0 button_left"
-                                        ElseIf _KeyCode = "m2" Then
-                                            tmpControlString += "mouse 0x0 button_right"
-                                        ElseIf _KeyCode = "m3" Then
-                                            tmpControlString += "mouse 0x0 button_middle"
-                                        End If
-
-                                    Else ' Joystick
-                                        Dim _tmpID = ""
-                                        If Not MednafenControllerID(_player - 1) = "0x0" Then
-
-                                            _tmpID = MednafenControllerID(_player - 1)
-                                            tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                            tmpControlString += " joystick " & _tmpID & " "
-
-                                            If _KeyCode.StartsWith("b") Then
-                                                tmpControlString += _KeyCode.Replace("b", "button_")
-                                            Else
-                                                tmpControlString += _KeyCode.Replace("a", "abs_")
-                                            End If
-
-                                            Exit For
-
-                                        Else
-                                            tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                            Exit For
-                                        End If
-                                    End If
-
-                                End If
-                            End If
-                        Next
-
-                        If Not tmpControlString = "" Then
-                            MednafenConfigs(linenumber) = tmpControlString
-                        End If
-
-                    End If
-
-                    linenumber += 1
+                ' Commands
+                For i = 0 To 9
+                    AllConfigLines += "command." & i & " " & vbNewLine
                 Next
 
-                Dim CompressedConfigFile As New List(Of String)
-                For Each _line In MednafenConfigs
-                    If Not _line.Trim.Length = 0 Then
-                        If _line.StartsWith(";") Then
-                            CompressedConfigFile.Add(vbNewLine & _line)
-                        Else
-                            CompressedConfigFile.Add(_line)
+                AllConfigLines += "command.state_slot_dec " & vbNewLine
+
+
+                For Each control_line In ControlsConfigs
+                    For i = 1 To 2
+                        Dim tmpControlString = ""
+                        If Not control_line.StartsWith("med_") Then Continue For
+
+                        control_line = control_line.Substring(4)
+
+                        tmpControlString = control_line.Split("=")(0).Replace("<port>", i.ToString)
+
+                        Dim _KeyCode = control_line.Split("=")(1).Split("|")(i - 1)
+
+                        If _KeyCode.StartsWith("k") Then ' Keyboard
+
+                            If Not _KeyCode = "k0" Then
+                                tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(i - 1).Substring(1))
+                            End If
+
+                        ElseIf _KeyCode.StartsWith("m") Then
+                            If _KeyCode = "m1" Then
+                                tmpControlString += " mouse 0x0 button_left"
+                            ElseIf _KeyCode = "m2" Then
+                                tmpControlString += " mouse 0x0 button_right"
+                            ElseIf _KeyCode = "m3" Then
+                                tmpControlString += " mouse 0x0 button_middle"
+                            End If
+
+                        Else ' Joystick
+                            Dim _tmpID = ""
+                            If Not MednafenControllerID(i - 1) = "0x0" Then
+
+                                _tmpID = MednafenControllerID(i - 1)
+                                tmpControlString += " joystick " & _tmpID & " "
+
+                                If _KeyCode.StartsWith("b") Then
+                                    tmpControlString += _KeyCode.Replace("b", "button_")
+                                Else
+                                    tmpControlString += _KeyCode.Replace("a", "abs_")
+                                End If
+
+                            Else
+                                tmpControlString = control_line.Split("=")(0).Replace("<port>", i.ToString)
+                            End If
+
                         End If
 
-                    End If
+                        If Not IgnoreTheseMedanfen.ContainsKey(tmpControlString.Split(" ")(0)) Then
+                            AllConfigLines += tmpControlString & vbNewLine
+                        End If
+                    Next
                 Next
 
                 File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
-                File.WriteAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", CompressedConfigFile.ToArray)
+                File.AppendAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", AllConfigLines.Split(vbNewLine))
+
             End If
 
         Catch ex As Exception
@@ -1184,6 +1124,16 @@ Public Class frmKeyMapperSDL
         End If
 
     End Sub
+
+    ReadOnly IgnoreTheseMedanfen As New Dictionary(Of String, String) From {
+        {"snes_faust.input.port2.superscope.turbo", ""},
+        {"snes_faust.input.port2.superscope.pause", ""},
+        {"snes_faust.input.port2.superscope.cursor", ""},
+        {"snes_faust.input.port2.superscope.offscreen_shot", ""},
+        {"snes_faust.input.port2.superscope.trigger", ""},
+        {"snes_faust.input.port1.mouse.right", ""},
+        {"snes_faust.input.port1.mouse.left", ""}
+    }
 
     Private Sub DoAnnoyingFlycastStuff(ByRef analogStuff As String,
                                        ByRef digitalStuff As String,
