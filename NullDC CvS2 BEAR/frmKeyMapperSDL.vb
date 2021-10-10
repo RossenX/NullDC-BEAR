@@ -189,7 +189,7 @@ Public Class frmKeyMapperSDL
 
         Dim lines(300) As String
 
-        Dim MednafenControllerID = GetMednafenControllerIDs()
+        'Dim MednafenControllerID = GetMednafenControllerIDs()
 
         lines(0) = MainformRef.Ver
         lines(1) = "Joystick=" & Joystick(0) & "|" & Joystick(1)
@@ -690,6 +690,12 @@ Public Class frmKeyMapperSDL
 
     Private Sub SaveEverything()
 
+        ' Ok save everything fuck it Medanfen isn't using the jank hack anymore so this should be best
+        NaomiChanged = True
+        DreamcastChanged = True
+        MednafenChanged = True
+        MupenChanged = True
+
         _InputThread.Abort()
         btn_Close.Text = "Saving..."
         Dim ControlFilePath = GetControlsFilePath()
@@ -1026,100 +1032,17 @@ Public Class frmKeyMapperSDL
 
             ' Open GameController this time but with xinput on, to fix the mednafen IDs
 
-            Dim MednafenControllerIDs = Rx.GetMednafenControllerIDs
-            Dim CurrentIDs As New ArrayList
-            Dim MednafenIDs As New ArrayList
-
-            Dim OriginalGUID As New ArrayList
-
-            Dim TempMappingStrings = {"", ""}
-
-            For i = 0 To 1
-                If Not tempJoystick(i) = "-1" Then
-                    TempMappingStrings(i) = SDL_GameControllerMappingForGUID(SDL_JoystickGetDeviceGUID(tempJoystick(i)))
-                End If
-            Next
-
-            For i = 0 To SDL_NumJoysticks() - 1
-                CurrentIDs.Add(SDL_JoystickGetDeviceGUID(i).ToString.Substring(0, 23))
-                OriginalGUID.Add(SDL_JoystickGetDeviceGUID(i))
-            Next
-
-            ' Give unique names to things with the same GUID
-
-            For i = 0 To CurrentIDs.Count - 1
-                Dim DuplicateCount = 0
-                For j = 0 To CurrentIDs.Count - 1
-                    If Not i = j Then
-                        If CurrentIDs(j) = CurrentIDs(i) Then
-                            CurrentIDs(j) += DuplicateCount.ToString
-                            DuplicateCount += 1
-                        End If
-                    End If
-                Next
-            Next
-
-            SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER)
-            SDL_QuitSubSystem(SDL_INIT_JOYSTICK)
-            SDL_Quit()
-            SDL_Delay(2500)
-
-            While SDL_WasInit(SDL_INIT_JOYSTICK) Or SDL_WasInit(SDL_INIT_GAMECONTROLLER)
-                SDL_Delay(100)
-            End While
-
-            SDL_SetHint(SDL_HINT_XINPUT_ENABLED, "1")
-            SDL_Init(SDL_INIT_GAMECONTROLLER)
-            SDL_Init(SDL_INIT_JOYSTICK)
-
-            For i = 0 To SDL_NumJoysticks() - 1
-                MednafenIDs.Add(SDL_JoystickGetDeviceGUID(i).ToString.Substring(0, 23))
-            Next
-
-            For i = 0 To MednafenIDs.Count - 1
-                Dim DuplicateCount = 0
-                For j = 0 To MednafenIDs.Count - 1
-                    If Not i = j Then
-                        If MednafenIDs(j) = MednafenIDs(i) Then
-                            MednafenIDs(j) += DuplicateCount.ToString
-                            DuplicateCount += 1
-                        End If
-                    End If
-                Next
-            Next
-
             Dim MednafenControllerID = {"0x0", "0x0"}
             For i = 0 To 1
                 If Not tempJoystick(i) = "-1" Then
-                    Dim ShiftID = 0
-                    For Each _medID In MednafenIDs
-                        If CurrentIDs(CInt(tempJoystick(i))) = _medID Then
-                            MednafenControllerID(i) = MednafenControllerIDs(ShiftID)
-                            Exit For
-
-                        End If
-                        ShiftID += 1
-                    Next
+                    MednafenControllerID(i) = "0x0" & tempJoystick(i) & "000000000000000000000000000000"
                 Else
                     MednafenControllerID(i) = "0x0"
-
                 End If
             Next
 
             If MednafenChanged Then
                 Console.WriteLine("Saving Mednafen Controls")
-                Dim _TranslatedControls(2) As Dictionary(Of String, String)
-
-                For i = 0 To 1
-                    If Not tempJoystick(i) = "-1" Then
-                        Dim _isx = False
-                        If MednafenControllerID(i).Contains("xinput_") Then _isx = True
-                        Dim tmpJoy = SDL_JoystickOpen(CInt(tempJoystick(i)))
-                        _TranslatedControls(i) = ConvertBEARMappingToMednafen(TempMappingStrings(i), SDL_JoystickNumAxes(tmpJoy), _isx)
-                        SDL_JoystickClose(tmpJoy)
-
-                    End If
-                Next
 
                 Dim MednafenConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg")
                 linenumber = 0
@@ -1202,25 +1125,15 @@ Public Class frmKeyMapperSDL
                                         If Not MednafenControllerID(_player - 1) = "0x0" Then
 
                                             _tmpID = MednafenControllerID(_player - 1)
-                                            If _tmpID.Contains("xinput_") Then
-                                                _tmpID = _tmpID.Replace("xinput_", "")
-                                            End If
-                                            tmpControlString += "joystick " & _tmpID
-                                            If _tmpID Is Nothing Then
-                                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-                                            End If
+                                            tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
+                                            tmpControlString += " joystick " & _tmpID & " "
 
-                                            If _TranslatedControls(_player - 1) Is Nothing Then
-                                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-
-                                            ElseIf _TranslatedControls(_player - 1).ContainsKey(_KeyCode) And _tmpID.Trim.Length > 1 Then ' Failsafe if we fail to get the controller ID then do NOT set controls, because it'll cause the whole config file to be useless and need to be reset before it can be used
-
-                                                tmpControlString += " " & _TranslatedControls(_player - 1)(_KeyCode)
-
+                                            If _KeyCode.StartsWith("b") Then
+                                                tmpControlString += _KeyCode.Replace("b", "button_")
                                             Else
-                                                tmpControlString = control_line.Split("=")(0).Replace("<port>", _player.ToString)
-
+                                                tmpControlString += _KeyCode.Replace("a", "abs_")
                                             End If
+
                                             Exit For
 
                                         Else
