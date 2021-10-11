@@ -56,26 +56,14 @@ Public Class frmKeyMapperSDL
         Try
             If Me.Visible Then
 
-                SDL_SetHint(SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS, "1")
                 SDL_SetHint(SDL_HINT_XINPUT_ENABLED, "0")
+                SDL_SetHint(SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS, "1")
 
                 Me.CenterToParent()
                 Me.Icon = My.Resources.fan_icon_text
                 ReloadTheme()
 
-                If SDL_WasInit(SDL_INIT_GAMECONTROLLER) = 0 Then
-                    SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER)
-                    Console.WriteLine("SDL_INIT GAME CONTROLLER")
-                End If
-
-                SDL_Delay(500)
-
-                If SDL_WasInit(SDL_INIT_JOYSTICK) = 0 Then
-                    SDL_InitSubSystem(SDL_INIT_JOYSTICK)
-                    Console.WriteLine("SDL_INIT JOYSTICK")
-                End If
-
-                SDL_Delay(500)
+                SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER)
                 DoInitialSetupShit()
                 LoadSettings()
 
@@ -460,6 +448,11 @@ Public Class frmKeyMapperSDL
                 End Try
 
                 SDL_Delay(16)
+
+                If Not SDL_WasInit(SDL_INIT_GAMECONTROLLER) = SDL_INIT_GAMECONTROLLER Then
+                    Exit While
+
+                End If
 
                 Dim _event As SDL_Event
                 While SDL_WaitEventTimeout(_event, 16)
@@ -1684,6 +1677,12 @@ Public Class frmKeyMapperSDL
     End Sub
 
     Private Sub frmKeyMapperSDL_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If _InputThread.IsAlive Then
+            _InputThread.Abort()
+            SDL_Delay(20)
+        End If
+
+
         If SDL_WasInit(SDL_INIT_JOYSTICK) Or SDL_WasInit(SDL_INIT_GAMECONTROLLER) Then
             For i = 0 To SDL_NumJoysticks() - 1
                 Console.WriteLine("Disconnecting: " & SDL_GameControllerNameForIndex(i))
