@@ -1931,7 +1931,10 @@ UpdateTry:
     End Sub
 
     Private Sub btnOffline_Click(sender As Object, e As EventArgs) Handles btnOffline.Click
-        If MainformRef.IsNullDCRunning Or Not MainformRef.MednafenLauncher.MednafenInstance Is Nothing Then
+        If MainformRef.IsNullDCRunning Or
+             MainformRef.MednafenLauncher.MednafenInstance IsNot Nothing Or
+             MainformRef.FlycastLauncher.FlycastProc IsNot Nothing Or
+             MainformRef.MupenLauncher.MupenInstance IsNot Nothing Then
             NotificationForm.ShowMessage("You're already playing...")
             Exit Sub
         End If

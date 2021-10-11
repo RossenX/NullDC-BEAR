@@ -16,12 +16,6 @@ Public Class frmKeyMapperSDL
     Dim Currently_Binding As Button
     Dim ButtonsDown As New Dictionary(Of String, Boolean)
 
-    ' Little things to know which systems were changed, so we don't have to always save settings that were not changed
-    Public NaomiChanged As Boolean = False
-    Public DreamcastChanged As Boolean = False
-    Public MednafenChanged As Boolean = False
-    Public MupenChanged As Boolean = False
-
     <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
     Private Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Boolean
     End Function
@@ -258,50 +252,6 @@ Public Class frmKeyMapperSDL
             Next
         Next
 
-        If Not File.Exists(_filepath) Then
-            NaomiChanged = True
-            DreamcastChanged = True
-            MednafenChanged = True
-            MupenChanged = True
-        Else
-            Dim _tmpConfigFile As String() = File.ReadAllLines(_filepath)
-
-            For Each _line In lines
-                If Not _tmpConfigFile.Contains(_line) And _line IsNot Nothing Then
-
-                    ' Deadzone change applies to all
-                    If _line.StartsWith("Deadzone=") Or _line.StartsWith("Joystick=") Then
-                        NaomiChanged = True
-                        DreamcastChanged = True
-                        MednafenChanged = True
-                        MupenChanged = True
-                    End If
-
-                    ' Naomi
-                    If _line.StartsWith("I_") Then
-                        NaomiChanged = True
-                    End If
-
-                    ' Dreamcast
-                    If _line.StartsWith("CONT_") Or _line.StartsWith("STICK_") Or _line.StartsWith("Peripheral=") Then
-                        DreamcastChanged = True
-                    End If
-
-                    ' Mednafen
-                    If _line.StartsWith("med_") Or _line.StartsWith("MednafenControllerID=") Then
-                        MednafenChanged = True
-                    End If
-
-                    ' Mupen
-                    If _line.StartsWith("mup_") Then
-                        MupenChanged = True
-                    End If
-
-                End If
-            Next
-
-        End If
-
         File.WriteAllLines(_filepath, lines)
 
     End Sub
@@ -348,13 +298,9 @@ Public Class frmKeyMapperSDL
 
     Private Sub CbProfileIndexChanged(sender As Object, e As EventArgs)
         RemoveHandler cbProfiles.SelectedIndexChanged, AddressOf CbProfileIndexChanged
-        NaomiChanged = True
-        DreamcastChanged = True
-        MednafenChanged = True
-        MupenChanged = True
-
         LoadSettings(cbProfiles.Text.Trim)
         AddHandler cbProfiles.SelectedIndexChanged, AddressOf CbProfileIndexChanged
+
     End Sub
 
 
@@ -496,6 +442,9 @@ Public Class frmKeyMapperSDL
 
     Private Sub InputThread()
         Try
+            SDL_PumpEvents()
+            SDL_FlushEvents(SDL_EventType.SDL_FIRSTEVENT, SDL_EventType.SDL_LASTEVENT)
+
             While _InputThread.IsAlive
 
                 Try
@@ -623,7 +572,7 @@ Public Class frmKeyMapperSDL
         TabsToReset.Add(Page_GBC_GBC)
         TabsToReset.Add(Page_NGP_NGP)
         TabsToReset.Add(Page_SMS_Gamepad)
-        TabsToReset.Add(Page_PCE_Gamepad)
+        TabsToReset.Add(page_PCE_Gamepad)
         TabsToReset.Add(page_N64_Controller)
 
         For Each _tab As TabPage In TabsToReset
@@ -690,12 +639,6 @@ Public Class frmKeyMapperSDL
 
     Private Sub SaveEverything()
 
-        ' Ok save everything fuck it Medanfen isn't using the jank hack anymore so this should be best
-        NaomiChanged = True
-        DreamcastChanged = True
-        MednafenChanged = True
-        MupenChanged = True
-
         _InputThread.Abort()
         btn_Close.Text = "Saving..."
         Dim ControlFilePath = GetControlsFilePath()
@@ -738,39 +681,38 @@ Public Class frmKeyMapperSDL
         ' Naomi Controls
         Dim linenumber = 0
         Try
-            If NaomiChanged Then
-                Console.WriteLine("Saving Naomi Controls")
-                Dim NaomiConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
-                For Each line As String In NaomiConfigs
-                    btn_Close.Text = "Saving Naomi..."
-                    If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
-                        Dim player = 0 ' Default player 1 is index 0
-                        If line.StartsWith("BPortB") Then player = 1 ' This is port B so it's player 2 index 1
 
-                        Dim KeyFound = False
-                        For Each control_line As String In ControlsConfigs
-                            If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
-                                NaomiConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                                KeyFound = True
-                                Exit For
-                            End If
-                        Next
+            Console.WriteLine("Saving Naomi Controls")
+            Dim NaomiConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\nullDC.cfg")
+            For Each line As String In NaomiConfigs
+                btn_Close.Text = "Saving Naomi..."
+                If line.StartsWith("BPort") Then ' Check if it's a BEAR Port So we ignore everything else
+                    Dim player = 0 ' Default player 1 is index 0
+                    If line.StartsWith("BPortB") Then player = 1 ' This is port B so it's player 2 index 1
 
-                        If Not KeyFound Then NaomiConfigs(linenumber) = line.Split("=")(0) & "=k0" ' The key was not in the controls so just set it to nothing
+                    Dim KeyFound = False
+                    For Each control_line As String In ControlsConfigs
+                        If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                            NaomiConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                            KeyFound = True
+                            Exit For
+                        End If
+                    Next
 
-                        If line.StartsWith("BPortA_Joystick=") Then NaomiConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
-                        If line.StartsWith("BPortB_Joystick=") Then NaomiConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
+                    If Not KeyFound Then NaomiConfigs(linenumber) = line.Split("=")(0) & "=k0" ' The key was not in the controls so just set it to nothing
 
-                        If line.StartsWith("BPortA_Deadzone=") Then NaomiConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
-                        If line.StartsWith("BPortB_Deadzone=") Then NaomiConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
+                    If line.StartsWith("BPortA_Joystick=") Then NaomiConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
+                    If line.StartsWith("BPortB_Joystick=") Then NaomiConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
 
-                    End If
-                    linenumber += 1
-                Next
+                    If line.StartsWith("BPortA_Deadzone=") Then NaomiConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
+                    If line.StartsWith("BPortB_Deadzone=") Then NaomiConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
 
-                File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
-                File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
-            End If
+                End If
+                linenumber += 1
+            Next
+
+            File.SetAttributes(MainformRef.NullDCPath & "\nullDC.cfg", FileAttributes.Normal)
+            File.WriteAllLines(MainformRef.NullDCPath & "\nullDC.cfg", NaomiConfigs)
 
         Catch ex As Exception
             MsgBox("Failed to save NullDC-Naomi Controls. Error: " & ex.Message)
@@ -780,56 +722,56 @@ Public Class frmKeyMapperSDL
         ' Dreamcast Controls
         Try
             linenumber = 0
-            If DreamcastChanged Then
-                Console.WriteLine("Saving Dreamcast Controls")
-                Dim DreamcastConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
-                For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
-                    btn_Close.Text = "Saving Dreamcast..."
-                    If line.StartsWith("BPort") Then
-                        Dim player = 0
-                        If line.StartsWith("BPortB") Then player = 1
 
-                        Dim KeyFound = False
-                        For Each control_line As String In ControlsConfigs
+            Console.WriteLine("Saving Dreamcast Controls")
+            Dim DreamcastConfigs() As String = File.ReadAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg")
+            For Each line As String In DreamcastConfigs ' Very similar to the Naomi configs, but different
+                btn_Close.Text = "Saving Dreamcast..."
+                If line.StartsWith("BPort") Then
+                    Dim player = 0
+                    If line.StartsWith("BPortB") Then player = 1
 
-                            If tempPeripheral(player) = "1" Then ' Joystick Peripheral so get the STICK_ instead of the CONT_ setting
-                                If control_line.StartsWith("STICK_") Then
-                                    If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
-                                        DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
-                                        KeyFound = True
-                                        Exit For
-                                    End If
-                                End If
+                    Dim KeyFound = False
+                    For Each control_line As String In ControlsConfigs
 
-                            Else
-
-                                If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                        If tempPeripheral(player) = "1" Then ' Joystick Peripheral so get the STICK_ instead of the CONT_ setting
+                            If control_line.StartsWith("STICK_") Then
+                                If line.Contains(control_line.Split("=")(0).Replace("STICK_", "CONT_") & "=") And control_line.Length > 0 Then
                                     DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
                                     KeyFound = True
                                     Exit For
                                 End If
-
                             End If
 
+                        Else
 
-                        Next
+                            If line.Contains(control_line.Split("=")(0) & "=") And control_line.Length > 0 Then
+                                DreamcastConfigs(linenumber) = line.Split("=")(0) & "=" & control_line.Split("=")(1).Split("|")(player)
+                                KeyFound = True
+                                Exit For
+                            End If
 
-                        If Not KeyFound Then DreamcastConfigs(linenumber) = line.Split("=")(0) & "=k0"
+                        End If
 
-                        If line.StartsWith("BPortA_Joystick=") Then DreamcastConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
-                        If line.StartsWith("BPortB_Joystick=") Then DreamcastConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
 
-                        If line.StartsWith("BPortA_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
-                        If line.StartsWith("BPortB_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
+                    Next
 
-                    End If
-                    linenumber += 1
+                    If Not KeyFound Then DreamcastConfigs(linenumber) = line.Split("=")(0) & "=k0"
 
-                Next
+                    If line.StartsWith("BPortA_Joystick=") Then DreamcastConfigs(linenumber) = "BPortA_Joystick=" & tempJoystick(0)
+                    If line.StartsWith("BPortB_Joystick=") Then DreamcastConfigs(linenumber) = "BPortB_Joystick=" & tempJoystick(1)
 
-                File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
-                File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
-            End If
+                    If line.StartsWith("BPortA_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortA_Deadzone=" & TempDeadzone(0)
+                    If line.StartsWith("BPortB_Deadzone=") Then DreamcastConfigs(linenumber) = "BPortB_Deadzone=" & TempDeadzone(1)
+
+                End If
+                linenumber += 1
+
+            Next
+
+            File.SetAttributes(MainformRef.NullDCPath & "\dc\nullDC.cfg", FileAttributes.Normal)
+            File.WriteAllLines(MainformRef.NullDCPath & "\dc\nullDC.cfg", DreamcastConfigs)
+
 
         Catch ex As Exception
             MsgBox("Failed to save NullDC-Dreamcast Controls. Error: " & ex.Message)
@@ -838,163 +780,162 @@ Public Class frmKeyMapperSDL
         ' Mupen Controls
         Try
 
-            If MupenChanged Then
 
-                Console.WriteLine("Saving Mupen Controls")
 
-                Dim TempMappingString As String() = {"", ""}
-                Dim MupenControls As String() = {"", ""}
+            Console.WriteLine("Saving Mupen Controls")
 
-                ' Ok new IDEA. FULLY MANUAL
+            Dim TempMappingString As String() = {"", ""}
+            Dim MupenControls As String() = {"", ""}
 
-                ' Here's what we need in the configs
-                ' version = 2.000000
-                ' mode = 0
-                ' device = {Joystick}
-                ' name = {Name}
-                ' plugged = True
-                ' plugin = 2
-                ' mouse = False
-                ' MouseSensitivity = "2.00,2.00"
-                ' AnalogDeadzone = "6553,6553"
-                ' AnalogPeak = "32768,32768"
+            ' Ok new IDEA. FULLY MANUAL
 
-                ' DPad R
-                ' DPad L
-                ' DPad D
-                ' DPad U
-                ' Start
-                ' Z Trig
-                ' B Button
-                ' A Button
-                ' C Button R 
-                ' C Button L
-                ' C Button D 
-                ' C Button U 
-                ' R Trig
-                ' L Trig
-                ' Mempak switch
-                ' Rumblepak switch
-                ' X Axis
-                ' Y Axis
+            ' Here's what we need in the configs
+            ' version = 2.000000
+            ' mode = 0
+            ' device = {Joystick}
+            ' name = {Name}
+            ' plugged = True
+            ' plugin = 2
+            ' mouse = False
+            ' MouseSensitivity = "2.00,2.00"
+            ' AnalogDeadzone = "6553,6553"
+            ' AnalogPeak = "32768,32768"
 
-                ' Initial Setup Stuff of values that are always the same
-                For i = 0 To 1
-                    MupenControls(i) += "Input-SDL-Control" & i + 1 & "]" & vbNewLine
-                    MupenControls(i) += vbNewLine
-                    MupenControls(i) += "version = 2.000000" & vbNewLine
+            ' DPad R
+            ' DPad L
+            ' DPad D
+            ' DPad U
+            ' Start
+            ' Z Trig
+            ' B Button
+            ' A Button
+            ' C Button R 
+            ' C Button L
+            ' C Button D 
+            ' C Button U 
+            ' R Trig
+            ' L Trig
+            ' Mempak switch
+            ' Rumblepak switch
+            ' X Axis
+            ' Y Axis
 
-                    MupenControls(i) += "mode = 0" & vbNewLine
+            ' Initial Setup Stuff of values that are always the same
+            For i = 0 To 1
+                MupenControls(i) += "Input-SDL-Control" & i + 1 & "]" & vbNewLine
+                MupenControls(i) += vbNewLine
+                MupenControls(i) += "version = 2.000000" & vbNewLine
 
-                    MupenControls(i) += "device = " & Joystick(i) & vbNewLine
+                MupenControls(i) += "mode = 0" & vbNewLine
 
-                    If tempJoystick(i) = -1 Then
-                        MupenControls(i) += "name = ""Keyboard""" & vbNewLine
-                    Else
-                        TempMappingString(i) = SDL_GameControllerMappingForIndex(tempJoystick(i))
-                        MupenControls(i) += "name = """ & SDL_GameControllerNameForIndex(tempJoystick(i)) & """" & vbNewLine
+                MupenControls(i) += "device = " & Joystick(i) & vbNewLine
+
+                If tempJoystick(i) = -1 Then
+                    MupenControls(i) += "name = ""Keyboard""" & vbNewLine
+                Else
+                    TempMappingString(i) = SDL_GameControllerMappingForIndex(tempJoystick(i))
+                    MupenControls(i) += "name = """ & SDL_GameControllerNameForIndex(tempJoystick(i)) & """" & vbNewLine
+                End If
+
+                MupenControls(i) += "plugged = True" & vbNewLine
+
+                MupenControls(i) += "plugin = 2" & vbNewLine
+                MupenControls(i) += "MouseSensitivity = ""2.00,2.00"" " & vbNewLine
+
+                MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "," & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "" & vbNewLine
+                MupenControls(i) += "AnalogPeak = ""32768,32768"" " & vbNewLine
+
+            Next
+
+            ' Go through the configs and generate a valid string for each of the buttons
+            ' Right so we save these axis for now since we need both of them before we can generate a string which we'll do in the end
+            Dim Y_AxisPlus As String() = {"", ""}
+            Dim Y_AxisMinus As String() = {"", ""}
+
+            Dim X_AxisPlus As String() = {"", ""}
+            Dim X_AxisMinus As String() = {"", ""}
+
+            For Each control_line In ControlsConfigs
+                If control_line.StartsWith("mup_") Then
+                    If control_line.Contains("Z Trig") Then
+                        Console.WriteLine("hello")
                     End If
 
-                    MupenControls(i) += "plugged = True" & vbNewLine
+                    For i = 0 To 1
+                        ' Check if this is the axis bind becuase that has to be handled differently
+                        If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
 
-                    MupenControls(i) += "plugin = 2" & vbNewLine
-                    MupenControls(i) += "MouseSensitivity = ""2.00,2.00"" " & vbNewLine
+                            If control_line.StartsWith("mup_X Axis+") Then
+                                X_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                    MupenControls(i) += "AnalogDeadzone = " & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "," & Math.Floor(32768 * (TempDeadzone(i) / 100)) & "" & vbNewLine
-                    MupenControls(i) += "AnalogPeak = ""32768,32768"" " & vbNewLine
+                            ElseIf control_line.StartsWith("mup_X Axis-") Then
+                                X_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                Next
+                            ElseIf control_line.StartsWith("mup_Y Axis+") Then
+                                Y_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
-                ' Go through the configs and generate a valid string for each of the buttons
-                ' Right so we save these axis for now since we need both of them before we can generate a string which we'll do in the end
-                Dim Y_AxisPlus As String() = {"", ""}
-                Dim Y_AxisMinus As String() = {"", ""}
-
-                Dim X_AxisPlus As String() = {"", ""}
-                Dim X_AxisMinus As String() = {"", ""}
-
-                For Each control_line In ControlsConfigs
-                    If control_line.StartsWith("mup_") Then
-                        If control_line.Contains("Z Trig") Then
-                            Console.WriteLine("hello")
-                        End If
-
-                        For i = 0 To 1
-                            ' Check if this is the axis bind becuase that has to be handled differently
-                            If control_line.StartsWith("mup_X Axis") Or control_line.StartsWith("mup_Y Axis") Then
-
-                                If control_line.StartsWith("mup_X Axis+") Then
-                                    X_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
-
-                                ElseIf control_line.StartsWith("mup_X Axis-") Then
-                                    X_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
-
-                                ElseIf control_line.StartsWith("mup_Y Axis+") Then
-                                    Y_AxisPlus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
-
-                                ElseIf control_line.StartsWith("mup_Y Axis-") Then
-                                    Y_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
-
-                                End If
-
-                            Else
-                                MupenControls(i) += control_line.Split("=")(0).Replace("mup_", "") & " = " & BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i)) & vbNewLine
+                            ElseIf control_line.StartsWith("mup_Y Axis-") Then
+                                Y_AxisMinus(i) = BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i))
 
                             End If
-                        Next
-                    End If
 
-                Next
+                        Else
+                            MupenControls(i) += control_line.Split("=")(0).Replace("mup_", "") & " = " & BEARButtonToMupenButton(TempMappingString(i), control_line.Split("=")(1).Split("|")(i)) & vbNewLine
 
-                ' Do The Analog Stuff
-                For i = 0 To 1
+                        End If
+                    Next
+                End If
 
-                    If X_AxisMinus(i) = "" Or X_AxisPlus(i) = "" Then
-                        MupenControls(i) += "X Axis = "
-                    Else
-                        MupenControls(i) += "X Axis = " & X_AxisMinus(i).Split("(")(0) & "(" & X_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & X_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
-                    End If
+            Next
+
+            ' Do The Analog Stuff
+            For i = 0 To 1
+
+                If X_AxisMinus(i) = "" Or X_AxisPlus(i) = "" Then
+                    MupenControls(i) += "X Axis = "
+                Else
+                    MupenControls(i) += "X Axis = " & X_AxisMinus(i).Split("(")(0) & "(" & X_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & X_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+                End If
 
 
-                    If Y_AxisMinus(i) = "" Or Y_AxisPlus(i) = "" Then
-                        MupenControls(i) += "Y Axis = "
-                    Else
-                        MupenControls(i) += "Y Axis = " & Y_AxisMinus(i).Split("(")(0) & "(" & Y_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & Y_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
-                    End If
+                If Y_AxisMinus(i) = "" Or Y_AxisPlus(i) = "" Then
+                    MupenControls(i) += "Y Axis = "
+                Else
+                    MupenControls(i) += "Y Axis = " & Y_AxisMinus(i).Split("(")(0) & "(" & Y_AxisMinus(i).Split("(")(1).Replace(")", "") & "," & Y_AxisPlus(i).Split("(")(1).Replace(")", "") & ")" & vbNewLine
+                End If
 
-                Next
+            Next
 
-                Dim MupenConfigs = File.ReadAllText(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg").Split("[")
+            Dim MupenConfigs = File.ReadAllText(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg").Split("[")
 
-                Dim PCount = 0
-                For i = 0 To MupenConfigs.Count - 1
+            Dim PCount = 0
+            For i = 0 To MupenConfigs.Count - 1
 
-                    If MupenConfigs(i).StartsWith("Input-SDL-Control1]") Then MupenConfigs(i) = MupenControls(0)
+                If MupenConfigs(i).StartsWith("Input-SDL-Control1]") Then MupenConfigs(i) = MupenControls(0)
 
-                    If MupenConfigs(i).StartsWith("Input-SDL-Control2]") Then MupenConfigs(i) = MupenControls(1) : Exit For
+                If MupenConfigs(i).StartsWith("Input-SDL-Control2]") Then MupenConfigs(i) = MupenControls(1) : Exit For
 
-                    ' Just in case we make it down this far somehow
-                    If MupenConfigs(i).StartsWith("Input-SDL-Control3]") Then Exit For
+                ' Just in case we make it down this far somehow
+                If MupenConfigs(i).StartsWith("Input-SDL-Control3]") Then Exit For
 
-                Next
+            Next
 
-                For i = 1 To MupenConfigs.Count - 1
-                    MupenConfigs(i) = "[" & MupenConfigs(i)
+            For i = 1 To MupenConfigs.Count - 1
+                MupenConfigs(i) = "[" & MupenConfigs(i)
 
-                Next
+            Next
 
-                For i = 0 To MupenConfigs.Count - 1
-                    If i > 0 Then
-                        MupenConfigs(i) = vbNewLine & MupenConfigs(i).Trim
-                    Else
-                        MupenConfigs(i) = MupenConfigs(i).Trim
-                    End If
+            For i = 0 To MupenConfigs.Count - 1
+                If i > 0 Then
+                    MupenConfigs(i) = vbNewLine & MupenConfigs(i).Trim
+                Else
+                    MupenConfigs(i) = MupenConfigs(i).Trim
+                End If
 
-                Next
+            Next
 
-                File.WriteAllLines(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg", MupenConfigs)
+            File.WriteAllLines(MainformRef.NullDCPath & "\Mupen64Plus\mupen64plus.cfg", MupenConfigs)
 
-            End If
 
         Catch ex As Exception
             MsgBox("Failed to save Mupen Controls. Error: " & ex.Message)
@@ -1042,74 +983,74 @@ Public Class frmKeyMapperSDL
             Next
 
 
-            If MednafenChanged Then
-                Dim AllConfigLines As String = vbNewLine
-                ' Deadzone
-                AllConfigLines += "input.joystick.axis_threshold " & TempDeadzone(0) & vbNewLine
 
-                ' Commands
-                For i = 0 To 9
-                    AllConfigLines += "command." & i & " " & vbNewLine
-                Next
+            Dim AllConfigLines As String = vbNewLine
+            ' Deadzone
+            AllConfigLines += "input.joystick.axis_threshold " & TempDeadzone(0) & vbNewLine
 
-                AllConfigLines += "command.state_slot_dec " & vbNewLine
+            ' Commands
+            For i = 0 To 9
+                AllConfigLines += "command." & i & " " & vbNewLine
+            Next
+
+            AllConfigLines += "command.state_slot_dec " & vbNewLine
 
 
-                For Each control_line In ControlsConfigs
-                    For i = 1 To 2
-                        Dim tmpControlString = ""
-                        If Not control_line.StartsWith("med_") Then Continue For
+            For Each control_line In ControlsConfigs
+                For i = 1 To 2
+                    Dim tmpControlString = ""
+                    If Not control_line.StartsWith("med_") Then Continue For
 
-                        control_line = control_line.Substring(4)
+                    control_line = control_line.Substring(4)
 
-                        tmpControlString = control_line.Split("=")(0).Replace("<port>", i.ToString)
+                    tmpControlString = control_line.Split("=")(0).Replace("<port>", i.ToString)
 
-                        Dim _KeyCode = control_line.Split("=")(1).Split("|")(i - 1)
+                    Dim _KeyCode = control_line.Split("=")(1).Split("|")(i - 1)
 
-                        If _KeyCode.StartsWith("k") Then ' Keyboard
+                    If _KeyCode.StartsWith("k") Then ' Keyboard
 
-                            If Not _KeyCode = "k0" Then
-                                tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(i - 1).Substring(1))
-                            End If
+                        If Not _KeyCode = "k0" Then
+                            tmpControlString += " keyboard 0x0 " & KeyCodeToSDLScanCode(control_line.Split("=")(1).Split("|")(i - 1).Substring(1))
+                        End If
 
-                        ElseIf _KeyCode.StartsWith("m") Then
-                            If _KeyCode = "m1" Then
-                                tmpControlString += " mouse 0x0 button_left"
-                            ElseIf _KeyCode = "m2" Then
-                                tmpControlString += " mouse 0x0 button_right"
-                            ElseIf _KeyCode = "m3" Then
-                                tmpControlString += " mouse 0x0 button_middle"
-                            End If
+                    ElseIf _KeyCode.StartsWith("m") Then
+                        If _KeyCode = "m1" Then
+                            tmpControlString += " mouse 0x0 button_left"
+                        ElseIf _KeyCode = "m2" Then
+                            tmpControlString += " mouse 0x0 button_right"
+                        ElseIf _KeyCode = "m3" Then
+                            tmpControlString += " mouse 0x0 button_middle"
+                        End If
 
-                        Else ' Joystick
-                            Dim _tmpID = ""
-                            If Not MednafenControllerID(i - 1) = "0x0" Then
+                    Else ' Joystick
+                        Dim _tmpID = ""
+                        If Not MednafenControllerID(i - 1) = "0x0" Then
 
-                                _tmpID = MednafenControllerID(i - 1)
-                                tmpControlString += " joystick " & _tmpID & " "
+                            _tmpID = MednafenControllerID(i - 1)
+                            tmpControlString += " joystick " & _tmpID & " "
 
-                                If _KeyCode.StartsWith("b") Then
-                                    tmpControlString += _KeyCode.Replace("b", "button_")
-                                Else
-                                    tmpControlString += _KeyCode.Replace("a", "abs_")
-                                End If
-
+                            If _KeyCode.StartsWith("b") Then
+                                tmpControlString += _KeyCode.Replace("b", "button_")
                             Else
-                                tmpControlString = control_line.Split("=")(0).Replace("<port>", i.ToString)
+                                tmpControlString += _KeyCode.Replace("a", "abs_")
                             End If
 
+                        Else
+                            tmpControlString = control_line.Split("=")(0).Replace("<port>", i.ToString)
                         End If
 
-                        If Not IgnoreTheseMedanfen.ContainsKey(tmpControlString.Split(" ")(0)) Then
-                            AllConfigLines += tmpControlString & vbNewLine
-                        End If
-                    Next
+                    End If
+
+                    If Not IgnoreTheseMedanfen.ContainsKey(tmpControlString.Split(" ")(0)) Then
+                        AllConfigLines += tmpControlString & vbNewLine
+                    End If
                 Next
+            Next
 
-                File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
-                File.AppendAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", AllConfigLines.Split(vbNewLine))
+            File.SetAttributes(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", FileAttributes.Normal)
+            File.AppendAllLines(MainformRef.NullDCPath & "\mednafen\mednafen.cfg", AllConfigLines.Split(vbNewLine))
 
-            End If
+
 
         Catch ex As Exception
             MsgBox("Failed to save Mednafen Controls. Error: " & ex.Message)

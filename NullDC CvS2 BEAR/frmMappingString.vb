@@ -67,9 +67,6 @@ Public Class frmMappingString
         End If
 
         SDL2.SDL.SDL_GameControllerAddMapping(_SDL)
-        frmKeyMapperSDL.NaomiChanged = True
-        frmKeyMapperSDL.DreamcastChanged = True
-        frmKeyMapperSDL.MednafenChanged = True
         Me.Close()
     End Sub
 

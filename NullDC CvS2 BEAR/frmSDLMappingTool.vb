@@ -100,8 +100,10 @@ Public Class frmSDLMappingTool
         SDL_PumpEvents()
         SDL_JoystickUpdate()
         For i = 0 To SDL_JoystickNumAxes(Joy) - 1
-            AxisIdle.Add(SDL_JoystickGetAxis(Joy, i))
-            Console.WriteLine("Idle: " & i & ":" & SDL_JoystickGetAxis(Joy, i))
+            Dim State = 0
+            SDL_JoystickGetAxisInitialState(Joy, i, State)
+            AxisIdle.Add(State)
+            Console.WriteLine("Idle: " & i & ":" & State)
 
         Next
 
@@ -200,7 +202,6 @@ Public Class frmSDLMappingTool
                         End If
 
                         If Not IsThumbStick Then
-
                             ' Idle is Between Deadzone (0) and current is above deadzone (1)
                             If AxisIdle(_event.jaxis.axis) >= -_deadzonetotal And AxisIdle(_event.jaxis.axis) <= _deadzonetotal And _event.jaxis.axisValue >= _deadzonetotal Then ' 0 to 1
                                 KeyPressed = "+a" & _event.jaxis.axis
@@ -223,11 +224,15 @@ Public Class frmSDLMappingTool
                                 KeyPressed = "a" & _event.jaxis.axis & "~"
                             End If
 
+                            If KeyPressed.Length > 0 Then
+                                Exit While
+                            End If
+
                         Else
 
                             ' Is is a thumbstick so just use full range -1 to 1
                             If Not AxisDown.ContainsKey("a" & _event.jaxis.axis) And
-                                Not AxisDown.ContainsKey("a" & _event.jaxis.axis & "~") Then
+                            Not AxisDown.ContainsKey("a" & _event.jaxis.axis & "~") Then
 
                                 If _event.jaxis.axisValue < -_deadzonetotal Then
                                     KeyPressed = "a" & _event.jaxis.axis & "~"
@@ -350,12 +355,18 @@ Public Class frmSDLMappingTool
 
                 For i = 0 To SDL_JoystickNumAxes(Joy) - 1
                     Dim DuplicatedAxisValue = SDL_JoystickGetAxis(Joy, i)
-                    If Not i = _event.jaxis.axis And DuplicatedAxisValue = _event.jaxis.axisValue And
-                                        Not DuplicatedAxisValue = AxisIdle(i) Then
-                        Console.WriteLine("Found Duplicate Axis: " & i & "|" & _event.jaxis.axis)
-                        If Not AxisDown.ContainsKey(KeyPressed.Replace(_event.jaxis.axis, i)) Then
-                            AxisDown.Add(KeyPressed.Replace(_event.jaxis.axis, i), DuplicatedAxisValue)
+                    If Not i = _event.jaxis.axis And DuplicatedAxisValue = _event.jaxis.axisValue Then
+
+                        If DuplicatedAxisValue >= (AxisIdle(i) + _deadzonetotal) Or DuplicatedAxisValue <= -(AxisIdle(i) + _deadzonetotal) Then
+
+                            Console.WriteLine("Found Duplicate Axis: " & i & "|" & _event.jaxis.axis)
+                            If Not AxisDown.ContainsKey(KeyPressed.Replace(_event.jaxis.axis, i)) Then
+                                AxisDown.Add(KeyPressed.Replace(_event.jaxis.axis, i), DuplicatedAxisValue)
+
+                            End If
+
                         End If
+
                     End If
                 Next
 
@@ -435,9 +446,6 @@ Public Class frmSDLMappingTool
                       frmKeyMapperSDL.AutoGenerateButtonConfigs(ConfigStringFinal)
                       frmKeyMapperSDL.UpdateButtonLabels()
 
-                      frmKeyMapperSDL.NaomiChanged = True
-                      frmKeyMapperSDL.DreamcastChanged = True
-                      frmKeyMapperSDL.MednafenChanged = True
                   End Sub)
 
         Console.WriteLine(ConfigStringFinal)
