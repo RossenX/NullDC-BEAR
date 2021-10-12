@@ -983,10 +983,10 @@ Public Class frmKeyMapperSDL
 
             ' Commands
             For i = 0 To 9
-                AllConfigLines += "command." & i & " " & vbNewLine
+                AllConfigLines += "command." & i & " keyboard 0x0 0" & vbNewLine
             Next
 
-            AllConfigLines += "command.state_slot_dec " & vbNewLine
+            AllConfigLines += "command.state_slot_dec keyboard 0x0 0" & vbNewLine
 
 
             For Each control_line In ControlsConfigs
@@ -1035,7 +1035,13 @@ Public Class frmKeyMapperSDL
                     End If
 
                     If Not IgnoreTheseMedanfen.ContainsKey(tmpControlString.Split(" ")(0)) Then
-                        AllConfigLines += tmpControlString & vbNewLine
+                        If tmpControlString.Split(" ").Count > 1 Then
+                            AllConfigLines += tmpControlString & vbNewLine
+                        Else
+                            AllConfigLines += tmpControlString & " keyboard 0x0 0" & vbNewLine
+                        End If
+
+
                     End If
                 Next
             Next
@@ -1672,7 +1678,6 @@ Public Class frmKeyMapperSDL
             MsgBox("Unable to delete profile: " & ex.Message)
 
         End Try
-
 
     End Sub
 

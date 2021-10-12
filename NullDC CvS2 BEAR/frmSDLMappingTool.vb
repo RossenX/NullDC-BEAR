@@ -100,10 +100,8 @@ Public Class frmSDLMappingTool
         SDL_PumpEvents()
         SDL_JoystickUpdate()
         For i = 0 To SDL_JoystickNumAxes(Joy) - 1
-            Dim State = 0
-            SDL_JoystickGetAxisInitialState(Joy, i, State)
-            AxisIdle.Add(State)
-            Console.WriteLine("Idle: " & i & ":" & State)
+            AxisIdle.Add(SDL_JoystickGetAxis(Joy, i))
+            Console.WriteLine("Idle: " & i & ":" & SDL_JoystickGetAxis(Joy, i))
 
         Next
 
