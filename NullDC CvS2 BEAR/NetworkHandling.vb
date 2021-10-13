@@ -67,6 +67,8 @@ Public Class NetworkHandling
     Delegate Sub MessageReceived_delegate(ByRef message As String, ByRef senderip As String, ByRef port As String)
     Private Sub MessageReceived(ByRef message As String, ByRef senderip As String, ByRef port As String)
 
+        If MainformRef.IsClosing Then Exit Sub ' If BEAR is closing then ignore all messages
+
         If message.Length > 500 Then
             Console.WriteLine("<-Recieved-> long ass message from " & senderip & ":" & port)
         Else
