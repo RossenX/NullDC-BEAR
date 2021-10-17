@@ -5,9 +5,12 @@ Easy setup easy connection, minimal effort maximum performance.
 ## Setup Guide
 
 ### Downloading
+[Click here to begin downloading the latest release](https://github.com/RossenX/NullDC-BEAR/releases/latest/download/NullDC.BEAR.exe). 
+
+If this does not work in your browser, download the latest release from the "Releases" section, and download NullDC.BEAR.exe. (you do not need to download the extra files)
 Click "Releases" and download the newest NullDC.BEAR.exe You do not need any of the other files they're just the source code.
 
-![Downlaoding](README%20Files/Downloading.gif?raw=true "Downlaoding")
+![Downloading](README%20Files/Downloading.gif?raw=true "Downlaoding")
 
 ### Installing
 Put BEAR in an empty folder
